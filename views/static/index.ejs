@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1>RobotUI</h1>
+    <h2>Controler</h2>
+    <a href="/user/new" class="btn btn-lg btn-success">Sign up now!</a>
+  </div>
+</div>
+
+
+
+<!-- https://geekytheory.com/tutorial-node-js-crear-un-chat-parte-1/ -->
+
+<!--
+<style>
+  #chat{
+    position: relative;
+    width: 100%;
+    float: left;
+    min-height: 100%;
+    height: 90%;
+    overflow: auto;
+  }
+</style>
+
+-->
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>Mandar comandos <small> <!-- desarrollado por --> </small></h1>
+  </div>
+
+  <div id="content" class="row" style="height: 70%;">
+    <div class="col-md-2"></div>
+    <div id="cahtContent" class="col-md-6">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          Comandos
+        </div>
+        <div id="chat" class="panel-body"></div>
+      </div>
+      <div>
+        <form id="sendMessage" class="input-group" style="text-align: center; margin:0 auto;">
+          <input id="message" class="form-control input-lg" type="text">
+        <span class="input-group-btn">
+          <button class="btn btn-lg btn-primary" type="submit">Mandar</button>
+        </span>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+    jQuery(function($){
+      var socket = io.connect('http://localhost:1337');
+
+      var $messageForm = $('#sendMessage');
+      var $message = $('#message');
+      var $chat = $('#chat');
+
+      $messageForm.submit(function (e) {
+        e.preventDefault();
+        if($message.val() != '' ) socket.emit('sendMessage', $message.val())
+
+        alert('enviando... ' +  $message.val());
+        $message.val('');
+      });
+
+
+      socket.on('newMessage', function(data){
+        $chat.append(' - ' + data.msg + '<br/>')
+      })
+
+
+    });
+</script>
+
+
+
+
+
+
+
+
+
+<!--
+<div class="container">
+
+
+   https://www.youtube.com/watch?v=2TE_syFAwbo
+
+  <form id="form_envio">
+    <input id="datos" name="" placeholder="Escribe aqui el texto..." required/>
+    <input type="submit" value="Enviar"/>
+  </form>
+  <div id="recibir"></div>
+  <script src="http://127.0.0.1:3000/socket.io/socket.io.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  <script>
+    var webSocket = io.connect("http://127.0.0.1:3000");
+
+    $(document).on("ready", inicio);
+    function inicio(){
+      $("#form_envio").on("submit", enviar_datos);
+      webSocket.on("datos_servidor", recibir_datos);
+    }
+
+    function enviar_datos(e){
+      e.preventDefault();
+      var dato = $("#form_envio").find("#datos").val();
+      webSocket.emit("datos_cliente", dato);
+    }
+
+    function recibir_datos(data){
+      $("#recibir").append(data);
+    }
+
+  </script>
+</div>
+
+
+var io = require('socket.io').listen(3000);
+io.sockets.on("conecction", arranque);
+
+
+
+function arranque(socket){
+socket.on("datos_cliente", regresar_datos);
+}
+
+function regresar_datos(data){
+
+io.sockets.emit("datos_servidor", data);
+}
+
+-->
