@@ -1,0 +1,55 @@
+<div class="container">
+
+  <h3>My Robots</h3>
+  <table class="table">
+    <tr>
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Ip address</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <% _.each(robots, function(robot){ %>
+    <tr data-id="<%= robot.id %>" data-model="robot">
+
+      <% if(robot.online){ %>
+      <td> <img src="/images/online.png" height="30" width="30"></td>
+      <% } else { %>
+      <td> <img src="/images/offline.png" height="30" width="30"></td>
+      <% } %>
+
+      <td><%= robot.id %></td>
+      <td><%= robot.name %></td>
+      <td><%= robot.description %></td>
+      <td><%= robot.ip %></td>
+
+
+      <td> <a href="robot/show/<%= robot.id %>" class="btn btn-sm btn-primary">Show</a></td>
+      <td> <a href="robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning">Edit</a></td>
+
+      <td>
+        <form action="/robot/destroy/<%=robot.id%>" method="post">
+          <input type="hidden" name="_method" value="delete"/>
+          <input type="submit"  class="btn btn-sm btn-danger" value="Delete"/>
+          <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+        </form>
+      </td>
+    </tr>
+    <% })%>
+
+  </table>
+
+
+  <div class="pull-right margintop20">
+    <a href="/robot/new" class="btn btn-sm btn-success">Add a new robot!</a>
+  </div>
+
+
+</div>
+
+
+

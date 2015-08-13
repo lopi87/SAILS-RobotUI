@@ -27,14 +27,28 @@
             + Import stylesheets from other directories
             + Use a different or additional preprocessor, like SASS, SCSS or Stylus
     -->
-
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.css">
     <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/styles/bootstrap/bootstrap.css">
     <link rel="stylesheet" href="/styles/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/chosen/chosen.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
+
+    <!--SCRIPTS-->
+    <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/customValidate.js"></script>
+    <script src="/js/vendor/jquery-1.11.3.js"></script>
+    <script src="/js/vendor/chosen.jquery.js"></script>
+
+
+    <script src="/js/vendor/bootstrap.js"></script>
+    <script src="/js/vendor/bootstrap.min.js"></script>
+    <script src="/js/vendor/npm.js"></script>
+    <!--SCRIPTS END-->
+
+
   </head>
 
   <body>
@@ -53,10 +67,11 @@
         <ul class="nav navbar-nav">
           <% if (session.authenticated) { %>
             <li class="active"><a href="/user/show/<%= session.User.id%>"><%= session.User.name %></a> </li>
-          <% } %>
-          <% if (session.authenticated && session.User.admin) { %>
+
+          <% if (session.User.admin) { %>
             <li><a href="/user"> User Administration</a> </li>
-            <li><a href="#"> Placeholder2</a> </li>
+          <% } %>
+          <li><a href="/robot/index"> My Robots</a> </li>
           <% } %>
         </ul>
 
@@ -146,12 +161,6 @@
 
     -->
 
-    <!--SCRIPTS-->
-    <script src="/js/dependencies/sails.io.js"></script>
-    <script src="/js/customValidate.js"></script>
-    <script src="/node_modules/bootstrap/js/*.js"></script>
-    <script src="/js/vendor/jquery-1.11.3.js"></script>
-    <script src="/js/vendor/npm.js"></script>
-    <!--SCRIPTS END-->
+
   </body>
 </html>

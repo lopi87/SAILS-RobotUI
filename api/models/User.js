@@ -44,6 +44,11 @@ module.exports = {
       type: 'string'
     },
 
+    // Add a reference to Robot
+    robots:{
+      collection: 'robot',
+      via: 'owners'
+    },
 
     toJSON: function(){
       var obj = this.toObject();
@@ -64,14 +69,9 @@ module.exports = {
 
     if(typeof values.admin != 'undefined'){
       if(values.admin == 'unchecked') {
-
-        console.log('---------------ADMINISTRADOR---------------');
         console.log(values);
-
         values.admin = false;
       } else if (values.admin[1] == 'on') {
-        console.log('---------------NO ADMINISTRADOR---------------');
-
         values.admin = true;
       }
     }
@@ -92,6 +92,11 @@ module.exports = {
     });
 
   }
+
+
+
+
+
 
 };
 

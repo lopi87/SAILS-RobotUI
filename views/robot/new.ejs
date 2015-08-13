@@ -1,0 +1,54 @@
+<div class="container">
+  <form action="/robot/create" method="POST" class="form-signin" id="sign-up-form">
+    <h2 class="form-sigin-heading">Create a robot</h2>
+
+    <% if(flash && flash.err){ %>
+    <ul class="alert alert-success" style="position: relative">
+      <%Object.keys(flash.err).forEach(function(error){ %>
+      <li><%- JSON.stringify(flash.err[error])%></li>
+      <%})%>
+    </ul>
+    <%}%>
+
+    <div class="control-group">
+      <input type="text" class="form-control" placeholder="name" name="name" required>
+    </div>
+
+    <div class="control-group">
+      <input type="text" class="form-control" placeholder="description" name="description">
+    </div>
+
+    <div class="control-group">
+      <input type="number" class="form-control" placeholder="ip address" name="ip" required>
+    </div>
+
+    <div class="control-group">
+      <input type="number" class="form-control" placeholder="port" name="port" required>
+    </div>
+
+    <!-- upload images http://maangalabs.com/blog/2014/08/12/uploading-a-file-in-sails/
+
+    otro ejemplo:
+    http://plugins.krajee.com/file-input/demo
+
+    -->
+    <input type="file" name="uploadPicture" />
+
+    <input type="file" name="uploadDocumentation" />
+
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="public"> Public
+      </label>
+    </div>
+
+
+    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create robot"/>
+    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+
+
+  </form>
+
+
+</div>
