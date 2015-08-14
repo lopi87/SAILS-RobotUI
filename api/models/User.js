@@ -35,9 +35,9 @@ module.exports = {
       defaultsTo: false
     },
 
-    languaje: {
+    language: {
       type:'string',
-      defaultsTo: 'en'
+      defaultsTo: 'EN'
     },
 
     encryptedPassword:{

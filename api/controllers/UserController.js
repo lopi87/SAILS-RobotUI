@@ -21,6 +21,7 @@ module.exports = {
       name: req.param('name'),
       title: req.param('title'),
       email: req.param('email'),
+      language: req.param('language'),
       password: req.param('password'),
       confirmation: req.param('confirmation')
     };

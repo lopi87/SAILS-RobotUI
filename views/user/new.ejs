@@ -24,6 +24,19 @@
     </div>
 
     <div class="control-group">
+      <select data-placeholder="Choose a Language..." class="chzn-select-language" style="width:150px;" tabindex="2" name="language">
+        <option value=""></option>
+        <option value="ES">Spanish</option>
+        <option value="EN">English</option>
+        <option value="PT">Portuguese</option>
+      </select>
+    </div>
+    <script type="text/javascript">
+      $('.chzn-select-language').chosen({disable_search_threshold: 10});
+    </script>
+
+
+    <div class="control-group">
       <input type="password" class="form-control" placeholder="password" name="password" required>
     </div>
 
