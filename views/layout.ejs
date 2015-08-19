@@ -35,13 +35,16 @@
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.css">
     <link rel="stylesheet" href="/styles/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="/styles/chosen/chosen.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
 
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/customValidate.js"></script>
+    <script src="/js/vendor/jquery-1.11.3.js"></script>
     <script src="/js/vendor/bootstrap.js"></script>
+    <script src="/js/vendor/chosen.jquery.js"></script>
     <script src="/js/vendor/npm.js"></script>
     <!--SCRIPTS END-->
 
@@ -72,34 +75,45 @@
           <% } %>
         </ul>
 
-      <form class="navbar-form navbar-right">
-          <div>
-            <select class="chzn-select-lan" style="width:75px;" tabindex="2">
+      <form class="navbar-form navbar-right" action="/language/change">
+          <div class="form-group">
+            <select class="chzn-select-lan" style="width:150px;" tabindex="2">
               <option value=""></option>
-              <option value="EN">EN</option>
-              <option value="ES">ES</option>
-              <option value="FR">FR</option>
-              <option value="PT">PT</option>
+              <option> <img src="/images/flags/ES.png">EN</option>
+              <option> <img src="/images/flags/ES.png">ES</option>
+              <option> <img src="/images/flags/ES.png">FR</option>
+              <option> <img src="/images/flags/ES.png">PT</option>
             </select>
-
             <script type="text/javascript">
               $('.chzn-select-lan').chosen({
                 "disable_search": true
               });
             </script>
           </div>
-        </form>
+        <input type="hidden" name="_csrf" value="<%= _csrf %>">
+      </form>
+
+
+        <script type="text/javascript">
+          $('.chzn-select-lan').change(change_language);
+
+          function change_language() {
+            alert("checked the button - worked");
+            $.ajax({
+              type:'POST',
+              url: '/language/change',
+              data: $.param({ pagetime: {pagename: "whatever", start: 7, end: 21 }})
+            });
+          }
+
+        </script>
 
 
         <div class="navbar-right">
           <% if (session.authenticated) { %>
           <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy">sign-out</a>
           <% } %>
-
-
-
         </div>
-
         <% if (!session.authenticated) { %>
         <form class="navbar-form navbar-right" action="/session/create">
           <div class="form-group">
