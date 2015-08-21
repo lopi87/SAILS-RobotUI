@@ -28,23 +28,22 @@
             + Use a different or additional preprocessor, like SASS, SCSS or Stylus
     -->
 
-    <script src="/js/vendor/jquery-1.11.3.js"></script>
-    <link rel="stylesheet" href="/styles/chosen/chosen.css">
-    <script src="/js/vendor/chosen.jquery.js"></script>
 
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.css">
     <link rel="stylesheet" href="/styles/bootstrap/bootstrap.css">
     <link rel="stylesheet" href="/styles/chosen/chosen.css">
+    <link rel="stylesheet" href="/styles/chosen/ImageSelect.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
 
     <!--SCRIPTS-->
+    <script src="/js/vendor/jquery-1.11.3.js"></script>
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/customValidate.js"></script>
-    <script src="/js/vendor/jquery-1.11.3.js"></script>
     <script src="/js/vendor/bootstrap.js"></script>
     <script src="/js/vendor/chosen.jquery.js"></script>
+    <script src="/js/vendor/ImageSelect.jquery.js"></script>
     <script src="/js/vendor/npm.js"></script>
     <!--SCRIPTS END-->
 
@@ -75,14 +74,21 @@
           <% } %>
         </ul>
 
+<!--
+        <img src="/images/flags/EN.png">
+        <img src="/images/flags/ES.png">
+        <img src="/images/flags/FR.png">
+        <img src="/images/flags/PT.png">
+    -->
+
       <form class="navbar-form navbar-right" action="/language/change">
           <div class="form-group">
             <select class="chzn-select-lan" style="width:150px;" tabindex="2">
               <option value=""></option>
-              <option> <img src="/images/flags/ES.png">EN</option>
-              <option> <img src="/images/flags/ES.png">ES</option>
-              <option> <img src="/images/flags/ES.png">FR</option>
-              <option> <img src="/images/flags/ES.png">PT</option>
+              <option data-img-src="/images/flags/EN.png" >EN</option>
+              <option data-img-src="/images/flags/ES.png" >ES</option>
+              <option data-img-src="/images/flags/FR.png" >FR</option>
+              <option data-img-src="/images/flags/PT.png" >PT</option>
             </select>
             <script type="text/javascript">
               $('.chzn-select-lan').chosen({
@@ -95,16 +101,18 @@
 
 
         <script type="text/javascript">
-          $('.chzn-select-lan').change(change_language);
-
-          function change_language() {
+          $('.chzn-select-lan').on('change',function(){
             alert("checked the button - worked");
             $.ajax({
-              type:'POST',
               url: '/language/change',
-              data: $.param({ pagetime: {pagename: "whatever", start: 7, end: 21 }})
+              type: 'GET',
+              data: {locale: $( ".chzn-select-lan" ).val()},
+              contentType: 'application/json',
+              dataType: 'json'
+            }).done(function(data){
+              alert('cambiado');
             });
-          }
+          });
 
         </script>
 
