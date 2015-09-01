@@ -9,16 +9,15 @@ module.exports = {
 
   attributes: {
 
-    robot: {
+    robot_owner: {
       model: 'robot'
     },
 
     // Acciones de la interfaz
     actions: {
       collection: 'action',
-      via: 'interfaces'
+      via: 'interface'
     }
-
 
   }
 };

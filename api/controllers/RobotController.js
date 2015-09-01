@@ -31,7 +31,7 @@ module.exports = {
       description: req.param('description'),
       ipaddress:  parseInt(req.param('ipaddress')),
       port: parseInt(req.param('port'))
-  };
+    };
 
 
 
@@ -59,42 +59,27 @@ module.exports = {
 
       Robot.publishCreate(robot);
 
-/*
-      console.log('Associating ',thisPony.name,'with',thisUser.name);
-      thisUser.pets.add(thisPony.id);
-      thisUser.save(console.log);
- */
+      /*
+       console.log('Associating ',thisPony.name,'with',thisUser.name);
+       thisUser.pets.add(thisPony.id);
+       thisUser.save(console.log);
+       */
       //Añade sus usuarios
-
       req.param('owners').forEach(function(user_id)  {
 
         User.findOne(user_id, function foundUser(err, user){
           if(err) return next(err);
           if(!user) return next();
 
-          console.log('Associating ',robot.name,'with',user.id);
+          //TODO añadir el usuario propietario en la relación con un boleano
+          console.log('Associating user: ',robot.name,'with',user.id);
           robot.owners.add(user.id);
           robot.save();
         });
       });
 
-      //Crea la interfaz para su control
-      Interface.create(robot, function interfaceCreated(err, interface) {
-        //Si hay error
-        if (err){
-          console.log(err);
-          req.session.flash ={
-            err: err
-          };
 
-          //redireccion si hay error
-          return res.redirect('/robot/new');
-        }
-
-        interface.save(function (err) {
-          if (err) return next(err);
-        });
-      });
+      Interface.create({robot_owner: robot.id}).exec(console.log);
 
 
       //Redirección a show

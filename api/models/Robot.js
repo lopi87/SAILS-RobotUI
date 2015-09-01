@@ -45,7 +45,7 @@ module.exports = {
     },
 
     //Interface del robot
-    interface: {
+    robot_interface: {
       model: 'interface'
     },
 

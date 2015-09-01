@@ -9,10 +9,9 @@ module.exports = {
 
   attributes: {
 
-    // Add a reference to Robot
-    interfaces:{
-      collection: 'interface',
-      via: 'actions'
+    //La acción pertenece a una interfaz
+    interface:{
+      model: 'interface'
     },
 
     name: {
@@ -24,7 +23,6 @@ module.exports = {
       type: 'string',
       required: true
     }
-
 
   }
 };
