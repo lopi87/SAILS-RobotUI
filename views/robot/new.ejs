@@ -1,54 +1,71 @@
 <div class="container">
-  <form action="/robot/create" method="POST" class="form-signin" id="sign-up-form">
-    <h2 class="form-sigin-heading">Create a robot</h2>
+  <div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-4">
+      <form action="/robot/create" method="POST" class="form-signin" id="sign-up-form">
+        <h1 class="text-center login-title"><%= i18n('Create_a_robot') %></h1>
 
-    <% if(flash && flash.err){ %>
-    <ul class="alert alert-success" style="position: relative">
-      <%Object.keys(flash.err).forEach(function(error){ %>
-      <li><%- JSON.stringify(flash.err[error])%></li>
-      <%})%>
-    </ul>
-    <%}%>
+        <% if(flash && flash.err){ %>
+        <ul class="alert alert-success" style="position: relative">
+          <%Object.keys(flash.err).forEach(function(error){ %>
+          <li><%- JSON.stringify(flash.err[error])%></li>
+          <%})%>
+        </ul>
+        <%}%>
 
-    <div class="control-group">
-      <input type="text" class="form-control" placeholder="name" name="name" required>
+        <div class="account-wall">
+
+          <div class="control-group">
+            <input type="text" class="form-control" placeholder="name" name="name" required>
+          </div>
+
+          <div class="control-group">
+            <input type="text" class="form-control" placeholder="description" name="description">
+          </div>
+
+          <div class="control-group">
+            <input type="number" class="form-control" placeholder="ip address" name="ipaddress" required>
+          </div>
+
+          <div class="control-group">
+            <input type="number" class="form-control" placeholder="port" name="port" required>
+          </div>
+
+          <!-- upload images http://maangalabs.com/blog/2014/08/12/uploading-a-file-in-sails/
+
+          otro ejemplo:
+          http://plugins.krajee.com/file-input/demo
+
+          -->
+          <input type="file" name="uploadPicture" />
+
+          <input type="file" name="uploadDocumentation" />
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="public"> Public
+            </label>
+          </div>
+
+          <div class="control-group">
+              <select tabindex="-1" multiple="" data-placeholder="Choose users..." class="chosen-select-users" style="width:360px; height: auto" tabindex="2" name="owners">
+                <option value=""></option>
+                <% users.forEach(function(user)  { %>
+                <option data-img-src="" value="<%= user._id %>"><%= user.name %></option>
+                <% }); %>
+              </select>
+          </div>
+
+          <script type="text/javascript">
+            $('.chosen-select-users').chosen({});
+          </script>
+          <br>
+          <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create robot"/>
+          <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+        </div>
+      </form>
     </div>
-
-    <div class="control-group">
-      <input type="text" class="form-control" placeholder="description" name="description">
-    </div>
-
-    <div class="control-group">
-      <input type="number" class="form-control" placeholder="ip address" name="ip" required>
-    </div>
-
-    <div class="control-group">
-      <input type="number" class="form-control" placeholder="port" name="port" required>
-    </div>
-
-    <!-- upload images http://maangalabs.com/blog/2014/08/12/uploading-a-file-in-sails/
-
-    otro ejemplo:
-    http://plugins.krajee.com/file-input/demo
-
-    -->
-    <input type="file" name="uploadPicture" />
-
-    <input type="file" name="uploadDocumentation" />
-
-
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" name="public"> Public
-      </label>
-    </div>
-
-
-    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create robot"/>
-    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
-
-
-  </form>
-
-
+  </div>
 </div>
+
+
+

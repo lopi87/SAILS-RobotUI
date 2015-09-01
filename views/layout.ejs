@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
     <title>RobotUI</title>
 
@@ -34,7 +34,8 @@
     <link rel="stylesheet" href="/styles/bootstrap/bootstrap.css">
     <link rel="stylesheet" href="/styles/chosen/chosen.css">
     <link rel="stylesheet" href="/styles/chosen/ImageSelect.css">
-    <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!--STYLES END-->
 
     <!--SCRIPTS-->
@@ -74,21 +75,16 @@
           <% } %>
         </ul>
 
-<!--
-        <img src="/images/flags/EN.png">
-        <img src="/images/flags/ES.png">
-        <img src="/images/flags/FR.png">
-        <img src="/images/flags/PT.png">
-    -->
 
-      <form class="navbar-form navbar-right" action="/language/change">
+
+      <form class="navbar-form navbar-right">
           <div class="form-group">
-            <select class="chzn-select-lan" style="width:150px;" tabindex="2">
+            <select data-placeholder="Choose a language" class="chzn-select-lan" style="width:150px;" tabindex="2">
               <option value=""></option>
-              <option data-img-src="/images/flags/EN.png" >EN</option>
-              <option data-img-src="/images/flags/ES.png" >ES</option>
-              <option data-img-src="/images/flags/FR.png" >FR</option>
-              <option data-img-src="/images/flags/PT.png" >PT</option>
+              <option data-img-src="/images/flags/EN.png" value="en">EN</option>
+              <option data-img-src="/images/flags/ES.png" value="es">ES</option>
+              <option data-img-src="/images/flags/FR.png" value="fr">FR</option>
+              <option data-img-src="/images/flags/PT.png" value="pt">PT</option>
             </select>
             <script type="text/javascript">
               $('.chzn-select-lan').chosen({
@@ -96,7 +92,6 @@
               });
             </script>
           </div>
-        <input type="hidden" name="_csrf" value="<%= _csrf %>">
       </form>
 
 
@@ -109,7 +104,7 @@
               data: {locale: $( ".chzn-select-lan" ).val()},
               contentType: 'application/json',
               dataType: 'json'
-            }).done(function(data){
+            }).done(function(){
               alert('cambiado');
             });
           });
@@ -119,7 +114,7 @@
 
         <div class="navbar-right">
           <% if (session.authenticated) { %>
-          <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy">sign-out</a>
+          <a class="btn btn-default navbar-btn" href="/session/destroy">sign-out</a>
           <% } %>
         </div>
         <% if (!session.authenticated) { %>
@@ -133,9 +128,7 @@
           <button type="submit" class="btn btn-success">Sign in</button>
           <input type="hidden" name="_csrf" value="<%= _csrf %>">
         </form>
-
         <% } %>
-
       </div>
     </div>
   </div>

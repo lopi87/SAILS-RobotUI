@@ -8,19 +8,31 @@
 module.exports = {
 
   //Carga la pag new
-  'new': function(req, res){
-    res.view();
+  new: function(req, res){
+
+    User.native(function(err, collection) {
+      if (err) return res.serverError(err);
+
+      collection.find({}, {name: true}).toArray(function (err, results) {
+        if (err) return res.serverError(err);
+        res.view({users: results});
+      });
+    });
+
   },
 
 
-  //Crea un usuario con los parametros del formulario
+  //Crea un robot con los parametros del formulario
   // new.ejs
   create: function(req, res, next) {
 
     var robotObj = {
       name: req.param('name'),
-      description: req.param('description')
-    };
+      description: req.param('description'),
+      ipaddress:  parseInt(req.param('ipaddress')),
+      port: parseInt(req.param('port'))
+  };
+
 
 
     Robot.create(robotObj, function robotCreated(err, robot) {
@@ -46,6 +58,44 @@ module.exports = {
       }
 
       Robot.publishCreate(robot);
+
+/*
+      console.log('Associating ',thisPony.name,'with',thisUser.name);
+      thisUser.pets.add(thisPony.id);
+      thisUser.save(console.log);
+ */
+      //Añade sus usuarios
+
+      req.param('owners').forEach(function(user_id)  {
+
+        User.findOne(user_id, function foundUser(err, user){
+          if(err) return next(err);
+          if(!user) return next();
+
+          console.log('Associating ',robot.name,'with',user.id);
+          robot.owners.add(user.id);
+          robot.save();
+        });
+      });
+
+      //Crea la interfaz para su control
+      Interface.create(robot, function interfaceCreated(err, interface) {
+        //Si hay error
+        if (err){
+          console.log(err);
+          req.session.flash ={
+            err: err
+          };
+
+          //redireccion si hay error
+          return res.redirect('/robot/new');
+        }
+
+        interface.save(function (err) {
+          if (err) return next(err);
+        });
+      });
+
 
       //Redirección a show
       res.redirect('robot/index/');

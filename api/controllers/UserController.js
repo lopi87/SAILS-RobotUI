@@ -49,8 +49,10 @@ module.exports = {
         if (err) return next(err);
       });
 
-/*
-      //Subida del avatar
+
+
+      /*
+
        req.file('avatar').upload({
           // don't allow the total upload size to exceed ~10MB
           maxBytes: 10000000
@@ -83,13 +85,17 @@ module.exports = {
         });
 
 
-      //////////////////////
-
-
 */
 
 
 
+
+      /*
+      req.file('avatar').upload(function (err, uploadedFiles){
+        if (err) return res.send(500, err);
+        res.send(200, uploadedFiles);
+      });
+*/
 
 
       if (req.session.User.admin) {

@@ -23,12 +23,12 @@ module.exports = {
     },
 
     ipaddress: {
-      type: 'number',
+      type: 'integer',
       required: true
     },
 
     port: {
-      type: 'number',
+      type: 'integer',
       required: true
     },
 
@@ -38,12 +38,16 @@ module.exports = {
     },
 
 
-    // Propietarios del robot
+    // Usuarios del robot
     owners: {
       collection: 'user',
       via: 'robots'
     },
 
+    //Interface del robot
+    interface: {
+      model: 'interface'
+    },
 
 
     toJSON: function(){

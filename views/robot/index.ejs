@@ -27,6 +27,13 @@
       <td><%= robot.description %></td>
       <td><%= robot.ip %></td>
 
+      <% if(robot.online){ %>
+      <td> <a href="robot/control/<%= robot.id %>" class="btn btn-sm btn-success">Take control</a></td>
+      <% } else { %>
+      <td> <a href="robot/control/<%= robot.id %>"class="btn btn-sm btn-success disabled">Take control</a></td>
+      <% } %>
+
+      <td> <a href="robot/interface/<%= robot.id %>" class="btn btn-sm btn-success">Personalice Interface</a></td>
 
       <td> <a href="robot/show/<%= robot.id %>" class="btn btn-sm btn-primary">Show</a></td>
       <td> <a href="robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning">Edit</a></td>

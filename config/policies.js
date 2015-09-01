@@ -36,9 +36,6 @@ module.exports.policies = {
     show: "userCanSeeProfile",
     edit: "userCanSeeProfile",
     update: "userCanSeeProfile",
-
-    //solo para pruebas
-    index:"flash",
     '*': "admin"
   },
 
