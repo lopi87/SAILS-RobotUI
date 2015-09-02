@@ -6,6 +6,15 @@
  */
 
 module.exports = {
-	
+
+  show: function(req, res, next){
+    Interface.findOne(req.param('id'), function foundInterface(err, iface){
+      if(err) return next(err);
+      res.view({
+        interface: iface
+      });
+    });
+  }
+
 };
 

@@ -22,6 +22,12 @@ module.exports = {
     code: {
       type: 'string',
       required: true
+    },
+
+    element: {
+      type: 'string',
+      enum: ['button', 'push', 'video'],
+      defaultsTo: 'button'
     }
 
   }

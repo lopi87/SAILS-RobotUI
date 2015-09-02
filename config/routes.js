@@ -36,6 +36,10 @@ module.exports.routes = {
     view: 'static/index'
   },
 
+  'robot/interface':{
+    view: 'interfaces/show'
+  }
+
 
   /***************************************************************************
   *                                                                          *

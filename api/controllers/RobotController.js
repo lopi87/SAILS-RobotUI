@@ -78,9 +78,11 @@ module.exports = {
         });
       });
 
-
-      Interface.create({robot_owner: robot.id}).exec(console.log);
-
+      //Se relaciona el robot con su interfaz de control (relacion en doble sentido)
+      Interface.create({robot_owner: robot.id}, function interfaceCreated(err, iface){
+        robot.robot_interface = iface.id;
+        robot.save();
+      });
 
       //Redirección a show
       res.redirect('robot/index/');
@@ -114,9 +116,9 @@ module.exports = {
 
 
   show: function(req, res, next){
-    Robot.findOne(req.param('id'), function foundRobot(err, user){
+    Robot.findOne(req.param('id'), function foundRobot(err, robot){
       if(err) return next(err);
-      if(!user) return next();
+      if(!robot) return next();
       res.view({
         robot: robot
       });
