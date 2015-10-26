@@ -15,3 +15,14 @@ module.exports = function(req, res, next) {
   var b = req.param('locale');
   next();
 };
+
+
+
+/*
+// api/policies/localize.js
+module.exports = function(req, res, next) {
+  req.setLocale(req.session.languagePreference);
+  next();
+};
+
+  */

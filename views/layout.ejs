@@ -81,17 +81,21 @@
 
       <form class="navbar-form navbar-right">
           <div class="form-group">
-            <select data-placeholder="Choose a language" class="chzn-select-lan" style="width:150px;" tabindex="2">
+
+            <%= locale = req.getLocale() %>
+
+            <select data-placeholder="Choose a language" class="chzn-select-lan" style="width:80px;" tabindex="2">
               <option value=""></option>
-              <option data-img-src="/images/flags/EN.png" value="en">EN</option>
-              <option data-img-src="/images/flags/ES.png" value="es">ES</option>
-              <option data-img-src="/images/flags/FR.png" value="fr">FR</option>
-              <option data-img-src="/images/flags/PT.png" value="pt">PT</option>
+              <option selected='<%= locale == 'en'%>' data-img-src="/images/flags/EN.png" value="en">EN</option>
+              <option selected='<%= locale == 'es'%>' data-img-src="/images/flags/ES.png" value="es">ES</option>
+              <option selected='<%= locale == 'fr'%>' data-img-src="/images/flags/FR.png" value="fr">FR</option>
+              <option selected='<%= locale == 'pt'%>' data-img-src="/images/flags/PT.png" value="pt">PT</option>
             </select>
             <script type="text/javascript">
               $('.chzn-select-lan').chosen({
-                "disable_search": true
+                "disable_search": true,
               });
+
             </script>
           </div>
       </form>
@@ -105,10 +109,27 @@
               type: 'GET',
               data: {locale: $( ".chzn-select-lan" ).val()},
               contentType: 'application/json',
-              dataType: 'json'
-            }).done(function(){
-              alert('cambiado');
+              dataType: 'json',
+
+              done:function() {
+              },
+
+              success: function(data){
+
+                alert('cambiado');
+
+              },
+
+              failure: function(msg) {
+                alert("Fail : " + msg);
+              },
+
+              error: function(xhr, status, text) {
+                var response = jQuery.parseJSON(xhr, responseText);
+                alert(response.error);
+              }
             });
+
           });
 
         </script>

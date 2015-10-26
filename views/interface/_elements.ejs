@@ -1,0 +1,77 @@
+<a href="/interface/getactions/<%= interface.id %>" class="btn btn-sm btn-warning">get actions</a>
+<a href="/interface/newaction/<%= interface.id %>" class="btn btn-sm btn-warning">new action</a>
+
+
+  <h1 class="text-center login-title"> action </h1>
+
+  <% if(flash && flash.err){ %>
+  <ul class="alert alert-success" style="position: relative">
+    <%Object.keys(flash.err).forEach(function(error){ %>
+    <li><%- JSON.stringify(flash.err[error])%></li>
+    <%})%>
+  </ul>
+  <%}%>
+
+  <div>
+    <div class="control-group">
+      <input id="name_field" type="text" class="form-control" placeholder="name" name="name" required>
+    </div>
+
+    <div class="control-group">
+      <input id="code_field" type="text" class="form-control" placeholder="code" name="code">
+    </div>
+
+    <div class="control-group">
+      <select data-placeholder="Choose a type..." class="chzn-select" style="width:350px;" tabindex="2" name="element">
+        <option value="button">button</option>
+      </select>
+    </div>
+
+    <script type="text/javascript">
+      $('.chosen-select-type').chosen({});
+    </script>
+    <br>
+    <button id="new_action" type="button" class="btn btn-default">create an action</button>
+  </div>
+
+
+
+<script type="text/javascript">
+  $('#new_action').on('click',function(){
+    $.ajax({
+      url: '/interface/newaction/' + '<%= interface.id %>',
+      type: 'GET',
+      data: {name: $( "#name_field" ).val(),
+             code: $( "#code_field" ).val()},
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(){
+      alert("nueva accion");
+      $("#actualizar").append('pulsado');
+    });
+  });
+</script>
+
+
+
+
+<h3>Actions</h3>
+<table class="table">
+  <tr>
+    <th></th>
+    <th>buttons</th>
+  </tr>
+
+  <div id="actualizar">
+
+  </div>
+
+  <% _.each(interface.action, function(action){ %>
+  <tr data-id="<%= action.id %>" data-model="action">
+    <td> <a href="robot/control/<%= action.id %>" class="btn btn-sm btn-success"><%= action.name %></a></td>
+  </tr>
+  <% })%>
+
+</table>
+
+

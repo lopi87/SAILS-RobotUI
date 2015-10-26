@@ -74,14 +74,19 @@ module.exports = {
           //TODO añadir el usuario propietario en la relación con un boleano
           console.log('Associating user: ',robot.name,'with',user.id);
           robot.owners.add(user.id);
-          robot.save();
+          robot.save(function (err) {
+            if (err) return next(err);
+          });
         });
       });
 
       //Se relaciona el robot con su interfaz de control (relacion en doble sentido)
       Interface.create({robot_owner: robot.id}, function interfaceCreated(err, iface){
         robot.robot_interface = iface.id;
-        robot.save();
+        robot.save(function (err) {
+          if (err) return next(err);
+        });
+
       });
 
       //Redirección a show

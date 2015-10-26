@@ -67,7 +67,7 @@ module.exports = {
           if (err) return next(err);
 
 
-          //Informar a otros sockets que el usuario esta logueado
+          //Informar a otros clientes (sockets abiertos) que el usuario esta logueado
           User.publishUpdate(user.id, {
             loggedIn: true,
             id: user.id

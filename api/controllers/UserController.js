@@ -201,6 +201,9 @@ module.exports = {
 
       User.subscribe(req.socket, users);
 
+      //Esto evitará un warning ya que intentaria renderizar una vizta
+      res.send(200);
+
     });
   },
 
