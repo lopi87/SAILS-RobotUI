@@ -31,19 +31,19 @@
 
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.css">
+    <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/styles/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="/styles/chosen/chosen.css">
+    <link rel="stylesheet" href="/styles/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="/styles/chosen/ImageSelect.css">
-    <link rel="stylesheet" href="/styles/styles.css">
-    <link rel="stylesheet" href="/styles/sidebar/sidebar.css">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/styles/chosen/chosen.css">
+    <link rel="stylesheet" href="/styles/chosen/chosen.min.css">
+    <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
 
     <!--SCRIPTS-->
-    <script src="/js/vendor/jquery-1.11.3.js"></script>
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/customValidate.js"></script>
+    <script src="/js/vendor/jquery-1.11.3.js"></script>
     <script src="/js/vendor/bootstrap.js"></script>
     <script src="/js/vendor/chosen.jquery.js"></script>
     <script src="/js/vendor/ImageSelect.jquery.js"></script>
@@ -63,7 +63,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">RobotUI</a>
+
+
+        <a class="navbar-brand" rel="home" href="/" title="Home page">
+          <img src="/images/logo/logo.png" style="max-width:100px; margin-top: -7px;">
+        </a>
+
+
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
@@ -125,7 +131,7 @@
               },
 
               error: function(xhr, status, text) {
-                var response = jQuery.parseJSON(xhr, responseText);
+                var response = jQuery.parseJSON(xhr, text);
                 alert(response.error);
               }
             });
