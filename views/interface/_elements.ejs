@@ -1,9 +1,5 @@
-<a href="/interface/getactions/<%= interface.id %>" class="btn btn-sm btn-warning">get actions</a>
-<a href="/interface/newaction/<%= interface.id %>" class="btn btn-sm btn-warning">new action</a>
 
-
-  <h1 class="text-center login-title"> action </h1>
-
+  <h1 class="text-center login-title"> Interface  <%= robot[0].name %></h1>
   <% if(flash && flash.err){ %>
   <ul class="alert alert-success" style="position: relative">
     <%Object.keys(flash.err).forEach(function(error){ %>
@@ -12,66 +8,323 @@
   </ul>
   <%}%>
 
-  <div>
-    <div class="control-group">
-      <input id="name_field" type="text" class="form-control" placeholder="name" name="name" required>
-    </div>
+  <h3>status: online - offline </h3>
 
-    <div class="control-group">
-      <input id="code_field" type="text" class="form-control" placeholder="code" name="code">
-    </div>
+  <div data-example-id="" class="bd-example">
+      <div class="control-group">
+        <input id="name_field" type="text" class="form-control" placeholder="name" name="name" required>
+      </div>
 
-    <div class="control-group">
-      <select data-placeholder="Choose a type..." class="chzn-select" style="width:350px;" tabindex="2" name="element">
-        <option value="button">button</option>
-      </select>
-    </div>
+      <div class="control-group">
+        <input id="code_field" type="text" class="form-control" placeholder="code" name="code">
+      </div>
 
-    <script type="text/javascript">
-      $('.chosen-select-type').chosen({});
-    </script>
-    <br>
-    <button id="new_action" type="button" class="btn btn-default">create an action</button>
+      <div class="control-group">
+        <select data-placeholder="Choose a type..." class="chzn-select" style="width:350px;" tabindex="2" name="element">
+          <option value="button">button</option>
+        </select>
+      </div>
+
+      <script type="text/javascript">
+        $('.chosen-select-type').chosen({});
+      </script>
+      <br>
+      <button id="new_action" type="button" class="btn btn-default">create an action</button>
   </div>
 
 
+  <table class="table table-bordered">
+    <caption>Actions</caption>
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Accion</th>
+      <th>boton</th>
+      <th></th>
+    </tr>
+    </thead>
 
-<script type="text/javascript">
-  $('#new_action').on('click',function(){
-    $.ajax({
-      url: '/interface/newaction/' + '<%= interface.id %>',
-      type: 'GET',
-      data: {name: $( "#name_field" ).val(),
-             code: $( "#code_field" ).val()},
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(){
-      alert("nueva accion");
-      $("#actualizar").append('pulsado');
-    });
-  });
-</script>
+    <tbody id="actualizar">
 
+    <% indice = 0 %>
+    <% _.each(actions, function(action){ %>
+    <tr id="line_<%= action.id %>" data-model="action">
+      <th scope="row"><%=indice++%></th>
+      <td><%= action.name %></td>
 
+      <td> <a href="/robot/control/<%= action.id %>" class="btn btn-sm btn-success"><%= action.name %></a></td>
+      <td> <button id="delete_action_<%= action.id %>" type="button" class="btn btn-sm btn-danger" onclick="row_action_deleted('<%= action.id %>')">Delete</button></td>
+    </tr>
+    <% })%>
 
-
-<h3>Actions</h3>
-<table class="table">
-  <tr>
-    <th></th>
-    <th>buttons</th>
-  </tr>
-
-  <div id="actualizar">
-
-  </div>
-
-  <% _.each(interface.action, function(action){ %>
-  <tr data-id="<%= action.id %>" data-model="action">
-    <td> <a href="robot/control/<%= action.id %>" class="btn btn-sm btn-success"><%= action.name %></a></td>
-  </tr>
-  <% })%>
-
+    </tbody>
 </table>
 
+
+
+
+
+  <script type="text/javascript">
+    $('#new_action').on('click',function(){
+      alert("checked the button - new_action");
+
+      $.ajax({
+        url: '/interface/newaction/' + '<%= interface.id %>',
+        type: 'GET',
+        data: {name: $( "#name_field" ).val(), code: $( "#code_field" ).val()},
+        contentType: 'application/json',
+        dataType: 'json',
+
+        done:function() {
+        },
+
+        success: function(data){
+          alert("Action created");
+          $("#actualizar").append(
+            "<tr data-model=\"action\" id=line_" + data.id + ">" +
+            "<th scope=\"row\">3</th>" +
+            "<td>" + data.name + "</td>" +
+            "<td> <a class=\"btn btn-sm btn-success\" href=\"/robot/control/5697da04be14af880ba1721a\">" + data.code + "</a></td> " +
+            "<td> <button id=\"delete_action_" + data.id + "\" type=\"button\" class=\"btn btn-sm btn-danger\" onclick=\"row_action_deleted('" + data.id + "')\">Delete</button></td>" +
+          "</tr>"
+          );
+        },
+
+        failure: function(msg) {
+          alert("Fail : " + msg);
+        },
+
+        error: function(xhr, status, text) {
+          var response = jQuery.parseJSON(xhr, text);
+          alert(response.error);
+        }
+      });
+    });
+
+
+    function row_action_deleted(id) {
+      alert("checked the button - delete_action");
+      $.ajax({
+        url: '/interface/deleteaction/' + id,
+        type: 'GET',
+        data: {},
+        contentType: 'application/json',
+        dataType: 'json',
+
+        success: function (data) {
+          $("#line_" + id).remove();
+        },
+
+        failure: function (msg) {
+          alert("Fail : " + msg);
+        },
+
+        error: function (xhr, status, text) {
+          //var response = jQuery.parseJSON(xhr, text);
+          //alert(response.error);
+        }
+      });
+    }
+
+  </script>
+
+
+
+
+
+  <script type="text/javascript">
+
+    //FUNCION IMPORTANTE: MANDAR LOS COMANDOS AL VEHICULO!
+
+
+    function send_action(id) {
+
+    }
+
+
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="container">
+    <div class="page-header">
+      <h1>Mandar comandos <small> <!-- desarrollado por --> </small></h1>
+    </div>
+
+    <div id="content" class="row" style="height: 70%;">
+      <div class="col-md-2"></div>
+      <div id="cahtContent" class="col-md-6">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            Comandos
+          </div>
+          <div id="chat" class="panel-body"></div>
+        </div>
+        <div>
+          <form id="sendMessage" class="input-group" style="text-align: center; margin:0 auto;">
+            <input id="message" class="form-control input-lg" type="text">
+        <span class="input-group-btn">
+          <button class="btn btn-lg btn-primary" type="submit">Mandar</button>
+        </span>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+
+    jQuery(function($){
+      var socket = io.connect('http://10.182.167.83:3000');
+
+      var $messageForm = $('#sendMessage');
+      var $message = $('#message');
+      var $chat = $('#chat');
+
+      $messageForm.submit(function (e) {
+        e.preventDefault();
+        if($message.val() != '' ) socket.emit('sendMessage', $message.val())
+
+        //alert('enviando... ' +  $message.val());
+        $message.val('');
+      });
+
+
+      socket.on('newMessage', function(data){
+        //alert('recibiendo... ' +  data.msg);
+        $chat.append(' - ' + data.msg + '<br/>');
+      });
+
+
+    });
+  </script>
+
+  <div class="margintop20">
+  <a href="/robot/index" class="btn btn-sm btn-warning"> My Robots</a>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    /*
+    //APERTURA DE SOCKETS
+    var io = require('socket.io').listen(3000);
+    io.sockets.on("connection", function(socket){
+      console.log('Socket robot abierto');
+      socket.on('sendMessage', function(data){
+        console.log('emitiendo orden...');
+        io.sockets.emit('newMessage',{msg: data});
+
+      });
+    });
+
+*/
+    //PARTE DE CONTROL
+
+    jQuery(function($){
+      var socket = io.connect('http://10.182.167.83:3000');
+
+      var $messageForm = $('#sendMessage');
+      var $message = $('#message');
+      var $chat = $('#chat');
+
+      $messageForm.submit(function (e) {
+        e.preventDefault();
+        if($message.val() != '' ) socket.emit('sendMessage', $message.val())
+
+        //alert('enviando... ' +  $message.val());
+        $message.val('');
+      });
+
+
+      socket.on('newMessage', function(data){
+        //alert('recibiendo... ' +  data.msg);
+        $chat.append(' - ' + data.msg + '<br/>');
+      });
+
+
+    });
+
+  </script>
 

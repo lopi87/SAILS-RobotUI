@@ -10,7 +10,7 @@ module.exports = {
   attributes: {
 
     //La acción pertenece a una interfaz
-    interface:{
+    interface_owner:{
       model: 'interface'
     },
 

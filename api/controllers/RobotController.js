@@ -37,6 +37,34 @@ module.exports = {
 
     Robot.create(robotObj, function robotCreated(err, robot) {
 
+
+
+      //Añade los usuarios del robot
+      req.param('owners').forEach(function(user_id)  {
+
+        User.findOne(user_id, function foundUser(err, user){
+          if(err) return next(err);
+          if(!user) return next();
+
+          //TODO añadir el usuario propietario en la relación con un boleano
+          console.log('Associating robot - user: ',robot.name,'with',user.id);
+          robot.owners.add(user.id);
+          robot.save(function (err) {
+            if (err) return next(err);
+          });
+        });
+      });
+
+      //Se relaciona el robot con su interfaz de control (relacion en doble sentido)
+      Interface.create({robot_owner: robot.id}, function interfaceCreated(err, iface){
+        console.log('Associating robot - interface: ',robot.name,'with',iface.id);
+
+        robot.robot_interface = iface.id;
+        robot.save(function (err) {
+          if (err) return next(err);
+        });
+      });
+
       //Si hay error
       if (err){
         console.log(err);
@@ -64,30 +92,7 @@ module.exports = {
        thisUser.pets.add(thisPony.id);
        thisUser.save(console.log);
        */
-      //Añade sus usuarios
-      req.param('owners').forEach(function(user_id)  {
 
-        User.findOne(user_id, function foundUser(err, user){
-          if(err) return next(err);
-          if(!user) return next();
-
-          //TODO añadir el usuario propietario en la relación con un boleano
-          console.log('Associating user: ',robot.name,'with',user.id);
-          robot.owners.add(user.id);
-          robot.save(function (err) {
-            if (err) return next(err);
-          });
-        });
-      });
-
-      //Se relaciona el robot con su interfaz de control (relacion en doble sentido)
-      Interface.create({robot_owner: robot.id}, function interfaceCreated(err, iface){
-        robot.robot_interface = iface.id;
-        robot.save(function (err) {
-          if (err) return next(err);
-        });
-
-      });
 
       //Redirección a show
       res.redirect('robot/index/');
@@ -121,6 +126,10 @@ module.exports = {
 
 
   show: function(req, res, next){
+
+    setLocale('pt');
+
+
     Robot.findOne(req.param('id'), function foundRobot(err, robot){
       if(err) return next(err);
       if(!robot) return next();

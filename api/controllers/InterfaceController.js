@@ -10,9 +10,23 @@ module.exports = {
   show: function (req, res, next) {
     Interface.findOne(req.param('id'), function foundInterface(err, iface) {
       if (err) return next(err);
-      res.view({
-        interface: iface
+
+      Action.find({interface_owner: req.param('id')}).exec(function(err, actions) {
+        if (err) return next(err);
+
+        Robot.find({robot_interface: iface.id}).exec(function(err, robot) {
+          if (err) return next(err);
+
+          res.view({
+            interface: iface,
+            actions: actions,
+            index: actions.length,
+            robot: robot
+          });
+        });
+
       });
+
     });
   },
 
@@ -37,13 +51,12 @@ module.exports = {
       if (err) return next(err);
 
       var actionObj = {
-        interface: iface.id,
+        interface_owner: iface.id,
         name: req.param('name'),
         code: req.param('code'),
         element: 'button',
         port: parseInt(req.param('port'))
       };
-
 
       Action.create(actionObj, function actionCreated(err, action) {
 
@@ -58,15 +71,21 @@ module.exports = {
           return res.redirect('/interface/show/' + iface.id);
         }
 
-        action.save(function (err) {
-          if (err) return next(err);
-        });
+        //action.save(function (err) {
+        //  if (err) return next(err);
+        //});
 
         Action.publishCreate(action);
+        console.log('The action has been created');
 
-        //Redirección
-        res.view('action/_list',{layout: null});
-        req.session.flash = {};
+        return res.ok({message: 'The action has been created',
+          name: action.name,
+          code: action.code,
+          id: action.id
+
+        });
+
+        //req.session.flash = {};
 
         //TODO https://courses.platzi.com/courses/develop-apps-sails-js/   curso de sails js por el creador del framework
 
@@ -74,7 +93,32 @@ module.exports = {
 
       });
     });
+  },
+
+
+
+  deleteaction: function (req, res, next) {
+
+    Action.destroy({id: req.param('id')}).exec(function deleteaction(err){
+      console.log('The action has been deleted');
+
+        //Si hay error
+        if (err){
+          console.log(err);
+          req.session.flash ={
+            err: err
+          };
+
+          //redireccion si hay error
+          return res.redirect('/interface/show/' + iface.id);
+
+        }
+
+      return res.ok({id: req.param('id')});
+      //req.session.flash = {};
+
+    });
   }
 
-};
+  };
 

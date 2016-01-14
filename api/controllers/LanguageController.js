@@ -16,7 +16,9 @@ module.exports = {
       }
     }
 
-    return res.ok({ });
+    res.setLocale('es');
+
+    return res.ok({locale: req.getLocale() });
 
   }
 };

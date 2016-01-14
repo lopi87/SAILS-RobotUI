@@ -16,7 +16,7 @@ module.exports = {
     // Acciones de la interfaz
     actions: {
       collection: 'action',
-      via: 'interface'
+      via: 'interface_owner'
     }
 
   }

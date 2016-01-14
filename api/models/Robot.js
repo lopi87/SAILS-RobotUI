@@ -17,6 +17,11 @@ module.exports = {
       type: 'string'
     },
 
+    busy: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+
     online: {
       type: 'boolean',
       defaultsTo: false
