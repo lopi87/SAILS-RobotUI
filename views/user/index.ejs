@@ -50,3 +50,47 @@
 
   </table>
 </div>
+
+
+<script type="text/javascript">
+
+  window.onload = function subscribeAndListen() {
+    io.socket.get('/user/user_subscribe/');
+
+
+    io.socket.on('user', function (obj) {
+
+      if (obj.verb == 'created') {
+        alert('usuario creado');
+        var data = obj.data;
+        console.log('Command ' + data.command + ' ' + data.id +' has been send.');
+        $chat.append(' - ' + data.command + '<br/>');
+      }
+
+
+      if (obj.verb == 'updated') {
+        alert('usuario actualizado');
+        var previous = obj.previous;
+        var data = obj.data;
+        console.log('User '+previous.name+' has been updated to '+data.name);
+      }
+
+
+
+      if (obj.verb == 'destroyed') {
+        alert('usuario eliminado');
+        var previous = obj.previous;
+        var data = obj.data;
+        console.log('User '+previous.name+' has been updated to '+data.name);
+      }
+
+    });
+
+
+
+  };
+
+
+</script>
+
+

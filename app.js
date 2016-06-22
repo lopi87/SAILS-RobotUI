@@ -17,7 +17,6 @@
  * The same command-line arguments are supported, e.g.:
  * `node app.js --silent --port=80 --prod`
  */
-
 // Ensure we're in the project directory, so relative paths work as expected
 // no matter where we actually lift from.
 process.chdir(__dirname);
@@ -54,22 +53,48 @@ process.chdir(__dirname);
   }
 
 
-  //Socket para el chat
+
+  /*
+  //Socket
   var io = require('socket.io').listen(3000);
+  var users_loggin = {};
+
+  //evento, nueva conexion al servidor
   io.sockets.on("connection", function(socket){
     console.log('Socket abierto');
-    socket.on('sendMessage', function(data){
-      console.log('emitiendo...');
-      io.sockets.emit('newMessage',{msg: data});
+
+    //Añadimos el par socket - usuario de la lista de conectados
+    users_loggin[socket.id] = 'invited';
+
+    //Imprimir hash (para depurar)
+    for (var i = 0, keys = Object.keys(users_loggin), ii = keys.length; i < ii; i++) {
+      console.log('key : ' + keys[i] + ' val : ' + users_loggin[keys[i]]);
+    }
+
+
+    //Funcion desconexion
+    socket.on('disconnect', function(){
+      //Detecta si un cliente se desconecta
+      console.log('Cliente desconectado - id del socket: ' + socket.id);
+      //socket.broadcast.to(roomName).emit('user_leave', {user_name: "johnjoe123"});
+
+      //Eliminamos el par socket - usuario de la lista de conectados
+      delete users_loggin[socket.id];
+      console.log('Usuarios restantes: \n');
+      for (var i = 0, keys = Object.keys(users_loggin), ii = keys.length; i < ii; i++) {
+        console.log('key : ' + keys[i] + ' val : ' + users_loggin[keys[i]]);
+      }
 
     });
   });
-
-
-
+   */
 
   // Start server
   sails.lift(rc('sails'));
 
-
 })();
+
+
+
+
+

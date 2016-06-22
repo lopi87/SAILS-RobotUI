@@ -26,19 +26,15 @@ module.exports = {
   // new.ejs
   create: function(req, res, next) {
 
+    //TODO Comprobar que los parametros sean correctos
     var robotObj = {
       name: req.param('name'),
       description: req.param('description'),
-      ipaddress:  parseInt(req.param('ipaddress')),
+      ipaddress: req.param('ipaddress'),
       port: parseInt(req.param('port'))
     };
 
-
-
     Robot.create(robotObj, function robotCreated(err, robot) {
-
-
-
       //Añade los usuarios del robot
       req.param('owners').forEach(function(user_id)  {
 
@@ -126,10 +122,6 @@ module.exports = {
 
 
   show: function(req, res, next){
-
-    setLocale('pt');
-
-
     Robot.findOne(req.param('id'), function foundRobot(err, robot){
       if(err) return next(err);
       if(!robot) return next();

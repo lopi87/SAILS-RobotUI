@@ -3,6 +3,12 @@
 	"A brand new app.": "Une toute nouvelle application.",
 
   "Create_an_account": "Crear una cuenta",
-  "Create_a_robot": "Crear un robot"
+  "Create_a_robot": "Crear un robot",
+
+  "testing": {
+    "test": "ceci est un test"
+  },
+
+  "sign_up_now": "¡registrese ahora!"
 
 }

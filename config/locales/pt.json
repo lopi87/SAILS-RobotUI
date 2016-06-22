@@ -1,14 +1,13 @@
 {
-  "Welcome": "Willkommen",
-  "A brand new app.": "Eine neue App.",
+  "Welcome": "Bienvenido",
+  "A brand new app.": "Una aplicación de la nueva marca.",
 
   "Create_an_account": "Crear una cuenta",
   "Create_a_robot": "Crear un robot",
 
   "testing": {
-    "test": "dies ist ein test"
+    "test": "esto es una prueba"
   },
 
   "sign_up_now": "¡registrese ahora!"
-
 }

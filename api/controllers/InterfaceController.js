@@ -96,7 +96,6 @@ module.exports = {
   },
 
 
-
   deleteaction: function (req, res, next) {
 
     Action.destroy({id: req.param('id')}).exec(function deleteaction(err){
@@ -118,6 +117,30 @@ module.exports = {
       //req.session.flash = {};
 
     });
+  },
+
+
+  commandline: function(req,res,next){
+
+    var command = req.param('command');
+    var interface = req.param('interface');
+
+    var user = req.session.User.id;
+
+    if (command && req.isSocket){
+      console.log('emitiendo comando...');
+      Interface.publishCreate({id: interface,command: command});
+
+     //sails.socket.emit('command', {command: command});
+
+      console.log('command send');
+
+    } else if (req.isSocket){
+      Interface.watch(req);
+      console.log('Intreface with socket id '+sails.sockets.id(req)+' is now subscribed to the model class \'Interface\'.');
+    } else {
+      res.view();
+    }
   }
 
   };

@@ -1,65 +1,59 @@
-<div class="container">
+    <div class="jumbox">
+      <h3>My Robots</h3>
+      <table class="table">
+        <tr>
+          <th></th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Ip address</th>
+          <th>Interface</th>
 
-  <h3>My Robots</h3>
-  <table class="table">
-    <tr>
-      <th></th>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Ip address</th>
-      <th>Interface</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
 
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
+        <% _.each(robots, function(robot){ %>
+        <tr data-id="<%= robot.id %>" data-model="robot">
 
-    <% _.each(robots, function(robot){ %>
-    <tr data-id="<%= robot.id %>" data-model="robot">
+          <% if(robot.online){ %>
+          <td> <img src="/images/online.png" height="30" width="30"></td>
+          <% } else { %>
+          <td> <img src="/images/offline.png" height="30" width="30"></td>
+          <% } %>
 
-      <% if(robot.online){ %>
-      <td> <img src="/images/online.png" height="30" width="30"></td>
-      <% } else { %>
-      <td> <img src="/images/offline.png" height="30" width="30"></td>
-      <% } %>
+          <td><%= robot.id %></td>
+          <td><%= robot.name %></td>
+          <td><%= robot.description %></td>
+          <td><%= robot.ipaddress %> : <%= robot.port%></td>
+          <td> <%= robot.robot_interface %> </td>
 
-      <td><%= robot.id %></td>
-      <td><%= robot.name %></td>
-      <td><%= robot.description %></td>
-      <td><%= robot.ip %></td>
-      <td> <%= robot.robot_interface%> </td>
+          <% if(robot.online){ %>
+          <td> <a href="robot/control/<%= robot.id %>" class="btn btn-sm btn-success">Take control</a></td>
+          <% } else { %>
+          <td> <a href="robot/control/<%= robot.id %>"class="btn btn-sm btn-success disabled">Take control</a></td>
+          <% } %>
 
-      <% if(robot.online){ %>
-      <td> <a href="robot/control/<%= robot.id %>" class="btn btn-sm btn-success">Take control</a></td>
-      <% } else { %>
-      <td> <a href="robot/control/<%= robot.id %>"class="btn btn-sm btn-success disabled">Take control</a></td>
-      <% } %>
+          <td> <a href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary">Personalice Interface</a></td>
 
-      <td> <a href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-success">Personalice Interface</a></td>
+          <td>
+            <form action="/robot/destroy/<%=robot.id%>" method="post">
+              <input type="hidden" name="_method" value="delete"/>
+              <input type="submit"  class="btn btn-sm btn-danger" value="Delete"/>
+              <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+            </form>
+          </td>
+        </tr>
+        <% })%>
 
-      <td> <a href="/robot/show/<%= robot.id %>" class="btn btn-sm btn-primary">Show</a></td>
-      <td> <a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning">Edit</a></td>
-
-      <td>
-        <form action="/robot/destroy/<%=robot.id%>" method="post">
-          <input type="hidden" name="_method" value="delete"/>
-          <input type="submit"  class="btn btn-sm btn-danger" value="Delete"/>
-          <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
-        </form>
-      </td>
-    </tr>
-    <% })%>
-
-  </table>
+      </table>
 
 
-  <div class="pull-right margintop20">
-    <a href="/robot/new" class="btn btn-sm btn-success">Add a new robot!</a>
-  </div>
-
-
-</div>
+      <div class="pull-right margintop20 marginbottom20">
+        <a href="/robot/new" class="btn btn-sm btn-success">Add a new robot!</a>
+      </div>
+    </div>
 
 
 

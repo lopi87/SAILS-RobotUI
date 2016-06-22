@@ -31,13 +31,21 @@ module.exports.policies = {
 
 
   user: {
-    'new': "flash",
+    'new': ["flash", "localize"],
     create: "flash",
     subscribe: "flash",
     show: "userCanSeeProfile",
     edit: "userCanSeeProfile",
     update: "userCanSeeProfile",
+    testSocket: "flash",
+    user_subscribe: "flash",
+
     '*': "admin"
+  },
+
+  session: {
+    'new': "flash",
+    destroy: "flash"
   },
 
   robot: {

@@ -32,9 +32,14 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+
+  'get /': 'IndexController.index',
+
+  /*
   '/': {
     view: 'static/index'
   },
+  */
 
   'robot/interface':{
     view: 'interfaces/show'
@@ -50,5 +55,4 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-
 };

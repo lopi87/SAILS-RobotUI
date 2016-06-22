@@ -3,7 +3,11 @@
 	"A brand new app.": "A brand new app.",
 
   "Create_an_account": "Create an account",
-  "Create_a_robot": "Create a robot"
+  "Create_a_robot": "Create a robot",
 
+  "testing": {
+    "test": "this is a test"
+  },
 
+  "sign_up_now": "sign up now!"
 }

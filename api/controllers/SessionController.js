@@ -19,6 +19,18 @@ module.exports = {
     res.view('session/new');
   },
 
+  getSocketID: function(req, res) {
+    if (!req.isSocket) {
+      return res.badRequest();
+    }
+
+    var socketId = sails.sockets.getId(req);
+    // => "BetX2G-2889Bg22xi-jy"
+
+    sails.log('My socket ID is: ' + socketId);
+
+    return res.json(socketId);
+  },
 
   create: function(req, res, next){
 
@@ -94,6 +106,14 @@ module.exports = {
     }, function (err){
         if(err) return next(err);
         req.session.destroy();
+        
+
+        //Restore session
+        Session.update({socket_id:sails.sockets.id(req)},{user_id:'invited'}).exec(function afterwards(err, updated){
+          if (err) return next(err);
+          console.log('Updated session to invited');
+        });
+
 
         //redireccion a Sign-in
         res.redirect('session/new');

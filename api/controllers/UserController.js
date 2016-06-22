@@ -50,60 +50,12 @@ module.exports = {
       });
 
 
-
-      /*
-
-       req.file('avatar').upload({
-          // don't allow the total upload size to exceed ~10MB
-          maxBytes: 10000000
-        },function whenDone(err, uploadedFiles) {
-
-
-          if (err) {
-            return res.negotiate(err);
-          }
-
-          // If no files were uploaded, respond with an error.
-          if (uploadedFiles.length === 0){
-            console.log('ERROR: No file was uploaded');
-            return res.badRequest('No file was uploaded');
-          }
-
-          // Save the "fd" and the url where the avatar for a user can be accessed
-          User.update(user, {
-
-            // Generate a unique URL where the avatar can be downloaded.
-            avatarUrl: require('util').format('%s/user/avatar/%s', sails.getBaseUrl(), user),
-
-            // Grab the first file and use it's `fd` (file descriptor)
-            avatarFd: uploadedFiles[0].fd
-          })
-            .exec(function (err){
-              if (err) return res.negotiate(err);
-              return res.ok();
-            });
-        });
-
-
-*/
-
-
-
-
-      /*
-      req.file('avatar').upload(function (err, uploadedFiles){
-        if (err) return res.send(500, err);
-        res.send(200, uploadedFiles);
-      });
-*/
-
-
       if (req.session.User.admin) {
         res.redirect('/user');
         return;
       }
 
-      User.publishCreate(user);
+      User.publishCreate({id: user.id});
 
       //Redirección a show
       res.redirect('user/show/' + user.id);
@@ -157,21 +109,44 @@ module.exports = {
         title: req.param('title'),
         email: req.param('email'),
         admin: req.param('admin')
-      }
+      };
+
     } else {
       var userObj = {
         name: req.param('name'),
         title: req.param('title'),
         email: req.param('email')
-      }
+        };
     }
 
     User.update(req.param('id'), userObj, function userUpdated(err){
       if(err){
         return res.redirect('/user/edit' + req.param('id'));
       }
+
+      if(req.session.User.admin == true) {
+        User.publishUpdate(req.param('id'), {
+          name: req.param('name'),
+          title: req.param('title'),
+          email: req.param('email'),
+          admin: req.param('admin')
+        });
+      }
+      else{
+        User.publishUpdate( req.param('id'), {
+          name: req.param('name'),
+          title: req.param('title'),
+          email: req.param('email')
+        });
+      }
+
       res.redirect('/user/show/' + req.param('id'));
     });
+
+
+
+
+
   },
 
   destroy: function(req, res, next) {
@@ -190,7 +165,7 @@ module.exports = {
   },
 
 
-
+/*
   subscribe: function(req, res){
 
     User.find(function foundUsers(err, users){
@@ -201,12 +176,12 @@ module.exports = {
 
       User.subscribe(req.socket, users);
 
-      //Esto evitará un warning ya que intentaria renderizar una vizta
+      //Esto evitará un warning ya que intentaria renderizar una vista
       res.send(200);
 
     });
   },
-
+*/
 
 
   /**
@@ -228,7 +203,6 @@ module.exports = {
       if (uploadedFiles.length === 0){
         return res.badRequest('No file was uploaded');
       }
-
 
       // Save the "fd" and the url where the avatar for a user can be accessed
       User.update(req.session.me, {
@@ -277,6 +251,34 @@ module.exports = {
         })
         .pipe(res);
     });
+  },
+
+
+
+  //Explicado aqui https://www.youtube.com/watch?v=enyZYgjXRqQ&list=PL16Fzt2LkOBQTP2vbyZ82wci6MoOdFtF5&index=24
+  user_subscribe: function(req,res,next){
+    if (req.isSocket){
+      //Update session table
+      Session.update({socket_id:sails.sockets.id(req)},{user_id:req.session.User.id}).exec(function afterwards(err, updated){
+        if (err) {
+          // handle error here- e.g. `res.serverError(err);`
+          return;
+        }
+        console.log('Updated session to username ' + User.name);
+      });
+
+      //Update, destroy...
+      User.find(function foundUsers(err,users){
+        if (err) return next(err);
+        User.subscribe(req.socket,users);
+      });
+
+      //Create
+      User.watch(req);
+      console.log('User ' + req.session.User.id + 'with socket id '+sails.sockets.id(req)+' is now subscribed to the model class \'User\'.');
+    } else {
+      res.view();
+    }
   }
 
 
@@ -284,3 +286,64 @@ module.exports = {
 };
 
 
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+ socket.on('message', commetMessageReceivedFromServer);
+ //socket.get('/user/user_subscribe');
+
+ function commetMessageReceivedFromServer(message){
+
+ if (message.model == 'user'){
+ var userId = message.id;
+ updateUserInDom(userId, message);
+ }
+ };
+
+ function updayeUserInDom(userId, message){
+
+ var page = document.localtion.pathname;
+
+ page = page.replace(/(\/)$/, '');
+
+ switch (page){
+ case '/user':
+ if (message.verb = 'update'){
+ UserIndexPage.updateUser(userId, message);
+ }
+ break;
+ }
+ }
+
+
+ var UserIndexPage = {
+ updateUser: function(id, message){
+
+ if (message.data.loggedIn) {
+ var $userRow = $('tr[data-id"' + id + '"] td img').first();
+ $userRow.attr('src', "/images/icon-online.png");
+ } else {
+ var $userRow = $('tr[data-id"' + id + '"] td img').first();
+ $userRow.attr('src', "/images/icon-offline.png");
+ }
+ }
+ }
+
+
+
+
+
+
+
+
+ */

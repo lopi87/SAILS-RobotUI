@@ -28,7 +28,7 @@ module.exports = {
     },
 
     ipaddress: {
-      type: 'integer',
+      type: 'string',
       required: true
     },
 
