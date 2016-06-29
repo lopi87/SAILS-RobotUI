@@ -1,4 +1,62 @@
-<% partial ('_sidebar.ejs') %>
-
 <%- partial('_elements.ejs') %>
+
+
+
+<div id="board" class="board_container boxwhite container">
+
+  <div class="row">
+    <div class="col-md-2 col-sm-2">
+      <div class="list-group">
+        <a class="list-group-item"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp;</a>
+        <a class="list-group-item"><i class="fa fa-remove fa-fw" aria-hidden="true"></i>&nbsp;</a>
+        <a class="list-group-item"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>&nbsp;</a>
+        <a class="list-group-item"><i class="fa fa-plug fa-fw" aria-hidden="true"></i>&nbsp;</a>
+        <a class="list-group-item"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;</a>
+      </div>
+    </div>
+
+    <div class="col-md-10 col-sm-10">
+      TABLERO
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="marginlef20 margintop20 floatright marginright20">
+        <a id="save_dash" class="btn btn-sm btn-success" > Save dashboard! </a>
+        <a id="edit_dash" class="btn btn-sm btn-warning" > Edit dashboard! </a>
+        <a id="reset_dash" class="btn btn-sm btn-danger" > Reset dashboard! </a>
+      </div>
+    </div>
+  </div>
+
+
+  <% partial ('_dashboard.ejs') %>
+
+  <script type="text/javascript">
+
+
+    $( "#save_dash" ).click(function() {
+      $('#board').addClass('loading');
+    });
+    $( "#edit_dash" ).click(function() {
+      $('#board').removeClass('loading');
+    });
+
+    //PENDIENTE RESIZABLE
+    // CAMBIAR CURSOR O ELEMENTO SELECCIONADO EN EL MENU
+    //IMAGEN CUADRICULA DE FONDO
+    $(function() {
+      $( "#board" ).resizable();
+    });
+    $('#new_action').on("click", function() {
+      $('#board').css('cursor', 'wait');
+    });
+
+  </script>
+
+
+</div>
+
 

@@ -130,6 +130,42 @@
   </script>
 
 
+
+  <div id="containment-wrapper">
+    <div id="draggable3" class="draggable ui-widget-content">
+      <p>DRAG ME</p>
+    </div>
+
+
+
+
+    <script type="text/javascript">
+      var sPositions = localStorage.positions || "{}",
+        positions = JSON.parse(sPositions);
+      $.each(positions, function (id, pos) {
+        $("#" + id).css(pos)
+      })
+      $("#draggable3").draggable({
+        containment: "#containment-wrapper",
+        scroll: false,
+        stop: function (event, ui) {
+          positions[this.id] = ui.position
+          localStorage.positions = JSON.stringify(positions)
+        }
+      });
+    </script>
+
+
+
+
+  </div>
+
+
+
+
+
+
+
   <div class="container">
     <div class="page-header -align-center">
       <h1>Mandar comandos <small> <!-- desarrollado por --> </small></h1>
