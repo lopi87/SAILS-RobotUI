@@ -30,143 +30,178 @@
 
 
   <!--STYLES-->
-  <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="/styles/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/bootstrap/bootstrap.css">
+  <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.css">
+  <link rel="stylesheet" href="/styles/bootstrap/bootstrap-colorpicker.css">
+  <link rel="stylesheet" href="/styles/bootstrap/bootstrap-colorpicker-plus.css">
   <link rel="stylesheet" href="/styles/chosen/ImageSelect.css">
   <link rel="stylesheet" href="/styles/chosen/chosen.min.css">
+  <link rel="stylesheet" href="/styles/gridster/gridster.css">
   <link rel="stylesheet" href="/styles/importer.css">
   <!--STYLES END-->
 
   <!--SCRIPTS-->
   <script src="/js/dependencies/sails.io.js"></script>
-  <script src="/js/vendor/jquery-1.11.3.js"></script>
+  <script src="/js/vendor/jquery-2.2.4.js"></script>
   <script src="/js/vendor/bootstrap.js"></script>
   <script src="/js/vendor/chosen.jquery.js"></script>
   <script src="/js/vendor/ImageSelect.jquery.js"></script>
+  <script src="/js/vendor/gridster.js"></script>
+  <script src="/js/vendor/bootstrap-colorpicker.js"></script>
+  <script src="/js/vendor/bootstrap-colorpicker-plus.js"></script>
   <script src="/js/vendor/npm.js"></script>
   <script src="/js/customValidate.js"></script>
   <!--SCRIPTS END-->
-
-
 </head>
 
 <body>
 
-<div class="navbar navbar-default navbar-inverse">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+
+  <div class="navbar navbar-default navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="navbar-brand" rel="home" href="/" title="Home page">
+          <img src="/images/logo/logo.png" style="max-width:100px; margin-top: -7px;">
+        </a>
+
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <% if (session.authenticated) { %>
+          <li class="active"><a href="/user/show/<%= session.User.id%>"><%= session.User.name %></a> </li>
+
+          <li role="presentation"><a href="/message/index">Messages <span class="badge">3</span></a></li>
 
 
-      <a class="navbar-brand" rel="home" href="/" title="Home page">
-        <img src="/images/logo/logo.png" style="max-width:100px; margin-top: -7px;">
-      </a>
+          <% if (session.User.admin) { %>
+          <li><a href="/user"> User Administration</a> </li>
+          <% } %>
+          <li><a href="/robot/index"> My Robots</a> </li>
+          <% } %>
+        </ul>
+
+        <div class="flag flag-en"></div>
+
+        <form class="navbar-form navbar-right">
+          <div class="form-group">
+
+            <select data-placeholder="Choose a language" class="chzn-select-lan" style="width:100px;" tabindex="2">
+              <option data-img-src="/images/flags/EN.png" value="en">EN</option>
+              <option data-img-src="/images/flags/ES.png" value="es">ES</option>
+              <option data-img-src="/images/flags/FR.png" value="fr">FR</option>
+              <option data-img-src="/images/flags/PT.png" value="pt">PT</option>
+              <option class="flag flag-es" value="rr">        RR</option>
+            </select>
+            <script type="text/javascript">
+              $('.chzn-select-lan option[value="<%= req.session.languagePreference %>"]').attr("selected",true);
+
+              $('.chzn-select-lan').chosen({
+                "disable_search": true,
+              });
+            </script>
+          </div>
+        </form>
 
 
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <% if (session.authenticated) { %>
-        <li class="active"><a href="/user/show/<%= session.User.id%>"><%= session.User.name %></a> </li>
+        <script type="text/javascript">
+          $('.chzn-select-lan').on('change',function(){
+            $.ajax({
+              url: '/language/change',
+              type: 'GET',
+              data: {locale: $( ".chzn-select-lan" ).val()},
+              contentType: 'application/json',
+              dataType: 'json',
 
-        <li role="presentation"><a href="/message/index">Messages <span class="badge">3</span></a></li>
+              done:function() {
+              },
 
+              success: function(data){
+                window.location.reload();
+              },
 
-        <% if (session.User.admin) { %>
-        <li><a href="/user"> User Administration</a> </li>
-        <% } %>
-        <li><a href="/robot/index"> My Robots</a> </li>
-        <% } %>
-      </ul>
+              failure: function(msg) {
+                alert("Fail : " + msg);
+              },
 
-
-      <form class="navbar-form navbar-right">
-        <div class="form-group">
-
-          <select data-placeholder="Choose a language" class="chzn-select-lan" style="width:80px;" tabindex="2">
-            <option data-img-src="/images/flags/EN.png" value="en">EN</option>
-            <option data-img-src="/images/flags/ES.png" value="es">ES</option>
-            <option data-img-src="/images/flags/FR.png" value="fr">FR</option>
-            <option data-img-src="/images/flags/PT.png" value="pt">PT</option>
-          </select>
-          <script type="text/javascript">
-            $('.chzn-select-lan option[value="<%= req.session.languagePreference %>"]').attr("selected",true);
-
-            $('.chzn-select-lan').chosen({
-              "disable_search": true,
+              error: function(xhr, status, text) {
+                var response = jQuery.parseJSON(xhr, text);
+                alert(response.error);
+              }
             });
-          </script>
-        </div>
-      </form>
-
-
-      <script type="text/javascript">
-        $('.chzn-select-lan').on('change',function(){
-          $.ajax({
-            url: '/language/change',
-            type: 'GET',
-            data: {locale: $( ".chzn-select-lan" ).val()},
-            contentType: 'application/json',
-            dataType: 'json',
-
-            done:function() {
-            },
-
-            success: function(data){
-              window.location.reload();
-            },
-
-            failure: function(msg) {
-              alert("Fail : " + msg);
-            },
-
-            error: function(xhr, status, text) {
-              var response = jQuery.parseJSON(xhr, text);
-              alert(response.error);
-            }
-
 
           });
 
-        });
-
-      </script>
+        </script>
 
 
-      <div class="navbar-right">
-        <% if (session.authenticated) { %>
-        <a class="btn btn-default navbar-btn" href="/session/destroy">sign-out</a>
+        <div class="navbar-right">
+          <% if (session.authenticated) { %>
+          <a class="btn btn-default navbar-btn" href="/session/destroy">sign-out</a>
+          <% } %>
+        </div>
+        <% if (!session.authenticated) { %>
+        <form class="navbar-form navbar-right" action="/session/create">
+          <div class="form-group">
+            <input type="text" placeholder="Email" name="email" class="form-control">
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Password" name="password" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-success">Sign in</button>
+          <input type="hidden" name="_csrf" value="<%= _csrf %>">
+        </form>
         <% } %>
       </div>
-      <% if (!session.authenticated) { %>
-      <form class="navbar-form navbar-right" action="/session/create">
-        <div class="form-group">
-          <input type="text" placeholder="Email" name="email" class="form-control">
-        </div>
-        <div class="form-group">
-          <input type="password" placeholder="Password" name="password" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-success">Sign in</button>
-        <input type="hidden" name="_csrf" value="<%= _csrf %>">
-      </form>
-      <% } %>
     </div>
+
+    <script type="text/javascript">
+      bootstrap_alert = function() {
+      }
+      bootstrap_alert.success = function(message) {
+        $('#alert_placeholder').append('<div class="alert alert-success alert-dismissible fade in" style="" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Well done!</strong>' + ' ' + message + ' ' + '</div> </div>');
+        //alertTimeout(3000);
+      }
+      bootstrap_alert.info = function(message) {
+        $('#alert_placeholder').append('<div class="alert alert-info alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Well done!</strong>' + ' ' + message + ' ' + '</div> </div>');
+        alertTimeout(3000);
+      }
+
+      bootstrap_alert.warning = function(message) {
+        $('#alert_placeholder').append('<div class="alert alert-warning alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Well done!</strong>' + ' ' + message + ' ' + '</div> </div>');
+        alertTimeout(3000);
+      }
+
+      bootstrap_alert.danger = function(message) {
+        $('#alert_placeholder').append('<div class="alert alert-danger alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Well done!</strong>' + ' ' + message + ' ' + '</div> </div>');
+        alertTimeout(3000);
+      }
+
+
+      function alertTimeout(wait){
+        setTimeout(function(){
+          $('#alert_placeholder').children('.alert:first-child').remove()
+        }, wait);
+      }
+    </script>
+
   </div>
-</div>
+
+  <div id="alert_placeholder"></div>
 
 
-<div class="container box">
-  <%- body %>
-</div>
+  <div class="container box">
+    <%- body %>
+  </div>
 
 <div class="container">
   <hr>
   <footer class="footer">
-    <div class="container">
         <div class="text-right">
           <a href="http://sailsjs.com/">sails.js</a>
           <div>Author: Manuel López Urbina</div>
@@ -175,8 +210,6 @@
           <a href="https://plus.google.com/+Robotui-page"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
           <a href="mailto:robotui.controller@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
         </div>
-
-    </div>
   </footer>
 </div>
 
