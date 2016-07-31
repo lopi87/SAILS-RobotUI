@@ -163,23 +163,27 @@
     <script type="text/javascript">
       bootstrap_alert = function() {
       }
-      bootstrap_alert.success = function(message) {
+      bootstrap_alert.success = function(message, time) {
         $('#alert_placeholder').append('<div class="alert alert-success alert-dismissible fade in" style="" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Well done!</strong>' + ' ' + message + ' ' + '</div> </div>');
-        //alertTimeout(3000);
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        alertTimeout(time);
       }
       bootstrap_alert.info = function(message) {
         $('#alert_placeholder').append('<div class="alert alert-info alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Well done!</strong>' + ' ' + message + ' ' + '</div> </div>');
-        alertTimeout(3000);
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        alertTimeout(time);
       }
 
       bootstrap_alert.warning = function(message) {
         $('#alert_placeholder').append('<div class="alert alert-warning alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Well done!</strong>' + ' ' + message + ' ' + '</div> </div>');
-        alertTimeout(3000);
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        alertTimeout(time);
       }
 
       bootstrap_alert.danger = function(message) {
         $('#alert_placeholder').append('<div class="alert alert-danger alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Well done!</strong>' + ' ' + message + ' ' + '</div> </div>');
-        alertTimeout(3000);
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        alertTimeout(time);
       }
 
 
@@ -192,7 +196,9 @@
 
   </div>
 
-  <div id="alert_placeholder"></div>
+  <div class="container whitebox">
+      <div id="alert_placeholder"></div>
+  </div>
 
 
   <div class="container box">
@@ -212,9 +218,6 @@
         </div>
   </footer>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
 </body>
 </html>

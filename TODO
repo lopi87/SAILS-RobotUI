@@ -1,0 +1,51 @@
+Integración paypal donaciones:
+
+
+https://devblog.paypal.com/building-a-web-app-with-node-js-the-paypal-sdk-part-2/
+
+
+Subida de archivos (fotografías - pdf manuales)
+
+
+
+
+NOTAS IMPORTANTES COSAS DE INTERES
+----------------------------------
+
+
+Encontrada Página de un proyecto similar: http://livebots.azurewebsites.net
+
+
+
+
+30 JULIO 2016
+--------------
+
+Cambiado estilos: mensaje cuando no hay robots creados en vez de tabla vacía.
+
+Descubierta pagina de un proyecto similar.
+
+Añadido scroll a la ventana de comandos
+
+Reconocimiento de eventos de los botones y emitidos a todos los clientes. (se manda al servidor el id del boton y se devuelve el comando correspondiente (consulta en BD).
+
+
+31 JULIO 2016
+--------------
+
+Estilos: Mejorada interfaz de la ventana de edición del panel de control
+
+Actualizar estado en la base de datos cunado un robot es conectado -> mostrar evento en la pag index
+
+
+
+
+PARA MAÑANA
+-----------
+
+Subir imagenes! (para subir la imagen del robot y la de los botones que se creen ICONOS)
+
+http://sailsjs.org/documentation/concepts/file-uploads
+
+
+IDEA: Inyectar codigo CSS para personalizar interfaz!!

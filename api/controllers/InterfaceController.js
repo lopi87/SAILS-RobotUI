@@ -123,25 +123,38 @@ module.exports = {
   commandline: function(req,res,next){
 
     var command = req.param('command');
+    var button = req.param('button');
+
     var interface = req.param('interface');
 
     var user = req.session.User.id;
 
-    if (command && req.isSocket){
+    if (command && req.isSocket) {
       console.log('emitiendo comando...');
-      Interface.publishCreate({id: interface,command: command});
+      Interface.publishCreate({id: interface, command: command});
 
-     //sails.socket.emit('command', {command: command});
+      //sails.socket.emit('command', {command: command});
 
       console.log('command send');
+    } else if (button && req.isSocket){
+      console.log('emitiendo boton pulsado...');
 
+      Action.findOne(button, function foundAction(err, action){
+        if(err) return next(err);
+        if(!action) return next();
+        Interface.publishCreate({id: interface, command: action.code });
+      });
+      //sails.socket.emit('command', {command: command});
+
+      console.log('command send');
     } else if (req.isSocket){
       Interface.watch(req);
-      console.log('Intreface with socket id '+sails.sockets.id(req)+' is now subscribed to the model class \'Interface\'.');
+      console.log('Intreface with socket id '+ sails.sockets.id(req)+' is now subscribed to the model class \'Interface\'.');
     } else {
       res.view();
     }
   }
+
 
   };
 

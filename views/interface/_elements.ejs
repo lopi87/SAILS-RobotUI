@@ -1,4 +1,3 @@
-
   <h1 class="text-center login-title"> Interface  <%= robot[0].name %></h1>
   <% if(flash && flash.err){ %>
   <ul class="alert alert-success" style="position: relative">
@@ -8,7 +7,23 @@
   </ul>
   <%}%>
 
-  <h3>status: <img id="img_state" height="30" width="30" src="/images/offline.png"> </h3>
+  <button  id="conectar" value="hola" type="button" class="btn btn-sm btn-success">CONECTAR</button></td>
+  <button  id="desconectar" value="hola" type="button" class="btn btn-sm btn-danger">DESCONECTAR</button></td>
+  <button  id="mandar" value="UP" type="button" class="btn btn-sm btn-warning">MANDAR</button></td>
+
+
+
+  <!-- COMPROBAR SI ESTA OCUPADO O NO EL ROBOT PARA PODER MANEJARLO -->
+  <% if (robot[0].online){%>
+  <h3><img id="img_state_<%= robot[0].id %>" height="30" width="30" src="/images/online.png"> </h3>
+  <% } else { %>
+  <h3><img id="img_state_<%= robot[0].id %>" height="30" width="30" src="/images/offline.png"> </h3>
+  <% }  %>
+
+
+
+
+
 
   <div data-example-id="" class="bd-example">
       <div class="control-group">
@@ -31,7 +46,6 @@
       <br>
       <button id="new_action" type="button" class="btn btn-default">create an action</button>
   </div>
-
 
 
 
@@ -131,54 +145,19 @@
 
 
 
-  <div id="containment-wrapper">
-    <div id="draggable3" class="draggable ui-widget-content">
-      <p>DRAG ME</p>
-    </div>
-
-
-
-
-    <script type="text/javascript">
-      var sPositions = localStorage.positions || "{}",
-        positions = JSON.parse(sPositions);
-      $.each(positions, function (id, pos) {
-        $("#" + id).css(pos)
-      })
-      $("#draggable3").draggable({
-        containment: "#containment-wrapper",
-        scroll: false,
-        stop: function (event, ui) {
-          positions[this.id] = ui.position
-          localStorage.positions = JSON.stringify(positions)
-        }
-      });
-    </script>
-
-
-
-
-  </div>
-
-
-
-
-
-
-
   <div class="container">
     <div class="page-header -align-center">
-      <h1>Mandar comandos <small> <!-- desarrollado por --> </small></h1>
+      <h1>Mandar comandos <small> <%= robot[0].name %> </small></h1>
     </div>
 
     <div id="content" class="row" style="height: 70%;">
       <div class="col-md-2"></div>
-      <div id="cahtContent" class="col-md-6">
+      <div id="cahtContent" class="col-md-3">
         <div class="panel panel-success">
           <div class="panel-heading">
             Comandos
           </div>
-          <div id="chat" class="panel-body"></div>
+          <div id="chat" class="panel-body" style="min-height: 250px; max-height: 250px; overflow-y: scroll;"></div>
         </div>
         <div>
           <form id="sendMessage" class="input-group" style="text-align: center; margin:0 auto;">
@@ -189,47 +168,124 @@
           </form>
         </div>
       </div>
-
     </div>
   </div>
 
 
-  <div>
-    <% if (true){%>
-    SI VIDEO ESTA ACTIVADO
-    <% } %>
-  </div>
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
-  <script type="text/javascript">
 
+  <div class="margintop20 marginbottom20">
+  <a href="/robot/index" class="btn btn-sm btn-warning"> My Robots</a>
+</div>
+
+
+  EMISION DE VIDEO
+
+  http://www.jlmonteagudo.com/2012/10/emitir-video-con-tu-dispositivo-movil-con-node-js-express-js-y-socket-io/
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript">
 
     // https://evothings.com/controlling-a-toy-car-with-evothings-and-raspberry-pi/
 
-
     //ROBOT
-    jQuery(function($) {
-      //conexion con el robot
-      var address_robot = "<%= robot[0].ipaddress%>" + ":" + "<%= robot[0].port%>";
-      var socket_robot = io.connect(address_robot);
+    //conexion con el robot
+    var address_robot = "localhost" + ":" + "8085";
+    var robot_id = '<%= robot[0].id %>';
 
-      socket.on('connect', function()
-      {
-        Console.log('connected!')
-        alert('conectado con el robot... ' + address_robot);
+    $("#conectar").click(function(){
+      try {
+        // Connect to the server running on the Robot(raspberry pi).
+        var socket = io.connect(address_robot);
+        socket.on('connect', function() {
+          console.log('robot connected!')
+          //Sincronizar con el resto de clientes que un robot se ha conectado:
+          io.socket.get('/robot/changestate/',{robot: '<%= robot[0].id %>' , state: 'on'});
+          bootstrap_alert['success']('Conectado con exito! ' + address_robot, 5000 )
+          change_img_state(robot_id,true)
+
+        })
+      } catch (error) {
+        bootstrap_alert['danger']('Failed to connect to the Robot! (Raspberry Pi!)' + address_robot + error , 5000)
+        io.socket.get('/robot/changestate/',{robot: '<%= robot[0].id %>' , state: 'off'});
+        change_img_state(robot_id,false)
+      }
+
+
+      //Presionar boton desconectar
+      $("#desconectar").click(function(){
+        try {
+          socket.disconnect(function(){
+            console.log('robot disconnected!')
+            bootstrap_alert['success']('Conectado con exito! ' + address_robot, 5000 )
+            change_img_state(robot_id,false)
+            //Sincronizar con el resto de clientes:
+            io.socket.get('/robot/changestate/',{robot: '<%= robot[0].id %>' , state: 'off'});
+          });
+        } catch (error) {
+          bootstrap_alert['success']('Error to Disconnect to the Robot! (Raspberry Pi!)' + address_robot + error, 5000 )
+          change_img_state(robot_id,false)
+        }
       });
 
+      //captura evento desconectar cuando el robot es apagado o pierde la señal
+      socket.on('disconnect', function() {
+        //Sincronizar con el resto de clientes:
+        io.socket.get('/robot/changestate/',{robot: '<%= robot[0].id %>' , state: 'off'});
+        bootstrap_alert['danger']('Disconnect to the Robot! (Raspberry Pi!)' + address_robot, 5000 )
+        change_img_state(robot_id,false)
+      })
 
-      //mandar accion
-      $('[id^=button_]').click(function (e) {
+
+      //funcion para mandar comando al robot (nombre y codigo)
+      function command_send(name, code){
+        try {
+          socket.emit(name, code)
+          console.log('emitting to robot: ' + code)
+        } catch (error) {
+          console.log(error + ': ' + code)
+          bootstrap_alert['danger']('Error to send command! (Raspberry Pi!)' + address_robot + error, 5000 )
+          change_img_state(robot_id,false)
+        }
+      }
+
+
+      //Mandar evento "mandar comando" al servidor para sincronizar con otros navegadores
+      var $messageForm = $('#sendMessage');
+      $messageForm.submit(function (e) {
+        var $message = $('#message');
         e.preventDefault();
-        var code = document.getElementById(this.id).value
-        alert('enviando... ' + code);
-        if (code != '') socket_robot.emit('sendMessage', code);
+        if($message.val() != '' ) io.socket.get('/interface/commandline/',{interface: '<%= interface.id %>' ,user_id: '<%= session.User.id%>'   ,command: $message.val()});
+        command_send('direction', $message.val())
+        $message.val('');
       });
+
+
+
+      //PENDIENTE DE MIRAR EVENTOS PARA LOS BOTONES
+      //emite el comando de los botones creados en la interfaz
+      var interface_buttons = $('[id^=button_]');
+      interface_buttons.click(function (e) {
+        var button_pressed_id = this.id.replace('button_','');
+        var code = document.getElementById(this.id).value
+
+        e.preventDefault();
+        io.socket.get('/interface/commandline/',{interface: '<%= interface.id %>' ,user_id: '<%= session.User.id%>'   ,button: button_pressed_id});
+
+        if (code != ''){
+          command_send('direction',code);
+        }
+        //Emitir al servidor la accion para sincronizar con el resto de clientes....
+        //Mandar evento al servidor para sincronizar con otros navegadores
+
+      });
+
+
     });
+
 
     window.onload = function subscribeAndListen() {
       io.socket.get('/interface/commandline/');
@@ -242,52 +298,29 @@
           $chat.append(' - ' + data.command + '<br/>');
         }
       });
-
     };
 
-    var $messageForm = $('#sendMessage');
-    $messageForm.submit(function (e) {
-      var $message = $('#message');
-      e.preventDefault();
-      if($message.val() != '' ) io.socket.get('/interface/commandline/',{interface: '<%= interface.id %>' ,user_id: '<%= session.User.id%>'   ,command: $message.val()});
-      $message.val('');
-    });
+
+    //IMAGEN ESTADO
+    function change_img_state(robot_id, boolean){
+      var img_id = '#img_state_' + robot_id;
+      var img_on= "online.png";
+      var img_off= "offline.png"
+
+      if (boolean){
+        var src = $(img_id).attr("src").replace(img_off, img_on);
+        $(img_id).attr("src", src);
+      }else{
+        var src = $(img_id).attr("src").replace(img_on,img_off);
+        $(img_id).attr("src", src);
+      }
+    }
 
 
-       /*
-    jQuery(function($){
-      //Conecta con el servidor
-      var socket = io.connect('http://192.168.1.16:3000');
+    //IMPLEMENTAR INTERFAZ MODO VISION Y MODO CONTROL
 
-      socket.on('connect', function() {
-        console.log('check 2', socket.connected);
-        //CAMBIO DE LA IMAGEN ESTADO
-        var image = document.getElementById('img_state');
-          image.src = "/images/online.png";
-      });
-
-      socket.on('disconnect', function () {
-        console.log('check 2', socket.disconnected);
-        //CAMBIO DE LA IMAGEN ESTADO
-        var image = document.getElementById('img_state');
-        image.src = "/images/offline.png";
-      });
-    });
-
-*/
-    //VIDEO
-    //MUY MUY IMPORTANTE VIDEO STREAMING https://www.youtube.com/watch?v=nG7OhBnfefE
 
   </script>
-
-  <div class="margintop20 marginbottom20">
-  <a href="/robot/index" class="btn btn-sm btn-warning"> My Robots</a>
-</div>
-
-
-
-
-
 
 
 

@@ -143,6 +143,53 @@ module.exports = {
         robots:robots
       });
     });
+  },
+
+
+  //Sockets
+  changestate: function(req,res,next){
+
+    var robot = req.param('robot');
+    var state = req.param('state');
+    var user = req.session.User.id;
+
+    //Comprobar que el robot pertenece al ususario que esta cambiando su estado
+    //.....
+    //
+
+
+    //Cambiar en la base de datos el estado del robot
+    if (robot && state){
+      Robot.findOne({id: robot}).exec(function (err, robot){
+        if (err) {
+          return res.negotiate(err);
+        }
+
+        if (state == 'on'){
+          robot.online = true;
+        }else if (state == 'off'){
+          robot.online = false;
+        }
+
+        robot.save(function (err, user){
+          if (err) return next(err);
+        });
+      });
+    }
+
+    //
+
+    if (robot && state && req.isSocket) {
+      console.log('cambiando estado...');
+      Robot.publishCreate({id: robot, state: state});
+      console.log('state changed');
+
+    } else if (req.isSocket){
+      Robot.watch(req);
+      //console.log('Intreface with socket id '+ sails.sockets.id(req)+' is now subscribed to the model class \'Interface\'.');
+    } else {
+      res.view();
+    }
   }
 
 };

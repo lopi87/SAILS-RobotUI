@@ -15,6 +15,11 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
+
+  'styles/bootstrap/bootstrap.css',
+  'styles/bootstrap/bootstrap-theme.css',
+  'styles/bootstrap/bootstrap-colorpicker.css',
+  'styles/bootstrap/bootstrap-colorpicker-plus.css',
   'styles/**/*.css'
 ];
 
@@ -27,10 +32,14 @@ var jsFilesToInject = [
   'js/dependencies/sails.io.js',
 
   // Dependencies like jQuery, or Angular are brought in here
-  'js/vendor/jquery-1.11.3.js',
+  'js/vendor/jquery-2.2.4.js',
   'js/vendor/bootstrap.js',
   'js/vendor/chosen.jquery.js',
   'js/vendor/ImageSelect.jquery.js',
+  'js/vendor/gridster.js',
+  'js/vendor/bootstrap-colorpicker.js',
+  'js/vendor/bootstrap-colorpicker-plus.js',
+
   'js/vendor/**/*.js',
 
   // All of the rest of your client-side js files

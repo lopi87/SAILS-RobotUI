@@ -1,5 +1,13 @@
     <div class="jumbox">
       <h3>My Robots</h3>
+
+      <%  if(robots.size == 0){ %>
+        <div class="alert alert-warning margintop20 marginbottom20" role="alert">
+          <strong>Ups!</strong>
+          You haven't created any robots yet...
+        </div>
+      <% } %>
+
       <table class="table">
         <tr>
           <th></th>
@@ -18,9 +26,9 @@
         <tr data-id="<%= robot.id %>" data-model="robot">
 
           <% if(robot.online){ %>
-          <td> <img src="/images/online.png" height="30" width="30"></td>
+          <td> <img id="img_state_<%= robot.id %>" src="/images/online.png" height="30" width="30"></td>
           <% } else { %>
-          <td> <img src="/images/offline.png" height="30" width="30"></td>
+          <td> <img id="img_state_<%= robot.id %>" src="/images/offline.png" height="30" width="30"></td>
           <% } %>
 
           <td><%= robot.id %></td>
@@ -45,7 +53,7 @@
             </form>
           </td>
         </tr>
-        <% })%>
+        <% }) %>
 
       </table>
 
@@ -57,3 +65,42 @@
 
 
 
+<script type="text/javascript">
+
+  window.onload = function subscribeAndListen() {
+    io.socket.get('/robot/changestate/');
+
+    io.socket.on('robot', function (obj) {
+      var data = obj.data;
+
+      if (obj.verb == 'created') {
+        if(data.state == 'on'){
+          console.log('Robot ' + data.id + ' has been connected.');
+          change_img_state(data.id, true)
+        }else if(data.state == 'off'){
+          console.log('Robot ' + data.id + ' has been disconnected.');
+          change_img_state(data.id, false)
+
+        }
+      }
+    });
+
+  };
+
+
+  //IMAGEN ESTADO
+  function change_img_state(robot_id, boolean){
+    var img_id = '#img_state_' + robot_id;
+    var img_on= "online.png";
+    var img_off= "offline.png"
+
+    if (boolean){
+      var src = $(img_id).attr("src").replace(img_off, img_on);
+      $(img_id).attr("src", src);
+    }else{
+      var src = $(img_id).attr("src").replace(img_on,img_off);
+      $(img_id).attr("src", src);
+    }
+  }
+
+</script>
