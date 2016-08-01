@@ -25,26 +25,26 @@ module.exports.policies = {
   * access)                                                                  *
   *                                                                          *
   ***************************************************************************/
-
-  '*': 'flash',
   '*': 'localize',
 
-
   user: {
-    'new': ["flash", "localize"],
+    'new': "flash",
     create: "flash",
     subscribe: "flash",
-    show: "userCanSeeProfile",
-    edit: "userCanSeeProfile",
+    show: ["userCanSeeProfile", "flash"],
+    edit: ["userCanSeeProfile", "flash"],
     update: "userCanSeeProfile",
     testSocket: "flash",
     user_subscribe: "flash",
+    upload: "flash",
+    index:"flash",
 
     '*': "admin"
   },
 
   session: {
     'new': "flash",
+    create: "flash",
     destroy: "flash"
   },
 
@@ -54,6 +54,10 @@ module.exports.policies = {
 
   interface: {
     'show': "flash"
+  },
+
+  index: {
+    '*': "flash"
   }
 
   /***************************************************************************

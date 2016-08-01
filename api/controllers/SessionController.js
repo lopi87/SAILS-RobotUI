@@ -35,11 +35,9 @@ module.exports = {
   create: function(req, res, next){
 
     if(!req.param('email') || !req.param('password')) {
-      var usernamePasswordRequiredError = [{name: 'usernamePasswordRequired', message: 'You must enter both a username and password.'}];
 
-      req.session.flash = {
-        err: usernamePasswordRequiredError
-      };
+      msg = { err: 'You must enter both a username and password.' };
+      FlashService.error(req, msg );
 
       res.redirect('/session/new');
       return;
@@ -49,10 +47,8 @@ module.exports = {
       if (err) return next(err);
 
       if (!user){
-        var noAccountError = [{name: 'noAccount', message: 'The email address' + req.param('email') + ' not found'}];
-        req.session.flash = {
-          err: noAccountError
-        };
+        msg = { err: 'The email address' + req.param('email') + ' not found' };
+        FlashService.error(req, msg );
 
         res.redirect('session/new');
         return;
@@ -62,10 +58,9 @@ module.exports = {
         if(err) return next(err);
 
         if(!valid){
-          var usernamePasswordMismatchError = [{name: 'usernamePasswordMismatchError', message: 'Invalid username and password combination'}];
-          req.session.flash = {
-            err: usernamePasswordMismatchError
-          };
+          msg = { err: 'Invalid username and password combination' };
+          FlashService.error(req, msg );
+
           res.redirect('session/new');
           return;
         }
@@ -85,6 +80,11 @@ module.exports = {
             id: user.id
           });
 
+          req.session.languagePreference = req.setLocale(user.language.toLowerCase());
+
+          msg = { err: req.__('Welcome') };
+          FlashService.success(req, msg );
+
           //Si el usuario es administrador redirecciona a la vista de todos los usuarios
           if (req.session.User.admin) {
             res.redirect('/user');
@@ -101,22 +101,21 @@ module.exports = {
 
     User.findOne(req.session.User.id, function foundUser(err, user){
       var userId = req.session.User.id;
-      User.update(user.id, {
-        online: false
-    }, function (err){
+      User.update(user.id, {online: false}, function (err){
         if(err) return next(err);
         req.session.destroy();
-        
 
-        //Restore session
-        Session.update({socket_id:sails.sockets.id(req)},{user_id:'invited'}).exec(function afterwards(err, updated){
-          if (err) return next(err);
-          console.log('Updated session to invited');
-        });
 
+//        msg = {messages: {error: ["See you soon!"], success: [], warning:[]}};
+
+       // Restore session
+       // Session.update({socket_id:sails.sockets.id(req)},{user_id:'invited'}).exec(function afterwards(err, updated){
+       //   if (err) return next(err);
+       //   console.log('Updated session to invited');
+       // });
 
         //redireccion a Sign-in
-        res.redirect('session/new');
+        return res.redirect('session/new');
       });
     });
   }

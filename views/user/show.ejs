@@ -1,3 +1,26 @@
+<% if (messages && messages['error'].length > 0) { %>
+<% messages['error'].forEach(function(message) { %>
+<script type="text/javascript">
+  bootstrap_alert['danger']('<%= message.err %>', 0 )
+</script>
+<% }); %>
+<% } %>
+<% if (messages && messages['warning'].length > 0) { %>
+<% messages['warning'].forEach(function(message) { %>
+<script type="text/javascript">
+  bootstrap_alert['warning']('<%= message.err %>', 0 )
+</script>
+<% }); %>
+<% } %>
+<% if (messages && messages['success'].length > 0) { %>
+<% messages['success'].forEach(function(message) { %>
+<script type="text/javascript">
+  bootstrap_alert['success']('<%= message.err %>', 0 )
+</script>
+<% }); %>
+<% } %>
+
+
 <div class="container">
   <h2>User information</h2>
   <h1><%= user.name %></h1>
@@ -11,7 +34,6 @@
   <h3><%= user.title %></h3>
   <hr>
   <h3>contact: <%= user.email %></h3>
-
 
   <div class="container-fluid">
     <div class="row">

@@ -1,17 +1,40 @@
+<% if (typeof(messages) !== 'undefined' && messages['error'].length > 0) { %>
+<% messages['error'].forEach(function(message) { %>
+<script type="text/javascript">
+  bootstrap_alert['danger']('<%= message.err %>', 0 )
+</script>
+<% }); %>
+<% } %>
+<% if (typeof(messages) !== 'undefined' && messages['warning'].length > 0) { %>
+<% messages['warning'].forEach(function(message) { %>
+<script type="text/javascript">
+  bootstrap_alert['warning']('<%= message.err %>', 0 )
+</script>
+<% }); %>
+<% } %>
+<% if (typeof(messages) !== 'undefined' && messages['success'].length > 0) { %>
+<% messages['success'].forEach(function(message) { %>
+<script type="text/javascript">
+  bootstrap_alert['success']('<%= message.err %>', 0 )
+</script>
+<% }); %>
+<% } %>
+
 <div class="container">
   <div class="jumbotron">
     <h1>RobotUI</h1>
     <h2>Controler</h2>
+
+<% if (!req.session.User) {%>
     <a href="/user/new" class="btn btn-lg btn-success"> <%= __("sign_up_now") %></a>
+<% } %>
+
   </div>
 
   <div>
     <h1>  <%= __("Welcome") %> </h1>
   </div>
-
 </div>
-
-
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -38,6 +61,19 @@
 </div>
 
 
+<!-- Prueba de botones -->
 
+<button>
+  <span><img src="http://www.famfamfam.com/lab/icons/silk/icons/disk.png" /></span>
+    <span>Button Text</span>
+</button>
 
+<button style="width:90px">
+  <span><img src="http://www.famfamfam.com/lab/icons/silk/icons/disk.png" /></span>
+    <span>Button Text</span>
+</button>
 
+<button class="btn btn-primary" style="width:120px">
+  <span><img src="http://www.famfamfam.com/lab/icons/silk/icons/disk.png" /></span>
+  <span>Button Text</span>
+</button>

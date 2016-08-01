@@ -14,7 +14,7 @@ module.exports = {
       Action.find({interface_owner: req.param('id')}).exec(function(err, actions) {
         if (err) return next(err);
 
-        Robot.find({robot_interface: iface.id}).exec(function(err, robot) {
+        Robot.findOne({robot_interface: iface.id}).exec(function(err, robot) {
           if (err) return next(err);
 
           res.view({

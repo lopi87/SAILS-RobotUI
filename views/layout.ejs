@@ -49,6 +49,7 @@
   <script src="/js/vendor/gridster.js"></script>
   <script src="/js/vendor/bootstrap-colorpicker.js"></script>
   <script src="/js/vendor/bootstrap-colorpicker-plus.js"></script>
+  <script src="/js/vendor/bootstrap-filestyle.js"></script>
   <script src="/js/vendor/npm.js"></script>
   <script src="/js/customValidate.js"></script>
   <!--SCRIPTS END-->
@@ -99,7 +100,7 @@
               <option class="flag flag-es" value="rr">        RR</option>
             </select>
             <script type="text/javascript">
-              $('.chzn-select-lan option[value="<%= req.session.languagePreference %>"]').attr("selected",true);
+              $('.chzn-select-lan option[value="<%= (typeof(req.session) !== 'undefined'  && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>"]').attr("selected",true);
 
               $('.chzn-select-lan').chosen({
                 "disable_search": true,
@@ -169,28 +170,29 @@
         alertTimeout(time);
       }
       bootstrap_alert.info = function(message) {
-        $('#alert_placeholder').append('<div class="alert alert-info alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Well done!</strong>' + ' ' + message + ' ' + '</div> </div>');
+        $('#alert_placeholder').append('<div class="alert alert-info alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Advice!</strong>' + ' ' + message + ' ' + '</div> </div>');
         $("html, body").animate({ scrollTop: 0 }, "slow");
         alertTimeout(time);
       }
 
       bootstrap_alert.warning = function(message) {
-        $('#alert_placeholder').append('<div class="alert alert-warning alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Well done!</strong>' + ' ' + message + ' ' + '</div> </div>');
+        $('#alert_placeholder').append('<div class="alert alert-warning alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Warning!</strong>' + ' ' + message + ' ' + '</div> </div>');
         $("html, body").animate({ scrollTop: 0 }, "slow");
         alertTimeout(time);
       }
 
       bootstrap_alert.danger = function(message) {
-        $('#alert_placeholder').append('<div class="alert alert-danger alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Well done!</strong>' + ' ' + message + ' ' + '</div> </div>');
+        $('#alert_placeholder').append('<div class="alert alert-danger alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Ups!</strong>' + ' ' + message + ' ' + '</div> </div>');
         $("html, body").animate({ scrollTop: 0 }, "slow");
         alertTimeout(time);
       }
 
-
       function alertTimeout(wait){
-        setTimeout(function(){
-          $('#alert_placeholder').children('.alert:first-child').remove()
-        }, wait);
+        if (wait > 0){
+          setTimeout(function(){
+            $('#alert_placeholder').children('.alert:first-child').remove()
+          }, wait);
+        }
       }
     </script>
 

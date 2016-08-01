@@ -1,3 +1,25 @@
+<% if (messages && messages['error'].length > 0) { %>
+<% messages['error'].forEach(function(message) { %>
+<script type="text/javascript">
+  bootstrap_alert['danger']('<%= message.err %>', 0 )
+</script>
+<% }); %>
+<% } %>
+<% if (messages && messages['warning'].length > 0) { %>
+<% messages['warning'].forEach(function(message) { %>
+<script type="text/javascript">
+  bootstrap_alert['warning']('<%= message.err %>', 0 )
+</script>
+<% }); %>
+<% } %>
+<% if (messages && messages['success'].length > 0) { %>
+<% messages['success'].forEach(function(message) { %>
+<script type="text/javascript">
+  bootstrap_alert['success']('<%= message.err %>', 0 )
+</script>
+<% }); %>
+<% } %>
+
 <div class="container">
 
   <h3>Users</h3>
@@ -85,11 +107,7 @@
       }
 
     });
-
-
-
   };
-
 
 </script>
 

@@ -161,11 +161,8 @@ module.exports.sockets = {
       console.log('\n....................................................');
       console.log('Conecting to Sails js...');
       console.log('Cliente conectado - id del socket: ' + socket.id);
-      console.log('Cliente conectado - id del socket: ' + socket.id);
       console.log('....................................................');
     }
-
-
 
 
     /// AQUI PARA ABAJO COMPROBAR TODO
@@ -179,7 +176,7 @@ module.exports.sockets = {
         var userId = message.id;
         updateUserInDom(userId, message);
       }
-    };
+    }
 
     function updayeUserInDom(userId, message){
 
@@ -209,14 +206,6 @@ module.exports.sockets = {
         }
       }
     }
-
-
-
-
-
-
-
-
 
 
   },

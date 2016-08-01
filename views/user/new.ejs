@@ -1,14 +1,28 @@
-      <form action="/user/create" method="POST" id="sign-up-form" class="form-signin">
+<% if (messages && messages['error'].length > 0) { %>
+<% messages['error'].forEach(function(message) { %>
+<script type="text/javascript">
+  bootstrap_alert['danger']('<%= message.err %>', 0 )
+</script>
+<% }); %>
+<% } %>
+<% if (messages && messages['warning'].length > 0) { %>
+<% messages['warning'].forEach(function(message) { %>
+<script type="text/javascript">
+  bootstrap_alert['warning']('<%= message.err %>', 0 )
+</script>
+<% }); %>
+<% } %>
+<% if (messages && messages['success'].length > 0) { %>
+<% messages['success'].forEach(function(message) { %>
+<script type="text/javascript">
+  bootstrap_alert['success']('<%= message.err %>', 0 )
+</script>
+<% }); %>
+<% } %>
+
+
+<form action="/user/create" method="POST" id="sign-up-form" class="form-signin">
         <h1 class="text-center login-title"><%= i18n('Create_an_account') %></h1>
-
-        <% if(flash && flash.err){ %>
-        <ul class="alert alert-success" style="position: relative">
-          <%Object.keys(flash.err).forEach(function(error){ %>
-          <li><%- JSON.stringify(flash.err[error])%></li>
-          <%})%>
-        </ul>
-        <%}%>
-
 
           <div class="control-group">
             <input type="text" class="form-control" placeholder="your name" name="name" required>
@@ -54,4 +68,20 @@
           <input type="hidden" name="_csrf" value="<%= _csrf %>" />
       </form>
 
-      <%= __("Welcome") %>
+
+
+ <form id="uploadForm"
+            enctype="multipart/form-data"
+            action="/user/upload"
+            method="post">
+   <input type="file" class="filestyle" name="uploadFile" data-buttonName="btn-primary">
+
+   <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+        <input type="submit" value="submit"/>
+      </form>
+
+
+      <img src="/uploads/profile_image/55d751b5b38a88e511352f33.png">
+
+
+

@@ -32,9 +32,7 @@ module.exports = {
       //Si hay error
       if (err){
         console.log(err);
-        req.session.flash ={
-          err: err
-        };
+        FlashService.error(req, err);
 
         //redireccion si hay error
         return res.redirect('/user/new');
@@ -49,6 +47,13 @@ module.exports = {
         if (err) return next(err);
       });
 
+      //...................................
+      //Subida del avatar
+      sails.controllers.user.upload(req,res);
+      //.....................................
+
+      msg = { err: 'User created' };
+      FlashService.success(req, msg );
 
       if (req.session.User.admin) {
         res.redirect('/user');
@@ -59,7 +64,6 @@ module.exports = {
 
       //Redirección a show
       res.redirect('user/show/' + user.id);
-      req.session.flash = {};
 
     });
   },
@@ -160,7 +164,10 @@ module.exports = {
         User.publishDestroy(user.id);
       });
 
-      res.redirect('/user');
+      msg = { err: 'User deleted' };
+      FlashService.success(req, msg );
+
+      res.redirect('/');
     });
   },
 
@@ -182,77 +189,6 @@ module.exports = {
     });
   },
 */
-
-
-  /**
-   * Upload avatar for currently logged-in user
-   *
-   * (POST /user/avatar)
-   */
-  uploadAvatar: function (req, res) {
-
-    req.file('avatar').upload({
-      // don't allow the total upload size to exceed ~10MB
-      maxBytes: 10000000
-    },function whenDone(err, uploadedFiles) {
-      if (err) {
-        return res.negotiate(err);
-      }
-
-      // If no files were uploaded, respond with an error.
-      if (uploadedFiles.length === 0){
-        return res.badRequest('No file was uploaded');
-      }
-
-      // Save the "fd" and the url where the avatar for a user can be accessed
-      User.update(req.session.me, {
-
-        // Generate a unique URL where the avatar can be downloaded.
-        avatarUrl: require('util').format('%s/user/avatar/%s', sails.getBaseUrl(), req.session.me),
-
-        // Grab the first file and use it's `fd` (file descriptor)
-        avatarFd: uploadedFiles[0].fd
-      })
-        .exec(function (err){
-          if (err) return res.negotiate(err);
-          return res.ok();
-        });
-    });
-  },
-
-  /**
-   * Download avatar of the user with the specified id
-   *
-   * (GET /user/avatar/:id)
-   */
-  avatar: function (req, res){
-
-    req.validate({
-      id: 'string'
-    });
-
-    User.findOne(req.param('id')).exec(function (err, user){
-      if (err) return res.negotiate(err);
-      if (!user) return res.notFound();
-
-      // User has no avatar image uploaded.
-      // (should have never have hit this endpoint and used the default image)
-      if (!user.avatarFd) {
-        return res.notFound();
-      }
-
-      var SkipperDisk = require('skipper-disk');
-      var fileAdapter = SkipperDisk(/* optional opts */);
-
-      // Stream the file down
-      fileAdapter.read(user.avatarFd)
-        .on('error', function (err){
-          return res.serverError(err);
-        })
-        .pipe(res);
-    });
-  },
-
 
 
   //Explicado aqui https://www.youtube.com/watch?v=enyZYgjXRqQ&list=PL16Fzt2LkOBQTP2vbyZ82wci6MoOdFtF5&index=24
@@ -279,9 +215,50 @@ module.exports = {
     } else {
       res.view();
     }
+  },
+
+
+  //Subida imagen avatar.
+  upload: function(req, res) {
+    if (req.method === 'GET')
+      return res.json({ 'status': 'GET not allowed' });
+    //	Call to /upload via GET is error
+
+    // setting allowed file types
+    var allowedTypes = ['image/jpeg', 'image/png'];
+
+    var uploadFile = req.file('uploadFile');
+    console.log(uploadFile);
+
+    var user_id = req.session.User.id;
+
+    uploadFile.upload({
+      saveAs: function(file, cb) {
+        var extension = file.filename.split('.').pop();
+
+        // seperate allowed and disallowed file types
+        if(allowedTypes.indexOf(file.headers['content-type']) === -1) {
+          err = { err: 'Disallowed file type' };
+          FlashService.error(req, err );
+          return res.redirect('/user/new');
+        }else{
+          // save as allowed files
+
+          gm(file).resize('200', '200').stream().pipe(output);
+
+          cb(null, '../../.tmp/public/uploads/profile_image/' + user_id + '.' + extension);
+          //Nombre del avatar: id del usuario + extension
+        }
+
+      }},function onUploadComplete(err, files) {
+            if (err) return next(err);
+
+            console.log(files);
+            msg = { err: 'Upload completed' };
+            FlashService.success(req, msg );
+            return res.redirect('/user/index');
+    });
   }
-
-
 
 };
 
@@ -296,9 +273,6 @@ module.exports = {
 
 
 /*
-
-
-
  socket.on('message', commetMessageReceivedFromServer);
  //socket.get('/user/user_subscribe');
 

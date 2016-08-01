@@ -40,12 +40,19 @@ Actualizar estado en la base de datos cunado un robot es conectado -> mostrar ev
 
 
 
-PARA MAÑANA
+1 AGOSTO 2016
 -----------
 
-Subir imagenes! (para subir la imagen del robot y la de los botones que se creen ICONOS)
+Se suben imagenes!
 
-http://sailsjs.org/documentation/concepts/file-uploads
+Cuando se loguea un usuario en el sistema se fija el idioma que tenia almacenado en preferencias
+
+Mejorado el sistema de notificaciones (alerts) ya no solo muestra errores y se muestran al redirecionar pagina
+
+
+Aparece seleccionado el idioma por defecto del usuario al ingresar al sistema
+
+Diseño de botones con iconos
 
 
 IDEA: Inyectar codigo CSS para personalizar interfaz!!

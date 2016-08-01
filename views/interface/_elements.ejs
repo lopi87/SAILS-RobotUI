@@ -1,11 +1,4 @@
-  <h1 class="text-center login-title"> Interface  <%= robot[0].name %></h1>
-  <% if(flash && flash.err){ %>
-  <ul class="alert alert-success" style="position: relative">
-    <%Object.keys(flash.err).forEach(function(error){ %>
-    <li><%- JSON.stringify(flash.err[error])%></li>
-    <%})%>
-  </ul>
-  <%}%>
+  <h1 class="text-center login-title"> Interface  <%= robot.name %></h1>
 
   <button  id="conectar" value="hola" type="button" class="btn btn-sm btn-success">CONECTAR</button></td>
   <button  id="desconectar" value="hola" type="button" class="btn btn-sm btn-danger">DESCONECTAR</button></td>
@@ -14,15 +7,11 @@
 
 
   <!-- COMPROBAR SI ESTA OCUPADO O NO EL ROBOT PARA PODER MANEJARLO -->
-  <% if (robot[0].online){%>
-  <h3><img id="img_state_<%= robot[0].id %>" height="30" width="30" src="/images/online.png"> </h3>
+  <% if (robot.online){%>
+  <h3><img id="img_state_<%= robot.id %>" height="30" width="30" src="/images/online.png"> </h3>
   <% } else { %>
-  <h3><img id="img_state_<%= robot[0].id %>" height="30" width="30" src="/images/offline.png"> </h3>
+  <h3><img id="img_state_<%= robot.id %>" height="30" width="30" src="/images/offline.png"> </h3>
   <% }  %>
-
-
-
-
 
 
   <div data-example-id="" class="bd-example">
@@ -147,7 +136,7 @@
 
   <div class="container">
     <div class="page-header -align-center">
-      <h1>Mandar comandos <small> <%= robot[0].name %> </small></h1>
+      <h1>Mandar comandos <small> <%= robot.name %> </small></h1>
     </div>
 
     <div id="content" class="row" style="height: 70%;">
@@ -171,16 +160,9 @@
     </div>
   </div>
 
-
-
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
-
   <div class="margintop20 marginbottom20">
   <a href="/robot/index" class="btn btn-sm btn-warning"> My Robots</a>
 </div>
-
 
   EMISION DE VIDEO
 
@@ -194,7 +176,7 @@
     //ROBOT
     //conexion con el robot
     var address_robot = "localhost" + ":" + "8085";
-    var robot_id = '<%= robot[0].id %>';
+    var robot_id = '<%= robot.id %>';
 
     $("#conectar").click(function(){
       try {
@@ -203,14 +185,14 @@
         socket.on('connect', function() {
           console.log('robot connected!')
           //Sincronizar con el resto de clientes que un robot se ha conectado:
-          io.socket.get('/robot/changestate/',{robot: '<%= robot[0].id %>' , state: 'on'});
+          io.socket.get('/robot/changestate/',{robot: '<%= robot.id %>' , state: 'on'});
           bootstrap_alert['success']('Conectado con exito! ' + address_robot, 5000 )
           change_img_state(robot_id,true)
 
         })
       } catch (error) {
         bootstrap_alert['danger']('Failed to connect to the Robot! (Raspberry Pi!)' + address_robot + error , 5000)
-        io.socket.get('/robot/changestate/',{robot: '<%= robot[0].id %>' , state: 'off'});
+        io.socket.get('/robot/changestate/',{robot: '<%= robot.id %>' , state: 'off'});
         change_img_state(robot_id,false)
       }
 
@@ -223,7 +205,7 @@
             bootstrap_alert['success']('Conectado con exito! ' + address_robot, 5000 )
             change_img_state(robot_id,false)
             //Sincronizar con el resto de clientes:
-            io.socket.get('/robot/changestate/',{robot: '<%= robot[0].id %>' , state: 'off'});
+            io.socket.get('/robot/changestate/',{robot: '<%= robot.id %>' , state: 'off'});
           });
         } catch (error) {
           bootstrap_alert['success']('Error to Disconnect to the Robot! (Raspberry Pi!)' + address_robot + error, 5000 )
@@ -234,7 +216,7 @@
       //captura evento desconectar cuando el robot es apagado o pierde la señal
       socket.on('disconnect', function() {
         //Sincronizar con el resto de clientes:
-        io.socket.get('/robot/changestate/',{robot: '<%= robot[0].id %>' , state: 'off'});
+        io.socket.get('/robot/changestate/',{robot: '<%= robot.id %>' , state: 'off'});
         bootstrap_alert['danger']('Disconnect to the Robot! (Raspberry Pi!)' + address_robot, 5000 )
         change_img_state(robot_id,false)
       })
