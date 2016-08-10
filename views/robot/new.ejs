@@ -1,17 +1,9 @@
+<%- partial('../_alert.ejs', {messages: messages}) %>
+
 <div class="container">
   <div class="row">
     <div class="col-sm-6 col-md-4 col-md-offset-4">
       <form action="/robot/create" method="POST" class="form-signin" id="sign-up-form">
-
-        <% if(flash && flash.err){ %>
-        <ul class="alert alert-success" style="position: relative">
-          <% Object.keys(flash.err).forEach(function(error) { %>
-          <li><%- JSON.stringify(flash.err[error]) %></li>
-          <% }) %>
-        </ul>
-        <%}%>
-
-
         <div class="panel panel-success margintop20">
           <div class="panel-heading">
             <%= i18n('Create_a_robot') %>

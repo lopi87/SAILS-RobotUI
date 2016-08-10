@@ -1,85 +1,110 @@
-<div class="container">
+<%- partial('../_alert.ejs', {messages: messages}) %>
 
+<div class="container">
   <h3>Inbox</h3>
   <table class="table">
     <tr>
-      <th></th>
+      <th>Read</th>
       <th>ID</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Ip address</th>
-      <th>Interface</th>
-
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>From</th>
+      <th>Message</th>
+      <th>Actions</th>
     </tr>
 
-    <% _.each(messages, function(message){ %>
-    <tr data-id="<%= robot.id %>" data-model="robot">
-
+    <% _.each(user_messages, function(message){ %>
+    <tr id="line_msg_<%= message.id %>" data-model="message">
       <% if(message.read){ %>
-      <td> <img src="/images/online.png" height="30" width="30"></td>
+      <td> <i class="fa fa-envelope alert-success fa-2x" aria-hidden="true"></i></td>
       <% } else { %>
-      <td> <img src="/images/offline.png" height="30" width="30"></td>
+      <td> <i class="fa fa-envelope alert-danger fa-2x" aria-hidden="true"></i></td>
       <% } %>
 
-
+      <td><%=message.id %></td>
+      <td><%=message.from_user_id %></td>
 
       <td>
-        <form action="/message/destroy/<%=message.id%>" method="post">
-          <input type="hidden" name="_method" value="delete"/>
-          <input type="submit"  class="btn btn-sm btn-danger" value="Delete"/>
-          <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
-        </form>
+        <%=message.content.substring(0,20) + '...' %>
+      </td>
+      <td>
+        <a class="btn btn-sm btn-success" onclick="reply_msg('<%= message.id %>')"><i class="fa fa-reply fa-lg"></i> Reply </a>
+        <a class="btn btn-sm btn-success" onclick=" window.location.href='<%='/message/show/' + message.id %>'">Read</a>
+        <a class="btn btn-sm btn-primary" onclick="msg_as_read('<%= message.id %>')">Mark as read</a>
+        <a href="/message/destroy/%>" class="btn btn-sm btn-danger" onclick="destroy_msg('<%= message.id %>')"><i class="fa fa-trash-o fa-lg"></i> Delete </a>
       </td>
     </tr>
     <% })%>
-
   </table>
-
+  <hr>
 </div>
 
+<script type="text/javascript">
+  function msg_as_read(id) {
+    $.ajax({
+      url: '/message/markasread/' + id,
+      type: 'GET',
+      data: {},
+      success: function () {
+        bootstrap_alert['success']('', 5000 );
+      },
+
+      error: function (xhr, status, text) {
+        bootstrap_alert['danger'](xhr.responseText, 5000 );
+      }
+    });
+  }
+
+  function destroy_msg(id) {
+    $.ajax({
+      url: '/message/destroy/',
+      type: 'GET',
+      data: {id: id},
+
+      success: function (data) {
+        $("#line_msg_" + id).remove();
+        bootstrap_alert['success']('The message has been deleted!', 5000 );
+      },
+
+      error: function (xhr, status, text) {
+        bootstrap_alert['danger'](xhr.responseText, 5000 );
+      }
+    });
+  }
+
+</script>
 
 
-<form class="form-horizontal" role="form" method="post" action="index.php">
+
+<form class="form-horizontal paddingleft20" method="POST" action="/message/send">
   <div class="form-group">
-    <label for="name" class="col-sm-2 control-label">Name</label>
+    <label for="name" class="col-sm-1 control-label">Title</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="name" name="name" placeholder="First & Last Name" value="">
+      <input type="text" class="form-control" id="title" name="title" placeholder="Title  ">
     </div>
   </div>
 
   <div class="form-group">
-    <div class="control-group">
-      <select tabindex="-1" multiple="" data-placeholder="Choose users..." class="chosen-select-users" style="width:360px; height: auto" tabindex="2" name="owners">
+    <label for="name" class="col-sm-1 control-label">to</label>
+    <div class="col-sm-10">
+      <select tabindex="-1" data-placeholder="Choose users..." class="chosen-select-users" style="width:360px; height: 20px;" tabindex="2" name="to_user_id">
         <option value=""></option>
         <% users.forEach(function(user)  { %>
-        <option data-img-src="" value="<%= user._id %>"><%= user.name %></option>
+            <option data-img-src="" value="<%= user.id %>"><%= user.name %></option>
         <% }); %>
       </select>
+      <script type="text/javascript">
+        $('.chosen-select-users').chosen({});
+      </script>
     </div>
-
-    <script type="text/javascript">
-      $('.chosen-select-users').chosen({});
-    </script>
   </div>
 
-
   <div class="form-group">
-    <label for="email" class="col-sm-2 control-label">Email</label>
+    <label for="message" class="col-sm-1 control-label">Message</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com" value="">
+      <textarea class="form-control" rows="4" name="message" placeholder="Text"></textarea>
     </div>
   </div>
   <div class="form-group">
-    <label for="message" class="col-sm-2 control-label">Message</label>
-    <div class="col-sm-10">
-      <textarea class="form-control" rows="4" name="message"></textarea>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="human" class="col-sm-2 control-label">2 + 3 = ?</label>
+    <label for="human" class="col-sm-1 control-label">2 + 3 = ?</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="human" name="human" placeholder="Your Answer">
     </div>
@@ -89,11 +114,7 @@
       <input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
     </div>
   </div>
-  <div class="form-group">
-    <div class="col-sm-10 col-sm-offset-2">
-      <! Will be used to display an alert to the user>
-    </div>
-  </div>
+  <input type="hidden" name="_csrf" value="<%= _csrf %>">
 </form>
 
 

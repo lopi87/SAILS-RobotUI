@@ -1,101 +1,79 @@
-<%- partial('_elements.ejs') %>
+<%- partial('../_alert.ejs', {messages: messages}) %>
 
-<% if (messages && messages['error'].length > 0) { %>
-<% messages['error'].forEach(function(message) { %>
-<script type="text/javascript">
-  bootstrap_alert['danger']('<%= message.err %>', 0 )
-</script>
-<% }); %>
-<% } %>
-<% if (messages && messages['warning'].length > 0) { %>
-<% messages['warning'].forEach(function(message) { %>
-<script type="text/javascript">
-  bootstrap_alert['warning']('<%= message.err %>', 0 )
-</script>
-<% }); %>
-<% } %>
-<% if (messages && messages['success'].length > 0) { %>
-<% messages['success'].forEach(function(message) { %>
-<script type="text/javascript">
-  bootstrap_alert['success']('<%= message.err %>', 0 )
-</script>
-<% }); %>
-<% } %>
+
+<input id="icon_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
+<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+
+<h1 class="text-center login-title"> Interface  <%= robot.name %></h1>
+
+<div>
+  <% if (robot.online){%>
+  <img id="img_state_<%= robot.id %>" height="30" width="30" src="/images/online.png">
+  <% } else { %>
+  <img id="img_state_<%= robot.id %>" height="30" width="30" src="/images/offline.png">
+  <% }  %>
+  <button  id="conectar" value="hola" type="button" class="marginlef10 btn btn-sm btn-success">CONECTAR</button></td>
+  <button  id="desconectar" value="hola" type="button" class="btn btn-sm btn-danger">DESCONECTAR</button></td>
+  <button  id="mandar" value="UP" type="button" class="btn btn-sm btn-warning">MANDAR</button></td>
+</div>
 
 <div id="board" class="panel panel-success margintop20">
-  <div class="panel-heading marginbottom20"> Control </div>
+  <div class="panel-heading"> Control </div>
 
-  <div class="row">
-    <div class="col-md-1">
-      <div class="bottom_col marginlef10">
-        <div class="list-group">
-          <a class="list-group-item"><i class="fa fa-plus fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
-          <a class="list-group-item"><i class="fa fa-remove fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
-          <a class="list-group-item"><i class="fa fa-edit fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
-          <a class="list-group-item"><i class="fa fa-plug fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
-          <a class="list-group-item"><i class="fa fa-cog fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
+  <div class="paddingtop20 paddingleft20 paddingright20">
+    <div>
+      <div class="col-md-1">
+        <div class="bottom_col">
+          <div class="list-group">
+            <a class="list-group-item"><i class="fa fa-plus fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
+            <a class="list-group-item"><i class="fa fa-remove fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
+            <a class="list-group-item" href="/interface/configure/<%= interface.id %>" data-toggle="tooltip" data-placement="top" title="Edit board"><i class="fa fa-edit fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
+            <a class="list-group-item"><i class="fa fa-plug fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
+            <a class="list-group-item"><i class="fa fa-cog fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="box_panel" class="col-md-11">
+        <div id="panel" class="panel_resizable work">
+          <% _.each(actions, function(action){ %>
+          <% if (action.icon){ %>
+          <button id="button_custom_<%= action.id %>" class="btn position_<%= action.id %> btn-custom_<%= action.id %>" value="<%= action.code %>">
+            <img src="/uploads/icons/<%= action.icon %>.png" />
+            <% if (action.name != ''){%>
+            <%= action.name %>
+            <% }%>
+          </button>
+          <% } else { %>
+          <button  id="button_<%= action.id %>" value="<%= action.code %>" class="btn position_<%= action.id %> btn-custom_<%= action.id %>"><%= action.name %></button>
+          <% } %>
+            <%- partial ('../action/style_action.ejs', {action: action})%>
+          <% })%>
         </div>
       </div>
     </div>
-    <div class="col-md-11">
-      <div class="panel_resizable">
-        <!-- ELEMENTOS AQUI -->
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="marginright20 margintop10 marginbottom10 floatright">
+          <a id="save_dash" class="btn btn-sm btn-success" > Save dashboard! </a>
+          <a id="edit_dash" class="btn btn-sm btn-warning" > Edit dashboard! </a>
+          <a id="reset_dash" class="btn btn-sm btn-danger" > Reset dashboard! </a>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12 col-sm-12">
-      <div class="marginright20 margintop10 marginbottom10 floatright">
-        <a id="save_dash" class="btn btn-sm btn-success" > Save dashboard! </a>
-        <a id="edit_dash" class="btn btn-sm btn-warning" > Edit dashboard! </a>
-        <a id="reset_dash" class="btn btn-sm btn-danger" > Reset dashboard! </a>
-      </div>
-    </div>
+</div>
+
+  <div class="pull-right margintop20 marginbottom20">
+    <a href="/robot/index" class="btn btn-sm btn-warning">Back</a>
   </div>
 
-</div>
 
 
+<script type="text/javascript">
 
-  <% partial ('_dashboard.ejs') %>
+  $( "#panel").width(<%= interface.panel_sizex %>);
+  $( "#panel").height(<%= interface.panel_sizey %>);
 
-  <script type="text/javascript">
-
-    $( "#save_dash" ).click(function() {
-      $('#board').addClass('loading');
-    });
-    $( "#edit_dash" ).click(function() {
-      $('#board').removeClass('loading');
-    });
-
-    $(function() {
-      $( "#board" ).resizable();
-    });
-    $('#new_action').on("click", function() {
-      $('#board').css('cursor', 'wait');
-    });
-
-  </script>
-
-
-</div>
-
-
-
-
-
-
-<!-- NOTA IMPORTANTE
-
-LIBRERIA JQUERY PANEL: drag and drop
-
-http://gridster.net
-
--->
-
-
-
-
-
-
+</script>
 

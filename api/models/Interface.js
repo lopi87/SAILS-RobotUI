@@ -9,6 +9,10 @@ module.exports = {
 
   attributes: {
 
+    csscode: {
+      type: 'string'
+    },
+
     robot_owner: {
       model: 'robot'
     },
@@ -17,6 +21,36 @@ module.exports = {
     actions: {
       collection: 'action',
       via: 'interface_owner'
+    },
+
+    panel_sizex: {
+      type: 'float',
+      defaultsTo: 0,
+      ispositive:true
+    },
+
+    panel_sizey: {
+      type: 'float',
+      defaultsTo: 0,
+      ispositive:true
+    },
+
+
+    toJSON: function(){
+      var obj = this.toObject();
+      delete obj._csrf;
+      return obj;
+    },
+
+    types: {
+      ispositive: function (value) {
+        console.log(value);
+        if (value >= 0) {
+          console.log('value is a positive number');
+          return true;
+        }
+        return false;
+      }
     }
 
   }

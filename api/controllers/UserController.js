@@ -49,7 +49,7 @@ module.exports = {
 
       //...................................
       //Subida del avatar
-      sails.controllers.user.upload(req,res);
+      //sails.controllers.user.upload(req,res);
       //.....................................
 
       msg = { err: 'User created' };
@@ -62,8 +62,17 @@ module.exports = {
 
       User.publishCreate({id: user.id});
 
-      //Redirección a show
-      res.redirect('user/show/' + user.id);
+      //Mandar email de bienvenida
+      EmailService.sendWelcomeEmail({
+        emailAddress: user.email,
+        firstName: user.name
+      }, function (err) {
+        if (err) { return res.serverError(err); }
+
+        // It worked!  The welcome email was sent.
+        //Redirección a show
+        res.redirect('user/show/' + user.id);
+      });
 
     });
   },
@@ -136,38 +145,30 @@ module.exports = {
           admin: req.param('admin')
         });
       }
-      else{
-        User.publishUpdate( req.param('id'), {
-          name: req.param('name'),
-          title: req.param('title'),
-          email: req.param('email')
-        });
-      }
 
       res.redirect('/user/show/' + req.param('id'));
     });
 
-
-
-
-
   },
 
+
   destroy: function(req, res, next) {
-    User.findOne(req.param('id'), function foundUser(err, user){
+    var id = req.param('id');
+
+    User.findOne(id, function foundUser(err, user){
       if (err) return next(err);
       if (!user) return next('User doesn\'t exists.');
 
-      User.destroy(req.param('id'), function userDestroyed(err){
+      User.destroy(id, function userDestroyed(err){
         if (err) return next(err);
 
-        User.publishDestroy(user.id);
+        User.publishDestroy(id, {id: user.id});
+
+        msg = { err: 'User deleted' };
+        FlashService.success(req, msg );
+
+        res.redirect('/');
       });
-
-      msg = { err: 'User deleted' };
-      FlashService.success(req, msg );
-
-      res.redirect('/');
     });
   },
 
@@ -192,17 +193,9 @@ module.exports = {
 
 
   //Explicado aqui https://www.youtube.com/watch?v=enyZYgjXRqQ&list=PL16Fzt2LkOBQTP2vbyZ82wci6MoOdFtF5&index=24
+
   user_subscribe: function(req,res,next){
     if (req.isSocket){
-      //Update session table
-      Session.update({socket_id:sails.sockets.id(req)},{user_id:req.session.User.id}).exec(function afterwards(err, updated){
-        if (err) {
-          // handle error here- e.g. `res.serverError(err);`
-          return;
-        }
-        console.log('Updated session to username ' + User.name);
-      });
-
       //Update, destroy...
       User.find(function foundUsers(err,users){
         if (err) return next(err);
@@ -218,8 +211,43 @@ module.exports = {
   },
 
 
+  // Send a private message from one user to another
+  private: function(req, res) {
+    // Get the ID of the currently connected socket
+    var socketId = sails.sockets.id(req.socket);
+    // Use that ID to look up the user in the session
+    // We need to do this because we can have more than one user
+    // per session, since we're creating one user per socket
+
+
+
+    // Publish a message to that user's "room".  In our app, the only subscriber to that
+    // room will be the socket that the user is on (subscription occurs in the onConnect
+    // method of config/sockets.js), so only they will get this message.
+    User.message('57a10a97ed7200310fd152ab', {
+      from: '57a3260de20725c313fb5507',
+      msg: 'HOLA!!!'
+    });
+
+
+  },
+
+  message_subscribe: function(req, res, next){
+    if (!req.isSocket) {
+      return res.badRequest('HTTP request.');
+    }
+
+    //Solo este usuario recibira el evento messageajes
+    User.subscribe(req, req.session.User, 'message');
+
+
+    return res.ok();
+  },
+
+
   //Subida imagen avatar.
   upload: function(req, res) {
+
     if (req.method === 'GET')
       return res.json({ 'status': 'GET not allowed' });
     //	Call to /upload via GET is error
@@ -257,6 +285,19 @@ module.exports = {
             msg = { err: 'Upload completed' };
             FlashService.success(req, msg );
             return res.redirect('/user/index');
+    });
+  },
+
+  //Añade una nueva fila a la tabla usuarios (vista) cuando uno es creado.
+  render: function(req,res,next){
+    User.findOne(req.param('id'), function foundUser(err, user){
+      if(err) return next(err);
+      if(!user) return next();
+
+      return res.render('user/user_row.ejs', {
+        user: user,
+        layout: false
+      });
     });
   }
 

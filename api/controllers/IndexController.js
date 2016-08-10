@@ -10,6 +10,5 @@ module.exports = {
   index: function (req, res) {
 
     return res.ok();
-    // add code to display logged in view
   }
 };

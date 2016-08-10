@@ -14,36 +14,28 @@ module.exports = {
 
   create: function(req, res, next) {
 
-    var actionObj = {
-      name: req.param('name'),
-      title: req.param('code'),
-      email: req.param('element')
-    };
+  },
 
 
-    User.create(actionObj, function actionCreated(err, action) {
+  update_position: function (req, res, next) {
+    //Ajax call
+    if (req.xhr) {
 
-      //Si hay error
-      if (err){
-        console.log(err);
-        req.session.flash ={
-          err: err
-        };
+      var id = req.param('id');
+      var x = req.param('x');
+      var y = req.param('y');
 
-        //redireccion si hay error
-        return res.redirect('/interface/show');
-      }
+      //Comprobar si puede o no actualizar
 
+      Action.update(id, {coordinate_x: x, coordinate_y: y}, function actionUpdated(err){
+        if(err) return res.badRequest(err);
+        res.ok();
+      });
 
-      Action.publishCreate(action);
-
-      //Redirección a show
-      res.redirect('interface/show/' + interface.id);
-      req.session.flash = {};
-
-    });
+    }else{
+      err= 'No Ajax call';
+      return res.badRequest(err);
+    }
   }
 
-
-  };
-
+};

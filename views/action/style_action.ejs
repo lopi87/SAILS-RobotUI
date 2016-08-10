@@ -1,0 +1,57 @@
+
+<style>
+  .btn-custom_<%= action.id %> {
+    color: <%= '#' + action.color_text%>;
+    background-color: <%= '#' + action.color_background%>;
+    border-color: <%= '#' + action.color_border%>;
+
+  }
+
+  .btn-custom_<%= action.id %>.position_<%= action.id %>{
+    left: <%= action.coordinate_x + 'px'%>;
+    top: <%= action.coordinate_y + 'px'%>;
+    position: relative;
+  }
+
+  .btn-custom_<%= action.id %>:hover,
+  .btn-custom_<%= action.id %>:focus,
+  .btn-custom_<%= action.id %>:active,
+  .btn-custom_<%= action.id %>.active_<%= action.id %>,
+  .open .dropdown-toggle.btn-custom_<%= action.id %> {
+    color: <%= '#' + action.color_text%>;
+    background-color: <%= '#' + action.color_active_background %>;
+    border-color: <%= '#' + action.color_border %>;
+  }
+
+
+
+  .btn-custom_<%= action.id %>:active,
+  .btn-custom_<%= action.id %>.active_<%= action.id %>,
+  .open .dropdown-toggle.btn-custom_<%= action.id %> {
+    background-image: none;
+  }
+
+  .btn-custom_<%= action.id %>.disabled_<%= action.id %>,
+  .btn-custom_<%= action.id %>[disabled],
+  fieldset[disabled] .btn-custom_<%= action.id %>,
+  .btn-custom_<%= action.id %>.disabled_<%= action.id %>:hover,
+  .btn-custom_<%= action.id %>[disabled]:hover,
+  fieldset[disabled] .btn-custom_<%= action.id %>:hover,
+  .btn-custom_<%= action.id %>.disabled_<%= action.id %>:focus,
+  .btn-custom[disabled]:focus,
+  fieldset[disabled] .btn-custom_<%= action.id %>:focus,
+  .btn-custom_<%= action.id %>.disabled_<%= action.id %>:active,
+  .btn-custom_<%= action.id %>[disabled]:active,
+  fieldset[disabled] .btn-custom_<%= action.id %>:active,
+  .btn-custom_<%= action.id %>.disabled_<%= action.id %>.active,
+  .btn-custom_<%= action.id %>[disabled].active_<%= action.id %>,
+  fieldset[disabled] .btn-custom_<%= action.id %>.active_<%= action.id %> {
+    background-color: <%= '#' + action.color_background%>;
+    border-color: <%= '#' + action.color_border%>;
+  }
+
+  .btn-custom_<%= action.id %> .badge_<%= action.id %> {
+    color: <%= '#' + action.color_background%>;
+    background-color: <%= '#' + action.color_text%>;
+  }
+</style>

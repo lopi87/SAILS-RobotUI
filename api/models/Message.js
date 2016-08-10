@@ -13,6 +13,11 @@ module.exports = {
       required: true
     },
 
+    title: {
+      type: 'string',
+      required: true
+    },
+
     read: {
       type: 'boolean',
       defaultsTo: false
@@ -31,7 +36,6 @@ module.exports = {
       delete obj._csrf;
       return obj;
     }
-
   }
 
 };

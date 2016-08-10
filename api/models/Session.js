@@ -17,7 +17,6 @@ module.exports = {
       model: 'user',
       required: true,
       defaultsTo: 'invited'
-
     },
 
     toJSON: function(){

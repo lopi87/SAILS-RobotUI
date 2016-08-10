@@ -28,7 +28,7 @@ module.exports = {
     },
 
     ipaddress: {
-      type: 'string',
+      type: 'ip',
       required: true
     },
 
@@ -42,6 +42,10 @@ module.exports = {
       defaultsTo: false
     },
 
+    // Usuario al que pertenece
+    owner: {
+      model: 'user'
+    },
 
     // Usuarios del robot
     owners: {

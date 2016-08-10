@@ -1,29 +1,10 @@
-<% if (messages && messages['error'].length > 0) { %>
-<% messages['error'].forEach(function(message) { %>
-<script type="text/javascript">
-  bootstrap_alert['danger']('<%= message.err %>', 0 )
-</script>
-<% }); %>
-<% } %>
-<% if (messages && messages['warning'].length > 0) { %>
-<% messages['warning'].forEach(function(message) { %>
-<script type="text/javascript">
-  bootstrap_alert['warning']('<%= message.err %>', 0 )
-</script>
-<% }); %>
-<% } %>
-<% if (messages && messages['success'].length > 0) { %>
-<% messages['success'].forEach(function(message) { %>
-<script type="text/javascript">
-  bootstrap_alert['success']('<%= message.err %>', 0 )
-</script>
-<% }); %>
-<% } %>
+<%- partial('../_alert.ejs', {messages: messages}) %>
 
 <div class="container">
 
   <h3>Users</h3>
   <table class="table">
+    <thead>
     <tr>
       <th></th>
       <th>ID</th>
@@ -35,14 +16,16 @@
       <th></th>
       <th></th>
     </tr>
+    </thead>
 
+    <tbody id="user_list">
     <% _.each(users, function(user){ %>
-    <tr data-id="<%= user.id %>" data-model="user">
+    <tr id="line_<%= user.id %>" data-model="user">
 
       <% if(user.online){ %>
-      <td> <img src="/images/online.png" height="30" width="30"></td>
+      <td> <img id="img_state_<%=user.id%>" src="/images/online.png" height="30" width="30"></td>
       <% } else { %>
-      <td> <img src="/images/offline.png" height="30" width="30"></td>
+      <td> <img id="img_state_<%=user.id%>" src="/images/offline.png" height="30" width="30"></td>
       <% } %>
 
       <td><%= user.id %></td>
@@ -51,9 +34,9 @@
       <td><%= user.email %></td>
 
       <% if(user.admin){ %>
-        <td> <img src="/images/admin.png"></td>
+      <td> <img src="/images/admin.png"></td>
       <% } else { %>
-        <td> <img src="/images/pawn.png" height="42" width="42"></td>
+      <td> <img src="/images/pawn.png" height="42" width="42"></td>
       <% } %>
 
       <td> <a href="user/show/<%= user.id %>" class="btn btn-sm btn-primary">Show</a></td>
@@ -69,45 +52,69 @@
       <td> <a href="robot/new/<%= user.id %>" class="btn btn-sm btn-success">Add a robot!</a></td>
     </tr>
     <% })%>
-
+    </tbody>
   </table>
 </div>
 
+<div id="user_list"></div>
 
 <script type="text/javascript">
 
-  window.onload = function subscribeAndListen() {
-    io.socket.get('/user/user_subscribe/');
+  function subscribeAndListen_user() {
 
+    io.socket.get('/user/user_subscribe');
 
     io.socket.on('user', function (obj) {
 
-      if (obj.verb == 'created') {
-        alert('usuario creado');
-        var data = obj.data;
-        console.log('Command ' + data.command + ' ' + data.id +' has been send.');
-        $chat.append(' - ' + data.command + '<br/>');
-      }
+      alert('evento');
 
+      if (obj.verb == 'created') {
+        var user = obj.data;
+        $.ajax({
+          url: '/user/render',
+          type: 'GET',
+          data: {id: user.id},
+          success: function(data){
+            $("#user_list").append(data);
+            bootstrap_alert['success']('A new user has been created!', 5000 )
+          }
+        });
+      }
 
       if (obj.verb == 'updated') {
-        alert('usuario actualizado');
-        var previous = obj.previous;
+        alert('updated');
         var data = obj.data;
-        console.log('User '+previous.name+' has been updated to '+data.name);
+        change_img_state(data.id, data.loggedIn);
+        console.log('User has been updated to ' + data.loggedIn);
       }
 
-
-
       if (obj.verb == 'destroyed') {
-        alert('usuario eliminado');
-        var previous = obj.previous;
-        var data = obj.data;
-        console.log('User '+previous.name+' has been updated to '+data.name);
+        $("#line_" + obj.id).remove();
+        bootstrap_alert['success']('An user has been deleted!', 5000 );
       }
 
     });
-  };
+
+  }
+
+  addLoadEvent(subscribeAndListen_user);
+
+
+  //IMAGEN ESTADO
+  function change_img_state(id, boolean){
+    var img_id = '#img_state_' + id;
+    var img_on= "online.png";
+    var img_off= "offline.png";
+    var src = $(img_id).attr("src");
+
+    if (boolean){
+      src = src.replace(img_off, img_on);
+      $(img_id).attr("src", src);
+    }else{
+      src = src.replace(img_on,img_off);
+      $(img_id).attr("src", src);
+    }
+  }
 
 </script>
 

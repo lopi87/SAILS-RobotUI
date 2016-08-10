@@ -144,100 +144,24 @@ module.exports.sockets = {
   // (To control whether a socket is allowed to connect, check out `authorization` config.)
   // Keep in mind that Sails' RESTful simulation for sockets
   // mixes in socket.io events for your routes and blueprints automatically.
-  onConnect: function (session, socket) {
-
-    var sessionObj = {
-      socket_id: socket.id
-    };
-
-    Session.create(sessionObj, function sessionCreated(err, session) {
-      session.save(function (err) {
-        if (err) return next(err);
-      });
-    });
 
 
-    if (typeof console != 'undefined'){
-      console.log('\n....................................................');
-      console.log('Conecting to Sails js...');
-      console.log('Cliente conectado - id del socket: ' + socket.id);
-      console.log('....................................................');
-    }
-
-
-    /// AQUI PARA ABAJO COMPROBAR TODO
-
-    socket.on('message', commetMessageReceivedFromServer);
-    //socket.get('/user/user_subscribe');
-
-    function commetMessageReceivedFromServer(message){
-
-      if (message.model == 'user'){
-        var userId = message.id;
-        updateUserInDom(userId, message);
-      }
-    }
-
-    function updayeUserInDom(userId, message){
-
-      var page = document.localtion.pathname;
-
-      page = page.replace(/(\/)$/, '');
-
-      switch (page){
-        case '/user':
-          if (message.verb = 'update'){
-            UserIndexPage.updateUser(userId, message);
-          }
-          break;
-      }
-    }
-
-
-    var UserIndexPage = {
-      updateUser: function(id, message){
-
-        if (message.data.loggedIn) {
-          var $userRow = $('tr[data-id"' + id + '"] td img').first();
-          $userRow.attr('src', "/images/icon-online.png");
-        } else {
-          var $userRow = $('tr[data-id"' + id + '"] td img').first();
-          $userRow.attr('src', "/images/icon-offline.png");
-        }
-      }
-    }
-
-
-  },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   afterDisconnect: function(session, socket, cb) {
-
+  afterDisconnect: function(session, socket, cb) {
     // By default: do nothing.
-     console.log('Cliente desconectado - id del socket: ' + socket.id);
+    console.log('Cliente desconectado - id del socket: ' + socket.id);
 
-     Session.find({socket_id: socket.id}, function foundSession(err, session) {
-      if (!session) return next('Session doesn\'t exists.');
+    //Eliminamos la session del socket cerrado,
+     Session.findOne({socket_id: socket.id}, function foundSession(err, session) {
+        if (err) return cb();
+        if (!session) return cb();
 
-      Session.destroy(session.id, function sessionDestroyed(err) {
-        if (err) return next(err);
+        Session.destroy(session.id, function sessionDestroyed(err) {
+          if (err) return cb();
+          return cb();
+        });
       });
+  }
 
-    });
-   }
 };
 
 

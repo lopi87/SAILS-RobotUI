@@ -32,11 +32,11 @@
   <!--STYLES-->
   <link rel="stylesheet" href="/styles/bootstrap/bootstrap.css">
   <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.css">
-  <link rel="stylesheet" href="/styles/bootstrap/bootstrap-colorpicker.css">
-  <link rel="stylesheet" href="/styles/bootstrap/bootstrap-colorpicker-plus.css">
+  <link rel="stylesheet" href="/styles/jasny-bootstrap/jasny-bootstrap.css">
+  <link rel="stylesheet" href="/styles/bootstrap-colorpicker/bootstrap-colorpicker.css">
+  <link rel="stylesheet" href="/styles/font-awesome/font-awesome.css">
   <link rel="stylesheet" href="/styles/chosen/ImageSelect.css">
   <link rel="stylesheet" href="/styles/chosen/chosen.min.css">
-  <link rel="stylesheet" href="/styles/gridster/gridster.css">
   <link rel="stylesheet" href="/styles/importer.css">
   <!--STYLES END-->
 
@@ -46,11 +46,12 @@
   <script src="/js/vendor/bootstrap.js"></script>
   <script src="/js/vendor/chosen.jquery.js"></script>
   <script src="/js/vendor/ImageSelect.jquery.js"></script>
-  <script src="/js/vendor/gridster.js"></script>
+  <script src="/js/vendor/jasny-bootstrap.js"></script>
   <script src="/js/vendor/bootstrap-colorpicker.js"></script>
-  <script src="/js/vendor/bootstrap-colorpicker-plus.js"></script>
-  <script src="/js/vendor/bootstrap-filestyle.js"></script>
+  <script src="/js/vendor/jquery-ui.js"></script>
+  <script src="/js/vendor/gridster.js"></script>
   <script src="/js/vendor/npm.js"></script>
+  <script src="/js/utils.js"></script>
   <script src="/js/customValidate.js"></script>
   <!--SCRIPTS END-->
 </head>
@@ -77,22 +78,27 @@
           <% if (session.authenticated) { %>
           <li class="active"><a href="/user/show/<%= session.User.id%>"><%= session.User.name %></a> </li>
 
-          <li role="presentation"><a href="/message/index">Messages <span class="badge">3</span></a></li>
-
+          <%if (n_messages > 0){%>
+          <li><a href="/message/index">Messages <span class="label label-pill label-danger"><%= '+' + n_messages %></span></a></li>
+          <% } else { %>
+          <li><a href="/message/index">Messages</a></li>
+          <%}%>
 
           <% if (session.User.admin) { %>
           <li><a href="/user"> User Administration</a> </li>
           <% } %>
           <li><a href="/robot/index"> My Robots</a> </li>
           <% } %>
+
+<li><button id="private-msg-button" class="btn btn-lg btn-primary btn-block" >MENSAJE</button></li>
+
         </ul>
 
-        <div class="flag flag-en"></div>
+        <!-- <div class="flag flag-en"></div> -->
 
         <form class="navbar-form navbar-right">
           <div class="form-group">
-
-            <select data-placeholder="Choose a language" class="chzn-select-lan" style="width:100px;" tabindex="2">
+            <select data-placeholder="Choose a language" class="chzn-select-lan" style="width:75px;" tabindex="2">
               <option data-img-src="/images/flags/EN.png" value="en">EN</option>
               <option data-img-src="/images/flags/ES.png" value="es">ES</option>
               <option data-img-src="/images/flags/FR.png" value="fr">FR</option>
@@ -126,13 +132,8 @@
                 window.location.reload();
               },
 
-              failure: function(msg) {
-                alert("Fail : " + msg);
-              },
-
               error: function(xhr, status, text) {
-                var response = jQuery.parseJSON(xhr, text);
-                alert(response.error);
+                bootstrap_alert['danger'](xhr.responseText, 5000 );
               }
             });
 
@@ -169,19 +170,19 @@
         $("html, body").animate({ scrollTop: 0 }, "slow");
         alertTimeout(time);
       }
-      bootstrap_alert.info = function(message) {
+      bootstrap_alert.info = function(message, time) {
         $('#alert_placeholder').append('<div class="alert alert-info alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Advice!</strong>' + ' ' + message + ' ' + '</div> </div>');
         $("html, body").animate({ scrollTop: 0 }, "slow");
         alertTimeout(time);
       }
 
-      bootstrap_alert.warning = function(message) {
+      bootstrap_alert.warning = function(message, time) {
         $('#alert_placeholder').append('<div class="alert alert-warning alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Warning!</strong>' + ' ' + message + ' ' + '</div> </div>');
         $("html, body").animate({ scrollTop: 0 }, "slow");
         alertTimeout(time);
       }
 
-      bootstrap_alert.danger = function(message) {
+      bootstrap_alert.danger = function(message, time) {
         $('#alert_placeholder').append('<div class="alert alert-danger alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Ups!</strong>' + ' ' + message + ' ' + '</div> </div>');
         $("html, body").animate({ scrollTop: 0 }, "slow");
         alertTimeout(time);
@@ -223,3 +224,80 @@
 
 </body>
 </html>
+
+
+
+
+
+
+<script type="text/javascript">
+
+  function func1() {
+    alert("This is the first.");
+  }
+  function func2() {
+    alert("This is the second.");
+  }
+
+  //Añadir all a app.js
+  function savesocket() {
+    io.socket.get("/session/saveSocketID", function(data){
+      window.me = data;
+      io.socket.get('/message', updateUserList);
+    });
+  }
+
+
+  function listenMessages() {
+
+    io.socket.on('connect', function socketConnected() {
+
+
+      io.socket.get("/user/message_subscribe", function (data) {
+        io.socket.on('user', function messageReceived(message) {
+          alert(message.verb);
+
+          switch (message.verb) {
+
+            // Handle private messages.  Only sockets subscribed to the "message" context of a
+            // User instance will get this message--see the onConnect logic in config/sockets.js
+            // to see where a new user gets subscribed to their own "message" context
+            case 'message':
+              alert('recibido');
+              break;
+
+            default:
+              break;
+          }
+        });
+
+        io.socket.get('/user');
+
+        $('#private-msg-button').click(function () {
+          alert('click send');
+          //io.socket.post('/user/private', {to: '57a3260de20725c313fb5507', msg: 'HOLA!!'});
+          io.socket.post('/user/private', {to: '57a3260de20725c313fb5507', msg: 'HOLA!!'}, function (resData, jwres) {
+            alert('ok');
+          });
+        });
+
+
+      });
+    });
+  }
+
+  //ad
+  // dLoadEvent(func1);
+  //addLoadEvent(func2);
+  addLoadEvent(function() {
+    document.body.style.backgroundColor = '#EFDF95';
+  });
+
+  //addLoadEvent(savesocket);
+  addLoadEvent(listenMessages);
+
+
+
+</script>
+
+

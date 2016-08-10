@@ -25,40 +25,26 @@ module.exports.policies = {
   * access)                                                                  *
   *                                                                          *
   ***************************************************************************/
-  '*': 'localize',
+  '*': ["localize","message","flash"],
 
   user: {
-    'new': "flash",
-    create: "flash",
-    subscribe: "flash",
-    show: ["userCanSeeProfile", "flash"],
-    edit: ["userCanSeeProfile", "flash"],
-    update: "userCanSeeProfile",
-    testSocket: "flash",
-    user_subscribe: "flash",
-    upload: "flash",
-    index:"flash",
+    show: ["userCanSeeProfile","message","flash"],
+    edit: ["userCanSeeProfile","message","flash"],
+    update: ["userCanSeeProfile","message","flash"],
+    render: ["userCanSeeProfile","message","flash"],
+    destroy: ["message","flash"],
 
-    '*': "admin"
+
+    '*': ["flash", "message"]
   },
+
 
   session: {
     'new': "flash",
     create: "flash",
     destroy: "flash"
-  },
-
-  robot: {
-    'new': "flash"
-  },
-
-  interface: {
-    'show': "flash"
-  },
-
-  index: {
-    '*': "flash"
   }
+
 
   /***************************************************************************
   *                                                                          *

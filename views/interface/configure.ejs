@@ -1,0 +1,434 @@
+<%- partial('../_alert.ejs', {messages: messages}) %>
+
+<h1 class="text-center login-title"> Interface  <%= robot.name %></h1>
+
+<div class="marginbottom10">
+  <% if (robot.online){%>
+  <img id="img_state_<%= robot.id %>" height="30" width="30" src="/images/online.png">
+  <% } else { %>
+  <img id="img_state_<%= robot.id %>" height="30" width="30" src="/images/offline.png">
+  <% }  %>
+  <button  id="conectar" value="hola" type="button" class="marginleft10 btn btn-sm btn-success">CONECTAR</button></td>
+  <button  id="desconectar" value="hola" type="button" class="btn btn-sm btn-danger">DESCONECTAR</button></td>
+  <button  id="mandar" value="UP" type="button" class="btn btn-sm btn-warning">MANDAR</button></td>
+</div>
+
+<div class="panel panel-success">
+  <div class="panel-heading"> Actions </div>
+
+  <div class="row marginleft20">
+    <div class="col-md-4 ">
+      <div class="control-group   margintop20">
+        <input id="name_field" type="text" class="form-control" placeholder="name" name="name" required>
+      </div>
+
+      <div class="control-group  ">
+        <input id="code_field" type="text" class="form-control" placeholder="code" required="true" name="code">
+      </div>
+
+      <div class="control-group  ">
+        <select data-placeholder="Choose a type..." class="chzn-select" style="width:350px;" tabindex="2" name="element">
+          <option value="button">button</option>
+          <option value="button">jpush-button</option>
+          <option value="button">joystick</option>
+        </select>
+      </div>
+
+      <script type="text/javascript">
+        $('.chosen-select-type').chosen({});
+      </script>
+      <br>
+
+      <h3>Select an icon</h3>
+      <div class="control-group ">
+        <select id="slect_icon" data-placeholder="Choose an icon" class="chzn-select-icon" style="width: 200px" tabindex="2">
+
+          <% _.each(icons, function(icon){ %>
+          <option data-img-src="/uploads/icons/<%= icon.id %>.<%= icon.format.split('/').pop()%>" value="<%= icon.id %>">1</option>
+          <% })%>
+
+        </select>
+        <script type="text/javascript">
+          $('.chzn-select-icon').chosen({
+            "disable_search": true
+          });
+        </script>
+      </div>
+
+      text
+      <div id="cp4" class="input-group colorpicker-component ">
+        <input id="text_field" type="text" class="form-control" />
+        <span class="input-group-addon"><i></i></span>
+      </div>
+      <script type="text/javascript">
+        $('#cp4').colorpicker({format: 'hex'});
+      </script>
+
+      background
+      <div id="cp" class="input-group colorpicker-component ">
+        <input id="background_field" type="text" class="form-control" />
+        <span class="input-group-addon"><i></i></span>
+      </div>
+      <script type="text/javascript">
+        $('#cp').colorpicker({format: 'hex'});
+      </script>
+
+      border
+      <div id="cp2" class="input-group colorpicker-component ">
+        <input id="border_field" type="text" class="form-control" />
+        <span class="input-group-addon"><i></i></span>
+      </div>
+      <script type="text/javascript">
+        $('#cp2').colorpicker({format: 'hex'});
+      </script>
+
+      active background
+      <div id="cp3" class="input-group colorpicker-component ">
+        <input id="active_background_field" type="text" class="form-control" />
+        <span class="input-group-addon"><i></i></span>
+      </div>
+      <script type="text/javascript">
+        $('#cp3').colorpicker({format: 'hex'});
+      </script>
+    </div>
+    <div class="col-md-6">
+
+
+
+      <div class="marginright20">
+        <h3>Upload a new icon</h3>
+
+        <form id="new_icon" enctype="multipart/form-data" method="post">
+          <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+            <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+            <span id="input_icon" class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="iconfile"></span>
+            <a id="remove_iconfile_input" href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+          </div>
+          <input type="submit"  class="btn btn-primary" value="upload icon"/>
+          <input id="icon_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
+        </form>
+
+        <script type="text/javascript">
+
+          //MUY IMPORTANTE SUBIR CON AJAX FILES
+          //http://www.desarrolloweb.com/articulos/upload-archivos-ajax-jquery.html
+
+
+          $("#new_icon").submit(function(e){
+            e.preventDefault();
+            var f = $(this);
+            var formData = new FormData(document.getElementById("new_icon"));
+            formData.append("dato", "valor");
+
+            $.ajax({
+              url: '/icon/create/' + '<%= interface %>',
+              type: 'POST',
+              cache: false,
+              dataType: 'json',
+              processData: false, // Don't process the files
+              contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+              data: formData,
+              beforeSend: function(xhr, settings){
+                xhr.setRequestHeader('X-CSRF-Token', $("#icon_csrf").val());
+              },
+              done:function() {
+              },
+              success: function(data){
+
+                alert('success');
+
+                if(typeof data.error === 'undefined')
+                {
+                  console.log('SUCCESS: ' + data.success);
+                  bootstrap_alert['success']('A new icon has been uploaded!', 3000 );
+
+                  //limpiar el input
+                  $("#remove_iconfile_input").trigger('click');
+
+                  //Añadir el nuevo icono al chosen select
+                  //
+
+                }
+                else
+                {
+                  // Handle errors here
+                  console.log('ERRORS: ' + data.error);
+                }
+              }
+            });
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+
+
+<!-- PREVIEW   IMPLEMENTANDO::::::::: -->
+
+
+  <div class="floatright marginright20 margintop20">
+    <div style="text-align: center">
+      Preview
+    </div>
+    <div class="fileinput-preview thumbnail" style="width: 200px; height: 150px;">
+
+      <button id="button_preview" class="btn btn-primary">texto</button>
+
+    </div>
+  </div>
+
+
+  <script type="text/javascript">
+    $('#button_preview').css('margin-left', $('#button_preview').width() * (-1));
+    $('#button_preview').css('margin-top', $('#button_preview').height() * (-1));
+  </script>
+
+  <style>
+    #button_preview{
+      margin-left: 0px;
+      margin-top: 0px;
+      position:relative;
+      top:50%;
+      left:50%;
+    }
+  </style>
+
+  <div class="marginbottom20 marginleft20 margintop20">
+    <button id="new_action" type="button" class="btn btn-success">create an action</button>
+  </div>
+
+</div>
+
+
+<div class="container">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Accion</th>
+      <th>boton</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody id="actualizar">
+
+    <% _.each(actions, function(action,index){ %>
+    <tr id="line_<%= action.id %>" data-model="action">
+      <th scope="row"><%= index %></th>
+      <td><%= action.name %></td>
+      <td>
+        <% if (action.icon){ %>
+
+<!-- http://blog.koalite.com/bbg/ -->
+
+        <button id="button_<%= action.id %>" class="btn btn-custom_<%= action.id %>" value="<%= action.code %>">
+          <span><img src="/uploads/icons/<%= action.icon %>.png" /></span>
+          <% if (action.name != ''){%>
+            <span><%= action.name %></span>
+          <% }%>
+        </button>
+        <% } else { %>
+        <button  id="button_<%= action.id %>" value="<%= action.code %>" class="btn btn-custom_<%= action.id %>"><%= action.name %></button>
+        <% } %>
+      </td>
+      <td> <button id="delete_action_<%= action.id %>" type="button" class="btn btn-sm btn-danger" onclick="row_action_deleted('<%= action.id %>')">Delete</button></td>
+    </tr>
+    <%- partial ('../action/style_action.ejs', {action: action, set_position: false})%>
+    <% })%>
+    </tbody>
+  </table>
+
+
+
+  <script type="text/javascript">
+    $('#new_action').on('click',function(){
+      $.ajax({
+        url: '/interface/newaction/' + '<%= interface %>',
+        type: 'GET',
+        data: {name: $( "#name_field" ).val(), code: $( "#code_field" ).val(), color_background: $( "#background_field" ).val(), color_border: $( "#border_field" ).val(), color_active_background: $( "#active_background_field" ).val(), color_text:$( "#text_field" ).val(), icon: $(".chzn-select-icon").val()},
+        done:function() {
+        },
+
+        success: function(data){
+          $("#actualizar").append(data);
+          bootstrap_alert['success']('A new action has been created!', 5000 );
+        },
+
+        error: function(xhr, status, text) {
+          bootstrap_alert['danger'](xhr.responseText, 5000 );
+        }
+      });
+    });
+
+    function row_action_deleted(id) {
+      $.ajax({
+        url: '/interface/deleteaction/' + id,
+        type: 'GET',
+        data: {},
+
+        success: function (data) {
+          $("#line_" + id).remove();
+          bootstrap_alert['success']('A new action has been deleted!', 5000 );
+        },
+
+        error: function (xhr, status, text) {
+          bootstrap_alert['danger'](xhr.responseText, 5000 );
+        }
+      });
+    }
+
+  </script>
+</div>
+
+<% partial ('csscode.ejs', {interface: interface})%>
+
+<%- partial ('commands.ejs', {robot: robot})%>
+
+<%- partial('config_panel.ejs', {actions: actions, interface: interface})%>
+
+<div class="margintop20 marginbottom20">
+  <a href="/robot/index" class="btn btn-sm btn-warning"> My Robots</a>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+  // https://evothings.com/controlling-a-toy-car-with-evothings-and-raspberry-pi/
+
+  //ROBOT
+  //conexion con el robot
+  var address_robot = "localhost" + ":" + "8085";
+  var robot_id = '<%= robot.id %>';
+
+  //INTERESANTE RECONCETAR AUTOMATICAMENTE-...... solucion ya que tarda en volver a conectar
+  //http://stackoverflow.com/questions/4432271/node-js-and-socket-io-how-to-reconnect-as-soon-as-disconnect-happens
+
+  $("#conectar").click(function(){
+    try {
+      // Connect to the server running on the Robot(raspberry pi).
+      var socket = io.connect(address_robot,{  'reconnection': true,
+        'reconnectionDelay': 500,
+        'reconnectionAttempts': 10});
+      socket.on('connect', function() {
+        console.log('robot connected!');
+        //Sincronizar con el resto de clientes que un robot se ha conectado:
+        io.socket.get('/robot/changestate/',{robot: robot_id , state: 'on'});
+        bootstrap_alert['success']('Conectado con exito! ' + address_robot, 5000 );
+        change_img_state(robot_id,true);
+      });
+
+    } catch (error) {
+      bootstrap_alert['danger']('Failed to connect to the Robot! (Raspberry Pi!)' + address_robot + error , 5000)
+      io.socket.get('/robot/changestate/',{robot: robot_id , state: 'off'});
+      change_img_state(robot_id,false);
+    }
+
+
+    //Presionar boton desconectar
+    $("#desconectar").click(function(){
+      try {
+        //bootstrap_alert['danger']('Lost connection to the Robot! (Raspberry Pi!)' + address_robot, 5000 )
+        //Sincronizar con el resto de clientes:
+        //io.socket.get('/robot/changestate/',{robot: robot_id , state: 'off'});
+        //change_img_state(robot_id,false);
+        socket.disconnect();
+      } catch (error) {
+        bootstrap_alert['danger']('Failed to disconnect to the Robot! (Raspberry Pi!)' + address_robot + error , 5000)
+        io.socket.get('/robot/changestate/',{robot: robot_id , state: 'off'});
+        change_img_state(robot_id,false);
+      }
+    });
+
+    //captura evento desconectar cuando el robot es apagado o pierde la señal
+
+    socket.on('disconnect', function() {
+      bootstrap_alert['danger']('Lost connection to the Robot! (Raspberry Pi!)' + address_robot, 5000 )
+      //Sincronizar con el resto de clientes:
+      io.socket.get('/robot/changestate/',{robot: robot_id , state: 'off'});
+      change_img_state(robot_id,false);
+    });
+
+
+    //funcion para mandar comando al robot (nombre y codigo)
+    function command_send(name, code){
+      try {
+        socket.emit(name, code);
+        console.log('emitting to robot: ' + code)
+      } catch (error) {
+        console.log(error + ': ' + code);
+        bootstrap_alert['danger']('Error to send command! (Raspberry Pi!)' + address_robot + error, 5000 )
+        change_img_state(robot_id,false);
+      }
+    }
+
+
+    //Mandar evento "mandar comando" al servidor para sincronizar con otros navegadores
+    var $messageForm = $('#sendMessage');
+    $messageForm.submit(function (e) {
+      var $message = $('#message');
+      e.preventDefault();
+      if($message.val() != '' ) io.socket.get('/interface/commandline/',{interface: '<%= interface.id %>' ,user_id: '<%= session.User.id%>'   ,command: $message.val()});
+      command_send('direction', $message.val())
+      $message.val('');
+    });
+
+
+    //PENDIENTE DE MIRAR EVENTOS PARA LOS BOTONES
+    //emite el comando de los botones creados en la interfaz
+    var interface_buttons = $('[id^=button_]');
+    interface_buttons.click(function (e) {
+      var button_pressed_id = this.id.replace('button_','');
+      var code = document.getElementById(this.id).value
+
+      e.preventDefault();
+      io.socket.get('/interface/commandline/',{interface: '<%= interface.id %>' ,user_id: '<%= session.User.id%>'   ,button: button_pressed_id});
+
+      if (code != ''){
+        command_send('direction',code);
+      }
+      //Emitir al servidor la accion para sincronizar con el resto de clientes....
+      //Mandar evento al servidor para sincronizar con otros navegadores
+    });
+
+
+  });
+
+
+  window.onload = function subscribeAndListen() {
+    io.socket.get('/interface/commandline/',{robot: '<%= robot.id%>'});
+
+    var $chat = $('#chat');
+
+    io.socket.on('interface', function (obj) {
+      if (obj.verb == 'created') {
+        var data = obj.data;
+        console.log('Command ' + data.command + ' ' + data.id +' has been send.');
+        $chat.append(' - ' + data.command + '<br/>');
+      }
+    });
+  };
+
+
+  //IMAGEN ESTADO
+  function change_img_state(robot_id, boolean){
+    var img_id = '#img_state_' + robot_id;
+    var img_on= "online.png";
+    var img_off= "offline.png"
+
+    if (boolean){
+      var src = $(img_id).attr("src").replace(img_off, img_on);
+      $(img_id).attr("src", src);
+    }else{
+      var src = $(img_id).attr("src").replace(img_on,img_off);
+      $(img_id).attr("src", src);
+    }
+  }
+
+
+  //IMPLEMENTAR INTERFAZ MODO VISION Y MODO CONTROL
+
+
+</script>
+
+
+

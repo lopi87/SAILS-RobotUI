@@ -18,8 +18,10 @@ var cssFilesToInject = [
 
   'styles/bootstrap/bootstrap.css',
   'styles/bootstrap/bootstrap-theme.css',
-  'styles/bootstrap/bootstrap-colorpicker.css',
-  'styles/bootstrap/bootstrap-colorpicker-plus.css',
+  'styles/jasny-bootstrap/jasny-bootstrap.css',
+  'styles/bootstrap-colorpicker/bootstrap-colorpicker.css',
+  'styles/font-awesome/font-awesome.css',
+
   'styles/**/*.css'
 ];
 
@@ -36,11 +38,14 @@ var jsFilesToInject = [
   'js/vendor/bootstrap.js',
   'js/vendor/chosen.jquery.js',
   'js/vendor/ImageSelect.jquery.js',
-  'js/vendor/gridster.js',
+  'js/vendor/jasny-bootstrap.js',
   'js/vendor/bootstrap-colorpicker.js',
-  'js/vendor/bootstrap-colorpicker-plus.js',
+  'js/vendor/jquery-ui.js',
 
   'js/vendor/**/*.js',
+  'js/utils.js',
+  'js/customValidate.js',
+
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.

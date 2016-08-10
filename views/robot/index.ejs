@@ -1,92 +1,78 @@
-    <div class="jumbox">
-      <h3>My Robots</h3>
+<div class="jumbox">
+  <h3>My Robots</h3>
 
-      <%  if(robots.size == 0){ %>
-        <div class="alert alert-warning margintop20 marginbottom20" role="alert">
-          <strong>Ups!</strong>
-          You haven't created any robots yet...
-        </div>
+  <%  if(robots.size == 0){ %>
+  <div class="alert alert-warning margintop20 marginbottom20" role="alert">
+    <strong>Ups!</strong>
+    You haven't created any robots yet...
+  </div>
+  <% } %>
+
+  <table class="table">
+    <tr>
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Ip address</th>
+      <th>Interface</th>
+
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <% _.each(robots, function(robot){ %>
+    <tr data-id="<%= robot.id %>" data-model="robot">
+
+      <% if(robot.online){ %>
+      <td> <img id="img_state_<%= robot.id %>" src="/images/online.png" height="30" width="30"></td>
+      <% } else { %>
+      <td> <img id="img_state_<%= robot.id %>" src="/images/offline.png" height="30" width="30"></td>
       <% } %>
 
-      <table class="table">
-        <tr>
-          <th></th>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Ip address</th>
-          <th>Interface</th>
-
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-
-        <% _.each(robots, function(robot){ %>
-        <tr data-id="<%= robot.id %>" data-model="robot">
-
-          <% if(robot.online){ %>
-          <td> <img id="img_state_<%= robot.id %>" src="/images/online.png" height="30" width="30"></td>
-          <% } else { %>
-          <td> <img id="img_state_<%= robot.id %>" src="/images/offline.png" height="30" width="30"></td>
-          <% } %>
-
-          <td><%= robot.id %></td>
-          <td><%= robot.name %></td>
-          <td><%= robot.description %></td>
-          <td><%= robot.ipaddress %> : <%= robot.port%></td>
-          <td> <%= robot.robot_interface %> </td>
-
-          <% if(robot.online){ %>
-          <td> <a href="robot/control/<%= robot.id %>" class="btn btn-sm btn-success">Take control</a></td>
-          <% } else { %>
-          <td> <a href="robot/control/<%= robot.id %>"class="btn btn-sm btn-success disabled">Take control</a></td>
-          <% } %>
-
-          <td> <a href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary">Personalice Interface</a></td>
-
-          <td>
-            <form action="/robot/destroy/<%=robot.id%>" method="post">
-              <input type="hidden" name="_method" value="delete"/>
-              <input type="submit"  class="btn btn-sm btn-danger" value="Delete"/>
-              <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
-            </form>
-          </td>
-        </tr>
-        <% }) %>
-
-      </table>
+      <td><%= robot.id %></td>
+      <td><%= robot.name %></td>
+      <td><%= robot.description %></td>
+      <td><%= robot.ipaddress %> : <%= robot.port%></td>
+      <td> <%= robot.robot_interface %> </td>
 
 
-      <div class="pull-right margintop20 marginbottom20">
-        <a href="/robot/new" class="btn btn-sm btn-success">Add a new robot!</a>
-      </div>
-    </div>
+      <td> <a href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-success">Take control</a></td>
+      <td> <a href="/interface/configure/<%= robot.robot_interface %>" class="btn btn-sm btn-primary">Personalice Interface</a></td>
+      <td>
+        <form action="/robot/destroy/<%=robot.id%>" method="post">
+          <input type="hidden" name="_method" value="delete"/>
+          <input type="submit"  class="btn btn-sm btn-danger" value="Delete"/>
+          <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+        </form>
+      </td>
+    </tr>
+    <% }) %>
 
+  </table>
+
+  <div class="pull-right margintop20 marginbottom20">
+    <a href="/robot/new" class="btn btn-sm btn-success">Add a new robot!</a>
+  </div>
+</div>
 
 
 <script type="text/javascript">
 
   window.onload = function subscribeAndListen() {
-    io.socket.get('/robot/changestate/');
+    io.socket.get('/robot/robot_subscribe/');
 
     io.socket.on('robot', function (obj) {
-      var data = obj.data;
 
-      if (obj.verb == 'created') {
-        if(data.state == 'on'){
-          console.log('Robot ' + data.id + ' has been connected.');
-          change_img_state(data.id, true)
-        }else if(data.state == 'off'){
-          console.log('Robot ' + data.id + ' has been disconnected.');
-          change_img_state(data.id, false)
-
-        }
+      if (obj.verb == 'updated') {
+        var data = obj.data;
+        change_img_state(data.id, data.online);
+        console.log('Robot has been updated to ' + data.online);
       }
+
     });
-
   };
-
 
   //IMAGEN ESTADO
   function change_img_state(robot_id, boolean){

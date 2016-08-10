@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="page-header -align-center">
+    <h1>CSS code <small> <%= robot.name %> </small></h1>
+  </div>
+  <form id="sendCSScode" class="input-group" style="text-align: center; margin:0 auto;">
+    <div class="input-group">
+        <textarea id="areacode" class="form-control custom-control" rows="3" style="resize:none">
+          <%= interface.csscode %>
+        </textarea>
+      <button class="input-group-addon btn btn-primary" type="submit">Save</button>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  $('#sendCSScode').submit(function (){
+    $.ajax({
+      url: '/interface/savecode/' + '<%= interface %>',
+      type: 'GET',
+      data: {code: $('#areacode').val()},
+      contentType: 'application/json',
+      dataType: 'json',
+
+      success: function(data){
+        bootstrap_alert['success']('The code has been saved!', 5000 );
+      },
+
+      error: function(xhr, status, text) {
+        bootstrap_alert['danger'](xhr.responseText, 5000 );
+      }
+    });
+  });
+</script>

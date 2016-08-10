@@ -19,18 +19,40 @@ module.exports = {
     res.view('session/new');
   },
 
-  getSocketID: function(req, res) {
+  saveSocketID: function(req, res) {
     if (!req.isSocket) {
       return res.badRequest();
     }
 
-    var socketId = sails.sockets.getId(req);
+    var socketId = sails.sockets.id(req);
     // => "BetX2G-2889Bg22xi-jy"
 
-    sails.log('My socket ID is: ' + socketId);
 
-    return res.json(socketId);
+    if(req.session.User != undefined) {
+      var sessionObj = {
+        socket_id: socketId,
+        user_id: req.session.User.id
+      };
+    }else {
+      var sessionObj = {
+        socket_id: socketId
+      };
+    }
+
+    Session.create(sessionObj, function sessionCreated(err, session) {
+      if (err) return res.badRequest();
+
+      console.log('\n....................................................');
+      console.log('Conecting to Sails js...');
+      console.log('Cliente conectado - id del socket: ' + socketId);
+      console.log('....................................................');
+
+      return res.json(socketId);
+
+    });
   },
+
+
 
   create: function(req, res, next){
 
@@ -69,10 +91,8 @@ module.exports = {
         req.session.User = user;
 
         //Cambio de estado a online
-        user.online = true;
-        user.save(function (err, user){
+        User.update(user.id, {online: true}, function (err){
           if (err) return next(err);
-
 
           //Informar a otros clientes (sockets abiertos) que el usuario esta logueado
           User.publishUpdate(user.id, {
@@ -88,10 +108,11 @@ module.exports = {
           //Si el usuario es administrador redirecciona a la vista de todos los usuarios
           if (req.session.User.admin) {
             res.redirect('/user');
-            return;
+          }else{
+            res.redirect('/user/show/' + user.id);
           }
-          res.redirect('/user/show/' + user.id);
 
+          return;
         });
       });
     });
@@ -105,8 +126,11 @@ module.exports = {
         if(err) return next(err);
         req.session.destroy();
 
-
-//        msg = {messages: {error: ["See you soon!"], success: [], warning:[]}};
+        //Informar a otros clientes (sockets abiertos) que el usuario esta logueado
+        User.publishUpdate(user.id, {
+          loggedIn: false,
+          id: user.id
+        });
 
        // Restore session
        // Session.update({socket_id:sails.sockets.id(req)},{user_id:'invited'}).exec(function afterwards(err, updated){

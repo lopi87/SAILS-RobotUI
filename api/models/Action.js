@@ -14,9 +14,13 @@ module.exports = {
       model: 'interface'
     },
 
+    //La acción tiene un icono
+    icon:{
+      model: 'icon'
+    },
+
     name: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
 
     code: {
@@ -24,12 +28,47 @@ module.exports = {
       required: true
     },
 
+    color_text: {
+      type: 'hexadecimal'
+    },
+
+    color_background: {
+      type: 'hexadecimal'
+    },
+
+    color_border: {
+      type: 'hexadecimal'
+    },
+
+    color_active_background: {
+      type: 'hexadecimal'
+    },
+
+    coordinate_x: {
+      type: 'float',
+      defaultsTo: 0
+    },
+
+    coordinate_y: {
+      type: 'float',
+      defaultsTo: 0
+    },
+
     element: {
       type: 'string',
-      enum: ['button', 'push', 'video'],
+      enum: ['button', 'push', 'joystick'],
       defaultsTo: 'button'
     }
 
+  },
+  types:{
+    ispositive:function(value){
+      console.log(value);
+      if(value >=0 ){
+        return true;
+      }
+      return false;
+    }
   }
 };
 

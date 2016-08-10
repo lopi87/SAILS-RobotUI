@@ -1,0 +1,30 @@
+<h1>Message</h1>
+
+<form class="form-horizontal paddingleft20 margintop20">
+<div class="form-group">
+    <label for="name" class="col-sm-1 control-label">Title</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control disabled" id="name" name="name" placeholder="First & Last Name" value="<%= message.title%>">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name" class="col-sm-1 control-label">From</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control disabled" id="name" name="name" placeholder="First & Last Name" value="<%= message.from_user_id%>">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="message" class="col-sm-1 control-label">Message</label>
+    <div class="col-sm-10">
+      <textarea class="form-control disabled" rows="4" name="message"><%= message.content %></textarea>
+    </div>
+  </div>
+
+</form>
+
+<div class="pull-right margintop20 marginbottom20">
+  <a class="btn btn-sm btn-success" href="/robot/new"><i class="fa fa-reply fa-lg"></i> Reply </a></a>
+  <a class="btn btn-sm btn-warning" href="/robot/new">back</a>
+</div>

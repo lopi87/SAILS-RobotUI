@@ -1,6 +1,4 @@
 
-
-
 module.exports = function(req, res, next) {
 
   // User is allowed, proceed to the next policy,
@@ -11,11 +9,10 @@ module.exports = function(req, res, next) {
 
   // User is not allowed
   else {
-    var requireLoginError = [{name: 'requireLogin', message: 'You must be signed in.'}]
-    req.session.flash = {
-      err: requireLoginError
-    }
+    msg = { err: 'You must be signed in.' };
+    FlashService.error(req, msg );
+
     res.redirect('/session/new');
-    return;
+    return next();
   }
 };

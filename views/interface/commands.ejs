@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="page-header -align-center">
+    <h1>Mandar comandos <small> <%= robot.name %> </small></h1>
+  </div>
+
+  <div id="content" class="row" style="height: 70%;">
+    <div class="col-md-2"></div>
+    <div id="cahtContent" class="col-md-3">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          Comandos
+        </div>
+        <div id="chat" class="panel-body" style="min-height: 250px; max-height: 250px; overflow-y: scroll;"></div>
+      </div>
+      <div>
+        <form id="sendMessage" class="input-group" style="text-align: center; margin:0 auto;">
+          <input id="message" class="form-control input-lg" type="text">
+        <span class="input-group-btn">
+          <button class="btn btn-lg btn-primary" type="submit">Mandar</button>
+        </span>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

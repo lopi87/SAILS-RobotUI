@@ -1,0 +1,174 @@
+<!-- PERSONALIZAR VENTANA -->
+<input id="icon_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
+<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+
+<div id="board" class="panel panel-success margintop20">
+  <div class="panel-heading"> Control </div>
+
+  <div class="paddingtop20 paddingleft20 paddingright20">
+    <div>
+      <div class="col-md-1">
+        <div class="bottom_col">
+          <div class="list-group">
+            <a class="list-group-item"><i class="fa fa-plus fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
+            <a class="list-group-item"><i class="fa fa-remove fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
+            <a class="list-group-item"><i class="fa fa-edit fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
+            <a class="list-group-item"><i class="fa fa-plug fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
+            <a class="list-group-item"><i class="fa fa-cog fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="box_panel" class="col-md-11">
+        <div id="panel" class="panel_resizable edit">
+          <% _.each(actions, function(action){ %>
+          <% if (action.icon){ %>
+          <button id="button_custom_<%= action.id %>" class="btn btn-custom_<%= action.id %> position_<%= action.id %>" value="<%= action.code %>">
+            <img src="/uploads/icons/<%= action.icon %>.png" />
+            <% if (action.name != ''){%>
+            <%= action.name %>
+            <% }%>
+          </button>
+          <% } else { %>
+          <button  id="button_custom_<%= action.id %>" value="<%= action.code %>" class="btn btn-custom_<%= action.id %> position_<%= action.id %>" ><%= action.name %></button>
+          <% } %>
+
+          <%- partial ('../action/style_action.ejs', {action: action, set_position: true})%>
+
+          <% })%>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="marginright20 margintop10 marginbottom10 floatright">
+          <a id="save_dash" class="btn btn-sm btn-success" > Save dashboard! </a>
+          <a id="edit_dash" class="btn btn-sm btn-warning" > Edit dashboard! </a>
+          <a id="reset_dash" class="btn btn-sm btn-danger" > Reset dashboard! </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  function get_max_top_left_panel() {
+    var top = 0;
+    var left = 0;
+    var inHeight = 0;
+    var inWidth = 0;
+
+    $('[id^=button_custom_]').each(function(){
+      if ($(this).position().top >= top){
+        inHeight = $(this).outerHeight() + 5;
+        top = $(this).position().top;
+        //console.log('New left limit: ' + $(this).position().top);
+      }
+
+      if ($(this).position().left >= left){
+        inWidth = $(this).outerWidth() + 5;
+        left = $(this).position().left;
+        //console.log('New top limit: ' + $(this).position().left);
+      }
+    });
+    left = left + inWidth;
+    top = top + inHeight;
+
+    //console.log('Dims: ' + inWidth + ' - ' + inHeight);
+    console.log('Limit: ' + left + ' - ' + top);
+    return [left ,top ];
+  }
+
+
+
+  //Enable elements draggables
+  $('[id^=button_custom_]').draggable({cancel: false, containment: '#panel', scroll: false,
+
+    stop: function(event, ui) {
+      var pos_x = ui.position.left;
+      var pos_y = ui.position.top;
+      var id = this.id.replace('button_custom_','');
+
+      console.log('x: ' + pos_x + ' - y: ' + pos_y );
+      console.log('id: ' + id);
+
+      //Do the ajax call to the server
+      $.ajax({
+        type: "POST",
+        url: "/action/update_position/",
+        data: { x: pos_x, y: pos_y, id: id},
+        beforeSend: function(xhr, settings){
+          xhr.setRequestHeader('X-CSRF-Token', $("#icon_csrf").val());
+        },
+
+        success: function(data){
+          console.log('bottom position updated');
+        },
+
+        error: function(xhr, status, text) {
+          bootstrap_alert['danger'](xhr.responseText, 5000 );
+        }
+
+      });
+    }
+  });
+
+
+
+  // http://jsfiddle.net/dzSRR/32/  ejemplo drag con limites
+
+  $( "#panel" ).resizable({
+    maxWidth: $("#box_panel").width() - 10,
+
+    create: function(){
+      $(this).width(<%= interface.panel_sizex %>);
+      $(this).height(<%= interface.panel_sizey %>);
+    },
+
+    resize: function(){
+      pos = get_max_top_left_panel();
+      $(this).css("min-width", pos[0]);
+      $(this).css("min-height", pos[1]);
+    },
+
+    stop: function(event, ui) {
+      var width = ui.size.width;
+      var height = ui.size.height;
+      var id = "<%= interface.id %>";
+      var min_w = $("#panel").css("minWidth").replace(/[^-\d\.]/g, '');
+      var min_h = $("#panel").css("minHeight").replace(/[^-\d\.]/g, '');
+
+      console.log('new board size: ' + width + ' - ' + height );
+      console.log('valores minimos permitidos: ' + min_w + '-'  + min_h);
+
+      //Nunca menor que el tamaño minimo
+      if(width < min_w){
+        width = min_w;
+      }
+      if(height < min_h){
+        height = min_h;
+      }
+
+      //Do the ajax call to the server
+      $.ajax({
+        type: "POST",
+        url: "/interface/update_board_size/",
+        data: { width: width, height: height, id: id},
+        beforeSend: function(xhr, settings){
+          xhr.setRequestHeader('X-CSRF-Token', $("#icon_csrf").val());
+        },
+
+        success: function(data){
+          console.log('board size updated');
+        },
+
+        error: function(xhr, status, text) {
+          bootstrap_alert['danger'](xhr.responseText, 5000 );
+        }
+      });
+    }
+
+  });
+</script>
+<!-- FIN PERSONALIZAR VENTANA -->

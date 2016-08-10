@@ -8,10 +8,8 @@ module.exports = function(req, res, next) {
   //El id solicitado no coincide con el id del usuario
   // y no es un administrador
   if(!(sessionUserMatchesId || isAdmin)) {
-    var noRightsError = [{name: 'noRights', message: 'You must be an admin'}];
-    req.session.flash = {
-      err:noRightsError
-    }
+    msg = { err:  'You must be an admin.' };
+    FlashService.warning(req, msg );
     res.redirect('/session/new');
     return;
   }
