@@ -38,7 +38,7 @@ module.exports = {
     User.findOne( req.param('to_user_id'), function foundUser(err, user) {
       if (err) return next(err);
       if (!user) {
-        msg = {err: 'Upload completed'};
+        msg = {err: 'No user selected'};
         FlashService.error(req, msg);
         return res.redirect('/message/index');
       }
@@ -46,17 +46,32 @@ module.exports = {
       Message.create(msgObj, function messageCreated(err, msge){
         if (err) return next(err);
 
-        //Message.publishAdd({to_user_id: req.param('to_user_id') },'to_user_id',msge.id);
-
-
-        // Publish a message to that user's "room".  In our app, the only subscriber to that
-        // room will be the socket that the user is on (subscription occurs in the onConnect
-        // method of config/sockets.js), so only they will get this message.
-        User.message(msge.to_user_id, {
-          from: msge.from_user_id,
-          msg: msge.content
+        //Mandar notificacion al usuario  FUNCIONA
+        Session.findOne({user_id: req.param('to_user_id')}, function foundSession(err, session) {
+          if (err) return next(err);
+          if (!session) return next();
+            User.message(session.user_id, {
+              from: req.session.User.id,
+              msg: req.param('message')
+            });
         });
+        //
 
+        //Mandar notificacion al usuario, a cada ventana que tiene abierta REVISAR SE MANDA MUCHAS VECES
+        /*
+        Session.find({user_id: req.param('to_user_id')}, function foundSession(err, sessions) {
+          if (err) return next(err);
+          if (!sessions) return next();
+
+          sessions.forEach(function(session, index){
+            User.message(session.user_id, {
+              from: req.session.User.id,
+              msg: req.param('message')
+            });
+          });
+        });
+        */
+        ////////////////////////////////
 
         msg = { err: '<i class="glyphicon glyphicon-send"></i>' + " Message send! " };
         FlashService.success(req, msg );

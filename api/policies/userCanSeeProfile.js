@@ -10,8 +10,7 @@ module.exports = function(req, res, next) {
   if(!(sessionUserMatchesId || isAdmin)) {
     msg = { err:  'You must be an admin.' };
     FlashService.warning(req, msg );
-    res.redirect('/session/new');
-    return;
+    return res.forbidden(msg);
   }
 
   next();

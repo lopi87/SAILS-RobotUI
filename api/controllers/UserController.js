@@ -193,7 +193,6 @@ module.exports = {
 
 
   //Explicado aqui https://www.youtube.com/watch?v=enyZYgjXRqQ&list=PL16Fzt2LkOBQTP2vbyZ82wci6MoOdFtF5&index=24
-
   user_subscribe: function(req,res,next){
     if (req.isSocket){
       //Update, destroy...
@@ -209,41 +208,6 @@ module.exports = {
       res.view();
     }
   },
-
-
-  // Send a private message from one user to another
-  private: function(req, res) {
-    // Get the ID of the currently connected socket
-    var socketId = sails.sockets.id(req.socket);
-    // Use that ID to look up the user in the session
-    // We need to do this because we can have more than one user
-    // per session, since we're creating one user per socket
-
-
-
-    // Publish a message to that user's "room".  In our app, the only subscriber to that
-    // room will be the socket that the user is on (subscription occurs in the onConnect
-    // method of config/sockets.js), so only they will get this message.
-    User.message('57a10a97ed7200310fd152ab', {
-      from: '57a3260de20725c313fb5507',
-      msg: 'HOLA!!!'
-    });
-
-
-  },
-
-  message_subscribe: function(req, res, next){
-    if (!req.isSocket) {
-      return res.badRequest('HTTP request.');
-    }
-
-    //Solo este usuario recibira el evento messageajes
-    User.subscribe(req, req.session.User, 'message');
-
-
-    return res.ok();
-  },
-
 
   //Subida imagen avatar.
   upload: function(req, res) {
@@ -299,7 +263,65 @@ module.exports = {
         layout: false
       });
     });
+  },
+
+
+
+
+
+
+
+// Send a private message from one user to another
+  private: function(req, res) {
+    // Get the ID of the currently connected socket
+    var socketId = sails.sockets.id(req.socket);
+    // Use that ID to look up the user in the session
+    // We need to do this because we can have more than one user
+    // per session, since we're creating one user per socket
+
+    Session.findOne({socket_id: socketId}, function foundSession(err, session) {
+      if (err) return next(err);
+      if (!session) return next();
+
+      User.findOne(session.user_id, function foundUser(err, user) {
+        if (err) return next(err);
+        if (!user) {}
+
+        User.message(user.id, {
+          from: user.id,
+          msg: 'HOLA HIJO PUTA'
+        });
+
+      });
+    });
+  },
+
+  message_subscribe: function(req, res, next){
+    if (!req.isSocket) {
+      return res.badRequest('HTTP request.');
+    }
+
+    var socketId = sails.sockets.id(req);
+
+    //Update, destroy...
+
+    Session.findOne({socket_id: socketId}, function foundSession(err, session) {
+      if (err) return next(err);
+      if (!session) return next();
+
+      User.findOne(session.user_id, function foundUser(err, user) {
+        if (err) return next(err);
+        if (!user) {}
+
+        //Solo este usuario recibira el evento messageajes
+        User.subscribe(req, user, 'message');
+
+        return res.json(user);
+      });
+    });
+
   }
+
 
 };
 
@@ -362,3 +384,18 @@ module.exports = {
 
 
  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

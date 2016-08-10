@@ -89,9 +89,6 @@
           <% } %>
           <li><a href="/robot/index"> My Robots</a> </li>
           <% } %>
-
-<li><button id="private-msg-button" class="btn btn-lg btn-primary btn-block" >MENSAJE</button></li>
-
         </ul>
 
         <!-- <div class="flag flag-en"></div> -->
@@ -231,72 +228,37 @@
 
 
 <script type="text/javascript">
-
-  function func1() {
-    alert("This is the first.");
-  }
-  function func2() {
-    alert("This is the second.");
-  }
-
   //Añadir all a app.js
+
+  //Funcion para tener en to do momento almacenado en la tabla session los sockets conectados junto con el usuario al que pertenece
   function savesocket() {
-    io.socket.get("/session/saveSocketID", function(data){
-      window.me = data;
-      io.socket.get('/message', updateUserList);
+    io.socket.get("/session/saveSocketID");
+  }
+
+
+  //Evento A la espera de recibir mensajes y notificar al usuario
+  function listenMessages(){
+
+    io.socket.get("/user/message_subscribe");
+
+    io.socket.on('user', function messageReceived(message) {
+      switch (message.verb) {
+        case 'messaged':
+          alert('recibido' + message.data.msg);
+          break;
+
+        default:
+          break;
+      }
     });
   }
 
 
-  function listenMessages() {
-
-    io.socket.on('connect', function socketConnected() {
-
-
-      io.socket.get("/user/message_subscribe", function (data) {
-        io.socket.on('user', function messageReceived(message) {
-          alert(message.verb);
-
-          switch (message.verb) {
-
-            // Handle private messages.  Only sockets subscribed to the "message" context of a
-            // User instance will get this message--see the onConnect logic in config/sockets.js
-            // to see where a new user gets subscribed to their own "message" context
-            case 'message':
-              alert('recibido');
-              break;
-
-            default:
-              break;
-          }
-        });
-
-        io.socket.get('/user');
-
-        $('#private-msg-button').click(function () {
-          alert('click send');
-          //io.socket.post('/user/private', {to: '57a3260de20725c313fb5507', msg: 'HOLA!!'});
-          io.socket.post('/user/private', {to: '57a3260de20725c313fb5507', msg: 'HOLA!!'}, function (resData, jwres) {
-            alert('ok');
-          });
-        });
-
-
-      });
-    });
-  }
-
-  //ad
-  // dLoadEvent(func1);
-  //addLoadEvent(func2);
   addLoadEvent(function() {
     document.body.style.backgroundColor = '#EFDF95';
   });
-
-  //addLoadEvent(savesocket);
+  addLoadEvent(savesocket);
   addLoadEvent(listenMessages);
-
-
 
 </script>
 

@@ -25,7 +25,9 @@ module.exports.policies = {
   * access)                                                                  *
   *                                                                          *
   ***************************************************************************/
+
   '*': ["localize","message","flash"],
+
 
   user: {
     show: ["userCanSeeProfile","message","flash"],
@@ -33,17 +35,26 @@ module.exports.policies = {
     update: ["userCanSeeProfile","message","flash"],
     render: ["userCanSeeProfile","message","flash"],
     destroy: ["message","flash"],
-
-
     '*': ["flash", "message"]
   },
 
 
   session: {
-    'new': "flash",
-    create: "flash",
-    destroy: "flash"
+    '*': ["flash", "message"]
+  },
+
+
+  message: {
+    index: ["flash", "message","sessionAuth"],
+      '*': ["flash", "message","sessionAuth"]
+  },
+
+  index:{
+    index: ["flash", "message", "localize"]
   }
+
+
+
 
 
   /***************************************************************************

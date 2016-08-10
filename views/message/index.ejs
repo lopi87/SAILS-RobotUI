@@ -1,6 +1,6 @@
 <%- partial('../_alert.ejs', {messages: messages}) %>
 
-<div class="container">
+<div class="jumbox">
   <h3>Inbox</h3>
   <table class="table">
     <tr>
@@ -29,7 +29,7 @@
         <a class="btn btn-sm btn-success" onclick="reply_msg('<%= message.id %>')"><i class="fa fa-reply fa-lg"></i> Reply </a>
         <a class="btn btn-sm btn-success" onclick=" window.location.href='<%='/message/show/' + message.id %>'">Read</a>
         <a class="btn btn-sm btn-primary" onclick="msg_as_read('<%= message.id %>')">Mark as read</a>
-        <a href="/message/destroy/%>" class="btn btn-sm btn-danger" onclick="destroy_msg('<%= message.id %>')"><i class="fa fa-trash-o fa-lg"></i> Delete </a>
+        <a class="btn btn-sm btn-danger" onclick="destroy_msg('<%= message.id %>')"><i class="fa fa-trash-o fa-lg"></i> Delete </a>
       </td>
     </tr>
     <% })%>
@@ -72,50 +72,51 @@
 
 </script>
 
+<div class="jumbox">
+  <form class="form-horizontal paddingleft20" method="POST" action="/message/send">
+    <div class="form-group">
+      <label for="name" class="col-sm-1 control-label">Title</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="title" name="title" placeholder="Title  ">
+      </div>
+    </div>
 
+    <div class="form-group">
+      <label for="name" class="col-sm-1 control-label">to</label>
+      <div class="col-sm-10">
+        <select tabindex="-1" data-placeholder="Choose users..." class="chosen-select-users" style="width:360px; height: 20px;" tabindex="2" name="to_user_id">
+          <option value=""></option>
+          <% users.forEach(function(user)  { %>
+          <option data-img-src="" value="<%= user.id %>"><%= user.name %></option>
+          <% }); %>
+        </select>
+        <script type="text/javascript">
+          $('.chosen-select-users').chosen({});
+        </script>
+      </div>
+    </div>
 
-<form class="form-horizontal paddingleft20" method="POST" action="/message/send">
-  <div class="form-group">
-    <label for="name" class="col-sm-1 control-label">Title</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="title" name="title" placeholder="Title  ">
+    <div class="form-group">
+      <label for="message" class="col-sm-1 control-label">Message</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" rows="4" name="message" placeholder="Text"></textarea>
+      </div>
     </div>
-  </div>
+    <div class="form-group">
+      <label for="human" class="col-sm-1 control-label">2 + 3 = ?</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="human" name="human" placeholder="Your Answer">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="button_right">
+        <input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+      </div>
+    </div>
+    <input type="hidden" name="_csrf" value="<%= _csrf %>">
+  </form>
+</div>
 
-  <div class="form-group">
-    <label for="name" class="col-sm-1 control-label">to</label>
-    <div class="col-sm-10">
-      <select tabindex="-1" data-placeholder="Choose users..." class="chosen-select-users" style="width:360px; height: 20px;" tabindex="2" name="to_user_id">
-        <option value=""></option>
-        <% users.forEach(function(user)  { %>
-            <option data-img-src="" value="<%= user.id %>"><%= user.name %></option>
-        <% }); %>
-      </select>
-      <script type="text/javascript">
-        $('.chosen-select-users').chosen({});
-      </script>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="message" class="col-sm-1 control-label">Message</label>
-    <div class="col-sm-10">
-      <textarea class="form-control" rows="4" name="message" placeholder="Text"></textarea>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="human" class="col-sm-1 control-label">2 + 3 = ?</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="human" name="human" placeholder="Your Answer">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-10 col-sm-offset-2">
-      <input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
-    </div>
-  </div>
-  <input type="hidden" name="_csrf" value="<%= _csrf %>">
-</form>
 
 
 
