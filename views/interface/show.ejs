@@ -1,23 +1,17 @@
 <%- partial('../_alert.ejs', {flash: flash}) %>
 
 
-<input id="icon_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
-
-<h1 class="text-center login-title"> Interface  <%= robot.name %></h1>
-
-<div>
-  <% if (robot.online){%>
-  <img id="img_state_<%= robot.id %>" height="30" width="30" src="/images/online.png">
-  <% } else { %>
-  <img id="img_state_<%= robot.id %>" height="30" width="30" src="/images/offline.png">
-  <% }  %>
-  <button  id="conectar" value="hola" type="button" class="marginlef10 btn btn-sm btn-success">CONECTAR</button></td>
-  <button  id="desconectar" value="hola" type="button" class="btn btn-sm btn-danger">DESCONECTAR</button></td>
-  <button  id="mandar" value="UP" type="button" class="btn btn-sm btn-warning">MANDAR</button></td>
+<div class="text-center marginbottom20">
+  <h1>Control panel <small> <%= robot.name %> </small></h1>
 </div>
 
+
 <div id="board" class="panel panel-success margintop20">
-  <div class="panel-heading"> Control </div>
+  <div class="panel-heading">
+    <img id="img_state_<%= robot.id %>" height="30" width="30" src="/images/offline.png" class="marginright20">
+    <button  id="conectar" type="button" class="marginlef10 btn btn-sm btn-success">CONECTAR</button></td>
+    <button  id="desconectar" type="button" class="btn btn-sm btn-danger">DESCONECTAR</button></td>
+  </div>
 
   <div class="paddingtop20 paddingleft20 paddingright20">
     <div>
@@ -51,6 +45,10 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+      $( "#panel").width(<%= interface.panel_sizex %>);
+      $( "#panel").height(<%= interface.panel_sizey %>);
+    </script>
     <div class="row">
       <div class="col-md-12 col-sm-12">
         <div class="marginright20 margintop10 marginbottom10 floatright">
@@ -67,12 +65,102 @@
     <a href="/robot/index" class="btn btn-sm btn-warning">Back</a>
   </div>
 
+<%- partial ('commands.ejs', {robot: robot})%>
 
 
+
+<script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
+  // https://evothings.com/controlling-a-toy-car-with-evothings-and-raspberry-pi/
 
-  $( "#panel").width(<%= interface.panel_sizex %>);
-  $( "#panel").height(<%= interface.panel_sizey %>);
+  //ROBOT
+  //conexion con el robot
+  addLoadEvent(function() {
+  });
+
+
+
+  var address_robot = "localhost" + ":" + "8085";
+  var robot_id = '<%= robot.id %>';
+  //INTERESANTE RECONCETAR AUTOMATICAMENTE-...... solucion ya que tarda en volver a conectar
+  //http://stackoverflow.com/questions/4432271/node-js-and-socket-io-how-to-reconnect-as-soon-as-disconnect-happens
+  $("#conectar").click(function() {
+    try {
+      // Connect to the server running on the Robot(raspberry pi).
+      var socket = io.connect(address_robot, {
+        'reconnection': true,
+        'reconnectionDelay': 500,
+        'reconnectionAttempts': 10
+      });
+      socket.on('connect', function () {
+        console.log('robot connected!');
+        //Sincronizar con el resto de clientes que un robot se ha conectado:
+        io.socket.get('/robot/changestate/', {robot: robot_id, state: 'on'});
+        bootstrap_alert['success']('Conectado con exito! ' + address_robot, 5000);
+        change_img_state(robot_id, true);
+      });
+
+    } catch (error) {
+      bootstrap_alert['danger']('Failed to connect to the Robot! (Raspberry Pi!)' + address_robot + error, 5000)
+      io.socket.get('/robot/changestate/', {robot: robot_id, state: 'off'});
+      change_img_state(robot_id, false);
+    }
+
+
+    //Presionar boton desconectar
+    $("#desconectar").click(function () {
+      try {
+        //bootstrap_alert['danger']('Lost connection to the Robot! (Raspberry Pi!)' + address_robot, 5000 )
+        //Sincronizar con el resto de clientes:
+        //io.socket.get('/robot/changestate/',{robot: robot_id , state: 'off'});
+        //change_img_state(robot_id,false);
+        socket.disconnect();
+      } catch (error) {
+        bootstrap_alert['danger']('Failed to disconnect to the Robot! (Raspberry Pi!)' + address_robot + error, 5000)
+        io.socket.get('/robot/changestate/', {robot: robot_id, state: 'off'});
+        change_img_state(robot_id, false);
+      }
+    });
+
+    //captura evento desconectar cuando el robot es apagado o pierde la señal
+    socket.on('disconnect', function () {
+      bootstrap_alert['danger']('Lost connection to the Robot! (Raspberry Pi!)' + address_robot, 5000)
+      //Sincronizar con el resto de clientes:
+      io.socket.get('/robot/changestate/', {robot: robot_id, state: 'off'});
+      change_img_state(robot_id, false);
+    });
+  });
+
+
+  //funcion para mandar comando al robot (nombre y codigo)
+  function command_send(name, code){
+    try {
+      io.socket.emit(name, code);
+      console.log('emitting to robot: ' + code)
+    } catch (error) {
+      console.log(error + ': ' + code);
+      bootstrap_alert['danger']('Error to send command! (Raspberry Pi!)' + address_robot + error, 5000 )
+      change_img_state(robot_id,false);
+    }
+  }
+
+
+  //IMAGEN ESTADO
+  function change_img_state(robot_id, boolean) {
+    var img_id = '#img_state_' + robot_id;
+    var img_on = "online.png";
+    var img_off = "offline.png"
+
+    var src;
+    if (boolean) {
+      src = $(img_id).attr("src").replace(img_off, img_on);
+      $(img_id).attr("src", src);
+    } else {
+      src = $(img_id).attr("src").replace(img_on, img_off);
+      $(img_id).attr("src", src);
+    }
+  }
+
 
 </script>
 

@@ -3,9 +3,9 @@
     <h1>Mandar comandos <small> <%= robot.name %> </small></h1>
   </div>
 
-  <div id="content" class="row" style="height: 70%;">
+  <div id="content" class="row">
     <div class="col-md-2"></div>
-    <div id="cahtContent" class="col-md-3">
+    <div id="cahtContent" class="col-md-8">
       <div class="panel panel-success">
         <div class="panel-heading">
           Comandos
@@ -20,6 +20,59 @@
         </span>
         </form>
       </div>
+    <div class="col-md-2"></div>
     </div>
   </div>
 </div>
+
+
+<script type="text/javascript">
+
+  //Subscribimos
+  addLoadEvent(subscribeAndListen());
+
+  function subscribeAndListen() {
+    alert('subscribeAndListen');
+    io.socket.get('/interface/commandline/',{robot: '<%= robot.id%>'});
+    var $chat = $('#chat');
+
+    io.socket.on('interface', function (obj) {
+      if (obj.verb == 'created') {
+        var data = obj.data;
+        console.log('Command ' + data.command + ' ' + data.id +' has been send.');
+        $chat.append(' - ' + data.command + '<br/>');
+
+      }
+    });
+  }
+
+
+  //Mandar evento "mandar comando" al servidor para sincronizar con otros navegadores
+  var $messageForm = $('#sendMessage');
+  $messageForm.submit(function (e) {
+    var $message = $('#message');
+    e.preventDefault();
+    if($message.val() != '' ) io.socket.get('/interface/commandline/',{interface: '<%= interface.id %>' ,user_id: '<%= session.User.id%>'   ,command: $message.val()});
+    $message.val('');
+    command_send('interface', $message.val())
+  });
+
+
+  //PENDIENTE DE MIRAR EVENTOS PARA LOS BOTONES
+  //emite el comando de los botones creados en la interfaz
+  var interface_buttons = $('[id^=button_]');
+  interface_buttons.click(function (){
+    var button_pressed_id = this.id.replace('button_','');
+    var code = document.getElementById(this.id).value
+
+    io.socket.get('/interface/commandline/',{interface: '<%= interface.id %>' ,user_id: '<%= session.User.id%>', button: button_pressed_id});
+
+    if (code != ''){
+      command_send('interface',code);
+    }
+    //Emitir al servidor la accion para sincronizar con el resto de clientes....
+    //Mandar evento al servidor para sincronizar con otros navegadores
+  });
+
+
+</script>

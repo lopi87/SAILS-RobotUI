@@ -1,0 +1,20 @@
+<div id="logger"></div>
+
+<img id="play">
+
+
+<script type="text/javascript">
+  //Subscribimos
+
+  function listenVideo() {
+    io.socket.get("/interface/video_emit");
+
+    io.socket.on('message', function (data) {
+          var image = document.getElementById("play");
+          image.src = data.image;
+    });
+  }
+
+  addLoadEvent(listenVideo);
+
+</script>

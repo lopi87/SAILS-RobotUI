@@ -5,6 +5,10 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+var Log = require('log');
+log = new Log('debug');
+
+
 module.exports = {
 
   configure: function (req, res, next) {
@@ -157,7 +161,8 @@ module.exports = {
       //sails.socket.emit('command', {command: command});
 
       console.log('command send');
-    } else if (button && req.isSocket) {
+
+    }else if (button && req.isSocket) {
       console.log('emitiendo boton pulsado...');
 
       Action.findOne(button, function foundAction(err, action) {
@@ -244,10 +249,47 @@ module.exports = {
       err = 'Ajax call';
       return res.badRequest(err);
     }
+  },
+
+
+  video: function(req, res, next){
+
+    log.debug('Llamado el metodo video');
+    //io.socket.broadcast.emit('stream', image);
+
+    return res.view();
+  },
+
+  show_video: function(req, res, next){
+
+    log.debug('Visualizar video');
+    return res.view();
+  },
+
+
+
+
+
+  video_emit: function (req, res, next) {
+    if (req.isSocket && req.param('image')) {
+      console.log('transmision video');
+      sails.sockets.broadcast('Manuel', {image: req.param('image')});
+      return;
+    }
+
+    //Subscribe
+    if(req.isSocket){
+      var roomName = 'Manuel';
+      sails.sockets.join(req, roomName, function(err) {
+        if (err) {
+          return res.serverError(err);
+        }
+        console.log('Subscribed to a fun room called '+roomName+'!');
+        return;
+      });
+    }
+      res.view();
   }
-
-
-
 
   /*
    //Subida imagen avatar.
@@ -308,9 +350,6 @@ module.exports = {
 
 
    */
-
-
-
 
 };
 

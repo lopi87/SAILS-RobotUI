@@ -231,163 +231,12 @@
 
 <% partial ('csscode.ejs', {interface: interface})%>
 
-<%- partial ('commands.ejs', {robot: robot})%>
-
 <%- partial('config_panel.ejs', {actions: actions, interface: interface})%>
 
 <div class="margintop20 marginbottom20">
   <a href="/robot/index" class="btn btn-sm btn-warning"> My Robots</a>
+  <a href="/interface/show/<%= interface.id %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
 </div>
-
-
-
-<script src="/socket.io/socket.io.js"></script>
-<script type="text/javascript">
-  // https://evothings.com/controlling-a-toy-car-with-evothings-and-raspberry-pi/
-
-  //ROBOT
-  //conexion con el robot
-  var address_robot = "localhost" + ":" + "8085";
-  var robot_id = '<%= robot.id %>';
-
-  //INTERESANTE RECONCETAR AUTOMATICAMENTE-...... solucion ya que tarda en volver a conectar
-  //http://stackoverflow.com/questions/4432271/node-js-and-socket-io-how-to-reconnect-as-soon-as-disconnect-happens
-
-  $("#conectar").click(function(){
-    try {
-      // Connect to the server running on the Robot(raspberry pi).
-      var socket = io.connect(address_robot,{  'reconnection': true,
-        'reconnectionDelay': 500,
-        'reconnectionAttempts': 10});
-      socket.on('connect', function() {
-        console.log('robot connected!');
-        //Sincronizar con el resto de clientes que un robot se ha conectado:
-        io.socket.get('/robot/changestate/',{robot: robot_id , state: 'on'});
-        bootstrap_alert['success']('Conectado con exito! ' + address_robot, 5000 );
-        change_img_state(robot_id,true);
-      });
-
-    } catch (error) {
-      bootstrap_alert['danger']('Failed to connect to the Robot! (Raspberry Pi!)' + address_robot + error , 5000)
-      io.socket.get('/robot/changestate/',{robot: robot_id , state: 'off'});
-      change_img_state(robot_id,false);
-    }
-
-
-    //Presionar boton desconectar
-    $("#desconectar").click(function(){
-      try {
-        //bootstrap_alert['danger']('Lost connection to the Robot! (Raspberry Pi!)' + address_robot, 5000 )
-        //Sincronizar con el resto de clientes:
-        //io.socket.get('/robot/changestate/',{robot: robot_id , state: 'off'});
-        //change_img_state(robot_id,false);
-        socket.disconnect();
-      } catch (error) {
-        bootstrap_alert['danger']('Failed to disconnect to the Robot! (Raspberry Pi!)' + address_robot + error , 5000)
-        io.socket.get('/robot/changestate/',{robot: robot_id , state: 'off'});
-        change_img_state(robot_id,false);
-      }
-    });
-
-    //captura evento desconectar cuando el robot es apagado o pierde la señal
-
-    socket.on('disconnect', function() {
-      bootstrap_alert['danger']('Lost connection to the Robot! (Raspberry Pi!)' + address_robot, 5000 )
-      //Sincronizar con el resto de clientes:
-      io.socket.get('/robot/changestate/',{robot: robot_id , state: 'off'});
-      change_img_state(robot_id,false);
-    });
-
-
-    //funcion para mandar comando al robot (nombre y codigo)
-    function command_send(name, code){
-      try {
-        socket.emit(name, code);
-        console.log('emitting to robot: ' + code)
-      } catch (error) {
-        console.log(error + ': ' + code);
-        bootstrap_alert['danger']('Error to send command! (Raspberry Pi!)' + address_robot + error, 5000 )
-        change_img_state(robot_id,false);
-      }
-    }
-
-
-    //Mandar evento "mandar comando" al servidor para sincronizar con otros navegadores
-    var $messageForm = $('#sendMessage');
-    $messageForm.submit(function (e) {
-      var $message = $('#message');
-      e.preventDefault();
-      if($message.val() != '' ) io.socket.get('/interface/commandline/',{interface: '<%= interface.id %>' ,user_id: '<%= session.User.id%>'   ,command: $message.val()});
-      command_send('direction', $message.val())
-      $message.val('');
-    });
-
-
-    //PENDIENTE DE MIRAR EVENTOS PARA LOS BOTONES
-    //emite el comando de los botones creados en la interfaz
-    var interface_buttons = $('[id^=button_]');
-    interface_buttons.click(function (e) {
-      var button_pressed_id = this.id.replace('button_','');
-      var code = document.getElementById(this.id).value
-
-      e.preventDefault();
-      io.socket.get('/interface/commandline/',{interface: '<%= interface.id %>' ,user_id: '<%= session.User.id%>'   ,button: button_pressed_id});
-
-      if (code != ''){
-        command_send('direction',code);
-      }
-      //Emitir al servidor la accion para sincronizar con el resto de clientes....
-      //Mandar evento al servidor para sincronizar con otros navegadores
-    });
-
-
-  });
-
-
-  window.onload = function subscribeAndListen() {
-    io.socket.get('/interface/commandline/',{robot: '<%= robot.id%>'});
-
-    var $chat = $('#chat');
-
-    io.socket.on('interface', function (obj) {
-      if (obj.verb == 'created') {
-        var data = obj.data;
-        console.log('Command ' + data.command + ' ' + data.id +' has been send.');
-        $chat.append(' - ' + data.command + '<br/>');
-      }
-    });
-  };
-
-
-  //IMAGEN ESTADO
-  function change_img_state(robot_id, boolean){
-    var img_id = '#img_state_' + robot_id;
-    var img_on= "online.png";
-    var img_off= "offline.png"
-
-    if (boolean){
-      var src = $(img_id).attr("src").replace(img_off, img_on);
-      $(img_id).attr("src", src);
-    }else{
-      var src = $(img_id).attr("src").replace(img_on,img_off);
-      $(img_id).attr("src", src);
-    }
-  }
-</script>
-
-
-
-<div class="marginbottom10">
-  <% if (robot.online){%>
-  <img id="img_state_<%= robot.id %>" height="30" width="30" src="/images/online.png">
-  <% } else { %>
-  <img id="img_state_<%= robot.id %>" height="30" width="30" src="/images/offline.png">
-  <% }  %>
-  <button  id="conectar" value="hola" type="button" class="marginleft10 btn btn-sm btn-success">CONECTAR</button></td>
-  <button  id="desconectar" value="hola" type="button" class="btn btn-sm btn-danger">DESCONECTAR</button></td>
-  <button  id="mandar" value="UP" type="button" class="btn btn-sm btn-warning">MANDAR</button></td>
-</div>
-
 
 
 
@@ -449,7 +298,6 @@
 
 
         <script type="text/javascript">
-
           //MUY IMPORTANTE SUBIR CON AJAX FILES
           //http://www.desarrolloweb.com/articulos/upload-archivos-ajax-jquery.html
 

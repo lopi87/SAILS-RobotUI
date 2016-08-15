@@ -19,15 +19,16 @@ function addLoadEvent(func) {
 
 //carga dinamica de archivos
 function loadjscssfile(filename, filetype){
+  var fileref;
   if (filetype=="js"){ //if filename is a external JavaScript file
-    var fileref=document.createElement('script')
-    fileref.setAttribute("type","text/javascript")
+    fileref=document.createElement('script');
+    fileref.setAttribute("type","text/javascript");
     fileref.setAttribute("src", filename)
   }
   else if (filetype=="css"){ //if filename is an external CSS file
-    var fileref=document.createElement("link")
-    fileref.setAttribute("rel", "stylesheet")
-    fileref.setAttribute("type", "text/css")
+    fileref=document.createElement("link");
+    fileref.setAttribute("rel", "stylesheet");
+    fileref.setAttribute("type", "text/css");
     fileref.setAttribute("href", filename)
   }
   if (typeof fileref!="undefined")
@@ -43,7 +44,7 @@ function loadjscssfile(filename, filetype){
 
 //Parsley functions
 function set_parsley_lang(load_lang) {
-  loadjscssfile( "/js/i18n/" + load_lang + ".js", "js") //dynamically load and add this .js file
+  loadjscssfile( "/js/i18n/" + load_lang + ".js", "js"); //dynamically load and add this .js file
 }
 
 window.Parsley.addValidator('filemaxmegabytes', {

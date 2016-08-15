@@ -1,0 +1,63 @@
+<!-- https://codelabs.developers.google.com/codelabs/webrtc-web/#3 Se explica aqui, super importante-->
+
+
+<div id="container">
+  <video autoplay style="max-width: 100%; width: 320px;"></video>
+</div>
+
+<canvas style="display: none" id="preview"></canvas>
+<div id="logger"></div>
+
+<script type="text/javascript">
+
+  navigator.getUserMedia = navigator.getUserMedia ||
+    navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+  var constraints = {
+    audio: false,
+    video: true
+  };
+
+  var video = document.querySelector('video');
+  var canvas = document.getElementById('preview');
+  var context = canvas.getContext("2d");
+
+  canvas.width = 800;
+  canvas.height = 600;
+
+  context.width = canvas.width;
+  context.height = canvas.height;
+
+  function successCallback(stream) {
+    window.stream = stream; // stream available to console
+    if (window.URL) {
+      video.src = window.URL.createObjectURL(stream);
+    } else {
+      video.src = stream;
+    }
+  }
+
+  function errorCallback(error) {
+    console.log('navigator.getUserMedia error: ', error);
+  }
+
+
+$(function(){
+  navigator.getUserMedia(constraints, successCallback, errorCallback);
+
+  //funcion para emitir -> convierte en canvas y puede emitir la imagen
+  function viewVideo(video,context){
+    context.drawImage(video,0,0,context.width,context.height);
+    io.socket.get('/interface/video_emit/',{image: canvas.toDataURL('image/webp')});
+  }
+
+  setInterval(function(){
+    viewVideo(video,context);
+  },1000);
+
+});
+
+
+
+
+</script>

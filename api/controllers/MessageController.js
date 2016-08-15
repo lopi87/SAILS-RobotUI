@@ -157,7 +157,7 @@ module.exports = {
       return res.badRequest('HTTP request.');
     }
 
-    //Solo este usuario recibira el evento messageajes
+    //Solo este usuario recibira el evento message
     User.subscribe(req, req.session.User.id, 'message');
 
 
