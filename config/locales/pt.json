@@ -1,13 +1,23 @@
 {
-  "Welcome": "Bem vindo",
-  "A brand new app.": "Una aplicaçao da nova marca",
+	"Welcome": "Bem vindo",
+	"createaccount": "Criar uma conta",
+	"createrobot": "Criar un robot",
+	"testing": {
+		"test": "Isso e uma prova"
+	},
+	"signupnow": "Registre-se agora!",
+  "password": "palavra-passe",
+  "passwordconfirmation": "Confirmaçao de palavra-passe",
+  "email": "Email",
+  "signin": "Identifique-se",
+  "signout": "Sair",
+  "filesmallerthan %s": "Por favor, proporcione um arquivo mais pequeno do que %s kb:",
+  "name": "Nome",
+  "nickname": "Nick",
+  "language": "Idioma",
+  "chooselanguage": "Escolher um idioma...",
+  "selectfile": "Selecionar um arquivo",
+  "remove": "Apagar",
+  "change": "Mudar"
 
-  "Create_an_account": "Abrir uma conta",
-  "Create_a_robot": "Criar un robot",
-
-  "testing": {
-    "test": "Isso e uma prova"
-  },
-
-  "sign_up_now": "Se escreva agora!"
 }

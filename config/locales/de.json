@@ -1,14 +1,22 @@
 {
   "Welcome": "Willkommen",
-  "A brand new app.": "Eine neue App.",
-
-  "Create_an_account": "Crear una cuenta",
-  "Create_a_robot": "Crear un robot",
-
+  "createaccount": "Crear una cuenta",
+  "createrobot": "Crear un robot",
   "testing": {
     "test": "dies ist ein test"
   },
-
-  "sign_up_now": "¡registrese ahora!"
-
+  "signupnow": "!Registrese ahora!",
+  "passwordconfirmation": "Confirmación de contraseña",
+  "password": "contraseña",
+  "email": "Email",
+  "signin": "Identifíquese",
+  "signout": "Salir",
+  "filesmallerthan %s": "Por favor, proporcione um archivo mas pequeño que %s kb",
+  "name": "Nombre",
+  "nickname": "Nick",
+  "language": "Idioma",
+  "chooselanguage": "Elige un idioma...",
+  "selectfile": "Seleccionar un archivo",
+  "remove": "Eliminar",
+  "change": "Cambiar"
 }

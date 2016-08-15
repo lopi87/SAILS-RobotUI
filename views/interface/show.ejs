@@ -1,8 +1,7 @@
-<%- partial('../_alert.ejs', {messages: messages}) %>
+<%- partial('../_alert.ejs', {flash: flash}) %>
 
 
 <input id="icon_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
-<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
 
 <h1 class="text-center login-title"> Interface  <%= robot.name %></h1>
 

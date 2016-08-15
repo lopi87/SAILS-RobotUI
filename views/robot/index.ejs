@@ -1,3 +1,5 @@
+<%- partial('../_alert.ejs', {flash: flash}) %>
+
 <div class="jumbox">
   <h3>My Robots</h3>
 
@@ -35,9 +37,9 @@
       <td><%= robot.ipaddress %> : <%= robot.port%></td>
       <td> <%= robot.robot_interface %> </td>
       <td>
-        <a href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-success">Take control</a>
-        <a href="/interface/configure/<%= robot.robot_interface %>" class="btn btn-sm btn-primary">Personalice Interface</a>
-        <a class="btn btn-sm btn-danger" onclick=" window.location.href='<%='/robot/destroy/' + robot.id %>'"><i class="fa fa-trash-o fa-lg"></i> Delete </a>
+        <a href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+        <a href="/interface/configure/<%= robot.robot_interface %>" class="btn btn-sm btn-warning"><i class="fa fa-wrench" aria-hidden="true"></i> Configure</a>
+        <a class="btn btn-sm btn-danger" onclick=" window.location.href='<%='/robot/destroy/' + robot.id %>'"><i class="fa fa-trash-o"></i> Delete </a>
       </td>
     </tr>
     <% }) %>
@@ -82,3 +84,31 @@
   }
 
 </script>
+
+
+<div class="clear"></div>
+
+
+<div class="jumbox">
+<h3>My Shared Robots</h3>
+<div class="alert alert-info margintop20 marginbottom20" role="alert">
+  <strong>Ups!</strong>
+  You haven't created any robots shared yet...
+</div>
+  <div class="button_right">
+    <a href="/robot/share" class="btn btn-sm btn-success">Share a new robot!</a>
+  </div>
+</div>
+
+
+<div class="clear"></div>
+<div class="jumbox">
+  <h3>My guest Robots</h3>
+  <div class="alert alert-info margintop20 marginbottom20" role="alert">
+    <strong>Ups!</strong>
+    You haven't created any robots guest yet...
+  </div>
+  <div class="button_right">
+    <a href="/robot/share" class="btn btn-sm btn-success">Require a new robot!</a>
+  </div>
+</div>

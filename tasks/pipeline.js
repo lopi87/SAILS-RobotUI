@@ -21,6 +21,10 @@ var cssFilesToInject = [
   'styles/jasny-bootstrap/jasny-bootstrap.css',
   'styles/bootstrap-colorpicker/bootstrap-colorpicker.css',
   'styles/font-awesome/font-awesome.css',
+  'styles/parsley/parsley.css',
+  'styles/jquery-ui/jquery-ui.css',
+
+
 
   'styles/**/*.css'
 ];
@@ -41,6 +45,8 @@ var jsFilesToInject = [
   'js/vendor/jasny-bootstrap.js',
   'js/vendor/bootstrap-colorpicker.js',
   'js/vendor/jquery-ui.js',
+  'js/vendor/parsley.js',
+  'js/i18n/*.js',  //languages of parsley
 
   'js/vendor/**/*.js',
   'js/utils.js',

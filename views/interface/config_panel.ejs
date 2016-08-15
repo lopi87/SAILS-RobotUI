@@ -1,6 +1,5 @@
 <!-- PERSONALIZAR VENTANA -->
 <input id="icon_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
-<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
 
 <div id="board" class="panel panel-success margintop20">
   <div class="panel-heading"> Control </div>
@@ -32,9 +31,7 @@
           <% } else { %>
           <button  id="button_custom_<%= action.id %>" value="<%= action.code %>" class="btn btn-custom_<%= action.id %> position_<%= action.id %>" ><%= action.name %></button>
           <% } %>
-
           <%- partial ('../action/style_action.ejs', {action: action, set_position: true})%>
-
           <% })%>
         </div>
       </div>
@@ -117,7 +114,6 @@
 
 
   // http://jsfiddle.net/dzSRR/32/  ejemplo drag con limites
-
   $( "#panel" ).resizable({
     maxWidth: $("#box_panel").width() - 10,
 

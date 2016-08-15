@@ -48,9 +48,11 @@ module.exports = {
     },
 
     // Usuarios del robot
-    owners: {
+    guests: {
       collection: 'user',
-      via: 'robots'
+      via: 'robots',
+      through: 'linked_user_robot',
+      dominant: true
     },
 
     //Interface del robot

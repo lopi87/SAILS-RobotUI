@@ -1,4 +1,4 @@
-<%- partial('../_alert.ejs', {messages: messages}) %>
+<%- partial('../_alert.ejs', {flash: flash}) %>
 
 
 <form action="/user/update/<%= user.id %>" method="post" class="form-signin">

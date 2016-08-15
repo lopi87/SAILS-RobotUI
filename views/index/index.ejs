@@ -1,62 +1,16 @@
-<% if (typeof(messages) !== 'undefined' && messages['error'].length > 0) { %>
-<% messages['error'].forEach(function(message) { %>
-<script type="text/javascript">
-  bootstrap_alert['danger']('<%= message.err %>', 0 )
-</script>
-<% }); %>
-<% } %>
-<% if (typeof(messages) !== 'undefined' && messages['warning'].length > 0) { %>
-<% messages['warning'].forEach(function(message) { %>
-<script type="text/javascript">
-  bootstrap_alert['warning']('<%= message.err %>', 0 )
-</script>
-<% }); %>
-<% } %>
-<% if (typeof(messages) !== 'undefined' && messages['success'].length > 0) { %>
-<% messages['success'].forEach(function(message) { %>
-<script type="text/javascript">
-  bootstrap_alert['success']('<%= message.err %>', 0 )
-</script>
-<% }); %>
-<% } %>
+<%- partial('../_alert.ejs', {flash: flash}) %>
 
 <div class="container">
   <div class="jumbotron">
     <h1>RobotUI</h1>
     <h2>Controler</h2>
 
-<% if (!req.session.User) {%>
-    <a href="/user/new" class="btn btn-lg btn-success"> <%= __("sign_up_now") %></a>
-<% } %>
-
+    <% if (!req.session.User) {%>
+    <a href="/user/new" class="btn btn-lg btn-success"> <%= __("signupnow") %></a>
+    <% } %>
   </div>
 
   <div>
     <h1>  <%= __("Welcome") %> </h1>
   </div>
 </div>
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-

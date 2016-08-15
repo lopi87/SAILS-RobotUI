@@ -33,7 +33,7 @@ module.exports.routes = {
   ***************************************************************************/
 
 
-  'get /': 'IndexController.index',
+  'get /': 'IndexController.index'
 
   /*
   '/': {
@@ -41,10 +41,11 @@ module.exports.routes = {
   },
   */
 
+  /*
   'robot/interface':{
     view: 'interfaces/show'
   }
-
+*/
 
   /***************************************************************************
   *                                                                          *

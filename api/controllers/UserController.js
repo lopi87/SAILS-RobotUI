@@ -157,7 +157,11 @@ module.exports = {
 
     User.findOne(id, function foundUser(err, user){
       if (err) return next(err);
-      if (!user) return next('User doesn\'t exists.');
+      if (!user){
+        msg = { err: 'User doesn\'t exists.' };
+        FlashService.error(req, msg );
+        return res.redirect('user/index');
+      }
 
       User.destroy(id, function userDestroyed(err){
         if (err) return next(err);

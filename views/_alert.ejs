@@ -1,21 +1,28 @@
-<% if (messages && messages['error'].length > 0) { %>
-<% messages['error'].forEach(function(message) { %>
+<% if (flash != 'undefined' && flash['error'].length > 0) { %>
+<% flash['error'].forEach(function(message) { %>
 <script type="text/javascript">
   bootstrap_alert['danger']('<%- message.err %>', 0 )
 </script>
 <% }); %>
 <% } %>
-<% if (messages && messages['warning'].length > 0) { %>
-<% messages['warning'].forEach(function(message) { %>
+<% if (flash != 'undefined' && flash['warning'].length > 0) { %>
+<% flash['warning'].forEach(function(message) { %>
 <script type="text/javascript">
   bootstrap_alert['warning']('<%- message.err %>', 0 )
 </script>
 <% }); %>
 <% } %>
-<% if (messages && messages['success'].length > 0) { %>
-<% messages['success'].forEach(function(message) { %>
+<% if (flash != 'undefined' && flash['success'].length > 0) { %>
+<% flash['success'].forEach(function(message) { %>
 <script type="text/javascript">
   bootstrap_alert['success']('<%-  message.err %>', 0 )
+</script>
+<% }); %>
+<% } %>
+<% if (flash != 'undefined' && flash['info'].length > 0) { %>
+<% flash['info'].forEach(function(message) { %>
+<script type="text/javascript">
+  bootstrap_alert['info']('<%-  message.err %>', 0 )
 </script>
 <% }); %>
 <% } %>

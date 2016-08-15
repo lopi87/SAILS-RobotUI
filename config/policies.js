@@ -26,31 +26,43 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': ["localize","message","flash"],
+  '*': ["flash","localize","message"],
 
 
   user: {
     show: ["userCanSeeProfile","message","flash"],
     edit: ["userCanSeeProfile","message","flash"],
     update: ["userCanSeeProfile","message","flash"],
+    index: ["isadmin","message","flash" ],
     render: ["userCanSeeProfile","message","flash"],
     destroy: ["message","flash"],
-    '*': ["flash", "message"]
+    create: ["message", "flash"]
   },
 
+  robot:{
+    create: ["flash", "message","sessionAuth", "localize"],
+    index: ["flash", "message","sessionAuth", "localize"]
+  },
 
   session: {
-    '*': ["flash", "message"]
+    create: ["flash", "message", "localize"],
+    '*': ["flash", "message", "localize"]
   },
 
 
   message: {
     index: ["flash", "message","sessionAuth"],
-      '*': ["flash", "message","sessionAuth"]
+    send: ["flash", "message","sessionAuth"],
+    new: ["flash", "message","sessionAuth"],
+    '*': ["flash", "message","sessionAuth"]
   },
 
   index:{
     index: ["flash", "message", "localize"]
+  },
+
+  interface: {
+    configure: ["flash", "message","sessionAuth"]
   }
 
 

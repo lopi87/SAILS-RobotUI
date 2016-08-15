@@ -7,9 +7,9 @@
 
 module.exports = {
 
+
   //Carga la pag new
   new: function(req, res){
-
     User.native(function(err, collection) {
       if (err) return res.serverError(err);
 
@@ -18,14 +18,10 @@ module.exports = {
         res.view({users: results});
       });
     });
-
   },
 
 
-  //Crea un robot con los parametros del formulario
-  // new.ejs
   create: function(req, res, next) {
-
     //TODO Comprobar que los parametros sean correctos
     var robotObj = {
       name: req.param('name'),
@@ -36,19 +32,18 @@ module.exports = {
     };
 
     Robot.create(robotObj, function robotCreated(err, robot) {
-      //Añade los usuarios del robot
+      //Añade los usuarios invitados del robot
       if (req.param('owners').size > 1){
         req.param('owners').forEach(function(user_id)  {
           User.findOne(user_id, function foundUser(err, user){
             if(err) return next(err);
             if(!user) return next();
 
-            //añadir invitados
-            console.log('Associating robot - user: ',robot.name,'with',user.id);
-            robot.owners.add(user.id);
-            robot.save(function (err) {
-              if (err) return next(err);
-            });
+            if (user.id != req.session.User.id){
+              //añadir invitados
+              console.log('Associating robot - user: ',robot.name,'with',user.id);
+              robot.guests.add(user.id, {permission: "full"});
+            }
           });
         });
 
@@ -58,45 +53,34 @@ module.exports = {
           if(!user) return next();
 
           //Añadir un invitado
-          console.log('Associating robot - user: ',robot.name,'with',user.id);
-          robot.owners.add(user.id);
-          robot.save(function (err) {
-            if (err) return next(err);
-          });
+          if (user.id != req.session.User.id) {
+            console.log('Associating robot - user: ', robot.name, 'with', user.id);
+            robot.guests.add(user.id, {permission: "full"});
+
+            //Linked_user_robot.create()
+
+          }
+
         });
       }
+      //Añadimos el propietario
+      robot.owner = req.session.User.id;
 
       //Se relaciona el robot con su interfaz de control (relacion en doble sentido)
-      Interface.create({robot_owner: robot.id, csscode: ''}, function interfaceCreated(err, iface){
+      Interface.create({robot_owner: robot.id}, function interfaceCreated(err, iface){
         console.log('Associating robot - interface: ',robot.name,'with',iface.id);
 
         robot.robot_interface = iface.id;
         robot.save(function (err) {
           if (err) return next(err);
         });
+
+        Robot.publishCreate(robot);
+
+        //Redirección a show
+        return res.redirect('robot/index/');
+
       });
-
-      //Si hay error
-      if (err){
-        console.log(err);
-        req.session.flash ={
-          err: err
-        };
-
-        //redireccion si hay error
-        return res.redirect('/robot/new');
-      }
-
-      robot.save(function (err) {
-        if (err) return next(err);
-      });
-
-      Robot.publishCreate(robot);
-
-      //Redirección a show
-      res.redirect('robot/index/');
-      req.session.flash = {};
-
     });
   },
 
@@ -199,6 +183,51 @@ module.exports = {
     } else {
       res.view();
     }
+  },
+
+
+  destroy: function(req, res, next){
+    var id = req.param('id');
+
+    Robot.findOne(id, function foundRobot(err, robot){
+      if (err) return next(err);
+      if (!robot){
+        msg = { err: 'Robot doesn\'t exists.' };
+        FlashService.error(req, msg );
+        return res.redirect('robot/index');
+      }
+
+
+      //TODO eliminar las relaciones con los usuarios
+
+      //Eliminar la interfaz del robot
+      Interface.find({robot_owner: robot.id}).exec(function (err, interface){
+        if (err) return next(err);
+        if (!interface) {
+          msg = {err: 'Interface doesn\'t exists.'};
+          FlashService.error(req, msg);
+          return res.redirect('robot/index');
+        }
+
+        Action.destroy({interface_owner: interface.id}).exec(function (err, action) {
+          if (err) return next(err);
+
+          Interface.destroy(interface.id, function interfaceDestroyed(err) {
+            if (err) return next(err);
+
+            Robot.destroy(id, function robotDestroyed(err){
+              if (err) return next(err);
+
+              Robot.publishDestroy(id, {id: robot.id});
+
+              msg = { err: 'Robot deleted' };
+              FlashService.success(req, msg );
+              return res.redirect('robot/index');
+            });
+          });
+        });
+      });
+    });
   }
 
 

@@ -1,13 +1,22 @@
 {
 	"Welcome": "Welcome",
-	"A brand new app.": "A brand new app.",
-
-  "Create_an_account": "Create an account",
-  "Create_a_robot": "Create a robot",
-
-  "testing": {
-    "test": "this is a test"
-  },
-
-  "sign_up_now": "sign up now!"
+	"createaccount": "Create an account",
+	"createrobot": "Create a robot",
+	"testing": {
+		"test": "this is a test"
+	},
+	"signupnow": "Sign up now",
+	"password": "password",
+	"passwordconfirmation": "Password confirmation",
+	"email": "Email",
+	"signin": "Sign-in",
+	"signout": "Sign-out",
+	"filesmallerthan %s": "Please provide a file smaller than %s Kb:",
+	"name": "Name",
+	"nickname": "Nick",
+	"language": "Language",
+	"chooselanguage": "Choose a language...",
+	"selectfile": "Select file",
+	"remove": "Remove",
+	"change": "Change"
 }

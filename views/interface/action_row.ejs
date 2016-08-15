@@ -1,69 +1,22 @@
 <tr id="line_<%= action.id %>" data-model="action">
-  <th scope="row"><%= indice++ %></th>
+  <th scope="row"></th>
   <td><%= action.name %></td>
   <td>
     <% if (action.icon){ %>
 
     <!-- http://blog.koalite.com/bbg/ -->
 
-    <button id="button_<%= action.id %>" class="btn btn-custom_<%= action.id %>" value="<%= action.code %>">
+    <button id="button_<%= action.id %>" class="btn  btn-primary btn-custom_<%= action.id %>" value="<%= action.code %>">
       <span><img src="/uploads/icons/<%= action.icon %>.png" /></span>
       <% if (action.name != ''){%>
       <span><%= action.name %></span>
       <% }%>
     </button>
     <% } else { %>
-    <button  id="button_<%= action.id %>" value="<%= action.code %>" class="btn btn-custom_<%= action.id %>"><%= action.name %></button>
+    <button  id="button_<%= action.id %>" value="<%= action.code %>" class="btn btn-primary btn-custom_<%= action.id %>"><%= action.name %></button>
     <% } %>
   </td>
   <td> <button id="delete_action_<%= action.id %>" type="button" class="btn btn-sm btn-danger" onclick="row_action_deleted('<%= action.id %>')">Delete</button></td>
 </tr>
 
-
-<style>
-  .btn-custom_<%= action.id %> {
-    color: <%= '#' + action.color_text%>;
-    background-color: <%= '#' + action.color_background%>;
-    border-color: <%= '#' + action.color_border%>;
-  }
-
-  .btn-custom_<%= action.id %>:hover,
-  .btn-custom_<%= action.id %>:focus,
-  .btn-custom_<%= action.id %>:active,
-  .btn-custom_<%= action.id %>.active_<%= action.id %>,
-  .open .dropdown-toggle.btn-custom_<%= action.id %> {
-    color: <%= '#' + action.color_text%>;
-    background-color: <%= '#' + action.color_active_background %>;
-    border-color: <%= '#' + action.color_border %>;
-  }
-
-  .btn-custom_<%= action.id %>:active,
-  .btn-custom_<%= action.id %>.active_<%= action.id %>,
-  .open .dropdown-toggle.btn-custom_<%= action.id %> {
-    background-image: none;
-  }
-
-  .btn-custom_<%= action.id %>.disabled_<%= action.id %>,
-  .btn-custom_<%= action.id %>[disabled],
-  fieldset[disabled] .btn-custom_<%= action.id %>,
-  .btn-custom_<%= action.id %>.disabled_<%= action.id %>:hover,
-  .btn-custom_<%= action.id %>[disabled]:hover,
-  fieldset[disabled] .btn-custom_<%= action.id %>:hover,
-  .btn-custom_<%= action.id %>.disabled_<%= action.id %>:focus,
-  .btn-custom[disabled]:focus,
-  fieldset[disabled] .btn-custom_<%= action.id %>:focus,
-  .btn-custom_<%= action.id %>.disabled_<%= action.id %>:active,
-  .btn-custom_<%= action.id %>[disabled]:active,
-  fieldset[disabled] .btn-custom_<%= action.id %>:active,
-  .btn-custom_<%= action.id %>.disabled_<%= action.id %>.active,
-  .btn-custom_<%= action.id %>[disabled].active_<%= action.id %>,
-  fieldset[disabled] .btn-custom_<%= action.id %>.active_<%= action.id %> {
-    background-color: <%= '#' + action.color_background%>;
-    border-color: <%= '#' + action.color_border%>;
-  }
-
-  .btn-custom_<%= action.id %> .badge_<%= action.id %> {
-    color: <%= '#' + action.color_background%>;
-    background-color: <%= '#' + action.color_text%>;
-  }
-</style>
+<%- partial ('../action/style_action.ejs', {action: action})%>

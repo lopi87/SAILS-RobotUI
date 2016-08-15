@@ -1,3 +1,5 @@
+/*
+
 $(document).ready(function(){
 
   $('#sign-up-form').validate({
@@ -42,3 +44,4 @@ $(document).ready(function(){
 });
 
 
+*/

@@ -118,6 +118,7 @@ module.exports = {
     });
   },
 
+
   destroy: function(req, res, next) {
 
     User.findOne(req.session.User.id, function foundUser(err, user){

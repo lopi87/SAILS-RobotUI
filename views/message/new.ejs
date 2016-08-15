@@ -1,58 +1,46 @@
-<form id="contact-form" method="post" action="contact.php" role="form">
+<div class="jumbox">
+  <form id="form_newmsg" method="POST" action="/message/send">
 
-  <div class="messages"></div>
+    <div class="control-group">
+      <label for="name">Title * :</label>
+      <input class="form-control" name="title" placeholder="your title"  type="text" required="">
+    </div>
 
-  <div class="controls">
+    <div class="control-group">
+      <label for="type">To: *</label>
+        <select data-placeholder="Choose users..." class="chosen-select-users" tabindex="2" name="to_user_id">
+          <option value=""></option>
+          <% users.forEach(function(user)  { %>
+          <option data-img-src="/img/a.png" value="<%= user.id %>"><%= user.name %></option>
+          <% }); %>
+        </select>
+      <script type="text/javascript">
+        $('.chosen-select-users').chosen( { width: '100%', height:'20px' } );
+      </script>
+    </div>
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="form_name">Firstname *</label>
-          <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required.">
-          <div class="help-block with-errors"></div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="form_lastname">Lastname *</label>
-          <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
-          <div class="help-block with-errors"></div>
-        </div>
+    <div class="form-group">
+    <label for="message">Message (20 chars min, 100 max)* :</label>
+    <textarea id="message" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10"></textarea>
+    </div>
+
+<!--
+    <div class="form-group">
+      <label for="human" class="col-sm-1 control-label">2 + 3 = ?</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="human" name="human" placeholder="Your Answer">
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="form_email">Email *</label>
-          <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
-          <div class="help-block with-errors"></div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="form_phone">Phone</label>
-          <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Please enter your phone">
-          <div class="help-block with-errors"></div>
-        </div>
+    <div class="form-group">
+      <div class="button_right">
+        <input id="submit_msg" name="submit" type="submit" value="Send" class="btn btn-primary">
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label for="form_message">Message *</label>
-          <textarea id="form_message" name="message" class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please,leave us a message."></textarea>
-          <div class="help-block with-errors"></div>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <input type="submit" class="btn btn-success btn-send" value="Send message">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <p class="text-muted"><strong>*</strong> These fields are required. Contact form template by <a href="http://bootstrapious.com" target="_blank">Bootstrapious</a>.</p>
-      </div>
-    </div>
-  </div>
+-->
 
-</form>
+    <input type="hidden" name="_csrf" value="<%= _csrf %>">
+  </form>
+</div>
+
+
+<div class="clear"></div>

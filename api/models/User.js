@@ -47,7 +47,8 @@ module.exports = {
     // Add a reference to Robot
     robots:{
       collection: 'robot',
-      via: 'owners'
+      via: 'guests',
+      through: 'linked_user_robot'
     },
 
 

@@ -11,14 +11,14 @@ module.exports = {
     Interface.findOne(req.param('id'), function foundInterface(err, iface) {
       if (err) return next(err);
 
-      Action.find({interface_owner: iface.id}).exec(function(err, actions) {
+      Action.find({interface_owner: req.param('id')}).exec(function (err, actions) {
         if (err) return next(err);
 
         //Mis iconos y los del sistema por defecto
-        Icon.find({or :[{ user_owner: req.session.User.id },{ default: true }]}).exec(function(err, icons) {
+        Icon.find({or: [{user_owner: req.session.User.id}, {default: true}]}).exec(function (err, icons) {
           if (err) return next(err);
 
-          Robot.findOne({robot_interface: iface.id}).exec(function(err, robot) {
+          Robot.findOne({robot_interface: req.param('id')}).exec(function (err, robot) {
             if (err) return next(err);
 
             res.view({
@@ -35,14 +35,14 @@ module.exports = {
   },
 
 
-  show: function(req,res,next){
+  show: function (req, res, next) {
     Interface.findOne(req.param('id'), function foundInterface(err, iface) {
       if (err) return next(err);
 
-      Action.find({interface_owner: req.param('id')}).exec(function(err, actions) {
+      Action.find({interface_owner: req.param('id')}).exec(function (err, actions) {
         if (err) return next(err);
 
-        Robot.findOne({robot_interface: iface.id}).exec(function(err, robot) {
+        Robot.findOne({robot_interface: iface.id}).exec(function (err, robot) {
           if (err) return next(err);
 
           res.view({
@@ -59,7 +59,6 @@ module.exports = {
 
 
   newaction: function (req, res, next) {
-
     if (req.xhr) {
       Interface.findOne(req.param('id'), function foundInterface(err, iface) {
         if (err) return next(err);
@@ -69,50 +68,52 @@ module.exports = {
           name: req.param('name'),
           code: req.param('code'),
           icon: req.param('icon'),
-          color_text: req.param('color_text').replace('#', ''),
-          color_background: req.param('color_background').replace('#', ''),
-          color_border: req.param('color_border').replace('#', ''),
-          color_active_background: req.param('color_active_background').replace('#', ''),
           element: 'button',
           port: parseInt(req.param('port'))
         };
 
-        if(req.param('name') == '' && req.param('icon') == 'undefined'){
+        if(req.param("color_default") == false){
+
+          var isOk1 = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(req.param('color_text'));
+          var isOk2 = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(req.param('color_background'));
+          var isOk3 = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(req.param('color_border'));
+          var isOk4 = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(req.param('color_active_background'));
+
+          if (!isOk1 || !isOk2 || !isOk3 || !isOk4) {
+            return res.badRequest('you have to give a valid hexadecimal color');
+          }
+
+          actionObj.color_text = req.param('color_text').replace('#', '');
+          actionObj.color_background = req.param('color_background').replace('#', '');
+          actionObj.color_border = req.param('color_border').replace('#', '');
+          actionObj.color_active_background = req.param('color_active_background').replace('#', '');
+          actionObj.color_default = false;
+        }
+
+        if (req.param('name') == '' && req.param('icon') == 'undefined') {
           return res.badRequest('you have to give a name or icon');
         }
 
-        var isOk1  =/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(req.param('color_text'));
-        var isOk2  =/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(req.param('color_background'));
-        var isOk3  =/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(req.param('color_border'));
-        var isOk4  =/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(req.param('color_active_background'));
-
-        if(!isOk1 || !isOk2 || !isOk3 || !isOk4){
-          return res.badRequest('you have to give a valid hexadecimal color');
-        }
 
         Action.create(actionObj, function actionCreated(err, action) {
-
-          //Si hay error
-          if (err){
-            return res.badRequest(err);
-          }
+        if (err) return res.badRequest(err);
 
           action.save(function (err) {
             if (err) return res.badRequest(err);
-          });
 
-          Action.publishCreate(action);
-          console.log('The action has been created');
+            console.log('The action has been created');
 
-          return res.render('interface/action_row.ejs', {
-            action: action,
-            layout: false
+            return res.render('interface/action_row.ejs', {
+              action: action,
+              layout: false
+            });
+
           });
         });
       });
 
-    }else{
-      err= 'Ajax call';
+    } else {
+      err = 'Ajax call';
       return res.badRequest(err);
     }
 
@@ -132,15 +133,15 @@ module.exports = {
 
         return res.ok({id: req.param('id')});
       });
-    }else{
-      err= 'Ajax call';
+    } else {
+      err = 'Ajax call';
       return res.badRequest(err);
     }
 
   },
 
 
-  commandline: function(req,res,next){
+  commandline: function (req, res, next) {
 
     var command = req.param('command');
     var button = req.param('button');
@@ -156,52 +157,51 @@ module.exports = {
       //sails.socket.emit('command', {command: command});
 
       console.log('command send');
-    } else if (button && req.isSocket){
+    } else if (button && req.isSocket) {
       console.log('emitiendo boton pulsado...');
 
-      Action.findOne(button, function foundAction(err, action){
-        if(err) return next(err);
-        if(!action) return next();
-        Interface.publishCreate({id: interface, command: action.code });
+      Action.findOne(button, function foundAction(err, action) {
+        if (err) return next(err);
+        if (!action) return next();
+        Interface.publishCreate({id: interface, command: action.code});
       });
       //sails.socket.emit('command', {command: command});
 
       console.log('command send');
-    } else if (req.isSocket){
+    } else if (req.isSocket) {
       Interface.watch(req);
-      console.log('Intreface with socket id '+ sails.sockets.id(req)+' is now subscribed to the model class \'Interface\'.');
+      console.log('Intreface with socket id ' + sails.sockets.id(req) + ' is now subscribed to the model class \'Interface\'.');
     } else {
       res.view();
     }
   },
 
 
-  savecode: function(req,res,next){
+  savecode: function (req, res, next) {
     if (req.xhr) {
       // Yup, it's AJAX alright.
       var code = req.param('code');
       var iface_id = req.param('id');
 
       Interface.findOne(iface_id, function foundInterface(err, iface) {
-        if (err) return  res.badRequest(err);
+        if (err) return res.badRequest(err);
 
         iface.csscode = code.html;
 
-        Interface.update(iface_id, iface, function ifaceUpdated(err){
-          if(err)  return res.badRequest(err);
+        Interface.update(iface_id, iface, function ifaceUpdated(err) {
+          if (err)  return res.badRequest(err);
           return res.ok({code: code.html});
         });
       });
-    }else{
-      err= 'Ajax call';
+    } else {
+      err = 'Ajax call';
       return res.badRequest(err);
     }
 
   },
 
 
-
-  update_board_size: function(req,res,next) {
+  update_board_size: function (req, res, next) {
     if (req.xhr) {
       //Puede actualizar?
 
@@ -211,21 +211,45 @@ module.exports = {
 
       //Comprobar si puede o no actualizar
 
-      Interface.update(id, {panel_sizex: x, panel_sizey: y}, function ifaceUpdated(err){
-        if(err) return res.badRequest(err);
+      Interface.update(id, {panel_sizex: x, panel_sizey: y}, function ifaceUpdated(err) {
+        if (err) return res.badRequest(err);
         res.ok();
       });
 
-    }else{
-      err= 'Ajax call';
+    } else {
+      err = 'Ajax call';
+      return res.badRequest(err);
+    }
+  },
+
+
+  //Se elimina las acciones de la interfaz, pero esta se conserva enlazada al robot
+  destroy: function (req, res, next) {
+    if(req.xhr){
+      var id = req.param('id');
+      Interface.findOne(id, function foundInterface(err, interface) {
+        if (err) return res.badRequest(err);
+        if (!interface) {
+          err = 'Interface doesn\'t exists.';
+          return res.badRequest(err);
+        }
+        Action.destroy({interface_owner: interface.id}).exec(function (err, action) {
+          if (err) return res.badRequest(err);
+          console.log('Actions deleted');
+          res.ok();
+        });
+      });
+
+    } else {
+      err = 'Ajax call';
       return res.badRequest(err);
     }
   }
 
+
+
+
   /*
-
-
-
    //Subida imagen avatar.
    upload: function(req, res) {
    if (req.method === 'GET')

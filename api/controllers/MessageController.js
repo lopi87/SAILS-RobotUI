@@ -36,7 +36,10 @@ module.exports = {
     };
 
     User.findOne( req.param('to_user_id'), function foundUser(err, user) {
-      if (err) return next(err);
+      if (err) {
+        FlashService.server_exit(req, err);
+        return res.redirect('/message/index');
+      }
       if (!user) {
         msg = {err: 'No user selected'};
         FlashService.error(req, msg);
@@ -44,11 +47,20 @@ module.exports = {
       }
 
       Message.create(msgObj, function messageCreated(err, msge){
-        if (err) return next(err);
+        if (err) {
+          FlashService.server_exit(req, err);
+          return res.redirect('/message/index');
+        }
 
         //Mandar notificacion al usuario  FUNCIONA
         Session.findOne({user_id: req.param('to_user_id')}, function foundSession(err, session) {
-          if (err) return next(err);
+          if (err) {
+            console.log(err);
+            var error = {err: err};
+            FlashService.error(req, error);
+            return res.redirect('/message/index');
+          }
+
           if (!session) return next();
             User.message(session.user_id, {
               from: req.session.User.id,
@@ -99,7 +111,7 @@ module.exports = {
   },
 
 
-  destroy: function(){
+  destroy: function(req, res, next){
     if (req.xhr) {
       //Puedo borrar???
 

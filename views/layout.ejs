@@ -35,6 +35,8 @@
   <link rel="stylesheet" href="/styles/jasny-bootstrap/jasny-bootstrap.css">
   <link rel="stylesheet" href="/styles/bootstrap-colorpicker/bootstrap-colorpicker.css">
   <link rel="stylesheet" href="/styles/font-awesome/font-awesome.css">
+  <link rel="stylesheet" href="/styles/parsley/parsley.css">
+  <link rel="stylesheet" href="/styles/jquery-ui/jquery-ui.css">
   <link rel="stylesheet" href="/styles/chosen/ImageSelect.css">
   <link rel="stylesheet" href="/styles/chosen/chosen.min.css">
   <link rel="stylesheet" href="/styles/importer.css">
@@ -49,8 +51,14 @@
   <script src="/js/vendor/jasny-bootstrap.js"></script>
   <script src="/js/vendor/bootstrap-colorpicker.js"></script>
   <script src="/js/vendor/jquery-ui.js"></script>
+  <script src="/js/vendor/parsley.js"></script>
+  <script src="/js/i18n/de.js"></script>
+  <script src="/js/i18n/en.js"></script>
+  <script src="/js/i18n/es.js"></script>
+  <script src="/js/i18n/fr.js"></script>
+  <script src="/js/i18n/pt.js"></script>
+  <script src="/js/i18n/ru.js"></script>
   <script src="/js/vendor/gridster.js"></script>
-  <script src="/js/vendor/npm.js"></script>
   <script src="/js/utils.js"></script>
   <script src="/js/customValidate.js"></script>
   <!--SCRIPTS END-->
@@ -78,11 +86,14 @@
           <% if (session.authenticated) { %>
           <li class="active"><a href="/user/show/<%= session.User.id%>"><%= session.User.name %></a> </li>
 
-          <%if (n_messages > 0){%>
-          <li><a href="/message/index">Messages <span class="label label-pill label-danger"><%= '+' + n_messages %></span></a></li>
-          <% } else { %>
-          <li><a href="/message/index">Messages</a></li>
-          <%}%>
+          <li id="buttom_msg">
+            <%if (n_messages > 0){%>
+            <a href="/message/index">Messages <span id="msg_new" class="label label-pill label-danger">+<%= n_messages %></span></a>
+            <% } else { %>
+            <a href="/message/index">Messages <spam id="msg_new"></spam></a>
+            <%}%>
+          </li>
+
 
           <% if (session.User.admin) { %>
           <li><a href="/user"> User Administration</a> </li>
@@ -100,11 +111,9 @@
               <option data-img-src="/images/flags/ES.png" value="es">ES</option>
               <option data-img-src="/images/flags/FR.png" value="fr">FR</option>
               <option data-img-src="/images/flags/PT.png" value="pt">PT</option>
-              <option class="flag flag-es" value="rr">        RR</option>
             </select>
             <script type="text/javascript">
               $('.chzn-select-lan option[value="<%= (typeof(req.session) !== 'undefined'  && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>"]').attr("selected",true);
-
               $('.chzn-select-lan').chosen({
                 "disable_search": true,
               });
@@ -141,66 +150,26 @@
 
         <div class="navbar-right">
           <% if (session.authenticated) { %>
-          <a class="btn btn-default navbar-btn" href="/session/destroy">sign-out</a>
+          <a class="btn btn-default navbar-btn" href="/session/destroy"><%= __("signout") %></a>
           <% } %>
         </div>
         <% if (!session.authenticated) { %>
         <form class="navbar-form navbar-right" action="/session/create">
           <div class="form-group">
-            <input type="text" placeholder="Email" name="email" class="form-control">
+            <input type="text" placeholder="<%= __("email") %>" name="email" class="form-control">
           </div>
           <div class="form-group">
             <input type="password" placeholder="Password" name="password" class="form-control">
           </div>
-          <button type="submit" class="btn btn-success">Sign in</button>
+          <button type="submit" class="btn btn-success"><%= __("signin") %></button>
           <input type="hidden" name="_csrf" value="<%= _csrf %>">
         </form>
         <% } %>
       </div>
     </div>
-
-    <script type="text/javascript">
-      bootstrap_alert = function() {
-      }
-      bootstrap_alert.success = function(message, time) {
-        $('#alert_placeholder').append('<div class="alert alert-success alert-dismissible fade in" style="" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Well done!</strong>' + ' ' + message + ' ' + '</div> </div>');
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-        alertTimeout(time);
-      }
-      bootstrap_alert.info = function(message, time) {
-        $('#alert_placeholder').append('<div class="alert alert-info alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Advice!</strong>' + ' ' + message + ' ' + '</div> </div>');
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-        alertTimeout(time);
-      }
-
-      bootstrap_alert.warning = function(message, time) {
-        $('#alert_placeholder').append('<div class="alert alert-warning alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Warning!</strong>' + ' ' + message + ' ' + '</div> </div>');
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-        alertTimeout(time);
-      }
-
-      bootstrap_alert.danger = function(message, time) {
-        $('#alert_placeholder').append('<div class="alert alert-danger alert-dismissible fade in col-md-2 col-md-offset-5" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Ups!</strong>' + ' ' + message + ' ' + '</div> </div>');
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-        alertTimeout(time);
-      }
-
-      function alertTimeout(wait){
-        if (wait > 0){
-          setTimeout(function(){
-            $('#alert_placeholder').children('.alert:first-child').remove()
-          }, wait);
-        }
-      }
-    </script>
-
   </div>
 
-  <div class="container whitebox">
-      <div id="alert_placeholder"></div>
-  </div>
-
-
+  <div id="alert_placeholder"></div>
   <div class="container box">
     <%- body %>
   </div>
@@ -244,7 +213,15 @@
     io.socket.on('user', function messageReceived(message) {
       switch (message.verb) {
         case 'messaged':
-          alert('recibido' + message.data.msg);
+          var num_msg = document.getElementById('msg_new').innerHTML.replace('+','');
+          if (document.getElementById('msg_new').innerHTML == ''){
+            num_msg = 1;
+          }else{
+            num_msg++;
+          }
+
+          $('#buttom_msg').html('<a href="/message/index">Messages <span id="msg_new" class="label label-pill label-danger">' + '+' + num_msg + '</span></a>');
+          bootstrap_alert['info']('You have a new message!', 5000 );
           break;
 
         default:
