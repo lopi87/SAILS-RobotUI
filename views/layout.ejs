@@ -6,7 +6,6 @@
   <!-- Viewport mobile tag for sensible mobile support -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-
   <!--
       Stylesheets and Preprocessors
       ==============================
@@ -65,114 +64,105 @@
 </head>
 
 <body>
+<nav class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <a class="navbar-brand" rel="home" href="/" title="Home page">
+      <img src="/images/logo/logo.png" style="max-width:100px; margin-top: -7px;">
+    </a>
+    <ul class="nav navbar-nav">
+      <% if (session.authenticated) { %>
 
+      <li class="nav-item">
+        <a href="/user/show/<%= session.User.id%>"><%= session.User.name %></a>
+      </li>
 
-  <div class="navbar navbar-default navbar-inverse">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
+      <li class="nav-item" id="buttom_msg">
+        <%if (n_messages > 0){%>
+        <a href="/message/index">Messages <span id="msg_new" class="label label-pill label-danger">+<%= n_messages %></span></a>
+        <% } else { %>
+        <a href="/message/index">Messages <spam id="msg_new"></spam></a>
+        <%}%>
+      </li>
 
-        <a class="navbar-brand" rel="home" href="/" title="Home page">
-          <img src="/images/logo/logo.png" style="max-width:100px; margin-top: -7px;">
-        </a>
+      <% if (session.User.admin) { %>
+      <li class="nav-item">
+        <a href="/user"> User Administration</a>
+      </li>
+      <% } %>
+      <li class="nav-item">
+        <a href="/robot/index"> My Robots</a>
+      </li>
+      <% } %>
+    </ul>
 
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <% if (session.authenticated) { %>
-          <li class="active"><a href="/user/show/<%= session.User.id%>"><%= session.User.name %></a> </li>
-
-          <li id="buttom_msg">
-            <%if (n_messages > 0){%>
-            <a href="/message/index">Messages <span id="msg_new" class="label label-pill label-danger">+<%= n_messages %></span></a>
-            <% } else { %>
-            <a href="/message/index">Messages <spam id="msg_new"></spam></a>
-            <%}%>
-          </li>
-
-
-          <% if (session.User.admin) { %>
-          <li><a href="/user"> User Administration</a> </li>
-          <% } %>
-          <li><a href="/robot/index"> My Robots</a> </li>
-          <% } %>
-        </ul>
-
-        <!-- <div class="flag flag-en"></div> -->
-
-        <form class="navbar-form navbar-right">
-          <div class="form-group">
-            <select data-placeholder="Choose a language" class="chzn-select-lan" style="width:75px;" tabindex="2">
-              <option data-img-src="/images/flags/EN.png" value="en">EN</option>
-              <option data-img-src="/images/flags/ES.png" value="es">ES</option>
-              <option data-img-src="/images/flags/FR.png" value="fr">FR</option>
-              <option data-img-src="/images/flags/PT.png" value="pt">PT</option>
-            </select>
-            <script type="text/javascript">
-              $('.chzn-select-lan option[value="<%= (typeof(req.session) !== 'undefined'  && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>"]').attr("selected",true);
-              $('.chzn-select-lan').chosen({
-                "disable_search": true,
-              });
-            </script>
-          </div>
-        </form>
-
-
-        <script type="text/javascript">
-          $('.chzn-select-lan').on('change',function(){
-            $.ajax({
-              url: '/language/change',
-              type: 'GET',
-              data: {locale: $( ".chzn-select-lan" ).val()},
-              contentType: 'application/json',
-              dataType: 'json',
-
-              done:function() {
-              },
-
-              success: function(data){
-                window.location.reload();
-              },
-
-              error: function(xhr, status, text) {
-                bootstrap_alert['danger'](xhr.responseText, 5000 );
-              }
+    <!-- <div class="flag flag-en"></div> -->
+    <div class="form-inline pull-xs-right">
+      <form class="navbar-form navbar-right">
+        <div class="form-group">
+          <select data-placeholder="Choose a language" class="chzn-select-lan" style="width:75px;" tabindex="2">
+            <option data-img-src="/images/flags/EN.png" value="en">EN</option>
+            <option data-img-src="/images/flags/ES.png" value="es">ES</option>
+            <option data-img-src="/images/flags/FR.png" value="fr">FR</option>
+            <option data-img-src="/images/flags/PT.png" value="pt">PT</option>
+          </select>
+          <script type="text/javascript">
+            $('.chzn-select-lan option[value="<%= (typeof(req.session) !== 'undefined'  && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>"]').attr("selected",true);
+            $('.chzn-select-lan').chosen({
+              "disable_search": true,
             });
+          </script>
+        </div>
+      </form>
+      <script type="text/javascript">
+        $('.chzn-select-lan').on('change',function(){
+          $.ajax({
+            url: '/language/change',
+            type: 'GET',
+            data: {locale: $( ".chzn-select-lan" ).val()},
+            contentType: 'application/json',
+            dataType: 'json',
 
+            done:function() {
+            },
+
+            success: function(data){
+              window.location.reload();
+            },
+
+            error: function(xhr, status, text) {
+              bootstrap_alert['danger'](xhr.responseText, 5000 );
+            }
           });
 
-        </script>
+        });
+      </script>
 
-
-        <div class="navbar-right">
-          <% if (session.authenticated) { %>
-          <a class="btn btn-default navbar-btn" href="/session/destroy"><%= __("signout") %></a>
-          <% } %>
+      <% if (session.authenticated) { %>
+      <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy"><%= __("signout") %></a>
+      <% } %>
+      <% if (!session.authenticated) { %>
+      <form class="navbar-form navbar-right" action="/session/create">
+        <div class="form-group">
+          <input type="text" placeholder="<%= __("email") %>" name="email" class="form-control">
         </div>
-        <% if (!session.authenticated) { %>
-        <form class="navbar-form navbar-right" action="/session/create">
-          <div class="form-group">
-            <input type="text" placeholder="<%= __("email") %>" name="email" class="form-control">
-          </div>
-          <div class="form-group">
-            <input type="password" placeholder="Password" name="password" class="form-control">
-          </div>
-          <button type="submit" class="btn btn-success"><%= __("signin") %></button>
-          <input type="hidden" name="_csrf" value="<%= _csrf %>">
-        </form>
-        <% } %>
-      </div>
+        <div class="form-group">
+          <input type="password" placeholder="Password" name="password" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success"><%= __("signin") %></button>
+        <input type="hidden" name="_csrf" value="<%= _csrf %>">
+      </form>
+      <% } %>
     </div>
+    <script type="text/javascript">
+      $('ul.nav > li > a[href="' + document.location.pathname + '"]').parent().addClass('active');
+    </script>
   </div>
+</nav>
 
-  <div id="alert_placeholder"></div>
-  <div class="container box">
-    <%- body %>
-  </div>
+<div id="alert_placeholder"></div>
+<div class="container box">
+  <%- body %>
+</div>
 
 <div class="container">
   <hr>
@@ -187,7 +177,6 @@
         </div>
   </footer>
 </div>
-
 </body>
 </html>
 
