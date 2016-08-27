@@ -17,7 +17,7 @@ function addLoadEvent(func) {
 
 
 
-//carga dinamica de archivos
+//carga dinamica de archivos js, css, ...
 function loadjscssfile(filename, filetype){
   var fileref;
   if (filetype=="js"){ //if filename is a external JavaScript file
@@ -129,4 +129,55 @@ function alertTimeout(wait){
   }
 }
 
+
+//Utils
+
+//CAMBIAR IMAGEN ESTADO
+function change_img_state(id, boolean){
+  var img_id = '#img_state_' + id;
+  var img_on= "online.png";
+  var img_off= "offline.png";
+  var src = $(img_id).attr("src");
+
+  if (boolean){
+    src = src.replace(img_off, img_on);
+    $(img_id).attr("src", src);
+  }else{
+    src = src.replace(img_on,img_off);
+    $(img_id).attr("src", src);
+  }
+}
+
+//CAMBIAR FREE BUSY
+function change_free_busy(id, boolean){
+  var label_id = '#label_state_' + id;
+  var label_free= '<span class="label label-pill label-success"> Free </span>';
+  var label_busy= '<span class="label label-pill label-danger"> Busy </span>';
+
+  if (boolean){
+    $(label_id).html(label_busy);
+  }else{
+    $(label_id).html(label_free);
+  }
+}
+
+
+//Apertura de una ventana
+
+//Open the interface in a new window
+function openWin(width, height, content) {
+  var div = document.getElementById(content).outerHTML;
+  var myWindow = window.open('', '', 'width=' + width ,'height=' + height);
+  var doc = myWindow.document;
+
+  var head = '<!DOCTYPE html><html lang="es"><head>  <title>RobotUI</title>  <!--STYLES-->  <link rel="stylesheet" href="/styles/bootstrap/bootstrap.css">  <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.css">  <link rel="stylesheet" href="/styles/jasny-bootstrap/jasny-bootstrap.css">  <link rel="stylesheet" href="/styles/bootstrap-colorpicker/bootstrap-colorpicker.css">  <link rel="stylesheet" href="/styles/font-awesome/font-awesome.css">  <link rel="stylesheet" href="/styles/parsley/parsley.css">  <link rel="stylesheet" href="/styles/jquery-ui/jquery-ui.css">  <link rel="stylesheet" href="/styles/chosen/ImageSelect.css">  <link rel="stylesheet" href="/styles/chosen/chosen.min.css">  <link rel="stylesheet" href="/styles/importer.css">  <!--STYLES END-->  <!--SCRIPTS-->  <script src="/js/dependencies/sails.io.js"></script>  <script src="/js/vendor/jquery-2.2.4.js"></script>  <script src="/js/vendor/bootstrap.js"></script>  <script src="/js/vendor/chosen.jquery.js"></script>  <script src="/js/vendor/ImageSelect.jquery.js"></script>  <script src="/js/vendor/jasny-bootstrap.js"></script>  <script src="/js/vendor/bootstrap-colorpicker.js"></script>  <script src="/js/vendor/jquery-ui.js"></script>  <script src="/js/vendor/parsley.js"></script>  <script src="/js/i18n/de.js"></script>  <script src="/js/i18n/en.js"></script>  <script src="/js/i18n/es.js"></script>  <script src="/js/i18n/fr.js"></script>  <script src="/js/i18n/pt.js"></script>  <script src="/js/i18n/ru.js"></script>  <script src="/js/vendor/gridster.js"></script>  <script src="/js/utils.js"></script>  <script src="/js/customValidate.js"></script>  <!--SCRIPTS END--></head><body><div id="alert_placeholder"></div>'
+  var foot = '</body></html><script type="text/javascript">  function savesocket() { io.socket.get("/session/saveSocketID");  }  addLoadEvent(savesocket);</script>'
+
+  doc.open();
+  doc.write(head);
+  doc.write(div);
+  doc.write(foot);
+
+  doc.close();
+}
 

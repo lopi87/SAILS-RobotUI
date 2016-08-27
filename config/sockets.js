@@ -155,6 +155,22 @@ module.exports.sockets = {
         if (err) return cb();
         if (!session) return cb();
 
+
+       //Comprobar si el soscket estaba usando algun robot para liberarlo:
+       if (session.robot_id){
+         console.log('Socked was using a robot');
+
+           Robot.update({id: session.robot_id},{busy: false}, function robotUpdated(err) {
+             if (err) return next(err);
+
+             //Informar a otros clientes (sockets abiertos) que el robot queda liberado
+             Robot.publishUpdate(session.robot_id, {
+               busy: false,
+               id: session.robot_id
+             });
+           });
+       }
+
         Session.destroy(session.id, function sessionDestroyed(err) {
           if (err) return cb();
           return cb();

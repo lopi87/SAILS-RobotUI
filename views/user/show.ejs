@@ -1,42 +1,44 @@
 <%- partial('../_alert.ejs', {flash: flash}) %>
 
 <div class="container">
-  <h2>User information</h2>
-  <h1><%= user.name %></h1>
+  <h2 class="form-sigin-heading">User information</h2>
 
-  <% if(user.admin){ %>
-  <td> <img src="/images/admin.png"></td> admin
-  <% } else { %>
-  <td> <img src="/images/pawn.png"  height="42" width="42"></td> pawn
-  <% } %>
+  <div class="card" style="min-width:300px; width: 30%; margin: auto">
+      <header class="card-container card-light-grey">
+        <h3><%= user.name %></h3>
+      </header>
 
-  <h3><%= user.title %></h3>
-  <hr>
-  <h3>contact: <%= user.email %></h3>
+      <div class="card-container paddingtop10">
+        <% if(user.admin){ %>
+        <img src="/images/admin.png" height="32" width="32"> admin
+        <% } else { %>
+        <img src="/images/pawn.png"  height="32" width="32"> pawn
+        <% } %>
+        <% if(user.online){ %>
+        <img src="/images/online.png" height="32" width="32"> online
+        <% } else { %>
+        <img src="/images/offline.png"  height="32" width="32"> offline
+        <% } %>
+      </div>
+    <hr>
 
-  <div class="container-fluid">
-    <div class="row">
-      <a class="btn btn-medium btn-primary" href="/user/edit/<%= user.id%>">Edit</a>
-      <a class="btn btn-medium btn-primary btn-success" href="/robot/index/<%= user.id%>">My robots</a>
+      <div class="card-container">
+        <img src="<%= user.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:75px">
+        <p>Email: <%= user.email%></p>
+        <p>Language: <img class="chose-image-small" src="/images/flags/<%= user.language.toUpperCase()%>.png"></p>
+
+        <br>
+    <div class="clear"></div>
+      </div>
+
+      <div class="card-dark-grey margintop10 card-btn-block">
+        <a class="btn btn-medium btn-primary" href="/user/edit/<%= user.id%>">Edit</a>
+        <a class="btn btn-medium btn-primary btn-success" href="/robot/index/<%= user.id%>">Show robots</a>
+      </div>
     </div>
   </div>
-</div>
 
 
-<script type="text/javascript">
 
-  window.onload = function subscribeAndListen() {
-    io.socket.get('/user/user_subscribe/');
 
-    io.socket.on('user', function (obj) {
-      if (obj.verb == 'created') {
-        alert('usuario creado');
-        var data = obj.data;
-        console.log('Command ' + data.command + ' ' + data.id +' has been send.');
-        $chat.append(' - ' + data.command + '<br/>');
-      }
 
-    });
-  };
-
-</script>

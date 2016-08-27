@@ -34,21 +34,26 @@
 
 -->
 
-<%- partial('_alert.ejs', {messages: messages}) %>
+<!-- Page Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="jumbox">
+        <h1><span class="error-404">403</span>
+        </h1>
 
+        <h1>
+          Forbidden
+        </h1>
+        <h2>
+          <% if (typeof error !== 'undefined') { %>
+          <%= error %>
+          <% } else { %>
+          You don't have permission to see the page you're trying to reach.
+          <% } %>
+        </h2>
 
-<div class="main">
-  <h1>
-    Forbidden
-  </h1>
-  <h2>
-    <% if (typeof error !== 'undefined') { %>
-    <%= error %>
-    <% } else { %>
-    You don't have permission to see the page you're trying to reach.
-    <% } %>
-  </h2>
-  <p class="help">
-    <a href="http://en.wikipedia.org/wiki/HTTP_403">Why</a> might this be happening?
-  </p>
+      </div>
+    </div>
+  </div>
 </div>

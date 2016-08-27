@@ -1,0 +1,20 @@
+<% Object.keys(perm).forEach(function (key) { %>
+<tr id="perm_<%= key %>">
+
+  <td> <%= key %></td>
+  <td> <%= User.find(key, {select: {name:1}}).limit(1) %></td>
+
+  <% if(perm[key].d){ %>
+  <td> <img src="/images/online.png" height="30" width="30"></td>
+  <% } else { %>
+  <td> <img src="/images/offline.png" height="30" width="30"></td>
+  <% } %>
+
+  <% if(perm[key].v){ %>
+  <td> <img src="/images/online.png" height="30" width="30"></td>
+  <% } else { %>
+  <td> <img src="/images/offline.png" height="30" width="30"></td>
+  <% } %>
+  <td>    <a class="btn btn-sm btn-danger" onclick="delete_row_permissions('<%= robot.id %>', '<%= key %>')">Delete</a></td>
+</tr>
+<% }) %>

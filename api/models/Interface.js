@@ -23,6 +23,19 @@ module.exports = {
       via: 'interface_owner'
     },
 
+    // Eventos de la interfaz
+    events: {
+      collection: 'event',
+      via: 'interface_owner'
+    },
+
+    //Videos de la interfaz
+    videos: {
+      collection: 'video',
+      via: 'interface_owner'
+    },
+
+
     panel_sizex: {
       type: 'float',
       defaultsTo: 0,
@@ -52,7 +65,6 @@ module.exports = {
         return false;
       }
     }
-
   }
 };
 

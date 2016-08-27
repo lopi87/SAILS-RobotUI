@@ -3,98 +3,34 @@
 <div class="jumbox">
   <h3>My Robots</h3>
 
-  <%  if(robots.size == 0){ %>
-  <div class="alert alert-warning margintop20 marginbottom20" role="alert">
+  <% if(robots.size == 0){ %>
+  <div class="alert alert-info margintop20 marginbottom20" role="alert">
     <strong>Ups!</strong>
     You haven't created any robots yet...
   </div>
+  <% } else { %>
+  <%- partial('_table.ejs', {robots: robots, type: 'my_robots'}) %>
   <% } %>
-
-  <table class="table">
-    <tr>
-
-      <th>ID</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Ip address</th>
-      <th>Interface</th>
-
-      <th></th>
-    </tr>
-
-    <% _.each(robots, function(robot){ %>
-    <tr data-id="<%= robot.id %>" data-model="robot">
-
-      <% if(robot.online){ %>
-      <td> <img id="img_state_<%= robot.id %>" src="/images/online.png" height="30" width="30"></td>
-      <% } else { %>
-      <td> <img id="img_state_<%= robot.id %>" src="/images/offline.png" height="30" width="30"></td>
-      <% } %>
-
-      <td><%= robot.id %></td>
-      <td><%= robot.name %></td>
-      <td><%= robot.description %></td>
-      <td><%= robot.ipaddress %> : <%= robot.port%></td>
-      <td> <%= robot.robot_interface %> </td>
-      <td>
-        <a href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
-        <a href="/interface/configure/<%= robot.robot_interface %>" class="btn btn-sm btn-warning"><i class="fa fa-wrench" aria-hidden="true"></i> Configure</a>
-        <a class="btn btn-sm btn-danger" onclick=" window.location.href='<%='/robot/destroy/' + robot.id %>'"><i class="fa fa-trash-o"></i> Delete </a>
-      </td>
-    </tr>
-    <% }) %>
-
-  </table>
 
   <div class="button_right">
     <a href="/robot/new" class="btn btn-sm btn-success">Add a new robot!</a>
   </div>
 </div>
 
-
-<script type="text/javascript">
-
-  window.onload = function subscribeAndListen() {
-    io.socket.get('/robot/robot_subscribe/');
-
-    io.socket.on('robot', function (obj) {
-
-      if (obj.verb == 'updated') {
-        var data = obj.data;
-        change_img_state(data.id, data.online);
-        console.log('Robot has been updated to ' + data.online);
-      }
-
-    });
-  };
-
-  //IMAGEN ESTADO
-  function change_img_state(robot_id, boolean){
-    var img_id = '#img_state_' + robot_id;
-    var img_on= "online.png";
-    var img_off= "offline.png"
-
-    if (boolean){
-      var src = $(img_id).attr("src").replace(img_off, img_on);
-      $(img_id).attr("src", src);
-    }else{
-      var src = $(img_id).attr("src").replace(img_on,img_off);
-      $(img_id).attr("src", src);
-    }
-  }
-
-</script>
-
-
 <div class="clear"></div>
-
 
 <div class="jumbox">
 <h3>My Shared Robots</h3>
-<div class="alert alert-info margintop20 marginbottom20" role="alert">
-  <strong>Ups!</strong>
-  You haven't created any robots shared yet...
-</div>
+
+  <% if(driver_robots.size == 0){ %>
+  <div class="alert alert-info margintop20 marginbottom20" role="alert">
+    <strong>Ups!</strong>
+    You haven't created any robots shared yet...
+  </div>
+  <% } else { %>
+  <%- partial('_table.ejs', {robots: driver_robots, type: 'my_driver_robots'}) %>
+  <% } %>
+
   <div class="button_right">
     <a href="/robot/share" class="btn btn-sm btn-success">Share a new robot!</a>
   </div>
@@ -102,13 +38,45 @@
 
 
 <div class="clear"></div>
+
 <div class="jumbox">
   <h3>My guest Robots</h3>
+
+  <% if(viewer_robots.size == 0){ %>
   <div class="alert alert-info margintop20 marginbottom20" role="alert">
     <strong>Ups!</strong>
-    You haven't created any robots guest yet...
+    You haven't created any robots shared yet...
   </div>
+  <% } else { %>
+  <%- partial('_table.ejs', {robots: viewer_robots, type: 'my_viewer_robots'}) %>
+  <% } %>
+
   <div class="button_right">
     <a href="/robot/share" class="btn btn-sm btn-success">Require a new robot!</a>
   </div>
 </div>
+
+
+<script type="text/javascript">
+
+  addLoadEvent(subscribeAndListen_robot);
+
+  function subscribeAndListen_robot(){
+    io.socket.get('/robot/robot_subscribe/');
+
+    io.socket.on('robot', function (obj) {
+      if (obj.verb == 'updated') {
+        var data = obj.data;
+        change_free_busy(data.id, data.busy);
+        console.log('Robot ' + data.id + ' has been updated to: busy:' + data.busy);
+
+        if (data.busy){
+          bootstrap_alert['success']('Robot busy', 5000)
+        }else{
+          bootstrap_alert['success']('Robot free!', 5000)
+        }
+      }
+
+    });
+  }
+</script>

@@ -6,15 +6,105 @@
 
 <%- partial('../_alert.ejs', {flash: flash}) %>
 
-<form action="/session/create" method="POST" class="form-signin">
-  <h2 class="form-sigin-heading">Please sign in...</h2>
 
-  <div class="control-group">
-    <input type="text" class="form-control" placeholder="Email address" name="email" required>
+<div class="row">
+
+  <div class="col-md-6">
+    <div class="jumbox" style="background-color: white">
+      <form id="signin_form" action="/session/create" method="POST" class="form-signin">
+        <h1 class="text-center login-title" style="padding-bottom: 100px"><%= i18n('signin')%></h1>
+
+        <div class="control-group">
+          <label for="passwordconf"><%= i18n("email") %> * :</label>
+          <input type="text" class="form-control" placeholder="<%= i18n('email')%>" name="email" required>
+        </div>
+
+        <div class="control-group">
+          <label for="passwordconf"><%= i18n("password") %> * :</label>
+          <input type="password" class="form-control" placeholder="<%= i18n('password')%>" name="password" required>
+        </div>
+        <div class="form-signin">
+          <input type="submit" class="btn btn-lg btn-primary btn-block" value="<%= i18n('signin')%>"/>
+          <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+        </div>
+      </form>
+
+      <script type="text/javascript">
+        addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
+        $('#signin_form').parsley().on('field:validated', function() {
+          var ok = $('.parsley-error').length === 0;
+        })
+      </script>
+    </div>
   </div>
-  <div class="control-group">
-    <input type="password" class="form-control" placeholder="Password" name="password" required>
+
+
+
+  <div class="col-md-6">
+
+    <form id="sign-up-form" class="form-signin" action="create" method="post" data-parsley-validate style="max-width: none">
+      <h1 class="text-center login-title marginbottom20"><%= i18n('createaccount') %></h1>
+      <div class="control-group">
+        <label for="name"><%= i18n("name") %> * :</label>
+        <input class="form-control" name="name" placeholder="<%= i18n("name") %>" required="" type="text">
+      </div>
+
+      <div class="control-group">
+        <label for="email"><%= i18n("email") %> * :</label>
+        <input class="form-control" name="email" placeholder="<%= i18n("email") %>" data-parsley-trigger="change" required="" type="email">
+      </div>
+
+      <div class=" margintop10">
+        <label for="question"><%= i18n("filesmallerthan %s","42") %></label>
+        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+          <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+          <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new"><%= i18n("selectfile") %></span><span class="fileinput-exists"><%= i18n("change") %></span><input id="input_avatar" type="file" name="avatar" data-parsley-filemaxmegabytes="42" data-parsley-trigger="change" data-parsley-filemimetypes="image/jpeg, image/png"></span>
+          <a id="remove_iconfile_input" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput"><%= i18n("remove") %></a>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label for="lan"><%= i18n("language") %> *:</label>
+        <div>
+          <select data-placeholder="<%= i18n("chooselanguage") %>" class="chzn-select-language" style="width:85px;" tabindex="2" required="" name="language">
+            <option value=""></option>
+            <option data-img-src="/images/flags/EN.png" value="en">EN</option>
+            <option data-img-src="/images/flags/ES.png" value="es">ES</option>
+            <option data-img-src="/images/flags/FR.png" value="fr">FR</option>
+            <option data-img-src="/images/flags/PT.png" value="pt">PT</option>
+          </select>
+        </div>
+        <script type="text/javascript">
+          $('.chzn-select-language option[value="<%= (typeof(req.session) !== 'undefined'  && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>"]').attr("selected",true);
+          $('.chzn-select-language').chosen({"disable_search": true});
+        </script>
+      </div>
+      <div class="control-group">
+        <label for="name"><%= i18n("title") %> * :</label>
+        <input class="form-control" name="title" placeholder="<%= i18n("name") %>"  type="text" required="">
+      </div>
+
+      <div class="control-group">
+        <label for="password"><%= i18n("password") %> * :</label>
+        <input id="passsword_field" type="password" class="form-control" placeholder="<%= i18n("password") %>" name="password" required>
+      </div>
+
+      <div class="control-group">
+        <label for="passwordconf"><%= i18n("passwordconfirmation") %> * :</label>
+        <input type="password" class="form-control" data-parsley-equalto="#passsword_field" placeholder="<%= i18n("passwordconfirmation") %>" name="confirmation" required>
+      </div>
+      <div class="form-signin">
+        <input class="btn btn-lg btn-primary btn-block" value="<%= i18n('createaccount') %>" type="submit">
+      </div>
+      <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+    </form>
+
+    <script type="text/javascript">
+      addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
+      $('#sign-up-form').parsley().on('field:validated', function() {
+        var ok = $('.parsley-error').length === 0;
+      })
+    </script>
+
   </div>
-  <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign-in"/>
-  <input type="hidden" name="_csrf" value="<%= _csrf %>" />
-</form>
+</div>

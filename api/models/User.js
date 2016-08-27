@@ -45,17 +45,32 @@ module.exports = {
     },
 
     // Add a reference to Robot
-    robots:{
+    d_robots:{
       collection: 'robot',
-      via: 'guests',
-      through: 'linked_user_robot'
+      via: 'drivers',
+      dominant: true
     },
 
+    // Add a reference to Robot
+    v_robots:{
+      collection: 'robot',
+      via: 'viewers',
+      dominant: true
+    },
 
     sessions:{
       model: 'session'
     },
 
+
+    avatarUrl:{
+      type:'string',
+      defaultsTo: '/images/avatar/avatar.png'
+    },
+
+    avatarFd:{
+      type:'string'
+    },
 
     toJSON: function(){
       var obj = this.toObject();
@@ -87,13 +102,18 @@ module.exports = {
 
   beforeCreate: function(values, next){
     if(!values.password || values.password != values.confirmation){
-      return next({err: ["Password doesn't match password confirmation."]})
+
+      msg = {err: "Password doesn't match password confirmation."};
+      FlashService.error(req, msg);
+      return next();
     }
 
     require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword){
       if(err) return next(err);
       values.encryptedPassword = encryptedPassword;
       values.onLine = true;
+      values.password = '';
+      values.confirmation = '';
       next();
     });
 

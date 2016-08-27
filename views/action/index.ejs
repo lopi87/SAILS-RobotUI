@@ -1,0 +1,83 @@
+<div class="container">
+
+  <h1 class="text-center"> <%= robot.name %></h1>
+
+  <h3>Actions</h3>
+  <div class="table-responsive">
+    <table id="actions_table" class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th><%= i18n('code')%></th>
+        <th>Accion</th>
+        <th>boton</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody id="actualizar">
+      <% _.each(actions, function(action,index){ %>
+      <tr id="line_<%= action.id %>" data-model="action">
+        <th scope="row"><%= action.id %></th>
+        <td><%= action.code %></td>
+        <td><%= action.name %></td>
+        <td>
+          <% if (action.icon){ %>
+          <button id="button_<%= action.id %>" class="btn btn-custom_<%= action.id %>" value="<%= action.code %>">
+            <span><img src="/uploads/icons/<%= action.icon %>.png" /></span>
+            <% if (action.name != ''){%>
+            <span><%= action.name %></span>
+            <% }%>
+          </button>
+          <% } else { %>
+          <button  id="button_<%= action.id %>" value="<%= action.code %>" class="btn btn-custom_<%= action.id %>"><%= action.name %></button>
+          <% } %>
+        </td>
+        <td>
+          <a class="btn btn-sm btn-info">show </a>
+          <a href="/action/edit/<%= action.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a>
+          <a class="btn btn-sm btn-danger"  onclick="row_action_deleted('<%= action.id %>')"><i class="fa fa-trash-o"></i> Delete </a>
+        </td>
+      </tr>
+      <!-- insertat el estilo del boton -->
+      <%- partial ('../action/style_action.ejs', {action: action})%>
+      <% })%>
+      </tbody>
+    </table>
+  </div>
+
+  <button type="button" class="btn btn-sm btn-danger" onclick="delete_actions('<%= interface.id %>')">Remove all actions</button>
+
+  <script type="text/javascript">
+    function delete_actions(id) {
+      $.ajax({
+        url: '/action/destroy/' + id,
+        type: 'GET',
+        success: function(data){
+          $("#actualizar tr").remove();
+          bootstrap_alert['success']('All actions has been deleted!', 5000 );
+        },
+        error: function(xhr, status, text) {
+          bootstrap_alert['danger'](xhr.responseText, 5000 );
+        }
+      });
+    }
+
+    function row_action_deleted(id) {
+      $.ajax({
+        url: '/action/deleteaction/' + id,
+        type: 'GET',
+        data: {},
+
+        success: function (data) {
+          $("#line_" + id).remove();
+          bootstrap_alert['success']('A new action has been deleted!', 5000 );
+        },
+
+        error: function (xhr, status, text) {
+          bootstrap_alert['danger'](xhr.responseText, 5000 );
+        }
+      });
+    }
+
+  </script>
+</div>

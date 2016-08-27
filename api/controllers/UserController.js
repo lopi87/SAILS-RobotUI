@@ -8,14 +8,14 @@
 module.exports = {
 
   //Carga la pag sign up
-  'new': function(req, res){
+  'new': function (req, res) {
     res.view();
   },
 
 
   //Crea un usuario con los parametros del formulario
   // new.ejs
-  create: function(req, res, next) {
+  create: function (req, res, next) {
 
     var userObj = {
       name: req.param('name'),
@@ -28,13 +28,8 @@ module.exports = {
 
 
     User.create(userObj, function userCreated(err, user) {
-
-      //Si hay error
       if (err){
-        console.log(err);
-        FlashService.error(req, err);
-
-        //redireccion si hay error
+        FlashService.server_exit(req, err);
         return res.redirect('/user/new');
       }
 
@@ -43,14 +38,37 @@ module.exports = {
       req.session.User = user;
 
       user.online = true;
+
+
+      ImageService.upload_avatar(req.file('avatar'), user,
+        function whenDone(err, file) {
+
+          if (err) return res.negotiate(err);
+
+          // If no files were uploaded, respond with an error.
+          if (file.length === 0){
+            return res.badRequest('No file was uploaded');
+          }
+
+
+          var extension = file[0].filename.split('.').pop();
+
+          // Save the "fd" and the url where the avatar for a user can be accessed
+          User.update(req.session.User.id, {
+            // Generate a unique URL where the avatar can be downloaded.
+            avatarUrl: require('util').format('%s/uploads/avatar/%s', sails.getBaseUrl(), req.session.User.id + '.' + extension),
+            // Grab the first file and use it's `fd` (file descriptor)
+            avatarFd: file[0].fd
+          }).exec(function (err){
+            if (err) return res.negotiate(err);
+            return res.ok({url: ''});
+          });
+
+        });
+
       user.save(function (err) {
         if (err) return next(err);
       });
-
-      //...................................
-      //Subida del avatar
-      //sails.controllers.user.upload(req,res);
-      //.....................................
 
       msg = { err: 'User created' };
       FlashService.success(req, msg );
@@ -78,10 +96,10 @@ module.exports = {
   },
 
 
-  show: function(req, res, next){
-    User.findOne(req.param('id'), function foundUser(err, user){
-      if(err) return next(err);
-      if(!user) return next();
+  show: function (req, res, next) {
+    User.findOne(req.param('id'), function foundUser(err, user) {
+      if (err) return next(err);
+      if (!user) return next();
       res.view({
         user: user
       });
@@ -89,24 +107,24 @@ module.exports = {
   },
 
 
-  index: function(req, res, next) {
+  index: function (req, res, next) {
     //console.log(new Date());
     //console.log(req.session.authenticated);
 
-      User.find(function foundUsers(err, users){
-        if(err) return next(err);
+    User.find(function foundUsers(err, users) {
+      if (err) return next(err);
 
-        res.view({
-          users:users
-        });
+      res.view({
+        users: users
       });
+    });
   },
 
 
-  edit: function(req, res, next){
-    User.findOne(req.param('id'), function foundUser(err, user){
-      if(err) return next(err);
-      if(!user) return next();
+  edit: function (req, res, next) {
+    User.findOne(req.param('id'), function foundUser(err, user) {
+      if (err) return next(err);
+      if (!user) return next();
       res.view({
         user: user
       });
@@ -114,9 +132,9 @@ module.exports = {
   },
 
 
-  update: function(req, res, next){
+  update: function (req, res, next) {
 
-    if(req.session.User.admin == true){
+    if (req.session.User.admin == true) {
       var userObj = {
         name: req.param('name'),
         title: req.param('title'),
@@ -129,15 +147,15 @@ module.exports = {
         name: req.param('name'),
         title: req.param('title'),
         email: req.param('email')
-        };
+      };
     }
 
-    User.update(req.param('id'), userObj, function userUpdated(err){
-      if(err){
+    User.update(req.param('id'), userObj, function userUpdated(err) {
+      if (err) {
         return res.redirect('/user/edit' + req.param('id'));
       }
 
-      if(req.session.User.admin == true) {
+      if (req.session.User.admin == true) {
         User.publishUpdate(req.param('id'), {
           name: req.param('name'),
           title: req.param('title'),
@@ -152,24 +170,24 @@ module.exports = {
   },
 
 
-  destroy: function(req, res, next) {
+  destroy: function (req, res, next) {
     var id = req.param('id');
 
-    User.findOne(id, function foundUser(err, user){
+    User.findOne(id, function foundUser(err, user) {
       if (err) return next(err);
-      if (!user){
-        msg = { err: 'User doesn\'t exists.' };
-        FlashService.error(req, msg );
+      if (!user) {
+        msg = {err: 'User doesn\'t exists.'};
+        FlashService.error(req, msg);
         return res.redirect('user/index');
       }
 
-      User.destroy(id, function userDestroyed(err){
+      User.destroy(id, function userDestroyed(err) {
         if (err) return next(err);
 
         User.publishDestroy(id, {id: user.id});
 
-        msg = { err: 'User deleted' };
-        FlashService.success(req, msg );
+        msg = {err: 'User deleted'};
+        FlashService.success(req, msg);
 
         res.redirect('/');
       });
@@ -177,90 +195,28 @@ module.exports = {
   },
 
 
-/*
-  subscribe: function(req, res){
-
-    User.find(function foundUsers(err, users){
-      if (err) return next(err);
-
-
-      User.subscribe(req.socket);
-
-      User.subscribe(req.socket, users);
-
-      //Esto evitará un warning ya que intentaria renderizar una vista
-      res.send(200);
-
-    });
-  },
-*/
-
-
-  //Explicado aqui https://www.youtube.com/watch?v=enyZYgjXRqQ&list=PL16Fzt2LkOBQTP2vbyZ82wci6MoOdFtF5&index=24
-  user_subscribe: function(req,res,next){
-    if (req.isSocket){
+  user_subscribe: function (req, res, next) {
+    if (req.isSocket) {
       //Update, destroy...
-      User.find(function foundUsers(err,users){
+      User.find(function foundUsers(err, users) {
         if (err) return next(err);
-        User.subscribe(req.socket,users);
+        User.subscribe(req.socket, users);
       });
 
       //Create
       User.watch(req);
-      console.log('User ' + req.session.User.id + 'with socket id '+sails.sockets.id(req)+' is now subscribed to the model class \'User\'.');
+      console.log('User ' + req.session.User.id + 'with socket id ' + sails.sockets.id(req) + ' is now subscribed to the model class \'User\'.');
     } else {
       res.view();
     }
   },
 
-  //Subida imagen avatar.
-  upload: function(req, res) {
-
-    if (req.method === 'GET')
-      return res.json({ 'status': 'GET not allowed' });
-    //	Call to /upload via GET is error
-
-    // setting allowed file types
-    var allowedTypes = ['image/jpeg', 'image/png'];
-
-    var uploadFile = req.file('uploadFile');
-    console.log(uploadFile);
-
-    var user_id = req.session.User.id;
-
-    uploadFile.upload({
-      saveAs: function(file, cb) {
-        var extension = file.filename.split('.').pop();
-
-        // seperate allowed and disallowed file types
-        if(allowedTypes.indexOf(file.headers['content-type']) === -1) {
-          err = { err: 'Disallowed file type' };
-          FlashService.error(req, err );
-          return res.redirect('/user/new');
-        }else{
-          // save as allowed files
-
-          gm(file).resize('200', '200').stream().pipe(output);
-
-          cb(null, '../../.tmp/public/uploads/profile_image/' + user_id + '.' + extension);
-          //Nombre del avatar: id del usuario + extension
-        }
-
-      }},function onUploadComplete(err, files) {
-            if (err) return next(err);
-
-            console.log(files);
-            msg = { err: 'Upload completed' };
-            FlashService.success(req, msg );
-            return res.redirect('/user/index');
-    });
-  },
 
   //Añade una nueva fila a la tabla usuarios (vista) cuando uno es creado.
-  render: function(req,res,next){
-    User.findOne(req.param('id'), function foundUser(err, user){
-      if(err) return next(err);
-      if(!user) return next();
+  render: function (req, res, next) {
+    User.findOne(req.param('id'), function foundUser(err, user) {
+      if (err) return next(err);
+      if (!user) return next();
 
       return res.render('user/user_row.ejs', {
         user: user,
@@ -270,13 +226,8 @@ module.exports = {
   },
 
 
-
-
-
-
-
 // Send a private message from one user to another
-  private: function(req, res) {
+  private: function (req, res) {
     // Get the ID of the currently connected socket
     var socketId = sails.sockets.id(req.socket);
     // Use that ID to look up the user in the session
@@ -289,25 +240,24 @@ module.exports = {
 
       User.findOne(session.user_id, function foundUser(err, user) {
         if (err) return next(err);
-        if (!user) {}
+        if (!user) return;
 
         User.message(user.id, {
           from: user.id,
-          msg: 'HOLA HIJO PUTA'
+          msg: ''
         });
 
       });
     });
   },
 
-  message_subscribe: function(req, res, next){
+
+  message_subscribe: function (req, res, next) {
     if (!req.isSocket) {
       return res.badRequest('HTTP request.');
     }
 
     var socketId = sails.sockets.id(req);
-
-    //Update, destroy...
 
     Session.findOne({socket_id: socketId}, function foundSession(err, session) {
       if (err) return next(err);
@@ -315,91 +265,69 @@ module.exports = {
 
       User.findOne(session.user_id, function foundUser(err, user) {
         if (err) return next(err);
-        if (!user) {}
+        if (!user) {return next(err);}
 
-        //Solo este usuario recibira el evento messageajes
+        //Solo este usuario recibira el evento message
         User.subscribe(req, user, 'message');
 
         return res.json(user);
       });
     });
 
+  },
+
+
+  edit_avatar: function (req, res, next) {
+
+    if (req.method === 'GET')
+      return res.json({'status': 'GET not allowed'});
+    //	Call via GET is error
+
+    if (req.xhr) {
+      // Yup, it's AJAX alright.
+
+      req.file('avatar').upload({
+        // don't allow the total upload size to exceed ~10MB
+        maxBytes: 10000000,
+        saveAs: function(file, cb){
+
+          // setting allowed file types
+          var allowedTypes = ['image/jpeg', 'image/png'];
+
+          var extension = file.filename.split('.').pop();
+
+          // seperate allowed and disallowed file types
+          if(allowedTypes.indexOf(file.headers['content-type']) === -1) {
+            err = {err: 'Disallowed file type'};
+            return res.badRequest(err);
+          }
+
+          var Path = '../../.tmp/public/uploads/avatar/' + req.session.User.id + '.' + extension;
+          cb(null, Path);
+
+        }
+      },function whenDone(err, file) {
+        if (err) return res.negotiate(err);
+
+        // If no files were uploaded, respond with an error.
+        if (file.length === 0){
+          return res.badRequest('No file was uploaded');
+        }
+
+
+        var extension = file[0].filename.split('.').pop();
+
+        // Save the "fd" and the url where the avatar for a user can be accessed
+        User.update(req.session.User.id, {
+          // Generate a unique URL where the avatar can be downloaded.
+          avatarUrl: require('util').format('%s/uploads/avatar/%s', sails.getBaseUrl(), req.session.User.id + '.' + extension),
+          // Grab the first file and use it's `fd` (file descriptor)
+          avatarFd: file[0].fd
+        }).exec(function (err){
+          if (err) return res.negotiate(err);
+          return res.ok({url: ''});
+        });
+      });
+    }
   }
-
-
 };
-
-
-
-
-
-
-
-
-
-
-
-/*
- socket.on('message', commetMessageReceivedFromServer);
- //socket.get('/user/user_subscribe');
-
- function commetMessageReceivedFromServer(message){
-
- if (message.model == 'user'){
- var userId = message.id;
- updateUserInDom(userId, message);
- }
- };
-
- function updayeUserInDom(userId, message){
-
- var page = document.localtion.pathname;
-
- page = page.replace(/(\/)$/, '');
-
- switch (page){
- case '/user':
- if (message.verb = 'update'){
- UserIndexPage.updateUser(userId, message);
- }
- break;
- }
- }
-
-
- var UserIndexPage = {
- updateUser: function(id, message){
-
- if (message.data.loggedIn) {
- var $userRow = $('tr[data-id"' + id + '"] td img').first();
- $userRow.attr('src', "/images/icon-online.png");
- } else {
- var $userRow = $('tr[data-id"' + id + '"] td img').first();
- $userRow.attr('src', "/images/icon-offline.png");
- }
- }
- }
-
-
-
-
-
-
-
-
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

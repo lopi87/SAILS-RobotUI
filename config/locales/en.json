@@ -18,5 +18,22 @@
 	"chooselanguage": "Choose a language...",
 	"selectfile": "Select file",
 	"remove": "Remove",
-	"change": "Change"
+	"change": "Change",
+	"actions": "actions",
+	"code": "code",
+	"type": "type",
+	"selectanicon": "selectanicon",
+	"color": "color",
+	"text": "text",
+	"background": "background",
+	"border": "border",
+	"activebackground": "activebackground",
+	"createaction": "createaction",
+	"events": "events",
+	"eventname": "eventname",
+	"unit": "unit",
+	"createevent": "createevent",
+	"videos": "videos",
+	"createvideo": "createvideo",
+	"edit": "edit"
 }

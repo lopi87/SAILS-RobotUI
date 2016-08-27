@@ -1,6 +1,4 @@
 <!-- PERSONALIZAR VENTANA -->
-<input id="icon_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
-
 <div id="board" class="panel panel-success margintop20">
   <div class="panel-heading"> Control </div>
 
@@ -20,6 +18,14 @@
 
       <div id="box_panel" class="col-md-11">
         <div id="panel" class="panel_resizable edit">
+
+          <% if (interface.has_video){%>
+          <% _.each(videos, function(video){ %>
+          <div id="play_<%= video.id %>" class="play_<%= video.id %> position_<%= video.id %>" style="background-image: url('/images/video/video.png'); height: 400px; width: 400px; border: 1px solid black;">
+          </div>
+          <% })%>
+          <%}%>
+
           <% _.each(actions, function(action){ %>
           <% if (action.icon){ %>
           <button id="button_custom_<%= action.id %>" class="btn btn-custom_<%= action.id %> position_<%= action.id %>" value="<%= action.code %>">
@@ -31,8 +37,16 @@
           <% } else { %>
           <button  id="button_custom_<%= action.id %>" value="<%= action.code %>" class="btn btn-custom_<%= action.id %> position_<%= action.id %>" ><%= action.name %></button>
           <% } %>
-          <%- partial ('../action/style_action.ejs', {action: action, set_position: true})%>
+          <%- partial ('../action/style_action.ejs', {action: action})%>
           <% })%>
+
+          <% _.each(events, function(event){ %>
+          <div id="event_<%= event.id %>" class="event_<%= event.id %> position_<%= event.id %>" style="max-width: 100px">
+            <h5><%= event.name %> <span class="label label-pill label-danger">-</span></h5>
+          </div>
+          <%- partial ('../event/style_event.ejs', {event: event})%>
+          <% })%>
+
         </div>
       </div>
     </div>
@@ -47,16 +61,27 @@
     </div>
   </div>
 </div>
+<input id="icon_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
+
 
 <script type="text/javascript">
 
   function get_max_top_left_panel() {
-    var top = 0;
-    var left = 0;
-    var inHeight = 0;
-    var inWidth = 0;
 
-    $('[id^=button_custom_]').each(function(){
+    var cord1 = max_top_left('[id^=button_custom_]');
+    var cord2 = max_top_left('[id^=event_]');
+    var cord3 = [];
+
+    cord3[0] = cord1[0] > cord2[0] ? cord1[0] : cord2[0];
+    cord3[1] = cord1[1] > cord2[1] ? cord1[1] : cord2[1];
+
+    return [cord3[0] ,cord3[1] ];
+  }
+
+
+  function max_top_left(id){
+    var top = 0, left = 0, inHeight = 0, inWidth = 0;
+    $(id).each(function(){
       if ($(this).position().top >= top){
         inHeight = $(this).outerHeight() + 5;
         top = $(this).position().top;
@@ -72,12 +97,11 @@
     left = left + inWidth;
     top = top + inHeight;
 
+
     //console.log('Dims: ' + inWidth + ' - ' + inHeight);
     console.log('Limit: ' + left + ' - ' + top);
     return [left ,top ];
   }
-
-
 
   //Enable elements draggables
   $('[id^=button_custom_]').draggable({cancel: false, containment: '#panel', scroll: false,
@@ -87,8 +111,8 @@
       var pos_y = ui.position.top;
       var id = this.id.replace('button_custom_','');
 
-      console.log('x: ' + pos_x + ' - y: ' + pos_y );
-      console.log('id: ' + id);
+      //console.log('x: ' + pos_x + ' - y: ' + pos_y );
+      //console.log('id: ' + id);
 
       //Do the ajax call to the server
       $.ajax({
@@ -101,6 +125,40 @@
 
         success: function(data){
           console.log('bottom position updated');
+        },
+
+        error: function(xhr, status, text) {
+          bootstrap_alert['danger'](xhr.responseText, 5000 );
+        }
+
+      });
+    }
+  });
+
+
+
+  //Enable elements draggables
+  $('[id^=event_]').draggable({cancel: false, containment: '#panel', scroll: false,
+
+    stop: function(event, ui) {
+      var pos_x = ui.position.left;
+      var pos_y = ui.position.top;
+      var id = this.id.replace('event_','');
+
+      //console.log('x: ' + pos_x + ' - y: ' + pos_y );
+      //console.log('id: ' + id);
+
+      //Do the ajax call to the server
+      $.ajax({
+        type: "POST",
+        url: "/event/update_position/",
+        data: { x: pos_x, y: pos_y, id: id},
+        beforeSend: function(xhr, settings){
+          xhr.setRequestHeader('X-CSRF-Token', $("#icon_csrf").val());
+        },
+
+        success: function(data){
+          console.log('event position updated');
         },
 
         error: function(xhr, status, text) {
@@ -135,7 +193,7 @@
       var min_w = $("#panel").css("minWidth").replace(/[^-\d\.]/g, '');
       var min_h = $("#panel").css("minHeight").replace(/[^-\d\.]/g, '');
 
-      console.log('new board size: ' + width + ' - ' + height );
+      //console.log('new board size: ' + width + ' - ' + height );
       console.log('valores minimos permitidos: ' + min_w + '-'  + min_h);
 
       //Nunca menor que el tamaño minimo

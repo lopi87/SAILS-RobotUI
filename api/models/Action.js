@@ -29,19 +29,23 @@ module.exports = {
     },
 
     color_text: {
-      type: 'hexadecimal'
+      type: 'hexadecimal',
+      defaultsTo: 'FFFFFF'
     },
 
     color_background: {
-      type: 'hexadecimal'
+      type: 'hexadecimal',
+      defaultsTo: '611BBD'
     },
 
     color_border: {
-      type: 'hexadecimal'
+      type: 'hexadecimal',
+      defaultsTo: '130269'
     },
 
     color_active_background: {
-      type: 'hexadecimal'
+      type: 'hexadecimal',
+      defaultsTo: '49247A'
     },
 
     coordinate_x: {

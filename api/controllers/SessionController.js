@@ -8,25 +8,16 @@
 module.exports = {
 
   new: function(req, res){
-
-/*
-    var oldDateObj = new Date();
-    var newDateObj = new Date(oldDateObj.getTime() + 60000);
-    req.session.cookie.expires = newDateObj;
-    req.session.authenticated = true;
-    console.log(req.session);
-*/
     res.view('session/new');
   },
 
+
+  //Almacenamiento en la base de datos la sesion de cada usuario de la pagina (PARA MANDAR MENSAJES)
   saveSocketID: function(req, res) {
-    if (!req.isSocket) {
-      return res.badRequest();
-    }
+    if (!req.isSocket) return res.badRequest();
 
     var socketId = sails.sockets.id(req);
     // => "BetX2G-2889Bg22xi-jy"
-
 
     if(req.session.User != undefined) {
       var sessionObj = {
@@ -69,7 +60,7 @@ module.exports = {
       if (err) return next(err);
 
       if (!user){
-        msg = { err: 'The email address' + req.param('email') + ' not found' };
+        msg = { err: 'The email address ' + req.param('email') + ' not found' };
         FlashService.error(req, msg );
 
         res.redirect('session/new');
@@ -107,9 +98,9 @@ module.exports = {
 
           //Si el usuario es administrador redirecciona a la vista de todos los usuarios
           if (req.session.User.admin) {
-            res.redirect('/user');
+            res.redirect('/robot/index/');
           }else{
-            res.redirect('/user/show/' + user.id);
+            res.redirect('/robot/index/');
           }
 
           return;
@@ -127,17 +118,11 @@ module.exports = {
         if(err) return next(err);
         req.session.destroy();
 
-        //Informar a otros clientes (sockets abiertos) que el usuario esta logueado
+        //Informar a otros clientes (sockets abiertos) que el usuario no esta logueado
         User.publishUpdate(user.id, {
           loggedIn: false,
           id: user.id
         });
-
-       // Restore session
-       // Session.update({socket_id:sails.sockets.id(req)},{user_id:'invited'}).exec(function afterwards(err, updated){
-       //   if (err) return next(err);
-       //   console.log('Updated session to invited');
-       // });
 
         //redireccion a Sign-in
         return res.redirect('session/new');

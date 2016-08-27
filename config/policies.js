@@ -30,12 +30,12 @@ module.exports.policies = {
 
 
   user: {
-    show: ["userCanSeeProfile","message","flash"],
-    edit: ["userCanSeeProfile","message","flash"],
-    update: ["userCanSeeProfile","message","flash"],
+    show: ["sessionAuth", "userCanSeeProfile","message","flash"],
+    edit: ["sessionAuth", "userCanSeeProfile","message","flash"],
+    update: ["sessionAuth", "userCanSeeProfile","message","flash"],
     index: ["isadmin","message","flash" ],
     render: ["userCanSeeProfile","message","flash"],
-    destroy: ["message","flash"],
+    destroy: ["sessionAuth", "userCanSeeProfile", "message","flash"],
     create: ["message", "flash"]
   },
 
@@ -62,7 +62,8 @@ module.exports.policies = {
   },
 
   interface: {
-    configure: ["flash", "message","sessionAuth"]
+    configure: ["flash", "message","sessionAuth"],
+    show: ["sessionAuth", "message","flash"]
   }
 
 

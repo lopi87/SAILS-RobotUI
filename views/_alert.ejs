@@ -26,3 +26,13 @@
 </script>
 <% }); %>
 <% } %>
+
+<% if (flash != 'undefined' && flash['server_exit'].length > 0) { %>
+<% flash['server_exit'].forEach(function(message) { %>
+  <% Object.keys(flash['server_exit']).forEach(function(error){ %>
+  <script type="text/javascript">
+    bootstrap_alert['danger']('<%- JSON.stringify(flash['server_exit'][error])%>', 0 )
+</script>
+  <% }) %>
+<% }); %>
+<% } %>

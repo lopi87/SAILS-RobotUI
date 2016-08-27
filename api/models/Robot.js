@@ -22,9 +22,9 @@ module.exports = {
       defaultsTo: false
     },
 
-    online: {
+    down: {
       type: 'boolean',
-      defaultsTo: false
+      defaultsTo: true
     },
 
     ipaddress: {
@@ -42,18 +42,34 @@ module.exports = {
       defaultsTo: false
     },
 
+    avatarUrl:{
+      type:'string',
+      defaultsTo: '/images/avatar/robot_avatar.png'
+    },
+
+    avatarFd:{
+      type:'string'
+    },
+
+
     // Usuario al que pertenece
     owner: {
       model: 'user'
     },
 
-    // Usuarios del robot
-    guests: {
+
+    // Add a reference to Robot
+    drivers:{
       collection: 'user',
-      via: 'robots',
-      through: 'linked_user_robot',
-      dominant: true
+      via: 'd_robots'
     },
+
+    // Add a reference to Robot
+    viewers:{
+      collection: 'user',
+      via: 'v_robots'
+    },
+
 
     //Interface del robot
     robot_interface: {

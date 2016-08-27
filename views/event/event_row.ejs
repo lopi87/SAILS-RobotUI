@@ -1,0 +1,10 @@
+<tr id="line_<%= event.id %>" data-model="event">
+  <th scope="row"></th>
+  <td><%= event.name %></td>
+  <td>
+    <input id="event_<%= event.id %>" class="disabled" type="text">
+  </td>
+  <td> <button id="delete_event_<%= event.id %>" type="button" class="btn btn-sm btn-danger" onclick="row_event_deleted('<%= event.id %>')">Delete</button></td>
+</tr>
+
+<%- partial ('../event/style_event.ejs', {event: event})%>

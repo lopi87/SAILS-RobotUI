@@ -22,4 +22,5 @@ module.exports = function(req, res, next) {
   FlashService.warning(req, msg );
   res.redirect('/');
   return;
+  //return res.forbidden('You are not permitted to perform this action.');
 };

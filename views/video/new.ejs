@@ -1,0 +1,68 @@
+
+<form id="video-form" class="form-signin" method="post" data-parsley-validate style="max-width: none">
+  <div class="row">
+    <h1 class="text-center login-title marginbottom20"><%= i18n('videos') %></h1>
+    <div class="col-md-6">
+      <div class="col-md-2"></div>
+      <div class="col-md-10">
+
+        <div class="control-group marginbottom5">
+          <label for="vname"><%= i18n("name") %> * :</label>
+          <input id="v_name_field" type="text" class="form-control" required placeholder="<%= i18n("name") %>" name="name">
+        </div>
+
+        <div class="control-group marginbottom5">
+          <label for="vevent"><%= i18n("eventname") %> * :</label>
+          <input id="v_event_field" type="text" class="form-control" required placeholder="<%= i18n("eventname") %>" name="event_name">
+        </div>
+
+        <div class="row">
+          <div class="col-md-7">
+          </div>
+          <div class="col-md-5">
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-10">
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+  <div class="form-signin">
+    <input class="btn btn-lg btn-primary btn-block" value="<%= i18n('createvideo') %>"  onclick="new_video('<%= interface.id %>')">
+  </div>
+  <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+</form>
+
+<script type="text/javascript">
+  addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
+  $('#video-form').parsley().on('field:validated', function() {
+    var ok = $('.parsley-error').length === 0;
+  })
+
+
+  function new_video(id) {
+    $.ajax({
+      url: '/video/newvideo/' + id,
+      type: 'GET',
+      data: {name: $( "#v_name_field" ).val(), event_name: $( "#v_event_field" ).val()},
+      done:function() {
+      },
+
+      success: function(data){
+        $("#event_update").append(data);
+        bootstrap_alert['success']('A new video element has been created!', 5000 );
+      },
+
+      error: function(xhr, status, text) {
+        bootstrap_alert['danger'](xhr.responseText, 0);
+      }
+    });
+  }
+
+
+</script>

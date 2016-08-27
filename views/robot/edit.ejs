@@ -1,0 +1,107 @@
+<%- partial('../_alert.ejs', {flash: flash}) %>
+
+
+<form id="sign-up-form" class="form-signin" action="create" method="post" data-parsley-validate style="max-width: none">
+  <div class="row">
+    <h1 class="text-center login-title marginbottom20"><%= i18n('createrobot') %></h1>
+
+    <div class="col-md-6">
+      <div class="col-md-2"></div>
+      <div class="col-md-10">
+        <div class="control-group">
+          <label for="name"><%= i18n("name") %> * :</label>
+          <input class="form-control" name="name" placeholder="<%= i18n("name") %>" required="" type="text">
+        </div>
+
+        <div class="form-group">
+          <label for="message"><%= i18n("description") %>:</label>
+          <textarea id="message" class="form-control" name="description" placeholder="<%= i18n("description") %>" data-parsley-trigger="keyup" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="message"><%= i18n("ipaddress") %>:</label>
+          <input class="form-control" name="ipaddress" id="ip" type="text" class="form-control" placeholder="<%= i18n("ipaddress") %>" required=""  data-parsley-pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$">
+        </div>
+
+        <div class="form-group">
+          <label for="message"><%= i18n("port") %>:</label>
+          <input class="form-control" type="number" min="0" class="form-control" placeholder="<%= i18n("port") %>" name="port" required="" data-parsley-maxlength="4">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-10">
+        <!-- upload images http://maangalabs.com/blog/2014/08/12/uploading-a-file-in-sails/
+        otro ejemplo:
+        http://plugins.krajee.com/file-input/demo
+        -->
+
+        <div class="form-group">
+          <label for="question"><%= i18n("image") %><%= i18n("filesmallerthan %s","42") %></label>
+          <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+            <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+            <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new"><%= i18n("selectfile") %></span><span class="fileinput-exists"><%= i18n("change") %></span><input id="input_avatar" type="file" name="uploadPicture" data-parsley-filemaxmegabytes="42" data-parsley-trigger="change" data-parsley-filemimetypes="image/jpeg, image/png"></span>
+            <a id="remove_iconfile_input" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput"><%= i18n("remove") %></a>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="question"><%= i18n("documentation") %> <%= i18n("filesmallerthan %s","42") %></label>
+          <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+            <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+            <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new"><%= i18n("selectfile") %></span><span class="fileinput-exists"><%= i18n("change") %></span><input id="input_avatar" type="file" name="uploadDocumentation" data-parsley-filemaxmegabytes="42" data-parsley-trigger="change" data-parsley-filemimetypes="application/pdf"></span>
+            <a id="remove_iconfile_input" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput"><%= i18n("remove") %></a>
+          </div>
+        </div>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="public"> Public
+          </label>
+        </div>
+
+        <div class="control-group">
+          <label for="name"><%= i18n("viewerusers") %> * :</label>
+
+          <select tabindex="-1" multiple="" data-placeholder="Choose viewer users..." class="chosen-select-users" style="width:360px; height: auto" tabindex="2" name="viewer_users">
+            <option value=""></option>
+            <% users.forEach(function(user)  { %>
+            <option data-img-src="" value="<%= user._id %>"><%= user.name %></option>
+            <% }); %>
+          </select>
+        </div>
+
+        <script type="text/javascript">
+          $('.chosen-select-users').chosen({});
+        </script>
+
+        <div class="control-group">
+          <label for="name"><%= i18n("driverusers") %> * :</label>
+          <select tabindex="-1" multiple="" data-placeholder="Choose driver users..." class="chosen-select-users" style="width:360px; height: auto" tabindex="2" name="driver_users">
+            <option value=""></option>
+            <% users.forEach(function(user)  { %>
+            <option data-img-src="" value="<%= user._id %>"><%= user.name %></option>
+            <% }); %>
+          </select>
+        </div>
+
+        <script type="text/javascript">
+          $('.chosen-select-users').chosen({});
+        </script>
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+  <div class="form-signin">
+    <input class="btn btn-lg btn-primary btn-block" value="<%= i18n('createrobot') %>" type="submit">
+  </div>
+  <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+</form>
+
+<script type="text/javascript">
+  addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
+  $('#sign-up-form').parsley().on('field:validated', function() {
+    var ok = $('.parsley-error').length === 0;
+  })
+</script>

@@ -3,18 +3,17 @@
 <div class="container">
 
   <h3>Users</h3>
+  <div class="table-responsive">
   <table class="table">
     <thead>
     <tr>
-      <th></th>
+      <th>Online</th>
       <th>ID</th>
       <th>Name</th>
       <th>Title</th>
       <th>Email</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Admin</th>
+      <th>Actions</th>
     </tr>
     </thead>
 
@@ -39,8 +38,8 @@
       <td> <img src="/images/pawn.png" height="42" width="42"></td>
       <% } %>
 
-      <td> <a href="user/show/<%= user.id %>" class="btn btn-sm btn-primary">Show</a></td>
-      <td> <a href="user/edit/<%= user.id %>" class="btn btn-sm btn-warning">Edit</a></td>
+      <td><a href="/user/show/<%= user.id %>" class="btn btn-sm btn-primary"><%= i18n('show') %></a></td>
+      <td><a href="/user/edit/<%= user.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a></td>
 
       <td>
         <form action="/user/destroy/<%=user.id%>" method="post">
@@ -54,6 +53,7 @@
     <% })%>
     </tbody>
   </table>
+    </div>
 </div>
 
 <div id="user_list"></div>
@@ -65,9 +65,6 @@
     io.socket.get('/user/user_subscribe');
 
     io.socket.on('user', function (obj) {
-
-      alert('evento');
-
       if (obj.verb == 'created') {
         var user = obj.data;
         $.ajax({
@@ -85,7 +82,7 @@
         alert('updated');
         var data = obj.data;
         change_img_state(data.id, data.loggedIn);
-        console.log('User has been updated to ' + data.loggedIn);
+        console.log('User has been updated to online:' + data.loggedIn);
       }
 
       if (obj.verb == 'destroyed') {
@@ -99,22 +96,6 @@
 
   addLoadEvent(subscribeAndListen_user);
 
-
-  //IMAGEN ESTADO
-  function change_img_state(id, boolean){
-    var img_id = '#img_state_' + id;
-    var img_on= "online.png";
-    var img_off= "offline.png";
-    var src = $(img_id).attr("src");
-
-    if (boolean){
-      src = src.replace(img_off, img_on);
-      $(img_id).attr("src", src);
-    }else{
-      src = src.replace(img_on,img_off);
-      $(img_id).attr("src", src);
-    }
-  }
 
 </script>
 

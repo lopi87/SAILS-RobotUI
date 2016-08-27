@@ -1,3 +1,92 @@
-ROBOT SHOW
-<h3> <%= i18n('Welcome') %> </h3>
+  <div class="container">
+    <h2 class="form-sigin-heading">Robot information</h2>
+
+    <div class="card" style="min-width:300px; width: 30%; margin: auto">
+      <header class="card-container card-light-grey">
+        <h3><%= robot.name %></h3>
+      </header>
+
+      <div class="card-container paddingtop10">
+        <% if(robot.busy){ %>
+        <span id="label_state_<%=robot.id%>" class="label label-pill label-danger"> Busy </span>
+        <% } else { %>
+        <span id="label_state_<%=robot.id%>" class="label label-pill label-success"> Free </span>
+        <% } %>
+        <img src="<%= user.avatarUrl %>" class="card-circle marginleft5" height="32" width="32">
+        <%= user.name %>
+      </div>
+      <hr>
+
+      <div class="card-container">
+        <img src="<%= robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:75px">
+        <p>Address: <%= robot.ipaddress + ':' + robot.port %></p>
+        <p>Description: <%= robot.description %></p>
+        <br>
+
+        <div class="row">
+          <div class="col-md-6">
+            <label>Drivers</label>
+            <ul>
+              <% user_driver.forEach(function(user)  { %>
+              <li>
+                <img src="<%= user.avatarUrl %>" class="card-circle marginleft5" height="32" width="32">
+                <%= user.name %>
+              </li>
+              <% }); %>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <label>Viewers</label>
+            <ul>
+              <% user_viewer.forEach(function(user)  { %>
+              <li>
+                <img src="<%= user.avatarUrl %>" class="card-circle marginleft5" height="32" width="32">
+                <%= user.name %>
+              </li>
+              <% }); %>
+            </ul>
+          </div>
+        </div>
+
+        <div class="clear"></div>
+      </div>
+
+      <div class="card-dark-grey margintop10 card-btn-block">
+        <a class="btn btn-medium btn-primary" href="/robot/edit/<%= robot.id%>">Edit</a>
+        <a class="btn btn-medium btn-primary btn-success" href="/robot/index/<%= robot.id%>">Show interface</a>
+      </div>
+    </div>
+
+  <div class="row">
+    <button></button>
+
+  </div>
+
+  </div>
+
+
+
+  <script type="text/javascript">
+
+    addLoadEvent(subscribeAndListen_robot);
+
+    function subscribeAndListen_robot(){
+      io.socket.get('/robot/robot_subscribe/');
+
+      io.socket.on('robot', function (obj) {
+        if (obj.verb == 'updated') {
+          var data = obj.data;
+          change_free_busy(data.id, data.busy);
+          console.log('Robot ' + data.id + ' has been updated to: busy:' + data.busy);
+
+          if (data.busy){
+            bootstrap_alert['success']('Robot busy', 5000)
+          }else{
+            bootstrap_alert['success']('Robot free!', 5000)
+          }
+        }
+
+      });
+    }
+  </script>
 

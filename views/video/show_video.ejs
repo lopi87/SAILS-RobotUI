@@ -1,12 +1,11 @@
 <div id="logger"></div>
 
-<img id="play">
-
+<img id="play" class="img-responsive" src="/images/video/video.png">
 
 <script type="text/javascript">
-  //Subscribimos
 
   function listenVideo() {
+    //Subscribimos
     io.socket.get("/interface/video_emit");
 
     io.socket.on('message', function (data) {

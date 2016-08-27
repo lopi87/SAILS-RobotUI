@@ -17,9 +17,14 @@ module.exports = {
       User.find(function foundUsers(err, users){
         if(err) return next(err);
 
-        res.view({
-          user_messages: messages,
-          users:users
+        Robot.find({owner: req.session.User.id}).exec(function foundRobot(err, robots){
+          if(err) return next(err);
+
+          res.view({
+            user_messages: messages,
+            users:users,
+            robots: robots
+          });
         });
       });
     });
@@ -64,7 +69,7 @@ module.exports = {
           if (!session) return next();
             User.message(session.user_id, {
               from: req.session.User.id,
-              msg: req.param('message')
+              msg: {msg: req.param('message'), id: msge.id}
             });
         });
         //

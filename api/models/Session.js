@@ -19,6 +19,10 @@ module.exports = {
       defaultsTo: 'invited'
     },
 
+    robot_id:{
+      model: 'robot'
+    },
+
     toJSON: function(){
       var obj = this.toObject();
       delete obj._csrf;

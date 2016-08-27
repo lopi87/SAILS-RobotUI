@@ -2,11 +2,18 @@
 
 <div class="container">
   <div class="jumbotron">
-    <h1>RobotUI</h1>
-    <h2>Controler</h2>
 
-    <% if (!req.session.User) {%>
-    <a href="/user/new" class="btn btn-lg btn-success"> <%= __("signupnow") %></a>
-    <% } %>
+    <img src="/images/logo/logotipo.png" class="img-responsive center-block" alt="RobotUI.com">
   </div>
 </div>
+
+<% if (!req.session.User) {%>
+<div class="container">
+  <div class="jumbotron">
+    <div class="margintop20">
+      <a href="/user/new" class="btn btn-lg btn-success"> <%= __("signupnow") %></a>
+    </div>
+  </div>
+</div>
+<% } %>
+

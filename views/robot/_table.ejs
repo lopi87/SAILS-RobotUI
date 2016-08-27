@@ -1,0 +1,88 @@
+<table class="table">
+  <tr>
+    <th>State</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Ip address</th>
+    <th>Interface</th>
+    <th></th>
+  </tr>
+
+  <% _.each(robots, function(robot){ %>
+  <tr id="<%= robot.id %>" data-model="robot">
+
+    <% if(robot.busy){ %>
+    <td> <span id="label_state_<%=robot.id%>" class="label label-pill label-danger"> Busy </span></td>
+    <% } else { %>
+    <td> <span id="label_state_<%=robot.id%>" class="label label-pill label-success"> Free </span> </td>
+    <% } %>
+
+    <td><%= robot.name %></td>
+    <td><%= robot.description %></td>
+    <td><%= robot.ipaddress %> : <%= robot.port%></td>
+    <td> <%= robot.robot_interface %> </td>
+    <td>
+      <% switch(type){
+      case "my_robots": %>
+      <a href="/robot/show/<%= robot.id %>" class="btn btn-sm btn-info"></i> show </a>
+      <a href="/robot/show_permissions/<%= robot.id %>" class="btn btn-sm btn-info"></i> Permissions </a>
+
+      <% if (robot.busy ){ %>
+      <a href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary disabled"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+      <a class="btn btn-sm btn-danger disabled" onclick=" window.location.href='<%='/robot/destroy/' + robot.id %>'"><i class="fa fa-trash-o"></i> Delete </a>
+      <a href="/interface/configure/<%= robot.robot_interface %>" class="btn btn-sm btn-warning disabled"><i class="fa fa-wrench" aria-hidden="true"></i> Configure</a>
+      <% } else { %>
+      <a href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+      <a class="btn btn-sm btn-danger" onclick=" window.location.href='<%='/robot/destroy/' + robot.id %>'"><i class="fa fa-trash-o"></i> Delete </a>
+      <a href="/interface/configure/<%= robot.robot_interface %>" class="btn btn-sm btn-warning"><i class="fa fa-wrench" aria-hidden="true"></i> Configure</a>
+      <% } %>
+      <% break;
+      case "my_driver_robots": %>
+      <% if (robot.busy ){ %>
+      <a href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary disabled"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+      <a href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
+      <% } else { %>
+      <a href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+      <a href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary disabled"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
+      <% } %>
+      <a class="btn btn-sm btn-danger" onclick=" unlink('<%= req.session.User.id %>', '<%=robot.id%>', 'driver')"><i class="fa fa-trash-o"></i> Unlink </a>
+
+      <% break;
+      case "my_viewer_robots": %>
+
+      <% if (robot.busy ){ %>
+      <a href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
+  <% } else { %>
+      <a href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary disabled"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
+      <% } %>
+      <a class="btn btn-sm btn-danger" onclick=" unlink('<%= req.session.User.id %>', '<%=robot.id%>', 'viewer')"><i class="fa fa-trash-o"></i> Unlink </a>
+      <% break;
+      } %>
+    </td>
+  </tr>
+  <% }) %>
+
+</table>
+
+
+
+<script type="text/javascript">
+  function unlink(user_id, robot_id, type_link) {
+    $.ajax({
+      url: '/robot/unlink/' + robot_id,
+      type: 'GET',
+      data: {robot_id: robot_id, user_id: user_id, type_link: type_link},
+      done:function() {
+      },
+
+      success: function(data){
+        $("#" + robot_id).remove();
+        bootstrap_alert['success']('Unlink!', 5000 );
+      },
+
+      error: function(xhr, status, text) {
+        bootstrap_alert['danger'](xhr.responseText, 5000 );
+      }
+    });
+  }
+</script>

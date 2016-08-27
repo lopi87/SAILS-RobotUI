@@ -66,9 +66,21 @@
 <body>
 <nav class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <a class="navbar-brand" rel="home" href="/" title="Home page">
-      <img src="/images/logo/logo.png" style="max-width:100px; margin-top: -7px;">
-    </a>
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" rel="home" href="/" title="Home page">
+        <img src="/images/logo/logotipo_header.png" style="max-width:100px;">
+      </a>
+    </div>
+
+
+
+    <div id="bs-example-navbar-collapse-1" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
     <ul class="nav navbar-nav">
       <% if (session.authenticated) { %>
 
@@ -91,6 +103,27 @@
       <% } %>
       <li class="nav-item">
         <a href="/robot/index"> My Robots</a>
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="#">
+          Robots
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu inverse-dropdown">
+          <li>
+            <a href="/robot/index"> My Robots</a>
+          </li>
+          <li>
+            <a href="/robot/index_driver_robots"> My driver robots</a>
+          </li>
+          <li>
+            <a href="/robot/index_viewer_robots"> My viewer robots</a>
+          </li>
+          <li class="nav-dividernavbar-inverse" role="separator"></li>
+          <li>
+            <a href="/robot/index"> Show all Robots</a>
+          </li>
+        </ul>
       </li>
       <% } %>
     </ul>
@@ -141,22 +174,31 @@
       <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy"><%= __("signout") %></a>
       <% } %>
       <% if (!session.authenticated) { %>
-      <form class="navbar-form navbar-right" action="/session/create">
+      <form id="login_form" class="navbar-right" action="/session/create">
         <div class="form-group">
-          <input type="text" placeholder="<%= __("email") %>" name="email" class="form-control">
+          <input type="email" placeholder="<%= __("email") %>" name="email" data-parsley-trigger="change" required class="form-control">
         </div>
         <div class="form-group">
-          <input type="password" placeholder="Password" name="password" class="form-control">
+          <input type="password" placeholder="<%= i18n("password") %>" required  name="password" class="form-control">
         </div>
-        <button type="submit" class="btn btn-success"><%= __("signin") %></button>
+        <button type="submit" class="btn btn-success navbar-btn"><%= __("signin") %></button>
         <input type="hidden" name="_csrf" value="<%= _csrf %>">
       </form>
+
+      <script type="text/javascript">
+        addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
+        $('#login_form').parsley().on('field:validated', function() {
+          var ok = $('.parsley-error').length === 0;
+        })
+      </script>
+
       <% } %>
     </div>
     <script type="text/javascript">
       $('ul.nav > li > a[href="' + document.location.pathname + '"]').parent().addClass('active');
     </script>
   </div>
+    </div>
 </nav>
 
 <div id="alert_placeholder"></div>
@@ -167,7 +209,11 @@
 <div class="container">
   <hr>
   <footer class="footer">
-        <div class="text-right">
+    <a class="navbar-brand" rel="home" href="/" title="Home page">
+      <img src="/images/logo/logotipo.png" style="max-width:150px;">
+    </a>
+
+        <div class="text-right marginbottom10">
           <a href="http://sailsjs.com/">sails.js</a>
           <div>Author: Manuel López Urbina</div>
           <a href="https://www.facebook.com/robotui"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
@@ -175,6 +221,13 @@
           <a href="https://plus.google.com/+Robotui-page"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
           <a href="mailto:robotui.controller@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
         </div>
+
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted"><href>about RobotUI</href></p>
+      </div>
+    </div>
+
   </footer>
 </div>
 </body>
@@ -210,7 +263,7 @@
           }
 
           $('#buttom_msg').html('<a href="/message/index">Messages <span id="msg_new" class="label label-pill label-danger">' + '+' + num_msg + '</span></a>');
-          bootstrap_alert['info']('You have a new message!', 5000 );
+          bootstrap_alert['info']('You have a new message! <a href="/message/show/' + message.data.msg.id + '">Open Here</a>' , 0 );
           break;
 
         default:
