@@ -148,16 +148,30 @@ function change_img_state(id, boolean){
   }
 }
 
-//CAMBIAR FREE BUSY
-function change_free_busy(id, boolean){
-  var label_id = '#label_state_' + id;
+//CAMBIAR FREE BUSY ROBOT
+function change_free_busy(id, busy){
+  var label_id = '[id="label_state_'+ id + '"]';
   var label_free= '<span class="label label-pill label-success"> Free </span>';
   var label_busy= '<span class="label label-pill label-danger"> Busy </span>';
 
-  if (boolean){
+  var btn_config = '[id="btn_config_'+ id + '"]';
+  var btn_tcontrol =  '[id="btn_tcontrol_'+ id + '"]';
+  var btn_view =  '[id="btn_view_'+ id + '"]';
+
+
+  if (busy){
     $(label_id).html(label_busy);
+
+    $(btn_config).addClass('hidden');
+    $(btn_view).removeClass('hidden');
+    $(btn_tcontrol).addClass('hidden');
+
   }else{
     $(label_id).html(label_free);
+
+    $(btn_config).removeClass('hidden');
+    $(btn_view).addClass('hidden');
+    $(btn_tcontrol).removeClass('hidden');
   }
 }
 

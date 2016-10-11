@@ -1,7 +1,7 @@
 <%- partial('../_alert.ejs', {flash: flash}) %>
 
 
-<form id="sign-up-form" class="form-signin" action="create" method="post" data-parsley-validate style="max-width: none">
+<form id="sign-up-form" class="form-signin" action="create" enctype="multipart/form-data" method="post" data-parsley-validate style="max-width: none">
   <div class="row">
     <h1 class="text-center login-title marginbottom20"><%= i18n('createrobot') %></h1>
 
@@ -37,56 +37,52 @@
         -->
 
         <div class="form-group">
-          <label for="question"><%= i18n("image") %><%= i18n("filesmallerthan %s","42") %></label>
+          <label for="question"><%= i18n("image") + ':' %></label>
           <div class="fileinput fileinput-new input-group" data-provides="fileinput">
             <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
-            <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new"><%= i18n("selectfile") %></span><span class="fileinput-exists"><%= i18n("change") %></span><input id="input_avatar" type="file" name="uploadPicture" data-parsley-filemaxmegabytes="42" data-parsley-trigger="change" data-parsley-filemimetypes="image/jpeg, image/png"></span>
+            <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new"><%= i18n("selectfile") %></span><span class="fileinput-exists"><%= i18n("change") %></span><input id="input_avatar" type="file" name="robot_avatar" data-parsley-filemaxmegabytes="42" data-parsley-trigger="change" data-parsley-filemimetypes="image/jpeg, image/png"></span>
             <a id="remove_iconfile_input" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput"><%= i18n("remove") %></a>
           </div>
+          <label for="question"><%= i18n("filesmallerthan %s","42") %></label>
         </div>
 
         <div class="form-group">
-          <label for="question"><%= i18n("documentation") %> <%= i18n("filesmallerthan %s","42") %></label>
+          <label for="question"><%= i18n("documentation") + ':' %></label>
           <div class="fileinput fileinput-new input-group" data-provides="fileinput">
             <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
-            <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new"><%= i18n("selectfile") %></span><span class="fileinput-exists"><%= i18n("change") %></span><input id="input_avatar" type="file" name="uploadDocumentation" data-parsley-filemaxmegabytes="42" data-parsley-trigger="change" data-parsley-filemimetypes="application/pdf"></span>
+            <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new"><%= i18n("selectfile") %></span><span class="fileinput-exists"><%= i18n("change") %></span><input id="input_documentation" type="file" name="robot_documentation" data-parsley-filemaxmegabytes="42" data-parsley-trigger="change" data-parsley-filemimetypes="application/pdf"></span>
             <a id="remove_iconfile_input" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput"><%= i18n("remove") %></a>
           </div>
-        </div>
-
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" name="public"> Public
-          </label>
+          <label for="question"> <%= i18n("filesmallerthan %s","42") %></label>
         </div>
 
         <div class="control-group">
           <label for="name"><%= i18n("viewerusers") %> * :</label>
 
-          <select tabindex="-1" multiple="" data-placeholder="Choose viewer users..." class="chosen-select-users" style="width:360px; height: auto" tabindex="2" name="viewer_users">
+          <select tabindex="-1" multiple="" data-placeholder="Choose viewer users..." class="chosen-select-viewers" name="viewer_users">
             <option value=""></option>
             <% users.forEach(function(user)  { %>
-            <option data-img-src="" value="<%= user._id %>"><%= user.name %></option>
+            <option data-img-src="<%= user.avatarUrl%>" value="<%= user.id %>"><%= user.name %></option>
             <% }); %>
           </select>
         </div>
 
         <script type="text/javascript">
-          $('.chosen-select-users').chosen({});
+          $('.chosen-select-viewers').chosen({width: '100%'});
         </script>
 
         <div class="control-group">
           <label for="name"><%= i18n("driverusers") %> * :</label>
-          <select tabindex="-1" multiple="" data-placeholder="Choose driver users..." class="chosen-select-users" style="width:360px; height: auto" tabindex="2" name="driver_users">
+          <select tabindex="-1" multiple="" data-placeholder="Choose driver users..." class="chosen-select-drivers"  name="driver_users">
             <option value=""></option>
             <% users.forEach(function(user)  { %>
-            <option data-img-src="" value="<%= user._id %>"><%= user.name %></option>
+            <option data-img-src="<%= user.avatarUrl%>" value="<%= user.id %>"><%= user.name %></option>
             <% }); %>
           </select>
         </div>
 
         <script type="text/javascript">
-          $('.chosen-select-users').chosen({});
+          $('.chosen-select-drivers').chosen({width: '100%'});
         </script>
 
       </div>

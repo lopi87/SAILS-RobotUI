@@ -29,12 +29,10 @@ module.exports = {
       via: 'interface_owner'
     },
 
-    //Videos de la interfaz
-    videos: {
-      collection: 'video',
-      via: 'interface_owner'
+    //Video de la interfaz
+    video: {
+      model: 'video'
     },
-
 
     panel_sizex: {
       type: 'float',

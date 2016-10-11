@@ -37,14 +37,9 @@ module.exports = {
       required: true
     },
 
-    public: {
-      type: 'boolean',
-      defaultsTo: false
-    },
-
     avatarUrl:{
       type:'string',
-      defaultsTo: '/images/avatar/robot_avatar.png'
+      defaultsTo: '/images/robot_avatar/robot_avatar.png'
     },
 
     avatarFd:{
@@ -74,6 +69,15 @@ module.exports = {
     //Interface del robot
     robot_interface: {
       model: 'interface'
+    },
+
+
+    longitude: {
+      type: 'float'
+    },
+
+    latitude: {
+      type: 'float'
     },
 
 

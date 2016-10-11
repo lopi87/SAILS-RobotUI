@@ -54,5 +54,11 @@
 	"show": "show",
 	"Sails.js / Skipper Image Uploading and Resizing Example": "Sails.js / Skipper Image Uploading and Resizing Example",
 	"title": "title",
-	"or": "or"
+	"or": "or",
+	"editrobot": "editrobot",
+	"editaccount": "editaccount",
+	"upload": "upload",
+	"Permisssions": "Permisssions",
+	"icon": "icon",
+	"author": "author"
 }

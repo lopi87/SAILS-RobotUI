@@ -29,25 +29,70 @@ module.exports = {
 
 
   upload_avatar: function(img, user, done){
-    img.upload({
-      // don't allow the total upload size to exceed ~10MB
-      maxBytes: 10000000,
-      saveAs: function(file, cb){
+    img.upload({ maxBytes: 10000000, saveAs: function(file, cb){
 
         // setting allowed file types
-        var allowedTypes = ['image/jpeg', 'image/png'];
+      var allowedTypes = ['image/jpeg', 'image/png'];
+      var Path = '../../.tmp/public/uploads/avatar/disallowed.disallowed';
 
+
+      // seperate allowed and disallowed file types
+      if(allowedTypes.indexOf(file.headers['content-type']) != -1 && file.length != 0) {
         var extension = file.filename.split('.').pop();
+        Path = '../../.tmp/public/uploads/avatar/' + user.id + '.' + extension;
 
-        // seperate allowed and disallowed file types
-        if(allowedTypes.indexOf(file.headers['content-type']) === -1) {
-          err = {err: 'Disallowed file type'};
-        }
-        var Path = '../../.tmp/public/uploads/avatar/' + user.id + '.' + extension;
-        cb(null, Path);
+        // Save the url where the avatar for a user can be accessed
+        User.update(user.id, {
+          // Generate a unique URL where the avatar can be downloaded.
+          avatarUrl: require('util').format('%s/uploads/avatar/%s', sails.getBaseUrl(), user.id + '.' + extension)
+        }).exec(function userUpdated(err, updated){
+          if (err) {
+            err = {err: 'Err'};
+            FlashService.error(req, err);
+            return;
+          }
+        });
       }
+      cb(null, Path);
+
+    }
+    }, done );
+  },
+
+
+
+  upload_robot_avatar: function(img, robot, done){
+    img.upload({ maxBytes: 10000000, saveAs: function(file, cb){
+
+      // setting allowed file types
+      var allowedTypes = ['image/jpeg', 'image/png'];
+      var Path = '../../.tmp/public/uploads/robot_avatar/disallowed.disallowed';
+
+
+      // seperate allowed and disallowed file types
+      if(allowedTypes.indexOf(file.headers['content-type']) != -1 && file.length != 0) {
+        var extension = file.filename.split('.').pop();
+        Path = '../../.tmp/public/uploads/robot_avatar/' + robot.id + '.' + extension;
+
+        // Save the url where the avatar for a user can be accessed
+        Robot.update(robot.id, {
+          // Generate a unique URL where the avatar can be downloaded.
+          avatarUrl: require('util').format('%s/uploads/robot_avatar/%s', sails.getBaseUrl(), robot.id + '.' + extension)
+        }).exec(function robotUpdated(err, updated){
+          if (err) {
+            err = {err: 'Err'};
+            FlashService.error(req, err);
+            return;
+          }
+        });
+      }
+      cb(null, Path);
+
+    }
     }, done );
   }
+
+
 
 };
 

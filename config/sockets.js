@@ -147,35 +147,61 @@ module.exports.sockets = {
 
 
   afterDisconnect: function(session, socket, cb) {
-    // By default: do nothing.
     console.log('Cliente desconectado - id del socket: ' + socket.id);
 
-    //Eliminamos la session del socket cerrado,
-     Session.findOne({socket_id: socket.id}, function foundSession(err, session) {
-        if (err) return cb();
-        if (!session) return cb();
+    //Session del socket cerrado,
+    Session.findOne({socket_id: socket.id}).populate('rooms').exec(function (err, session) {
+      if (err) return cb();
+      if (!session) return cb();
+
+      //Comprobar si el soscket estaba usando algun robot para liberarlo:
+      if (session.robot_id) {
+        console.log('Socked was using a robot');
+
+        Robot.update({id: session.robot_id}, {busy: false}, function robotUpdated(err) {
+          if (err) return next(err);
+
+          //Informar a otros clientes (sockets abiertos) que el robot queda liberado
+          Robot.publishUpdate(session.robot_id, {
+            busy: false,
+            id: session.robot_id
+          });
+        });
+      }
 
 
-       //Comprobar si el soscket estaba usando algun robot para liberarlo:
-       if (session.robot_id){
-         console.log('Socked was using a robot');
+      //Emit to every room that a socket leave the room ->  and leave the room
+      session.rooms.forEach(function (room) {
+        //sails.sockets.leave(session.socket_id, room.room_name, function(err) {
+        //  if (err) {return res.serverError(err);}
+        //});
+        sails.sockets.broadcast(room.room_name, {type: 'exit', msg: {user_id: session.user_id}});
+      });
 
-           Robot.update({id: session.robot_id},{busy: false}, function robotUpdated(err) {
-             if (err) return next(err);
 
-             //Informar a otros clientes (sockets abiertos) que el robot queda liberado
-             Robot.publishUpdate(session.robot_id, {
-               busy: false,
-               id: session.robot_id
-             });
-           });
-       }
+      //Comprobar si el usuario tiene mas sockets abiertos:
+      Session.count({user_id: session.user_id}).exec(function countUserSessions(error, n_sessions) {
+        console.log('There are ' + n_sessions + 'of user ' + session.user_id);
+
+        //Change user to offline state
+        if (n_sessions == 1) {
+          User.update(session.user_id, {online: false}, function (err) {
+            if (err) return cb(err);
+
+            //Informar a otros clientes (sockets abiertos) que el usuario NO esta logueado
+            User.publishUpdate(session.user_id, {
+              loggedIn: false,
+              id: session.user_id
+            });
+          });
+        }
 
         Session.destroy(session.id, function sessionDestroyed(err) {
           if (err) return cb();
           return cb();
         });
       });
+    });
   }
 
 };

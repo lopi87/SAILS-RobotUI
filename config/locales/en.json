@@ -35,5 +35,6 @@
 	"createevent": "createevent",
 	"videos": "videos",
 	"createvideo": "createvideo",
-	"edit": "edit"
+	"edit": "edit",
+	"title": "title"
 }

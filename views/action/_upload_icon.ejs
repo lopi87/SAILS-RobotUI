@@ -24,8 +24,6 @@
 
 
         <script type="text/javascript">
-          //MUY IMPORTANTE SUBIR CON AJAX FILES
-          //http://www.desarrolloweb.com/articulos/upload-archivos-ajax-jquery.html
 
           $("#new_icon").submit(function(e){
             e.preventDefault();
@@ -47,20 +45,19 @@
               done:function() {
               },
               success: function(data){
-
-                alert('success');
-
                 if(typeof data.error === 'undefined')
                 {
-                  console.log('SUCCESS: ' + data.success);
+                  //colse modal
+                  $('#writeModal').modal('hide');
                   bootstrap_alert['success']('A new icon has been uploaded!', 3000 );
-
                   //limpiar el input
                   $("#remove_iconfile_input").trigger('click');
 
                   //Añadir el nuevo icono al chosen select
+                  var newIcon = $('<option data-img-src="' + data.url + '"value="' + data.id + '">' + '<%= i18n('icon') %></option>');
+                  $('.chzn-select-icon').append(newIcon);
+                  $('.chzn-select-icon').trigger("chosen:updated");
                   //
-
                 }
                 else
                 {

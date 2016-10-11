@@ -24,13 +24,32 @@ module.exports = {
         socket_id: socketId,
         user_id: req.session.User.id
       };
+
+      //Comprobar si el usuario tiene mas sockets abiertos:
+      Session.count({user_id: req.session.User.id}).exec(function countUserSessions(error, n_sessions) {
+        console.log('There are ' + n_sessions + ' sessions of user ' + req.session.User.id);
+
+        if (n_sessions == 0) {
+          //Cambio de estado del usuario a online
+          User.update(req.session.User.id, {online: true}, function (err) {
+            if (err) return res.badRequest();
+
+            //Informar a otros clientes (sockets abiertos) que el usuario esta logueado
+            User.publishUpdate(req.session.User.id, {
+              loggedIn: true,
+              id: req.session.User.id
+            });
+          });
+        }
+      });
+
     }else {
       var sessionObj = {
         socket_id: socketId
       };
     }
 
-    Session.create(sessionObj, function sessionCreated(err, session) {
+    Session.create(sessionObj).exec( function (err, session) {
       if (err) return res.badRequest();
 
       console.log('\n....................................................');
@@ -38,8 +57,7 @@ module.exports = {
       console.log('Cliente conectado - id del socket: ' + socketId);
       console.log('....................................................');
 
-      return res.json(socketId);
-
+      return;
     });
   },
 
@@ -113,7 +131,13 @@ module.exports = {
   destroy: function(req, res, next) {
 
     User.findOne(req.session.User.id, function foundUser(err, user){
-      var userId = req.session.User.id;
+      if(err) return next(err);
+      if(!user){
+        msg = { err: 'User not found' };
+        FlashService.error(req, msg );
+        return res.redirect('/');
+      }
+
       User.update(user.id, {online: false}, function (err){
         if(err) return next(err);
         req.session.destroy();

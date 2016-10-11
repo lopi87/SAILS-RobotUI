@@ -13,20 +13,26 @@ module.exports = {
 
   configure: function (req, res, next) {
 
-    Interface.findOne({id: req.param('id')}).populate('actions').populate('events').populate('videos').populate('robot_owner').exec(function (err, iface) {
+    Interface.findOne({id: req.param('id')}).populate('events').populate('video').populate('robot_owner').exec(function (err, iface) {
       if (err) return next(err);
+      if (!iface) return next(err);
 
       //Mis iconos y los del sistema por defecto
       Icon.find({or: [{user_owner: req.session.User.id}, {default: true}]}).exec(function (err, icons) {
         if (err) return next(err);
 
-        res.view({
-          interface: iface,
-          actions: iface.actions,
-          events: iface.events,
-          videos: iface.videos,
-          icons: icons,
-          robot: iface.robot_owner
+        Action.find({or: [{interface_owner: req.param('id')},{default: true}] }).populate('icon').exec(function(err, actions){
+          if (err) return res.badRequest(err);
+
+          res.view({
+            interface: iface,
+            actions: actions,
+            events: iface.events,
+            video: iface.video,
+            icons: icons,
+            robot: iface.robot_owner
+          });
+
         });
       });
     });
@@ -34,64 +40,62 @@ module.exports = {
 
 
   show: function (req, res, next) {
-    Interface.findOne({id: req.param('id')}).populate('actions').populate('events').populate('videos').populate('robot_owner').exec(function (err, iface) {
+    Interface.findOne({id: req.param('id')}).populate('events').populate('video').populate('robot_owner').exec(function (err, iface) {
       if (err) return next(err);
 
-      res.view({
-        interface: iface,
-        actions: iface.actions,
-        events: iface.events,
-        videos: iface.videos,
-        robot: iface.robot_owner
+      //Almacenamos la room para los visitantes en la BD:
+      Room.findOrCreate({room_name: iface.robot_owner.id}, {room_name: iface.robot_owner.id}).exec(function createFindCB(error, createdOrFoundRecords){
+        if (err) return res.badRequest(err);
+
+        Action.find({interface_owner: req.param('id')}).populate('icon').exec(function(err, actions) {
+          if (err) return res.badRequest(err);
+
+          User.findOne({id:  iface.robot_owner.owner}).exec(function Userfound(error, user){
+            if (err) return res.badRequest(err);
+
+            res.view({
+              interface: iface,
+              actions: actions,
+              events: iface.events,
+              video: iface.video,
+              robot: iface.robot_owner,
+              user: user
+            });
+          });
+        });
       });
     });
   },
 
 
-  get_viewer_users: function (req, res, next){
+  view: function(req, res, next){
 
-  },
+    Interface.findOne({id: req.param('id')}).populate('events').populate('video').populate('robot_owner').exec(function (err, iface) {
+      if (err) return next(err);
 
+      Action.find({interface_owner: req.param('id')}).populate('icon').exec(function(err, actions) {
+        if (err) return res.badRequest(err);
 
+        //Almacenamos la room para los visitantes en la BD:
+        Room.findOrCreate({room_name: iface.robot_owner.id}, {room_name: iface.robot_owner.id}).exec(function createFindCB(error, createdOrFoundRecords) {
+          if (err) return res.badRequest(err);
 
-  commandline: function (req, res, next) {
+          User.findOne({id:  iface.robot_owner.owner}).exec(function Userfound(error, user){
+            if (err) return res.badRequest(err);
 
-    var command = req.param('command');
-    var button = req.param('button');
-
-    var interface = req.param('interface');
-
-    var user = req.session.User.id;
-
-    if (command && req.isSocket) {
-      console.log('emitiendo comando...');
-      Interface.publishCreate({id: interface, command: command});
-
-      //sails.socket.emit('command', {command: command});
-
-      console.log('command send');
-
-    }else if (button && req.isSocket) {
-      console.log('emitiendo boton pulsado...');
-
-      Action.findOne(button, function foundAction(err, action) {
-        if (err) return next(err);
-        if (!action) return next();
-        Interface.publishCreate({id: interface, command: action.code});
-        console.log('command send');
-        //sails.socket.emit('command', {command: command});
-
-        //sails.sockets.broadcast(robot.id, { msg: 'Hola!' });
-
+          res.view({
+            interface: iface,
+            actions: actions,
+            video: iface.video,
+            events: iface.events,
+            robot: iface.robot_owner,
+            user: user
+          });
+          });
+        });
       });
-    } else if (req.isSocket) {
-      Interface.subscribe(req.socket,req.session.User.id);
-      console.log('Intreface with socket id ' + sails.sockets.id(req) + ' is now subscribed to the model class \'Interface\'.');
-    } else {
-      res.view();
-    }
+    });
   },
-
 
   savecode: function (req, res, next) {
     if (req.xhr) {
@@ -163,52 +167,88 @@ module.exports = {
   },
 
 
+//Modo visita en la interfaz, se subscribe para recibir los eventos que iran sucediendo
+  view_subscribe: function (req, res, next){
 
-  view: function(req, res, next){
+    if (!req.isSocket) return res.badRequest();
 
-    Interface.findOne({id: req.param('id')}).populate('actions').populate('events').populate('videos').populate('robot_owner').exec(function (err, iface) {
+    //Nos unimos al room
+    sails.sockets.join(req.socket, req.param('robot'));
+
+    //Link socket with a room (into database)
+    Session.findOne({socket_id: req.socket.id}).exec(function (err, session){
       if (err) return next(err);
 
-      res.view({
-        interface: iface,
-        actions: iface.actions,
-        videos: iface.videos,
-        events: iface.events,
-        robot: iface.robot_owner
+      Room.findOrCreate({room_name: req.param('robot')}, {room_name: req.param('robot')}).exec(function createFindCB(error, room){
+        if (err) return next(err);
+
+        //Link
+        session.rooms.add(room.id);
+        session.save();
+
+        //Aviso de una nueva conexion a todos los clientes de la room llamada con el valor de robot.id
+        User.findOne(session.user_id, function foundUser(err, user) {
+          sails.sockets.broadcast(req.param('robot'), {
+            type: 'new_viewer_user',
+            msg: {user_name: user.name, avatar: user.avatarUrl, user_id: user.id}
+          });
+          console.log('User ' + req.session.User.id + 'with socket id ' + sails.sockets.id(req) + ' is now subscribed to the model class \'Robot\'.');
+        });
       });
     });
   },
 
 
-
-//Modo visita en la interfaz, se subscribe para recibir los eventos que iran sucediendo
-  view_subscribe: function (req, res, next){
-
-  //Comprobar si tiene permisos TODO
-    if (req.isSocket) {
-
-      //Nos unimos al room
-      sails.sockets.join(req.socket, req.param('robot'));
-
-      //Aviso de una nueva conexion
-      sails.sockets.broadcast(req.param('robot'), {type: 'new_viewer_user' ,msg: req.session.User.id });
-
-      console.log('User ' + req.session.User.id + 'with socket id ' + sails.sockets.id(req) + ' is now subscribed to the model class \'Robot\'.');
-    } else {
-      res.view();
-    }
-  },
-
-
   //Emision de los eventos a los vivitantes de una interfaz
   emit_event: function(req, res, next){
-    sails.sockets.broadcast(req.param('robot'), { type: 'event' ,id: req.param('id'), msg: req.param('msg') });
+    if (!req.isSocket) return res.badRequest();
+    sails.sockets.broadcast(req.param('robot'), {type: 'event', id: req.param('id'), msg: req.param('msg')});
   },
 
 
   //Emision de las acciones a los vivitantes de una interfaz
   emit_action: function(req, res, next){
-    sails.sockets.broadcast(req.param('robot'), { type: 'action' ,id: req.param('id'), msg: req.param('msg') });
+    if (!req.isSocket) return res.badRequest();
+    sails.sockets.broadcast(req.param('robot'), {type: 'action', id: req.param('id'), msg: req.param('msg')});
+  },
+
+
+  //Emision de las acciones a los vivitantes de una interfaz
+  emit_command: function(req, res, next){
+    if (!req.isSocket) return res.badRequest();
+    sails.sockets.broadcast(req.param('robot'), {type: 'command', id: req.param('id'), msg: req.param('msg')});
+  },
+
+
+  eject_viewer_user: function (req, res, next) {
+    //Ajax call
+    if (req.xhr) {
+      if(req.param('user_id') != req.session.User.id){
+        Room.findOne({room_name: req.param('robot_id')}).populate('sockets_room').exec(function (err, room) {
+          if (err) {return res.serverError(err);}
+          if (!room) return next();
+
+
+          room.sockets_room.forEach(function(session) {
+            if (session.user_id ==  req.param('user_id')){
+              sails.sockets.broadcast(session.socket_id, {type: 'out'});
+              sails.sockets.leave(session.socket_id, room.room_name, function(err) {
+              });
+            }
+          });
+
+        });
+        return res.ok();
+
+      }else{
+        err= 'User incorrect';
+        return res.badRequest(err);
+      }
+
+    }else{
+      err= 'No Ajax call';
+      return res.badRequest(err);
+    }
   }
 
 };

@@ -17,9 +17,6 @@
    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#writeModal">
      Redactar
    </button>
-   <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#requestModal">
-     Mandar solicitud
-   </button>
  </div>
 
   <div class="clear"></div>
@@ -30,7 +27,9 @@
       <th>Read</th>
       <th>From</th>
       <th>Message</th>
-      <th>Robot</th>
+      <th>Fecha</th>
+      <th>Actions</th>
+
     </tr>
 
     <% _.each(user_messages, function(message){ %>
@@ -42,10 +41,10 @@
         <i class="fa fa-eye-slash fa-2x" aria-hidden="true"></i>
         <% } %>
       </td>
-      <td><%=message.from_user_id %></td>
-      <td>
-        <%=message.content.substring(0,20) + '...' %>
-      </td>
+      <td><% message.from_user_id  %></td>
+
+      <td><%=message.content.substring(0,20) %></td>
+      <td><%=message.createdAt %></td>
       <td>
         <a class="btn btn-sm btn-success" onclick="reply_msg('<%= message.id %>')"><i class="fa fa-reply"></i> Reply </a>
         <a class="btn btn-sm btn-info" onclick=" window.location.href='<%='/message/show/' + message.id %>'">Read</a>
@@ -59,14 +58,10 @@
   </table>
   <hr>
 
-
   <!-- Button trigger modal -->
   <div class="button_right">
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#writeModal">
       Redactar
-    </button>
-    <button type="button" class="btn btn-success">
-      Mandar solicitud
     </button>
   </div>
 
@@ -139,26 +134,3 @@
     </div>
   </div>
 </div>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Mensaje nuevo</h4>
-      </div>
-      <div class="modal-body">
-        <%- partial('request.ejs') %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" onclick='$("#form_newmsg").submit()' >Send</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-

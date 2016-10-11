@@ -27,8 +27,6 @@ module.exports = {
       var x = req.param('x');
       var y = req.param('y');
 
-      //Comprobar si puede o no actualizar
-
       Event.update(id, {coordinate_x: x, coordinate_y: y}, function eventUpdated(err){
         if(err) return res.badRequest(err);
         res.ok();

@@ -30,18 +30,38 @@ module.exports.policies = {
 
 
   user: {
-    show: ["sessionAuth", "userCanSeeProfile","message","flash"],
-    edit: ["sessionAuth", "userCanSeeProfile","message","flash"],
-    update: ["sessionAuth", "userCanSeeProfile","message","flash"],
-    index: ["isadmin","message","flash" ],
-    render: ["userCanSeeProfile","message","flash"],
-    destroy: ["sessionAuth", "userCanSeeProfile", "message","flash"],
+    show: ["flash","sessionAuth", "userCanSeeProfile","message"],
+    edit: ["flash","sessionAuth", "userCanSeeProfile","message"],
+    update: ["flash","sessionAuth", "userCanSeeProfile","message"],
+    index: ["sessionAuth", "isadmin","message","flash" ],
+    render: ["flash","sessionAuth", "userCanSeeProfile","message"],
+    destroy: ["flash","sessionAuth", "userCanSeeProfile","message"],
     create: ["message", "flash"]
+  },
+
+  action: {
+    update_position: ["flash", "message","sessionAuth", "userCanConfigureInterface"]
+  },
+
+  event: {
+    update_position: ["flash", "message","sessionAuth", "userCanConfigureInterface"]
+  },
+
+  video: {
+    update_position: ["flash", "message","sessionAuth", "userCanConfigureInterface"]
   },
 
   robot:{
     create: ["flash", "message","sessionAuth", "localize"],
-    index: ["flash", "message","sessionAuth", "localize"]
+    index: ["flash", "message","sessionAuth", "localize"],
+    delete_permission: ["flash", "message","sessionAuth", "localize", "UserCanEditRobot"],
+    new_permissions: ["flash", "message","sessionAuth", "localize", "UserCanEditRobot"],
+    show_permissions: ["flash", "message","sessionAuth", "localize", "UserCanEditRobot"],
+    edit: ["flash", "message","sessionAuth", "localize", "UserCanEditRobot"],
+    update: ["flash", "message","sessionAuth", "localize", "UserCanEditRobot"],
+    destroy: ["flash", "message","sessionAuth", "localize", "UserCanEditRobot"],
+    changetobusy: ["flash", "message","sessionAuth", "localize", "userCanShowInterface"],
+    show: ["flash", "message","sessionAuth", "localize"]
   },
 
   session: {
@@ -54,6 +74,8 @@ module.exports.policies = {
     index: ["flash", "message","sessionAuth"],
     send: ["flash", "message","sessionAuth"],
     new: ["flash", "message","sessionAuth"],
+    show: ["flash", "message","sessionAuth"],
+    destroy: ["flash", "message","sessionAuth"],
     '*': ["flash", "message","sessionAuth"]
   },
 
@@ -62,11 +84,10 @@ module.exports.policies = {
   },
 
   interface: {
-    configure: ["flash", "message","sessionAuth"],
-    show: ["sessionAuth", "message","flash"]
+    configure: ["flash", "message","sessionAuth", "userCanConfigureInterface"],
+    show: ["flash", "sessionAuth", "message", "userCanShowInterface"],
+    view: ["flash", "message","sessionAuth", "userCanViewInterface"]
   }
-
-
 
 
 

@@ -102,27 +102,39 @@ module.exports = {
 
   beforeCreate: function(values, next){
     if(!values.password || values.password != values.confirmation){
-
-      msg = {err: "Password doesn't match password confirmation."};
-      FlashService.error(req, msg);
-      return next();
+      return next({err: ["Password doesn't match password confirmation."]})
     }
 
     require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword){
       if(err) return next(err);
       values.encryptedPassword = encryptedPassword;
       values.onLine = true;
-      values.password = '';
-      values.confirmation = '';
+      delete values.password;
+      delete values.confirmation;
       next();
     });
 
+  },
+
+  beforeUpdate: function (values, next) {
+
+    if(values.newPassword){
+      if(!values.password || values.password != values.confirmation){
+        return next({err: ["Password doesn't match password confirmation."]})
+      }
+
+      require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword){
+        if(err) return next(err);
+        values.encryptedPassword = encryptedPassword;
+        values.onLine = true;
+        delete values.password;
+        delete values.confirmation;
+        next();
+      });
+    }else{
+      next();
+    }
   }
-
-
-
-
-
 
 };
 

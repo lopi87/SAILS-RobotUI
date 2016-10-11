@@ -1,7 +1,5 @@
-<div class="container">
-
+<div>
   <h1 class="text-center"> <%= robot.name %></h1>
-
   <h3>Actions</h3>
   <div class="table-responsive">
     <table id="actions_table" class="table">
@@ -23,7 +21,7 @@
         <td>
           <% if (action.icon){ %>
           <button id="button_<%= action.id %>" class="btn btn-custom_<%= action.id %>" value="<%= action.code %>">
-            <span><img src="/uploads/icons/<%= action.icon %>.png" /></span>
+            <span><img src="<%= action.icon.iconUrl %>" height="32px" width="32px"/></span>
             <% if (action.name != ''){%>
             <span><%= action.name %></span>
             <% }%>
@@ -33,8 +31,6 @@
           <% } %>
         </td>
         <td>
-          <a class="btn btn-sm btn-info">show </a>
-          <a href="/action/edit/<%= action.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a>
           <a class="btn btn-sm btn-danger"  onclick="row_action_deleted('<%= action.id %>')"><i class="fa fa-trash-o"></i> Delete </a>
         </td>
       </tr>

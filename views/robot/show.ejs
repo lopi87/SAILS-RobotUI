@@ -1,4 +1,6 @@
-  <div class="container">
+<%- partial('../_alert.ejs', {flash: flash}) %>
+
+<div class="container">
     <h2 class="form-sigin-heading">Robot information</h2>
 
     <div class="card" style="min-width:300px; width: 30%; margin: auto">
@@ -56,11 +58,6 @@
         <a class="btn btn-medium btn-primary btn-success" href="/robot/index/<%= robot.id%>">Show interface</a>
       </div>
     </div>
-
-  <div class="row">
-    <button></button>
-
-  </div>
 
   </div>
 

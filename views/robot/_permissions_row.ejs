@@ -1,8 +1,7 @@
 <% Object.keys(perm).forEach(function (key) { %>
 <tr id="perm_<%= key %>">
 
-  <td> <%= key %></td>
-  <td> <%= User.find(key, {select: {name:1}}).limit(1) %></td>
+  <td> <%= perm[key].name %></td>
 
   <% if(perm[key].d){ %>
   <td> <img src="/images/online.png" height="30" width="30"></td>

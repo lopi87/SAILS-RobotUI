@@ -29,11 +29,9 @@ module.exports = function(req, res, next) {
 // api/policies/localize.js
 module.exports = function(req, res, next) {
 
-  if (req.session.languagePreference == undefined){
-    req.session.languagePreference = sails.config.i18n.defaultLocale;
-  }
+  req.session.languagePreference = sails.config.i18n.defaultLocale;
 
-  if(req.param('locale') != req.session.languagePreference && req.param('locale') != undefined){
+  if( req.param('locale') != req.session.languagePreference){
     req.session.languagePreference = req.param('locale');
   }
 

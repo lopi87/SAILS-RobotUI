@@ -63,7 +63,8 @@
   <!--SCRIPTS END-->
 </head>
 
-<body>
+<body class="">
+
 <nav class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
     <div class="navbar-header">
@@ -78,8 +79,6 @@
       </a>
     </div>
 
-
-
     <div id="bs-example-navbar-collapse-1" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
     <ul class="nav navbar-nav">
       <% if (session.authenticated) { %>
@@ -87,6 +86,12 @@
       <li class="nav-item">
         <a href="/user/show/<%= session.User.id%>"><%= session.User.name %></a>
       </li>
+
+      <% if (session.User.admin) { %>
+      <li class="nav-item">
+        <a href="/user"> User Administration</a>
+      </li>
+      <% } %>
 
       <li class="nav-item" id="buttom_msg">
         <%if (n_messages > 0){%>
@@ -96,11 +101,6 @@
         <%}%>
       </li>
 
-      <% if (session.User.admin) { %>
-      <li class="nav-item">
-        <a href="/user"> User Administration</a>
-      </li>
-      <% } %>
       <li class="nav-item">
         <a href="/robot/index"> My Robots</a>
       </li>
@@ -224,28 +224,35 @@
 
     <div id="footer">
       <div class="container">
-        <p class="text-muted"><href>about RobotUI</href></p>
+        <a href="/index/about"><p class="text-muted">About RobotUI</p></a>
       </div>
     </div>
 
   </footer>
 </div>
-</body>
-</html>
-
-
-
-
-
 
 <script type="text/javascript">
-  //Añadir all a app.js
+
+  //addLoadEvent(savesocket);
+
+  $.when( savesocket() ).done(function(){
+    if (typeof subscribeAndListen == 'function') {
+      subscribeAndListen();
+    }
+  });
+
+  addLoadEvent(function() {
+    //document.body.style.backgroundColor = '#EFDF95';
+    document.body.style.backgroundColor = '#437070';
+    //document.body.style.backgroundColor = '#228B22';
+
+  });
+  addLoadEvent(listenMessages);
 
   //Funcion para tener en to do momento almacenado en la tabla session los sockets conectados junto con el usuario al que pertenece
   function savesocket() {
     io.socket.get("/session/saveSocketID");
   }
-
 
   //Evento A la espera de recibir mensajes y notificar al usuario
   function listenMessages(){
@@ -272,13 +279,10 @@
     });
   }
 
-
-  addLoadEvent(function() {
-    document.body.style.backgroundColor = '#EFDF95';
-  });
-  addLoadEvent(savesocket);
-  addLoadEvent(listenMessages);
-
 </script>
+
+
+</body>
+</html>
 
 

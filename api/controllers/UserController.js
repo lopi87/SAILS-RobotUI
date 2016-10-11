@@ -39,46 +39,17 @@ module.exports = {
 
       user.online = true;
 
-
-      ImageService.upload_avatar(req.file('avatar'), user,
-        function whenDone(err, file) {
-
-          if (err) return res.negotiate(err);
-
-          // If no files were uploaded, respond with an error.
-          if (file.length === 0){
-            return res.badRequest('No file was uploaded');
-          }
-
-
-          var extension = file[0].filename.split('.').pop();
-
-          // Save the "fd" and the url where the avatar for a user can be accessed
-          User.update(req.session.User.id, {
-            // Generate a unique URL where the avatar can be downloaded.
-            avatarUrl: require('util').format('%s/uploads/avatar/%s', sails.getBaseUrl(), req.session.User.id + '.' + extension),
-            // Grab the first file and use it's `fd` (file descriptor)
-            avatarFd: file[0].fd
-          }).exec(function (err){
-            if (err) return res.negotiate(err);
-            return res.ok({url: ''});
-          });
-
-        });
-
       user.save(function (err) {
         if (err) return next(err);
       });
 
       msg = { err: 'User created' };
       FlashService.success(req, msg );
-
-      if (req.session.User.admin) {
-        res.redirect('/user');
-        return;
-      }
-
       User.publishCreate({id: user.id});
+
+      ImageService.upload_avatar(req.file('avatar'), user, function whenDone(err, files) {
+        if (err) return res.negotiate(err);
+      });
 
       //Mandar email de bienvenida
       EmailService.sendWelcomeEmail({
@@ -86,15 +57,14 @@ module.exports = {
         firstName: user.name
       }, function (err) {
         if (err) { return res.serverError(err); }
-
-        // It worked!  The welcome email was sent.
-        //Redirección a show
-        res.redirect('user/show/' + user.id);
       });
+
+
+      if (req.session.User.admin) return res.redirect('/user');
+      return res.redirect('user/show/' + user.id);
 
     });
   },
-
 
   show: function (req, res, next) {
     User.findOne(req.param('id'), function foundUser(err, user) {
@@ -134,24 +104,41 @@ module.exports = {
 
   update: function (req, res, next) {
 
-    if (req.session.User.admin == true) {
-      var userObj = {
-        name: req.param('name'),
-        title: req.param('title'),
-        email: req.param('email'),
-        admin: req.param('admin')
-      };
+    var userObj = {
+      name: req.param('name'),
+      title: req.param('title'),
+      email: req.param('email'),
+      language: req.param('language')
+    };
 
-    } else {
-      var userObj = {
-        name: req.param('name'),
-        title: req.param('title'),
-        email: req.param('email')
-      };
+    if (req.session.User.admin == true) {
+      userObj.admin = req.param('admin')
     }
+
+    if (req.param('password') != '********'){
+      userObj.password = req.param('password');
+      userObj.confirmation = req.param('confirmation');
+      userObj.newPassword = true;
+    }
+
+
+    User.findOne(req.param('id')).exec(function userFound(err, user){
+      if (err){
+        FlashService.server_exit(err);
+        return res.redirect('/user/edit' + req.param('id'));
+      }
+      ImageService.upload_avatar(req.file('avatar'), user, function whenDone(err, files) {
+        if (err){
+          FlashService.server_exit(err);
+          return res.redirect('/user/edit' + req.param('id'));
+        }
+      });
+    });
+
 
     User.update(req.param('id'), userObj, function userUpdated(err) {
       if (err) {
+        FlashService.server_exit(err);
         return res.redirect('/user/edit' + req.param('id'));
       }
 
@@ -164,6 +151,8 @@ module.exports = {
         });
       }
 
+      msg = { err: 'User updated'};
+      FlashService.success(req, msg );
       res.redirect('/user/show/' + req.param('id'));
     });
 
@@ -311,7 +300,9 @@ module.exports = {
 
         // If no files were uploaded, respond with an error.
         if (file.length === 0){
-          return res.badRequest('No file was uploaded');
+          msg = {err: 'No file was uploaded'};
+          FlashService.error(req, msg);
+          res.redirect('/user/new');
         }
 
 

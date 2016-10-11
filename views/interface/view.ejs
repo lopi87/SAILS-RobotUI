@@ -11,36 +11,23 @@
     <a href="#" onclick="openWin(200,200,'board')"><i class="fa fa-external-link fa-2x floatright" style="height: 20px"></i></a>
   </div>
 
-  <div class="paddingtop20 paddingleft20 paddingright20">
-    <div>
-      <div class="col-md-1">
-        <div class="bottom_col">
-          <div class="list-group">
-            <a class="list-group-item"><i class="fa fa-plus fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
-            <a class="list-group-item"><i class="fa fa-remove fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
-            <a class="list-group-item" href="/interface/configure/<%= interface.id %>" data-toggle="tooltip" data-placement="top" title="Edit board"><i class="fa fa-edit fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
-            <a class="list-group-item"><i class="fa fa-plug fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
-            <a class="list-group-item"><i class="fa fa-cog fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
-          </div>
-        </div>
-      </div>
+  <div class="paddingtop20 paddingleft20 paddingright20 paddingbottom20">
+    <div class="row">
 
-      <div id="box_panel" class="col-md-11">
+      <div id="box_panel" class="col-md-10">
         <div id="panel" class="panel_resizable work">
 
           <!-- Insert video -->
-          <% if (interface.has_video){%>
-          <% _.each(videos, function(video){ %>
+          <% if (video){%>
           <img id="play_<%= video.id %>" class="img-responsive play_<%= video.id %> position_<%= video.id %>" src="/images/video/video.png" width="400" height="300">
           <%- partial ('../video/style_video.ejs', {video: video})%>
-          <% })%>
           <%}%>
 
           <!-- Insert actions -->
           <% _.each(actions, function(action){ %>
           <% if (action.icon){ %>
           <button id="button_custom_<%= action.id %>" class="btn position_<%= action.id %> btn-custom_<%= action.id %>" value="<%= action.code %>">
-            <img src="/uploads/icons/<%= action.icon %>.png" />
+            <img src="<%= sails.getBaseURL() + action.icon.iconUrl %>"  height="32" width="32" />
             <% if (action.name != ''){%>
             <%= action.name %>
             <% }%>
@@ -62,60 +49,82 @@
 
        </div>
       </div>
+      <div class="col-md-2">
+          <div class="panel panel-info">
+            <div class="panel-heading">Users</div>
+            <div class="panel-body">
+              <div id="user_viewer_list">
+              </div>
+            </div>
+          </div>
+        <div id="chatContent">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              Comandos
+            </div>
+            <div id="chat" class="panel-body" style="min-height: 250px; max-height: 250px; overflow-y: scroll;"></div>
+          </div>
+        </div>
+      </div>
+      </div>
     </div>
     <script type="text/javascript">
       $( "#panel").width(<%= interface.panel_sizex %>);
       $( "#panel").height(<%= interface.panel_sizey %>);
     </script>
-    <div class="row">
-      <div class="col-md-12 col-sm-12">
-        <div class="marginright20 margintop10 marginbottom10 floatright">
-          <!--
-          <a id="save_dash" class="btn btn-sm btn-success" > Save dashboard! </a>
-          <a id="edit_dash" class="btn btn-sm btn-warning" > Edit dashboard! </a>
-          <a id="reset_dash" class="btn btn-sm btn-danger" > Reset dashboard! </a>
-        -->
-        </div>
-      </div>
-    </div>
   </div>
+
+<%- partial ('_robot_info.ejs')%>
+
 </div>
 
 <div class="pull-right margintop20 marginbottom20">
   <a href="/robot/index" class="btn btn-sm btn-warning">Back</a>
 </div>
 
-<% partial ('commands.ejs', {robot: robot})%>
-
 
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
 
-  //Subscribimos
-  addLoadEvent(subscribeAndListen());
-
   function subscribeAndListen() {
-    io.socket.get('/interface/view_subscribe/',{robot: '<%= robot.id%>'});
+    io.socket.get('/interface/view_subscribe/',{robot: '<%= robot.id%>', socket_id: io.socket.id});
 
     io.socket.on('message', function (obj) {
       //EVENTOS CAPURADOS
       switch (obj.type) {
         case 'action':
-          alert('action ' + 'id: ' + obj.id + ' msg: ' + obj.msg);
+          console.log('action ' + 'id: ' + obj.id + ' msg: ' + obj.msg);
+          $('#chat').prepend('- send: ' + obj.msg + '<br/>');
+          $('#buttom_custom_' + obj.id).addClass('focus');
           break;
 
         case 'event':
-          alert('event ' + 'id: ' + obj.id + ' msg: ' + obj.msg);
+          console.log('event ' + 'id: ' + obj.id + ' msg: ' + obj.msg.value);
+          $('#chat').prepend('- received: ' + obj.msg.name + ': ' + obj.msg.value + '<br/>');
+          $('#event_' + obj.id).html('<h5>' + obj.msg.name + '<span class="label label-pill label-danger">' + obj.msg.value + '</span></h5>');
           break;
 
         case 'new_viewer_user':
-          alert('new viewer user');
+
+          if($("#" + obj.msg.user_id).length == 0) {
+            $('#user_viewer_list').append('<p id="' +  obj.msg.user_id + '"><img src="' + obj.msg.avatar + '" class="card-circle marginright10" height="32" width="32">' + obj.msg.user_name +'</p>');
+          }
+
           break;
 
         case 'video':
           alert('new video frame');
           break;
 
+        case 'command':
+          $('#chat').prepend('- send: ' + obj.msg + '<br/>');
+          break;
+
+        case 'out':
+          alert('expulsado');
+          window.location.href = "<%= sails.getBaseUrl() %>";
+          bootstrap_alert['danger']('Exit!', 5000);
+          break;
 
         default:
           break;

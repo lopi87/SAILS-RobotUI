@@ -1,26 +1,18 @@
-<% if ( typeof(req.session.User) == 'undefined'){ %>
-<script type="text/javascript">
-  bootstrap_alert['success']('See you soon!', 0 )
-</script>
-<%  } %>
-
 <%- partial('../_alert.ejs', {flash: flash}) %>
 
-
 <div class="row">
-
   <div class="col-md-6">
-    <div class="jumbox" style="background-color: white">
+    <div class="jumbox">
       <form id="signin_form" action="/session/create" method="POST" class="form-signin">
         <h1 class="text-center login-title" style="padding-bottom: 100px"><%= i18n('signin')%></h1>
 
         <div class="control-group">
-          <label for="passwordconf"><%= i18n("email") %> * :</label>
+          <label for="email"><%= i18n("email") %> * :</label>
           <input type="text" class="form-control" placeholder="<%= i18n('email')%>" name="email" required>
         </div>
 
         <div class="control-group">
-          <label for="passwordconf"><%= i18n("password") %> * :</label>
+          <label for="password"><%= i18n("password") %> * :</label>
           <input type="password" class="form-control" placeholder="<%= i18n('password')%>" name="password" required>
         </div>
         <div class="form-signin">
@@ -42,7 +34,7 @@
 
   <div class="col-md-6">
 
-    <form id="sign-up-form" class="form-signin" action="create" method="post" data-parsley-validate style="max-width: none">
+    <form id="sign-up-form" class="form-signin" action="/user/create" method="POST" enctype="multipart/form-data" data-parsley-validate style="max-width: none">
       <h1 class="text-center login-title marginbottom20"><%= i18n('createaccount') %></h1>
       <div class="control-group">
         <label for="name"><%= i18n("name") %> * :</label>

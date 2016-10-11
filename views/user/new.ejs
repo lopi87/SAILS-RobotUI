@@ -1,6 +1,6 @@
 <%- partial('../_alert.ejs', {flash: flash}) %>
 
-<form id="sign-up-form" class="form-signin" action="create" method="post" data-parsley-validate style="max-width: none">
+<form id="sign-up-form" class="form-signin" action="create" method="POST" enctype="multipart/form-data" data-parsley-validate style="max-width: none">
   <div class="row">
     <h1 class="text-center login-title marginbottom20"><%= i18n('createaccount') %></h1>
 
@@ -70,12 +70,6 @@
   <input type="hidden" name="_csrf" value="<%= _csrf %>" />
 </form>
 
-<script type="text/javascript">
-  addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
-  $('#sign-up-form').parsley().on('field:validated', function() {
-    var ok = $('.parsley-error').length === 0;
-  })
-</script>
 
 
 

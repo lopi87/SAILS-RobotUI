@@ -13,5 +13,15 @@ module.exports.bootstrap = function(cb) {
 
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
+  Session.destroy({}).exec(function (err) {
+    Room.destroy({}).exec(function (err) {
+      User.update({online: true}, {online: false}).exec(function (err){
+        Robot.update({busy: true}, {busy: false}).exec(function (err){
+        });
+      });
+    });
+  });
+
+
   cb();
 };

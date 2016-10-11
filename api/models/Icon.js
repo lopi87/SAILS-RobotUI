@@ -14,9 +14,8 @@ module.exports = {
       model: 'user'
     },
 
-    format: {
-      type: 'string',
-      enum: ['image/png', 'image/jpeg']
+    iconUrl:{
+      type:'string'
     },
 
     default_icon: {

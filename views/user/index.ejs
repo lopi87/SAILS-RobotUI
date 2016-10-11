@@ -60,8 +60,7 @@
 
 <script type="text/javascript">
 
-  function subscribeAndListen_user() {
-
+  function subscribeAndListen() {
     io.socket.get('/user/user_subscribe');
 
     io.socket.on('user', function (obj) {
@@ -79,9 +78,14 @@
       }
 
       if (obj.verb == 'updated') {
-        alert('updated');
         var data = obj.data;
         change_img_state(data.id, data.loggedIn);
+
+        if(data.loggedIn){
+          bootstrap_alert['success']('User connected!', 5000 );
+        }else{
+          bootstrap_alert['success']('User disconnected!', 5000 );
+        }
         console.log('User has been updated to online:' + data.loggedIn);
       }
 
@@ -93,8 +97,6 @@
     });
 
   }
-
-  addLoadEvent(subscribeAndListen_user);
 
 
 </script>

@@ -1,3 +1,5 @@
+
+
 <form id="action-form" class="form-signin" action="create" method="post" data-parsley-validate style="max-width: none">
   <div class="row">
     <h1 class="text-center login-title marginbottom20"><%= i18n('actions') %></h1>
@@ -37,7 +39,7 @@
                 <select id="slect_icon" data-placeholder="<%= i18n("selectanicon") %>" class="chzn-select-icon" tabindex="2">
                   <option value=""></option>
                   <% _.each(icons, function(icon){ %>
-                  <option data-img-src="/uploads/icons/<%= icon.id %>.<%= icon.format.split('/').pop()%>" value="<%= icon.id %>">1</option>
+                  <option data-img-src="<%= icon.iconUrl %>" value="<%= icon.id %>"><%= i18n('icon') %></option>
                   <% })%>
                 </select>
               </div>

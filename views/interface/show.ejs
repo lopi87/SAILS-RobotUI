@@ -1,10 +1,10 @@
 <%- partial('../_alert.ejs', {flash: flash}) %>
 
-<div class="text-center marginbottom20">
+<div class="text-center marginbottom20" xmlns="http://www.w3.org/1999/html">
   <h1>Control panel <small> <%= robot.name %> </small></h1>
 </div>
 
-<div id="board" class="panel panel-success margintop20">
+<div id="board" class="panel panel-success margintop20 paddingbottom20">
   <div class="panel-heading">
     <img style="max-width:150px;" src="/images/logo/logotipo.png">
     <a href="#" onclick="openWin(200,200,'board')"><i class="fa fa-external-link fa-2x floatright" style="height: 20px"></i></a>
@@ -18,34 +18,21 @@
       <button  id="desconectar" type="button" class="btn btn-sm btn-danger">DESCONECTAR</button></td>
     </div>
 
-    <div>
-      <div class="col-md-1">
-        <div id="user_list">
-          <% if(typeof viewer_users !== 'undefined' && viewer_users ){%>
-          <% _.each(viewer_users, function(v_user){ %>
-          <img src="<%= v_user.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:75px">
-          <%= v_user.name %>
-          <% })%>
-          <%}%>
-        </div>
-      </div>
-
-      <div id="box_panel" class="col-md-11">
+    <div class="row">
+      <div id="box_panel" class="col-md-10">
         <div id="panel" class="panel_resizable work">
 
           <!-- Insert video -->
-          <% if (videos){%>
-          <% _.each(videos, function(video){ %>
+          <% if (video){%>
           <img id="play_<%= video.id %>" class="img-responsive play_<%= video.id %> position_<%= video.id %>" src="/images/video/video.png" width="400" height="300">
           <%- partial ('../video/style_video.ejs', {video: video})%>
-          <% })%>
           <%}%>
 
           <!-- Insert actions -->
           <% _.each(actions, function(action){ %>
           <% if (action.icon){ %>
           <button id="button_custom_<%= action.id %>" class="btn position_<%= action.id %> btn-custom_<%= action.id %>" value="<%= action.code %>">
-            <img src="/uploads/icons/<%= action.icon %>.png" />
+            <img src="<%= sails.getBaseURL() + action.icon.iconUrl %>" height="32" width="32" />
             <% if (action.name != ''){%>
             <%= action.name %>
             <% }%>
@@ -56,7 +43,6 @@
             <%- partial ('../action/style_action.ejs', {action: action})%>
           <% })%>
 
-
           <!-- Insert events -->
           <% _.each(events, function(event){ %>
           <div id="event_<%= event.id %>" class="event_<%= event.id %> position_<%= event.id %>" style="max-width: 100px">
@@ -64,41 +50,52 @@
           </div>
           <%- partial ('../event/style_event.ejs', {event: event})%>
           <% })%>
-
-
         </div>
       </div>
+
+      <div class="col-md-2">
+        <div class="panel panel-info">
+          <div class="panel-heading">Users</div>
+            <div class="panel-body">
+              <div id="user_viewer_list">
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              Comandos
+            </div>
+            <div id="chat" class="panel-body" style="min-height: 250px; max-height: 250px; overflow-y: scroll;"></div>
+          </div>
+          <div>
+            <div class="input-group" style="text-align: center; margin:0 auto;">
+              <input id="message" class="form-control input-lg" type="text">
+              <span class="input-group-btn">
+              <button id="sendMessage" class="btn btn-lg btn-primary">Mandar</button>
+              </span>
+            </div>
+          </div>
+      </div>
     </div>
+
     <script type="text/javascript">
       $( "#panel").width(<%= interface.panel_sizex %>);
       $( "#panel").height(<%= interface.panel_sizey %>);
     </script>
-    <div class="row">
-      <div class="col-md-12 col-sm-12">
-        <div class="marginright20 margintop10 marginbottom10 floatright">
-          <!--
-          <a id="save_dash" class="btn btn-sm btn-success" > Save dashboard! </a>
-          <a id="edit_dash" class="btn btn-sm btn-warning" > Edit dashboard! </a>
-          <a id="reset_dash" class="btn btn-sm btn-danger" > Reset dashboard! </a>
-        -->
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
-  <div class="pull-right margintop20 marginbottom20">
-    <a href="/robot/index" class="btn btn-sm btn-warning">Back</a>
-  </div>
+<%- partial ('_robot_info.ejs')%>
 
-<% partial ('commands.ejs', {robot: robot})%>
+
+<div class="pull-right margintop20 marginbottom20">
+  <a href="/robot/index" class="btn btn-sm btn-warning">Back</a>
+</div>
 
 
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
-
-
-
     // https://evothings.com/controlling-a-toy-car-with-evothings-and-raspberry-pi/
 
     //ROBOT
@@ -141,6 +138,7 @@
         }
       });
 
+
       //captura evento desconectar cuando el robot es apagado o pierde la señal
       socket.on('disconnect', function () {
         bootstrap_alert['success']('Robot disconnect!' + address_robot, 5000)
@@ -151,17 +149,20 @@
 
 
       //Mandar evento "mandar comando" al servidor para sincronizar con otros navegadores
-      /*
+
       var $messageForm = $('#sendMessage');
-      $messageForm.submit(function (e) {
+      $messageForm.click(function (e) {
         var $message = $('#message');
         e.preventDefault();
-        if($message.val() != '' ) io.socket.get('/interface/commandline/',{interface: '<%= interface.id %>' ,user_id: '<%= session.User.id%>'   ,command: $message.val()});
-        command_send(socket, 'direction', $message.val())
+        if($message.val() != '' ){
+          //Comunicar al servidor para difundir a los usuarios
+          io.socket.get('/interface/emit_command/',{robot: '<%=robot.id %>', id: 'command', msg: $message.val() })
+          $('#chat').prepend('- send: ' + $message.val() + '<br/>');
+          //Mandar instruccion al robot
+          socket.emit('direction', $message.val());
+        }
         $message.val('');
       });
-      */
-
 
 
       //Presionar boton accion!
@@ -171,12 +172,11 @@
         var button_pressed_id = this.id.replace('button_custom_','');
         var code = document.getElementById(this.id).value
 
-        //io.socket.get('/interface/commandline/',{interface: '<%= interface.id %>' ,user_id: '<%= session.User.id%>'   ,button: button_pressed_id})
-
+        //Comunicar al servidor para difundir a los usuarios
         io.socket.get('/interface/emit_action/',{robot: '<%=robot.id %>', id: button_pressed_id, msg: code })
 
-
         if (code != ''){
+          $('#chat').prepend('- send: ' + code + '<br/>');
           //Mandar instruccion al robot
           socket.emit('direction', code);
           console.log('Emitiendo comando: ' + code );
@@ -184,26 +184,78 @@
       });
 
 
-
-
       <!-- Insert events -->
       <% _.each(events, function(event){ %>
       socket.on("<%= event.event_name %>", function messageReceived(message) {
-        io.socket.get('/interface/emit_event/',{robot: '<%=robot.id %>', id: '<%= event.id %>', msg: message.msg  })
+        io.socket.get('/interface/emit_event/',{robot: '<%=robot.id %>', id: '<%= event.id %>', msg: {value: message.msg, name: '<%= event.name %>'}})
         $('#event_<%= event.id%>').html('<h5><%= event.name %> <span class="label label-pill label-danger">' + message.msg + '</span></h5>');
+        $('#chat').prepend('- received: ' + '<%= event.name %>' + ': ' + message.msg + '<br/>');
       });
       <% })%>
 
 
-      //Implementar funcion de escucha: PROVISIONAL RECIBE UN MENSAJE CONCRETO BORRAR!!!!!!!!!
-      socket.on('robotmsg', function messageReceived(message) {
-        alert(message.msg);
-        io.socket.get('/interface/emit_event/',{robot: '<%=robot.id %>',id: 'id', msg: message.msg })
+      ///////////////////////////////////////////   liveStream
+      /*
+
+      socket.on("liveStream", function (data) {
+        var image = document.getElementById("play");
+        image.src = data.image;
       });
 
+      setInterval(function(){
+        io.socket.get('/video/video_emit/',{image: document.getElementById("play")});
+      },1000);
+
+      */
+      ///////////////////////////////////////////////
+
+
+      subscribeAndListen();
+
+      function subscribeAndListen() {
+        io.socket.get('/interface/view_subscribe/',{robot: '<%= robot.id%>'});
+        io.socket.on('message', function (obj) {
+          //EVENTOS CAPURADOS
+          switch (obj.type) {
+            case 'new_viewer_user':
+
+              if($("#" + obj.msg.user_id).length == 0) {
+                $('#user_viewer_list').append('<p id="' +  obj.msg.user_id + '"><img src="' + obj.msg.avatar + '" class="card-circle marginright10" height="32" width="32">' + obj.msg.user_name + '<span onclick=eject_viewer_user("' + obj.msg.user_id  + '")><i style="cursor: pointer; color: red" class="fa fa-sign-out marginleft5" aria-hidden="true"></i></span></p>');
+              }
+              break;
+
+            case 'exit':
+              $('#' + obj.msg.user_id).remove();
+              break;
+
+            case 'out':
+              $('#' + obj.msg.user_id).remove();
+              alert('Leave the room!');
+              break;
+
+            default:
+              break;
+          }
+        });
+      }
     });
 
+  function eject_viewer_user(user_id){
+    $.ajax({
+      url: '/interface/eject_viewer_user/',
+      type: 'GET',
+      data: {user_id: user_id, robot_id: '<%= robot.id %>'},
+      done:function() {
+      },
 
+      success: function(data){
+        bootstrap_alert['success']('User out!', 5000 );
+      },
 
+      error: function(xhr, status, text) {
+        bootstrap_alert['danger'](xhr.responseText, 5000 );
+      }
+    });
+  }
 
 </script>

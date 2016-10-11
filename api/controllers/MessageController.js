@@ -11,20 +11,15 @@ module.exports = {
 
 
   index: function(req, res, next) {
-    Message.find({to_user_id: req.session.User.id}).exec(function foundMessage(err, messages){
+    Message.find({to_user_id: req.session.User.id}).populate('from_user_id').exec(function foundMessage(err, messages){
       if(err) return next(err);
 
       User.find(function foundUsers(err, users){
         if(err) return next(err);
 
-        Robot.find({owner: req.session.User.id}).exec(function foundRobot(err, robots){
-          if(err) return next(err);
-
-          res.view({
-            user_messages: messages,
-            users:users,
-            robots: robots
-          });
+        res.view({
+          user_messages: messages,
+          users:users
         });
       });
     });
@@ -67,10 +62,10 @@ module.exports = {
           }
 
           if (!session) return next();
-            User.message(session.user_id, {
-              from: req.session.User.id,
-              msg: {msg: req.param('message'), id: msge.id}
-            });
+          User.message(session.user_id, {
+            from: req.session.User.id,
+            msg: {msg: req.param('message'), id: msge.id}
+          });
         });
         //
 
@@ -164,7 +159,6 @@ module.exports = {
 
     //Solo este usuario recibira el evento message
     User.subscribe(req, req.session.User.id, 'message');
-
 
     return res.ok();
   }

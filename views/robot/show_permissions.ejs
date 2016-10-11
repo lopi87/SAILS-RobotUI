@@ -1,7 +1,7 @@
 <%- partial('../_alert.ejs', {flash: flash}) %>
 
 <div class="jumbox">
-  <h3>Permissions <%= robot.name %></h3>
+  <h1 class="text-center login-title marginbottom20 margintop20"><%= i18n('Permisssions') + ' ' + robot.name%></h1>
 
   <% if(perm.size == 0){ %>
   <div class="alert alert-info margintop20 marginbottom20" role="alert">
@@ -9,83 +9,89 @@
     This robot is private.
   </div>
   <% } else { %>
-  <table class="table">
-    <thead>
-    <tr>
-      <th>User ID</th>
-      <th>Username</th>
-      <th>Drive</th>
-      <th>View</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody id="actualizar">
-
-    <% Object.keys(perm).forEach(function (key) { %>
-    <tr id="perm_<%= key %>">
-
-      <td> <%= key %></td>
-      <td> <%= User.find(key, {select: {name:1}}).limit(1) %></td>
-
-      <% if(perm[key].d){ %>
-      <td> <img src="/images/online.png" height="30" width="30"></td>
-      <% } else { %>
-      <td> <img src="/images/offline.png" height="30" width="30"></td>
-      <% } %>
-
-      <% if(perm[key].v){ %>
-      <td> <img src="/images/online.png" height="30" width="30"></td>
-      <% } else { %>
-      <td> <img src="/images/offline.png" height="30" width="30"></td>
-      <% } %>
-      <td>    <a class="btn btn-sm btn-danger" onclick="delete_row_permissions('<%= robot.id %>', '<%= key %>')">Delete</a></td>
-    </tr>
-    <% }) %>
-</tbody>
-  </table>
-  <% } %>
-</div>
-
-
-
-<div class="clear"></div>
-
-<div class="jumbox">
 
   <div class="row">
-    <div class="col-md-5">
-      <div class="control-group">
-        <p><label for="user"><%= i18n("users") %> * :</label></p>
-        <select tabindex="-1" multiple="" data-placeholder="Choose users..." class="chzn-select"> tabindex="2" name="users">
-          <option value=""></option>
-          <% users.forEach(function(user)  { %>
-          <option data-img-src="<%= user.avatarUrl %>" value="<%= user.id %>"><%= user.name %></option>
-          <% }); %>
-        </select>
-      </div>
-      <script type="text/javascript">
-        $('.chzn-select').chosen({width: '100%'});
-      </script>
+    <div class="col-md-10 col-md-offset-1">
+
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>Username</th>
+          <th>Drive</th>
+          <th>View</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="actualizar">
+
+        <% Object.keys(perm).forEach(function (key) { %>
+        <tr id="perm_<%= key %>">
+
+          <td> <%= perm[key].name %></td>
+
+          <% if(perm[key].d){ %>
+          <td> <img src="/images/online.png" height="30" width="30"></td>
+          <% } else { %>
+          <td> <img src="/images/offline.png" height="30" width="30"></td>
+          <% } %>
+
+          <% if(perm[key].v){ %>
+          <td> <img src="/images/online.png" height="30" width="30"></td>
+          <% } else { %>
+          <td> <img src="/images/offline.png" height="30" width="30"></td>
+          <% } %>
+          <td> <a class="btn btn-sm btn-danger" onclick="delete_row_permissions('<%= robot.id %>', '<%= key %>')">Delete</a></td>
+        </tr>
+        <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+
+
     </div>
-    <div class="col-md-4">
-      <div class="control-group marginbottom5" style="margin-top: 50px">
-        <label for="name"><%= i18n("permissions") %> * :</label>
-        <p>
-          Control: <input name="control_check" required="" type="checkbox">
-          View: <input name="view_check" type="checkbox">
-        </p>
+  </div>
+
+  <div class="clear"></div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <hr class="margintop20">
+
+      <div class="row">
+        <div class="col-md-6 marginbottom10">
+          <div class="control-group">
+            <p><label for="user"><%= i18n("users") %> * :</label></p>
+            <select tabindex="-1" multiple="" data-placeholder="Choose users..." class="chzn-select" name="users">
+              <option value=""></option>
+              <% users.forEach(function(user)  { %>
+              <option data-img-src="<%= user.avatarUrl %>" value="<%= user.id %>"><%= user.name %></option>
+              <% }); %>
+            </select>
+            <script type="text/javascript">
+              $('.chzn-select').chosen({width: '100%'});
+            </script>
+          </div>
+        </div>
+
+
+        <div class="col-md-4">
+          <div class="control-group">
+            <label for="name"><%= i18n("permissions") %> * :</label>
+            <p class="paddingtop10">
+              Control: <input name="control_check" required="" type="checkbox">
+              View: <input name="view_check" type="checkbox">
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-2 margintop10">
+          <a id="down_bottom" class="btn btn-primary btn-success" onclick="new_permissions('<%= robot.id %>')"><%= i18n('add') %></a>
+        </div>
       </div>
-    </div>
-    <div class="col-md-3">
-      <input class="btn btn-primary" value="<%= i18n('add') %>"  onclick="new_permissions('<%= robot.id %>')"  style="margin-top: 60px">
     </div>
   </div>
 </div>
 
-
-<div class="button_right">
-  <a href="/robot/index/" class="btn btn-sm btn-warning">Back</a>
-</div>
 
 <script type="text/javascript">
 

@@ -1,5 +1,5 @@
 /**
- * Session.js
+ * Socket.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/#!documentation/models
@@ -8,27 +8,11 @@
 module.exports = {
 
   attributes: {
-    socket_id:{
+
+    socket_name:{
       type: 'string',
       required: true
     },
-
-    user_id:{
-      model: 'user',
-      required: true,
-      defaultsTo: 'invited'
-    },
-
-    robot_id:{
-      model: 'robot'
-    },
-
-    //Rooms of socket
-    rooms: {
-      collection: 'room',
-      via: 'sockets_room'
-    },
-
 
     toJSON: function(){
       var obj = this.toObject();
@@ -37,6 +21,4 @@ module.exports = {
     }
 
   }
-
 };
-

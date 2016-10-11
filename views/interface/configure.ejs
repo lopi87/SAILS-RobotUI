@@ -1,12 +1,9 @@
 <%- partial('../_alert.ejs', {flash: flash}) %>
 
-
-<div class="container">
-
   <!-- Upload icon modal (action)-->
   <%- partial('../action/_upload_icon.ejs', {interface: interface})%>
 
-  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel-group margintop20" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="headingOne">
         <h4 class="panel-title">
@@ -52,19 +49,6 @@
   </div>
 
 
+<%- partial ('../action/index.ejs', {interface: interface})%>
 
-
-
-<% partial ('../action/index.ejs', {interface: interface})%>
-
-<%- partial('config_panel.ejs', {interface: interface, events: events, actions: actions, videos: videos})%>
-
-<div class="margintop20 marginbottom20">
-  <a href="/robot/index" class="btn btn-sm btn-warning"> My Robots</a>
-  <a href="/interface/show/<%= interface.id %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
-</div>
-
-
-
-
-</div>
+<%- partial('config_panel.ejs', {interface: interface, events: events, actions: actions, video: video})%>

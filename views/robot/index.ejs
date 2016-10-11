@@ -11,10 +11,6 @@
   <% } else { %>
   <%- partial('_table.ejs', {robots: robots, type: 'my_robots'}) %>
   <% } %>
-
-  <div class="button_right">
-    <a href="/robot/new" class="btn btn-sm btn-success">Add a new robot!</a>
-  </div>
 </div>
 
 <div class="clear"></div>
@@ -31,9 +27,6 @@
   <%- partial('_table.ejs', {robots: driver_robots, type: 'my_driver_robots'}) %>
   <% } %>
 
-  <div class="button_right">
-    <a href="/robot/share" class="btn btn-sm btn-success">Share a new robot!</a>
-  </div>
 </div>
 
 
@@ -51,22 +44,23 @@
   <%- partial('_table.ejs', {robots: viewer_robots, type: 'my_viewer_robots'}) %>
   <% } %>
 
+
   <div class="button_right">
-    <a href="/robot/share" class="btn btn-sm btn-success">Require a new robot!</a>
+    <a href="/robot/new" class="btn btn-sm btn-success">Create a new robot!</a>
   </div>
+
 </div>
 
 
 <script type="text/javascript">
 
-  addLoadEvent(subscribeAndListen_robot);
-
-  function subscribeAndListen_robot(){
+  function subscribeAndListen(){
     io.socket.get('/robot/robot_subscribe/');
 
     io.socket.on('robot', function (obj) {
       if (obj.verb == 'updated') {
         var data = obj.data;
+        alert(data.busy);
         change_free_busy(data.id, data.busy);
         console.log('Robot ' + data.id + ' has been updated to: busy:' + data.busy);
 

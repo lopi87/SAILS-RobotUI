@@ -29,8 +29,6 @@ module.exports = {
       var x = req.param('x');
       var y = req.param('y');
 
-      //Comprobar si puede o no actualizar
-
       Video.update(id, {coordinate_x: x, coordinate_y: y}, function videoUpdated(err){
         if(err) return res.badRequest(err);
         res.ok();
@@ -53,19 +51,19 @@ module.exports = {
           event_name: req.param('event_name')
         };
 
-        Video.create(videoObj, function videoCreated(err, video) {
+        //Delete old videos before create new
+        Video.destroy({interface_owner: iface.is}).exec(function (err, video) {
+          if (err) return next(err);
+
+          Video.create(videoObj, function videoCreated(err, video) {
           if (err) return res.badRequest(err);
-
-          video.save(function (err) {
-            if (err) return res.badRequest(err);
-
             console.log('The video element has been created');
 
-            return res.render('video/_video_row.ejs', {
-              video: video,
-              layout: false
-            });
+            Interface.update({id: req.param('id')},{video: video.id}, function ifaceUpdated(err) {
+              if (err) return next(err);
 
+              return res.ok();
+            });
           });
         });
       });
