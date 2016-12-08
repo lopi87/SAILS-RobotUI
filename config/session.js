@@ -67,11 +67,11 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  adapter: 'mongo',
-  host: 'localhost',
-  port: 27017,
-  db: 'RobotUI',
-  collection: 'cookies'
+  //adapter: 'mongo',
+  //host: 'localhost',
+  //port: 27017,
+  //db: 'RobotUI',
+  //collection: 'cookies'
   /***************************************************************************
   *                                                                          *
   * Optional Values:                                                         *
