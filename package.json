@@ -6,6 +6,7 @@
   "keywords": [],
   "dependencies": {
     "bcrypt": "^0.8.7",
+    "connect-mongo": "^0.3.3",
     "db-migrate": "^0.9.18",
     "ejs": "~0.8.4",
     "font-awesome": "^4.4.0",
