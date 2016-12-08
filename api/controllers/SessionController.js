@@ -5,6 +5,11 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+
+var geoip = require('geoip-lite');
+var requestIp = require('request-ip');
+
+
 module.exports = {
 
   new: function(req, res){
@@ -99,8 +104,18 @@ module.exports = {
         req.session.authenticated = true;
         req.session.User = user;
 
+
+        //Get user ip -> location
+        var clientIp = requestIp.getClientIp(req).substr(7); // on localhost > 127.0.0.1
+        var geo = geoip.lookup(clientIp);
+        var long = 0, lat = 0;
+        if(geo){
+          long = geo.ll[1];
+          lat = geo.ll[0];
+        }
+
         //Cambio de estado a online
-        User.update(user.id, {online: true}, function (err){
+        User.update(user.id, {online: true, longitude: long, latitude: lat}, function (err){
           if (err) return next(err);
 
           //Informar a otros clientes (sockets abiertos) que el usuario esta logueado

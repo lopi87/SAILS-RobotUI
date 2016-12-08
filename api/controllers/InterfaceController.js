@@ -7,6 +7,7 @@
 
 var Log = require('log');
 log = new Log('debug');
+var geoip = require('geoip-lite');
 
 
 module.exports = {
@@ -52,6 +53,12 @@ module.exports = {
 
           User.findOne({id:  iface.robot_owner.owner}).exec(function Userfound(error, user){
             if (err) return res.badRequest(err);
+
+            var geo = geoip.lookup(iface.robot_owner.ipaddress);
+            if(geo){
+              iface.robot_owner.longitude = geo.ll[1];
+              iface.robot_owner.latitude = geo.ll[0];
+            }
 
             res.view({
               interface: iface,

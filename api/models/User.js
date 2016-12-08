@@ -35,6 +35,14 @@ module.exports = {
       defaultsTo: false
     },
 
+    longitude: {
+      type: 'float'
+    },
+
+    latitude: {
+      type: 'float'
+    },
+
     language: {
       type:'string',
       defaultsTo: 'ES'

@@ -38,5 +38,7 @@
 	"edit": "Edit",
 	"title": "Title",
 	"show": "Show",
-	"editaccount": "Edit Account"
+	"editaccount": "Edit Account",
+	"author": "author",
+	"description": "description"
 }

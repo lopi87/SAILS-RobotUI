@@ -5,11 +5,8 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-
 var Log = require('log');
 log = new Log('debug');
-
-var geoip = require('geoip-lite');
 
 module.exports = {
 
@@ -26,22 +23,13 @@ module.exports = {
 
   create: function(req, res, next) {
 
-    var geo = geoip.lookup(req.param('ipaddress'));
-
     var robotObj = {
       name: req.param('name'),
       description: req.param('description'),
       ipaddress: req.param('ipaddress'),
       port: parseInt(req.param('port')),
       owner: req.session.User.id, //Añadimos el propietario
-      longitude: 0,
-      latitude: 0
     };
-
-    if(geo){
-      robotObj.longitude = geo.ll[1];
-      robotObj.latitude = geo.ll[0];
-    }
 
 
     Robot.create(robotObj, function robotCreated(err, robot) {
