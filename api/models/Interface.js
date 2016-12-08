@@ -55,7 +55,6 @@ module.exports = {
 
     types: {
       ispositive: function (value) {
-        console.log(value);
         if (value >= 0) {
           console.log('value is a positive number');
           return true;

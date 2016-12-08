@@ -72,7 +72,6 @@ module.exports = {
   },
   types:{
     ispositive:function(value){
-      console.log(value);
       if(value >=0 ){
         return true;
       }

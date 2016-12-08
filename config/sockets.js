@@ -181,7 +181,7 @@ module.exports.sockets = {
 
       //Comprobar si el usuario tiene mas sockets abiertos:
       Session.count({user_id: session.user_id}).exec(function countUserSessions(error, n_sessions) {
-        console.log('There are ' + n_sessions + 'of user ' + session.user_id);
+        console.log('There are ' + n_sessions + ' users ' + session.user_id);
 
         //Change user to offline state
         if (n_sessions == 1) {
