@@ -17,11 +17,9 @@ module.exports.bootstrap = function(cb) {
     Room.destroy({}).exec(function (err) {
       User.update({online: true}, {online: false}).exec(function (err){
         Robot.update({busy: true}, {busy: false}).exec(function (err){
+          cb();
         });
       });
     });
   });
-
-
-  cb();
 };

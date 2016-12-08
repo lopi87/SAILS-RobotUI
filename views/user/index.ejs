@@ -21,7 +21,7 @@
     <% _.each(users, function(user){ %>
     <tr id="line_<%= user.id %>" data-model="user">
 
-      <% if(user.online){ %>
+      <% if(user.online || (user.id == req.session.User.id)){ %>
       <td> <img id="img_state_<%=user.id%>" src="/images/online.png" height="30" width="30"></td>
       <% } else { %>
       <td> <img id="img_state_<%=user.id%>" src="/images/offline.png" height="30" width="30"></td>
@@ -97,7 +97,6 @@
     });
 
   }
-
 
 </script>
 

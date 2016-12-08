@@ -150,7 +150,32 @@ Mejorada la ventana de registro de usuario con la validadion del form.
 
 
 
+17 Agosto
+---------
 
+(Incluye cosas de dias anteriores)
+
+Mejorado el layout -> ahora responsive.
+Mejorado diseños!
+Parseley en los form!
+
+Pruebas con video, capto de la webcam y emito a una room!
+
+Capturas de eventos del robot al que me conceto!
+
+Se esta creando la estructura en la base de datos para su gestion!
+Formulario de creacion!
+
+
+Mejora del logotipo! En SVG
+
+
+
+
+
+Pesonalizacion de botones:
+
+http://blog.koalite.com/bbg/
 
 
 
@@ -171,10 +196,6 @@ Añadir otros botones
 COSAS PENDIENTES:
 ------------------
 
-Configurar webstorm para sails js:
-https://www.youtube.com/watch?v=he5PFFU9_uI
-
-
 Usar python para conectar a un servidor socket.io
 https://www.youtube.com/watch?v=RADUHye8am8
 --------------------------------------
@@ -182,3 +203,100 @@ https://www.youtube.com/watch?v=RADUHye8am8
 Editor CSS -> http://codemirror.net/
 Joystick controlado con el raton!! me gusta la idea: http://scottlobdell.me/2015/09/creating-touch-controlled-joystick-html5/
 
+
+
+
+
+
+
+INFORMACION UTIL
+----------------
+
+SOCKETTS
+
+Here is my list (updated for 1.0):
+
+// sending to sender-client only
+socket.emit('message', "this is a test");
+
+// sending to all clients, include sender
+io.emit('message', "this is a test");
+
+// sending to all clients except sender
+socket.broadcast.emit('message', "this is a test");
+
+// sending to all clients in 'game' room(channel) except sender
+socket.broadcast.to('game').emit('message', 'nice game');
+
+// sending to all clients in 'game' room(channel), include sender
+io.in('game').emit('message', 'cool game');
+
+// sending to sender client, only if they are in 'game' room(channel)
+socket.to('game').emit('message', 'enjoy the game');
+
+// sending to all clients in namespace 'myNamespace', include sender
+io.of('myNamespace').emit('message', 'gg');
+
+// sending to individual socketid
+socket.broadcast.to(socketid).emit('message', 'for your eyes only');
+
+
+
+
+Ejemplos de badges:
+
+http://cssdeck.com/labs/twitter-bootstrap-badges
+
+
+Leds
+
+http://cssdeck.com/labs/css-leds
+
+https://codepen.io/ErikGuerrero/pen/cmtJb
+
+
+
+TABLA DE LA RELACION  ENTRE USUARIO - ROBOT     -> HECHO!
+
+VISTAS INVITADOS Y COMPARTIR ROBOT  -> LO SIGUIENTE
+
+MEJORAS Y CONTROL DE PERMISOS  ERRORES...
+
+
+ENVIO DE EVENTOS ENTRE VENTANAS  -> HECHO!!
+
+CONTROL DE ROBOT OCUPADO DISPONIBLE -> HECO!!
+
+Cuando se controle una interfaz ver en tiempo real usurios vivitantes conectados   -> HECHO!
+
+Hcaer la vista de los comandos -> hecho
+
+Terminar la subida de imagenes!  -> subida del robot  hecho!
+TERMINAR LA VENTANA EDITAR USUARIO  -> HECHO!
+CREAR VENTANA EDITAR ROBOT  -> HECHO!
+
+VENTANA ABOUT -> hecho!
+EN SHOW AÑADIR ABAJO INFORMACION SOBRE AUTOR DESCRIPCION Y LOCALIZACION!!   -> HECHO!
+
+
+IMPORTANTE! QUEDA POR HACER!
+----------------------------
+
+Arreglar errores dimensionar interfaz!
+Añadir VIDEO!
+MEjorar diseño de la configuracion de interfaz
+
+CREAR ROBOT DE MUESTRA
+
+Robots publicos!! numero de robots online!
+
+PAGINA INDEX EXPLICACION DE EN QUE CONSISTE EL TEMA
+
+PAGINA TUTORIAL INSTALACION CONFIGURACION ETC, EJEMPLOS....
+
+
+
+
+IMPORTANTE
+COMO CONTROLAR UN ROBOT CON NODE JS RASPBERY PI
+http://blog.bricogeek.com/noticias/raspberry-pi/como-controlar-un-robot-con-nodejs-y-raspberry-pi/

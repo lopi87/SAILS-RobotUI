@@ -339,7 +339,7 @@ h2 {
 
 //index
 li#nav-play {
-  width: 400px;
+  width: 360px;
 }
 
 li#nav-start {
@@ -351,11 +351,22 @@ li#nav-how {
 }
 
 #front-nav ul li {
-  display: inline-block;
+  display: inline;
   float: left;
   margin-bottom: 20px;
 }
 
 #front-nav li {
   line-height: 22px;
+}
+
+
+#front-nav::before {
+  content: "";
+  display: table;
+}
+#front-nav::after {
+  clear: both;
+  content: "";
+  display: table;
 }

@@ -1,34 +1,31 @@
 <%- partial('../_alert.ejs', {flash: flash}) %>
-
-<div class="container">
-  <div class="jumbotron">
+ <div class="jumbotron">
 
     <img src="/images/logo/logotipo.png" class="img-responsive center-block" alt="RobotUI.com">
     <div class="margintop20">
       <h2>The platform for all people can interact with robots through the internet.</h2>
     </div>
   </div>
-</div>
 
 <% if (n_robots_online > 0){%>
 <!-- <div class="alert alert-success" role="alert">There are <%= n_robots_online %> robots online, choose one and start playing!</div> -->
 <%}%>
 
-<div class="row">
+<div>
   <nav id="front-nav">
     <ul>
       <li id="nav-play">
-        <img src="/images/index/game.png" alt="play with robots" class="card-left card-circle card-margin-right" style="width:75px">
+        <img src="/images/index/game.png" alt="play with robots" class="card-left card-circle card-margin-right" style="width:80px">
         <h2>Play with robots!</h2>
         <p>Create robot games for people to have fun.</p>
       </li>
       <li id="nav-start">
-        <img src="/images/index/turn_on.png" alt="play now" class="card-left card-circle card-margin-right" style="width:75px">
+        <img src="/images/index/turn_on.png" alt="play now" class="card-left card-circle card-margin-right" style="width:80px">
         <h2>Get started!</h2>
         <p>Join us and add your robot!</p>
       </li>
       <li id="nav-how">
-        <img src="/images/index/work.png" alt="play now" class="card-left card-circle card-margin-right" style="width:75px">
+        <img src="/images/index/work.png" alt="play now" class="card-left card-circle card-margin-right" style="width:80px">
         <h2>How to do it?</h2>
         <p>If you don't know how to do it, check our tutorial!.</p>
       </li>
@@ -38,12 +35,10 @@
 
 
 <% if (!req.session.User) {%>
-<div class="container">
   <div class="jumbotron">
     <div class="margintop20">
       <a href="/user/new" class="btn btn-lg btn-success"> <%= __("signupnow") %></a>
     </div>
   </div>
-</div>
 <% } %>
 

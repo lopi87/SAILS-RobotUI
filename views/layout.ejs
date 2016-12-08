@@ -63,7 +63,7 @@
   <!--SCRIPTS END-->
 </head>
 
-<body class="">
+<body class="grad">
 
 <nav class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
@@ -101,9 +101,13 @@
         <%}%>
       </li>
 
+
+      <% if (session.User.admin) { %>
       <li class="nav-item">
-        <a href="/robot/index"> My Robots</a>
+        <a href="/robot/index">Robots administration</a>
       </li>
+      <% } %>
+
       <li class="dropdown">
         <a class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="#">
           Robots
@@ -208,7 +212,7 @@
 
 <div class="container">
   <hr>
-  <footer class="footer">
+  <div class="footer">
     <a class="navbar-brand" rel="home" href="/" title="Home page">
       <img src="/images/logo/logotipo.png" style="max-width:150px;">
     </a>
@@ -227,27 +231,24 @@
         <a href="/index/about"><p class="text-muted">About RobotUI</p></a>
       </div>
     </div>
-
-  </footer>
+  </div>
 </div>
+
+
+<footer>
+
+</footer>
 
 <script type="text/javascript">
 
   //addLoadEvent(savesocket);
 
-  $.when( savesocket() ).done(function(){
+  $.when(savesocket()).done(function(){
     if (typeof subscribeAndListen == 'function') {
       subscribeAndListen();
     }
+    listenMessages();
   });
-
-  addLoadEvent(function() {
-    //document.body.style.backgroundColor = '#EFDF95';
-    document.body.style.backgroundColor = '#437070';
-    //document.body.style.backgroundColor = '#228B22';
-
-  });
-  addLoadEvent(listenMessages);
 
   //Funcion para tener en to do momento almacenado en la tabla session los sockets conectados junto con el usuario al que pertenece
   function savesocket() {
@@ -256,7 +257,6 @@
 
   //Evento A la espera de recibir mensajes y notificar al usuario
   function listenMessages(){
-
     io.socket.get("/user/message_subscribe");
 
     io.socket.on('user', function messageReceived(message) {

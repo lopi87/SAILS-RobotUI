@@ -181,6 +181,8 @@ module.exports = {
 
       Room.findOrCreate({room_name: req.param('robot')}, {room_name: req.param('robot')}).exec(function createFindCB(error, room){
         if (err) return next(err);
+        if (!room) return next(err);
+
 
         //Link
         session.rooms.add(room.id);
