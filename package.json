@@ -6,9 +6,12 @@
   "keywords": [],
   "dependencies": {
     "bcrypt": "^0.8.3",
+    "connect-mongo": "^0.4.2",
     "db-migrate": "^0.9.18",
     "ejs": "~0.8.4",
     "font-awesome": "^4.4.0",
+    "geoip-lite": "^1.1.8",
+    "gm": "^1.23.0",
     "grunt": "0.4.2",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-coffee": "~0.10.1",
@@ -23,13 +26,17 @@
     "grunt-sync": "~0.0.4",
     "include-all": "~0.1.3",
     "jade": "^1.11.0",
+    "log": "^1.4.0",
+    "mailgun-js": "^0.7.14",
+    "mongoose": "^4.7.2",
     "parsleyjs": "^2.4.4",
     "paypal-rest-sdk": "^1.6.9",
     "rc": "~0.5.0",
+    "request": "^2.79.0",
     "sails": "^0.11.0",
     "sails-db-migrate": "^0.8.0",
     "sails-disk": "~0.10.0",
-    "sails-mongo": "^0.11.2",
+    "sails-mongo": "^0.11.7",
     "sails-mysql": "^0.10.12",
     "skipper": "^0.5.5",
     "socket.io": "^1.3.6",
@@ -38,14 +45,14 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "sails lift"
+    "start": "node app.js"
   },
   "main": "app.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/manuel/RobotUI.git"
   },
-  "author": "manuel",
+  "author": "Manuel Lopez Urbina",
   "license": "",
   "devDependencies": {}
 }

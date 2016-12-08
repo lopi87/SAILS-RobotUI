@@ -1,8 +1,8 @@
 //http://www.tysoncadenhead.com/blog/how-to-upload-remote-images-with-sails-js#.V6Mch16li1E
 
 var gm = require('gm'),
-  fs = require('fs'),
-  request = require('request');
+    fs = require('fs'),
+    request = require('request');
 
 module.exports = {
 

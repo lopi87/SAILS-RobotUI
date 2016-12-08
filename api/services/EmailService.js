@@ -1,4 +1,4 @@
-var Mailgun = require('machinepack-mailgun');
+var Mailgun = require('mailgun-js');
 
 // api/services/EmailService.js
 module.exports = {
