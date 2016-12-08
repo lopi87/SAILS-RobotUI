@@ -6,7 +6,6 @@
   "keywords": [],
   "dependencies": {
     "bcrypt": "^0.8.7",
-    "connect-mongo": "^0.4.2",
     "db-migrate": "^0.9.18",
     "ejs": "~0.8.4",
     "font-awesome": "^4.4.0",
@@ -28,7 +27,6 @@
     "log": "^1.4.0",
     "mailgun-js": "^0.7.14",
     "parsleyjs": "^2.4.4",
-    "paypal-rest-sdk": "^1.6.9",
     "pug": "^0.1.0",
     "rc": "~0.5.0",
     "request": "^2.79.0",
