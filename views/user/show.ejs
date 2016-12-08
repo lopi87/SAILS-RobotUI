@@ -8,18 +8,18 @@
         <h3><%= user.name %></h3>
       </header>
 
-      <div class="card-container paddingtop10">
-        <% if(user.admin){ %>
-        <img src="/images/admin.png" height="32" width="32"> admin
-        <% } else { %>
-        <img src="/images/pawn.png"  height="32" width="32"> pawn
-        <% } %>
-        <% if(user.online){ %>
+    <div class="card-container paddingtop10">
+      <% if(user.admin){ %>
+      <img src="/images/admin.png" height="32" width="32"> admin
+      <% } else { %>
+      <img src="/images/pawn.png"  height="32" width="32"> pawn
+      <% } %>
+      <% if(user.online || user.id == req.session.User.id){ %>
         <img src="/images/online.png" height="32" width="32"> online
-        <% } else { %>
+      <% } else { %>
         <img src="/images/offline.png"  height="32" width="32"> offline
-        <% } %>
-      </div>
+      <% } %>
+    </div>
     <hr>
 
       <div class="card-container">
@@ -37,8 +37,3 @@
       </div>
     </div>
   </div>
-
-
-
-
-

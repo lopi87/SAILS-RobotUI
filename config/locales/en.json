@@ -32,9 +32,11 @@
 	"events": "events",
 	"eventname": "eventname",
 	"unit": "unit",
-	"createevent": "createevent",
+	"createevent": "Create event",
 	"videos": "videos",
-	"createvideo": "createvideo",
-	"edit": "edit",
-	"title": "title"
+	"createvideo": "Create video",
+	"edit": "Edit",
+	"title": "Title",
+	"show": "Show",
+	"editaccount": "Edit Account"
 }
