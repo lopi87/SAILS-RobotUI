@@ -36,10 +36,12 @@ module.exports = {
 
     //Añade los usuarios invitados del robot
     var driver_users = [];
-    if (drivers != undefined && !(drivers) instanceof Array) {
-      driver_users.push(drivers);
-    }else{
+    if ((drivers) instanceof Array) {
       driver_users = drivers
+    }else{
+      if (drivers != undefined){
+        driver_users.push(drivers);
+      }
     }
 
     driver_users.forEach(function (user_id) {
@@ -56,12 +58,13 @@ module.exports = {
       });
     });
 
-
     var viewer_users = [];
-    if (viewers != undefined && !(viewers instanceof Array)) {
-      viewer_users.push(viewers);
-    }else{
+    if ((viewers) instanceof Array) {
       viewer_users = viewers
+    }else{
+      if (viewers != undefined){
+        viewer_users.push(viewers);
+      }
     }
 
     //Añade los usuarios invitados del robot

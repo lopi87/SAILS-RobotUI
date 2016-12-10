@@ -32,7 +32,7 @@ module.exports.session = {
   ***************************************************************************/
 
   cookie: {
-    maxAge: 60*60*1000
+    maxAge: 24 * 60 * 60 * 1000
   },
 
   /***************************************************************************
@@ -72,7 +72,7 @@ module.exports.session = {
   //port: 27017,
   //db: 'RobotUI',
   //collection: 'cookies'
-  
+
   externalMongodbServer: {
     adapter: 'sails-mongo',
     url: process.env.DB_URL,
