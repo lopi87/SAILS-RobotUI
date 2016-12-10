@@ -6,13 +6,17 @@ module.exports = function(req, res, next) {
     Robot.findOne(iface.robot_owner).populate('viewers').exec(function (err, robot) {
       if (err) return next(err);
 
-
       var found = false;
-      robot.viewers.forEach(function(user) {
-        if(user.id === req.session.User.id){
-          found = true;
-        }
-      });
+
+      if (robot.public_view){
+        found = true;
+      }else{
+        robot.viewers.forEach(function(user) {
+          if(user.id === req.session.User.id){
+            found = true;
+          }
+        });
+      }
 
       if (found){
         next();

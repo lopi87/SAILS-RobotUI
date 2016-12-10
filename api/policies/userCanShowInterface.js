@@ -8,11 +8,17 @@ module.exports = function(req, res, next) {
       if (err) return next(err);
 
       var found = false;
-      robot.drivers.forEach(function(user) {
-        if(user.id === req.session.User.id){
-          found = true;
-        }
-      });
+
+      if (robot.public_drive){
+        found = true;
+      }else{
+        robot.drivers.forEach(function(user) {
+          if(user.id === req.session.User.id){
+            found = true;
+          }
+        });
+      }
+
 
       if (found){
         next();
