@@ -1,0 +1,30 @@
+<%- partial('../_alert.ejs', {flash: flash}) %>
+
+<div class="jumbox">
+  <h3>Public Robots</h3>
+
+  <%- partial('_table.ejs', {robots: public_robots, type: 'public_robots'}) %>
+
+  <div class="button_right">
+    <a href="/robot/share" class="btn btn-sm btn-success">Share a new robot!</a>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  addLoadEvent(subscribeAndListen_robot);
+
+  function subscribeAndListen_robot(){
+    io.socket.get('/robot/robot_subscribe/');
+
+    io.socket.on('robot', function (obj) {
+
+      if (obj.verb == 'updated') {
+        var data = obj.data;
+        change_img_state(data.id, data.online);
+        console.log('Robot has been updated to: online:' + data.online);
+      }
+
+    });
+  }
+</script>

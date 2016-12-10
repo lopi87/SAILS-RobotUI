@@ -21,6 +21,26 @@
     <td><%= robot.ipaddress + ':' + robot.port%></td>
 
     <% switch(type){
+    case "public_robots": %>
+    <td>
+      <a href="/robot/show/<%= robot.id %>" class="btn btn-sm btn-primary"></i> Show </a>
+      <% if (robot.busy ){ %>
+      <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary hidden"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+      <a id="btn_config_ <%= robot.id%>" href="/interface/configure/<%= robot.robot_interface %>" class="btn btn-sm btn-warning hidden"><i class="fa fa-wrench" aria-hidden="true"></i> Configure</a>
+      <% } else { %>
+      <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+      <a id="btn_config_ <%= robot.id%>" href="/interface/configure/<%= robot.robot_interface %>" class="btn btn-sm btn-warning"><i class="fa fa-wrench" aria-hidden="true"></i> Configure</a>
+      <% } %>
+      <a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"></i> Edit </a>
+      <a class="btn btn-sm btn-danger" onclick=" window.location.href='<%='/robot/destroy/' + robot.id %>'"><i class="fa fa-trash-o"></i> Delete </a>
+
+    </td>
+    <% break;
+
+
+
+
+
     case "my_robots": %>
     <td>
       <a href="/robot/show/<%= robot.id %>" class="btn btn-sm btn-primary"></i> Show </a>

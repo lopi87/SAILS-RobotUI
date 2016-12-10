@@ -1,7 +1,7 @@
 <%- partial('../_alert.ejs', {flash: flash}) %>
 
 <div class="jumbox">
-  <h1 class="text-center login-title marginbottom20 margintop20"><%= i18n('Permisssions') + ' ' + robot.name%></h1>
+  <h1 class="text-center login-title marginbottom20 margintop20"><%= i18n('permissions')%></h1>
 
   <% if(perm.size == 0){ %>
   <div class="alert alert-info margintop20 marginbottom20" role="alert">
@@ -9,6 +9,15 @@
     This robot is private.
   </div>
   <% } else { %>
+
+  <div class="checkbox">
+    <label><input type="checkbox" name="public_drive" <%= robot.public_drive == true ? 'checked' : '' %>><%= i18n('Public')%></label>
+  </div>
+
+  <div class="checkbox">
+    <label><input type="checkbox" name="public_view" <%= robot.public_view == true ? 'checked' : '' %>><%= i18n('Public')%></label>
+  </div>
+
 
   <div class="row">
     <div class="col-md-10 col-md-offset-1">

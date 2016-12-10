@@ -29,6 +29,8 @@ module.exports = {
       ipaddress: req.param('ipaddress'),
       port: parseInt(req.param('port')),
       owner: req.session.User.id, //Añadimos el propietario
+      public_drive: req.param('public_drive') == 'on' ? true : false,
+      public_view: req.param('public_view') == 'on' ? true : false
     };
 
 
@@ -41,60 +43,23 @@ module.exports = {
         robot.robot_interface = iface.id;
         Robot.publishCreate(robot);
 
-        //Añade los usuarios invitados del robot
-        var driver_users = [];
-        if (req.param('driver_users') != undefined && !(req.param('driver_users') instanceof Array)){
-          driver_users.push(req.param('driver_users'));
-        }
-
-        driver_users.forEach(function(user_id)  {
-          User.findOne(user_id, function foundUser(err, user){
-            if(err) return next(err);
-            if(!user) return next();
-
-            //añadir invitados
-            log.debug('Associating robot - user: ',robot.id,'with',user.id);
-            robot.drivers.add(user.id);
-            robot.save(function (err) {
-              if (err) return next(err);
-            });
-          });
-        });
-
-
-        var viewer_users = [];
-        if (req.param('viewer_users') != undefined && !(req.param('viewer_users') instanceof Array)){
-          viewer_users.push(req.param('viewer_users'));
-        }
-
-        //Añade los usuarios invitados del robot
-        viewer_users.forEach(function(user_id)  {
-          User.findOne(user_id, function foundUser(err, user){
-            if(err) return next(err);
-            if(!user) return next();
-
-            //añadir invitados
-            log.debug('Associating robot - user: ',robot.id,'with',user.id);
-            robot.viewers.add(user.id);
-            robot.save(function (err) {
-              if (err) return next(err);
-            });
-          });
-        });
-
-        ImageService.upload_robot_avatar(req.file('robot_avatar'), robot, function whenDone(err, files) {
+        PermissionService.init_permissions(robot, req.param('driver_users'), req.param('viewer_users'), function whenDone(err){
           if (err) return res.negotiate(err);
 
-          msg = { err: 'Robot has been created.' };
-          FlashService.success(req, msg );
+          ImageService.upload_robot_avatar(req.file('robot_avatar'), robot, function whenDone(err, files) {
+            if (err) return res.negotiate(err);
 
-          robot.save(function (err) {
-            if (err) return next(err);
+            msg = { err: 'Robot has been created.' };
+            FlashService.success(req, msg );
+
+            robot.save(function (err) {
+              if (err) return next(err);
+            });
+
+            //Redirección a index
+            return res.redirect('robot/index/');
+
           });
-
-          //Redirección a index
-          return res.redirect('robot/index/');
-
         });
       });
     });
@@ -154,6 +119,15 @@ module.exports = {
     });
   },
 
+  index_public_robots: function(req, res, next) {
+    Robot.find().where({ or: [{public_view: true, public_drive: true}]}).exec(function (err, robots){
+      if (err) return res.serverError(err);
+
+      res.view({
+        public_robots: robots
+      });
+    });
+  },
 
 
   index_driver_robots: function(req, res, next) {
@@ -311,7 +285,9 @@ robot_subscribe: function(req,res,next){
       description: req.param('description'),
       ipaddress: req.param('ipaddress'),
       port: parseInt(req.param('port')),
-      owner: req.session.User.id
+      owner: req.session.User.id,
+      public_drive: req.param('public_drive') == 'on' ? true : false,
+      public_view: req.param('public_view') == 'on' ? true : false
     };
 
 
@@ -361,9 +337,9 @@ robot_subscribe: function(req,res,next){
   new_permissions: function(req, res, next){
     var robot_id = req.param('id');
 
-    var users = [];
-    if (req.param('users') != undefined && !(req.param('users') instanceof Array)){
-      users.push(req.param('users'));
+    if (req.param('users') && req.param('users') instanceof Array) {
+    }else{
+      users = [req.param('users')]
     }
 
     //Check if the users exists
@@ -378,7 +354,7 @@ robot_subscribe: function(req,res,next){
       if (err) return res.badRequest(err);
       if (!robot) return res.badRequest(err);
 
-      users.forEach(function (user_id) {
+      req.param('users').forEach(function (user_id) {
         if (req.param('control_check')) {
           robot.drivers.add(user_id);
         }

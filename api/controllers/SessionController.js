@@ -129,11 +129,10 @@ module.exports = {
           msg = { err: req.__('Welcome') };
           FlashService.success(req, msg );
 
-          //Si el usuario es administrador redirecciona a la vista de todos los usuarios
           if (req.session.User.admin) {
-            res.redirect('/robot/index/');
+            res.redirect('/robot/index_public_robots/');
           }else{
-            res.redirect('/robot/index/');
+            res.redirect('/robot/index_public_robots/');
           }
 
           return;
