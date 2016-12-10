@@ -28,7 +28,7 @@
 	"createaction": "Crear acción",
 	"text": "Texto",
 	"background": "Background",
-	"border": "border",
+	"border": "Border",
 	"activebackground": "Activebackground",
 	"colors": "colors",
 	"color": "Color",
@@ -36,7 +36,7 @@
 	"unit": "Unidad",
 	"createevent": "Crear evento",
 	"edit": "Editar",
-	"Proceed": "Proceed",
+	"Proceed": "Proceder",
 	"videos": "videos",
 	"createvideo": "createvideo",
 	"events": "events",
@@ -57,8 +57,9 @@
 	"or": "o",
 	"editrobot": "Editar robot",
 	"editaccount": "Editar cuenta",
-	"upload": "upload",
+	"upload": "Subir",
 	"Permisssions": "Permisssions",
 	"icon": "Icono",
-	"author": "Autor"
+	"author": "Autor",
+	"about": "Acerca de"
 }

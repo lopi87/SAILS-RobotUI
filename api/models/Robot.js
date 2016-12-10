@@ -52,6 +52,16 @@ module.exports = {
       model: 'user'
     },
 
+    public_drive: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+
+    public_view: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+
 
     // Add a reference to Robot
     drivers:{

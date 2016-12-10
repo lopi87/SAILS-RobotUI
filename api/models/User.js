@@ -114,7 +114,7 @@ module.exports = {
     require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword){
       if(err) return next(err);
       values.encryptedPassword = encryptedPassword;
-      values.onLine = true;
+      values.online = true;
       delete values.password;
       delete values.confirmation;
       next();
@@ -132,7 +132,7 @@ module.exports = {
       require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword){
         if(err) return next(err);
         values.encryptedPassword = encryptedPassword;
-        values.onLine = true;
+        values.online = true;
         delete values.password;
         delete values.confirmation;
         next();

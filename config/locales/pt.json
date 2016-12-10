@@ -6,18 +6,19 @@
 		"test": "Isso e uma prova"
 	},
 	"signupnow": "Registre-se agora!",
-  "password": "palavra-passe",
-  "passwordconfirmation": "Confirmaçao de palavra-passe",
-  "email": "Email",
-  "signin": "Identifique-se",
-  "signout": "Sair",
-  "filesmallerthan %s": "Por favor, proporcione um arquivo mais pequeno do que %s kb:",
-  "name": "Nome",
-  "nickname": "Nick",
-  "language": "Idioma",
-  "chooselanguage": "Escolher um idioma...",
-  "selectfile": "Selecionar um arquivo",
-  "remove": "Apagar",
-  "change": "Mudar"
-
+	"password": "palavra-passe",
+	"passwordconfirmation": "Confirmaçao de palavra-passe",
+	"email": "Email",
+	"signin": "Identifique-se",
+	"signout": "Sair",
+	"filesmallerthan %s": "Por favor, proporcione um arquivo mais pequeno do que %s kb:",
+	"name": "Nome",
+	"nickname": "Nick",
+	"language": "Idioma",
+	"chooselanguage": "Escolher um idioma...",
+	"selectfile": "Selecionar um arquivo",
+	"remove": "Apagar",
+	"change": "Mudar",
+	"author": "author",
+	"about": "about"
 }

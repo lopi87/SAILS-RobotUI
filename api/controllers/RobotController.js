@@ -43,10 +43,8 @@ module.exports = {
 
         //Añade los usuarios invitados del robot
         var driver_users = [];
-        if (req.param('driver_users') && !(req.param('driver_users') instanceof Array)){
+        if (req.param('driver_users') != undefined && !(req.param('driver_users') instanceof Array)){
           driver_users.push(req.param('driver_users'));
-        }else{
-          driver_users = req.param('driver_users');
         }
 
         driver_users.forEach(function(user_id)  {
@@ -65,10 +63,8 @@ module.exports = {
 
 
         var viewer_users = [];
-        if (req.param('viewer_users') && !(req.param('viewer_users') instanceof Array)){
+        if (req.param('viewer_users') != undefined && !(req.param('viewer_users') instanceof Array)){
           viewer_users.push(req.param('viewer_users'));
-        }else{
-          viewer_users = req.param('driver_users');
         }
 
         //Añade los usuarios invitados del robot
@@ -365,9 +361,9 @@ robot_subscribe: function(req,res,next){
   new_permissions: function(req, res, next){
     var robot_id = req.param('id');
 
-    if (req.param('users') && req.param('users') instanceof Array) {
-    }else{
-      users = [req.param('users')]
+    var users = [];
+    if (req.param('users') != undefined && !(req.param('users') instanceof Array)){
+      users.push(req.param('users'));
     }
 
     //Check if the users exists
@@ -382,7 +378,7 @@ robot_subscribe: function(req,res,next){
       if (err) return res.badRequest(err);
       if (!robot) return res.badRequest(err);
 
-      req.param('users').forEach(function (user_id) {
+      users.forEach(function (user_id) {
         if (req.param('control_check')) {
           robot.drivers.add(user_id);
         }
