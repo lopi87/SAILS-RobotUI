@@ -62,5 +62,6 @@
 	"icon": "Icono",
 	"author": "Autor",
 	"about": "Acerca de",
-	"Public": "Public"
+	"public": "Público",
+	"menu": "Menu"
 }

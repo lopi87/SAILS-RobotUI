@@ -46,20 +46,27 @@ module.exports = {
         PermissionService.init_permissions(robot, req.param('driver_users'), req.param('viewer_users'), function whenDone(err){
           if (err) return res.negotiate(err);
 
-          ImageService.upload_robot_avatar(req.file('robot_avatar'), robot, function whenDone(err, files) {
-            if (err) return res.negotiate(err);
+          msg = { err: 'Robot has been created.' };
+          FlashService.success(req, msg );
 
-            msg = { err: 'Robot has been created.' };
-            FlashService.success(req, msg );
+          robot.save(function (err) {
+            if (err) return next(err);
 
-            robot.save(function (err) {
-              if (err) return next(err);
+            ImageService.upload_robot_avatar(req.file('robot_avatar'), robot, function whenDone(err, files) {
+              if (err) return res.negotiate(err);
             });
 
-            //Redirección a index
-            return res.redirect('robot/index/');
+            /*
+             ImageService.upload_robot_documentation(req.file('robot_documentation'), robot, function whenDone(err, files) {
+             if (err) return res.negotiate(err);
+             });
 
+             */
           });
+
+          //Redirección a index
+          return res.redirect('robot/index/');
+
         });
       });
     });

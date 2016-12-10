@@ -27,18 +27,25 @@
 
         <div class="row">
           <div class="col-md-6">
-            <label>Drivers</label>
-            <ul>
-              <% user_driver.forEach(function(user)  { %>
-              <li>
-                <img src="<%= user.avatarUrl %>" class="card-circle marginleft5" height="32" width="32">
-                <%= user.name %>
-              </li>
+            <label>Drivers:</label>
+            <% if (robot.public_drive){ %>
+              <span class="label label-pill label-success"> <%= i18n('public')%> </span>
+            <%} else {%>
+              <ul>
+                <% user_driver.forEach(function(user)  { %>
+                <li>
+                  <img src="<%= user.avatarUrl %>" class="card-circle marginleft5" height="32" width="32">
+                  <%= user.name %>
+                </li>
               <% }); %>
             </ul>
+            <% } %>
           </div>
           <div class="col-md-6">
-            <label>Viewers</label>
+            <label>Viewers:</label>
+            <% if (robot.public_view){ %>
+              <span class="label label-pill label-success"> <%= i18n('public')%> </span>
+            <%} else {%>
             <ul>
               <% user_viewer.forEach(function(user)  { %>
               <li>
@@ -46,6 +53,7 @@
                 <%= user.name %>
               </li>
               <% }); %>
+            <% } %>
             </ul>
           </div>
         </div>
@@ -54,8 +62,8 @@
       </div>
 
       <div class="card-dark-grey margintop10 card-btn-block">
-        <a class="btn btn-medium btn-primary" href="/robot/edit/<%= robot.id%>">Edit</a>
-        <a class="btn btn-medium btn-primary btn-success" href="/robot/index/<%= robot.id%>">Show interface</a>
+        <a class="btn btn-medium btn-primary" href="/robot/edit/<%= robot.id%>"> <%= i18n('edit')%></a>
+        <a class="btn btn-medium btn-primary btn-success" href="/robot/index/<%= robot.id%>"><%= i18n('menu') %></a>
       </div>
     </div>
 
