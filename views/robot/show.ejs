@@ -14,13 +14,13 @@
         <% } else { %>
         <span id="label_state_<%=robot.id%>" class="label label-pill label-success"> Free </span>
         <% } %>
-        <img src="<%= user.avatarUrl %>" class="card-circle marginleft5" height="32" width="32">
+        <img src="<%= sails.getBaseUrl() + user.avatarUrl %>" class="card-circle marginleft5" height="32" width="32">
         <%= user.name %>
       </div>
       <hr>
 
       <div class="card-container">
-        <img src="<%= robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:75px">
+        <img src="<%= sails.getBaseUrl() + robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:75px">
         <p>Address: <%= robot.ipaddress + ':' + robot.port %></p>
         <p>Description: <%= robot.description %></p>
         <br>
@@ -34,7 +34,7 @@
               <ul>
                 <% user_driver.forEach(function(user)  { %>
                 <li>
-                  <img src="<%= user.avatarUrl %>" class="card-circle marginleft5" height="32" width="32">
+                  <img src="<%= sails.getBaseUrl() + user.avatarUrl %>" class="card-circle marginleft5" height="32" width="32">
                   <%= user.name %>
                 </li>
               <% }); %>
@@ -49,7 +49,7 @@
             <ul>
               <% user_viewer.forEach(function(user)  { %>
               <li>
-                <img src="<%= user.avatarUrl %>" class="card-circle marginleft5" height="32" width="32">
+                <img src="<%= sails.getBaseUrl() + user.avatarUrl %>" class="card-circle marginleft5" height="32" width="32">
                 <%= user.name %>
               </li>
               <% }); %>

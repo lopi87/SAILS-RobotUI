@@ -11,7 +11,7 @@
         <select data-placeholder="Choose users..." class="chosen-select-users" tabindex="2" name="to_user_id">
           <option value=""></option>
           <% users.forEach(function(user)  { %>
-          <option data-img-src="<%= user.avatarUrl %>" value="<%= user.id %>"><%= user.name %></option>
+          <option data-img-src="<%= sails.getBaseUrl() + user.avatarUrl %>" value="<%= user.id %>"><%= user.name %></option>
           <% }); %>
         </select>
       <script type="text/javascript">

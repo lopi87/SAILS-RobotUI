@@ -14,8 +14,8 @@
         <tbody>
         <tr>
           <td></td>
-          <td><img src="<%= user.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:30px"><p class="margintop5"><%= user.name %></p></td>
-          <td><img src="<%= robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:45px"><p class="margintop5"><%= robot.description %></td>
+          <td><img src="<%= sails.getBaseUrl() + user.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:30px"><p class="margintop5"><%= user.name %></p></td>
+          <td><img src="<%= sails.getBaseUrl() + robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:45px"><p class="margintop5"><%= robot.description %></td>
         </tr>
         <tr>
         <tr>

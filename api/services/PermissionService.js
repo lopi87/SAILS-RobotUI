@@ -14,15 +14,15 @@ module.exports = {
       //Hash con clave id, valores d y v (true false)
       var perm = {};
       robot.drivers.forEach(function(user) {
-        perm[user.id] = {d: true, v: false, user_name: user.name, avatarUrl: user.avatarUrl};
+        perm[user.id] = {d: true, v: false, user_name: user.name, avatarUrl: sails.getBaseUrl() + user.avatarUrl};
       });
 
       robot.viewers.forEach(function(user) {
         if((user.id in perm)){
-          perm[user.id] = {d: perm[user.id].d , v: true, name: user.name, avatarUrl: user.avatarUrl};
+          perm[user.id] = {d: perm[user.id].d , v: true, name: user.name, avatarUrl: sails.getBaseUrl() +user.avatarUrl};
         }
         else{
-          perm[user.id] = {d: false, v: true, name: user.name, avatarUrl: user.avatarUrl};
+          perm[user.id] = {d: false, v: true, name: user.name, avatarUrl: sails.getBaseUrl() + user.avatarUrl};
         }
       });
 

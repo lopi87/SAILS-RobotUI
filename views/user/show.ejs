@@ -23,7 +23,7 @@
     <hr>
 
       <div class="card-container">
-        <img src="<%= user.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:75px">
+        <img src="<%= sails.getBaseUrl() + user.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:75px">
         <p>Email: <%= user.email%></p>
         <p>Language: <img class="chose-image-small" src="/images/flags/<%= user.language.toUpperCase()%>.png"></p>
 

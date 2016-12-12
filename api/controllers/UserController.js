@@ -311,7 +311,7 @@ module.exports = {
         // Save the "fd" and the url where the avatar for a user can be accessed
         User.update(req.session.User.id, {
           // Generate a unique URL where the avatar can be downloaded.
-          avatarUrl: require('util').format('%s/uploads/avatar/%s', sails.getBaseUrl(), req.session.User.id + '.' + extension),
+          avatarUrl: require('util').format('/uploads/avatar/%s', req.session.User.id + '.' + extension),
           // Grab the first file and use it's `fd` (file descriptor)
           avatarFd: file[0].fd
         }).exec(function (err){

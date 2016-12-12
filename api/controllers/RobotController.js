@@ -54,19 +54,18 @@ module.exports = {
 
             ImageService.upload_robot_avatar(req.file('robot_avatar'), robot, function whenDone(err, files) {
               if (err) return res.negotiate(err);
+
+              //Redirección a index
+              return res.redirect('robot/index/');
             });
 
             /*
              ImageService.upload_robot_documentation(req.file('robot_documentation'), robot, function whenDone(err, files) {
              if (err) return res.negotiate(err);
              });
-
              */
+
           });
-
-          //Redirección a index
-          return res.redirect('robot/index/');
-
         });
       });
     });
@@ -233,13 +232,13 @@ robot_subscribe: function(req,res,next){
           return res.redirect('robot/index');
         }
 
-        Action.destroy({interface_owner: interface.id}).exec(function (err, action) {
+        Action.destroy({interface_owner: interface.id}).exec(function (err) {
           if (err) return next(err);
 
-          Event.destroy({interface_owner: interface.id}).exec(function (err, action) {
+          Event.destroy({interface_owner: interface.id}).exec(function (err) {
             if (err) return next(err);
 
-            Video.destroy({interface_owner: interface.id}).exec(function (err, action) {
+            Video.destroy({interface_owner: interface.id}).exec(function (err) {
               if (err) return next(err);
 
               Interface.destroy(interface.id, function interfaceDestroyed(err) {
@@ -247,6 +246,8 @@ robot_subscribe: function(req,res,next){
 
                 Robot.destroy(id, function robotDestroyed(err){
                   if (err) return next(err);
+
+                  ImageService.delete_file(robot);
 
                   Robot.publishDestroy(id, {id: robot.id});
 

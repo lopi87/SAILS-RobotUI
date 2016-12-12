@@ -44,7 +44,7 @@ module.exports = {
         // Save the url where the avatar for a user can be accessed
         User.update(user.id, {
           // Generate a unique URL where the avatar can be downloaded.
-          avatarUrl: require('util').format('%s/uploads/avatar/%s', sails.getBaseUrl(), user.id + '.' + extension)
+          avatarUrl: require('util').format('/uploads/avatar/%s', user.id + '.' + extension)
         }).exec(function userUpdated(err, updated){
           if (err) {
             err = {err: 'Err'};
@@ -77,17 +77,16 @@ module.exports = {
         // Save the url where the avatar for a user can be accessed
         Robot.update(robot.id, {
           // Generate a unique URL where the avatar can be downloaded.
-          avatarUrl: require('util').format('%s/uploads/robot_avatar/%s', sails.getBaseUrl(), robot.id + '.' + extension)
+          avatarUrl: require('util').format('/uploads/robot_avatar/%s', robot.id + '.' + extension)
         }).exec(function robotUpdated(err, updated){
           if (err) {
             err = {err: 'Err'};
             FlashService.error(req, err);
             return;
           }
+          return cb(null, Path);
         });
       }
-      cb(null, Path);
-
     }
     }, done );
   },
@@ -97,34 +96,39 @@ module.exports = {
     img.upload({ maxBytes: 10000000, saveAs: function(file, cb){
 
       // setting allowed file types
-      var allowedTypes = ['image/jpeg', 'image/png'];
-      var Path = '../../.tmp/public/uploads/robot_avatar/disallowed.disallowed';
-
+      var allowedTypes = ['application/pdf'];
+      var Path = '../../.tmp/public/uploads/robot_documentation/disallowed.disallowed';
 
       // seperate allowed and disallowed file types
       if(allowedTypes.indexOf(file.headers['content-type']) != -1 && file.length != 0) {
         var extension = file.filename.split('.').pop();
-        Path = '../../.tmp/public/uploads/robot_avatar/' + robot.id + '.' + extension;
+        Path = '../../.tmp/public/uploads/robot_documentation/' + robot.id + '.' + extension;
 
         // Save the url where the avatar for a user can be accessed
         Robot.update(robot.id, {
           // Generate a unique URL where the avatar can be downloaded.
-          avatarUrl: require('util').format('%s/uploads/robot_avatar/%s', sails.getBaseUrl(), robot.id + '.' + extension)
+          avatarUrl: require('util').format('/uploads/robot_documentation/%s', robot.id + '.' + extension)
         }).exec(function robotUpdated(err, updated){
           if (err) {
             err = {err: 'Err'};
             FlashService.error(req, err);
             return;
           }
+
+          return cb(null, Path);
         });
       }
-      cb(null, Path);
-
     }
     }, done );
+  },
+
+
+  delete_file: function(element){
+    var location = '.tmp/public' + element.avatarUrl;
+    if (fs.existsSync(location)){
+      fs.unlinkSync(location);
+    }
   }
-
-
 
 
 };
