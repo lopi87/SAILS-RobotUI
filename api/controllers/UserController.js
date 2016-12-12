@@ -173,6 +173,8 @@ module.exports = {
       User.destroy(id, function userDestroyed(err) {
         if (err) return next(err);
 
+        ImageService.delete_file(user);
+
         User.publishDestroy(id, {id: user.id});
 
         msg = {err: 'User deleted'};
