@@ -41,5 +41,6 @@
 	"editaccount": "Edit Account",
 	"author": "Author",
 	"description": "Description",
-  "about": "About"
+	"about": "About",
+	"icon": "icon"
 }

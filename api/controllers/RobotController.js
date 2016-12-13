@@ -126,7 +126,7 @@ module.exports = {
   },
 
   index_public_robots: function(req, res, next) {
-    Robot.find().where({ or: [{public_view: true, public_drive: true}]}).exec(function (err, robots){
+    Robot.find().where({ or: [{public_view: true, public_drive: true}]}).paginate({page: req.param('page'), limit: 4}).exec(function (err, robots){
       if (err) return res.serverError(err);
 
       res.view({

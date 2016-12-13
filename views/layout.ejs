@@ -60,6 +60,7 @@
   <script src="/js/vendor/gridster.js"></script>
   <script src="/js/utils.js"></script>
   <script src="/js/customValidate.js"></script>
+  <script src="/js/carousel.js"></script>
   <!--SCRIPTS END-->
 </head>
 
@@ -178,16 +179,23 @@
       <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy"><%= __("signout") %></a>
       <% } %>
       <% if (!session.authenticated) { %>
+
+
+      <div class="navbar-right marginleft10">
+        <a href="/user/new" class="btn btn-success navbar-btn"> <%= __("signupnow") %></a>
+      </div>
+
       <form id="login_form" class="navbar-right" action="/session/create">
         <div class="form-group">
           <input type="email" placeholder="<%= __("email") %>" name="email" data-parsley-trigger="change" required class="form-control">
         </div>
         <div class="form-group">
-          <input type="password" placeholder="<%= i18n("password") %>" required  name="password" class="form-control">
+          <input type="password" placeholder="<%= i18n("password") %>" required  name="password" class="form-control" style="width: 150px">
         </div>
         <button type="submit" class="btn btn-success navbar-btn"><%= __("signin") %></button>
         <input type="hidden" name="_csrf" value="<%= _csrf %>">
       </form>
+
 
       <script type="text/javascript">
         addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
