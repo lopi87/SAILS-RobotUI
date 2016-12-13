@@ -10,7 +10,6 @@
       <th>Online</th>
       <th>ID</th>
       <th>Name</th>
-      <th>Title</th>
       <th>Email</th>
       <th>Admin</th>
       <th>Actions</th>
@@ -29,7 +28,6 @@
 
       <td><%= user.id %></td>
       <td><%= user.name %></td>
-      <td><%= user.title %></td>
       <td><%= user.email %></td>
 
       <% if(user.admin){ %>
@@ -81,12 +79,14 @@
         var data = obj.data;
         change_img_state(data.id, data.loggedIn);
 
-        if(data.loggedIn){
-          bootstrap_alert['success']('User connected!', 5000 );
-        }else{
-          bootstrap_alert['success']('User disconnected!', 5000 );
+        if (data.id != '<%= req.session.User.id %>') {
+          if (data.loggedIn) {
+            bootstrap_alert['success']('User connected!', 5000);
+          } else {
+            bootstrap_alert['success']('User disconnected!', 5000);
+          }
+          console.log('User has been updated to online:' + data.loggedIn);
         }
-        console.log('User has been updated to online:' + data.loggedIn);
       }
 
       if (obj.verb == 'destroyed') {
