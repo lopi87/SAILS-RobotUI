@@ -25,6 +25,20 @@
             <a id="remove_iconfile_input" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput"><%= i18n("remove") %></a>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-10">
+        <div class="control-group">
+          <label for="password"><%= i18n("password") %> * :</label>
+          <input id="passsword_field" type="password" class="form-control" placeholder="<%= i18n("password") %>" name="password" required>
+        </div>
+
+        <div class="control-group">
+          <label for="passwordconf"><%= i18n("passwordconfirmation") %> * :</label>
+          <input type="password" class="form-control" data-parsley-equalto="#passsword_field" placeholder="<%= i18n("passwordconfirmation") %>" name="confirmation" required>
+        </div>
+
 
         <div class="control-group">
           <label for="lan"><%= i18n("language") %> *:</label>
@@ -43,23 +57,10 @@
           </script>
         </div>
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="col-md-10">
-        <div class="control-group">
-          <label for="password"><%= i18n("password") %> * :</label>
-          <input id="passsword_field" type="password" class="form-control" placeholder="<%= i18n("password") %>" name="password" required>
-        </div>
-
-        <div class="control-group">
-          <label for="passwordconf"><%= i18n("passwordconfirmation") %> * :</label>
-          <input type="password" class="form-control" data-parsley-equalto="#passsword_field" placeholder="<%= i18n("passwordconfirmation") %>" name="confirmation" required>
-        </div>
-      </div>
       <div class="col-md-2"></div>
     </div>
   </div>
-  <div class="form-signin">
+  <div class="form-signin margintop20">
     <input class="btn btn-lg btn-primary btn-block" value="<%= i18n('createaccount') %>" type="submit">
   </div>
   <input type="hidden" name="_csrf" value="<%= _csrf %>" />
