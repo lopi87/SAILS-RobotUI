@@ -19,7 +19,6 @@ module.exports = {
 
     var userObj = {
       name: req.param('name'),
-      title: req.param('title'),
       email: req.param('email'),
       language: req.param('language'),
       password: req.param('password'),
@@ -106,7 +105,6 @@ module.exports = {
 
     var userObj = {
       name: req.param('name'),
-      title: req.param('title'),
       email: req.param('email'),
       language: req.param('language')
     };
@@ -145,7 +143,6 @@ module.exports = {
       if (req.session.User.admin == true) {
         User.publishUpdate(req.param('id'), {
           name: req.param('name'),
-          title: req.param('title'),
           email: req.param('email'),
           admin: req.param('admin')
         });
