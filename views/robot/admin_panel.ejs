@@ -1,0 +1,113 @@
+<%- partial('../_alert.ejs', {flash: flash}) %>
+
+<div class="container">
+
+  <h3>Robots</h3>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Online</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>IP:PORT</th>
+        <th>Owner</th>
+        <th>Public drive</th>
+        <th>Public view</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+
+      <tbody id="robot_list">
+      <% _.each(robots, function(robot){ %>
+        <tr id="line_<%= robot.id %>" data-model="robot">
+          <td> <img id="img_state_<%= robot.id %>" src=" <%= robot.online ? '/images/online.png' : '/images/offline.png'%>" height="30" width="30"></td>
+          <td>
+            <%= robot.name %>
+            <img src="<%= sails.getBaseUrl() + robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:30px">
+          </td>
+          <td><%= robot.description %></td>
+
+          <td><%= robot.ipaddress + ':' + robot.port %> </td>
+          <td><%= robot.owner.name %>
+            <img src="<%= sails.getBaseUrl() + robot.owner.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:30px">
+          </td>
+
+          <% if(robot.public_view){ %>
+          <td>
+            <span class="label label-pill label-success"> <%= i18n('public')%> </span>
+          </td>
+          <% } else { %>
+          <td> <span class="label label-pill label-error"> <%= i18n('private')%> </span></td>
+          <% } %>
+
+          <% if(robot.public_drive){ %>
+          <td>             <span class="label label-pill label-success"> <%= i18n('public')%> </span>
+          </td>
+          <% } else { %>
+          <td> <span class="label label-pill label-error"> <%= i18n('private')%> </span></td>
+          <% } %>
+
+          <td>
+            <a href="/robot/show/<%= robot.id %>" class="btn btn-sm btn-primary"><%= i18n('show') %></a>
+            <a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a>
+            <a href="/robot/show_permissions/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('permissions') %></a>
+
+            <form action="/robot/destroy/<%=robot.id%>" method="post">
+              <input type="hidden" name="_method" value="delete"/>
+              <input type="submit"  class="btn btn-sm btn-danger" value="Delete"/>
+              <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+            </form>
+          </td>
+       </tr>
+      <% })%>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="user_list"></div>
+
+<script type="text/javascript">
+
+  function subscribeAndListen() {
+    io.socket.get('/robot/robot_subscribe');
+
+    io.socket.on('robot', function (obj) {
+      if (obj.verb == 'created') {
+        var user = obj.data;
+        $.ajax({
+          url: '/robot/render',
+          type: 'GET',
+          data: {id: user.id},
+          success: function(data){
+            $("#robot_list").append(data);
+            bootstrap_alert['success']('A new robot has been created!', 5000 )
+          }
+        });
+      }
+
+      if (obj.verb == 'updated') {
+        var data = obj.data;
+        change_img_state(data.id, data.loggedIn);
+
+        if(data.loggedIn){
+          bootstrap_alert['success']('Robot connected!', 5000 );
+        }else{
+          bootstrap_alert['success']('Robot disconnected!', 5000 );
+        }
+        console.log('Robot has been updated to online:' + data.loggedIn);
+      }
+
+      if (obj.verb == 'destroyed') {
+        $("#line_" + obj.id).remove();
+        bootstrap_alert['success']('A robot has been deleted!', 5000 );
+      }
+
+    });
+
+  }
+
+</script>
+
+

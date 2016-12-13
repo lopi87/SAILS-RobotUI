@@ -18,11 +18,12 @@ module.exports = {
       domain: 'sandbox5fe2cba9c56e4260b4771b26016533ac.mailgun.org',
       toEmail: options.emailAddress,
       toName: options.firstName,
-      subject: 'Welcome, ' + options.firstName + '!',
+      subject: 'Welcome to RobotUI, ' + options.firstName + '!',
       textMessage: options.firstName + ',\nThanks for joining our community. If you have any questions, please don\'t hesitate to send them our way. Feel free to reply to this email directly.\n\nSincerely,\nThe Management',
       htmlMessage: options.firstName + ',<br><br><p>Thanks for joining our community. If you have any questions, please don\'t hesitate to send them our way. Feel free to reply to this email directly.</p><br/><span>Sincerely,</span><br/><strong>The Management</strong>',
       fromEmail: 'lopez.urbina.manuel@gmail.com',
-      fromName: 'Manuel López Urbina'
+      fromName: 'Manuel López Urbina',
+      tesMode: false
     });
   }
 };

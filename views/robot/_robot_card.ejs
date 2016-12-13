@@ -3,11 +3,18 @@
     <div class="thumbnail">
       <a href="#"><img src="<%= robot.avatarUrl%>" alt="" style="width:360px;"></a>
     </div>
+
     <div class="caption">
       <h4><%= robot.name%></h4>
       <p><%= robot.description%></p>
-      <a class="btn btn-mini" href="#">» Read More</a>
+      <div class="row">
+       <div class="col-md-12">
+         <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary floatright"><i class="fa fa-eye" aria-hidden="true"></i></i> <%= i18n('view') %> </a>
+       </div>
+      </div>
     </div>
+
+
   </div>
 </li>
 

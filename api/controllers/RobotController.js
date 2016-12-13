@@ -194,8 +194,20 @@ module.exports = {
     }
   },
 
+  admin_panel: function(req, res, next){
 
-robot_subscribe: function(req,res,next){
+    Robot.find({owner: req.session.User.id}).populate('owner').exec(function foundRobot(err, robots) {
+      if (err) return res.serverError(err);
+
+      res.view({
+        robots:robots,
+      });
+    });
+
+  },
+
+
+  robot_subscribe: function(req,res,next){
     if (req.isSocket){
       //Update, destroy...
       Robot.find(function foundRobots(err,robots){
@@ -393,6 +405,18 @@ robot_subscribe: function(req,res,next){
     });
   },
 
+  //Añade una nueva fila a la tabla robots (vista) cuando uno es creado.
+  render: function (req, res, next) {
+    Robot.findOne(req.param('id'), function foundRobot(err, robot) {
+      if (err) return next(err);
+      if (!robot) return next();
+
+      return res.render('robot/robot_row.ejs', {
+        robot: robot,
+        layout: false
+      });
+    });
+  },
 
   delete_permission: function (req, res, next) {
 
