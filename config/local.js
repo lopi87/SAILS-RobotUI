@@ -59,7 +59,7 @@ module.exports = {
    * In env/production.js, you'll probably want to change this setting       *
    * to 80 (http://) or 443 (https://) if you have an SSL certificate        *
    ***************************************************************************/
-
+  hookTimeout: 30000, // 30 seconds
   port: process.env.PORT || 5000,
 
   /***************************************************************************
