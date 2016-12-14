@@ -59,6 +59,7 @@ module.exports.session = {
   // pass: <redis auth password>,
   // prefix: 'sess:',
 
+
   /***************************************************************************
   *                                                                          *
   * Uncomment the following lines to use your Mongo adapter as a session     *
