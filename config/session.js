@@ -59,7 +59,6 @@ module.exports.session = {
   // pass: <redis auth password>,
   // prefix: 'sess:',
 
-
   /***************************************************************************
   *                                                                          *
   * Uncomment the following lines to use your Mongo adapter as a session     *
@@ -67,17 +66,19 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  //adapter: 'mongo',
-  //host: 'localhost',
-  //port: 27017,
-  //db: 'RobotUI',
-  //collection: 'cookies'
+  adapter: 'mongo',
+  host: 'localhost',
+  port: 27017,
+  db: 'RobotUI',
+  collection: 'cookies'
 
-  externalMongodbServer: {
-    adapter: 'sails-mongo',
-    url: process.env.DB_URL,
-    collection: 'cookies'
-  }
+  //adapter: 'mongo',
+  //url: process.env.DB_URL,
+  //collection: 'cookies',
+  //auto_reconnect: false,
+  //ssl: false,
+  //stringify: true
+
   /***************************************************************************
   *                                                                          *
   * Optional Values:                                                         *
