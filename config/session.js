@@ -78,6 +78,12 @@ module.exports.session = {
   //collection: 'cookies',
   //stringify: false
 
+  externalMongodbServer: {
+    adapter: 'sails-mongo',
+    url: process.env.DB_URL,
+    collection: 'cookies'
+  }
+
   /***************************************************************************
   *                                                                          *
   * Optional Values:                                                         *
