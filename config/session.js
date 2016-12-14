@@ -73,10 +73,11 @@ module.exports.session = {
   //db: 'RobotUI',
   //collection: 'cookies'
 
-  adapter: 'sails-mongo',
-  url: process.env.DB_URL,
-  collection: 'cookies'
-
+  externalMongodbServer: {
+    adapter: 'sails-mongo',
+    url: process.env.DB_URL,
+    collection: 'cookies'
+  }
   /***************************************************************************
   *                                                                          *
   * Optional Values:                                                         *
