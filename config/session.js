@@ -67,17 +67,18 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  //adapter: 'mongo',
-  //host: 'localhost',
-  //port: 27017,
-  //db: 'RobotUI',
-  //collection: 'cookies'
+  adapter: 'mongo',
+  host: 'localhost',
+  port: 27017,
+  db: 'RobotUI',
+  collection: 'cookies'
 
-  externalMongodbServer: {
+  /*externalMongodbServer: {
     adapter: 'sails-mongo',
     url: process.env.DB_URL,
     collection: 'cookies'
   }
+  */
   /***************************************************************************
   *                                                                          *
   * Optional Values:                                                         *
