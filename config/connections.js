@@ -57,11 +57,15 @@ module.exports.connections = {
   * Run: npm install sails-mongo                                             *
   *                                                                          *
   ***************************************************************************/
+
   someMongodbServer: {
     adapter: 'sails-mongo',
-    url: process.env.DB_URL
+    host: 'localhost',
+    port: 27017,
+    user: '',
+    password: '',
+    database: 'RobotUI'
   },
-
 
   externalMongodbServer: {
     adapter: 'sails-mongo',

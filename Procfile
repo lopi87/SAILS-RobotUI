@@ -1,1 +1,1 @@
-web: node app.js --prod
+web: sails lift --prod
