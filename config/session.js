@@ -52,10 +52,18 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
+  /*
   host: process.env.REDIS_HOST,
   port: process.env.REDIS_PORT,
   db: process.env.REDIS_DB,
   pass: process.env.REDIS_PASS
+  */
+
+
+  host: 'porgy.redistogo.com',
+  port: '10160',
+  db: 'redistogo',
+  pass: '70c0e5b04e2095bf41fdef30b0aaa945'
 
   // host: 'localhost',
   // port: 6379,
