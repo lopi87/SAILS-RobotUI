@@ -65,12 +65,12 @@ module.exports.connections = {
     //user: '',
     //password: '',
     //database: 'RobotUI'
-    url: process.env.DB_URL || 'mongodb://robotui:943146@ds127968.mlab.com:27968/robotui'
+    url: process.env.DB_URL
   },
 
   externalMongodbServer: {
     adapter: 'sails-mongo',
-    url: process.env.DB_URL || 'mongodb://robotui:943146@ds127968.mlab.com:27968/robotui'
+    url: process.env.DB_URL
   },
 
   /***************************************************************************
