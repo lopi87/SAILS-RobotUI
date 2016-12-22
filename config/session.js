@@ -21,7 +21,7 @@ module.exports.session = {
   * of your users, forcing them to log in again.                             *
   *                                                                          *
   ***************************************************************************/
-  secret: '406891da04d2995b09d2d0270c620532',
+  secret: '406891da04d2995b09d2d0270c620531',
 
 
   /***************************************************************************
@@ -74,9 +74,6 @@ module.exports.session = {
   db: 'RobotUI',
   collection: 'cookies'
 */
-
-  adapter: 'sails-mongo',
-  url: process.env.DB_URL + '/cookies'
 
   /*externalMongodbServer: {
     adapter: 'sails-mongo',
