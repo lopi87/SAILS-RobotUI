@@ -28,6 +28,7 @@ module.exports = {
       var sessionObj = {
         socket_id: socketId,
         user_id: req.session.User.id
+
       };
 
       //Comprobar si el usuario tiene mas sockets abiertos:

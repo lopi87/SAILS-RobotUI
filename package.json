@@ -9,6 +9,7 @@
     "connect-mongo": "^0.3.3",
     "connect-redis": "1.4.5",
     "db-migrate": "^0.9.18",
+    "delivery": "0.0.6",
     "ejs": "~0.8.4",
     "font-awesome": "^4.4.0",
     "geoip-lite": "^1.1.8",

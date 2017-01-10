@@ -147,7 +147,7 @@ module.exports.sockets = {
 
 
   afterDisconnect: function(session, socket, cb) {
-    console.log('Cliente desconectado - id del socket: ' + socket.id);
+     console.log('Cliente desconectado - id del socket: ' + socket.id);
 
     //Session del socket cerrado,
     Session.findOne({socket_id: socket.id}).populate('rooms').exec(function (err, session) {

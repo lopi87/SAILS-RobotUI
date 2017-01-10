@@ -60,13 +60,15 @@ module.exports = {
               iface.robot_owner.latitude = geo.ll[0];
             }
 
+            var Delivery = require('delivery');
             res.view({
               interface: iface,
               actions: actions,
               events: iface.events,
               video: iface.video,
               robot: iface.robot_owner,
-              user: user
+              user: user,
+              Delivery: Delivery
             });
           });
         });

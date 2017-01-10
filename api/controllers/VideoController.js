@@ -143,7 +143,7 @@ module.exports = {
 
   video_emit: function (req, res, next) {
     if (req.isSocket && req.param('image')) {
-      console.log('transmision video');
+      //console.log('transmision video');
       sails.sockets.broadcast('Manuel', {image: req.param('image')});
       return;
     }

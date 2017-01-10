@@ -38,7 +38,7 @@
             <% }%>
           </button>
           <% } else { %>
-          <button  id="button_<%= action.id %>" value="<%= action.code %>" class="btn position_<%= action.id %> btn-custom_<%= action.id %>"><%= action.name %></button>
+            <button  id="button_<%= action.id %>" value="<%= action.code %>" class="btn position_<%= action.id %> btn-custom_<%= action.id %>"><%= action.name %></button>
           <% } %>
             <%- partial ('../action/style_action.ejs', {action: action})%>
           <% })%>
@@ -86,6 +86,13 @@
   </div>
 </div>
 
+
+
+<div class="row">
+  <img src="" id="stream">
+</div>
+
+
 <%- partial ('_robot_info.ejs')%>
 
 
@@ -93,14 +100,15 @@
   <a href="/robot/index" class="btn btn-sm btn-warning">Back</a>
 </div>
 
+<script src="<%= Delivery %>"></script>
 
-<script src="/socket.io/socket.io.js"></script>
+
 <script type="text/javascript">
     // https://evothings.com/controlling-a-toy-car-with-evothings-and-raspberry-pi/
 
     //ROBOT
     //conexion con el robot
-    var address_robot = "192.168.1.142" + ":" + "8085";
+    var address_robot = '<%= robot.ipaddress %>' + ":" + '<%= robot.port %>';
     var robot_id = '<%= robot.id %>';
     //INTERESANTE RECONCETAR AUTOMATICAMENTE-...... solucion ya que tarda en volver a conectar
     //http://stackoverflow.com/questions/4432271/node-js-and-socket-io-how-to-reconnect-as-soon-as-disconnect-happens
@@ -195,18 +203,45 @@
 
 
       ///////////////////////////////////////////   liveStream
-      /*
 
-      socket.on("liveStream", function (data) {
-        var image = document.getElementById("play");
-        image.src = data.image;
+      socket.on('connect', function() {
+
+        var delivery = new Delivery(socket);
+
+        delivery.on('receive.start', function (fileUID) {
+          console.log('receiving a file!');
+        });
+
+        delivery.on('receive.success', function (file) {
+          var params = file.params;
+          if (file.isImage()) {
+            $('#stream').attr('src', file.dataURL());
+          };
+        });
       });
 
+      socket.on("liveStream", function (data) {
+        //var image = document.getElementById("play");
+        //image.src = data.image;
+
+        //$('#stream').attr('src', url);
+
+        if (data.image) {
+          var img = new Image();
+          img.src = 'data:image/jpeg;base64,' + data.buffer;
+          ctx.drawImage(img, 0, 0);
+
+          alert(img.src)
+        }
+
+      });
+
+      /*
       setInterval(function(){
         io.socket.get('/video/video_emit/',{image: document.getElementById("play")});
       },1000);
-
       */
+
       ///////////////////////////////////////////////
 
 
