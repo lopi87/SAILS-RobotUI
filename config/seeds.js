@@ -9,7 +9,7 @@
  */
 module.exports.seeds = {
 
-  person: {
+  user: {
     data: [
       {
         id: "584b0f35a3f0ac26181cd642",
@@ -18,6 +18,8 @@ module.exports.seeds = {
         language: "es",
         admin: true,
         online: false,
+        password: '12345678',
+        confirmation: '12345678',
         avatarUrl: "/images/avatar/avatar.png",
         encryptedPassword: "$2a$10$ISyLb32.j/TE8VkMDmfJGeHu5o/aI3sddapt/GGzea.4KWuKGUeRC",
         onLine: true,
@@ -30,6 +32,8 @@ module.exports.seeds = {
         language: "es",
         admin: false,
         online: false,
+        password: '12345678',
+        confirmation: '12345678',
         avatarUrl: "/images/avatar/avatar.png",
         encryptedPassword: "$2a$10$dHF2BWMtfQww0sx696ZCQeEHn6nR1nbLVkYBh8I38xCiYaCyiDxuO",
         latitude: 0
