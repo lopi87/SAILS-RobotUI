@@ -41,11 +41,12 @@ module.exports = {
 
 
   show: function (req, res, next) {
-    Interface.findOne({id: req.param('id')}).populate('events').populate('video').populate('robot_owner').exec(function (err, iface) {
+    Interface.findOne(req.param('id')).populate('events').populate('video').populate('robot_owner').exec(function (err, iface) {
       if (err) return next(err);
+      if (!iface) return next(err);
 
       //Almacenamos la room para los visitantes en la BD:
-      Room.findOrCreate({room_name: iface.robot_owner.id}, {room_name: iface.robot_owner.id}).exec(function createFindCB(error, createdOrFoundRecords){
+      Room.findOrCreate({room_name: iface.robot_owner.id}, {room_name: iface.robot_owner.id}).exec(function createFindCB(err){
         if (err) return res.badRequest(err);
 
         Action.find({interface_owner: req.param('id')}).populate('icon').exec(function(err, actions) {
@@ -60,15 +61,13 @@ module.exports = {
               iface.robot_owner.latitude = geo.ll[0];
             }
 
-            var Delivery = require('delivery');
             res.view({
               interface: iface,
               actions: actions,
               events: iface.events,
               video: iface.video,
               robot: iface.robot_owner,
-              user: user,
-              Delivery: Delivery
+              user: user
             });
           });
         });
@@ -81,6 +80,7 @@ module.exports = {
 
     Interface.findOne({id: req.param('id')}).populate('events').populate('video').populate('robot_owner').exec(function (err, iface) {
       if (err) return next(err);
+      if (!iface) return next(err);
 
       Action.find({interface_owner: req.param('id')}).populate('icon').exec(function(err, actions) {
         if (err) return res.badRequest(err);
@@ -177,7 +177,7 @@ module.exports = {
 
 
 //Modo visita en la interfaz, se subscribe para recibir los eventos que iran sucediendo
-  view_subscribe: function (req, res, next){
+  view_subscribe: function (req, res){
 
     if (!req.isSocket) return res.badRequest();
 
@@ -186,46 +186,51 @@ module.exports = {
 
     //Link socket with a room (into database)
     Session.findOne({socket_id: req.socket.id}).exec(function (err, session){
-      if (err) return next(err);
+      if (err) return res.badRequest();
+      if (!session) return res.badRequest();
 
-      Room.findOrCreate({room_name: req.param('robot')}, {room_name: req.param('robot')}).exec(function createFindCB(error, room){
-        if (err) return next(err);
-        if (!room) return next(err);
-
+      Room.findOrCreate({room_name: req.param('robot')}, {room_name: req.param('robot')}).then(function(room){
+        if (!room) return res.badRequest();
 
         //Link
-        session.rooms.add(room.id);
-        session.save();
-
-        //Aviso de una nueva conexion a todos los clientes de la room llamada con el valor de robot.id
-        User.findOne(session.user_id, function foundUser(err, user) {
-          sails.sockets.broadcast(req.param('robot'), {
-            type: 'new_viewer_user',
-            msg: {user_name: user.name, avatar: user.avatarUrl, user_id: user.id}
-          });
-          console.log('User ' + req.session.User.id + 'with socket id ' + sails.sockets.id(req) + ' is now subscribed to the model class \'Robot\'.');
+        room.sockets_room.add(session.id)
+        room.save(function(err) {
+          if (err) return res.badRequest();
         });
+      }).catch( sails.log.error );
+
+      //Aviso de una nueva conexion a todos los clientes de la room llamada con el valor de robot.id
+      User.findOne(session.user_id, function foundUser(err, user) {
+        if (err) return res.badRequest();
+        if (!user) return res.badRequest();
+
+        sails.sockets.broadcast(req.param('robot'), {
+          type: 'new_viewer_user',
+          msg: {user_name: user.name, avatar: user.avatarUrl, user_id: user.id}
+        });
+        console.log('User ' + req.session.User.id + 'with socket id ' + sails.sockets.id(req) + ' is now subscribed to the model class \'Robot\'.');
       });
+
     });
   },
 
 
   //Emision de los eventos a los vivitantes de una interfaz
-  emit_event: function(req, res, next){
+  emit_event: function(req, res){
     if (!req.isSocket) return res.badRequest();
     sails.sockets.broadcast(req.param('robot'), {type: 'event', id: req.param('id'), msg: req.param('msg')});
   },
 
 
   //Emision de las acciones a los vivitantes de una interfaz
-  emit_action: function(req, res, next){
+  emit_action: function(req, res){
     if (!req.isSocket) return res.badRequest();
     sails.sockets.broadcast(req.param('robot'), {type: 'action', id: req.param('id'), msg: req.param('msg')});
   },
 
 
   //Emision de las acciones a los vivitantes de una interfaz
-  emit_command: function(req, res, next){
+  emit_command: function(req, res){
     if (!req.isSocket) return res.badRequest();
     sails.sockets.broadcast(req.param('robot'), {type: 'command', id: req.param('id'), msg: req.param('msg')});
   },

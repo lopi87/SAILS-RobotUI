@@ -175,6 +175,20 @@ function change_free_busy(id, busy){
   }
 }
 
+//CAMBIAR ONLINE OFFLINE ROBOT
+function change_online_offline(id, online){
+  var label_id = '[id="label_online_'+ id + '"]';
+  var label_online= '<span class="label label-pill label-success"> Online </span>';
+  var label_offline= '<span class="label label-pill label-danger"> Offline </span>';
+
+
+  if (online) {
+    $(label_id).html(label_online);
+  }else{
+    $(label_id).html(label_offline);
+  }
+
+}
 
 //Apertura de una ventana
 

@@ -60,7 +60,7 @@ module.exports.policies = {
     edit: ["flash", "message","sessionAuth", "localize", "UserCanEditRobot"],
     update: ["flash", "message","sessionAuth", "localize", "UserCanEditRobot"],
     destroy: ["flash", "message","sessionAuth", "localize", "UserCanEditRobot"],
-    changetobusy: ["flash", "message","sessionAuth", "localize", "userCanShowInterface"],
+    changetobusy: ["sessionAuth"],
     show: ["flash", "message","sessionAuth", "localize"],
     robot_subscribe: ["flash", "message","sessionAuth"]
   },

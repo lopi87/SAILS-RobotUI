@@ -7,7 +7,7 @@
 <div id="board" class="panel panel-success margintop20 paddingbottom20">
   <div class="panel-heading">
     <img style="max-width:150px;" src="/images/logo/logotipo.png">
-    <a href="#" onclick="openWin(200,200,'board')"><i class="fa fa-external-link fa-2x floatright" style="height: 20px"></i></a>
+    <!--<a href="#" onclick="openWin(200,200,'board')"><i class="fa fa-external-link fa-2x floatright" style="height: 20px"></i></a>-->
   </div>
 
   <div class="paddingtop20 paddingleft20 paddingright20">
@@ -57,8 +57,8 @@
         <div class="panel panel-info">
           <div class="panel-heading">Users</div>
             <div class="panel-body">
-              <div id="user_viewer_list">
-              </div>
+              <div id="current_user"></div>
+              <div id="user_viewer_list"></div>
             </div>
           </div>
 
@@ -100,16 +100,14 @@
   <a href="/robot/index" class="btn btn-sm btn-warning">Back</a>
 </div>
 
-<script src="<%= Delivery %>"></script>
-
-
+<script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
     // https://evothings.com/controlling-a-toy-car-with-evothings-and-raspberry-pi/
 
     //ROBOT
     //conexion con el robot
     var address_robot = '<%= robot.ipaddress %>' + ":" + '<%= robot.port %>';
-    var robot_id = '<%= robot.id %>';
+
     //INTERESANTE RECONCETAR AUTOMATICAMENTE-...... solucion ya que tarda en volver a conectar
     //http://stackoverflow.com/questions/4432271/node-js-and-socket-io-how-to-reconnect-as-soon-as-disconnect-happens
     $("#conectar").click(function() {
@@ -120,20 +118,12 @@
           'reconnectionDelay': 500,
           'reconnectionAttempts': 10
         });
-        socket.on('connect', function () {
-          console.log('robot connected!');
-          //Sincronizar con el resto de clientes que un robot se ha conectado:
-          io.socket.get('/robot/changetobusy/', {robot: robot_id, state: 'on'});
-          bootstrap_alert['success']('Conectado con exito! ' + address_robot, 5000);
-          change_img_state(robot_id, true);
-        });
 
       } catch (error) {
         bootstrap_alert['danger']('Failed to connect to the Robot! (Raspberry Pi!)' + address_robot + error, 5000)
-        io.socket.get('/robot/changetobusy/', {robot: robot_id, state: 'off'});
+        io.socket.get('/robot/changetobusy/', {robot: robot_id, state: false});
         change_img_state(robot_id, false);
       }
-
 
       //Presionar boton desconectar
       $("#desconectar").click(function () {
@@ -141,18 +131,19 @@
           socket.disconnect();
         } catch (error) {
           bootstrap_alert['danger']('Failed to disconnect to the Robot!' + address_robot + error, 5000)
-          io.socket.get('/robot/changestate/', {robot: robot_id, state: 'off'});
-          change_img_state(robot_id, false);
+          io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
+          change_img_state('<%=robot.id %>', false);
         }
       });
+
 
 
       //captura evento desconectar cuando el robot es apagado o pierde la señal
       socket.on('disconnect', function () {
         bootstrap_alert['success']('Robot disconnect!' + address_robot, 5000)
         //Sincronizar con el resto de clientes:
-        io.socket.get('/robot/changestate/', {robot: robot_id, state: 'off'});
-        change_img_state(robot_id, false);
+        io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
+        change_img_state('<%=robot.id %>', false);
       });
 
 
@@ -204,48 +195,23 @@
 
       ///////////////////////////////////////////   liveStream
 
-      socket.on('connect', function() {
+      socket.emit('start-stream');
 
-        var delivery = new Delivery(socket);
-
-        delivery.on('receive.start', function (fileUID) {
-          console.log('receiving a file!');
-        });
-
-        delivery.on('receive.success', function (file) {
-          var params = file.params;
-          if (file.isImage()) {
-            $('#stream').attr('src', file.dataURL());
-          };
-        });
+      socket.on('liveStream', function(url) {
+        console.log('get frame! ' + url);
+        $('#stream').attr('src', url);
       });
 
-      socket.on("liveStream", function (data) {
-        //var image = document.getElementById("play");
-        //image.src = data.image;
 
-        //$('#stream').attr('src', url);
-
-        if (data.image) {
-          var img = new Image();
-          img.src = 'data:image/jpeg;base64,' + data.buffer;
-          ctx.drawImage(img, 0, 0);
-
-          alert(img.src)
-        }
-
+      socket.on('connect', function () {
+        console.log('robot connected!');
+        io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: true});
+        bootstrap_alert['success']('Conectado con exito! ' + address_robot, 5000);
+        change_img_state('<%=robot.id %>', true);
       });
 
-      /*
-      setInterval(function(){
-        io.socket.get('/video/video_emit/',{image: document.getElementById("play")});
-      },1000);
-      */
 
       ///////////////////////////////////////////////
-
-
-      subscribeAndListen();
 
       function subscribeAndListen() {
         io.socket.get('/interface/view_subscribe/',{robot: '<%= robot.id%>'});
@@ -254,8 +220,10 @@
           switch (obj.type) {
             case 'new_viewer_user':
 
-              if($("#" + obj.msg.user_id).length == 0) {
+              if($("#" + obj.msg.user_id).length == 0 && obj.msg.user_id != '<%= req.session.User.id %>') {
                 $('#user_viewer_list').append('<p id="' +  obj.msg.user_id + '"><img src="' + obj.msg.avatar + '" class="card-circle marginright10" height="32" width="32">' + obj.msg.user_name + '<span onclick=eject_viewer_user("' + obj.msg.user_id  + '")><i style="cursor: pointer; color: red" class="fa fa-sign-out marginleft5" aria-hidden="true"></i></span></p>');
+              }else{
+                $('#current_user').append('<p id="' +  obj.msg.user_id + '"><img src="' + obj.msg.avatar + '" class="card-circle marginright10" height="32" width="32">' + obj.msg.user_name);
               }
               break;
 
@@ -279,7 +247,7 @@
     $.ajax({
       url: '/interface/eject_viewer_user/',
       type: 'GET',
-      data: {user_id: user_id, robot_id: '<%= robot.id %>'},
+      data: {user_id: user_id, '<%=robot.id %>': '<%= robot.id %>'},
       done:function() {
       },
 

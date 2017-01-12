@@ -66,196 +66,169 @@
 
 <body class="grad">
 
-<nav class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <div class="navbar-header">
-      <button class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" rel="home" href="/" title="Home page">
-        <img src="/images/logo/logotipo_header.png" style="max-width:100px;">
-      </a>
-    </div>
-
-    <div id="bs-example-navbar-collapse-1" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
-    <ul class="nav navbar-nav">
-      <% if (session.authenticated) { %>
-
-      <% if (session.User.admin) { %>
-      <li class="dropdown">
-        <a class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="#">
-          Admin
-          <span class="caret"></span>
+  <nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" rel="home" href="/" title="Home page">
+          <img src="/images/logo/logotipo_header.png" style="max-width:100px;">
         </a>
-        <ul class="dropdown-menu inverse-dropdown">
-          <li>
-            <a href="/user"> User Administration</a>
-          </li>
-          <li>
-            <a href="/robot/admin_panel">Robots administration</a>
-          </li>
-        </ul>
-      </li>
-      <% } %>
+      </div>
+
+      <div id="bs-example-navbar-collapse-1" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+      <ul class="nav navbar-nav">
+        <% if (session.authenticated) { %>
+
+        <% if (session.User.admin) { %>
+        <li class="dropdown">
+          <a class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="#">
+            Admin
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu inverse-dropdown">
+            <li>
+              <a href="/user"> User Administration</a>
+            </li>
+            <li>
+              <a href="/robot/admin_panel">Robots administration</a>
+            </li>
+          </ul>
+        </li>
+        <% } %>
 
 
-      <li class="nav-item">
-        <a href="/user/show/<%= session.User.id%>"><%= session.User.name %></a>
-      </li>
+        <li class="nav-item">
+          <a href="/user/show/<%= session.User.id%>"><%= session.User.name %></a>
+        </li>
 
 
-      <li class="nav-item" id="buttom_msg">
-        <%if (n_messages > 0){%>
-        <a href="/message/index">Messages <span id="msg_new" class="label label-pill label-danger">+<%= n_messages %></span></a>
-        <% } else { %>
-        <a href="/message/index">Messages <spam id="msg_new"></spam></a>
-        <%}%>
-      </li>
+        <li class="nav-item" id="buttom_msg">
+          <%if (typeof n_messages !== 'undefined' && n_messages > 0){%>
+          <a href="/message/index">Messages <span id="msg_new" class="label label-pill label-danger">+<%= n_messages %></span></a>
+          <% } else { %>
+          <a href="/message/index">Messages <spam id="msg_new"></spam></a>
+          <%}%>
+        </li>
 
-      <li class="dropdown">
-        <a class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="#">
-          Robots
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu inverse-dropdown">
-          <li>
-            <a href="/robot/index"> My Robots</a>
-          </li>
-          <li>
-            <a href="/robot/index_driver_robots"> My driver robots</a>
-          </li>
-          <li>
-            <a href="/robot/index_viewer_robots"> My viewer robots</a>
-          </li>
-          <li class="nav-dividernavbar-inverse" role="separator"></li>
-          <li>
-            <a href="/robot/index"> Show all Robots</a>
-          </li>
-        </ul>
-      </li>
-      <% } %>
-    </ul>
+        <li class="dropdown">
+          <a class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="#">
+            Robots
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu inverse-dropdown">
+            <li>
+              <a href="/robot/index"> My Robots</a>
+            </li>
+            <li>
+              <a href="/robot/index_driver_robots"> My driver robots</a>
+            </li>
+            <li>
+              <a href="/robot/index_viewer_robots"> My viewer robots</a>
+            </li>
+            <li class="nav-dividernavbar-inverse" role="separator"></li>
+            <li>
+              <a href="/robot/index"> Show all Robots</a>
+            </li>
+          </ul>
+        </li>
+        <% } %>
+      </ul>
 
-    <!-- <div class="flag flag-en"></div> -->
-    <div class="form-inline pull-xs-right">
-      <form class="navbar-form navbar-right">
-        <div class="form-group">
-          <select data-placeholder="Choose a language" class="chzn-select-lan" style="width:75px;" tabindex="2">
-            <option data-img-src="/images/flags/EN.png" value="en">EN</option>
-            <option data-img-src="/images/flags/ES.png" value="es">ES</option>
-            <option data-img-src="/images/flags/FR.png" value="fr">FR</option>
-            <option data-img-src="/images/flags/PT.png" value="pt">PT</option>
-          </select>
-          <script type="text/javascript">
-            $('.chzn-select-lan option[value="<%= (typeof(req.session) !== 'undefined'  && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>"]').attr("selected",true);
-            $('.chzn-select-lan').chosen({
-              "disable_search": true,
+      <!-- <div class="flag flag-en"></div> -->
+      <div class="form-inline pull-xs-right">
+        <form class="navbar-form navbar-right">
+          <div class="form-group">
+            <select data-placeholder="Choose a language" class="chzn-select-lan" style="width:75px;" tabindex="2">
+              <option data-img-src="/images/flags/EN.png" value="en">EN</option>
+              <option data-img-src="/images/flags/ES.png" value="es">ES</option>
+              <option data-img-src="/images/flags/FR.png" value="fr">FR</option>
+              <option data-img-src="/images/flags/PT.png" value="pt">PT</option>
+            </select>
+            <script type="text/javascript">
+              $('.chzn-select-lan option[value="<%= (typeof(req.session) !== 'undefined'  && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>"]').attr("selected",true);
+              $('.chzn-select-lan').chosen({
+                "disable_search": true,
+              });
+            </script>
+          </div>
+        </form>
+        <script type="text/javascript">
+          $('.chzn-select-lan').on('change',function(){
+            $.ajax({
+              url: '/language/change',
+              type: 'GET',
+              data: {locale: $( ".chzn-select-lan" ).val()},
+              contentType: 'application/json',
+              dataType: 'json',
+
+              done:function() {
+              },
+
+              success: function(data){
+                window.location.reload();
+              },
+
+              error: function(xhr, status, text) {
+                bootstrap_alert['danger'](xhr.responseText, 5000 );
+              }
             });
-          </script>
-        </div>
-      </form>
-      <script type="text/javascript">
-        $('.chzn-select-lan').on('change',function(){
-          $.ajax({
-            url: '/language/change',
-            type: 'GET',
-            data: {locale: $( ".chzn-select-lan" ).val()},
-            contentType: 'application/json',
-            dataType: 'json',
 
-            done:function() {
-            },
-
-            success: function(data){
-              window.location.reload();
-            },
-
-            error: function(xhr, status, text) {
-              bootstrap_alert['danger'](xhr.responseText, 5000 );
-            }
           });
+        </script>
 
-        });
-      </script>
-
-      <% if (session.authenticated) { %>
-      <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy"><%= __("signout") %></a>
-      <% } %>
-      <% if (!session.authenticated) { %>
+        <% if (session.authenticated) { %>
+        <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy"><%= __("signout") %></a>
+        <% } %>
+        <% if (!session.authenticated) { %>
 
 
-      <div class="navbar-right marginleft10">
-        <a href="/user/new" class="btn btn-success navbar-btn"> <%= __("signupnow") %></a>
+        <div class="navbar-right marginleft10">
+          <a href="/user/new" class="btn btn-success navbar-btn"> <%= __("signupnow") %></a>
+        </div>
+
+        <form id="login_form" class="navbar-right" action="/session/create">
+          <div class="form-group">
+            <input type="email" placeholder="<%= __("email") %>" name="email" data-parsley-trigger="change" required class="form-control">
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="<%= i18n("password") %>" required  name="password" class="form-control" style="width: 150px">
+          </div>
+          <button type="submit" class="btn btn-success navbar-btn"><%= __("signin") %></button>
+          <input type="hidden" name="_csrf" value="<%= _csrf %>">
+        </form>
+
+
+        <script type="text/javascript">
+          addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
+          $('#login_form').parsley().on('field:validated', function() {
+            var ok = $('.parsley-error').length === 0;
+          })
+        </script>
+
+        <% } %>
       </div>
-
-      <form id="login_form" class="navbar-right" action="/session/create">
-        <div class="form-group">
-          <input type="email" placeholder="<%= __("email") %>" name="email" data-parsley-trigger="change" required class="form-control">
-        </div>
-        <div class="form-group">
-          <input type="password" placeholder="<%= i18n("password") %>" required  name="password" class="form-control" style="width: 150px">
-        </div>
-        <button type="submit" class="btn btn-success navbar-btn"><%= __("signin") %></button>
-        <input type="hidden" name="_csrf" value="<%= _csrf %>">
-      </form>
-
-
       <script type="text/javascript">
-        addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
-        $('#login_form').parsley().on('field:validated', function() {
-          var ok = $('.parsley-error').length === 0;
-        })
+        $('ul.nav > li > a[href="' + document.location.pathname + '"]').parent().addClass('active');
       </script>
-
-      <% } %>
     </div>
-    <script type="text/javascript">
-      $('ul.nav > li > a[href="' + document.location.pathname + '"]').parent().addClass('active');
-    </script>
-  </div>
-    </div>
-</nav>
-
-<div id="alert_placeholder"></div>
-<div class="container box">
-  <%- body %>
-</div>
-
-<div class="container">
-  <hr>
-  <div class="footer">
-    <a class="navbar-brand" rel="home" href="/" title="Home page">
-      <img src="/images/logo/logotipo.png" style="max-width:150px;">
-    </a>
-
-        <div class="text-right marginbottom10">
-          <a href="http://sailsjs.com/">sails.js</a>
-          <div><%= __("author") + ': ' %> Manuel López Urbina</div>
-          <a href="https://www.facebook.com/robotui"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
-          <a href="https://twitter.com/robotui"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
-          <a href="https://plus.google.com/+Robotui-page"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
-          <a href="mailto:robotui.controller@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
-        </div>
-
-    <div id="footer">
-      <div class="container">
-        <a href="/index/about"><p class="text-muted"><%=__("about")%> RobotUI</p></a>
       </div>
-    </div>
+  </nav>
+
+  <div id="alert_placeholder"></div>
+  <div class="container box">
+    <%- body %>
   </div>
-</div>
 
+  <%- partial('footer.ejs') %>
+</body>
 
-<footer>
-
-</footer>
 
 <script type="text/javascript">
-
-  //addLoadEvent(savesocket);
 
   $.when(savesocket()).done(function(){
     if (typeof subscribeAndListen == 'function') {
@@ -269,10 +242,8 @@
     io.socket.get("/session/saveSocketID");
   }
 
-  //Evento A la espera de recibir mensajes y notificar al usuario
+  //Evento a la espera de recibir mensajes y notificar al usuario
   function listenMessages(){
-    io.socket.get("/user/message_subscribe");
-
     io.socket.on('user', function messageReceived(message) {
       switch (message.verb) {
         case 'messaged':
@@ -295,8 +266,6 @@
 
 </script>
 
-
-</body>
 </html>
 
 

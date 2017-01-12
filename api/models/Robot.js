@@ -22,11 +22,6 @@ module.exports = {
       defaultsTo: false
     },
 
-    down: {
-      type: 'boolean',
-      defaultsTo: true
-    },
-
     ipaddress: {
       type: 'ip',
       required: true

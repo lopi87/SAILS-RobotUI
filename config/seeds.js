@@ -39,7 +39,6 @@ module.exports.seeds = {
         latitude: 0
        }
     ],
-    unique: ['id']
   },
 
   robot:{
@@ -87,7 +86,6 @@ module.exports.seeds = {
         robot_interface: "584f05aed5e35f4a1e727888"
       }
     ],
-    unique: ['id']
   },
 
 
@@ -96,25 +94,23 @@ module.exports.seeds = {
       {
         id: "584f03efd5e35f4a1e727875",
         robot_owner: "584f03efd5e35f4a1e727874",
-        panel_sizex: 0,
-        panel_sizey: 0
+        panel_sizex: 200,
+        panel_sizey: 200
       },
       {
         id: "584f04dbd5e35f4a1e72787c",
         robot_owner: "584f04dbd5e35f4a1e72787b",
-        panel_sizex: 0,
-        panel_sizey: 0
+        panel_sizex: 200,
+        panel_sizey: 200
       },
       {
         id: "584f05aed5e35f4a1e727888",
         robot_owner: "584f05aed5e35f4a1e727887",
-        panel_sizex: 0,
-        panel_sizey: 0
+        panel_sizex: 200,
+        panel_sizey: 200
       }
 
     ],
-    unique: ['id']
   }
 
-
-}
+};

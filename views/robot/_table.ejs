@@ -1,6 +1,6 @@
 <table class="table">
   <tr>
-    <th>State</th>
+    <th colspan="2">State</th>
     <th>Name</th>
     <th>Description</th>
     <th>Ip address</th>
@@ -8,12 +8,12 @@
   </tr>
 
   <% _.each(robots, function(robot){ %>
-  <tr id="<%= robot.id %>" data-model="robot">
+  <tr id="<%= robot.id %>" data-model="robot" >
 
     <% if(robot.busy){ %>
-    <td id="label_state_<%=robot.id%>"> <span  class="label label-pill label-danger"> Busy </span></td>
+      <td id="label_state_<%=robot.id%>"> <span class="label label-pill label-danger"> Busy </span></td>
     <% } else { %>
-    <td id="label_state_<%=robot.id%>"> <span class="label label-pill label-success"> Free </span> </td>
+      <td id="label_state_<%=robot.id%>"> <span class="label label-pill label-success"> Free </span></td>
     <% } %>
 
     <td><%= robot.name %></td>

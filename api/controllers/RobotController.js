@@ -95,7 +95,6 @@ module.exports = {
     Robot.find({owner: req.session.User.id}).exec(function foundRobot(err, robots){
       if(err) return res.serverError(err);
 
-
       /*
       var ping = require('ping');
       var address;
@@ -111,9 +110,11 @@ module.exports = {
 
       User.findOne(req.session.User.id).populate('d_robots').exec(function (err, user1){
         if (err) return res.serverError(err);
+        if (!user1) return res.badRequest();
 
         User.findOne(req.session.User.id).populate('v_robots').exec(function (err, user2){
           if (err) return res.serverError(err);
+          if (!user2) return res.badRequest();
 
           res.view({
             robots:robots,
@@ -160,39 +161,36 @@ module.exports = {
 
 
   //Cambiar en la base de datos el estado del robot (Ocupado)
-  changetobusy: function(req,res,next){
+  changetobusy: function(req,res){
 
-    if (req.isSocket) {
+    if (!req.isSocket) return res.badRequest();
 
-      var robot_id = req.param('robot'), state = req.param('state'), user = req.session.User.id;
-      state == 'on'?  state = true : state = false;
+    var robot_id = req.param('robot'), state = req.param('state');
 
-      Robot.update({id: robot_id},{busy: state}, function robotUpdated(err) {
-        if (err) return next(err);
+    Robot.update({id: robot_id},{busy: state}, function robotUpdated(err) {
+      if (err) return  res.badRequest();
 
-        //Informar a otros clientes (sockets abiertos) que el robot queda liberado u ocupado
-        Robot.publishUpdate(robot_id, {
-          busy: state,
-          id: robot_id
-        });
-
-        //Si el robot queda ocupado, lo alamcenamos en la session
-        if (state == true) {
-          Session.update({socket_id: req.socket.id}, {robot_id: robot_id}, function sessionUpdated(err, session){
-            if (err) return next(err);
-            log.debug('Robot ocupado...');
-          });
-        } else if (state == false) {
-          Session.update({socket_id: req.socket.id}, {robot_id: ''}, function sessionUpdated(err, session){
-            if (err) return next(err);
-            log.debug('Robot liberado...');
-          });
-        }
+      //Informar a otros clientes (sockets abiertos) que el robot queda liberado u ocupado
+      Robot.publishUpdate(robot_id, {
+        busy: state,
+        id: robot_id
       });
-    }else {
-      res.view();
-    }
+
+      //Si el robot queda ocupado, lo alamcenamos en la session
+      if (state == true) {
+        Session.update({socket_id: req.socket.id}, {robot_id: robot_id}, function sessionUpdated(err){
+          if (err) res.badRequest();
+          log.debug('Robot ocupado...');
+        });
+      } else if (state == false) {
+        Session.update({socket_id: req.socket.id}, {robot_id: ''}, function sessionUpdated(err){
+          if (err) return res.badRequest();
+          log.debug('Robot liberado...');
+        });
+      }
+    });
   },
+
 
   admin_panel: function(req, res, next){
 

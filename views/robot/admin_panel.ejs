@@ -1,7 +1,6 @@
 <%- partial('../_alert.ejs', {flash: flash}) %>
 
-<div class="container">
-
+<div class="jumbox margintop20">
   <h3>Robots</h3>
   <div class="table-responsive">
     <table class="table">
@@ -14,14 +13,20 @@
         <th>Owner</th>
         <th>Public drive</th>
         <th>Public view</th>
-        <th>Actions</th>
+        <th colspan="4">Actions</th>
       </tr>
       </thead>
 
       <tbody id="robot_list">
       <% _.each(robots, function(robot){ %>
         <tr id="line_<%= robot.id %>" data-model="robot">
-          <td> <img id="img_state_<%= robot.id %>" src=" <%= robot.online ? '/images/online.png' : '/images/offline.png'%>" height="30" width="30"></td>
+
+          <% if(robot.busy){ %>
+            <td> <img id="img_state_<%=robot.id%>" src="/images/online.png" height="30" width="30"></td>
+          <% } else { %>
+            <td> <img id="img_state_<%=robot.id%>" src="/images/offline.png" height="30" width="30"></td>
+          <% } %>
+
           <td>
             <%= robot.name %>
             <img src="<%= sails.getBaseUrl() + robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:30px">
@@ -50,9 +55,14 @@
 
           <td>
             <a href="/robot/show/<%= robot.id %>" class="btn btn-sm btn-primary"><%= i18n('show') %></a>
+          </td>
+          <td>
             <a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a>
+          </td>
+          <td>
             <a href="/robot/show_permissions/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('permissions') %></a>
-
+          </td>
+          <td>
             <form action="/robot/destroy/<%=robot.id%>" method="post">
               <input type="hidden" name="_method" value="delete"/>
               <input type="submit"  class="btn btn-sm btn-danger" value="Delete"/>
@@ -66,7 +76,7 @@
   </div>
 </div>
 
-<div id="user_list"></div>
+<div id="robot_list"></div>
 
 <script type="text/javascript">
 
@@ -89,14 +99,14 @@
 
       if (obj.verb == 'updated') {
         var data = obj.data;
-        change_img_state(data.id, data.loggedIn);
+        change_img_state(data.id, data.busy);
 
-        if(data.loggedIn){
+        if(data.busy){
           bootstrap_alert['success']('Robot connected!', 5000 );
         }else{
           bootstrap_alert['success']('Robot disconnected!', 5000 );
         }
-        console.log('Robot has been updated to online:' + data.loggedIn);
+        console.log('Robot has been updated to online:' + data.busy);
       }
 
       if (obj.verb == 'destroyed') {

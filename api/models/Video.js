@@ -25,14 +25,14 @@ module.exports = {
 
     coordinate_x: {
       type: 'float',
-      defaultsTo: 0
+      defaultsTo: 100
     },
 
     coordinate_y: {
       type: 'float',
-      defaultsTo: 0
+      defaultsTo: 100
     },
-    
+
     toJSON: function(){
       var obj = this.toObject();
       delete obj._csrf;
