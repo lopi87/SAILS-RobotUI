@@ -52,7 +52,7 @@ module.exports = {
         Action.find({interface_owner: req.param('id')}).populate('icon').exec(function(err, actions) {
           if (err) return res.badRequest(err);
 
-          User.findOne({id:  iface.robot_owner.owner}).exec(function Userfound(error, user){
+          User.findOne({id:  iface.robot_owner.owner}).exec(function Userfound(err, user){
             if (err) return res.badRequest(err);
 
             var geo = geoip.lookup(iface.robot_owner.ipaddress);
