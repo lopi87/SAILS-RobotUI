@@ -3,8 +3,7 @@ var io = require('./node_modules/socket.io').listen(8085, { log: false });
 
 // Load required modules.
 var sys = require('util'), exec = require('child_process').exec,
-  fs = require('fs'), path = require('path'), express = require('express'),
-  app = express(), spawn = require('child_process').spawn, proc;
+  path = require('path'), spawn = require('child_process').spawn, ffmpeg_command;
 
 
 // Path to Raspbian's gpio driver, used for sending signals to the remote.
@@ -16,7 +15,9 @@ pins = [7, 8, 9, 11];
 // Enable sending signals to the car's remote control
 // which is connected to the Raspberry Pi.
 //initPins()
-// Listen for connections
+
+
+console.log('Waiting connection...');
 
 var sockets = {};
 
@@ -24,40 +25,23 @@ io.sockets.on('connection', function (socket)
 {
 
   sockets[socket.id] = socket;
+
   console.log("Total clients connected : ", Object.keys(sockets).length);
 
   socket.on('disconnect', function() {
-    delete sockets[socket.id];
-
-    // no more sockets, kill the stream
-    if (Object.keys(sockets).length == 0) {
-      app.set('watchingFile', false);
-      if (proc) proc.kill();
-      fs.unwatchFile('./stream/image_stream.jpg');
-    }
+    stopStreaming(socket);
   });
 
 
   socket.on('start-stream', function() {
-    startStreaming(io);
     console.log('Start stream....');
-
+    startStreaming(socket);
   });
 
 
-  var msg = "HELLO!!!";
-  socket.emit('robotmsg', {msg: msg});
-  console.log('emit: ' + msg);
+  socket.emit('robotmsg', {msg: "HELLO!!!"});
+  console.log('emit: ' + "HELLO!!!");
 
-
-  var n = "23";
-  socket.emit('dist', {msg: n});
-  console.log('emit: ' + n);
-
-
-  socket.on('disconnect', function() {
-    delete sockets[socket.id];
-  });
 
 
   // Listen for direction messages from the app.
@@ -104,44 +88,57 @@ io.sockets.on('connection', function (socket)
 
   })
 
+
+
+
 });
 
 
-function stopStreaming() {
-  if (Object.keys(sockets).length == 0) {
-    app.set('watchingFile', false);
-    if (proc) proc.kill();
-    fs.unwatchFile('./stream/image_stream.jpg');
-  }
+
+
+
+function stopStreaming(socket) {
+    delete sockets[socket.id];
+    console.log('Client desconected');
+    // no more sockets, kill the stream
+    if (Object.keys(sockets).length == 0) {
+      if (ffmpeg_command) ffmpeg_command.kill();
+    }
 }
+
 
 function startStreaming(socket) {
 
-  if (app.get('watchingFile')) {
-    io.sockets.emit('liveStream', 'image_stream.jpg?_t=' + (Math.random() * 100000));
-    return;
-  }
 
-  var args = ["./stream/image_stream.jpg", "-t", "999999999", "-l", "1"];
-  proc = spawn('fswebcam', args);
-  app.set('watchingFile', true);
+	console.log('Streaming....');
 
-  fs.watchFile('./stream/image_stream.jpg', function(current, previous) {
-    io.sockets.emit('liveStream', 'image_stream.jpg?_t=' + (Math.random() * 100000));
-  })
+	var args = ["-f", "video4linux2", "-i", "/dev/video0", "-s", "160x144","-f","mjpeg", "pipe:1"]
 
+	ffmpeg_command = require('child_process').spawn("ffmpeg", args);
+
+	ffmpeg_command.on('error', function(err, stdout, stderr) {
+	  console.log("ffmpeg stdout:\n" + stdout);
+	  console.log("ffmpeg stderr:\n" + stderr);
+	  throw err;
+	})
+
+
+	ffmpeg_command.on('close', function (code) {
+		console.log('ffmpeg exited with code ' + code);
+	});
+
+	ffmpeg_command.stderr.on('data', function (data) {
+		//console.log('stderr: ' + data);
+	});
+
+
+	ffmpeg_command.stdout.on('data', function (data) {
+		//console.log("stream data");
+		var frame = new Buffer(data).toString('base64');
+		socket.emit('canvas',frame);
+	});
+  
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -154,7 +151,6 @@ function startStreaming(socket) {
 function initPins()
 {
 	// Enable control of the Raspberry Pi's gpio pins.
-	// Read more at http://elinux.org/RPi_Low-level_peripherals#Bash_shell_script.2C_using_sysfs.2C_part_of_the_raspbian_operating_system
 	for (var pin in pins)
 	{
 		console.log('Creating port ' + pins[pin] + '...');
@@ -175,7 +171,6 @@ function initPins()
 
 	// Configure the Raspberry Pi's gpio pins as output ports which enables signals
 	// to be sent to the car's remote control.
-	// Read more at http://elinux.org/RPi_Low-level_peripherals#Bash_shell_script.2C_using_sysfs.2C_part_of_the_raspbian_operating_system
 	for (var pin in pins)
 	{
 		console.log('Configuring port ' + pins[pin] + '...');
@@ -193,3 +188,9 @@ function initPins()
 		})
 	}
 }
+
+
+
+
+
+

@@ -206,10 +206,7 @@ module.exports = {
         if (err) return res.badRequest();
         if (!user) return res.badRequest();
 
-        sails.sockets.broadcast(req.param('robot'), {
-          type: 'new_viewer_user',
-          msg: {user_name: user.name, avatar: user.avatarUrl, user_id: user.id}
-        });
+        sails.sockets.broadcast(req.param('robot'), {type: 'new_viewer_user', id: '', msg: {user_name: user.name, avatar: user.avatarUrl, user_id: user.id}});
         console.log('User ' + req.session.User.id + 'with socket id ' + sails.sockets.id(req) + ' is now subscribed to the model class \'Robot\'.');
       });
 
