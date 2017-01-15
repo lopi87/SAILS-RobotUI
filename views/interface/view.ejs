@@ -8,7 +8,7 @@
 <div id="board" class="panel panel-success margintop20">
   <div class="panel-heading">
     <img style="max-width:150px;" src="/images/logo/logotipo.png">
-    <a href="#" onclick="openWin(200,200,'board')"><i class="fa fa-external-link fa-2x floatright" style="height: 20px"></i></a>
+    <!--<a href="#" onclick="openWin(200,200,'board')"><i class="fa fa-external-link fa-2x floatright" style="height: 20px"></i></a>-->
   </div>
 
   <div class="paddingtop20 paddingleft20 paddingright20 paddingbottom20">
@@ -19,9 +19,12 @@
 
           <!-- Insert video -->
           <% if (video){%>
-          <img id="play_<%= video.id %>" class="img-responsive play_<%= video.id %> position_<%= video.id %>" src="/images/video/video.png" width="400" height="300">
-          <%- partial ('../video/style_video.ejs', {video: video})%>
+          <div id="stream-container">
+            <canvas id="play_<%= video.id %>" width="160" height="144" style="border:solid;" style="background:src('/images/video/video.png');"></canvas>
+            <%- partial ('../video/style_video.ejs', {video: video})%>
+          </div>
           <%}%>
+
 
           <!-- Insert actions -->
           <% _.each(actions, function(action){ %>
@@ -98,6 +101,24 @@
           $('#buttom_custom_' + obj.id).addClass('focus');
           break;
 
+
+        case 'video':
+          //read video stream
+            console.log(obj.msg);
+            try {
+              var canvas = document.getElementById('play_' + obj.id);
+              var context = canvas.getContext('2d');
+              var imageObj = new Image();
+              imageObj.src = "data:image/jpeg;base64," + obj.msg;
+              imageObj.onload = function(){
+                context.height = imageObj.height;
+                context.width = imageObj.width;
+                context.drawImage(imageObj,0,0,context.width,context.height);
+              }
+            } catch(e){ }
+
+          break;
+
         case 'event':
           console.log('event ' + 'id: ' + obj.id + ' msg: ' + obj.msg.value);
           $('#chat').prepend('- received: ' + obj.msg.name + ': ' + obj.msg.value + '<br/>');
@@ -105,15 +126,10 @@
           break;
 
         case 'new_viewer_user':
-
           if($("#" + obj.msg.user_id).length == 0) {
             $('#user_viewer_list').append('<p id="' +  obj.msg.user_id + '"><img src="' + obj.msg.avatar + '" class="card-circle marginright10" height="32" width="32">' + obj.msg.user_name +'</p>');
           }
 
-          break;
-
-        case 'video':
-          alert('new video frame');
           break;
 
         case 'command':

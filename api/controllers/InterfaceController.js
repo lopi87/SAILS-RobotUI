@@ -86,7 +86,7 @@ module.exports = {
         if (err) return res.badRequest(err);
 
         //Almacenamos la room para los visitantes en la BD:
-        Room.findOrCreate({room_name: iface.robot_owner.id}, {room_name: iface.robot_owner.id}).exec(function createFindCB(error, createdOrFoundRecords) {
+        Room.findOrCreate({room_name: iface.robot_owner.id}, {room_name: iface.robot_owner.id}).exec(function createFindCB(err) {
           if (err) return res.badRequest(err);
 
           User.findOne({id:  iface.robot_owner.owner}).exec(function Userfound(error, user){
@@ -105,6 +105,8 @@ module.exports = {
       });
     });
   },
+
+
 
   savecode: function (req, res, next) {
     if (req.xhr) {
@@ -234,6 +236,14 @@ module.exports = {
     if (!req.isSocket) return res.badRequest();
     sails.sockets.broadcast(req.param('robot'), {type: 'command', id: req.param('id'), msg: req.param('msg')});
   },
+
+
+  //Emision de las acciones a los vivitantes de una interfaz
+  emit_video: function(req, res){
+    if (!req.isSocket) return res.badRequest();
+    sails.sockets.broadcast(req.param('robot'), {type: 'video', id: req.param('id'), msg: req.param('msg')});
+  },
+
 
 
   eject_viewer_user: function (req, res, next) {

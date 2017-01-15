@@ -67,5 +67,6 @@
 	"Public": "Public",
 	"free": "free",
 	"view": "view",
-	"private": "private"
+	"private": "private",
+	"busy": "busy"
 }

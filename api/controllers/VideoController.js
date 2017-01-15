@@ -11,12 +11,12 @@ log = new Log('debug');
 
 module.exports = {
 
-  'new': function(req, res){
+  'new': function (req, res) {
     res.view();
   },
 
 
-  create: function(req, res, next) {
+  create: function (req, res, next) {
 
   },
 
@@ -29,13 +29,13 @@ module.exports = {
       var x = req.param('x');
       var y = req.param('y');
 
-      Video.update(id, {coordinate_x: x, coordinate_y: y}, function videoUpdated(err){
-        if(err) return res.badRequest(err);
+      Video.update(id, {coordinate_x: x, coordinate_y: y}, function videoUpdated(err) {
+        if (err) return res.badRequest(err);
         res.ok();
       });
 
-    }else{
-      err= 'No Ajax call';
+    } else {
+      err = 'No Ajax call';
       return res.badRequest(err);
     }
   },
@@ -56,10 +56,10 @@ module.exports = {
           if (err) return next(err);
 
           Video.create(videoObj, function videoCreated(err, video) {
-          if (err) return res.badRequest(err);
+            if (err) return res.badRequest(err);
             console.log('The video element has been created');
 
-            Interface.update({id: req.param('id')},{video: video.id}, function ifaceUpdated(err) {
+            Interface.update({id: req.param('id')}, {video: video.id}, function ifaceUpdated(err) {
               if (err) return next(err);
 
               return res.ok();
@@ -96,71 +96,14 @@ module.exports = {
 
   },
 
-  edit: function(req, res, next){
-    Video.findOne(req.param('id'), function foundVideo(err, video){
-      if(err) return next(err);
-      if(!video) return next();
+  edit: function (req, res, next) {
+    Video.findOne(req.param('id'), function foundVideo(err, video) {
+      if (err) return next(err);
+      if (!video) return next();
       res.view({
         video: video
       });
     });
-  },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////// PRUEBAS DE VIDEO
-  video: function(req, res, next){
-
-    log.debug('Llamado el metodo video');
-    //io.socket.broadcast.emit('stream', image);
-
-    return res.view();
-  },
-
-  show_video: function(req, res, next){
-
-    log.debug('Visualizar video');
-    return res.view();
-  },
-
-
-
-  video_emit: function (req, res, next) {
-    if (req.isSocket && req.param('image')) {
-      //console.log('transmision video');
-      sails.sockets.broadcast('Manuel', {image: req.param('image')});
-      return;
-    }
-
-    //Subscribe
-    if(req.isSocket){
-      var roomName = 'Manuel';
-      sails.sockets.join(req, roomName, function(err) {
-        if (err) {
-          return res.serverError(err);
-        }
-        console.log('Subscribed to a fun room called '+roomName+'!');
-        return;
-      });
-    }
-    res.view();
   }
 
 };
-

@@ -24,8 +24,10 @@
 
           <!-- Insert video -->
           <% if (video){%>
-          <img id="play_<%= video.id %>" class="img-responsive play_<%= video.id %> position_<%= video.id %>" src="/images/video/video.png" width="400" height="300">
-          <%- partial ('../video/style_video.ejs', {video: video})%>
+          <div id="stream-container">
+            <canvas id="play_<%= video.id %>" width="160" height="144" style="border:solid;" style="background:src('/images/video/video.png');"></canvas>
+            <%- partial ('../video/style_video.ejs', {video: video})%>
+          </div>
           <%}%>
 
           <!-- Insert actions -->
@@ -125,6 +127,9 @@
         change_img_state(robot_id, false);
       }
 
+      //start stream
+      socket.emit('start-stream');
+
       //Presionar boton desconectar
       $("#desconectar").click(function () {
         try {
@@ -137,7 +142,6 @@
       });
 
 
-
       //captura evento desconectar cuando el robot es apagado o pierde la señal
       socket.on('disconnect', function () {
         bootstrap_alert['success']('Robot disconnect!' + address_robot, 5000)
@@ -147,8 +151,27 @@
       });
 
 
-      //Mandar evento "mandar comando" al servidor para sincronizar con otros navegadores
+      //read video stream
+      socket.on('<%= video.event_name %>', function(data) {
+        //console.log(data);
+        try {
+          var canvas = document.getElementById('play_<%= video.id %>');
+          var context = canvas.getContext('2d');
+          var imageObj = new Image();
+          imageObj.src = "data:image/jpeg;base64,"+data;
+          imageObj.onload = function(){
+            context.height = imageObj.height;
+            context.width = imageObj.width;
+            context.drawImage(imageObj,0,0,context.width,context.height);
+          }
+        } catch(e){ }
+        io.socket.get('/interface/emit_video/',{robot: '<%=robot.id %>', id: '<%= video.id %>', msg: data })
 
+      });
+
+
+
+      //Mandar evento "mandar comando" al servidor para sincronizar con otros navegadores
       var $messageForm = $('#sendMessage');
       $messageForm.click(function (e) {
         var $message = $('#message');
@@ -193,33 +216,26 @@
       <% })%>
 
 
-      ///////////////////////////////////////////   liveStream
-
-      socket.emit('start-stream');
-
-      socket.on('liveStream', function(url) {
-        console.log('get frame! ' + url);
-        $('#stream').attr('src', url);
-      });
-
-
       socket.on('connect', function () {
         console.log('robot connected!');
         io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: true});
+        //start stream
+        socket.emit('start-stream');
         bootstrap_alert['success']('Conectado con exito! ' + address_robot, 5000);
         change_img_state('<%=robot.id %>', true);
       });
 
 
-      ///////////////////////////////////////////////
-
       function subscribeAndListen() {
+
         io.socket.get('/interface/view_subscribe/',{robot: '<%= robot.id%>'});
+
         io.socket.on('message', function (obj) {
           //EVENTOS CAPURADOS
           switch (obj.type) {
             case 'new_viewer_user':
 
+              alert('user');
               if($("#" + obj.msg.user_id).length == 0 && obj.msg.user_id != '<%= req.session.User.id %>') {
                 $('#user_viewer_list').append('<p id="' +  obj.msg.user_id + '"><img src="' + obj.msg.avatar + '" class="card-circle marginright10" height="32" width="32">' + obj.msg.user_name + '<span onclick=eject_viewer_user("' + obj.msg.user_id  + '")><i style="cursor: pointer; color: red" class="fa fa-sign-out marginleft5" aria-hidden="true"></i></span></p>');
               }else{
