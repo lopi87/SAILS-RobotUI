@@ -25,10 +25,11 @@
           <!-- Insert video -->
           <% if (video){%>
           <div id="stream-container">
-            <canvas id="play_<%= video.id %>" width="160" height="144" style="border:solid;" style="background:src('/images/video/video.png');"></canvas>
+            <canvas id="play_<%= video.id %>" width="400" height="300" style="border:solid;" style="background:src('/images/video/video.png');"></canvas>
             <%- partial ('../video/style_video.ejs', {video: video})%>
           </div>
           <%}%>
+
 
           <!-- Insert actions -->
           <% _.each(actions, function(action){ %>

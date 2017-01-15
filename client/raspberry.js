@@ -112,7 +112,7 @@ function startStreaming(socket) {
 
 	console.log('Streaming....');
 
-	var args = ["-f", "video4linux2", "-i", "/dev/video0", "-s", "160x144","-f","mjpeg", "pipe:1"]
+	var args = ["-f", "video4linux2", "-i", "/dev/video0", "-s", "400x300","-f","mjpeg", "pipe:1"]
 
 	ffmpeg_command = require('child_process').spawn("ffmpeg", args);
 
@@ -120,7 +120,7 @@ function startStreaming(socket) {
 	  console.log("ffmpeg stdout:\n" + stdout);
 	  console.log("ffmpeg stderr:\n" + stderr);
 	  throw err;
-	})
+	});
 
 
 	ffmpeg_command.on('close', function (code) {
@@ -137,7 +137,7 @@ function startStreaming(socket) {
 		var frame = new Buffer(data).toString('base64');
 		socket.emit('canvas',frame);
 	});
-  
+
 }
 
 
