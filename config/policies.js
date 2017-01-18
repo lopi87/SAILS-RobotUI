@@ -30,7 +30,7 @@ module.exports.policies = {
 
 
   user: {
-    '*': ['flash','localize','message'],
+    '*': ['message'],
     show: ['sessionAuth','userCanSeeProfile','message'],
     edit: ['sessionAuth','userCanSeeProfile','message'],
     update: ['sessionAuth','userCanSeeProfile','message'],
@@ -40,22 +40,22 @@ module.exports.policies = {
   },
 
   action: {
-    '*': ['sessionAuth', 'flash','localize','message'],
+    '*': ['sessionAuth','message'],
     update_position: ['userCanConfigureInterface']
   },
 
   event: {
-    '*': ['sessionAuth', 'flash','localize','message'],
+    '*': ['sessionAuth','message'],
     update_position: ['userCanConfigureInterface']
   },
 
   video: {
-    '*': ['sessionAuth', 'flash','localize','message'],
+    '*': ['sessionAuth','message'],
     update_position: ['userCanConfigureInterface']
   },
 
   robot:{
-    '*': ['sessionAuth', 'flash','localize','message'],
+    '*': ['sessionAuth', 'message'],
     delete_permission: ['UserCanEditRobot'],
     new_permissions: ['UserCanEditRobot'],
     show_permissions: ['UserCanEditRobot'],
@@ -65,20 +65,17 @@ module.exports.policies = {
   },
 
   session: {
-    create: ['flash', 'message', 'localize']
+    create: ['message']
   },
 
 
   message: {
-    '*': ['sessionAuth', 'flash','localize','message']
+    '*': ['sessionAuth']
   },
 
-  index:{
-    '*': ['flash','localize','message']
-  },
 
   interface: {
-    '*': ['sessionAuth', 'flash','localize','message'],
+    '*': ['sessionAuth'],
     configure: ['userCanConfigureInterface'],
     show: ['userCanShowInterface'],
     view: ['userCanViewInterface']
