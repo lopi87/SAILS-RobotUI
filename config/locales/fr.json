@@ -11,7 +11,7 @@
 	"email": "Email",
 	"signin": "Identifíquese",
 	"signout": "Salir",
-	"filesmallerthan %s": "Por favor, proporcione um archivo mas pequeño que %s kb",
+	"filesmallerthan %s": "Por favor, proporcione un archivo mas pequeño que %s kb",
 	"name": "Nombre",
 	"nickname": "Nick",
 	"language": "Idioma",
@@ -19,5 +19,6 @@
 	"selectfile": "Seleccionar un archivo",
 	"remove": "Eliminar",
 	"change": "Cambiar",
-	"filesmallerthan %s": "filesmallerthan %s"
+	"author": "author",
+	"about": "about"
 }

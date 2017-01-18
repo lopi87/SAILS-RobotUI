@@ -220,7 +220,7 @@
   </nav>
 
   <div class="container box">
-    <%- partial('alert.ejs') %>
+    <%- partial('_alert.ejs', {flash: flash}) %>
     <%- body %>
   </div>
 

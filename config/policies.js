@@ -28,55 +28,55 @@ module.exports.policies = {
 
   '*' : 'flash',
 
-  action: {
+  action:{
     '*': ['flash', 'localize', 'sessionAuth','message'],
-    update_position: ['userCanConfigureInterface']
+    update_position: ['flash', 'localize', 'sessionAuth','message', 'userCanConfigureInterface']
   },
 
-  event: {
+  event:{
     '*': ['flash', 'sessionAuth','message', 'localize'],
-    update_position: ['userCanConfigureInterface']
+    update_position: ['flash', 'localize', 'sessionAuth','message', 'userCanConfigureInterface' ]
   },
 
-  icon: {
-    '*': ['flash', 'sessionAuth', 'localize']
+  icon:{
+    '*': ['flash', 'sessionAuth', 'localize', 'message']
   },
 
   index:{
-    '*': ['flash', 'localize']
+    '*': ['flash', 'localize', 'flash', 'message']
   },
 
-  interface: {
-    '*': ['flash', 'sessionAuth', 'localize'],
-    configure: ['userCanConfigureInterface'],
-    show: ['userCanShowInterface'],
-    view: ['userCanViewInterface']
+  interface:{
+    '*': ['flash', 'sessionAuth','message', 'localize'],
+    configure: ['flash', 'sessionAuth','message', 'localize', 'userCanConfigureInterface'],
+    show: ['flash', 'sessionAuth','message', 'localize', 'userCanShowInterface'],
+    view: ['flash', 'sessionAuth','message', 'localize', 'userCanViewInterface']
   },
 
   language: {
-    '*': ['flash', 'sessionAuth', 'localize'],
+    '*': ['flash', 'localize']
   },
 
 
-  message: {
+  message:{
     '*': ['flash', 'sessionAuth', 'localize']
   },
 
   robot:{
     '*': ['flash', 'sessionAuth', 'message', 'localize'],
-    delete_permission: ['UserCanEditRobot'],
-    new_permissions: ['UserCanEditRobot'],
-    show_permissions: ['UserCanEditRobot'],
-    edit: ['UserCanEditRobot'],
-    update: ['UserCanEditRobot'],
-    destroy: ['UserCanEditRobot']
+    delete_permission: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot'],
+    new_permissions: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot'],
+    show_permissions: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot'],
+    edit: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot'],
+    update: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot'],
+    destroy: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot']
   },
 
-  room: {
+  room:{
     '*': ['flash', 'sessionAuth', 'localize']
   },
 
-  session: {
+  session:{
     create: ['flash', 'message', 'localize']
   },
 
@@ -84,19 +84,19 @@ module.exports.policies = {
     '*': ['flash', 'localize']
   },
 
-  user: {
+  user:{
     '*': ['flash', 'localize', 'message'],
-    show: ['sessionAuth','userCanSeeProfile'],
-    edit: ['sessionAuth','userCanSeeProfile'],
-    update: ['sessionAuth','userCanSeeProfile'],
-    index: ['sessionAuth','isadmin' ],
-    render: ['sessionAuth','sessionAuth', 'userCanSeeProfile'],
-    destroy: ['sessionAuth','userCanSeeProfile']
+    show: ['flash', 'localize', 'message', 'sessionAuth','userCanSeeProfile'],
+    edit: ['flash', 'localize', 'message', 'sessionAuth','userCanSeeProfile'],
+    update: ['flash', 'localize', 'message', 'sessionAuth','userCanSeeProfile'],
+    index: ['flash', 'localize', 'message', 'sessionAuth','isadmin' ],
+    render: ['flash', 'localize', 'message', 'sessionAuth','sessionAuth', 'userCanSeeProfile'],
+    destroy: ['flash', 'localize', 'message', 'sessionAuth','userCanSeeProfile']
   },
 
-  video: {
+  video:{
     '*': ['flash','sessionAuth','message', 'localize'],
-    update_position: ['userCanConfigureInterface']
+    update_position: ['flash', 'localize', 'message', 'userCanConfigureInterface']
   }
 
 
