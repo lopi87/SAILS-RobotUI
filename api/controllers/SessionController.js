@@ -145,28 +145,33 @@ module.exports = {
 
   destroy: function(req, res, next) {
 
-    User.findOne(req.session.User.id, function foundUser(err, user){
-      if(err) return next(err);
-      if(!user){
-        msg = { err: 'User not found' };
-        FlashService.error(req, msg );
-        return res.redirect('/');
-      }
-
-      User.update(user.id, {online: false}, function (err){
+    if (req.session.User){
+      User.findOne(req.session.User.id, function foundUser(err, user){
         if(err) return next(err);
-        req.session.destroy();
+        if(!user){
+          msg = { err: 'User not found' };
+          FlashService.error(req, msg );
+          return res.redirect('/');
+        }
 
-        //Informar a otros clientes (sockets abiertos) que el usuario no esta logueado
-        User.publishUpdate(user.id, {
-          loggedIn: false,
-          id: user.id
+        User.update(user.id, {online: false}, function (err){
+          if(err) return next(err);
+          req.session.destroy();
+
+          //Informar a otros clientes (sockets abiertos) que el usuario no esta logueado
+          User.publishUpdate(user.id, {
+            loggedIn: false,
+            id: user.id
+          });
+
+          res.clearCookie('io');
+          res.clearCookie('sails.sid');
+
+          //redireccion a Sign-in
+          return res.redirect('/');
         });
-
-        //redireccion a Sign-in
-        return res.redirect('session/new');
       });
-    });
-  }
+    }
+    }
 };
 

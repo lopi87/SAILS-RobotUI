@@ -59,12 +59,12 @@ module.exports.session = {
   pass: process.env.REDIS_PASS
   */
 
-
+/*
   host: 'porgy.redistogo.com',
   port: '10160',
   db: 'redistogo',
   pass: '70c0e5b04e2095bf41fdef30b0aaa945'
-
+*/
   // host: 'localhost',
   // port: 6379,
   // ttl: <redis session TTL in seconds>,
@@ -80,13 +80,11 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  /*
   adapter: 'mongo',
   host: 'localhost',
   port: 27017,
   db: 'RobotUI',
-  collection: 'cookies'
-*/
+  collection: 'session',
 
   /*externalMongodbServer: {
     adapter: 'sails-mongo',
@@ -103,6 +101,8 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
+  socket_id: '',
+  user_id: ''
   // username: '',
   // password: '',
   // auto_reconnect: false,

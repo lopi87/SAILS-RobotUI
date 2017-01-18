@@ -26,7 +26,7 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': ["flash","localize","message"],
+  '*': ['sessionAuth', 'flash','localize','message'],
 
 
   user: {
