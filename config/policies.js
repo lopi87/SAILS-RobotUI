@@ -30,14 +30,13 @@ module.exports.policies = {
 
 
   user: {
-    '*': ['sessionAuth', 'flash','localize','message'],
-    show: ['userCanSeeProfile','message'],
-    edit: ['userCanSeeProfile','message'],
-    update: ['userCanSeeProfile','message'],
-    index: ['isadmin','message','flash' ],
-    render: ['sessionAuth', 'userCanSeeProfile','message'],
-    destroy: ['userCanSeeProfile','message'],
-    create: []
+    '*': ['flash','localize','message'],
+    show: ['sessionAuth','userCanSeeProfile','message'],
+    edit: ['sessionAuth','userCanSeeProfile','message'],
+    update: ['sessionAuth','userCanSeeProfile','message'],
+    index: ['sessionAuth','isadmin','message','flash' ],
+    render: ['sessionAuth','sessionAuth', 'userCanSeeProfile','message'],
+    destroy: ['sessionAuth','userCanSeeProfile','message']
   },
 
   action: {
