@@ -127,9 +127,6 @@
         change_img_state(robot_id, false);
       }
 
-      //start stream
-      socket.emit('start-stream');
-
       //Presionar boton desconectar
       $("#desconectar").click(function () {
         try {
@@ -152,24 +149,25 @@
 
 
       //read video stream
+      <% if( typeof video !== 'undefined' ){ %>
+
       socket.on('<%= video.event_name %>', function(data) {
-        //console.log(data);
-        try {
-          var canvas = document.getElementById('play_<%= video.id %>');
-          var context = canvas.getContext('2d');
-          var imageObj = new Image();
-          imageObj.src = "data:image/jpeg;base64,"+data;
-          imageObj.onload = function(){
-            context.height = imageObj.height;
-            context.width = imageObj.width;
-            context.drawImage(imageObj,0,0,context.width,context.height);
-          }
-        } catch(e){ }
-        io.socket.get('/interface/emit_video/',{robot: '<%=robot.id %>', id: '<%= video.id %>', msg: data })
+          //console.log(data);
+          try {
+            var canvas = document.getElementById('play_<%= video.id %>');
+            var context = canvas.getContext('2d');
+            var imageObj = new Image();
+            imageObj.src = "data:image/jpeg;base64,"+data;
+            imageObj.onload = function(){
+              context.height = imageObj.height;
+              context.width = imageObj.width;
+              context.drawImage(imageObj,0,0,context.width,context.height);
+            }
+          } catch(e){ }
+          io.socket.get('/interface/emit_video/',{robot: '<%=robot.id %>', id: '<%= video.id %>', msg: data })
 
-      });
-
-
+        });
+      <% } %>
 
       //Mandar evento "mandar comando" al servidor para sincronizar con otros navegadores
       var $messageForm = $('#sendMessage');
@@ -219,8 +217,10 @@
       socket.on('connect', function () {
         console.log('robot connected!');
         io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: true});
-        //start stream
-        socket.emit('start-stream');
+        <% if( typeof video !== 'undefined' ){ %>
+          //start stream
+          socket.emit('start-stream');
+        <%}%>
         bootstrap_alert['success']('Conectado con exito! ' + address_robot, 5000);
         change_img_state('<%=robot.id %>', true);
       });

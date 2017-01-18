@@ -3,7 +3,7 @@ var io = require('./node_modules/socket.io').listen(8085, { log: false });
 
 // Load required modules.
 var sys = require('util'), exec = require('child_process').exec,
-  path = require('path'), spawn = require('child_process').spawn, ffmpeg_command;
+  path = require('path'), ffmpeg_command, running_camera = false;
 
 
 // Path to Raspbian's gpio driver, used for sending signals to the remote.
@@ -25,7 +25,6 @@ io.sockets.on('connection', function (socket)
 {
 
   sockets[socket.id] = socket;
-
   console.log("Total clients connected : ", Object.keys(sockets).length);
 
   socket.on('disconnect', function() {
@@ -100,6 +99,7 @@ io.sockets.on('connection', function (socket)
 function stopStreaming(socket) {
     delete sockets[socket.id];
     console.log('Client desconected');
+    running_camera = false;
     // no more sockets, kill the stream
     if (Object.keys(sockets).length == 0) {
       if (ffmpeg_command) ffmpeg_command.kill();
@@ -108,29 +108,33 @@ function stopStreaming(socket) {
 
 
 function startStreaming(socket) {
+  //ffmpeg -f video4linux2 -i /dev/video0 -s 400x300 -f mjpeg pipe:1
 
-
-	console.log('Streaming....');
-
-	var args = ["-f", "video4linux2", "-i", "/dev/video0", "-s", "400x300","-f","mjpeg", "pipe:1"]
-
-	ffmpeg_command = require('child_process').spawn("ffmpeg", args);
+  if (running_camera == false){
+    console.log('Starting streaming....');
+    var args = ["-f", "video4linux2", "-i", "/dev/video0", "-s", "400x300","-f","mjpeg", "pipe:1"]
+    ffmpeg_command = require('child_process').spawn("ffmpeg", args);
+    running_camera = true
+  }
 
 	ffmpeg_command.on('error', function(err, stdout, stderr) {
 	  console.log("ffmpeg stdout:\n" + stdout);
 	  console.log("ffmpeg stderr:\n" + stderr);
 	  throw err;
-	});
+    running_camera = false
+  });
 
 
 	ffmpeg_command.on('close', function (code) {
-		console.log('ffmpeg exited with code ' + code);
-	});
+		console.log('ffmpeg exited');
+    running_camera = false
+  });
 
+	/*
 	ffmpeg_command.stderr.on('data', function (data) {
-		//console.log('stderr: ' + data);
+		console.log('stderr: ' + data);
 	});
-
+  */
 
 	ffmpeg_command.stdout.on('data', function (data) {
 		//console.log("stream data");
@@ -139,12 +143,6 @@ function startStreaming(socket) {
 	});
 
 }
-
-
-
-
-
-
 
 
 
