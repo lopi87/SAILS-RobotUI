@@ -26,36 +26,44 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': ['flash', 'localize'],
-
-
-  user: {
-    '*': ['message'],
-    show: ['sessionAuth','userCanSeeProfile','message'],
-    edit: ['sessionAuth','userCanSeeProfile','message'],
-    update: ['sessionAuth','userCanSeeProfile','message'],
-    index: ['sessionAuth','isadmin','message','flash' ],
-    render: ['sessionAuth','sessionAuth', 'userCanSeeProfile','message'],
-    destroy: ['sessionAuth','userCanSeeProfile','message']
-  },
+  '*' : 'flash',
 
   action: {
-    '*': ['sessionAuth','message'],
+    '*': ['flash', 'localize', 'sessionAuth','message'],
     update_position: ['userCanConfigureInterface']
   },
 
   event: {
-    '*': ['sessionAuth','message'],
+    '*': ['flash', 'sessionAuth','message', 'localize'],
     update_position: ['userCanConfigureInterface']
   },
 
-  video: {
-    '*': ['sessionAuth','message'],
-    update_position: ['userCanConfigureInterface']
+  icon: {
+    '*': ['flash', 'sessionAuth', 'localize']
+  },
+
+  index:{
+    '*': ['flash', 'localize']
+  },
+
+  interface: {
+    '*': ['flash', 'sessionAuth', 'localize'],
+    configure: ['userCanConfigureInterface'],
+    show: ['userCanShowInterface'],
+    view: ['userCanViewInterface']
+  },
+
+  language: {
+    '*': ['flash', 'sessionAuth', 'localize'],
+  },
+
+
+  message: {
+    '*': ['flash', 'sessionAuth', 'localize']
   },
 
   robot:{
-    '*': ['sessionAuth', 'message'],
+    '*': ['flash', 'sessionAuth', 'message', 'localize'],
     delete_permission: ['UserCanEditRobot'],
     new_permissions: ['UserCanEditRobot'],
     show_permissions: ['UserCanEditRobot'],
@@ -64,23 +72,32 @@ module.exports.policies = {
     destroy: ['UserCanEditRobot']
   },
 
+  room: {
+    '*': ['flash', 'sessionAuth', 'localize']
+  },
+
   session: {
-    create: ['message']
+    create: ['flash', 'message', 'localize']
   },
 
-
-  message: {
-    '*': ['sessionAuth']
+  socket:{
+    '*': ['flash', 'localize']
   },
 
+  user: {
+    '*': ['flash', 'localize', 'message'],
+    show: ['sessionAuth','userCanSeeProfile'],
+    edit: ['sessionAuth','userCanSeeProfile'],
+    update: ['sessionAuth','userCanSeeProfile'],
+    index: ['sessionAuth','isadmin' ],
+    render: ['sessionAuth','sessionAuth', 'userCanSeeProfile'],
+    destroy: ['sessionAuth','userCanSeeProfile']
+  },
 
-  interface: {
-    '*': ['sessionAuth'],
-    configure: ['userCanConfigureInterface'],
-    show: ['userCanShowInterface'],
-    view: ['userCanViewInterface']
+  video: {
+    '*': ['flash','sessionAuth','message', 'localize'],
+    update_position: ['userCanConfigureInterface']
   }
-
 
 
   /***************************************************************************

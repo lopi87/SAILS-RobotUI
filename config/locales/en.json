@@ -42,5 +42,9 @@
 	"author": "Author",
 	"description": "Description",
 	"about": "About",
-	"icon": "icon"
+	"icon": "icon",
+	"view": "view",
+	"free": "free",
+	"public": "public",
+	"menu": "menu"
 }

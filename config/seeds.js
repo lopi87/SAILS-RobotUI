@@ -38,7 +38,8 @@ module.exports.seeds = {
         encryptedPassword: '$2a$10$dHF2BWMtfQww0sx696ZCQeEHn6nR1nbLVkYBh8I38xCiYaCyiDxuO',
         latitude: 0
        }
-    ]
+    ],
+    unique: ['id']
   },
 
   robot:{
@@ -85,7 +86,8 @@ module.exports.seeds = {
         avatarUrl: '/uploads/robot_avatar/584f05aed5e35f4a1e727887.jpg',
         robot_interface: '584f05aed5e35f4a1e727888'
       }
-    ]
+    ],
+    unique: ['id']
   },
 
 
@@ -110,7 +112,8 @@ module.exports.seeds = {
         panel_sizey: 200
       }
 
-    ]
+    ],
+    unique: ['id']
   }
 
 };

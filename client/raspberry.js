@@ -33,7 +33,6 @@ io.sockets.on('connection', function (socket)
 
 
   socket.on('start-stream', function() {
-    console.log('Start stream....');
     startStreaming(socket);
   });
 
