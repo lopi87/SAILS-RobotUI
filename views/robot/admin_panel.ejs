@@ -12,7 +12,7 @@
         <th>Owner</th>
         <th>Public drive</th>
         <th>Public view</th>
-        <th colspan="4">Actions</th>
+        <th colspan="5">Actions</th>
       </tr>
       </thead>
 
@@ -46,7 +46,8 @@
           <% } %>
 
           <% if(robot.public_drive){ %>
-          <td>             <span class="label label-pill label-success"> <%= i18n('public')%> </span>
+          <td>
+            <span class="label label-pill label-success"> <%= i18n('public')%> </span>
           </td>
           <% } else { %>
           <td> <span class="label label-pill label-error"> <%= i18n('private')%> </span></td>
@@ -54,6 +55,9 @@
 
           <td>
             <a href="/robot/show/<%= robot.id %>" class="btn btn-sm btn-primary"><%= i18n('show') %></a>
+          </td>
+          <td>
+            <a href="/interface/view/<%= robot.robot_interface.id %>" class="btn btn-sm btn-success"><%= i18n(' show_interface') %></a>
           </td>
           <td>
             <a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a>
