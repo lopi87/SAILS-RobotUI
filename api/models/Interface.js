@@ -23,6 +23,14 @@ module.exports = {
       via: 'interface_owner'
     },
 
+
+    // Sliders de la interfaz
+    sliders: {
+      collection: 'slider',
+      via: 'interface_owner'
+    },
+
+
     // Eventos de la interfaz
     events: {
       collection: 'event',

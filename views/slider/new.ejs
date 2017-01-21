@@ -7,114 +7,15 @@
 
         <div class="control-group marginbottom5">
           <label for="name"><%= i18n("name") %> * :</label>
-          <input id="name_field" type="text" class="form-control" placeholder="<%= i18n("name") %>" name="name">
+          <input id="s_name_field" type="text" class="form-control" placeholder="<%= i18n("name") %>" name="name">
         </div>
 
         <div class="control-group marginbottom5">
-          <label for="name"><%= i18n("code") %> * :</label>
-          <input id="code_field" type="text" class="form-control" placeholder="<%= i18n("code") %>" required="" name="code">
-        </div>
-
-        <div class="control-group marginbottom5">
-          <label for="type"><%= i18n("type") %> *:</label>
-          <div class="chosen_container">
-            <select data-placeholder="Choose a type..." class="chzn-select-type" tabindex="2" name="element">
-              <option value="button">button</option>
-              <option value="push">push-button</option>
-              <option value="joystick">joystick</option>
-            </select>
-          </div>
-          <script type="text/javascript">
-            $('.chzn-select-type').chosen({width: '100%'});
-          </script>
-        </div>
-
-        <div class="row">
-          <div class="col-md-7">
-            <div class="control-group">
-              <label for="icon"><%= i18n("selectanicon") %> *:</label>
-              <div>
-                <select id="slect_icon" data-placeholder="<%= i18n("selectanicon") %>" class="chzn-select-icon" tabindex="2">
-                  <option value=""></option>
-                  <% _.each(icons, function(icon){ %>
-                  <option data-img-src="<%= icon.iconUrl %>" value="<%= icon.id %>"><%= i18n('icon') %></option>
-                  <% })%>
-                </select>
-              </div>
-              <script type="text/javascript">
-                $('.chzn-select-icon').chosen({ width: '100%', disable_search: true });
-              </script>
-            </div>
-          </div>
-          <div class="col-md-5">
-            <div class="button_right" style="margin-top: 30px">
-              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#writeModal">
-                Upload a new icon
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="control-group marginbottom5">
-          <label for="name"><%= i18n("color") %> * :</label>
-          <p>
-            Default: <input name="color_default" id="default" value="true" required="" type="radio" onchange="disable_colorform()">
-            custom: <input name="color_default" id="custom" value="false" type="radio" onchange="enable_colorform()">
-          </p>
-        </div>
-        <script type="text/javascript">
-          function enable_colorform(){
-            $('#colorform').show();
-          }
-          function disable_colorform(){
-            $('#colorform').hide();
-          }
-        </script>
-
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="col-md-10">
-
-        <div id="colorform" style="display:none">
-          <div class="control-group">
-            <label for="colortext"><%= i18n("text") %> * :</label>
-            <div id="cp4" class="input-group colorpicker-component ">
-              <input id="text_field" type="text" class="form-control" />
-              <span class="input-group-addon"><i></i></span>
-            </div>
-          </div>
-
-          <div class="control-group">
-            <label for="colorbackground"><%= i18n("background") %> * :</label>
-            <div id="cp" class="input-group colorpicker-component ">
-              <input id="background_field" type="text" class="form-control" />
-              <span class="input-group-addon"><i></i></span>
-            </div>
-          </div>
-
-          <div class="control-group">
-            <label for="colorbordert"><%= i18n("border") %> * :</label>
-            <div id="cp2" class="input-group colorpicker-component ">
-              <input id="border_field" type="text" class="form-control" />
-              <span class="input-group-addon"><i></i></span>
-            </div>
-          </div>
-
-          <div class="control-group">
-            <label for="colorbordert"><%= i18n("activebackground") %> * :</label>
-            <div id="cp3" class="input-group colorpicker-component ">
-              <input id="active_background_field" type="text" class="form-control" />
-              <span class="input-group-addon"><i></i></span>
-            </div>
-          </div>
-          <script type="text/javascript">
-            $('[id^=cp]').colorpicker({format: 'hex'});
-          </script>
+          <label for="code"><%= i18n("code") %> * :</label>
+          <input id="s_code_field" type="text" class="form-control" placeholder="<%= i18n("code") %>" required="" name="code">
         </div>
 
       </div>
-      <div class="col-md-2"></div>
     </div>
   </div>
   <div class="form-signin">
@@ -129,13 +30,11 @@
     var ok = $('.parsley-error').length === 0;
   })
 
-
-
   function new_slider(id) {
     $.ajax({
       url: '/slider/newslider/' + id,
       type: 'GET',
-      data: {name: $( "#name_field" ).val(), code: $( "#code_field" ).val(), color_background: $( "#background_field" ).val(), color_border: $( "#border_field" ).val(), color_active_background: $( "#active_background_field" ).val(), color_text:$( "#text_field" ).val(), icon: $(".chzn-select-icon").val(), color_default: $('input[name=color_default]:checked').val()},
+      data: {name: $( "#s_name_field" ).val(), code: $( "#s_code_field" ).val()},
       done:function() {
       },
 

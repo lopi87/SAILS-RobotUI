@@ -68,5 +68,7 @@
 	"free": "free",
 	"view": "view",
 	"private": "private",
-	"busy": "busy"
+	"busy": "busy",
+	"sliders": "sliders",
+	"createslider": "createslider"
 }

@@ -20,29 +20,24 @@
         <div id="panel" class="panel_resizable edit">
 
           <% if(video){%>
-          <img id="play_<%= video.id %>" class="img-responsive play_<%= video.id %> position_<%= video.id %>" src="/images/video/video.png" width="400" height="300">
+            <%- partial ('_video.ejs', {video: video})%>
           <%}%>
 
           <% _.each(actions, function(action){ %>
-          <% if (action.icon){ %>
-          <button id="button_custom_<%= action.id %>" class="btn btn-custom_<%= action.id %> position_<%= action.id %>" value="<%= action.code %>">
-            <img src="<%= action.icon.iconUrl %>" height="32px" width="32px"/>
-            <% if (action.name != ''){%>
-            <%= action.name %>
-            <% }%>
-          </button>
-          <% } else { %>
-          <button  id="button_custom_<%= action.id %>" value="<%= action.code %>" class="btn btn-custom_<%= action.id %> position_<%= action.id %>" ><%= action.name %></button>
-          <% } %>
-          <%- partial ('../action/style_action.ejs', {action: action})%>
+          <%- partial ('_action.ejs', {action: action})%>
           <% })%>
 
           <% _.each(events, function(event){ %>
-          <div id="event_<%= event.id %>" class="event_<%= event.id %> position_<%= event.id %>" style="max-width: 100px">
-            <h5><%= event.name %> <span class="label label-pill label-danger">-</span></h5>
-          </div>
-          <%- partial ('../event/style_event.ejs', {event: event})%>
+            <%- partial ('_event.ejs', {event: event})%>
           <% })%>
+
+          <% _.each(sliders, function(slider){ %>
+            <%- partial ('_slider.ejs', {slider: slider})%>
+          <% })%>
+          <script type="text/javascript">
+            var sliders = $('[id^=slider_]').slider();
+          </script>
+
         </div>
       </div>
     </div>
@@ -101,12 +96,12 @@
   }
 
   //Enable elements draggables
-  $('[id^=button_custom_]').draggable({cancel: false, containment: '#panel', scroll: false,
+  $('[id^=button_]').draggable({cancel: false, containment: '#panel', scroll: false,
 
     stop: function(event, ui) {
       var pos_x = ui.position.left;
       var pos_y = ui.position.top;
-      var id = this.id.replace('button_custom_','');
+      var id = this.id.replace('button_','');
 
       console.log('x: ' + pos_x + ' - y: ' + pos_y );
       //console.log('id: ' + id);
@@ -121,6 +116,37 @@
 
         success: function(data){
           console.log('bottom position updated');
+        },
+
+        error: function(xhr, status, text) {
+          bootstrap_alert['danger'](xhr.responseText, 5000 );
+        }
+
+      });
+    }
+  });
+
+
+  $('[id^=slider_]').draggable({cancel: false, containment: '#panel', scroll: false,
+
+    stop: function(event, ui) {
+      var pos_x = ui.position.left;
+      var pos_y = ui.position.top;
+      var id = this.id.replace('slider_','');
+
+      console.log('x: ' + pos_x + ' - y: ' + pos_y );
+      //console.log('id: ' + id);
+
+      $.ajax({
+        type: "POST",
+        url: "/slider/update_position/",
+        data: { x: pos_x, y: pos_y, id: id},
+        beforeSend: function(xhr, settings){
+          xhr.setRequestHeader('X-CSRF-Token', $("#icon_csrf").val());
+        },
+
+        success: function(data){
+          console.log('slider position updated');
         },
 
         error: function(xhr, status, text) {

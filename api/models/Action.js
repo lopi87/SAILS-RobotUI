@@ -61,12 +61,6 @@ module.exports = {
     color_default: {
       type: 'boolean',
       defaultsTo: true
-    },
-
-    element: {
-      type: 'string',
-      enum: ['button', 'push', 'joystick'],
-      defaultsTo: 'button'
     }
 
   },

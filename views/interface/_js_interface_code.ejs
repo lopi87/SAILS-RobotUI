@@ -6,10 +6,6 @@
   //conexion con el robot
   var address_robot = '<%= robot.ipaddress %>' + ":" + '<%= robot.port %>';
 
-  //Init sliders
-  $('[id^=slider_]').slider();
-
-
   //INTERESANTE RECONCETAR AUTOMATICAMENTE-...... solucion ya que tarda en volver a conectar
   //http://stackoverflow.com/questions/4432271/node-js-and-socket-io-how-to-reconnect-as-soon-as-disconnect-happens
   $("#conectar").click(function() {
@@ -50,23 +46,22 @@
 
     //read video stream
     <% if( typeof video !== 'undefined' ){ %>
+      socket.on('<%= video.event_name %>', function(data) {
+        //console.log(data);
+        try {
+          var canvas = document.getElementById('play_<%= video.id %>');
+          var context = canvas.getContext('2d');
+          var imageObj = new Image();
+          imageObj.src = "data:image/jpeg;base64,"+data;
+          imageObj.onload = function(){
+            context.height = imageObj.height;
+            context.width = imageObj.width;
+            context.drawImage(imageObj,0,0,context.width,context.height);
+          }
+        } catch(e){ }
+        io.socket.get('/interface/emit_video/',{robot: '<%=robot.id %>', id: '<%= video.id %>', msg: data })
 
-    socket.on('<%= video.event_name %>', function(data) {
-      //console.log(data);
-      try {
-        var canvas = document.getElementById('play_<%= video.id %>');
-        var context = canvas.getContext('2d');
-        var imageObj = new Image();
-        imageObj.src = "data:image/jpeg;base64,"+data;
-        imageObj.onload = function(){
-          context.height = imageObj.height;
-          context.width = imageObj.width;
-          context.drawImage(imageObj,0,0,context.width,context.height);
-        }
-      } catch(e){ }
-      io.socket.get('/interface/emit_video/',{robot: '<%=robot.id %>', id: '<%= video.id %>', msg: data })
-
-    });
+      });
     <% } %>
 
     //Mandar evento "mandar comando" al servidor para sincronizar con otros navegadores
@@ -115,63 +110,36 @@
 
 
     //Slide bar
-    var sliders = $('[id^=slider_]');
-    sliders.on("swipe",function(e){
-      e.preventDefault();
+    $('[id^=slider_]').on( "slide", function(e, ui){
       var slider_id = this.id.replace('slider_','');
-      var value = slider_id.slider("option", "value");
-
       //Comunicar al servidor para difundir a los usuarios
-      io.socket.get('/interface/emit_slider/',{robot: '<%=robot.id %>', id: slider_id, msg: value })
-
-      if (value != ''){
-        $('#chat').prepend('- slider value send: ' + value + '<br/>');
-        socket.emit('slider', value);
-        console.log('Emitiendo slider: ' + value );
-      }
+      io.socket.get('/interface/emit_slider/',{robot: '<%=robot.id %>', id: slider_id, msg:  ui.value })
+      $('#chat').prepend('- slider value send: ' + ui.value + '<br/>');
+      socket.emit('slider',  ui.value);
+      console.log('Emitiendo slider: ' + ui.value );
     });
-
-
-    var brightness = 0; //static variable to hold the current brightness
-      socket.emit('led', {value: brightness}); //send the new client the current brightness
-      socket.on('led', function (data) { //makes the socket react to 'led' packets by calling this function
-        brightness = data.value;  //updates brightness from the data object
-
-        io.sockets.emit('led', {value: brightness}); //sends the updated brightness to all connected clients
-      });
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     socket.on('connect', function () {
       console.log('robot connected!');
       io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: true});
 
-      //if vide then start stream
+      //if video then start stream
       <% if( typeof video !== 'undefined' ){ %>
-        socket.emit('start-stream');
+      socket.emit('start-stream');
       <%}%>
 
       bootstrap_alert['success']('Conectado con exito! ' + address_robot, 5000);
       change_img_state('<%=robot.id %>', true);
     });
+
+
+
   });
+
+
+
+
 
 
   function subscribeAndListen() {

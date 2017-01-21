@@ -14,7 +14,7 @@ module.exports = {
 
   configure: function (req, res, next) {
 
-    Interface.findOne({id: req.param('id')}).populate('events').populate('video').populate('robot_owner').exec(function (err, iface) {
+    Interface.findOne({id: req.param('id')}).populate('events').populate('video').populate('robot_owner').populate('sliders').exec(function (err, iface) {
       if (err) return next(err);
       if (!iface) return next(err);
 
@@ -28,6 +28,7 @@ module.exports = {
           res.view({
             interface: iface,
             actions: actions,
+            sliders: iface.sliders,
             events: iface.events,
             video: iface.video,
             icons: icons,
@@ -85,7 +86,7 @@ module.exports = {
 
   view: function(req, res, next){
 
-    Interface.findOne({id: req.param('id')}).populate('events').populate('video').populate('robot_owner').exec(function (err, iface) {
+    Interface.findOne({id: req.param('id')}).populate('events').populate('video').populate('sliders').populate('robot_owner').exec(function (err, iface) {
       if (err) return next(err);
       if (!iface) return next(err);
 
@@ -102,6 +103,7 @@ module.exports = {
           res.view({
             interface: iface,
             actions: actions,
+            sliders: iface.sliders,
             video: iface.video,
             events: iface.events,
             robot: iface.robot_owner,

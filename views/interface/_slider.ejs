@@ -1,7 +1,12 @@
 <div id="slider_<%= slider.id %>"></div>
 
 <script type="text/javascript">
-$( function() {
-  $( "#slider" ).slider();
-} );
+  $("#slider_<%= slider.id %>").slider(
+    {
+      value: parseInt('<%= slider.value %>'),
+      min: parseInt('<%= slider.min %>'),
+      max: parseInt('<%= slider.max %>'),
+      step: parseInt('<%= slider.step %>')
+    }
+  );
 </script>

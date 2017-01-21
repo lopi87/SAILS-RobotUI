@@ -80,6 +80,11 @@ module.exports.policies = {
     create: ['flash', 'message', 'localize']
   },
 
+  slider:{
+    '*': ['flash', 'localize', 'sessionAuth','message'],
+    update_position: ['flash', 'localize', 'sessionAuth','message', 'userCanConfigureInterface']
+  },
+
   socket:{
     '*': ['flash', 'localize']
   },

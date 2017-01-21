@@ -23,6 +23,30 @@ module.exports = {
       required: true
     },
 
+    value: {
+      type: 'integer',
+      required: true,
+      defaultsTo: 0
+    },
+
+    min: {
+      type: 'integer',
+      required: true,
+      defaultsTo: 0
+    },
+
+    max: {
+      type: 'integer',
+      required: true,
+      defaultsTo: 100
+    },
+
+    step: {
+      type: 'integer',
+      required: true,
+      defaultsTo: 10
+    },
+
     color: {
       type: 'hexadecimal',
       defaultsTo: 'FFFFFF'

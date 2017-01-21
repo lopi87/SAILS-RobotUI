@@ -17,6 +17,23 @@
         </div>
       </div>
     </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingTwo">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseTwo">
+            <h5><%= i18n('sliders')%></h5>
+          </a>
+        </h4>
+      </div>
+      <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+          <%- partial ('../slider/new.ejs', {interface: interface})%>
+        </div>
+      </div>
+    </div>
+
+
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="headingTwo">
         <h4 class="panel-title">

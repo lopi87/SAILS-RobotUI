@@ -18,35 +18,22 @@
 
           <!-- Insert video -->
           <% if (video){%>
-          <div id="stream-container">
-            <canvas id="play_<%= video.id %>" width="400" height="300" style="border:solid;" style="background:src('/images/video/video.png');"></canvas>
-            <%- partial ('../video/style_video.ejs', {video: video})%>
-          </div>
+          <%- partial ('_video.ejs', {video: video})%>
           <%}%>
-
 
           <!-- Insert actions -->
           <% _.each(actions, function(action){ %>
-          <% if (action.icon){ %>
-          <button id="button_custom_<%= action.id %>" class="btn position_<%= action.id %> btn-custom_<%= action.id %>" value="<%= action.code %>">
-            <img src="<%= sails.getBaseURL() + action.icon.iconUrl %>"  height="32" width="32" />
-            <% if (action.name != ''){%>
-            <%= action.name %>
-            <% }%>
-          </button>
-          <% } else { %>
-          <button  id="button_<%= action.id %>" value="<%= action.code %>" class="btn position_<%= action.id %> btn-custom_<%= action.id %>"><%= action.name %></button>
-          <% } %>
-          <%- partial ('../action/style_action.ejs', {action: action})%>
+          <%- partial ('_action.ejs', {action: action})%>
           <% })%>
 
+          <!-- Insert sliders -->
+          <% _.each(sliders, function(slider){ %>
+          <%- partial ('_slider.ejs', {slider: slider})%>
+          <% })%>
 
           <!-- Insert events -->
           <% _.each(events, function(event){ %>
-          <div id="event_<%= event.id %>" class="event_<%= event.id %> position_<%= event.id %>" style="max-width: 100px">
-            <h5><%= event.name %> <span class="label label-pill label-danger">-</span></h5>
-          </div>
-          <%- partial ('../event/style_event.ejs', {event: event})%>
+          <%- partial ('_event.ejs', {event: event})%>
           <% })%>
 
        </div>
@@ -100,6 +87,11 @@
           $('#buttom_custom_' + obj.id).addClass('focus');
           break;
 
+        case 'slider':
+          console.log('slider ' + 'id: ' + obj.id + ' msg: ' + obj.msg);
+          $('#chat').prepend('- send slider: ' + obj.msg + '<br/>');
+          $('#slider_' + obj.id).slider( "option", "value", obj.msg );
+        break;
 
         case 'video':
           //read video stream
