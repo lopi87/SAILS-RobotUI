@@ -235,6 +235,13 @@ module.exports = {
   },
 
 
+  //Emision del valor slider a los vivitantes de una interfaz
+  emit_slider: function(req, res){
+    if (!req.isSocket) return res.badRequest();
+    sails.sockets.broadcast(req.param('robot'), {type: 'slider', id: req.param('id'), msg: req.param('msg')});
+  },
+
+
   //Emision de las acciones a los vivitantes de una interfaz
   emit_command: function(req, res){
     if (!req.isSocket) return res.badRequest();

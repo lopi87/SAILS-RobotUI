@@ -114,26 +114,22 @@
     <% })%>
 
 
-
-
     //Slide bar
     var sliders = $('[id^=slider_]');
-    interface_buttons.click(function (e) {
+    sliders.on("swipe",function(e){
       e.preventDefault();
       var slider_id = this.id.replace('slider_','');
-      var code = document.getElementById(this.id).value
+      var value = slider_id.slider("option", "value");
 
       //Comunicar al servidor para difundir a los usuarios
-      io.socket.get('/interface/emit_slider/',{robot: '<%=robot.id %>', id: slider_id, msg: code })
+      io.socket.get('/interface/emit_slider/',{robot: '<%=robot.id %>', id: slider_id, msg: value })
 
-      if (code != ''){
-        $('#chat').prepend('- slider value send: ' + code + '<br/>');
-        socket.emit('slider', code);
-        console.log('Emitiendo comando: ' + code );
+      if (value != ''){
+        $('#chat').prepend('- slider value send: ' + value + '<br/>');
+        socket.emit('slider', value);
+        console.log('Emitiendo slider: ' + value );
       }
     });
-
-
 
 
     var brightness = 0; //static variable to hold the current brightness
