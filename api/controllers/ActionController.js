@@ -28,6 +28,23 @@ module.exports = {
   },
 
 
+  create: function (req, res, next){
+    //Mis iconos y los del sistema por defecto
+    Interface.findOne(req.param('id'), function foundInterface(err, iface) {
+      if (err) return next(err);
+
+      Icon.find({or: [{user_owner: req.session.User.id}, {default: true}]}).exec(function (err, icons) {
+        if (err) return next(err);
+
+        return res.render('action/new.ejs', {
+          icons: icons,
+          interface: iface,
+          layout: false
+        });
+      });
+    });
+  },
+
   newaction: function (req, res, next) {
     if (req.xhr) {
       Interface.findOne(req.param('id'), function foundInterface(err, iface) {
@@ -37,12 +54,10 @@ module.exports = {
           interface_owner: iface.id,
           name: req.param('name'),
           code: req.param('code'),
-          icon: req.param('icon'),
-          element: 'button',
-          port: parseInt(req.param('port'))
+          icon: req.param('icon')
         };
 
-        if(req.param("color_default") == false){
+        if(req.param("color_default") == 'false'){
 
           var isOk1 = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(req.param('color_text'));
           var isOk2 = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(req.param('color_background'));
@@ -73,7 +88,7 @@ module.exports = {
 
             console.log('The action has been created');
 
-            return res.render('interface/action_row.ejs', {
+            return res.render('interface/_action.ejs', {
               action: action,
               layout: false
             });

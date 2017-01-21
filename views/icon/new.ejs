@@ -16,14 +16,12 @@
           </div>
           <input id="icon_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
         </form>
+
         <script type="text/javascript">
+
           $('#new_icon').parsley().on('field:validated', function() {
             var ok = $('.parsley-error').length === 0;
           })
-        </script>
-
-
-        <script type="text/javascript">
 
           $("#new_icon").submit(function(e){
             e.preventDefault();

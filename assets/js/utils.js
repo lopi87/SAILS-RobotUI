@@ -198,7 +198,7 @@ function openWin(width, height, content) {
   var myWindow = window.open('', '', 'width=' + width ,'height=' + height);
   var doc = myWindow.document;
 
-  var head = '<!DOCTYPE html><html lang="es"><head>  <title>RobotUI</title>  <!--STYLES-->  <link rel="stylesheet" href="/styles/bootstrap/bootstrap.css">  <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.css">  <link rel="stylesheet" href="/styles/jasny-bootstrap/jasny-bootstrap.css">  <link rel="stylesheet" href="/styles/bootstrap-colorpicker/bootstrap-colorpicker.css">  <link rel="stylesheet" href="/styles/font-awesome/font-awesome.css">  <link rel="stylesheet" href="/styles/parsley/parsley.css">  <link rel="stylesheet" href="/styles/jquery-ui/jquery-ui.css">  <link rel="stylesheet" href="/styles/chosen/ImageSelect.css">  <link rel="stylesheet" href="/styles/chosen/chosen.min.css">  <link rel="stylesheet" href="/styles/importer.css">  <!--STYLES END-->  <!--SCRIPTS-->  <script src="/js/dependencies/sails.io.js"></script>  <script src="/js/vendor/jquery-2.2.4.js"></script>  <script src="/js/vendor/bootstrap.js"></script>  <script src="/js/vendor/chosen.jquery.js"></script>  <script src="/js/vendor/ImageSelect.jquery.js"></script>  <script src="/js/vendor/jasny-bootstrap.js"></script>  <script src="/js/vendor/bootstrap-colorpicker.js"></script>  <script src="/js/vendor/jquery-ui.js"></script>  <script src="/js/vendor/parsley.js"></script>  <script src="/js/i18n/de.js"></script>  <script src="/js/i18n/en.js"></script>  <script src="/js/i18n/es.js"></script>  <script src="/js/i18n/fr.js"></script>  <script src="/js/i18n/pt.js"></script>  <script src="/js/i18n/ru.js"></script>  <script src="/js/vendor/gridster.js"></script>  <script src="/js/utils.js"></script>  <script src="/js/customValidate.js"></script>  <!--SCRIPTS END--></head><body><div id="alert_placeholder"></div>'
+  var head = '<!DOCTYPE html><html lang="es"><head>  <title>RobotUI</title>  <!--STYLES-->  <link rel="stylesheet" href="/styles/bootstrap/bootstrap.css">  <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.css">  <link rel="stylesheet" href="/styles/jasny-bootstrap/jasny-bootstrap.css">  <link rel="stylesheet" href="/styles/bootstrap-colorpicker/bootstrap-colorpicker.css">  <link rel="stylesheet" href="/styles/font-awesome/font-awesome.css">  <link rel="stylesheet" href="/styles/parsley/parsley.css">  <link rel="stylesheet" href="/styles/jquery-ui/jquery-ui.css">  <link rel="stylesheet" href="/styles/chosen/ImageSelect.css">  <link rel="stylesheet" href="/styles/chosen/chosen.min.css">  <link rel="stylesheet" href="/styles/importer.css">  <!--STYLES END-->  <!--SCRIPTS-->  <script src="/js/dependencies/sails.io.js"></script>  <script src="/js/vendor/jquery-2.2.4.js"></script>  <script src="/js/vendor/bootstrap.js"></script>  <script src="/js/vendor/chosen.jquery.js"></script>  <script src="/js/vendor/ImageSelect.jquery.js"></script>  <script src="/js/vendor/jasny-bootstrap.js"></script>  <script src="/js/vendor/bootstrap-colorpicker.js"></script>  <script src="/js/vendor/jquery-ui.js"></script>  <script src="/js/vendor/parsley.js"></script>  <script src="/js/i18n/de.js"></script>  <script src="/js/i18n/en.js"></script>  <script src="/js/i18n/es.js"></script>  <script src="/js/i18n/fr.js"></script>  <script src="/js/i18n/pt.js"></script>  <script src="/js/i18n/ru.js"></script>  <script src="/js/vendor/gridster.js"></script>  <script src="/js/utils.js"></script> <!--SCRIPTS END--></head><body><div id="alert_placeholder"></div>'
   var foot = '</body></html><script type="text/javascript">  function savesocket() { io.socket.get("/session/saveSocketID");  }  addLoadEvent(savesocket);</script>'
 
   doc.open();
@@ -207,5 +207,20 @@ function openWin(width, height, content) {
   doc.write(foot);
 
   doc.close();
+}
+
+
+
+function open_modal(url, id){
+  function new_action(id) {
+    $.ajax({
+      url: url,
+      type: 'GET',
+      done:function(data) {
+        $('#' + id).html(data)
+      }
+    });
+  }
+
 }
 

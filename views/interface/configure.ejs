@@ -1,70 +1,11 @@
 
-  <!-- Upload icon modal (action)-->
-  <%- partial('../action/_upload_icon.ejs', {interface: interface})%>
-
-  <div class="panel-group margintop20" id="accordion" role="tablist" aria-multiselectable="true">
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingOne">
-        <h4 class="panel-title">
-          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            <h5><%= i18n('actions')%></h5>
-          </a>
-        </h4>
-      </div>
-      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-        <div class="panel-body">
-          <%- partial ('../action/new.ejs', {interface: interface})%>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingTwo">
-        <h4 class="panel-title">
-          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseTwo">
-            <h5><%= i18n('sliders')%></h5>
-          </a>
-        </h4>
-      </div>
-      <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-        <div class="panel-body">
-          <%- partial ('../slider/new.ejs', {interface: interface})%>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingTwo">
-        <h4 class="panel-title">
-          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            <h5><%= i18n('events')%></h5>
-          </a>
-        </h4>
-      </div>
-      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-        <div class="panel-body">
-          <%- partial ('../event/new.ejs', {interface: interface})%>
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingThree">
-        <h4 class="panel-title">
-          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            <h5><%= i18n('videos')%></h5>
-          </a>
-        </h4>
-      </div>
-      <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-        <div class="panel-body">
-          <%- partial ('../video/new.ejs', {interface: interface})%>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-<%- partial ('../action/index.ejs', {interface: interface})%>
-
 <%- partial('config_panel.ejs', {interface: interface, events: events, actions: actions, video: video})%>
+
+
+<!--TODO: ANALOGICO CONTROL Y USO DE BIBLIOTECA EN ROBOT-->
+  <%//STICK   http://scottlobdell.me/2015/09/creating-touch-controlled-joystick-html5/ %>
+  <!--https://github.com/jperkin/node-rpio-->
+
+  <!--TODO: MEJORAR CONFIGURACION Y DISEÑO DE LA INTERFAZ-->
+  <!--http://interactjs.io/-->
+

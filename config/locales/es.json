@@ -72,5 +72,9 @@
 	"sliders": "sliders",
 	"createslider": "createslider",
 	"interface": "interface",
-	" show_interface": " show_interface"
+	" show_interface": " show_interface",
+	"min": "min",
+	"max": "max",
+	"value": "value",
+	"step": "step"
 }

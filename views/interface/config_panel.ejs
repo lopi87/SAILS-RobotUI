@@ -1,6 +1,8 @@
 <!-- PERSONALIZAR VENTANA -->
 <div id="board" class="panel panel-success margintop20 paddingbottom20">
-  <div class="panel-heading"> Control </div>
+  <div class="panel-heading">
+    <img style="max-width:150px;" src="/images/logo/logotipo.png">
+  </div>
 
   <div class="paddingtop20 paddingleft20 paddingright20">
     <div class="row">
@@ -12,6 +14,44 @@
             <a class="list-group-item"><i class="fa fa-edit fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
             <a class="list-group-item"><i class="fa fa-plug fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
             <a class="list-group-item"><i class="fa fa-cog fa-2 marginlef10" aria-hidden="true"></i>&nbsp;</a>
+
+            <a>
+              <button type="button" id='new_slider' class="list-group-item" data-toggle="modal" data-target="#writeModal">
+                New slider
+              </button>
+
+              <script type="text/javascript">
+                $('#new_slider').click(function (e){
+                  $.ajax({
+                    url: '/slider/create',
+                    type: 'GET',
+                    data: {id: '<%= interface.id%>'},
+                    success: function(data){
+                      $(".modal-content").html(data);
+                    }
+                  });
+                });
+              </script>
+            </a>
+
+            <a>
+              <button type="button" id='new_action' class="list-group-item" data-toggle="modal" data-target="#writeModal">
+                New button
+              </button>
+            </a>
+
+            <script type="text/javascript">
+              $('#new_action').click(function (e){
+                $.ajax({
+                  url: '/action/create',
+                  type: 'GET',
+                  data: {id: '<%= interface.id%>'},
+                  success: function(data){
+                    $(".modal-content").html(data);
+                  }
+                });
+              });
+            </script>
           </div>
         </div>
       </div>
@@ -95,6 +135,7 @@
     return [left ,top ];
   }
 
+  /*
   //Enable elements draggables
   $('[id^=button_]').draggable({cancel: false, containment: '#panel', scroll: false,
 
@@ -221,10 +262,88 @@
       });
     }
   });
+*/
+
+
+
+
+
+
+
+
+  // target elements with the "draggable" class
+  interact('.draggable')
+    .draggable({
+      // enable inertial throwing
+      inertia: true,
+      // keep the element within the area of it's parent
+      restrict: {
+        restriction: "parent",
+        endOnly: true,
+        elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+      },
+      // enable autoScroll
+      autoScroll: true,
+
+      // call this function on every dragmove event
+      onmove: dragMoveListener,
+      // call this function on every dragend event
+      onend: function (event) {
+        var target = event.target;
+        var pos_x = target.getAttribute('data-x');
+        var pos_y = target.getAttribute('data-y');
+        var id = target.getAttribute('id').replace('button_','');
+
+        var elem = $('#' +target.getAttribute('id'))
+
+        var p = elem.position()
+        $.ajax({
+          type: "POST",
+          url: "/action/update_position/",
+          data: { x: p.left, y: p.top, id: id},
+          beforeSend: function(xhr, settings){
+            xhr.setRequestHeader('X-CSRF-Token', $("#icon_csrf").val());
+          },
+
+          success: function(data){
+            console.log('bottom position updated');
+          },
+
+          error: function(xhr, status, text) {
+            bootstrap_alert['danger'](xhr.responseText, 5000 );
+          }
+        });
+
+      }
+    });
+
+  function dragMoveListener (event) {
+    var target = event.target,
+      // keep the dragged position in the data-x/data-y attributes
+      x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+      y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+    // translate the element
+    target.style.webkitTransform =
+      target.style.transform =
+        'translate(' + x + 'px, ' + y + 'px)';
+
+    // update the posiion attributes
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+  }
+
+  // this is used later in the resizing and gesture demos
+  window.dragMoveListener = dragMoveListener;
+
+
+
+
+
 
   // http://jsfiddle.net/dzSRR/32/  ejemplo drag con limites
   $("#panel").resizable({
-    maxWidth: $("#box_panel").width() - 10,
+    maxWidth: $("#box_panel").width(),
 
     create: function(){
       $(this).width(<%= interface.panel_sizex %>);
@@ -233,9 +352,7 @@
 
     resize: function(){
       pos = get_max_top_left_panel();
-
       console.log(pos[0] + '-' + pos[1]);
-
       $(this).css("min-width", pos[0]);
       $(this).css("min-height", pos[1]);
     },
@@ -261,12 +378,17 @@
       }
 
       //Do the ajax call to the server
+
       $.ajax({
         type: "POST",
         url: "/interface/update_board_size/",
         data: { width: width, height: height, id: id},
         beforeSend: function(xhr, settings){
           xhr.setRequestHeader('X-CSRF-Token', $("#icon_csrf").val());
+        },
+
+        done: function(){
+
         },
 
         success: function(data){

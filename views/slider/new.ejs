@@ -15,6 +15,26 @@
           <input id="s_code_field" type="text" class="form-control" placeholder="<%= i18n("code") %>" required="" name="code">
         </div>
 
+        <div class="form-group">
+          <label for="min"><%= i18n("min") %>:</label>
+          <input id="s_min_field" type="number" min="0" class="form-control" placeholder="<%= i18n("min") %>" name="min" required="" data-parsley-maxlength="3">
+        </div>
+
+        <div class="form-group">
+          <label for="max"><%= i18n("max") %>:</label>
+          <input id="s_max_field" class="form-control" type="number" min="0" class="form-control" placeholder="<%= i18n("max") %>" name="max" required="" data-parsley-maxlength="3">
+        </div>
+
+        <div class="form-group">
+          <label for="value"><%= i18n("value") %>:</label>
+          <input id="s_value_field" type="number" min="0" class="form-control" placeholder="<%= i18n("value") %>" name="value" required="" data-parsley-maxlength="3">
+        </div>
+
+        <div class="form-group">
+          <label for="step"><%= i18n("step") %>:</label>
+          <input id="s_step_field" type="number" min="0" class="form-control" placeholder="<%= i18n("step") %>" name="step" required="" data-parsley-maxlength="3">
+        </div>
+
       </div>
     </div>
   </div>
@@ -34,7 +54,7 @@
     $.ajax({
       url: '/slider/newslider/' + id,
       type: 'GET',
-      data: {name: $( "#s_name_field" ).val(), code: $( "#s_code_field" ).val()},
+      data: {name: $( "#s_name_field" ).val(), code: $( "#s_code_field" ).val(), min: $( "#s_min_field" ).val(), max: $( "#s_max_field" ).val(), value: $( "#s_value_field" ).val(), step: $( "#s_step_field" ).val() },
       done:function() {
       },
 

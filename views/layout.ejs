@@ -48,6 +48,7 @@
   <script src="/js/vendor/chosen.jquery.js"></script>
   <script src="/js/vendor/ImageSelect.jquery.js"></script>
   <script src="/js/vendor/jasny-bootstrap.js"></script>
+  <script src="/js/vendor/interact.js"></script>
   <script src="/js/vendor/bootstrap-colorpicker.js"></script>
   <script src="/js/vendor/jquery-ui.js"></script>
   <script src="/js/vendor/parsley.js"></script>
@@ -59,8 +60,6 @@
   <script src="/js/i18n/ru.js"></script>
   <script src="/js/vendor/gridster.js"></script>
   <script src="/js/utils.js"></script>
-  <script src="/js/customValidate.js"></script>
-  <script src="/js/carousel.js"></script>
   <!--SCRIPTS END-->
 </head>
 
@@ -220,6 +219,7 @@
   </nav>
 
   <div class="container box">
+    <%- partial ('modal.ejs')%>
     <%- partial('_alert.ejs', {flash: flash}) %>
     <%- body %>
   </div>

@@ -43,6 +43,7 @@ var jsFilesToInject = [
   'js/vendor/chosen.jquery.js',
   'js/vendor/ImageSelect.jquery.js',
   'js/vendor/jasny-bootstrap.js',
+  'js/vendor/interact.js',
   'js/vendor/bootstrap-colorpicker.js',
   'js/vendor/jquery-ui.js',
   'js/vendor/parsley.js',
@@ -50,7 +51,6 @@ var jsFilesToInject = [
 
   'js/vendor/**/*.js',
   'js/utils.js',
-  'js/customValidate.js',
 
 
   // All of the rest of your client-side js files

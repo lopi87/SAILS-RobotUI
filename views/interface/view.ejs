@@ -30,6 +30,9 @@
           <% _.each(sliders, function(slider){ %>
           <%- partial ('_slider.ejs', {slider: slider})%>
           <% })%>
+          <script type="text/javascript">
+            $('[id^=slider_]').slider( "option", "disabled", true );
+          </script>
 
           <!-- Insert events -->
           <% _.each(events, function(event){ %>

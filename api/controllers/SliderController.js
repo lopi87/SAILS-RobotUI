@@ -27,6 +27,16 @@ module.exports = {
     }
   },
 
+  create: function (req, res, next){
+    //Mis iconos y los del sistema por defecto
+    Interface.findOne(req.param('id'), function foundInterface(err, iface) {
+      if (err) return next(err);
+        return res.render('slider/new.ejs', {
+          interface: iface,
+          layout: false
+        });
+      });
+  },
 
   newslider: function (req, res, next) {
     if (req.xhr) {
@@ -36,7 +46,11 @@ module.exports = {
         var sliderObj = {
           interface_owner: iface.id,
           name: req.param('name'),
-          code: req.param('code')
+          code: req.param('code'),
+          min: req.param('min'),
+          max: req.param('max'),
+          value: req.param('value'),
+          step: req.param('step')
         };
 
 
