@@ -1,0 +1,79 @@
+<div>
+  <h1 class="text-center"> <%= robot.name %></h1>
+  <h3>sliders</h3>
+  <div class="table-responsive">
+    <table id="sliders_table" class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th><%= i18n('code')%></th>
+        <th>Slider</th>
+        <th>boton</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody id="actualizar">
+      <% _.each(sliders, function(slider,index){ %>
+      <tr id="line_<%= slider.id %>" data-model="slider">
+        <th scope="row"><%= slider.id %></th>
+        <td><%= slider.code %></td>
+        <td><%= slider.name %></td>
+        <td>
+          <% if (slider.icon){ %>
+          <button id="button_<%= slider.id %>" class="btn btn-custom_<%= slider.id %>" value="<%= slider.code %>">
+            <span><img src="<%= slider.icon.iconUrl %>" height="32px" width="32px"/></span>
+            <% if (slider.name != ''){%>
+            <span><%= slider.name %></span>
+            <% }%>
+          </button>
+          <% } else { %>
+          <button  id="button_<%= slider.id %>" value="<%= slider.code %>" class="btn btn-custom_<%= slider.id %>"><%= slider.name %></button>
+          <% } %>
+        </td>
+        <td>
+          <a class="btn btn-sm btn-danger"  onclick="row_slider_deleted('<%= slider.id %>')"><i class="fa fa-trash-o"></i> Delete </a>
+        </td>
+      </tr>
+      <!-- insertat el estilo del boton -->
+      <%- partial ('../slider/style_slider.ejs', {slider: slider})%>
+      <% })%>
+      </tbody>
+    </table>
+  </div>
+
+  <button type="button" class="btn btn-sm btn-danger" onclick="delete_sliders('<%= interface.id %>')">Remove all sliders</button>
+
+  <script type="text/javascript">
+    function delete_sliders(id) {
+      $.ajax({
+        url: '/slider/destroy/' + id,
+        type: 'GET',
+        success: function(data){
+          $("#actualizar tr").remove();
+          bootstrap_alert['success']('All sliders has been deleted!', 5000 );
+        },
+        error: function(xhr, status, text) {
+          bootstrap_alert['danger'](xhr.responseText, 5000 );
+        }
+      });
+    }
+
+    function row_slider_deleted(id) {
+      $.ajax({
+        url: '/slider/deleteslider/' + id,
+        type: 'GET',
+        data: {},
+
+        success: function (data) {
+          $("#line_" + id).remove();
+          bootstrap_alert['success']('A new slider has been deleted!', 5000 );
+        },
+
+        error: function (xhr, status, text) {
+          bootstrap_alert['danger'](xhr.responseText, 5000 );
+        }
+      });
+    }
+
+  </script>
+</div>

@@ -1,0 +1,11 @@
+<% if (action.icon){ %>
+<button id="button_custom_<%= action.id %>" class="btn position_<%= action.id %> btn-custom_<%= action.id %>" value="<%= action.code %>">
+  <img src="<%= sails.getBaseURL() + action.icon.iconUrl %>" height="32" width="32" />
+  <% if (action.name != ''){%>
+  <%= action.name %>
+  <% }%>
+</button>
+<% } else { %>
+<button  id="button_<%= action.id %>" value="<%= action.code %>" class="btn position_<%= action.id %> btn-custom_<%= action.id %>"><%= action.name %></button>
+<% } %>
+<%- partial ('../action/style_action.ejs', {action: action})%>

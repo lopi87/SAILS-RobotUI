@@ -23,34 +23,24 @@
 
           <!-- Insert video -->
           <% if (video){%>
-          <div id="stream-container">
-            <canvas id="play_<%= video.id %>" width="400" height="300" style="border:solid;" style="background:src('/images/video/video.png');"></canvas>
-            <%- partial ('../video/style_video.ejs', {video: video})%>
-          </div>
+          <%- partial ('_video.ejs', {video: video})%>
           <%}%>
 
           <!-- Insert actions -->
           <% _.each(actions, function(action){ %>
-          <% if (action.icon){ %>
-          <button id="button_custom_<%= action.id %>" class="btn position_<%= action.id %> btn-custom_<%= action.id %>" value="<%= action.code %>">
-            <img src="<%= sails.getBaseURL() + action.icon.iconUrl %>" height="32" width="32" />
-            <% if (action.name != ''){%>
-            <%= action.name %>
-            <% }%>
-          </button>
-          <% } else { %>
-            <button  id="button_<%= action.id %>" value="<%= action.code %>" class="btn position_<%= action.id %> btn-custom_<%= action.id %>"><%= action.name %></button>
-          <% } %>
-            <%- partial ('../action/style_action.ejs', {action: action})%>
+            <%- partial ('_action.ejs', {action: action})%>
+          <% })%>
+
+          <!-- Insert sliders -->
+          <% _.each(sliders, function(slider){ %>
+            <%- partial ('_slider.ejs', {slider: slider})%>
           <% })%>
 
           <!-- Insert events -->
           <% _.each(events, function(event){ %>
-          <div id="event_<%= event.id %>" class="event_<%= event.id %> position_<%= event.id %>" style="max-width: 100px">
-            <h5><%= event.name %> <span class="label label-pill label-danger">-</span></h5>
-          </div>
-          <%- partial ('../event/style_event.ejs', {event: event})%>
+            <%- partial ('_event.ejs', {event: event})%>
           <% })%>
+
         </div>
       </div>
 
@@ -87,13 +77,6 @@
   </div>
 </div>
 
-
-
-<div class="row">
-  <img src="" id="stream">
-</div>
-
-
 <%- partial ('_robot_info.ejs')%>
 
 
@@ -101,178 +84,5 @@
   <a href="/robot/index" class="btn btn-sm btn-warning">Back</a>
 </div>
 
-<script src="/socket.io/socket.io.js"></script>
-<script type="text/javascript">
-    // https://evothings.com/controlling-a-toy-car-with-evothings-and-raspberry-pi/
+<%- partial('_js_interface_code.ejs')%>
 
-    //ROBOT
-    //conexion con el robot
-    var address_robot = '<%= robot.ipaddress %>' + ":" + '<%= robot.port %>';
-
-    //INTERESANTE RECONCETAR AUTOMATICAMENTE-...... solucion ya que tarda en volver a conectar
-    //http://stackoverflow.com/questions/4432271/node-js-and-socket-io-how-to-reconnect-as-soon-as-disconnect-happens
-    $("#conectar").click(function() {
-      try {
-        // Connect to the server running on the Robot(raspberry pi).
-        var socket = io.connect(address_robot, {
-          'reconnection': true,
-          'reconnectionDelay': 500,
-          'reconnectionAttempts': 10
-        });
-
-      } catch (error) {
-        bootstrap_alert['danger']('Failed to connect to the Robot! (Raspberry Pi!)' + address_robot + error, 5000)
-        io.socket.get('/robot/changetobusy/', {robot: robot_id, state: false});
-        change_img_state(robot_id, false);
-      }
-
-      //Presionar boton desconectar
-      $("#desconectar").click(function () {
-        try {
-          socket.disconnect();
-        } catch (error) {
-          bootstrap_alert['danger']('Failed to disconnect to the Robot!' + address_robot + error, 5000)
-          io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
-          change_img_state('<%=robot.id %>', false);
-        }
-      });
-
-
-      //captura evento desconectar cuando el robot es apagado o pierde la señal
-      socket.on('disconnect', function () {
-        bootstrap_alert['success']('Robot disconnect!' + address_robot, 5000)
-        //Sincronizar con el resto de clientes:
-        io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
-        change_img_state('<%=robot.id %>', false);
-      });
-
-
-      //read video stream
-      <% if( typeof video !== 'undefined' ){ %>
-
-      socket.on('<%= video.event_name %>', function(data) {
-          //console.log(data);
-          try {
-            var canvas = document.getElementById('play_<%= video.id %>');
-            var context = canvas.getContext('2d');
-            var imageObj = new Image();
-            imageObj.src = "data:image/jpeg;base64,"+data;
-            imageObj.onload = function(){
-              context.height = imageObj.height;
-              context.width = imageObj.width;
-              context.drawImage(imageObj,0,0,context.width,context.height);
-            }
-          } catch(e){ }
-          io.socket.get('/interface/emit_video/',{robot: '<%=robot.id %>', id: '<%= video.id %>', msg: data })
-
-        });
-      <% } %>
-
-      //Mandar evento "mandar comando" al servidor para sincronizar con otros navegadores
-      var $messageForm = $('#sendMessage');
-      $messageForm.click(function (e) {
-        var $message = $('#message');
-        e.preventDefault();
-        if($message.val() != '' ){
-          //Comunicar al servidor para difundir a los usuarios
-          io.socket.get('/interface/emit_command/',{robot: '<%=robot.id %>', id: 'command', msg: $message.val() })
-          $('#chat').prepend('- send: ' + $message.val() + '<br/>');
-          //Mandar instruccion al robot
-          socket.emit('direction', $message.val());
-        }
-        $message.val('');
-      });
-
-
-      //Presionar boton accion!
-      var interface_buttons = $('[id^=button_]');
-      interface_buttons.click(function (e) {
-        e.preventDefault();
-        var button_pressed_id = this.id.replace('button_custom_','');
-        var code = document.getElementById(this.id).value
-
-        //Comunicar al servidor para difundir a los usuarios
-        io.socket.get('/interface/emit_action/',{robot: '<%=robot.id %>', id: button_pressed_id, msg: code })
-
-        if (code != ''){
-          $('#chat').prepend('- send: ' + code + '<br/>');
-          //Mandar instruccion al robot
-          socket.emit('direction', code);
-          console.log('Emitiendo comando: ' + code );
-        }
-      });
-
-
-      <!-- Insert events -->
-      <% _.each(events, function(event){ %>
-      socket.on("<%= event.event_name %>", function messageReceived(message) {
-        io.socket.get('/interface/emit_event/',{robot: '<%=robot.id %>', id: '<%= event.id %>', msg: {value: message.msg, name: '<%= event.name %>'}})
-        $('#event_<%= event.id%>').html('<h5><%= event.name %> <span class="label label-pill label-danger">' + message.msg + '</span></h5>');
-        $('#chat').prepend('- received: ' + '<%= event.name %>' + ': ' + message.msg + '<br/>');
-      });
-      <% })%>
-
-
-      socket.on('connect', function () {
-        console.log('robot connected!');
-        io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: true});
-        <% if( typeof video !== 'undefined' ){ %>
-          //start stream
-          socket.emit('start-stream');
-        <%}%>
-        bootstrap_alert['success']('Conectado con exito! ' + address_robot, 5000);
-        change_img_state('<%=robot.id %>', true);
-      });
-    });
-
-
-    function subscribeAndListen() {
-      io.socket.get('/interface/view_subscribe/',{robot: '<%= robot.id%>', socket_id: io.socket.id});
-
-      io.socket.on('message', function (obj) {
-
-        //EVENTOS CAPURADOS
-        switch (obj.type) {
-          case 'new_viewer_user':
-            if($("#" + obj.msg.user_id).length == 0 && obj.msg.user_id != '<%= req.session.User.id %>') {
-              $('#user_viewer_list').append('<p id="' +  obj.msg.user_id + '"><img src="' + obj.msg.avatar + '" class="card-circle marginright10" height="32" width="32">' + obj.msg.user_name + '<span onclick=eject_viewer_user("' + obj.msg.user_id  + '")><i style="cursor: pointer; color: red" class="fa fa-sign-out marginleft5" aria-hidden="true"></i></span></p>');
-            }else{
-              $('#current_user').append('<p id="' +  obj.msg.user_id + '"><img src="' + obj.msg.avatar + '" class="card-circle marginright10" height="32" width="32">' + obj.msg.user_name);
-            }
-            break;
-
-          case 'exit':
-            $('#' + obj.msg.user_id).remove();
-            break;
-
-          case 'out':
-            $('#' + obj.msg.user_id).remove();
-            alert('Leave the room!');
-            break;
-
-          default:
-            break;
-        }
-      });
-    }
-
-
-  function eject_viewer_user(user_id){
-    $.ajax({
-      url: '/interface/eject_viewer_user/',
-      type: 'GET',
-      data: {user_id: user_id, '<%=robot.id %>': '<%= robot.id %>'},
-      done:function() {
-      },
-
-      success: function(data){
-        bootstrap_alert['success']('User out!', 5000 );
-      },
-
-      error: function(xhr, status, text) {
-        bootstrap_alert['danger'](xhr.responseText, 5000 );
-      }
-    });
-  }
-
-</script>

@@ -52,22 +52,29 @@ module.exports = {
         Action.find({interface_owner: req.param('id')}).populate('icon').exec(function(err, actions) {
           if (err) return res.badRequest(err);
 
-          User.findOne({id:  iface.robot_owner.owner}).exec(function Userfound(err, user){
+
+          Slider.find({interface_owner: req.param('id')}).exec(function(err, sliders) {
             if (err) return res.badRequest(err);
 
-            var geo = geoip.lookup(iface.robot_owner.ipaddress);
-            if(geo){
-              iface.robot_owner.longitude = geo.ll[1];
-              iface.robot_owner.latitude = geo.ll[0];
-            }
 
-            res.view({
-              interface: iface,
-              actions: actions,
-              events: iface.events,
-              video: iface.video,
-              robot: iface.robot_owner,
-              user: user
+            User.findOne({id:  iface.robot_owner.owner}).exec(function Userfound(err, user){
+              if (err) return res.badRequest(err);
+
+              var geo = geoip.lookup(iface.robot_owner.ipaddress);
+              if(geo){
+                iface.robot_owner.longitude = geo.ll[1];
+                iface.robot_owner.latitude = geo.ll[0];
+              }
+
+              res.view({
+                interface: iface,
+                actions: actions,
+                sliders: sliders,
+                events: iface.events,
+                video: iface.video,
+                robot: iface.robot_owner,
+                user: user
+              });
             });
           });
         });

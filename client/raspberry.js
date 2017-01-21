@@ -36,16 +36,14 @@ io.sockets.on('connection', function (socket)
     startStreaming(socket);
   });
 
-
   socket.emit('robotmsg', {msg: "HELLO!!!"});
   console.log('emit: ' + "HELLO!!!");
 
 
-
   // Listen for direction messages from the app.
-  socket.on('direction', function (data)
+  socket.on('action', function (data)
   {
-    console.log('received direction: ' + data);
+    console.log('received action: ' + data);
 
     // Choose the right command for sending a signal to the car's remote.
     command = '';
@@ -86,13 +84,7 @@ io.sockets.on('connection', function (socket)
 
   })
 
-
-
-
 });
-
-
-
 
 
 function stopStreaming(socket) {
