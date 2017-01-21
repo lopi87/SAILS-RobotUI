@@ -91,7 +91,7 @@
 </div>
 
 
-<input id="icon_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
+<input id="_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
 
 
 <script type="text/javascript">
@@ -152,7 +152,7 @@
         url: "/action/update_position/",
         data: { x: pos_x, y: pos_y, id: id},
         beforeSend: function(xhr, settings){
-          xhr.setRequestHeader('X-CSRF-Token', $("#icon_csrf").val());
+          xhr.setRequestHeader('X-CSRF-Token', $("#_csrf").val());
         },
 
         success: function(data){
@@ -183,7 +183,7 @@
         url: "/slider/update_position/",
         data: { x: pos_x, y: pos_y, id: id},
         beforeSend: function(xhr, settings){
-          xhr.setRequestHeader('X-CSRF-Token', $("#icon_csrf").val());
+          xhr.setRequestHeader('X-CSRF-Token', $("#_csrf").val());
         },
 
         success: function(data){
@@ -216,7 +216,7 @@
         url: "/video/update_position/",
         data: { x: pos_x, y: pos_y, id: id},
         beforeSend: function(xhr, settings){
-          xhr.setRequestHeader('X-CSRF-Token', $("#icon_csrf").val());
+          xhr.setRequestHeader('X-CSRF-Token', $("#_csrf").val());
         },
 
         success: function(data){
@@ -248,7 +248,7 @@
         url: "/event/update_position/",
         data: { x: pos_x, y: pos_y, id: id},
         beforeSend: function(xhr, settings){
-          xhr.setRequestHeader('X-CSRF-Token', $("#icon_csrf").val());
+          xhr.setRequestHeader('X-CSRF-Token', $("#_csrf").val());
         },
 
         success: function(data){
@@ -302,7 +302,7 @@
           url: "/action/update_position/",
           data: { x: p.left, y: p.top, id: id},
           beforeSend: function(xhr, settings){
-            xhr.setRequestHeader('X-CSRF-Token', $("#icon_csrf").val());
+            xhr.setRequestHeader('X-CSRF-Token', $("#_csrf").val());
           },
 
           success: function(data){
@@ -384,7 +384,7 @@
         url: "/interface/update_board_size/",
         data: { width: width, height: height, id: id},
         beforeSend: function(xhr, settings){
-          xhr.setRequestHeader('X-CSRF-Token', $("#icon_csrf").val());
+          xhr.setRequestHeader('X-CSRF-Token', $("#_csrf").val());
         },
 
         done: function(){
