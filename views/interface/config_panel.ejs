@@ -221,12 +221,14 @@
         var p = elem.position()
         $.ajax({
           type: "POST",
-          url: "/action/update_position/",
+          url: "/action/update_position",
           data: { x: p.left, y: p.top, id: id},
-          beforeSend: function(xhr, settings){
+          beforeSend: function(xhr){
             xhr.setRequestHeader('X-CSRF-Token', $("#_csrf").val());
           },
-
+          done: function () {
+            console.log('bottom position updated');
+          },
           success: function(data){
             console.log('bottom position updated');
           },

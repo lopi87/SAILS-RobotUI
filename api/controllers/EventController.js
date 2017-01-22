@@ -29,7 +29,9 @@ module.exports = {
 
       Event.update(id, {coordinate_x: x, coordinate_y: y}, function eventUpdated(err){
         if(err) return res.badRequest(err);
-        res.ok();
+        res.ok({
+          msg: 'position updated'
+        });
       });
 
     }else{

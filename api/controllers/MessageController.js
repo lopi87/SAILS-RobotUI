@@ -102,7 +102,9 @@ module.exports = {
 
       Message.update( id, {read: true}, function msgUpdated(err){
         if(err) return res.badRequest(err);
-        return res.ok();
+        return res.ok({
+          msg: 'set as read'
+        });
       });
     }else{
       err= 'Ajax call';
@@ -160,6 +162,8 @@ module.exports = {
     //Solo este usuario recibira el evento message
     User.subscribe(req, req.session.User.id, 'message');
 
-    return res.ok();
+    return res.ok({
+      msg: 'suscribed'
+    });
   }
 };

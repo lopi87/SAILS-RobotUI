@@ -152,7 +152,9 @@ module.exports = {
 
       Interface.update(id, {panel_sizex: x, panel_sizey: y}, function ifaceUpdated(err) {
         if (err) return res.badRequest(err);
-        res.ok();
+        res.ok({
+          msg: 'size updated'
+        });
       });
 
     } else {
@@ -175,7 +177,9 @@ module.exports = {
         Action.destroy({interface_owner: interface.id}).exec(function (err, action) {
           if (err) return res.badRequest(err);
           console.log('Actions deleted');
-          res.ok();
+          res.ok({
+            msg: 'deleted'
+          });
         });
       });
 
@@ -276,7 +280,9 @@ module.exports = {
           });
 
         });
-        return res.ok();
+        return res.ok({
+          msg: 'User out'
+        });
 
       }else{
         err= 'User incorrect';

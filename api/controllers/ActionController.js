@@ -18,7 +18,10 @@ module.exports = {
 
       Action.update(id, {coordinate_x: x, coordinate_y: y}, function actionUpdated(err){
         if(err) return res.badRequest(err);
-        res.ok();
+
+        res.ok({
+          msg: 'position updated'
+        });
       });
 
     }else{

@@ -438,7 +438,9 @@ module.exports = {
         robot.viewers.remove(user_id);
         robot.save().fail(function(){});
 
-        return res.ok();
+        return res.ok({
+          msg: 'permission updated'
+        });
       });
     });
   }

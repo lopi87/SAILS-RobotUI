@@ -18,7 +18,9 @@ module.exports = {
 
       slider.update(id, {coordinate_x: x, coordinate_y: y}, function sliderUpdated(err){
         if(err) return res.badRequest(err);
-        res.ok();
+        res.ok({
+          msg: 'position updated'
+        });
       });
 
     }else{
