@@ -67,8 +67,10 @@ module.exports = {
 
             Interface.update({id: req.param('id')}, {video: video.id}, function ifaceUpdated(err) {
               if (err) return next(err);
-
-              return res.ok();
+              return res.render('interface/_video.ejs', {
+                video: video,
+                layout: false
+              });
             });
           });
         });
@@ -85,16 +87,12 @@ module.exports = {
   deletevideo: function (req, res, next) {
     if (req.xhr) {
       Video.destroy({id: req.param('id')}).exec(function deleteVideo(err) {
+        if (err) return res.next(err);
+
         console.log('The video element has been deleted');
-
-        //Si hay error
-        if (err) {
-          console.log(err);
-          return res.next(err);
-        }
-
         return res.ok({id: req.param('id')});
       });
+
     } else {
       err = 'Ajax call';
       return res.badRequest(err);

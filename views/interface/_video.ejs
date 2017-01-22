@@ -1,4 +1,4 @@
-<div id="stream-container" class="draggable">
+<div id="video_<%= video.id %>" class="draggable position_<%= video.id %>">
   <canvas id="play_<%= video.id %>" width="400" height="300" style="background:src('/images/video/video.png');"></canvas>
   <%- partial ('../video/style_video.ejs', {video: video})%>
 </div>

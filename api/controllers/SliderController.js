@@ -16,7 +16,7 @@ module.exports = {
       var x = req.param('x');
       var y = req.param('y');
 
-      slider.update(id, {coordinate_x: x, coordinate_y: y}, function sliderUpdated(err){
+      Slider.update(id, {coordinate_x: x, coordinate_y: y}, function sliderUpdated(err){
         if(err) return res.badRequest(err);
         res.ok({
           msg: 'position updated'

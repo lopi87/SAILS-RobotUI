@@ -1,4 +1,4 @@
-<div id="slider_<%= slider.id %>" class="draggable"></div>
+<div id="slider_<%= slider.id %>" class="draggable position_<%= slider.id %>"></div>
 
 <script type="text/javascript">
   $("#slider_<%= slider.id %>").slider(
@@ -10,3 +10,4 @@
     }
   );
 </script>
+<%- partial ('../slider/style_slider.ejs', {slider: slider})%>

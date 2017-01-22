@@ -214,15 +214,17 @@
         var target = event.target;
         var pos_x = target.getAttribute('data-x');
         var pos_y = target.getAttribute('data-y');
-        var id = target.getAttribute('id').replace('button_','');
 
-        var elem = $('#' +target.getAttribute('id'))
+        var id = target.getAttribute('id')
+        var id_parts = id.split("_");
+        var elem = $('#' + target.getAttribute('id'));
+        id_parts[0] = id_parts[0] == 'button' ? 'action': id_parts[0]
 
-        var p = elem.position()
+        var p = elem.position();
         $.ajax({
           type: "POST",
-          url: "/action/update_position",
-          data: { x: p.left, y: p.top, id: id},
+          url: "/" + id_parts[0] + "/update_position",
+          data: { x: p.left, y: p.top, id: id_parts[1]},
           beforeSend: function(xhr){
             xhr.setRequestHeader('X-CSRF-Token', $("#_csrf").val());
           },

@@ -25,12 +25,12 @@ module.exports = {
 
     coordinate_x: {
       type: 'float',
-      defaultsTo: 100
+      defaultsTo: 0
     },
 
     coordinate_y: {
       type: 'float',
-      defaultsTo: 100
+      defaultsTo: 0
     },
 
     toJSON: function(){
