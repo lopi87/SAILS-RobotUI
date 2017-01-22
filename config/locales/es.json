@@ -76,5 +76,10 @@
 	"min": "min",
 	"max": "max",
 	"value": "value",
-	"step": "step"
+	"step": "step",
+	"button": "button",
+
+
+
+  "action.code.required": "Código es obligatorio"
 }

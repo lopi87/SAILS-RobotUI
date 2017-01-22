@@ -1,0 +1,82 @@
+<div class="paddingtop20 paddingleft20 paddingright20">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="bottom_col">
+        <div class="list-group">
+          <a id='new_joystick' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/joystick/create', '<%= i18n('button') %>')">
+            <i class="fa fa-dot-circle-o fa-2 marginlef10" aria-hidden="true">
+              Joystick
+            </i>
+          </a>
+          <a id='new_video' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/video/create', '<%= i18n('button') %>')">
+            <i class="fa fa-video-camera fa-2 marginlef10" aria-hidden="true">
+              Video
+            </i>
+          </a>
+          <a id='new_slider' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/slider/create', '<%= i18n('button') %>')" >
+            <i class="fa fa-sliders fa-2 marginlef10" aria-hidden="true">
+              Slider
+            </i>
+          </a>
+          <a id='new_action' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/action/create', '<%= i18n('button') %>')">
+            <i class="fa fa-cog fa-2 marginlef10" aria-hidden="true">
+              Button
+            </i>
+          </a>
+          <a class="list-group-item">
+            <i class="fa fa-remove fa-2 marginlef10" aria-hidden="true">
+              Remove
+            </i>
+          </a>
+          <a class="list-group-item">
+            <i class="fa fa-edit fa-2 marginlef10" aria-hidden="true">
+              Edit
+            </i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div id="box_panel" class="col-md-10">
+      <div id="panel" class="panel_resizable edit">
+
+        <% if(video){%>
+        <%- partial ('_video.ejs', {video: video})%>
+        <%}%>
+
+        <% _.each(actions, function(action){ %>
+        <%- partial ('_action.ejs', {action: action})%>
+        <% })%>
+
+        <% _.each(events, function(event){ %>
+        <%- partial ('_event.ejs', {event: event})%>
+        <% })%>
+
+        <% _.each(sliders, function(slider){ %>
+        <%- partial ('_slider.ejs', {slider: slider})%>
+        <% })%>
+        <script type="text/javascript">
+          var sliders = $('[id^=slider_]').slider();
+        </script>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+  function ajax_call(action, title){
+      $.ajax({
+        url: action,
+        type: 'GET',
+        data: {id: '<%= interface.id %>'},
+        success: function(data){
+          $("#errors_container").html('');
+          $('#myModalLabel').html(title)
+          $("#container").html(data);
+        }
+      });
+  }
+</script>

@@ -46,5 +46,11 @@
 	"view": "view",
 	"free": "free",
 	"public": "public",
-	"menu": "menu"
+	"menu": "menu",
+	"action.code.required": "action.code.required",
+	"slider.code.required": "slider.code.required",
+	"slider.value.integer": "slider.value.integer",
+	"slider.min.integer": "slider.min.integer",
+	"slider.max.integer": "slider.max.integer",
+	"slider.step.integer": "slider.step.integer"
 }

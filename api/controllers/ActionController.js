@@ -29,10 +29,10 @@ module.exports = {
 
 
   create: function (req, res, next){
-    //Mis iconos y los del sistema por defecto
     Interface.findOne(req.param('id'), function foundInterface(err, iface) {
       if (err) return next(err);
 
+      //Mis iconos y los del sistema por defecto
       Icon.find({or: [{user_owner: req.session.User.id}, {default: true}]}).exec(function (err, icons) {
         if (err) return next(err);
 
@@ -81,19 +81,13 @@ module.exports = {
 
 
         Action.create(actionObj, function actionCreated(err, action) {
-          if (err) return res.badRequest(err);
-
-          action.save(function (err) {
-            if (err) return res.badRequest(err);
-
+          if (err) return res.badRequest(err.Errors);
             console.log('The action has been created');
 
             return res.render('interface/_action.ejs', {
               action: action,
               layout: false
             });
-
-          });
         });
       });
 

@@ -15,11 +15,15 @@ module.exports = {
     res.view();
   },
 
-
-  create: function (req, res, next) {
-
+  create: function (req, res, next){
+    Interface.findOne(req.param('id'), function foundInterface(err, iface) {
+      if (err) return next(err);
+      return res.render('video/new.ejs', {
+        interface: iface,
+        layout: false
+      });
+    });
   },
-
 
   update_position: function (req, res, next) {
     //Ajax call

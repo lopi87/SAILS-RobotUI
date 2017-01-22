@@ -1,6 +1,5 @@
 <form id="action-form" class="form-signin" action="create" method="post" data-parsley-validate style="max-width: none">
   <div class="row">
-    <h1 class="text-center login-title marginbottom20"><%= i18n('actions') %></h1>
     <div class="col-md-6">
       <div class="col-md-2"></div>
       <div class="col-md-10">
@@ -91,40 +90,48 @@
             $('[id^=cp]').colorpicker({format: 'hex'});
           </script>
         </div>
-
       </div>
       <div class="col-md-2"></div>
     </div>
-  </div>
-  <div class="form-signin">
-    <button type="btn btn-lg btn-primary btn-block" class="btn btn-success" ><%= i18n('createaction') %></button>
   </div>
   <input id="action_csrf" type="hidden" name="_csrf" value="<%= _csrf %>" />
 </form>
 
 <script type="text/javascript">
   addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
-  $('#action-form').parsley().on('field:validated', function() {
+
+  function submit_function() {
+    $('#action-form').parsley().validate()
     var ok = $('.parsley-error').length === 0;
-  })
 
+    if (true){
+      $.ajax({
+        url: '/action/newaction/' + '<%= interface.id %>',
+        type: 'GET',
+        data: {
+          name: $("#name_field").val(),
+          code: $("#code_field").val(),
+          color_background: $("#background_field").val(),
+          color_border: $("#border_field").val(),
+          color_active_background: $("#active_background_field").val(),
+          color_text: $("#text_field").val(),
+          icon: $(".chzn-select-icon").val(),
+          color_default: $('input[name=color_default]:checked').val()
+        },
 
-  $("#action-form").submit(function(e){
-    e.preventDefault();
-    $.ajax({
-      url: '/action/newaction/' + '<%= interface.id%>',
-      type: 'GET',
-      data: {name: $( "#name_field" ).val(), code: $( "#code_field" ).val(), color_background: $( "#background_field" ).val(), color_border: $( "#border_field" ).val(), color_active_background: $( "#active_background_field" ).val(), color_text:$( "#text_field" ).val(), icon: $(".chzn-select-icon").val(), color_default: $('input[name=color_default]:checked').val()},
+        success: function (data) {
+          $("#errors_container").html('');
+          $("#panel").html(data);
+          $('.modal').modal('toggle');
+          bootstrap_alert['success']('A new action has been created!', 5000);
+        },
 
-      success: function(data){
-        $("#panel").append(data);
-        $('.modal').modal('toggle');
-        bootstrap_alert['success']('A new action has been created!', 5000 );
-      },
+        error: function (xhr) {
+          $("#errors_container").html('<p class="bg-danger">' + xhr.responseText + '</p>');
+          //bootstrap_alert['danger'](xhr.responseText, 5000);
+        }
+      });
 
-      error: function(xhr) {
-        bootstrap_alert['danger'](xhr.responseText, 5000 );
-      }
-    });
-  });
+    }
+  }
 </script>

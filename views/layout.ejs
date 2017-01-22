@@ -217,10 +217,9 @@
     </div>
       </div>
   </nav>
-
+  <%- partial('_alert.ejs', {flash: flash}) %>
   <div class="container box">
     <%- partial ('modal.ejs')%>
-    <%- partial('_alert.ejs', {flash: flash}) %>
     <%- body %>
   </div>
 

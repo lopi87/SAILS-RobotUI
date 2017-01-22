@@ -119,7 +119,6 @@ module.exports = {
 
   savecode: function (req, res, next) {
     if (req.xhr) {
-      // Yup, it's AJAX alright.
       var code = req.param('code');
       var iface_id = req.param('id');
 

@@ -28,7 +28,6 @@ module.exports = {
   },
 
   create: function (req, res, next){
-    //Mis iconos y los del sistema por defecto
     Interface.findOne(req.param('id'), function foundInterface(err, iface) {
       if (err) return next(err);
         return res.render('slider/new.ejs', {
@@ -53,20 +52,12 @@ module.exports = {
           step: req.param('step')
         };
 
-
         Slider.create(sliderObj, function sliderCreated(err, slider) {
-          if (err) return res.badRequest(err);
-
-          slider.save(function (err) {
-            if (err) return res.badRequest(err);
-
-            console.log('The slider has been created');
-
-            return res.render('interface/slider_row.ejs', {
-              slider: slider,
-              layout: false
-            });
-
+          if (err) return res.badRequest(err.Errors);
+          console.log('The slider has been created');
+          return res.render('interface/slider_row.ejs', {
+            slider: slider,
+            layout: false
           });
         });
       });
