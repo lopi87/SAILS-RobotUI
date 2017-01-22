@@ -30,11 +30,14 @@ module.exports = {
       return res.json({ 'status': 'GET not allowed' });
     //	Call to /newicon via GET is error
 
+    var def = req.session.User.admin ? req.param('default_icon') == 'on' : false
+
     if (req.xhr) {
       var uploadFile = req.file('iconfile');
       var iconObj = {
         user_owner: req.session.User.id,
-        name: req.param('name')
+        name: req.param('name'),
+        default_icon: def
       };
 
       Icon.create(iconObj, function iconCreated(err, icon) {

@@ -11,6 +11,15 @@
     <input id="name_field" type="text" class="form-control" placeholder="<%= i18n("name") %>" required="" name="name">
   </div>
 
+  <% if (session.User.admin) { %>
+    <div class="control-group marginbottom5">
+      <label for="name"><%= i18n("public") %> * :</label>
+      <input id="public_field" type="checkbox" class="paddingtop5" name="default_icon">
+    </div>
+
+  <% } %>
+
+
   <input id="icon_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
 </form>
 
