@@ -18,181 +18,6 @@
 
 <script type="text/javascript">
 
-  function get_max_top_left_panel() {
-
-    var cord1 = max_top_left('[id^=button_custom_]');
-    var cord2 = max_top_left('[id^=event_]');
-    var cord3 = [];
-
-    cord3[0] = (cord1[0] > cord2[0] ? cord1[0] : cord2[0]);
-    cord3[1] = (cord1[1] > cord2[1] ? cord1[1] : cord2[1]);
-
-    //console.log('Limit: ' + cord3[0] + ' - ' + cord3[1]);
-    return [cord3[0] ,cord3[1] ];
-  }
-
-
-  function max_top_left(id){
-    var top = 0, left = 0, inHeight = 0, inWidth = 0;
-    $(id).each(function(){
-      if ($(this).position().top >= top){
-        inHeight = $(this).outerHeight() + 5;
-        top = $(this).position().top;
-        //console.log('New top limit: ' + $(this).position().top);
-      }
-
-      if ($(this).position().left >= left){
-        inWidth = $(this).outerWidth() + 5;
-        left = $(this).position().left;
-        //console.log('New left limit: ' + $(this).position().left);
-      }
-    });
-
-    console.log('Dims: ' + inWidth + ' - ' + inHeight);
-    console.log('Limit: ' + left + ' - ' + top);
-
-    left = left + inWidth;
-    top = top + inHeight;
-
-    return [left ,top ];
-  }
-
-  /*
-  //Enable elements draggables
-  $('[id^=button_]').draggable({cancel: false, containment: '#panel', scroll: false,
-
-    stop: function(event, ui) {
-      var pos_x = ui.position.left;
-      var pos_y = ui.position.top;
-      var id = this.id.replace('button_','');
-
-      console.log('x: ' + pos_x + ' - y: ' + pos_y );
-      //console.log('id: ' + id);
-
-      $.ajax({
-        type: "POST",
-        url: "/action/update_position/",
-        data: { x: pos_x, y: pos_y, id: id},
-        beforeSend: function(xhr, settings){
-          xhr.setRequestHeader('X-CSRF-Token', $("#_csrf").val());
-        },
-
-        success: function(data){
-          console.log('bottom position updated');
-        },
-
-        error: function(xhr, status, text) {
-          bootstrap_alert['danger'](xhr.responseText, 5000 );
-        }
-
-      });
-    }
-  });
-
-
-  $('[id^=slider_]').draggable({cancel: false, containment: '#panel', scroll: false,
-
-    stop: function(event, ui) {
-      var pos_x = ui.position.left;
-      var pos_y = ui.position.top;
-      var id = this.id.replace('slider_','');
-
-      console.log('x: ' + pos_x + ' - y: ' + pos_y );
-      //console.log('id: ' + id);
-
-      $.ajax({
-        type: "POST",
-        url: "/slider/update_position/",
-        data: { x: pos_x, y: pos_y, id: id},
-        beforeSend: function(xhr, settings){
-          xhr.setRequestHeader('X-CSRF-Token', $("#_csrf").val());
-        },
-
-        success: function(data){
-          console.log('slider position updated');
-        },
-
-        error: function(xhr, status, text) {
-          bootstrap_alert['danger'](xhr.responseText, 5000 );
-        }
-
-      });
-    }
-  });
-
-
-  //Enable elements draggables
-  $('[id^=play_]').draggable({cancel: false, containment: '#panel', scroll: false,
-
-    stop: function(event, ui) {
-      var pos_x = ui.position.left;
-      var pos_y = ui.position.top;
-      var id = this.id.replace('play_','');
-
-      console.log('x: ' + pos_x + ' - y: ' + pos_y );
-      //console.log('id: ' + id);
-
-      //Do the ajax call to the server
-      $.ajax({
-        type: "POST",
-        url: "/video/update_position/",
-        data: { x: pos_x, y: pos_y, id: id},
-        beforeSend: function(xhr, settings){
-          xhr.setRequestHeader('X-CSRF-Token', $("#_csrf").val());
-        },
-
-        success: function(data){
-          console.log('video position updated');
-        },
-
-        error: function(xhr, status, text) {
-          bootstrap_alert['danger'](xhr.responseText, 5000 );
-        }
-
-      });
-    }
-  });
-
-  //Enable elements draggables
-  $('[id^=event_]').draggable({cancel: false, containment: '#panel', scroll: false,
-
-    stop: function(event, ui) {
-      var pos_x = ui.position.left;
-      var pos_y = ui.position.top;
-      var id = this.id.replace('event_','');
-
-      console.log('x: ' + pos_x + ' - y: ' + pos_y );
-      //console.log('id: ' + id);
-
-      //Do the ajax call to the server
-      $.ajax({
-        type: "POST",
-        url: "/event/update_position/",
-        data: { x: pos_x, y: pos_y, id: id},
-        beforeSend: function(xhr, settings){
-          xhr.setRequestHeader('X-CSRF-Token', $("#_csrf").val());
-        },
-
-        success: function(data){
-          console.log('event position updated');
-        },
-
-        error: function(xhr, status, text) {
-          bootstrap_alert['danger'](xhr.responseText, 5000 );
-        }
-
-      });
-    }
-  });
-*/
-
-
-
-
-
-
-
-
   // target elements with the "draggable" class
   interact('.draggable')
     .draggable({
@@ -266,6 +91,32 @@
 
 
 
+  function getdraggablemaxheightwidth() {
+    var $container = $("#panel"),
+      maxheight = 0,
+      maxwidth = 0,
+      currentheight = 0,
+      currentwidth = 0,
+      currentposition;
+
+    $container.children(".draggable").each(function(index, element) {
+      currentposition = $(element).position();
+      currentheight = currentposition.top + $(element).outerHeight() + 5;
+      if(currentheight > maxheight)
+        maxheight = currentheight;
+
+
+      currentwidth = currentposition.left + $(element).outerWidth() + 5;
+      if(currentwidth > maxwidth)
+        maxwidth = currentwidth;
+    });
+
+    return [maxheight, maxwidth];
+
+  }
+
+
+
 
   // http://jsfiddle.net/dzSRR/32/  ejemplo drag con limites
   $("#panel").resizable({
@@ -276,11 +127,10 @@
       $(this).height(<%= interface.panel_sizey %>);
     },
 
-    resize: function(){
-      pos = get_max_top_left_panel();
-      console.log(pos[0] + '-' + pos[1]);
-      $(this).css("min-width", pos[0]);
-      $(this).css("min-height", pos[1]);
+    start: function () {
+      pos = getdraggablemaxheightwidth();
+      $(this).css("min-height", pos[0]);
+      $(this).css("min-width", pos[1]);
     },
 
     stop: function(event, ui) {
@@ -288,33 +138,14 @@
       var height = ui.size.height;
       var id = "<%= interface.id %>";
 
-      //Tam en px eliminar 'px'
-      var min_w = $("#panel").css("minWidth").replace(/[^-\d\.]/g, '');
-      var min_h = $("#panel").css("minHeight").replace(/[^-\d\.]/g, '');
-
-      //console.log('new board size: ' + width + ' - ' + height );
-      console.log('valores minimos permitidos: ' + min_w + '-'  + min_h);
-
-      //Nunca menor que el tamaño minimo
-      if(width < min_w){
-        width = min_w;
-      }
-      if(height < min_h){
-        height = min_h;
-      }
-
       //Do the ajax call to the server
 
       $.ajax({
         type: "POST",
-        url: "/interface/update_board_size/",
-        data: { width: width, height: height, id: id},
+        url: "/interface/update_board_size",
+        data: { height:  height, width:  width, id: id},
         beforeSend: function(xhr, settings){
           xhr.setRequestHeader('X-CSRF-Token', $("#_csrf").val());
-        },
-
-        done: function(){
-
         },
 
         success: function(data){
@@ -330,4 +161,3 @@
   });
 
 </script>
-<!-- FIN PERSONALIZAR VENTANA -->

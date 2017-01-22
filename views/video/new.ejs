@@ -35,10 +35,10 @@
         done:function() {
         },
 
-
         success: function (data) {
           $("#errors_container").html('');
-          $("#panel").html(data);
+          $('[id^=video_]').remove();
+          $("#panel").prepend(data);
           $('.modal').modal('toggle');
           bootstrap_alert['success']('A new video has been created!', 5000);
         },

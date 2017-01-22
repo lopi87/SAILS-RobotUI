@@ -210,6 +210,13 @@ function openWin(width, height, content) {
 }
 
 
+function set_image_video(id){
+  var canvas = document.getElementById(id), ctx = canvas.getContext("2d");
+  var background = new Image();
+  background.src = "/images/video/video.png";
+  ctx.drawImage(background,0,0);
+}
+
 // $(function() {
 //   var canvas = document.createElement("canvas");
 //   canvas.width = 24;
