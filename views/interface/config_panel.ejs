@@ -10,15 +10,11 @@
 <div class="margintop20 marginbottom20 floatright">
   <a href="/robot/index" class="btn btn-sm btn-success bottom-right"><i class="fa fa-home" aria-hidden="true"></i> My Robots</a>
   <a href="/interface/show/<%= interface.id %>" class="btn btn-sm btn-primary bottom-right"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+  <input id="_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
 </div>
-
-
-<input id="_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
-
 
 <script type="text/javascript">
 
-  // target elements with the "draggable" class
   interact('.draggable')
     .draggable({
       // enable inertial throwing
@@ -87,10 +83,6 @@
   // this is used later in the resizing and gesture demos
   window.dragMoveListener = dragMoveListener;
 
-
-
-
-
   function getdraggablemaxheightwidth() {
     var $container = $("#panel"),
       maxheight = 0,
@@ -116,9 +108,6 @@
   }
 
 
-
-
-  // http://jsfiddle.net/dzSRR/32/  ejemplo drag con limites
   $("#panel").resizable({
     maxWidth: $("#box_panel").width(),
 
@@ -132,6 +121,7 @@
       $(this).css("min-height", pos[0]);
       $(this).css("min-width", pos[1]);
     },
+
 
     stop: function(event, ui) {
       var width = ui.size.width;
