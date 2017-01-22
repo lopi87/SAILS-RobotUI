@@ -84,10 +84,20 @@ module.exports = {
           if (err) return res.badRequest(err.Errors);
             console.log('The action has been created');
 
-            return res.render('interface/_action.ejs', {
-              action: action,
-              layout: false
-            });
+            if (req.param('icon')){
+              Action.findOne(action.id).populate('icon').exec(function(err, action) {
+                if (err) return res.badRequest(err);
+                return res.render('interface/_action.ejs', {
+                  action: action,
+                  layout: false
+                });
+              });
+            }else{
+              return res.render('interface/_action.ejs', {
+                action: action,
+                layout: false
+              });
+            }
         });
       });
 

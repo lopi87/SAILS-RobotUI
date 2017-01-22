@@ -1,6 +1,6 @@
 <% if (action.icon){ %>
 <button id="button_custom_<%= action.id %>" class="btn position_<%= action.id %> btn-custom_<%= action.id %> draggable" value="<%= action.code %>">
-  <img src="<%= sails.getBaseURL() + action.icon.iconUrl %>" height="32" width="32" />
+  <img src="<%= action.icon.iconUrl %>" height="32" width="32" />
   <% if (action.name != ''){%>
   <%= action.name %>
   <% }%>

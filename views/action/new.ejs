@@ -119,7 +119,7 @@
 
         success: function (data) {
           $("#errors_container").html('');
-          $("#panel").html(data);
+          $("#panel").append(data);
           $('.modal').modal('toggle');
           bootstrap_alert['success']('A new action has been created!', 5000);
         },
