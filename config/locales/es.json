@@ -78,8 +78,7 @@
 	"value": "value",
 	"step": "step",
 	"button": "button",
-
-
-
-  "action.code.required": "Código es obligatorio"
+	"action.code.required": "Código es obligatorio",
+	"video": "video",
+	"slider": "slider"
 }

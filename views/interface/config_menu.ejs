@@ -8,12 +8,12 @@
               Joystick
             </i>
           </a>
-          <a id='new_video' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/video/create', '<%= i18n('button') %>')">
+          <a id='new_video' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/video/create', '<%= i18n('video') %>')">
             <i class="fa fa-video-camera fa-2 marginlef10" aria-hidden="true">
               Video
             </i>
           </a>
-          <a id='new_slider' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/slider/create', '<%= i18n('button') %>')" >
+          <a id='new_slider' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/slider/create', '<%= i18n('slider') %>')" >
             <i class="fa fa-sliders fa-2 marginlef10" aria-hidden="true">
               Slider
             </i>
@@ -21,6 +21,11 @@
           <a id='new_action' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/action/create', '<%= i18n('button') %>')">
             <i class="fa fa-cog fa-2 marginlef10" aria-hidden="true">
               Button
+            </i>
+          </a>
+          <a id='new_icon' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/icon/create', '<%= i18n('icon') %>')">
+            <i class="fa fa-plus fa-2 marginlef10" aria-hidden="true">
+              Add icon
             </i>
           </a>
           <a class="list-group-item">

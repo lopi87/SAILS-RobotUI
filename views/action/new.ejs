@@ -14,24 +14,22 @@
           <input id="code_field" type="text" class="form-control" placeholder="<%= i18n("code") %>" required="" name="code">
         </div>
 
-        <div class="row">
-          <div class="col-md-7">
-            <div class="control-group">
-              <label for="icon"><%= i18n("selectanicon") %> *:</label>
-              <div>
-                <select id="slect_icon" data-placeholder="<%= i18n("selectanicon") %>" class="chzn-select-icon" tabindex="2">
-                  <option value=""></option>
-                  <% _.each(icons, function(icon){ %>
-                  <option data-img-src="<%= icon.iconUrl %>" value="<%= icon.id %>"><%= i18n('icon') %></option>
-                  <% })%>
-                </select>
-              </div>
-              <script type="text/javascript">
-                $('.chzn-select-icon').chosen({ width: '100%', disable_search: true });
-              </script>
-            </div>
+
+        <div class="control-group marginbottom5">
+          <label for="icon"><%= i18n("selectanicon") %> *:</label>
+          <div>
+            <select id="slect_icon" data-placeholder="<%= i18n("selectanicon") %>" class="chzn-select-icon" tabindex="2" style="width: 100%">
+              <option value=""></option>
+              <% _.each(icons, function(icon){ %>
+              <option data-img-src="<%= icon.iconUrl %>" value="<%= icon.id %>"><%= icon.name %></option>
+              <% })%>
+            </select>
           </div>
+          <script type="text/javascript">
+            $('.chzn-select-icon').chosen({ width: '100%', disable_search: true });
+          </script>
         </div>
+
 
         <div class="control-group marginbottom5">
           <label for="name"><%= i18n("color") %> * :</label>

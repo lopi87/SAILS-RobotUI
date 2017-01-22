@@ -10,22 +10,32 @@ var gm = require('gm');
 
 module.exports = {
 
+  create: function (req, res, next){
+    Interface.findOne(req.param('id'), function foundInterface(err, iface) {
+      if (err) return next(err);
+
+        return res.render('icon/new.ejs', {
+          interface: iface,
+          layout: false
+        });
+      });
+  },
+
+
+
   //Subida de iconos via ajax para la creacion de botones
-  create: function(req,res,next){
+  new: function(req,res,next){
 
     if (req.method === 'GET')
       return res.json({ 'status': 'GET not allowed' });
     //	Call to /newicon via GET is error
 
     if (req.xhr) {
-      // Yup, it's AJAX alright.
-
       var uploadFile = req.file('iconfile');
       var iconObj = {
-        user_owner: req.session.User.id
+        user_owner: req.session.User.id,
+        name: req.param('name')
       };
-
-
 
       Icon.create(iconObj, function iconCreated(err, icon) {
         if (err) return res.badRequest(err);
@@ -44,7 +54,7 @@ module.exports = {
           }
 
           Icon.update(icon.id, {
-            iconUrl: require('util').format('%s/uploads/icons/%s', icon.id + '.' + extension)
+            iconUrl: require('util').format('/uploads/icons/%s', (icon.id + '.' + extension))
           }).exec(function iconUpdated(err, updated){
             if (err) {
               err = {err: 'Err'};

@@ -1,78 +1,56 @@
-<!-- Modal Upload icon -->
-<div class="modal fade" id="writeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Upload icon</h4>
-      </div>
-      <div class="modal-body">
-        <label for="question"><%= i18n("filesmallerthan %s","42") %></label>
-        <form id="new_icon" enctype="multipart/form-data" method="post">
-          <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-            <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
-            <span id="input_icon" class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="iconfile" data-parsley-filemaxmegabytes="42" data-parsley-trigger="change" data-parsley-filemimetypes="image/jpeg, image/png" required=""></span>
-            <a id="remove_iconfile_input" href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-          </div>
-          <input id="icon_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
-        </form>
-
-        <script type="text/javascript">
-
-          $('#new_icon').parsley().on('field:validated', function() {
-            var ok = $('.parsley-error').length === 0;
-          })
-
-          $("#new_icon").submit(function(e){
-            e.preventDefault();
-            var f = $(this);
-            var formData = new FormData(document.getElementById("new_icon"));
-            formData.append("dato", "valor");
-
-            $.ajax({
-              url: '/icon/create/' + '<%= interface.id %>',
-              type: 'POST',
-              cache: false,
-              dataType: 'json',
-              processData: false, // Don't process the files
-              contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-              data: formData,
-              beforeSend: function(xhr, settings){
-                xhr.setRequestHeader('X-CSRF-Token', $("#icon_csrf").val());
-              },
-              done:function() {
-              },
-              success: function(data){
-                if(typeof data.error === 'undefined')
-                {
-                  //colse modal
-                  $('#writeModal').modal('hide');
-                  bootstrap_alert['success']('A new icon has been uploaded!', 3000 );
-                  //limpiar el input
-                  $("#remove_iconfile_input").trigger('click');
-
-                  //Añadir el nuevo icono al chosen select
-                  var newIcon = $('<option data-img-src="' + data.url + '"value="' + data.id + '">' + '<%= i18n('icon') %></option>');
-                  $('.chzn-select-icon').append(newIcon);
-                  $('.chzn-select-icon').trigger("chosen:updated");
-                  //
-                }
-                else
-                {
-                  // Handle errors here
-                  console.log('ERRORS: ' + data.error);
-                }
-              }
-            });
-          });
-        </script>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" onclick='$("#new_icon").submit()' >upload icon</button>
-      </div>
-    </div>
+<label for="question"><%= i18n("filesmallerthan %s","42") %></label>
+<form id="icon-form" enctype="multipart/form-data" method="post">
+  <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+    <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+    <span id="input_icon" class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="iconfile" data-parsley-filemaxmegabytes="42" data-parsley-trigger="change" data-parsley-filemimetypes="image/jpeg, image/png" required=""></span>
+    <a id="remove_iconfile_input" href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
   </div>
-</div>
+
+  <div class="control-group marginbottom5">
+    <label for="name"><%= i18n("name") %> * :</label>
+    <input id="name_field" type="text" class="form-control" placeholder="<%= i18n("name") %>" required="" name="name">
+  </div>
+
+  <input id="icon_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
+</form>
 
 
+<script type="text/javascript">
+  addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
+
+  function submit_function() {
+    $('#icon-form').parsley().validate()
+    var ok = $('.parsley-error').length === 0;
+
+    var formData = new FormData(document.getElementById("icon-form"));
+    formData.append("dato", "valor");
+
+    if (true){
+      $.ajax({
+        url: '/icon/new/' + '<%= interface.id %>',
+        type: 'POST',
+        cache: false,
+        dataType: 'json',
+        processData: false, // Don't process the files
+        contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+        data: formData,
+        beforeSend: function(xhr, settings){
+          xhr.setRequestHeader('X-CSRF-Token', $("#icon_csrf").val());
+        },
+
+        success: function (data) {
+          $("#errors_container").html('');
+          $("#panel").html(data);
+          $('.modal').modal('toggle');
+          bootstrap_alert['success']('A new icon has been added!', 5000);
+        },
+
+        error: function (xhr) {
+          $("#errors_container").html('<p class="bg-danger">' + xhr.responseText + '</p>');
+          //bootstrap_alert['danger'](xhr.responseText, 5000);
+        }
+      });
+
+    }
+  }
+</script>

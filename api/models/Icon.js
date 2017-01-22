@@ -18,6 +18,11 @@ module.exports = {
       type:'string'
     },
 
+    name:{
+      type:'string',
+      required: true
+    },
+
     default_icon: {
       type: 'boolean',
       defaultsTo: false
