@@ -44,13 +44,13 @@ module.exports = {
 
     panel_sizex: {
       type: 'float',
-      defaultsTo: 0,
+      defaultsTo: 500,
       ispositive:true
     },
 
     panel_sizey: {
       type: 'float',
-      defaultsTo: 0,
+      defaultsTo: 500,
       ispositive:true
     },
 

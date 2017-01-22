@@ -210,17 +210,19 @@ function openWin(width, height, content) {
 }
 
 
-
-function open_modal(url, id){
-  function new_action(id) {
-    $.ajax({
-      url: url,
-      type: 'GET',
-      done:function(data) {
-        $('#' + id).html(data)
-      }
-    });
-  }
-
-}
+// $(function() {
+//   var canvas = document.createElement("canvas");
+//   canvas.width = 24;
+//   canvas.height = 24;
+//   //document.body.appendChild(canvas);
+//   var ctx = canvas.getContext("2d");
+//   ctx.fillStyle = "#000000";
+//   ctx.font = "24px FontAwesome";
+//   ctx.textAlign = "center";
+//   ctx.textBaseline = "middle";
+//   ctx.fillText("\uf003", 12, 12);
+//   var dataURL = canvas.toDataURL('image/png')
+//   $('body').css('cursor', 'url('+dataURL+'), auto');
+// });
+//
 
