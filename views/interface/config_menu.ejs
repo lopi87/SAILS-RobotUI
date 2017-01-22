@@ -8,6 +8,13 @@
               Joystick
             </i>
           </a>
+
+          <a id='new_event' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/event/create', '<%= i18n('event') %>')">
+            <i class="fa fa-tags fa-2 marginlef10" aria-hidden="true">
+              Event
+            </i>
+          </a>
+
           <a id='new_video' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/video/create', '<%= i18n('video') %>')">
             <i class="fa fa-video-camera fa-2 marginlef10" aria-hidden="true">
               Video

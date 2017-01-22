@@ -1,4 +1,4 @@
-<div id="event_<%= event.id %>" class="event_<%= event.id %> position_<%= event.id %>" style="max-width: 100px">
+<div id="event_<%= event.id %>" class="event_<%= event.id %> position_<%= event.id %> draggable" style="max-width: 100px">
   <h5><%= event.name %> <span class="label label-pill label-danger">-</span></h5>
 </div>
 <%- partial ('../event/style_event.ejs', {event: event})%>

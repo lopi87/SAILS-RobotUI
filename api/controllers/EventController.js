@@ -14,10 +14,15 @@ module.exports = {
   },
 
 
-  create: function(req, res, next) {
-
+  create: function (req, res, next){
+    Interface.findOne(req.param('id'), function foundInterface(err, iface) {
+      if (err) return next(err);
+        return res.render('event/new.ejs', {
+          interface: iface,
+          layout: false
+        });
+      });
   },
-
 
   update_position: function (req, res, next) {
     //Ajax call
@@ -61,7 +66,7 @@ module.exports = {
 
             console.log('The event has been created');
 
-            return res.render('event/event_row.ejs', {
+            return res.render('interface/_event.ejs', {
               event: event,
               layout: false
             });
