@@ -44,6 +44,8 @@ module.exports = {
       Interface.findOne(req.param('id'), function foundInterface(err, iface) {
         if (err) return next(err);
 
+        var vertical = req.param('vertical') == 'true' ? true : false
+
         var sliderObj = {
           interface_owner: iface.id,
           name: req.param('name'),
@@ -51,13 +53,15 @@ module.exports = {
           min: req.param('min'),
           max: req.param('max'),
           value: req.param('value'),
-          step: req.param('step')
+          step: req.param('step'),
+          length: req.param('length'),
+          vertical: vertical
         };
 
         Slider.create(sliderObj, function sliderCreated(err, slider) {
           if (err) return res.badRequest(err.Errors);
           console.log('The slider has been created');
-          return res.render('interface/slider_row.ejs', {
+          return res.render('interface/_slider.ejs', {
             slider: slider,
             layout: false
           });

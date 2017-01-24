@@ -1,8 +1,14 @@
-<div id="slider_<%= slider.id %>" class="draggable position_<%= slider.id %>"></div>
+<div id="slider_<%= slider.id %>" class=" position_<%= slider.id %> draggable"></div>
+<%- partial ('../slider/style_slider.ejs', {slider: slider})%>
 
 <script type="text/javascript">
   $("#slider_<%= slider.id %>").slider(
     {
+      <% if (slider.vertical == true){ %>
+      orientation: 'vertical',
+      <% } else { %>
+      orientation: 'horizontal',
+      <% } %>
       value: parseInt('<%= slider.value %>'),
       min: parseInt('<%= slider.min %>'),
       max: parseInt('<%= slider.max %>'),
@@ -10,4 +16,3 @@
     }
   );
 </script>
-<%- partial ('../slider/style_slider.ejs', {slider: slider})%>

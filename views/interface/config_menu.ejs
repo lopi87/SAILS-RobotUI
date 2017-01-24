@@ -56,6 +56,10 @@
         <%- partial ('_video.ejs', {video: video})%>
         <%}%>
 
+        <% _.each(joysticks, function(joystick){ %>
+        <%- partial ('_action.ejs', {joystick: joystick})%>
+        <% })%>
+
         <% _.each(actions, function(action){ %>
         <%- partial ('_action.ejs', {action: action})%>
         <% })%>

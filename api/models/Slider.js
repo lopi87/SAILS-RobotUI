@@ -58,6 +58,11 @@ module.exports = {
       defaultsTo: 0
     },
 
+    vertical: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+
     color_default: {
       type: 'boolean',
       defaultsTo: true

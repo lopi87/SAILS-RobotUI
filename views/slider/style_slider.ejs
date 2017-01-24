@@ -1,5 +1,12 @@
 <style>
-  .slider_<%= slider.id %>.position_<%= slider.id %>{
+  .ui-slider-horizontal {
+    width: 200px;
+  }
+  .ui-slider-vertical{
+    height: 200px;
+  }
+
+  .position_<%= slider.id %>{
     left: <%= slider.coordinate_x + 'px'%>;
     top: <%= slider.coordinate_y + 'px'%>;
     position: absolute;

@@ -63,9 +63,6 @@
             <a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a>
           </td>
           <td>
-            <a href="/robot/show_permissions/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('permissions') %></a>
-          </td>
-          <td>
             <form action="/robot/destroy/<%=robot.id%>" method="post">
               <input type="hidden" name="_method" value="delete"/>
               <input type="submit"  class="btn btn-sm btn-danger" value="Delete"/>

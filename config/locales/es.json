@@ -81,5 +81,7 @@
 	"action.code.required": "Código es obligatorio",
 	"video": "video",
 	"slider": "slider",
-	"event": "event"
+	"event": "event",
+	"vertical": "vertical",
+	"length": "length"
 }

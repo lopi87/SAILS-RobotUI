@@ -37,6 +37,12 @@ module.exports = {
       via: 'interface_owner'
     },
 
+    // Eventos de la interfaz
+    joysticks: {
+      collection: 'joystick',
+      via: 'interface_owner'
+    },
+
     //Video de la interfaz
     video: {
       model: 'video'
