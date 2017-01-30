@@ -18,14 +18,14 @@ module.exports = {
    ***************************************************************************/
 
   models: {
-    connection: 'externalMongodbServer'
+    connection: 'someMongodbServer'
   },
 
   /***************************************************************************
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: 5000
+  port: 80
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
