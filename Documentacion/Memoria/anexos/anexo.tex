@@ -1,0 +1,260 @@
+% Este archivo es parte de la memoria del proyecto fin de carrera
+% de Manuel López Urbina. Protegida bajo la licencia GFDL.
+% Para más información, la licencia completa viene incluida en el
+% fichero fdl-1.3.tex
+
+% Copyright (C) 2017 Manuel López Urbina
+
+\chapter{Anexos}
+\label{chap:anexos}
+
+Anexos con las instrucciones para la instalación de todos los componentes software empleados en el desarrollo del proyecto.
+
+\section{Instalación de Node.js}
+
+
+Instalación de los prerequisitos:
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install python-software-properties python g++ make
+\end{lstlisting}
+
+
+Si está utilizando Ubuntu 12.10, necesitará hacer los siguiente:
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install software-properties-common
+\end{lstlisting}
+
+
+Añadimos el repositorio:
+
+\begin{lstlisting}[language=bash]
+sudo add-apt-repository ppa:chris-lea/node.js
+\end{lstlisting}
+
+Actualizamos la lista de paquetes:
+
+\begin{lstlisting}[language=bash]
+sudo apt-get update
+\end{lstlisting}
+
+Instalación de  Node.js:
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install nodejs
+\end{lstlisting}
+
+
+
+
+\section{Instalación Sails.js}
+
+Esta guía proporciona las pautas necesarias para la configuración de un entorno de trabajo para el desarrollo de aplicaciones Sails. Esta guía no cubre la instalación de en un entorno de producción.\\
+
+\subsection{Prerrequisitos}
+
+Partiendo de que se encuentra Node correctamente instalado en una máquina con Ubuntu 14.04 LTS. Ubuntu es una plataforma muy popular y utilizada en el desarrollo de Sails.js, al igual que otros sistemas operativos basados ​​en Unix, como Mac OS X. La instalación es relativamente fácil y existe multitud de información gracias a su amplia comunidad de desarrolladores.\\
+
+\begin{itemize}
+\item{Una máquina con Ubuntu 14.04.}
+\item{Node js instalado.}
+\end{itemize}
+
+\subsection{Instalación}
+
+A continuación detallaremos los pasos para la instalación de Sails. Lo primero que haremos es instalar Sails haciendo uso de npm, el gestor de paquetes que viene con el propio Node. Para ello, lo que vamos a hacer es ir directamente a la terminal y e introducir lo siguiente:\\
+
+\begin{lstlisting}[language=bash]
+sudo npm install sails -g
+\end{lstlisting}
+
+La opción -g, qe significa global, lo que hace es instalar Sails a nivel global, la cual nos permitirá acceder a las funcionalidades de Sails que emplearemos para la creación de nuestros proyectos.\\
+
+Es posible que necesite permisos de administrador para instalar Sails a nivel global.\\
+
+Para comprobar que la instalación se realizó correctamente, crearemos un proyecto inicial y levantaremos el servidor. Para ello introducirmos en la terminal:\\
+
+\begin{lstlisting}[language=bash]
+sails new my_first_app
+\end{lstlisting}
+
+Cambie de directorio (cd) al nuevo directorio creado, en el cual nos aseguraremos de que Sails está correctamente instalado. Para ello arrancaremos el servidor y comprobaremos en nuestro navegador en localhost 1337 (localhost: 1337) que Sails está funcionando correctamente.\\
+
+
+\begin{lstlisting}[language=bash]
+cd my_fisrt_app
+sails lift
+\end{lstlisting}
+
+
+Tras introducir en nuestro navegador \emph{localhost: 1337} debemos obtener el siguiente resultado:
+
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.3]{imagenes/anexo/running_sails.png}
+  \end{center}
+  \label{fig:logo}
+ \caption{Iniciando Sails \protect\footnotemark.}
+\end{figure}
+
+
+Y en nuestro navegador:\\
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.3]{imagenes/anexo/browser_sails.png}
+  \end{center}
+  \label{fig:logo}
+ \caption{Sails en funcionamiento \protect\footnotemark.}
+\end{figure}
+
+
+
+\section{Instalación de MongoDB}
+
+MongoDB es una base de datos libre y de código abierto NoSQL utilizada comúnmente en aplicaciones web modernas. Esta guía le ayudará a configurar MongoDB en su máquina para un entorno de aplicación de producción.\\
+
+\subsection{Prerrequisitos}
+
+Para seguir esta guía es necesario:
+\begin{itemize}
+
+\item{Una máquina con Ubuntu 14.04.}
+\item{Un usuario con permisos de administrador (no root).}
+\end{itemize}
+
+\subsection{Instalación}
+
+
+MongoDB ya está incluido en los repositorios de paquetes de Ubuntu, pero el repositorio oficial MongoDB proporciona la versión más actualizada y es la forma recomendada de instalar el software. Ubuntu garantiza la autenticidad de los paquetes de software al verificar que están firmados con las claves GPG, por lo que primero tenemos que importar la clave para el repositorio oficial de MongoDB.
+
+Para ello, ejecute:
+
+\begin{lstlisting}[language=bash]
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+\end{lstlisting}
+
+
+Después de importar con éxito la clave, verá lo siguiente:
+
+\begin{lstlisting}[language=bash]
+Gpg: Número total procesado: 1
+Gpg: importado: 1 (RSA: 1)
+\end{lstlisting}
+
+A continuación, tenemos que actualizar los detalles del repositorio de MongoDB para que APT sepa de dónde descargar los paquetes.
+
+Introduzca el siguiente comando para crear un archivo de lista para MongoDB.
+
+\begin{lstlisting}[language=bash]
+echo "deb http://repo.mongodb.org/apt/ubuntu "\$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+\end{lstlisting}
+
+Después de agregar los detalles del repositorio, necesitamos actualizar la lista de paquetes.
+
+\begin{lstlisting}[language=bash]
+sudo apt-get update
+\end{lstlisting}
+
+
+Ahora podemos instalar el propio paquete MongoDB.
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install -y mongodb-org
+\end{lstlisting}
+
+Este comando instalará varios paquetes que contengan la última versión estable de MongoDB junto con útiles herramientas de administración para el servidor MongoDB.\\
+
+Después de la instalación del paquete, MongoDB se iniciará automáticamente. Puede comprobarlo ejecutando el siguiente comando.
+
+\begin{lstlisting}[language=bash]
+service mongodb status
+\end{lstlisting}
+
+Si MongoDB se está ejecutando, verá una salida como la siguiente (con un ID de proceso diferente).
+
+\begin{lstlisting}[language=bash]
+● mongodb.service - An object/document-oriented database
+   Loaded: loaded (/lib/systemd/system/mongodb.service; enabled; vendor preset: enabled)
+   Active: active (running) since sáb 2017-02-04 13:07:01 CET; 11h ago
+     Docs: man:mongod(1)
+ Main PID: 807 (mongod)
+    Tasks: 10
+   Memory: 84.8M
+      CPU: 4min 7.494s
+   CGroup: /system.slice/mongodb.service
+           └─807 /usr/bin/mongod --config /etc/mongodb.conf
+\end{lstlisting}
+
+También puede detener, iniciar y reiniciar MongoDB utilizando los siguientes comandos
+
+\begin{lstlisting}[language=bash]
+service mongodb stop
+service mongodb start
+\end{lstlisting}
+
+
+\section{Instalación de WebStorm}
+
+
+
+\section{Robomongo}
+
+
+
+\section{Git}
+
+
+\subsection{Prerrequisitos}
+
+Para seguir esta guía es necesario:
+\begin{itemize}
+\item{Una máquina con Ubuntu 14.04.}
+\end{itemize}
+
+\subsection{Instalación}
+
+La forma más sencilla de disponer Git instalado y listo para su utilización es mediante los repositorios predeterminados de Ubuntu. Este es el método más rápido, pero la versión puede ser más antigua que la versión más reciente. Si necesita la última versión, deberá seguir los pasos para compilar git desde el origen.
+
+Puede utilizar las herramientas de administración de paquetes de apt para actualizar su índice de paquetes local. Después, puede descargar e instalar. Para ello introduce los siguientes comandos:
+
+\begin{lstlisting}[language=bash]
+sudo apt-get update
+sudo apt-get install git
+\end{lstlisting}
+
+Esto descargará e instalará git en su sistema. A continuación tendrá que completar los pasos de configuración.
+
+\subsection{Configuración}
+
+Ahora que tiene git instalado, necesita hacer algunas cosas para que los mensajes de confirmación que se generarán para usted contendrán su información correcta.
+
+La forma más sencilla de hacerlo es a través del comando git config. Específicamente, necesitamos proporcionar nuestro nombre y dirección de correo electrónico porque git incorpora esta información en cada commit que hacemos. Podemos seguir adelante y agregar esta información escribiendo:
+
+\begin{lstlisting}[language=bash]
+ git config --global user.name "Su nombre"
+ git config --global user.email "tuemail@dominio.com"
+\end{lstlisting}
+
+
+Podemos ver todos los elementos de configuración que se han establecido escribiendo:
+
+\begin{lstlisting}[language=bash]
+git config --list
+\end{lstlisting}
+
+Configuración git
+
+User.name = Su nombre
+User.email=youremail@domain.com
+
+Hay muchas otras opciones que puede establecer, pero estos son los dos esenciales necesarios.
+
+
+\section{Despliegue}
+
+
+
+
