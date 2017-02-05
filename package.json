@@ -47,7 +47,8 @@
     "skipper": "^0.5.5",
     "socket.io": "^1.7.2",
     "transition": "^0.1.1",
-    "validate": "^2.1.6"
+    "validate": "^2.1.6",
+    "winston": "^2.3.1"
   },
   "scripts": {
     "debug": "node debug app.js",

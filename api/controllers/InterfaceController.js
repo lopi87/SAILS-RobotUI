@@ -22,20 +22,26 @@ module.exports = {
       Icon.find({or: [{user_owner: req.session.User.id}, {default: true}]}).exec(function (err, icons) {
         if (err) return next(err);
 
-        Action.find({or: [{interface_owner: req.param('id')},{default: true}] }).populate('icon').exec(function(err, actions){
+        User.findOne({id:  iface.robot_owner.owner}).exec(function Userfound(err, user){
           if (err) return res.badRequest(err);
+          if (!user) return next(err);
 
-          res.view({
-            interface: iface,
-            actions: actions,
-            sliders: iface.sliders,
-            events: iface.events,
-            video: iface.video,
-            joysticks: iface.joysticks,
-            icons: icons,
-            robot: iface.robot_owner
+
+          Action.find({or: [{interface_owner: req.param('id')},{default: true}] }).populate('icon').exec(function(err, actions) {
+            if (err) return res.badRequest(err);
+
+            res.view({
+              interface: iface,
+              actions: actions,
+              sliders: iface.sliders,
+              events: iface.events,
+              video: iface.video,
+              joysticks: iface.joysticks,
+              icons: icons,
+              robot: iface.robot_owner,
+              user: user
+            });
           });
-
         });
       });
     });
