@@ -100,12 +100,6 @@
         </li>
         <% } %>
 
-
-        <li class="nav-item">
-          <a href="/user/show/<%= session.User.id%>"><%= session.User.name %></a>
-        </li>
-
-
         <li class="nav-item" id="buttom_msg">
           <%if (typeof n_messages !== 'undefined' && n_messages > 0){%>
           <a href="/message/index">Messages <span id="msg_new" class="label label-pill label-danger">+<%= n_messages %></span></a>
@@ -182,6 +176,10 @@
 
         <% if (session.authenticated) { %>
         <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy"><%= __("signout") %></a>
+
+        <a class="navbar-btn navbar-right" href="/user/show/<%= session.User.id%>">
+          <img src="<%= sails.getBaseUrl() + session.User.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:32px">
+        </a>
         <% } %>
         <% if (!session.authenticated) { %>
 
