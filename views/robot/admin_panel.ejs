@@ -1,4 +1,3 @@
-
 <div class="jumbox margintop20">
   <h3>Robots</h3>
   <div class="table-responsive">
@@ -12,7 +11,7 @@
         <th>Owner</th>
         <th>Public drive</th>
         <th>Public view</th>
-        <th colspan="5">Actions</th>
+        <th colspan="4">Actions</th>
       </tr>
       </thead>
 
@@ -27,14 +26,14 @@
           <% } %>
 
           <td>
-            <%= robot.name %>
+            <a href="/robot/show/<%= robot.id %>"><%= robot.name %></a>
             <img src="<%= sails.getBaseUrl() + robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:30px">
           </td>
           <td><%= robot.description %></td>
 
           <td><%= robot.ipaddress + ':' + robot.port %> </td>
           <td><%= robot.owner.name %>
-            <img src="<%= sails.getBaseUrl() + robot.owner.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:30px">
+            <img src="<%= sails.getBaseUrl() + robot.owner.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:32px">
           </td>
 
           <% if(robot.public_view){ %>
@@ -54,10 +53,7 @@
           <% } %>
 
           <td>
-            <a href="/robot/show/<%= robot.id %>" class="btn btn-sm btn-primary"><%= i18n('show') %></a>
-          </td>
-          <td>
-            <a href="/interface/view/<%= robot.robot_interface.id %>" class="btn btn-sm btn-success"><%= i18n(' show_interface') %></a>
+            <a href="/interface/view/<%= robot.robot_interface.id %>" class="btn btn-sm btn-primary"><%= i18n('interface') %></a>
           </td>
           <td>
             <a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a>

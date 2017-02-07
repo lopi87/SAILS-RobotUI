@@ -83,5 +83,6 @@
 	"slider": "slider",
 	"event": "event",
 	"vertical": "vertical",
-	"length": "length"
+	"length": "length",
+	"message": "message"
 }

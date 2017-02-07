@@ -199,7 +199,7 @@ module.exports = {
 
   admin_panel: function(req, res, next){
 
-    Robot.find({owner: req.session.User.id}).populate('robot_interface').populate('owner').exec(function foundRobot(err, robots) {
+    Robot.find().populate('robot_interface').populate('owner').exec(function foundRobot(err, robots) {
       if (err) return res.serverError(err);
 
       res.view({

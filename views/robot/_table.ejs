@@ -16,14 +16,13 @@
       <td id="label_state_<%=robot.id%>"> <span class="label label-pill label-success"> Free </span></td>
     <% } %>
 
-    <td><%= robot.name %></td>
+    <td><a href="/robot/show/<%= robot.id %>"><%= robot.name %></a></td>
     <td><%= robot.description %></td>
     <td><%= robot.ipaddress + ':' + robot.port%></td>
 
     <% switch(type){
     case "public_robots": %>
     <td>
-      <a href="/robot/show/<%= robot.id %>" class="btn btn-sm btn-primary"></i> Show </a>
       <% if (robot.busy ){ %>
       <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
       <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>

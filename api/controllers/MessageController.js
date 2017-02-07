@@ -8,8 +8,6 @@
 module.exports = {
 
 
-
-
   index: function(req, res, next) {
     Message.find({to_user_id: req.session.User.id}).populate('from_user_id').exec(function foundMessage(err, messages){
       if(err) return next(err);
@@ -21,6 +19,16 @@ module.exports = {
           user_messages: messages,
           users:users
         });
+      });
+    });
+  },
+
+  create: function (req, res, next) {
+    User.find(function foundUsers(err, users) {
+      if (err) return next(err);
+
+      return res.render('message/new.ejs', {
+        users: users
       });
     });
   },

@@ -59,7 +59,8 @@ module.exports.policies = {
 
 
   message:{
-    '*': ['flash', 'sessionAuth', 'localize']
+    '*': ['flash', 'sessionAuth', 'localize'],
+    new: ['flash', 'sessionAuth', 'localize']
   },
 
   robot:{
