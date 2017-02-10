@@ -49,7 +49,7 @@ module.exports = {
 
 
   show: function (req, res, next) {
-    Interface.findOne(req.param('id')).populate('events').populate('joysticks').populate('video').populate('robot_owner').exec(function (err, iface) {
+    Interface.findOne(req.param('id')).populate('events').populate('joystick').populate('video').populate('robot_owner').exec(function (err, iface) {
       if (err) return next(err);
       if (!iface) return next(err);
 
