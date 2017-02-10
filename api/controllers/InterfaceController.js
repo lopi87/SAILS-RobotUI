@@ -112,7 +112,7 @@ module.exports = {
             interface: iface,
             actions: actions,
             sliders: iface.sliders,
-            joysticks: iface.joysticks,
+            joysticks: iface.joystick,
             video: iface.video,
             events: iface.events,
             robot: iface.robot_owner,
