@@ -54,5 +54,9 @@
 	"slider.max.integer": "slider.max.integer",
 	"slider.step.integer": "slider.step.integer",
 	"video.event_name.required": "video.event_name.required",
-	"event.event_name.required": "event.event_name.required"
+	"event.event_name.required": "event.event_name.required",
+	"message.content.string": "message.content.string",
+	"message.content.required": "message.content.required",
+	"message.title.string": "message.title.string",
+	"message.title.required": "message.title.required"
 }

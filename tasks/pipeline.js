@@ -23,6 +23,9 @@ var cssFilesToInject = [
   'styles/font-awesome/font-awesome.css',
   'styles/parsley/parsley.css',
   'styles/jquery-ui/jquery-ui.css',
+  'styles/summernote/summernote.css',
+  'styles/summernote/summernote-bs3.css',
+  'styles/base/*.scss',
 
 
 
@@ -47,6 +50,7 @@ var jsFilesToInject = [
   'js/vendor/bootstrap-colorpicker.js',
   'js/vendor/jquery-ui.js',
   'js/vendor/parsley.js',
+  'js/vendor/summernote.min.js',
   'js/i18n/*.js',  //languages of parsley
 
   'js/vendor/**/*.js',

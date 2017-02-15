@@ -14,7 +14,7 @@ module.exports = {
 
   configure: function (req, res, next) {
 
-    Interface.findOne({id: req.param('id')}).populate('events').populate('video').populate('joysticks').populate('robot_owner').populate('sliders').exec(function (err, iface) {
+    Interface.findOne({id: req.param('id')}).populate('events').populate('video').populate('robot_owner').populate('sliders').exec(function (err, iface) {
       if (err) return next(err);
       if (!iface) return next(err);
 

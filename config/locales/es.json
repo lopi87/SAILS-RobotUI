@@ -84,5 +84,6 @@
 	"event": "event",
 	"vertical": "vertical",
 	"length": "length",
-	"message": "message"
+	"message": "message",
+	"send": "send"
 }

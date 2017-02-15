@@ -103,7 +103,7 @@ function startStreaming(socket) {
 
   if (running_camera == false){
     console.log('Starting streaming....');
-    var args = ["-f", "video4linux2", "-i", "/dev/video0", "-s", "400x300","-f","mjpeg", "pipe:1"]
+    var args = ["-f", "video4linux2", "-i", "/dev/video2", "-s", "300x150","-f","mjpeg", "pipe:1"]
     ffmpeg_command = require('child_process').spawn("ffmpeg", args);
     running_camera = true
   }
