@@ -50,7 +50,7 @@ var jsFilesToInject = [
   'js/vendor/bootstrap-colorpicker.js',
   'js/vendor/jquery-ui.js',
   'js/vendor/parsley.js',
-  'js/vendor/summernote.min.js',
+  'js/vendor/summernote.js',
   'js/i18n/*.js',  //languages of parsley
 
   'js/vendor/**/*.js',
