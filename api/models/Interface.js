@@ -37,6 +37,7 @@ module.exports = {
       via: 'interface_owner'
     },
 
+
     // Eventos de la interfaz
     joystick: {
       collection: 'joystick',
