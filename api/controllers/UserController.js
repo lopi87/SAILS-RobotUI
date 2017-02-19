@@ -79,13 +79,6 @@ module.exports = {
 
 
   index: function (req, res, next) {
-    // User.find().exec(function (err, users) {
-    //   if (err) return next(err);
-    //   res.view({
-    //     users: users
-    //   });
-    // });
-
     var page = 1;
 
     if( typeof req.param('page') != 'undefined'  ){

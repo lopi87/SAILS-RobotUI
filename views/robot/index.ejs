@@ -1,14 +1,16 @@
+<%- partial('../_alert.ejs', {flash: flash}) %>
 
 <div class="jumbox">
   <h2 class="form-sigin-heading"><%= i18n('my_robots') %></h2>
 
-  <% if(robots.size == 0){ %>
+  <% if(data_robots.robots.size == 0){ %>
   <div class="alert alert-info margintop20 marginbottom20" role="alert">
     <strong>Ups!</strong>
     You haven't created any robots yet...
   </div>
   <% } else { %>
-  <%- partial('_table.ejs', {robots: robots, type: 'my_robots'}) %>
+  <%- partial('_table.ejs', {data: data_robots, type: 'my_robots'}) %>
+  <%- partial ('../_paginate.ejs', { paginate: data_robots.meta.paginate, param_name: 'page' } )%>
   <% } %>
 </div>
 
@@ -17,13 +19,13 @@
 <div class="jumbox">
 <h3>My Shared Robots</h3>
 
-  <% if(driver_robots.size == 0){ %>
+  <% if(data_driver_robots.robots.size == 0){ %>
   <div class="alert alert-info margintop20 marginbottom20" role="alert">
     <strong>Ups!</strong>
     You haven't created any robots shared yet...
   </div>
   <% } else { %>
-  <%- partial('_table.ejs', {robots: driver_robots, type: 'my_driver_robots'}) %>
+  <%- partial('_table.ejs', {data: data_driver_robots, type: 'my_driver_robots'}) %>
   <% } %>
 
 </div>
@@ -34,13 +36,13 @@
 <div class="jumbox">
   <h3>My guest Robots</h3>
 
-  <% if(viewer_robots.size == 0){ %>
+  <% if(data_viewer_robots.robots.size == 0){ %>
   <div class="alert alert-info margintop20 marginbottom20" role="alert">
     <strong>Ups!</strong>
     You haven't created any robots shared yet...
   </div>
   <% } else { %>
-  <%- partial('_table.ejs', {robots: viewer_robots, type: 'my_viewer_robots'}) %>
+  <%- partial('_table.ejs', {data: data_viewer_robots, type: 'my_viewer_robots'}) %>
   <% } %>
 
 

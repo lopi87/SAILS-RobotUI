@@ -1,3 +1,5 @@
+<%- partial('../_alert.ejs', {flash: flash}) %>
+
 <div class="jumbox margintop20">
   <h2 class="form-sigin-heading"><%= i18n('robots') %></h2>
   <div class="table-responsive">
@@ -32,7 +34,9 @@
           <td><%= robot.description %></td>
 
           <td><%= robot.ipaddress + ':' + robot.port %> </td>
-          <td><%= robot.owner.name %>
+
+          <td>
+            <a href="/user/show/<%= robot.owner.id %>"><%= robot.owner.name %></a>
             <img src="<%= sails.getBaseUrl() + robot.owner.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:32px">
           </td>
 

@@ -1,88 +1,92 @@
-<table class="table">
-  <tr>
-    <th><%= i18n('state') %></th>
-    <th><%= i18n('name') %></th>
-    <th><%= i18n('description') %></th>
-    <th><%= i18n('ip_address') %></th>
-    <th colspan="3" ><%= i18n('actions') %></th>
-  </tr>
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+      <th><%= i18n('state') %></th>
+      <th><%= i18n('name') %></th>
+      <th><%= i18n('description') %></th>
+      <th><%= i18n('ip_address') %></th>
+      <th colspan="3" ><%= i18n('actions') %></th>
+    </tr>
 
-  <% _.each(robots, function(robot){ %>
-  <tr id="<%= robot.id %>" data-model="robot" >
+    <% _.each(data.robots, function(robot){ %>
+    <tr id="<%= robot.id %>" data-model="robot" >
 
-    <% if(robot.busy){ %>
+      <% if(robot.busy){ %>
       <td id="label_state_<%=robot.id%>"> <span class="label label-pill label-danger"> Busy </span></td>
-    <% } else { %>
+      <% } else { %>
       <td id="label_state_<%=robot.id%>"> <span class="label label-pill label-success"> Free </span></td>
-    <% } %>
-
-    <td><a href="/robot/show/<%= robot.id %>"><%= robot.name %></a></td>
-    <td><%= robot.description %></td>
-    <td><%= robot.ipaddress + ':' + robot.port%></td>
-
-    <% switch(type){
-    case "public_robots": %>
-    <td>
-      <% if (robot.busy ){ %>
-      <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
-      <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
-      <% } else { %>
-      <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary hidden"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
-      <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
-      <a id="btn_config_ <%= robot.id%>" href="/interface/configure/<%= robot.robot_interface %>" class="btn btn-sm btn-warning"><i class="fa fa-wrench" aria-hidden="true"></i> Configure</a>
       <% } %>
 
-    </td>
-    <% break;
+      <td>
+        <a href="/robot/show/<%= robot.id %>"><%= robot.name %></a>
+        <img src="<%= sails.getBaseUrl() + robot.avatarUrl %>" alt="Avatar" title="<%= robot.name %>" class="card-left card-circle card-margin-right img-responsive" style="width:32px">
+      </td>
+
+      <td><%= robot.description %></td>
+      <td><%= robot.ipaddress + ':' + robot.port%></td>
+
+      <% switch( type ){
+      case "public_robots": %>
+      <td>
+        <% if (robot.busy ){ %>
+        <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
+        <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+        <% } else { %>
+        <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary hidden"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
+        <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+        <a id="btn_config_ <%= robot.id%>" href="/interface/configure/<%= robot.robot_interface %>" class="btn btn-sm btn-warning"><i class="fa fa-wrench" aria-hidden="true"></i> Configure</a>
+        <% } %>
+
+      </td>
+      <% break;
 
 
-    case "my_robots": %>
-    <td>
-      <% if (robot.busy ){ %>
-      <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
-      <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary hidden"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
-      <% } else { %>
-      <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
-      <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary hidden"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
-      <% } %>
-      <a href="/interface/configure/<%= robot.robot_interface %>" class="btn btn-sm btn-warning"><i class="fa fa-wrench" aria-hidden="true"></i> Configure</a>
-      <a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"></i> Edit </a>
-      <a class="btn btn-sm btn-danger" onclick=" unlink('<%= req.session.User.id %>', '<%=robot.id%>', 'driver')"><i class="fa fa-trash-o"></i> Unlink </a>
-      <a class="btn btn-sm btn-danger" onclick=" window.location.href='<%='/robot/destroy/' + robot.id %>'"><i class="fa fa-trash-o"></i> Delete </a>
-    </td>
+      case "my_robots": %>
+      <td>
+        <% if( robot.busy ){ %>
+        <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
+        <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary hidden"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+        <% } else { %>
+        <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+        <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary hidden"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
+        <% } %>
+        <a href="/interface/configure/<%= robot.robot_interface %>" class="btn btn-sm btn-warning"><i class="fa fa-wrench" aria-hidden="true"></i> Configure</a>
+        <a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"></i> Edit </a>
+        <a class="btn btn-sm btn-danger" onclick=" unlink('<%= req.session.User.id %>', '<%=robot.id%>', 'driver')"><i class="fa fa-trash-o"></i> Unlink </a>
+        <a class="btn btn-sm btn-danger" onclick=" window.location.href='<%='/robot/destroy/' + robot.id %>'"><i class="fa fa-trash-o"></i> Delete </a>
+      </td>
 
-    <% break;
-    case "my_driver_robots": %>
-    <td>
-      <% if (robot.busy ){ %>
-      <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary hidden"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
-      <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
-      <% } else { %>
-      <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
-      <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary hidden"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
-      <% } %>
-      <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
-      <a class="btn btn-sm btn-danger" onclick=" unlink('<%= req.session.User.id %>', '<%=robot.id%>', 'driver')"><i class="fa fa-trash-o"></i> Unlink </a>
-    </td>
+      <% break;
+      case "my_driver_robots": %>
+      <td>
+        <% if( robot.busy ){ %>
+        <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary hidden"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+        <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
+        <% } else { %>
+        <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+        <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary hidden"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
+        <% } %>
+        <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
+        <a class="btn btn-sm btn-danger" onclick=" unlink('<%= req.session.User.id %>', '<%=robot.id%>', 'driver')"><i class="fa fa-trash-o"></i> Unlink </a>
+      </td>
 
-    <% break;
-    case "my_viewer_robots": %>
-    <td>
-      <% if (robot.busy ){ %>
-      <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
-      <% } else { %>
-      <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary hidden"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
-      <% } %>
-      <a class="btn btn-sm btn-danger" onclick=" unlink('<%= req.session.User.id %>', '<%=robot.id%>', 'viewer')"><i class="fa fa-trash-o"></i> Unlink </a>
-    </td>
-    <% break;
-    } %>
-  </tr>
-  <% }) %>
+      <% break;
+      case "my_viewer_robots": %>
+      <td>
+        <% if( robot.busy ){ %>
+        <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
+        <% } else { %>
+        <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.robot_interface %>" class="btn btn-sm btn-primary hidden"><i class="fa fa-eye" aria-hidden="true"></i></i> View </a>
+        <% } %>
+        <a class="btn btn-sm btn-danger" onclick=" unlink('<%= req.session.User.id %>', '<%=robot.id%>', 'viewer')"><i class="fa fa-trash-o"></i> Unlink </a>
+      </td>
+      <% break;
+      } %>
+    </tr>
+    <% }) %>
 
-</table>
-
-
+  </table>
+</div>
 
 <script type="text/javascript">
   function unlink(user_id, robot_id, type_link) {
@@ -94,7 +98,7 @@
       },
 
       success: function(data){
-        $("#" + robot_id).remove();
+        $("#"  + robot_id).remove();
         bootstrap_alert['success']('Unlink!', 5000 );
       },
 

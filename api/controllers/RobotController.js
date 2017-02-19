@@ -98,60 +98,75 @@ module.exports = {
 
   index: function(req, res, next) {
 
-    Robot.find({owner: req.session.User.id}).exec(function foundRobot(err, robots){
-      if(err) return res.serverError(err);
+    //   var ping = require('ping');
+    //   var address;
+    //   robots.forEach(function(robot){
+    //     address = robot.ipaddress + ':' + robot.port;
+    //     ping.sys.probe(robot.ipaddress, function(isAlive){
+    //       var msg = isAlive ? 'host ' + address + ' is alive' : 'host ' + address + ' is dead';
+    //       robot.isAlive = isAlive;
+    //       console.log(msg);
+    //     });
+    //   });
 
-      /*
-      var ping = require('ping');
-      var address;
-      robots.forEach(function(robot){
-        address = robot.ipaddress + ':' + robot.port;
-        ping.sys.probe(robot.ipaddress, function(isAlive){
-          var msg = isAlive ? 'host ' + address + ' is alive' : 'host ' + address + ' is dead';
-          robot.isAlive = isAlive;
-          console.log(msg);
-        });
-      });
-      */
+    var page = page2 = page3 = 1;
+    if( typeof req.param('page') != 'undefined'  ){
+      page = parseInt(req.param('page'));
+    }
+    if( typeof req.param('page2') != 'undefined'  ){
+      page2 = parseInt(req.param('page2'));
+    }
+    if( typeof req.param('page3') != 'undefined'  ){
+      page3 = parseInt(req.param('page3'));
+    }
 
-      User.findOne(req.session.User.id).populate('d_robots').exec(function (err, user1){
-        if (err) return res.serverError(err);
-        if (!user1) return res.badRequest();
 
-        User.findOne(req.session.User.id).populate('v_robots').exec(function (err, user2){
-          if (err) return res.serverError(err);
-          if (!user2) return res.badRequest();
+    User.findOne(req.session.User.id).populate('d_robots').populate('v_robots').exec(function (err, user){
+      if (err) return res.serverError(err);
+      if (!user) return res.badRequest();
 
-          res.view({
-            robots:robots,
-            driver_robots: user1.d_robots,
-            viewer_robots: user2.v_robots
-          });
-        });
+      Robot.pagify('robots',{ findQuery: { owner: user.id }, sort: ['createdAt DESC'], page: page}).then(function(data_robots) {
+
+         Robot.pagify('robots',{ findQuery: { viewers: user.id }, sort: ['createdAt DESC'], page: page2}).then(function(data_d_robots) {
+
+           Robot.pagify('robots',{ findQuery: { drivers: user.id }, sort: ['createdAt DESC'], page: page3}).then(function(data_v_robots) {
+
+             res.view({
+               data_robots: data_robots,
+               data_driver_robots: data_d_robots,
+               data_viewer_robots: data_v_robots
+             });
+
+           });
+         });
       });
     });
   },
 
   index_public_robots: function(req, res, next) {
-    Robot.find().where({ or: [{public_view: true, public_drive: true}]}).paginate({page: req.param('page'), limit: 4}).exec(function (err, robots){
-      if (err) return res.serverError(err);
 
-      res.view({
-        public_robots: robots
-      });
+    var page = 1;
+
+    if( typeof req.param('page') != 'undefined'  ){
+      page = parseInt(req.param('page'));
+    }
+
+    Robot.pagify('robots', {findQuery: { or: [{public_view: true, public_drive: true}]} , sort: ['createdAt DESC'], page: page}).then(function(data){
+      res.view({data: data});
+    }).catch(function(err){
+      return next(err);
     });
   },
 
-
-  index_driver_robots: function(req, res, next) {
-    User.findOne(req.session.User.id).populate('d_robots').exec(function (err, user){
-      if (err) return res.serverError(err);
-
-      res.view({
-        driver_robots: user.d_robots
-      });
-    });
-  },
+  //
+  // index_driver_robots: function(req, res, next) {
+  //   User.findOne(req.session.User.id).populate('d_robots').exec(function (err, user){
+  //     if (err) return res.serverError(err);
+  //
+  //     res.view({
+  //       driver_robots: user.d_robots
+  //     });
+  //   });
 
 
 
@@ -200,14 +215,6 @@ module.exports = {
 
   admin_panel: function(req, res, next){
 
-    // Robot.find().populate('robot_interface').populate('owner').exec(function foundRobot(err, robots) {
-    //   if (err) return res.serverError(err);
-    //
-    //   res.view({
-    //     robots:robots
-    //   });
-    // });
-
     var page = 1;
 
     if( typeof req.param('page') != 'undefined'  ){
@@ -219,8 +226,6 @@ module.exports = {
     }).catch(function(err){
       return next(err);
     });
-
-
 
   },
 
