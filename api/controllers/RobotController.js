@@ -7,6 +7,7 @@
 
 var Log = require('log');
 log = new Log('debug');
+var pager = require('sails-pager');
 
 module.exports = {
 
@@ -199,13 +200,27 @@ module.exports = {
 
   admin_panel: function(req, res, next){
 
-    Robot.find().populate('robot_interface').populate('owner').exec(function foundRobot(err, robots) {
-      if (err) return res.serverError(err);
+    // Robot.find().populate('robot_interface').populate('owner').exec(function foundRobot(err, robots) {
+    //   if (err) return res.serverError(err);
+    //
+    //   res.view({
+    //     robots:robots
+    //   });
+    // });
 
-      res.view({
-        robots:robots
-      });
+    var page = 1;
+
+    if( typeof req.param('page') != 'undefined'  ){
+      page = parseInt(req.param('page'));
+    }
+
+    Robot.pagify('robots', {sort: ['createdAt DESC'], populate: ['robot_interface', 'owner'], page: page}).then(function(data){
+      res.view({data: data});
+    }).catch(function(err){
+      return next(err);
     });
+
+
 
   },
 

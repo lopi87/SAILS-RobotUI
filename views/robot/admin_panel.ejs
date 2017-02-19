@@ -16,7 +16,7 @@
       </thead>
 
       <tbody id="robot_list">
-      <% _.each(robots, function(robot){ %>
+      <% _.each(data.robots, function(robot){ %>
         <tr id="line_<%= robot.id %>" data-model="robot">
 
           <% if(robot.busy){ %>
@@ -70,6 +70,9 @@
       </tbody>
     </table>
   </div>
+
+  <%- partial ('../_paginate.ejs', { paginate: data.meta.paginate } )%>
+
 </div>
 
 <div id="robot_list"></div>
