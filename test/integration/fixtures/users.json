@@ -1,0 +1,32 @@
+[
+  {
+    "id": "584b0f35a3f0ac26181cd642",
+    "name": "m",
+    "email": "er_lope@hotmail.com",
+    "language": "es",
+    "admin": true,
+    "online": false,
+    "password": "12345678",
+    "confirmation": "12345678",
+    "avatarUrl": "/images/avatar/avatar.png",
+    "encryptedPassword": "$2a$10$ISyLb32.j/TE8VkMDmfJGeHu5o/aI3sddapt/GGzea.4KWuKGUeRC",
+    "onLine": true,
+    "atitude": 0
+  },
+  {
+    "id": "58505b0fe2916f2b18a48a04",
+    "name": "Manuel",
+    "email": "lopez.urbina.manuel@gmail.com",
+    "language": "es",
+    "admin": false,
+    "online": false,
+    "password": "12345678",
+    "confirmation": "12345678",
+    "avatarUrl": "/images/avatar/avatar.png",
+    "encryptedPassword": "$2a$10$dHF2BWMtfQww0sx696ZCQeEHn6nR1nbLVkYBh8I38xCiYaCyiDxuO",
+    "latitude": 0
+  }
+
+
+
+]

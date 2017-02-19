@@ -85,5 +85,18 @@
 	"vertical": "vertical",
 	"length": "length",
 	"message": "message",
-	"send": "send"
+	"send": "send",
+	"user.email.string": "user.email.string",
+	"user.email.email": "user.email.email",
+	"user.email.required": "user.email.required",
+	"online": "online",
+	"role": "role",
+	"state": "state",
+	"ip_address": "ip_address",
+	"avatar": "avatar",
+	"add_robot": "add_robot",
+	"show_robots": "show_robots",
+	"delete": "delete",
+	"robots": "robots",
+	"my_robots": "my_robots"
 }

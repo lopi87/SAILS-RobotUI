@@ -1,0 +1,27 @@
+<% if (paginate.totalPages > 1) { %>
+<ul class="pagination">
+  <% if (paginate.currentPage > 1) { %>
+  <li><a href="<%= req.path %>?page=1">&laquo;</a></li>
+  <% } %>
+  <% var i = 1;
+    if (paginate.currentPage > 5) {
+      i = + paginate.currentPage - 4;
+    } %>
+  <% if (i !== 1) { %>
+  <li class="disabled"><a href="<%= req.path %>">...</a></li>
+  <% } %>
+  <% for (i; i<= paginate.totalPages; i++) { %>
+  <% if (paginate.currentPage == i) { %>
+  <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+  <% } else { %>
+  <li><a href="<%= req.path %>?page=<%= i %>"><%= i %></a></li>
+  <% } %>
+  <% if (i == (+ paginate.currentPage + 4)) { %>
+  <li class="disabled"><a href="<%= req.path %>">...</a></li>
+  <% break; } %>
+  <% } %>
+  <% if (paginate.currentPage != paginate.totalPages) { %>
+  <li><a href="<%= req.path %>?page=<%= paginate.totalPages %>">&raquo;</a></li>
+  <% } %>
+</ul>
+<% } %>

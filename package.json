@@ -11,6 +11,7 @@
     "db-migrate": "^0.9.18",
     "delivery": "0.0.6",
     "ejs": "~0.8.4",
+    "express-paginate": "^0.2.2",
     "font-awesome": "^4.4.0",
     "forever": "^0.15.3",
     "geoip-lite": "^1.1.8",
@@ -41,8 +42,10 @@
     "sails-db-migrate": "^0.8.0",
     "sails-disk": "~0.10.0",
     "sails-hook-email": "^0.12.1",
+    "sails-hook-pagify": "^0.2.0",
     "sails-hook-validation": "^0.4.6",
     "sails-mongo": "^0.12.1",
+    "sails-pager": "^2.0.5",
     "sails-seed": "^0.5.0",
     "skipper": "^0.5.5",
     "socket.io": "^1.7.2",
@@ -51,8 +54,9 @@
     "winston": "^2.3.1"
   },
   "scripts": {
+    "start": "node app.js",
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "test": "PORT=9999 NODE_ENV=test mocha --timeout 15000 test/integration/**/*.test.js"
   },
   "main": "app.js",
   "repository": {
@@ -61,5 +65,14 @@
   },
   "author": "Manuel Lopez Urbina",
   "license": "",
-  "devDependencies": {}
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "barrels": "^1.6.4",
+    "grunt-mocha-test": "^0.13.2",
+    "mocha": "^3.2.0",
+    "sails-memory": "^0.10.7",
+    "should": "^11.2.0",
+    "sinon": "^1.17.7",
+    "supertest": "^3.0.0"
+  }
 }

@@ -1,3 +1,4 @@
+<%- partial('../_alert.ejs', {flash: flash}) %>
 
 <div class="container">
   <h2 class="form-sigin-heading">User information</h2>
@@ -9,20 +10,20 @@
 
     <div class="card-container paddingtop10">
       <% if(user.admin){ %>
-      <img src="/images/admin.png" height="32" width="32"> admin
+      <img src="/images/admin.png" height="32" width="32" class="img-responsive"> admin
       <% } else { %>
-      <img src="/images/pawn.png"  height="32" width="32"> pawn
+      <img src="/images/pawn.png"  height="32" width="32" class="img-responsive"> pawn
       <% } %>
       <% if(user.online || user.id == req.session.User.id){ %>
-        <img src="/images/online.png" height="32" width="32"> online
+        <img src="/images/online.png" height="32" width="32" class="img-responsive"> online
       <% } else { %>
-        <img src="/images/offline.png"  height="32" width="32"> offline
+        <img src="/images/offline.png"  height="32" width="32" class="img-responsive"> offline
       <% } %>
     </div>
     <hr>
 
       <div class="card-container">
-        <img src="<%= sails.getBaseUrl() + user.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:75px">
+        <img src="<%= sails.getBaseUrl() + user.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right img-responsive" style="width:75px">
         <p>Email: <%= user.email%></p>
         <p>Language: <img class="chose-image-small" src="/images/flags/<%= user.language.toUpperCase()%>.png"></p>
 

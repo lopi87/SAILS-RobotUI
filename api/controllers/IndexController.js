@@ -7,22 +7,23 @@
 
 
 module.exports = {
-  index: function (req, res) {
 
-    var n_robots_online = 1;
-    return res.view({
-      n_robots_online: n_robots_online
+  index: function (req, res) {
+    Robot.count({online: true}).exec(function countOnlineRobots(error, number) {
+      return res.view({
+        n_robots_online: number
+      });
     });
   },
 
   about: function (req, res){
 
-    return res.ok();
+    return res.view();
   },
 
   contact: function (req, res){
 
-    return res.ok();
+    return res.view();
   }
 
 };

@@ -101,18 +101,18 @@ module.exports = {
   },
 
 
-  beforeCreate: function(values, next){
-    if(!values.password || values.password != values.confirmation){
+  beforeCreate: function(user, next){
+    if(!user.password || user.password != user.confirmation){
       return next({err: ["Password doesn't match password confirmation."]})
     }
 
-    require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword){
+    require('bcrypt').hash(user.password, 10, function passwordEncrypted(err, encryptedPassword){
       if(err) return next(err);
-      values.encryptedPassword = encryptedPassword;
-      values.online = true;
-      delete values.password;
-      delete values.confirmation;
-      next();
+      user.encryptedPassword = encryptedPassword;
+      user.online = true;
+      delete user.password;
+      delete user.confirmation;
+      next(null, user);
     });
 
   },

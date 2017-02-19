@@ -5,6 +5,8 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+var pager = require('sails-pager');
+
 module.exports = {
 
   //Carga la pag sign up
@@ -67,7 +69,7 @@ module.exports = {
 
   show: function (req, res, next) {
     User.findOne(req.param('id'), function foundUser(err, user) {
-      if (err) return next(err);
+      if (err) return res.serverError(err);
       if (!user) return next();
       res.view({
         user: user
@@ -77,16 +79,25 @@ module.exports = {
 
 
   index: function (req, res, next) {
-    //console.log(new Date());
-    //console.log(req.session.authenticated);
+    // User.find().exec(function (err, users) {
+    //   if (err) return next(err);
+    //   res.view({
+    //     users: users
+    //   });
+    // });
 
-    User.find(function foundUsers(err, users) {
-      if (err) return next(err);
+    var page = 1;
 
-      res.view({
-        users: users
-      });
+    if( typeof req.param('page') != 'undefined'  ){
+      page = parseInt(req.param('page'));
+    }
+
+    User.pagify('users', {sort: ['createdAt DESC'], page: page}).then(function(data){
+      res.view({data: data});
+    }).catch(function(err){
+      return next(err);
     });
+
   },
 
 
@@ -206,7 +217,7 @@ module.exports = {
       if (err) return next(err);
       if (!user) return next();
 
-      return res.render('user/user_row.ejs', {
+      return res.render('user/_row.ejs', {
         user: user,
         layout: false
       });

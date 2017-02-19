@@ -15,17 +15,18 @@ module.exports = function(req, res, next){
 
 */
 
-// flash.js policy MEJORADO
+// flash.js policy
 module.exports = function(req, res, next) {
-  res.locals.flash = { success: [], error: [], warning: [], info: [], server_exit: [] };
 
   if(!req.session.flash) {
     req.session.flash = { success: [], error: [], warning: [], info: [], server_exit: [] };
-    return next();
+    res.locals.flash = _.clone(req.session.flash);
   }
-  res.locals.flash = _.clone(req.session.flash);
+  else{
+    res.locals.flash = _.clone(req.session.flash);
+    req.session.flash = { success: [], error: [], warning: [], info: [], server_exit: [] };
+  }
 
-  // Clear flash
-  req.session.flash = { success: [], error: [], warning: [], info: [], server_exit: [] };
   return next();
+
 };

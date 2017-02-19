@@ -29,11 +29,42 @@
 
 
   <!--STYLES-->
-  <link rel="stylesheet" href="/min/production.min.css">
+  <link rel="stylesheet" href="/styles/bootstrap/bootstrap.css">
+  <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.css">
+  <link rel="stylesheet" href="/styles/jasny-bootstrap/jasny-bootstrap.css">
+  <link rel="stylesheet" href="/styles/bootstrap-colorpicker/bootstrap-colorpicker.css">
+  <link rel="stylesheet" href="/styles/font-awesome/font-awesome.css">
+  <link rel="stylesheet" href="/styles/parsley/parsley.css">
+  <link rel="stylesheet" href="/styles/jquery-ui/jquery-ui.css">
+  <link rel="stylesheet" href="/styles/summernote/summernote.css">
+  <link rel="stylesheet" href="/styles/summernote/summernote-bs3.css">
+  <link rel="stylesheet" href="/styles/base/md-skin.scss">
+  <link rel="stylesheet" href="/styles/base/pages.scss">
+  <link rel="stylesheet" href="/styles/chosen/ImageSelect.css">
+  <link rel="stylesheet" href="/styles/chosen/chosen.min.css">
+  <link rel="stylesheet" href="/styles/importer.css">
   <!--STYLES END-->
 
   <!--SCRIPTS-->
-  <script src="/min/production.min.js"></script>
+  <script src="/js/dependencies/sails.io.js"></script>
+  <script src="/js/vendor/jquery-2.2.4.js"></script>
+  <script src="/js/vendor/bootstrap.js"></script>
+  <script src="/js/vendor/chosen.jquery.js"></script>
+  <script src="/js/vendor/ImageSelect.jquery.js"></script>
+  <script src="/js/vendor/jasny-bootstrap.js"></script>
+  <script src="/js/vendor/interact.js"></script>
+  <script src="/js/vendor/bootstrap-colorpicker.js"></script>
+  <script src="/js/vendor/jquery-ui.js"></script>
+  <script src="/js/vendor/parsley.js"></script>
+  <script src="/js/vendor/summernote.js"></script>
+  <script src="/js/i18n/de.js"></script>
+  <script src="/js/i18n/en.js"></script>
+  <script src="/js/i18n/es.js"></script>
+  <script src="/js/i18n/fr.js"></script>
+  <script src="/js/i18n/pt.js"></script>
+  <script src="/js/i18n/ru.js"></script>
+  <script src="/js/vendor/gridster.js"></script>
+  <script src="/js/utils.js"></script>
   <!--SCRIPTS END-->
 </head>
 
@@ -152,7 +183,7 @@
         <% if (session.authenticated) { %>
         <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy"> <i class="fa fa-sign-out"></i> <span><%= __("signout") %></span></a>
         <a class="navbar-btn navbar-right" href="/user/show/<%= session.User.id%>">
-          <img src="<%= sails.getBaseUrl() + session.User.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:32px">
+          <img src="<%= sails.getBaseUrl() + session.User.avatarUrl %>" alt="Avatar" title="<%=session.User.name%>" class=" card-left card-circle card-margin-right" style="width:32px">
         </a>
         <% } %>
         <% if (!session.authenticated) { %>
@@ -189,9 +220,8 @@
     </div>
       </div>
   </nav>
-  <%- partial('_alert.ejs', {flash: flash}) %>
   <div class="container box">
-    <%- partial ('modal.ejs')%>
+    <%- partial ('_modal.ejs')%>
     <%- body %>
   </div>
 

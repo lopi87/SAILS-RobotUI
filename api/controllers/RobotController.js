@@ -414,7 +414,7 @@ module.exports = {
       if (err) return next(err);
       if (!robot) return next();
 
-      return res.render('robot/robot_row.ejs', {
+      return res.render('robot/_row.ejs', {
         robot: robot,
         layout: false
       });
