@@ -9,19 +9,25 @@
   </div>
   <% } else { %>
 
-  <div class="checkbox">
-    <label><input type="checkbox" name="public_drive" <%= robot.public_drive == true ? 'checked' : '' %>><%= i18n('Public')%></label>
-  </div>
 
-  <div class="checkbox">
-    <label><input type="checkbox" name="public_view" <%= robot.public_view == true ? 'checked' : '' %>><%= i18n('Public')%></label>
-  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="control-group">
+        <label for="name"><%= i18n("public") %> * :</label>
+        <p class="paddingtop10">
+          <%= i18n('control') + ':' %><input class="i-checks pr-2" name="public_drive" type="checkbox" checked="<%= robot.public_drive %>">
+          <%= i18n('view') + ':' %><input class="i-checks pr-2" name="public_view" type="checkbox" checked="<%= robot.public_view %>">
+        </p>
+      </div>
+    </div>
+
 
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
       <table class="table table-hover">
         <thead>
         <tr>
+          <th>Avatar</th>
           <th>Username</th>
           <th>Drive</th>
           <th>View</th>
@@ -33,6 +39,7 @@
         <% Object.keys(perm).forEach(function (key) { %>
         <tr id="perm_<%= key %>">
 
+          <td><img src="<%= sails.getBaseUrl() + perm[key].avatarUrl %>" alt="Avatar" title="<%= perm[key].name %>" class="card-left card-circle card-margin-right img-responsive" style="width:32px"></td>
           <td> <%= perm[key].name %></td>
 
           <% if(perm[key].d){ %>
@@ -61,9 +68,8 @@
   <div class="row">
     <div class="col-md-12">
       <hr class="margintop20">
-
       <div class="row">
-        <div class="col-md-6 marginbottom10">
+        <div class="col-lg-12 marginbottom10">
           <div class="control-group">
             <p><label for="user"><%= i18n("users") %> * :</label></p>
             <select tabindex="-1" multiple="" data-placeholder="Choose users..." class="chzn-select" name="users">
@@ -77,20 +83,20 @@
             </script>
           </div>
         </div>
-
-
-        <div class="col-md-4">
+      </div>
+      <div class="row">
+        <div class="col-md-6">
           <div class="control-group">
-            <label for="name"><%= i18n("permissions") %> * :</label>
+            <label for="name"><%= i18n("actions") %> * :</label>
             <p class="paddingtop10">
-              Control: <input name="control_check" required="" type="checkbox">
-              View: <input name="view_check" type="checkbox">
+              Control: <input class="i-checks pr-2" name="control_check" type="checkbox">
+              View: <input class="i-checks pr-2" name="view_check" type="checkbox">
             </p>
           </div>
         </div>
 
-        <div class="col-md-2 margintop10">
-          <a id="down_bottom" class="btn btn-primary btn-success" onclick="new_permissions('<%= robot.id %>')"><%= i18n('add') %></a>
+        <div class="col-md-6 margintop10">
+          <a id="down_bottom" class="btn btn-lg btn-block btn-success margintop10" onclick="new_permissions('<%= robot.id %>')"><%= i18n('add') %></a>
         </div>
       </div>
     </div>
@@ -110,11 +116,11 @@
 
       success: function(data){
         $('#actualizar').html(data);
-        bootstrap_alert['success']('The new permissions has been added!', 5000 );
+        toastr.info('The new permissions has been added!', 'Permissions' );
       },
 
       error: function(xhr, status, text) {
-        bootstrap_alert['danger'](xhr.responseText, 5000 );
+        toastr.danger(xhr.responseText, Permissions );
       }
     });
   }
@@ -130,7 +136,7 @@
 
       success: function(data){
         $("#perm_" + user_id).remove();
-        bootstrap_alert['success']('Permissions user has been deleted!', 5000 );
+       toastr.info('Permissions user has been deleted!', 'Robot' );
       },
 
       error: function(xhr, status, text) {

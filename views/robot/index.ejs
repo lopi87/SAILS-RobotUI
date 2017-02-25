@@ -65,9 +65,9 @@
         console.log('Robot ' + data.id + ' has been updated to: busy:' + data.busy);
 
         if (data.busy){
-          bootstrap_alert['success']('Robot busy', 5000)
+         toastr.info('Robot busy', 'Robot')
         }else{
-          bootstrap_alert['success']('Robot free!', 5000)
+         toastr.info('Robot free!', 'Robot')
         }
       }
 

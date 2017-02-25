@@ -70,7 +70,7 @@
           $("#errors_container").html('');
           $("#panel").append(data);
           $('.modal').modal('toggle');
-          bootstrap_alert['success']('A new slider has been created!', 5000);
+         toastr.info('A new slider has been created!', 'Slider');
         },
 
         error: function (xhr) {

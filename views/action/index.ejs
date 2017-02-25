@@ -50,7 +50,7 @@
         type: 'GET',
         success: function(data){
           $("#actualizar tr").remove();
-          bootstrap_alert['success']('All actions has been deleted!', 5000 );
+         toastr.info('All actions has been deleted!', 'Action' );
         },
         error: function(xhr, status, text) {
           bootstrap_alert['danger'](xhr.responseText, 5000 );
@@ -66,7 +66,7 @@
 
         success: function (data) {
           $("#line_" + id).remove();
-          bootstrap_alert['success']('A new action has been deleted!', 5000 );
+         toastr.info('A new action has been deleted!', 'Action' );
         },
 
         error: function (xhr, status, text) {

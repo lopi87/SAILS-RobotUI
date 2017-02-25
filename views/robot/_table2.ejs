@@ -1,0 +1,67 @@
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+      <th><%= i18n('state') %></th>
+      <th><%= i18n('name') %></th>
+      <th><%= i18n('description') %></th>
+      <th><%= i18n('ip_address') %></th>
+      <th colspan="3" ><%= i18n('actions') %></th>
+    </tr>
+
+    <% _.each(data.robots, function(robot){ %>
+    <tr id="line_<%= robot.id %>" data-model="robot">
+
+      <% if(robot.busy){ %>
+      <td> <img id="img_state_<%=robot.id%>" src="/images/online.png" height="30" width="30"></td>
+      <% } else { %>
+      <td> <img id="img_state_<%=robot.id%>" src="/images/offline.png" height="30" width="30"></td>
+      <% } %>
+
+      <td>
+        <img src="<%= sails.getBaseUrl() + robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:30px">
+        <a href="/robot/show/<%= robot.id %>"><%= robot.name %></a>
+      </td>
+      <td><%= robot.description %></td>
+
+      <td><%= robot.ipaddress + ':' + robot.port %> </td>
+
+      <td>
+        <a href="/user/show/<%= robot.owner.id %>"><%= robot.owner.name %></a>
+        <img src="<%= sails.getBaseUrl() + robot.owner.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:32px">
+      </td>
+
+      <% if(robot.public_view){ %>
+      <td>
+        <span class="label label-pill label-success"> <%= i18n('public')%> </span>
+      </td>
+      <% } else { %>
+      <td> <span class="label label-pill label-danger"> <%= i18n('private')%> </span></td>
+      <% } %>
+
+      <% if(robot.public_drive){ %>
+      <td>
+        <span class="label label-pill label-success"> <%= i18n('public')%> </span>
+      </td>
+      <% } else { %>
+      <td> <span class="label label-pill label-danger"> <%= i18n('private')%> </span></td>
+      <% } %>
+
+      <td>
+        <a href="/interface/view/<%= robot.iface.id %>" class="btn btn-sm btn-primary"><%= i18n('interface') %></a>
+      </td>
+      <td>
+        <a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a>
+      </td>
+      <td>
+        <form action="/robot/destroy/<%=robot.id%>" method="post">
+          <input type="hidden" name="_method" value="delete"/>
+          <input type="submit"  class="btn btn-sm btn-danger" value="Delete"/>
+          <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+        </form>
+      </td>
+    </tr>
+
+    <% }); %>
+
+  </table>
+</div>

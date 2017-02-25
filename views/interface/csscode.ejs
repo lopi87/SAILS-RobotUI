@@ -22,7 +22,7 @@
       dataType: 'json',
 
       success: function(data){
-        bootstrap_alert['success']('The code has been saved!', 5000 );
+       toastr.info('The code has been saved!', 'Code' );
       },
 
       error: function(xhr, status, text) {

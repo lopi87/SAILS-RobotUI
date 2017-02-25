@@ -49,7 +49,7 @@
           $("#errors_container").html('');
           $("#panel").append(data);
           $('.modal').modal('toggle');
-          bootstrap_alert['success']('A new action has been created!', 5000);
+         toastr.info('A new action has been created!', 'Action');
         },
 
         error: function (xhr) {

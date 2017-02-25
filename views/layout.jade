@@ -1,16 +1,144 @@
 doctype html
-html
+html(lang='es')
   head
-    title= title
+    title RobotUI
     // Viewport mobile tag for sensible mobile support
-    meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
-    block styles
-  body
-    block body
-    // A few optional dependencies, linked in order
-    // Bring in the socket.io client
-    script(type="text/javascript", src="/linker/js/socket.io.js")
-    // then beef it up with some convenience logic for talking to Sails.js'
-    script(type="text/javascript", src="/linker/js/sails.io.js")
-    // listen on socket.io for incoming messages
-    script(type="text/javascript", src="/linker/js/example.js")
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    //
+      Stylesheets and Preprocessors
+      ==============================
+      You can always bring in CSS files manually with `<link>` tags, or asynchronously
+      using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+      of Sails' conventional asset pipeline (boilerplate Gruntfile).
+      By default, stylesheets from your `assets/styles` folder are included
+      here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+      are supported. In production, your styles will be minified and concatenated into
+      a single file.
+      To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+      For example, here are a few things you could do:
+      + Change the order of your CSS files
+      + Import stylesheets from other directories
+      + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    // STYLES
+    link(rel="stylesheet", href="/styles/bootstrap/bootstrap.css")
+    link(rel="stylesheet", href="/styles/bootstrap/bootstrap-theme.css")
+    link(rel="stylesheet", href="/styles/jasny-bootstrap/jasny-bootstrap.css")
+    link(rel="stylesheet", href="/styles/bootstrap-colorpicker/bootstrap-colorpicker.css")
+    link(rel="stylesheet", href="/styles/font-awesome/font-awesome.css")
+    link(rel="stylesheet", href="/styles/parsley/parsley.css")
+    link(rel="stylesheet", href="/styles/jquery-ui/jquery-ui.css")
+    link(rel="stylesheet", href="/styles/summernote/summernote.css")
+    link(rel="stylesheet", href="/styles/summernote/summernote-bs3.css")
+    link(rel="stylesheet", href="/styles/iCheck/custom.css")
+    link(rel="stylesheet", href="/styles/toastr/toastr.min.css")
+    link(rel="stylesheet", href="/styles/chosen/ImageSelect.css")
+    link(rel="stylesheet", href="/styles/chosen/chosen.min.css")
+    link(rel="stylesheet", href="/styles/importer.css")
+    // STYLES END
+    // SCRIPTS
+    script(src="/js/dependencies/sails.io.js")
+    script(src="/js/vendor/jquery-2.2.4.js")
+    script(src="/js/vendor/bootstrap.js")
+    script(src="/js/vendor/chosen.jquery.js")
+    script(src="/js/vendor/ImageSelect.jquery.js")
+    script(src="/js/vendor/jasny-bootstrap.js")
+    script(src="/js/vendor/interact.js")
+    script(src="/js/vendor/bootstrap-colorpicker.js")
+    script(src="/js/vendor/jquery-ui.js")
+    script(src="/js/vendor/parsley.js")
+    script(src="/js/vendor/summernote.js")
+    script(src="/js/i18n/de.js")
+    script(src="/js/i18n/en.js")
+    script(src="/js/i18n/es.js")
+    script(src="/js/i18n/fr.js")
+    script(src="/js/i18n/pt.js")
+    script(src="/js/i18n/ru.js")
+    script(src="/js/vendor/toastr.js")
+    script(src="/js/vendor/gridster.js")
+    script(src="/js/vendor/icheck.js")
+    script(src="/js/vendor/observer/observer.js")
+    script(src="/js/utils.js")
+    script(src="/js/notifications.js")
+    // SCRIPTS END
+  body.grad
+    nav.navbar.navbar-fixed-top.navbar-inverse
+      .container
+        .navbar-header
+          button.navbar-toggle.collapsed(data-target='#bs-example-navbar-collapse-1', data-toggle='collapse', type='button', aria-expanded='false')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(rel='home', href='/', title='Home page')
+            img(src='/images/logo/logotipo_header.png', style='max-width:100px;')
+        #bs-example-navbar-collapse-1.navbar-collapse.collapse(aria-expanded='false', style='height: 1px;')
+          ul.nav.navbar-nav
+          // <div class="flag flag-en"></div>
+          .form-inline.pull-xs-right
+            form.navbar-form.navbar-right
+              .form-group
+                select.chzn-select-lan(data-placeholder='Choose a language', style='width:75px;', tabindex='2')
+                  option(data-img-src='/images/flags/EN.png', value='en') EN
+                  option(data-img-src='/images/flags/ES.png', value='es') ES
+                  option(data-img-src='/images/flags/FR.png', value='fr') FR
+                  option(data-img-src='/images/flags/PT.png', value='pt') PT
+                script(type='text/javascript').
+                  $('.chzn-select-lan option[value="<%= (typeof(req.session) !== "undefined"  && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>"]').attr("selected",true);
+                  $('.chzn-select-lan').chosen({
+                    "disable_search": true,
+                  });
+
+            script(type='text/javascript').
+              $('.chzn-select-lan').on('change',function(){
+                $.ajax({
+                  url: '/language/change',
+                  type: 'GET',
+                  data: {locale: $( ".chzn-select-lan" ).val()},
+                  contentType: 'application/json',
+                  dataType: 'json',
+                  done:function() {
+                  },
+                  success: function(data){
+                    window.location.reload();
+                  },
+                  error: function(xhr, status, text) {
+                    bootstrap_alert['danger'](xhr.responseText, 5000 );
+                  }
+                });
+              });
+
+          script(type='text/javascript').
+            $('ul.nav > li > a[href="' + document.location.pathname + '"]').parent().addClass('active');
+
+    .container.box
+
+  script(type='text/javascript').
+    $.when(savesocket()).done(function(){
+      if (typeof subscribeAndListen == 'function') {
+        subscribeAndListen();
+      }
+      listenMessages();
+    });
+    //Funcion para tener en to do momento almacenado en la tabla session los sockets conectados junto con el usuario al que pertenece
+    function savesocket() {
+      io.socket.get("/session/saveSocketID");
+    }
+    //Evento a la espera de recibir mensajes y notificar al usuario
+    function listenMessages(){
+      io.socket.on('user', function messageReceived(message) {
+        switch (message.verb) {
+          case 'messaged':
+            var num_msg = document.getElementById('msg_new').innerHTML.replace('+','');
+            if (document.getElementById('msg_new').innerHTML == ''){
+              num_msg = 1;
+            }else{
+              num_msg++;
+            }
+            $('#buttom_msg').html('<a href="/message/index">Messages <span id="msg_new" class="label label-pill label-danger">' + '+' + num_msg + '</span></a>');
+            bootstrap_alert['info']('You have a new message! <a href="/message/show/' + message.data.msg.id + '">Open Here</a>' , 0 );
+            break;
+          default:
+            break;
+        }
+      });
+    }

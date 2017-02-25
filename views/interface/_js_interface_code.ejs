@@ -17,7 +17,7 @@
       });
 
     } catch (error) {
-      bootstrap_alert['danger']('Failed to connect to the Robot! (Raspberry Pi!)' + address_robot + error, 5000)
+      bootstrap_alert['danger']('Failed to connect to the Robot!' + address_robot + error, 5000)
       io.socket.get('/robot/changetobusy/', {robot: robot_id, state: false});
       change_img_state(robot_id, false);
     }
@@ -36,7 +36,7 @@
 
     //captura evento desconectar cuando el robot es apagado o pierde la señal
     socket.on('disconnect', function () {
-      bootstrap_alert['success']('Robot disconnect!' + address_robot, 5000)
+     toastr.info('Robot disconnect!' + address_robot, 'Robot' )
       //Sincronizar con el resto de clientes:
       io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
       change_img_state('<%=robot.id %>', false);
@@ -128,7 +128,7 @@
       socket.emit('start-stream');
       <%}%>
 
-      bootstrap_alert['success']('Conectado con exito! ' + address_robot, 5000);
+     toastr.info('Conectado con exito! ' + address_robot, 'Robot');
       change_img_state('<%=robot.id %>', true);
     });
 
@@ -181,7 +181,7 @@
       },
 
       success: function(data){
-        bootstrap_alert['success']('User out!', 5000 );
+       toastr.info('User out!', 'User' );
       },
 
       error: function(xhr, status, text) {

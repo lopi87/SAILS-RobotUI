@@ -60,7 +60,7 @@
           $("#errors_container").html('');
           $("#panel").append(data);
           $('.modal').modal('toggle');
-          bootstrap_alert['success']('A new message has been send!', 5000);
+         toastr.info('A new message has been send!', 'Message');
         },
 
         error: function (xhr) {

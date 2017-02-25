@@ -25,6 +25,7 @@ var cssFilesToInject = [
   'styles/jquery-ui/jquery-ui.css',
   'styles/summernote/summernote.css',
   'styles/summernote/summernote-bs3.css',
+  'styles/iCheck/custom.css',
   'styles/base/*.scss',
   'styles/toastr/toastr.min.css',
 
@@ -54,12 +55,14 @@ var jsFilesToInject = [
   'js/vendor/summernote.js',
   'js/i18n/*.js',  //languages of parsley
   'js/vendor/toastr.js',
+  'js/vendor/iCheck.js',
 
 
   'js/vendor/**/*.js',
   'js/utils.js',
   'js/notifications.js',
 
+  'js/observer/observer.js',
 
 
   // All of the rest of your client-side js files

@@ -13,16 +13,16 @@ module.exports = {
 
 
   //Carga la pag new
-  new: function(req, res){
+  new: function (req, res) {
 
-    User.find(function foundUsers(err, users){
+    User.find(function foundUsers(err, users) {
       if (err) return res.serverError(err);
       res.view({users: users});
     });
   },
 
 
-  create: function(req, res, next) {
+  create: function (req, res, next) {
 
     var robotObj = {
       name: req.param('name'),
@@ -37,23 +37,25 @@ module.exports = {
 
     Robot.create(robotObj, function robotCreated(err, robot) {
       //Se relaciona el robot con su interfaz de control
-      Interface.create({robot_owner: robot.id}, function interfaceCreated(err, iface){
-        if (err) { return res.serverError(err); }
+      Interface.create({robot_owner: robot.id}, function interfaceCreated(err, iface) {
+        if (err) {
+          return res.serverError(err);
+        }
 
-        console.log('Associating robot - interface: ',robot.name,'with',iface.id);
+        console.log('Associating robot - interface: ', robot.name, 'with', iface.id);
         robot.iface = iface.id;
         Robot.publishCreate(robot);
 
-        PermissionService.init_permissions(robot, req.param('driver_users'), req.param('viewer_users'), function whenDone(err){
+        PermissionService.init_permissions(robot, req.param('driver_users'), req.param('viewer_users'), function whenDone(err) {
           if (err) return res.negotiate(err);
 
-          msg = { err: 'Robot has been created.' };
-          FlashService.success(req, msg );
+          msg = {err: 'Robot has been created.'};
+          FlashService.success(req, msg);
 
           robot.save(function (err) {
             if (err) return next(err);
 
-            if (req.file('robot_avatar')){
+            if (req.file('robot_avatar')) {
               ImageService.upload_robot_avatar(req.file('robot_avatar'), robot, function whenDone(err, files) {
                 if (err) return res.negotiate(err);
                 //Redirección a index
@@ -78,13 +80,13 @@ module.exports = {
   },
 
 
-  show: function(req, res, next){
-    Robot.findOne(req.param('id')).populate('drivers').populate('viewers').exec(function (err, robot){
-      if(err) return next(err);
-      if(!robot) return next();
+  show: function (req, res, next) {
+    Robot.findOne(req.param('id')).populate('drivers').populate('viewers').exec(function (err, robot) {
+      if (err) return next(err);
+      if (!robot) return next();
 
-      User.findOne(robot.owner,function foundUsers(err, user){
-        if(err) return next(err);
+      User.findOne(robot.owner, function foundUsers(err, user) {
+        if (err) return next(err);
         res.view({
           robot: robot,
           user: user,
@@ -96,7 +98,7 @@ module.exports = {
   },
 
 
-  index: function(req, res, next) {
+  index: function (req, res, next) {
 
     //   var ping = require('ping');
     //   var address;
@@ -110,55 +112,73 @@ module.exports = {
     //   });
 
     var page = page2 = page3 = 1;
-    if( typeof req.param('page') != 'undefined'  ){
+    if (typeof req.param('page') != 'undefined') {
       page = parseInt(req.param('page'));
     }
-    if( typeof req.param('page2') != 'undefined'  ){
+    if (typeof req.param('page2') != 'undefined') {
       page2 = parseInt(req.param('page2'));
     }
-    if( typeof req.param('page3') != 'undefined'  ){
+    if (typeof req.param('page3') != 'undefined') {
       page3 = parseInt(req.param('page3'));
     }
 
 
-    User.findOne(req.session.User.id).populate('d_robots').populate('v_robots').exec(function (err, user){
+    User.findOne(req.session.User.id).populate('d_robots').populate('v_robots').exec(function (err, user) {
       if (err) return res.serverError(err);
       if (!user) return res.badRequest();
 
-      Robot.pagify('robots',{ findQuery: { owner: user.id }, sort: ['createdAt DESC'], page: page}).then(function(data_robots) {
+      Robot.pagify('robots', {
+        findQuery: {owner: user.id},
+        sort: ['createdAt DESC'],
+        page: page
+      }).then(function (data_robots) {
 
-         Robot.pagify('robots',{ findQuery: { viewers: user.id }, sort: ['createdAt DESC'], page: page2}).then(function(data_d_robots) {
+        Robot.pagify('robots', {
+          findQuery: {viewers: user.id},
+          sort: ['createdAt DESC'],
+          page: page2
+        }).then(function (data_d_robots) {
 
-           Robot.pagify('robots',{ findQuery: { drivers: user.id }, sort: ['createdAt DESC'], page: page3}).then(function(data_v_robots) {
+          Robot.pagify('robots', {
+            findQuery: {drivers: user.id},
+            sort: ['createdAt DESC'],
+            page: page3
+          }).then(function (data_v_robots) {
 
-             res.view({
-               data_robots: data_robots,
-               data_driver_robots: data_d_robots,
-               data_viewer_robots: data_v_robots
-             });
+            res.view({
+              data_robots: data_robots,
+              data_driver_robots: data_d_robots,
+              data_viewer_robots: data_v_robots
+            });
 
-           });
-         });
+          });
+        });
       });
     });
   },
 
-  index_public_robots: function(req, res, next) {
+  index_public_robots: function (req, res, next) {
 
     var page = 1;
-    if( typeof req.param('page') != 'undefined'  ){
+    if (typeof req.param('page') != 'undefined') {
       page = parseInt(req.param('page'));
     }
 
-    Robot.pagify('robots', {findQuery: { or: [{public_view: true, public_drive: true}]} , sort: ['createdAt DESC'], populate: ['owner'], page: page, perPage: 3}).then(function(data){
+    Robot.pagify('robots', {
+      findQuery: {or: [{public_view: true, public_drive: true}]},
+      sort: ['createdAt DESC'],
+      populate: ['owner'],
+      page: page,
+      perPage: 3
+    }).then(function (data) {
       res.view({data: data});
-    }).catch(function(err){
+    }).catch(function (err) {
       return next(err);
     });
   },
 
 
-  index_driver_robots: function(req, res, next) {
+  index_driver_robots: function (req, res, next) {
     User.findOne(req.session.User.id).populate('d_robots').exec(function (err, user) {
       if (err) return res.serverError(err);
 
@@ -169,9 +189,8 @@ module.exports = {
   },
 
 
-
-  index_viewer_robots: function(req, res, next) {
-    User.findOne(req.session.User.id).populate('v_robots').exec(function (err, user){
+  index_viewer_robots: function (req, res, next) {
+    User.findOne(req.session.User.id).populate('v_robots').exec(function (err, user) {
       if (err) return res.serverError(err);
 
       res.view({
@@ -182,14 +201,14 @@ module.exports = {
 
 
   //Cambiar en la base de datos el estado del robot (Ocupado)
-  changetobusy: function(req,res){
+  changetobusy: function (req, res) {
 
     if (!req.isSocket) return res.badRequest();
 
     var robot_id = req.param('robot'), state = req.param('state');
 
-    Robot.update({id: robot_id},{busy: state}, function robotUpdated(err) {
-      if (err) return  res.badRequest();
+    Robot.update({id: robot_id}, {busy: state}, function robotUpdated(err) {
+      if (err) return res.badRequest();
 
       //Informar a otros clientes (sockets abiertos) que el robot queda liberado u ocupado
       Robot.publishUpdate(robot_id, {
@@ -199,12 +218,12 @@ module.exports = {
 
       //Si el robot queda ocupado, lo alamcenamos en la session
       if (state == true) {
-        Session.update({socket_id: req.socket.id}, {robot_id: robot_id}, function sessionUpdated(err){
+        Session.update({socket_id: req.socket.id}, {robot_id: robot_id}, function sessionUpdated(err) {
           if (err) res.badRequest();
           log.debug('Robot ocupado...');
         });
       } else if (state == false) {
-        Session.update({socket_id: req.socket.id}, {robot_id: ''}, function sessionUpdated(err){
+        Session.update({socket_id: req.socket.id}, {robot_id: ''}, function sessionUpdated(err) {
           if (err) return res.badRequest();
           log.debug('Robot liberado...');
         });
@@ -217,7 +236,7 @@ module.exports = {
 
     var page = 1;
 
-    if( typeof req.param('page') != 'undefined'  ){
+    if( typeof req.param('page') != 'undefined'){
       page = parseInt(req.param('page'));
     }
 
@@ -230,36 +249,36 @@ module.exports = {
   },
 
 
-  robot_subscribe: function(req,res,next){
-    if (req.isSocket){
+  robot_subscribe: function (req, res, next) {
+    if (req.isSocket) {
       //Update, destroy...
-      Robot.find(function foundRobots(err,robots){
+      Robot.find(function foundRobots(err, robots) {
         if (err) return next(err);
-        Robot.subscribe(req.socket,robots);
+        Robot.subscribe(req.socket, robots);
       });
 
       //Create
       Robot.watch(req);
-      log.debug('User ' + req.session.User.id + 'with socket id '+sails.sockets.id(req)+' is now subscribed to the model class \'Robot\'.');
+      log.debug('User ' + req.session.User.id + 'with socket id ' + sails.sockets.id(req) + ' is now subscribed to the model class \'Robot\'.');
     } else {
       res.view();
     }
   },
 
 
-  destroy: function(req, res, next){
+  destroy: function (req, res, next) {
     var id = req.param('id');
 
-    Robot.findOne(id, function foundRobot(err, robot){
+    Robot.findOne(id, function foundRobot(err, robot) {
       if (err) return next(err);
-      if (!robot){
-        msg = { err: 'Robot doesn\'t exists.' };
-        FlashService.error(req, msg );
+      if (!robot) {
+        msg = {err: 'Robot doesn\'t exists.'};
+        FlashService.error(req, msg);
         return res.redirect('robot/index');
       }
 
       //Eliminar la interfaz del robot
-      Interface.find({robot_owner: robot.id}).exec(function (err, interface){
+      Interface.find({robot_owner: robot.id}).exec(function (err, interface) {
         if (err) return next(err);
         if (!interface) {
           msg = {err: 'Interface doesn\'t exists.'};
@@ -279,15 +298,15 @@ module.exports = {
               Interface.destroy(interface.id, function interfaceDestroyed(err) {
                 if (err) return next(err);
 
-                Robot.destroy(id, function robotDestroyed(err){
+                Robot.destroy(id, function robotDestroyed(err) {
                   if (err) return next(err);
 
                   ImageService.delete_file(robot);
 
                   Robot.publishDestroy(id, {id: robot.id});
 
-                  msg = { err: 'Robot deleted' };
-                  FlashService.success(req, msg );
+                  msg = {err: 'Robot deleted'};
+                  FlashService.success(req, msg);
                   return res.redirect('robot/index');
                 });
               });
@@ -299,16 +318,15 @@ module.exports = {
   },
 
 
-
   edit: function (req, res, next) {
     Robot.findOne(req.param('id'), function foundRobot(err, robot) {
       if (err) return next(err);
       if (!robot) return next();
 
-      User.find(function foundUsers(err, users){
+      User.find(function foundUsers(err, users) {
         if (err) return next(err);
 
-        PermissionService.get_permissions_array(robot.id, function(error, perm) {
+        PermissionService.get_permissions_array(robot.id, function (error, perm) {
 
           res.view({
             robot: robot,
@@ -321,7 +339,7 @@ module.exports = {
   },
 
 
-  update: function(req, res, next){
+  update: function (req, res, next) {
 
     var robotObj = {
       name: req.param('name'),
@@ -342,7 +360,7 @@ module.exports = {
       });
 
       Robot.update(req.param('id'), robotObj, function robotUpdated(err) {
-        if (err){
+        if (err) {
           return res.redirect('/robot/edit' + req.param('id'));
         }
         msg = {err: 'The Robot has been updated'};
@@ -353,14 +371,14 @@ module.exports = {
   },
 
 
-  show_permissions: function(req, res, next){
+  show_permissions: function (req, res, next) {
 
     var robot_id = req.param('id');
 
     Robot.findOne(robot_id).exec(function (err, robot) {
       if (err) return res.badRequest(err);
 
-      PermissionService.get_permissions_array(robot_id, function(error, perm) {
+      PermissionService.get_permissions_array(robot_id, function (error, perm) {
 
         User.find(function foundUsers(err, users) {
           if (err) return res.badRequest(err);
@@ -377,11 +395,11 @@ module.exports = {
   },
 
 
-  new_permissions: function(req, res, next){
+  new_permissions: function (req, res, next) {
     var robot_id = req.param('id');
 
     if (req.param('users') && req.param('users') instanceof Array) {
-    }else{
+    } else {
       users = [req.param('users')]
     }
 
@@ -398,10 +416,10 @@ module.exports = {
       if (!robot) return res.badRequest(err);
 
       req.param('users').forEach(function (user_id) {
-        if (req.param('control_check')) {
+        if (req.param('control_check') && (robot.owner.id != req.session.User.id)) {
           robot.drivers.add(user_id);
         }
-        if (req.param('view_check')) {
+        if (req.param('view_check') && (robot.owner.id != req.session.User.id)) {
           robot.viewers.add(user_id);
         }
 
@@ -413,10 +431,10 @@ module.exports = {
         }
       });
 
-      robot.save(function (err){
+      robot.save(function (err) {
         console.log('The new permissions has been added');
 
-        PermissionService.get_permissions_array(robot_id, function(error, perm) {
+        PermissionService.get_permissions_array(robot_id, function (error, perm) {
 
           return res.render('robot/_permissions_row.ejs', {
             robot: robot,
@@ -456,13 +474,51 @@ module.exports = {
 
         robot.drivers.remove(user_id);
         robot.viewers.remove(user_id);
-        robot.save().fail(function(){});
+        robot.save().fail(function () {
+        });
 
         return res.ok({
           msg: 'permission updated'
         });
       });
     });
+  },
+
+
+  my_robots: function (req, res, next) {
+
+    var page = 1;
+    if (typeof req.param('page') != 'undefined') {
+      page = parseInt(req.param('page'));
+    }
+
+
+    Userdriverrobot.find().where({'user': req.session.User.id}).exec(function (err, user_d_robots) {
+      if (err) return next(err);
+
+
+      Userviewerrobot.find().where({'user': req.session.User.id}).exec(function (err, user_v_robots) {
+        if (err) return next(err);
+
+        var d_robot = _.pluck(user_d_robots, 'robot');
+        var v_robot = _.pluck(user_v_robots, 'robot');
+        var list_id = d_robot.concat(v_robot);
+
+
+        Robot.pagify('robots', {
+          findQuery: { or: [ { id: list_id }, { owner: req.session.User.id } ] },
+          populate: ['drivers', 'viewers', 'owner'],
+          page: page
+        }).then(function (data_robots) {
+
+        // Robot.find().where( { or: [ {'id': list_id}, { owner: req.session.User.id } ] } ).populate('drivers').populate('viewers').populate('owner').exec(function (err, robots) {
+            return res.view({
+              data: data_robots
+            });
+          });
+        });
+    });
   }
+
 
 };

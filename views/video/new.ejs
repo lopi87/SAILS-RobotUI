@@ -39,7 +39,7 @@
           $('[id^=video_]').remove();
           $("#panel").prepend(data);
           $('.modal').modal('toggle');
-          bootstrap_alert['success']('A new video has been created!', 5000);
+         toastr.info('A new video has been created!', 'Video');
         },
 
         error: function (xhr) {

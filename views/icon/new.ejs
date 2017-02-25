@@ -51,7 +51,7 @@
           $("#errors_container").html('');
           $("#panel").html(data);
           $('.modal').modal('toggle');
-          bootstrap_alert['success']('A new icon has been added!', 5000);
+         toastr.info('A new icon has been added!', 'Icon');
         },
 
         error: function (xhr) {

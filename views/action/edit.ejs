@@ -131,7 +131,7 @@
           $("#errors_container").html('');
           $('#button_' + '<%= action.id %>').html(data);
           $('.modal').modal('toggle');
-          bootstrap_alert['success']('A new video has been updated!', 5000);
+         toastr.info('A new video has been updated!', 'Video');
         },
 
         error: function (xhr) {

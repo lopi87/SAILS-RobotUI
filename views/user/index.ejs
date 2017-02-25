@@ -75,7 +75,7 @@
           data: {id: user.id},
           success: function(data){
             $("#user_list").append(data);
-            bootstrap_alert['success']('A new user has been created!', 5000 )
+           toastr.info('A new user has been created!', 'User' )
           }
         });
       }
@@ -86,9 +86,9 @@
 
         if (data.id != '<%= req.session.User.id %>') {
           if (data.loggedIn) {
-            bootstrap_alert['success']('User connected!', 5000);
+           toastr.info('User connected!', 'User');
           } else {
-            bootstrap_alert['success']('User disconnected!', 5000);
+           toastr.info('User disconnected!', 'User');
           }
           console.log('User has been updated to online:' + data.loggedIn);
         }
@@ -96,7 +96,7 @@
 
       if (obj.verb == 'destroyed') {
         $("#user_" + obj.id).remove();
-        bootstrap_alert['success']('An user has been deleted!', 5000 );
+       toastr.info('An user has been deleted!', 'User' );
       }
 
     });

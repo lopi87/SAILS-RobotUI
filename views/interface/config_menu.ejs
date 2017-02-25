@@ -119,7 +119,7 @@
       success: function (data) {
         $("#video_" + data.id).remove();
         $("#button_" + data.id).remove();
-        bootstrap_alert['success']('A element has been deleted!', 5000 );
+       toastr.info('A element has been deleted!', 5000 );
       },
 
       error: function (xhr, status, text) {

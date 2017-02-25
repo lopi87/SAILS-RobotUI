@@ -105,7 +105,7 @@
         var num_msg = document.getElementById('msg_new').innerHTML.replace('+','');
         num_msg--;
         $('#buttom_msg').html('<a href="/message/index">Messages <span id="msg_new" class="label label-pill label-danger">' + '+' + num_msg + '</span></a>');
-        bootstrap_alert['success']('', 5000 );
+       toastr.info('', 5000 );
 
       },
 
@@ -123,7 +123,7 @@
 
       success: function (data) {
         $("#line_msg_" + id).remove();
-        bootstrap_alert['success']('The message has been deleted!', 5000 );
+       toastr.info('The message has been deleted!', 'Message' );
       },
 
       error: function (xhr, status, text) {
@@ -245,8 +245,6 @@
         var num_msg = document.getElementById('msg_new').innerHTML.replace('+','');
         num_msg--;
         $('#buttom_msg').html('<a href="/message/index">Messages <span id="msg_new" class="label label-pill label-danger">' + '+' + num_msg + '</span></a>');
-        bootstrap_alert['success']('', 5000 );
-
       },
 
       error: function (xhr, status, text) {
@@ -263,7 +261,7 @@
 
       success: function (data) {
         $("#line_msg_" + id).remove();
-        bootstrap_alert['success']('The message has been deleted!', 5000 );
+       toastr.info('The message has been deleted!', 'Message' );
       },
 
       error: function (xhr, status, text) {

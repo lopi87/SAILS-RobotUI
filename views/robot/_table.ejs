@@ -99,7 +99,7 @@
 
       success: function(data){
         $("#"  + robot_id).remove();
-        bootstrap_alert['success']('Unlink!', 5000 );
+       toastr.info('Unlink!', 'Robot' );
       },
 
       error: function(xhr, status, text) {

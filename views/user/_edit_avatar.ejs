@@ -40,7 +40,7 @@
         if(typeof data.error === 'undefined')
         {
           console.log('SUCCESS: ' + data.success);
-          bootstrap_alert['success']('A new icon has been uploaded!', 3000 );
+         toastr.info('A new icon has been uploaded!', 3000 );
 
           //limpiar el input
           $("#remove_iconfile_input").trigger('click');

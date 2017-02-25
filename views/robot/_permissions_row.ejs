@@ -1,6 +1,7 @@
 <% Object.keys(perm).forEach(function (key) { %>
 <tr id="perm_<%= key %>">
 
+  <td><img src="<%= sails.getBaseUrl() + perm[key].avatarUrl %>" alt="Avatar" title="<%= perm[key].name %>" class="card-left card-circle card-margin-right img-responsive" style="width:32px"></td>
   <td> <%= perm[key].name %></td>
 
   <% if(perm[key].d){ %>

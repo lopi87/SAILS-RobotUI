@@ -1,0 +1,34 @@
+<div class="jumbox">
+  <h2>My Robots</h2>
+
+  <% if(data.size == 0){ %>
+  <div class="alert alert-info margintop20 marginbottom20" role="alert">
+    <strong>Ups!</strong>
+    You haven't created any robots shared yet...
+  </div>
+  <% } else { %>
+  <%- partial('_table2.ejs', {data: data}) %>
+  <% } %>
+
+  <%- partial ('../_paginate.ejs', { paginate: data.meta.paginate } )%>
+
+</div>
+
+<script type="text/javascript">
+
+  addLoadEvent(subscribeAndListen_robot);
+
+  function subscribeAndListen_robot(){
+    io.socket.get('/robot/robot_subscribe/');
+
+    io.socket.on('robot', function (obj) {
+
+      if (obj.verb == 'updated') {
+        var data = obj.data;
+        change_img_state(data.id, data.online);
+        console.log('Robot has been updated to: online:' + data.online);
+      }
+
+    });
+  }
+</script>

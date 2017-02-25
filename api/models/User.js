@@ -7,6 +7,10 @@
 
 module.exports = {
 
+  schema: true,
+  autoUpdatedAt: true,
+  autoCreatedAt: true,
+
   attributes: {
     name:{
       type: 'string',
@@ -58,6 +62,13 @@ module.exports = {
     v_robots:{
       collection: 'robot',
       via: 'viewers',
+      dominant: true
+    },
+
+    // Add a reference to Robot
+    robots:{
+      collection: 'robot',
+      via: 'owner',
       dominant: true
     },
 

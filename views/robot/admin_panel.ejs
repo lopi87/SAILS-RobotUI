@@ -45,7 +45,7 @@
             <span class="label label-pill label-success"> <%= i18n('public')%> </span>
           </td>
           <% } else { %>
-          <td> <span class="label label-pill label-error"> <%= i18n('private')%> </span></td>
+          <td> <span class="label label-pill label-danger"> <%= i18n('private')%> </span></td>
           <% } %>
 
           <% if(robot.public_drive){ %>
@@ -53,7 +53,7 @@
             <span class="label label-pill label-success"> <%= i18n('public')%> </span>
           </td>
           <% } else { %>
-          <td> <span class="label label-pill label-error"> <%= i18n('private')%> </span></td>
+          <td> <span class="label label-pill label-danger"> <%= i18n('private')%> </span></td>
           <% } %>
 
           <td>
@@ -95,7 +95,7 @@
           data: {id: user.id},
           success: function(data){
             $("#robot_list").append(data);
-            bootstrap_alert['success']('A new robot has been created!', 5000 )
+           toastr.info('A new robot has been created!', 'Robot' )
           }
         });
       }
@@ -105,16 +105,16 @@
         change_img_state(data.id, data.busy);
 
         if(data.busy){
-          bootstrap_alert['success']('Robot connected!', 5000 );
+         toastr.info('Robot connected!', 'Robot' );
         }else{
-          bootstrap_alert['success']('Robot disconnected!', 5000 );
+         toastr.info('Robot disconnected!', 'Robot' );
         }
         console.log('Robot has been updated to online:' + data.busy);
       }
 
       if (obj.verb == 'destroyed') {
         $("#line_" + obj.id).remove();
-        bootstrap_alert['success']('A robot has been deleted!', 5000 );
+       toastr.info('A robot has been deleted!', 'Robot' );
       }
 
     });
