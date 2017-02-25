@@ -72,7 +72,7 @@ module.exports = {
 
 
     //Interface del robot
-    robot_interface: {
+    iface: {
       model: 'interface'
     },
 

@@ -126,7 +126,7 @@ module.exports = {
       //Puedo borrar???
 
       var id = req.param('id');
-      Message.destroy({id: req.param('id')}).exec(function deleteaction(err) {
+      Message.destroy({id: req.param('id')}).exec(function deleteMessage(err) {
         console.log('The msg has been deleted');
 
         //Si hay error

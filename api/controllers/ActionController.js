@@ -18,12 +18,8 @@ module.exports = {
 
       Action.update(id, {coordinate_x: x, coordinate_y: y}, function actionUpdated(err){
         if(err) return res.badRequest(err);
-
-        res.ok({
-          msg: 'position updated'
-        });
+        res.ok({ msg: 'position updated' });
       });
-
     }else{
       err= 'No Ajax call';
       return res.badRequest(err);
@@ -61,20 +57,14 @@ module.exports = {
         };
 
         if(req.param("color_default") == 'false'){
-
-          var isOk1 = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(req.param('color_text'));
-          var isOk2 = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(req.param('color_background'));
-          var isOk3 = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(req.param('color_border'));
-          var isOk4 = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(req.param('color_active_background'));
+          var isOk1 = CssService.valid_color(req.param('color_text'));
+          var isOk2 = CssService.valid_color(req.param('color_background'));
+          var isOk3 = CssService.valid_color(req.param('color_border'));
+          var isOk4 = CssService.valid_color(req.param('color_active_background'));
 
           if (!isOk1 || !isOk2 || !isOk3 || !isOk4) {
             return res.badRequest('you have to give a valid hexadecimal color');
           }
-
-          actionObj.color_text = req.param('color_text').replace('#', '');
-          actionObj.color_background = req.param('color_background').replace('#', '');
-          actionObj.color_border = req.param('color_border').replace('#', '');
-          actionObj.color_active_background = req.param('color_active_background').replace('#', '');
           actionObj.color_default = false;
         }
 
@@ -82,10 +72,8 @@ module.exports = {
           return res.badRequest('you have to give a name or icon');
         }
 
-
         Action.create(actionObj, function actionCreated(err, action) {
           if (err) return res.badRequest(err.Errors);
-            console.log('The action has been created');
 
             if (req.param('icon')){
               Action.findOne(action.id).populate('icon').exec(function(err, action) {
@@ -112,16 +100,10 @@ module.exports = {
   },
 
 
-  deleteaction: function (req, res, next) {
+  destroy: function (req, res, next) {
     if (req.xhr) {
       Action.destroy({id: req.param('id')}).exec(function deleteaction(err) {
-        console.log('The action has been deleted');
-
-        //Si hay error
-        if (err) {
-          console.log(err);
-          return res.next(err);
-        }
+        if (err) return next(err);
 
         return res.ok({id: req.param('id')});
       });
@@ -142,12 +124,53 @@ module.exports = {
       Icon.find({or: [{user_owner: req.session.User.id}, {default: true}]}).exec(function (err, icons) {
         if (err) return next(err);
 
-        res.view({
+        return res.render('action/edit.ejs', {
           action: action,
-          icons: icons
+          icons: icons,
+          layout: false
         });
+
       });
     });
+  },
+
+
+  update: function(req, res, next){
+    if (req.xhr) {
+
+      var actionObj = {
+        name: req.param('name'),
+        code: req.param('code'),
+        icon: req.param('icon')
+      };
+
+
+      if(req.param("color_default") == 'false') {
+        actionObj.color_default = false;
+        actionObj.color_text = CssService.valid_color(req.param('color_text')) == true ? req.param('color_text') : null
+        actionObj.color_text = CssService.valid_color(req.param('color_background')) == true ? req.param('color_background') : null
+        actionObj.color_text = CssService.valid_color(req.param('color_border')) == true ? req.param('color_border') : null
+        actionObj.color_text = CssService.valid_color(req.param('color_active_background')) == true ? req.param('color_active_background') : null
+      }
+
+      if (req.param('name') == '' && req.param('icon') == 'undefined') {
+        return res.badRequest('you have to give a name or icon');
+      }
+
+      Action.update(req.param('id'), actionObj, function actionUpdated(err, action) {
+        if (err){ return res.redirect('/action/edit' + req.param('id')); }
+        msg = {err: 'The action has been updated'};
+        FlashService.success(req, msg);
+
+        return res.render('interface/_action.ejs', {
+          action: action,
+          layout: false
+        });
+      });
+    } else {
+      err = 'Ajax call';
+      return res.badRequest(err);
+    }
   },
 
 
@@ -159,7 +182,6 @@ module.exports = {
       });
     });
   }
-
 
 
 };

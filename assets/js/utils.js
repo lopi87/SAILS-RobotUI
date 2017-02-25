@@ -91,45 +91,6 @@ window.Parsley.addValidator('filemimetypes', {
 });
 
 
-
-
-
-//ALERTS FUNCTION
-
-bootstrap_alert = function() {};
-
-bootstrap_alert.success = function(message, time) {
-  $('#alert_placeholder').append('<div class="alert alert-success alert-dismissible fade in" style="" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Well done!</strong>' + ' ' + message + ' ' + '</div> </div>');
-  $("html, body").animate({ scrollTop: 0 }, "slow");
-  alertTimeout(time);
-};
-bootstrap_alert.info = function(message, time) {
-  $('#alert_placeholder').append('<div class="alert alert-info alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Advice!</strong>' + ' ' + message + ' ' + '</div> </div>');
-  $("html, body").animate({ scrollTop: 0 }, "slow");
-  alertTimeout(time);
-};
-
-bootstrap_alert.warning = function(message, time) {
-  $('#alert_placeholder').append('<div class="alert alert-warning alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Warning!</strong>' + ' ' + message + ' ' + '</div> </div>');
-  $("html, body").animate({ scrollTop: 0 }, "slow");
-  alertTimeout(time);
-};
-
-bootstrap_alert.danger = function(message, time) {
-  $('#alert_placeholder').append('<div class="alert alert-danger alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> <strong>Ups!</strong>' + ' ' + message + ' ' + '</div> </div>');
-  $("html, body").animate({ scrollTop: 0 }, "slow");
-  alertTimeout(time);
-};
-
-function alertTimeout(wait){
-  if (wait > 0){
-    setTimeout(function(){
-      $('#alert_placeholder').children('.alert:first-child').remove()
-    }, wait);
-  }
-}
-
-
 //Utils
 
 //CAMBIAR IMAGEN ESTADO
@@ -217,23 +178,149 @@ function set_image_video(id){
   ctx.drawImage(background,0,0);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function setting_panel_mode( mode ){
+  var menu_button = $('#action_' + mode );
+  var was_active = menu_button.hasClass('active');
+  $('[id^=action_]').removeClass('active');
+
+  if ( was_active ){
+    on_off_action( mode , 'off');
+  } else {
+    menu_button.addClass('active');
+    on_off_action( mode, 'on' )
+  }
+}
+
+
+function on_off_action( mode, state ){
+
+  switch ( mode ){
+    case 'create':
+      if (state == 'on') {
+        enable_menu();
+      }
+    break;
+    case 'delete':
+      if (state == 'on') {
+        disable_menu();
+        destroy_mode('on');
+      }
+    break;
+    case 'edit':
+      if (state == 'on') {
+        disable_menu();
+        edit_mode('on');
+      }
+    break;
+  }
+}
+
+
+function destroy_mode(state){
+  if (state == 'on'){
+    $("[id^=play_]").each( function( ){
+      $( this ).attr('data-toggle', '');
+      $( this ).attr('data-target', '');
+      var id = $( this ).attr('id').replace('play_','');
+      $("#play_" + id).click(function( ){ ajax_destroy_call('/video/destroy/' + id ); });
+    });
+    $("[id^=button_]").each( function( ){
+      $( this ).attr('data-toggle', '');
+      $( this ).attr('data-target', '');
+      var id = $( this ).attr('id').replace('button_','');
+      $("#button_" + id).click(function( ){ ajax_destroy_call('/action/destroy/' + id ); });
+    });
+    $("[id^=slider_]").each( function( ){
+      $( this ).attr('data-toggle', '');
+      $( this ).attr('data-target', '');
+      var id = $( this ).attr('id').replace('slider_','');
+      $("#slider_" + id).click(function(){ ajax_destroy_call('/slider/destroy/' + id ); });
+    });
+  }else{
+    off_click_events();
+  }
+}
+
+
+function edit_mode( state ){
+  var id;
+
+  if (state == 'on'){
+    $("[id^=play_]").each( function( ){
+      $( this ).attr('data-toggle', 'modal');
+      $( this ).attr('data-target', '#writeModal');
+      id = $( this ).attr('id').replace('play_','');
+      $("#play_" + id).click(function( ){ ajax_call('/video/edit/' + id, 'video');});
+    });
+    $("[id^=button_]").each( function( ){
+      $( this ).attr('data-toggle', 'modal');
+      $( this ).attr('data-target', '#writeModal');
+      id = $( this ).attr('id').replace('button_','');
+      $("#button_" + id).click(function( ){ ajax_call('/action/edit/' + id, 'button');});
+    });
+    $("[id^=slider_]").each( function( ){
+      $( this ).attr('data-toggle', 'modal');
+      $( this ).attr('data-target', '#writeModal');
+      id = $( this ).attr('id').replace('slider_','');
+      $("#slider_" + id).click(function( ){ ajax_call('/slider/edit/' + id, 'slider');});
+    });
+  }else{
+    off_click_events();
+  }
+}
+
+
+function off_click_events() {
+  $("[id^=play_]").removeAttribute("onclick");
+  $("[id^=button_]").removeAttribute("onclick");
+  $("[id^=slider_]").removeAttribute("onclick");
+}
+
+
+
+function disable_menu(){
+  $("[id^=new_]").addClass( "disabled" );
+  $("[id^=new_]").prop('onclick',null).off('click');
+  interact('.draggable').draggable(false);
+  alert('DISABLE');
+}
+
+
+function enable_menu(){
+  $("[id^=new_]").removeClass( "disabled" );
+  $("[id^=new_]").prop('onclick',null).on('click');
+  interact('.draggable').draggable(true);
+  alert('ENABLE');
+}
+
+
+
 //
-// function set_cursor(mode){
-//
-//   if (mode == 'delete'){
-//     var canvas = document.createElement("canvas");
-//     canvas.width = 24;
-//     canvas.height = 24;
-//     //document.body.appendChild(canvas);
-//     var ctx = canvas.getContext("2d");
-//     ctx.fillStyle = "#000000";
-//     ctx.font = "24px FontAwesome";
-//     ctx.textAlign = "center";
-//     ctx.textBaseline = "middle";
-//     ctx.fillText("\uf003", 12, 12);
-//     var dataURL = canvas.toDataURL('image/png')
-//     $('body').css('cursor', 'url('+dataURL+'), auto');
-//   }
-// }
-//
-//
+// var canvas = document.createElement("canvas");
+// canvas.width = 24;
+// canvas.height = 24;
+// document.body.appendChild(canvas);
+// var ctx = canvas.getContext("2d");
+// ctx.fillStyle = "#000000";
+// ctx.font = "24px FontAwesome";
+// ctx.textAlign = "center";
+// ctx.textBaseline = "middle";
+// ctx.fillText("\uf047", 12, 12);
+// var dataURL = canvas.toDataURL('image/png');
+// $('body').css('cursor', 'url('+dataURL+'), auto');

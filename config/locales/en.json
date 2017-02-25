@@ -58,5 +58,13 @@
 	"message.content.string": "message.content.string",
 	"message.content.required": "message.content.required",
 	"message.title.string": "message.title.string",
-	"message.title.required": "message.title.required"
+	"message.title.required": "message.title.required",
+	"icon.name.required": "icon.name.required",
+	"action.color_text.hexadecimal": "action.color_text.hexadecimal",
+	"action.color_background.hexadecimal": "action.color_background.hexadecimal",
+	"action.color_border.hexadecimal": "action.color_border.hexadecimal",
+	"action.color_active_background.hexadecimal": "action.color_active_background.hexadecimal",
+	"joystick.event_name.string": "joystick.event_name.string",
+	"joystick.event_name.required": "joystick.event_name.required",
+	"action.code.string": "action.code.string"
 }

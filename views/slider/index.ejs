@@ -20,14 +20,14 @@
         <td><%= slider.name %></td>
         <td>
           <% if (slider.icon){ %>
-          <button id="button_<%= slider.id %>" class="btn btn-custom_<%= slider.id %>" value="<%= slider.code %>">
+          <button id="slider_<%= slider.id %>" class="btn btn-custom_<%= slider.id %>" value="<%= slider.code %>">
             <span><img src="<%= slider.icon.iconUrl %>" height="32px" width="32px"/></span>
             <% if (slider.name != ''){%>
             <span><%= slider.name %></span>
             <% }%>
           </button>
           <% } else { %>
-          <button  id="button_<%= slider.id %>" value="<%= slider.code %>" class="btn btn-custom_<%= slider.id %>"><%= slider.name %></button>
+          <button  id="slider_<%= slider.id %>" value="<%= slider.code %>" class="btn btn-custom_<%= slider.id %>"><%= slider.name %></button>
           <% } %>
         </td>
         <td>
@@ -60,7 +60,7 @@
 
     function row_slider_deleted(id) {
       $.ajax({
-        url: '/slider/deleteslider/' + id,
+        url: '/slider/destroy/' + id,
         type: 'GET',
         data: {},
 

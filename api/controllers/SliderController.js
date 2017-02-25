@@ -39,7 +39,7 @@ module.exports = {
       });
   },
 
-  newslider: function (req, res, next) {
+  new: function (req, res, next) {
     if (req.xhr) {
       Interface.findOne(req.param('id'), function foundInterface(err, iface) {
         if (err) return next(err);
@@ -76,7 +76,7 @@ module.exports = {
   },
 
 
-  deleteslider: function (req, res, next) {
+  destroy: function (req, res, next) {
     if (req.xhr) {
       slider.destroy({id: req.param('id')}).exec(function deleteslider(err) {
         console.log('The slider has been deleted');

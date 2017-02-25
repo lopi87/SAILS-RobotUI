@@ -2,7 +2,7 @@
   <th scope="row"></th>
   <td><%= slider.name %></td>
   <td>
-    <button  id="button_<%= slider.id %>" value="<%= slider.code %>" class="btn btn-primary btn-custom_<%= slider.id %>"><%= slider.name %></button>
+    <button  id="slider_<%= slider.id %>" value="<%= slider.code %>" class="btn btn-primary btn-custom_<%= slider.id %>"><%= slider.name %></button>
   </td>
   <td> <button id="delete_slider_<%= slider.id %>" type="button" class="btn btn-sm btn-danger" onclick="row_slider_deleted('<%= slider.id %>')">Delete</button></td>
 </tr>

@@ -15,7 +15,7 @@ module.exports = {
     res.view();
   },
 
-  create: function (req, res, next){
+  create: function (req, res, next) {
     Interface.findOne(req.param('id'), function foundInterface(err, iface) {
       if (err) return next(err);
       return res.render('video/new.ejs', {
@@ -46,7 +46,7 @@ module.exports = {
     }
   },
 
-  newvideo: function (req, res, next) {
+  new: function (req, res, next) {
     if (req.xhr) {
       Interface.findOne(req.param('id'), function foundInterface(err, iface) {
         if (err) return next(err);
@@ -84,12 +84,10 @@ module.exports = {
   },
 
 
-  deletevideo: function (req, res, next) {
+  destroy: function (req, res, next) {
     if (req.xhr) {
       Video.destroy({id: req.param('id')}).exec(function deleteVideo(err) {
         if (err) return res.next(err);
-
-        console.log('The video element has been deleted');
         return res.ok({id: req.param('id')});
       });
 
@@ -97,17 +95,51 @@ module.exports = {
       err = 'Ajax call';
       return res.badRequest(err);
     }
-
   },
 
+
   edit: function (req, res, next) {
-    Video.findOne(req.param('id'), function foundVideo(err, video) {
-      if (err) return next(err);
-      if (!video) return next();
-      res.view({
-        video: video
+    if (req.xhr) {
+      Video.findOne(req.param('id'), function foundVideo(err, video) {
+        if (err) return next(err);
+        if (!video) return next();
+        return res.render('video/edit.ejs', {
+          video: video,
+          interface: video.interface_owner,
+          layout: false
+        });
       });
-    });
+    } else {
+      err = 'Ajax call';
+      return res.badRequest(err);
+    }
+  },
+
+
+  update: function(req, res, next){
+    if (req.xhr) {
+
+      var videoObj = {
+        name: req.param('name'),
+        event_name: req.param('event_name')
+      };
+
+      Video.update(req.param('id'), videoObj, function videoUpdated(err, video) {
+        if (err){
+          return res.redirect('/video/edit' + req.param('id'));
+        }
+        msg = {err: 'The video has been updated'};
+        FlashService.success(req, msg);
+
+        return res.render('interface/_video.ejs', {
+          video: video,
+          layout: false
+        });
+      });
+    } else {
+      err = 'Ajax call';
+      return res.badRequest(err);
+    }
   }
 
 };

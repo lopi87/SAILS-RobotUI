@@ -57,7 +57,8 @@
       </div>
 
       <div class="card-dark-grey margintop10 card-btn-block">
-        <a class="btn btn-medium btn-primary" href="/robot/edit/<%= robot.id%>"> <%= i18n('edit')%></a>
+        <a class="btn btn-medium btn-warning" href="/robot/edit/<%= robot.id%>"> <%= i18n('edit')%></a>
+        <a class="btn btn-medium btn-primary" href="/interface/show/<%= robot.iface %>"> <%= i18n('interface')%></a>
         <a class="btn btn-medium btn-primary btn-success" href="/robot/index/<%= robot.id%>"><%= i18n('menu') %></a>
       </div>
     </div>

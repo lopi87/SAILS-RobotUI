@@ -6,8 +6,6 @@
  */
 
 
-var gm = require('gm');
-
 module.exports = {
 
   create: function (req, res, next){
@@ -43,39 +41,39 @@ module.exports = {
       Icon.create(iconObj, function iconCreated(err, icon) {
         if (err) return res.badRequest(err);
 
-       uploadFile.upload({
-        saveAs: function(file, cb) {
+        uploadFile.upload({
+          saveAs: function(file, cb) {
 
-          // setting allowed file types
-          var allowedTypes = ['image/jpeg', 'image/png'];
-          var extension = file.filename.split('.').pop();
+            // setting allowed file types
+            var allowedTypes = ['image/jpeg', 'image/png'];
+            var extension = file.filename.split('.').pop();
 
-          // seperate allowed and disallowed file types
-          if(allowedTypes.indexOf(file.headers['content-type']) === -1) {
-            err = { err: 'Disallowed file type' };
-            return res.badRequest(err);
-          }
-
-          Icon.update(icon.id, {
-            iconUrl: require('util').format('/uploads/icons/%s', (icon.id + '.' + extension))
-          }).exec(function iconUpdated(err, updated){
-            if (err) {
-              err = {err: 'Err'};
-              FlashService.error(req, err);
-              return;
+            // seperate allowed and disallowed file types
+            if(allowedTypes.indexOf(file.headers['content-type']) === -1) {
+              err = { err: 'Disallowed file type' };
+              return res.badRequest(err);
             }
-          });
 
-          var Path = '../../.tmp/public/uploads/icons/' + icon.id + '.' + extension;
-          cb(null, Path);
-        }
-      },function onUploadComplete(err, files) {
-        if (err) return res.badRequest(err);
-        Icon.findOne(icon.id, function foundIcon(err, icon){
-          if(err) return res.badRequest(err);
-          return res.ok({id: icon.id, url: icon.iconUrl});
+            Icon.update(icon.id, {
+              iconUrl: require('util').format('/uploads/icons/%s', (icon.id + '.' + extension))
+            }).exec(function iconUpdated(err, updated){
+              if (err) {
+                err = {err: 'Err'};
+                FlashService.error(req, err);
+                return;
+              }
+            });
+
+            var Path = '../../.tmp/public/uploads/icons/' + icon.id + '.' + extension;
+            cb(null, Path);
+          }
+        },function onUploadComplete(err, files) {
+          if (err) return res.badRequest(err);
+          Icon.findOne(icon.id, function foundIcon(err, icon){
+            if(err) return res.badRequest(err);
+            return res.ok({id: icon.id, url: icon.iconUrl});
+          });
         });
-      });
       });
     }else{
       return res.next(err);

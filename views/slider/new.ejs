@@ -60,7 +60,7 @@
 
     if (true){
       $.ajax({
-        url: '/slider/newslider/' + '<%= interface.id %>',
+        url: '/slider/new/' + '<%= interface.id %>',
         type: 'GET',
         data: {name: $( "#s_name_field" ).val(),vertical: $("#s_vertical_field" ).is(':checked'), code: $( "#s_code_field" ).val(), min: $( "#s_min_field" ).val(), max: $( "#s_max_field" ).val(), value: $( "#s_value_field" ).val(), step: $( "#s_step_field" ).val() },
         done:function() {

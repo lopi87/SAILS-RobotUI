@@ -45,28 +45,8 @@
       </div>
 
       <div class="col-md-2">
-        <div class="panel panel-info">
-          <div class="panel-heading">Users</div>
-            <div class="panel-body">
-              <div id="current_user"></div>
-              <div id="user_viewer_list"></div>
-            </div>
-          </div>
-
-          <div class="panel panel-success">
-            <div class="panel-heading">
-              Comandos
-            </div>
-            <div id="chat" class="panel-body" style="min-height: 250px; max-height: 250px; overflow-y: scroll;"></div>
-          </div>
-          <div>
-            <div class="input-group" style="text-align: center; margin:0 auto;">
-              <input id="message" class="form-control input-lg" type="text">
-              <span class="input-group-btn">
-              <button id="sendMessage" class="btn btn-lg btn-primary">Mandar</button>
-              </span>
-            </div>
-          </div>
+        <%- partial ('_users.ejs')%>
+        <%- partial ('_commands.ejs')%>
       </div>
     </div>
 

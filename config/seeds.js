@@ -56,7 +56,7 @@ module.exports.seeds = {
         busy: false,
         down: true,
         avatarUrl: '/uploads/robot_avatar/584f03efd5e35f4a1e727874.jpg',
-        robot_interface: '584f03efd5e35f4a1e727875'
+        iface: '584f03efd5e35f4a1e727875'
       },
       {
         id: '584f04dbd5e35f4a1e72787b',
@@ -70,7 +70,7 @@ module.exports.seeds = {
         busy: false,
         down: true,
         avatarUrl: '/uploads/robot_avatar/584f04dbd5e35f4a1e72787b.jpg',
-        robot_interface: '584f04dbd5e35f4a1e72787c'
+        iface: '584f04dbd5e35f4a1e72787c'
       },
       {
         id: '584f05aed5e35f4a1e727887',
@@ -84,7 +84,7 @@ module.exports.seeds = {
         busy: false,
         down: true,
         avatarUrl: '/uploads/robot_avatar/584f05aed5e35f4a1e727887.jpg',
-        robot_interface: '584f05aed5e35f4a1e727888'
+        iface: '584f05aed5e35f4a1e727888'
       }
     ],
     unique: ['id']

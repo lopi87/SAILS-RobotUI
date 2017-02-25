@@ -41,7 +41,7 @@ module.exports = {
         if (err) { return res.serverError(err); }
 
         console.log('Associating robot - interface: ',robot.name,'with',iface.id);
-        robot.robot_interface = iface.id;
+        robot.iface = iface.id;
         Robot.publishCreate(robot);
 
         PermissionService.init_permissions(robot, req.param('driver_users'), req.param('viewer_users'), function whenDone(err){
@@ -146,7 +146,6 @@ module.exports = {
   index_public_robots: function(req, res, next) {
 
     var page = 1;
-
     if( typeof req.param('page') != 'undefined'  ){
       page = parseInt(req.param('page'));
     }
@@ -158,15 +157,16 @@ module.exports = {
     });
   },
 
-  //
-  // index_driver_robots: function(req, res, next) {
-  //   User.findOne(req.session.User.id).populate('d_robots').exec(function (err, user){
-  //     if (err) return res.serverError(err);
-  //
-  //     res.view({
-  //       driver_robots: user.d_robots
-  //     });
-  //   });
+
+  index_driver_robots: function(req, res, next) {
+    User.findOne(req.session.User.id).populate('d_robots').exec(function (err, user) {
+      if (err) return res.serverError(err);
+
+      res.view({
+        driver_robots: user.d_robots
+      });
+    });
+  },
 
 
 
@@ -221,7 +221,7 @@ module.exports = {
       page = parseInt(req.param('page'));
     }
 
-    Robot.pagify('robots', {sort: ['createdAt DESC'], populate: ['robot_interface', 'owner'], page: page}).then(function(data){
+    Robot.pagify('robots', {sort: ['createdAt DESC'], populate: ['iface', 'owner'], page: page}).then(function(data){
       res.view({data: data});
     }).catch(function(err){
       return next(err);

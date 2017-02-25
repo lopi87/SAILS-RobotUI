@@ -10,8 +10,13 @@
 @black: #1C1C1C;
 @darkBlue: #106E8D;
 @darkGray: #4A4A4A;   // paragraphs
-@red: #D16565; // error
 
+// Basic Colors
+@navy: #1ab394;       // Primary color
+@dark-gray: #c2c2c2;  // Default color
+@lazur: #23c6c8;      // Info color
+@yellow: #f8ac59;     // Warrning color
+@red: #ED5565;        // Danger color
 
 
 html {
@@ -322,15 +327,28 @@ hr {
   position: relative;
 }
 
+//
+////Background
+//.grad {
+//  background: #437070; /* For browsers that do not support gradients */
+//  background: -webkit-linear-gradient(#568f8f, #437070); /* For Safari 5.1 to 6.0 */
+//  background: -o-linear-gradient(#568f8f, #437070); /* For Opera 11.1 to 12.0 */
+//  background: -moz-linear-gradient(#568f8f, #437070); /* For Firefox 3.6 to 15 */
+//  background: linear-gradient(#568f8f, #437070); /* Standard syntax */
+//  min-height: 100%;
+//}
+
+
 
 //Background
 .grad {
-  background: #437070; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(#568f8f, #437070); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(#568f8f, #437070); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(#568f8f, #437070); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(#568f8f, #437070); /* Standard syntax */
+  background: #F0FFFF; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#F0FFFF, #437070); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#F0FFFF, #437070); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#F0FFFF, #437070); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#F0FFFF, #437070); /* Standard syntax */
   min-height: 100%;
+  height: 100%;
 }
 
 h2 {
@@ -430,3 +448,127 @@ canvas {
 
 img.img-responsive { display: table-cell; max-width: 100%; }
 
+/* PAGINATION */
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+  background-color: #f4f4f4;
+  border-color: #DDDDDD;
+  color: inherit;
+  cursor: default;
+  z-index: 2;
+}
+
+.pagination > li > a, .pagination > li > span {
+  background-color: #FFFFFF;
+  border: 1px solid #DDDDDD;
+  color: inherit;
+  float: left;
+  line-height: 1.42857;
+  margin-left: -1px;
+  padding: 4px 10px;
+  position: relative;
+  text-decoration: none;
+}
+
+
+.list-group  > a.disabled  {
+  color: #FFFFFF;
+
+  &:hover,
+  &:focus {
+    color: #FFFFFF;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: not-allowed;
+  }
+}
+
+
+body {
+  min-height: 100%;
+}
+
+textarea {
+  resize:vertical ;
+}
+
+//TOAST CUSTOM
+
+#toast-container > .toast {
+  background-image: none !important;
+}
+
+#toast-container > .toast:before {
+  position: fixed;
+  font-family: FontAwesome;
+  font-size: 24px;
+  line-height: 24px;
+  float: left;
+  color: #FFF;
+  padding-right: 0.5em;
+  margin: auto 0.5em auto -1.5em;
+}
+
+#toast-container > .toast-warning:before {
+  content: "\f0e7";
+}
+
+#toast-container > .toast-error:before {
+  content: "\f071";
+}
+
+#toast-container > .toast-info:before {
+  content: "\f005";
+}
+
+#toast-container > .toast-success:before {
+  content: "\f00C";
+}
+
+#toast-container > div {
+  -moz-box-shadow: 0 0 3px #999;
+  -webkit-box-shadow: 0 0 3px #999;
+  box-shadow: 0 0 3px #999;
+  opacity: .9;
+  -ms-filter: alpha(Opacity=90);
+  filter: alpha(opacity=90);
+  margin-top: 50px;
+}
+
+#toast-container > :hover {
+  -moz-box-shadow: 0 0 4px #999;
+  -webkit-box-shadow: 0 0 4px #999;
+  box-shadow: 0 0 4px #999;
+  opacity: 1;
+  -ms-filter: alpha(Opacity=100);
+  filter: alpha(opacity=100);
+  cursor: pointer
+}
+
+.toast {
+  background-color: @navy
+}
+
+.toast-success {
+  background-color: @navy
+}
+
+.toast-error {
+  background-color: @red
+}
+
+.toast-info {
+  background-color: @lazur
+}
+
+.toast-warning {
+  background-color: @yellow
+}
+
+.toast-top-full-width {
+  margin-top: 20px;
+}
+
+.toast-bottom-full-width {
+  margin-bottom: 20px;
+}

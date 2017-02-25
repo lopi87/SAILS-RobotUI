@@ -3,28 +3,32 @@
 <% if (flash != 'undefined' && flash['error'].length > 0) { %>
 <% flash['error'].forEach(function(message) { %>
 <script type="text/javascript">
-  bootstrap_alert['danger']('<%- message.err %>', 0 )
+  //bootstrap_alert['danger']('<%- message.err %>', 0 )
+  toast['danger']('<%- message.err %>')
 </script>
 <% }); %>
 <% } %>
 <% if (flash != 'undefined' && flash['warning'].length > 0) { %>
 <% flash['warning'].forEach(function(message) { %>
 <script type="text/javascript">
-  bootstrap_alert['warning']('<%- message.err %>', 0 )
+  //bootstrap_alert['warning']('<%- message.err %>', 0 )
+  toast['warning']('<%- message.err %>')
 </script>
 <% }); %>
 <% } %>
 <% if (flash != 'undefined' && flash['success'].length > 0) { %>
 <% flash['success'].forEach(function(message) { %>
 <script type="text/javascript">
-  bootstrap_alert['success']('<%-  message.err %>', 0 )
+  //bootstrap_alert['success']('<%-  message.err %>', 0 )
+  toast['info']('<%- message.err %>')
 </script>
 <% }); %>
 <% } %>
 <% if (flash != 'undefined' && flash['info'].length > 0) { %>
 <% flash['info'].forEach(function(message) { %>
 <script type="text/javascript">
-  bootstrap_alert['info']('<%-  message.err %>', 0 )
+  //bootstrap_alert['info']('<%-  message.err %>', 0 )
+  toast['info']('<%- message.err %>')
 </script>
 <% }); %>
 <% } %>
@@ -33,8 +37,9 @@
 <% flash['server_exit'].forEach(function(message) { %>
   <% Object.keys(flash['server_exit']).forEach(function(error){ %>
   <script type="text/javascript">
-    bootstrap_alert['danger']('<%- JSON.stringify(flash['server_exit'][error])%>', 0 )
-</script>
+    //bootstrap_alert['danger']('<%- JSON.stringify(flash['server_exit'][error])%>', 0 )
+    toast['danger']('<%- JSON.stringify(flash['server_exit'][error])%>')
+  </script>
   <% }) %>
 <% }); %>
 <% } %>

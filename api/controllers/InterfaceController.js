@@ -183,11 +183,23 @@ module.exports = {
           err = 'Interface doesn\'t exists.';
           return res.badRequest(err);
         }
-        Action.destroy({interface_owner: interface.id}).exec(function (err, action) {
+        Action.destroy({interface_owner: interface.id}).exec(function (err) {
           if (err) return res.badRequest(err);
-          console.log('Actions deleted');
-          res.ok({
-            msg: 'deleted'
+
+          Video.destroy({interface_owner: interface.id}).exec(function (err) {
+            if (err) return res.badRequest(err);
+
+            Slider.destroy({interface_owner: interface.id}).exec(function (err) {
+              if (err) return res.badRequest(err);
+
+              Event.destroy({interface_owner: interface.id}).exec(function (err) {
+                if (err) return res.badRequest(err);
+
+                res.ok({
+                  msg: 'deleted'
+                });
+              });
+            });
           });
         });
       });
@@ -278,7 +290,6 @@ module.exports = {
         Room.findOne({room_name: req.param('robot_id')}).populate('sockets_room').exec(function (err, room) {
           if (err) {return res.serverError(err);}
           if (!room) return next();
-
 
           room.sockets_room.forEach(function(session) {
             if (session.user_id ==  req.param('user_id')){
