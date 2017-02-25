@@ -1,11 +1,14 @@
 <%- partial('../_alert.ejs', {flash: flash}) %>
 
 <div class="jumbox">
-  <h3>Public Robots</h3>
-  <%- partial('_table.ejs', {data: data, type: 'public_robots'}) %>
-  <div class="button_right">
-    <a href="/robot/share" class="btn btn-sm btn-success">Share a new robot!</a>
-  </div>
+  <h1 class="text-center login-title marginbottom20"><%= i18n('public_robots') %></h1>
+
+    <% _.each(data.robots, function(robot){ %>
+    <%- partial('_card.ejs', {robot: robot}) %>
+    <% }) %>
+
+  <%- partial ('../_paginate.ejs', { paginate: data.meta.paginate } )%>
+
 </div>
 
 
@@ -28,23 +31,4 @@
 </script>
 
 
-<div class="col-md-12">
-  <div class="carousel slide" id="myCarousel">
-    <div class="carousel-inner">
-      <div class="item active">
-        <ul class="thumbnails">
-          <% _.each(data.robots, function(robot){ %>
-          <%- partial('_card.ejs', {robot: robot}) %>
-          <% }) %>
-        </ul>
-      </div>
-    </div>
 
-    <nav>
-      <ul class="control-box pager">
-        <li><a data-slide="prev" href="#myCarousel" class=""><i class="glyphicon glyphicon-chevron-left"></i></a></li>
-        <li><a data-slide="next" href="#myCarousel" class=""><i class="glyphicon glyphicon-chevron-right"></i></a></li>
-      </ul>
-    </nav>
-  </div>
-</div>

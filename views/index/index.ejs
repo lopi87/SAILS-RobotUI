@@ -5,10 +5,6 @@
     </div>
   </div>
 
-<% if (n_robots_online > 0){%>
-<!-- <div class="alert alert-success" role="alert">There are <%= n_robots_online %> robots online, choose one and start playing!</div> -->
-<%}%>
-
 <div class="column colspan-1 text-center">
   <img src="/images/index/game.png" alt="play with robots" class="img-responsive card-circle block center" style="height:100px">
   <h4 class="index_h">Play with robots!</h4>
@@ -30,11 +26,12 @@
 
 <div class="clear"></div>
 
-<% if (!req.session.User) {%>
-  <div class="jumbotron">
-    <div class="margintop20">
-      <a href="/user/new" class="btn btn-lg btn-success"> <%= __("signupnow") %></a>
-    </div>
-  </div>
-<% } %>
-
+ <div class="jumbotron">
+   <div class="form-signin">
+     <% if (!req.session.User) {%>
+     <a href="/user/new" class="btn btn-lg btn-block btn-success"> <%= __("signupnow") %></a>
+     <% } else { %>
+     <a href="/robot/index_public_robots" class="btn btn-lg btn-block btn-success"> <%= __("robots") %></a>
+     <% } %>
+   </div>
+ </div>

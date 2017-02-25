@@ -62,7 +62,7 @@ module.exports = {
 
 
   upload_robot_avatar: function(img, robot, done){
-    img.upload({ maxBytes: 10000000, saveAs: function(file, cb){
+    img.upload({ maxBytes: 50000000, saveAs: function(file, cb){
 
       // setting allowed file types
       var allowedTypes = ['image/jpeg', 'image/png'];

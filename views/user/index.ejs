@@ -26,8 +26,8 @@
         <% } %>
 
         <td>
-          <a href="/user/show/<%= user.id %>"><%= user.name %></a>
           <img src="<%= sails.getBaseUrl() + user.avatarUrl %>" alt="Avatar" title="<%= user.name %>" class="card-left card-circle card-margin-right img-responsive" style="width:32px">
+          <a href="/user/show/<%= user.id %>"><%= user.name %></a>
         </td>
         <td><%= user.email %></td>
 

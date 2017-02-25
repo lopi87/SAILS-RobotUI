@@ -150,7 +150,7 @@ module.exports = {
       page = parseInt(req.param('page'));
     }
 
-    Robot.pagify('robots', {findQuery: { or: [{public_view: true, public_drive: true}]} , sort: ['createdAt DESC'], page: page}).then(function(data){
+    Robot.pagify('robots', {findQuery: { or: [{public_view: true, public_drive: true}]} , sort: ['createdAt DESC'], populate: ['owner'], page: page, perPage: 3}).then(function(data){
       res.view({data: data});
     }).catch(function(err){
       return next(err);

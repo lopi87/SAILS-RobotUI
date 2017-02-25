@@ -18,8 +18,8 @@
       <% } %>
 
       <td>
-        <a href="/robot/show/<%= robot.id %>"><%= robot.name %></a>
         <img src="<%= sails.getBaseUrl() + robot.avatarUrl %>" alt="Avatar" title="<%= robot.name %>" class="card-left card-circle card-margin-right img-responsive" style="width:32px">
+        <a href="/robot/show/<%= robot.id %>"><%= robot.name %></a>
       </td>
 
       <td><%= robot.description %></td>

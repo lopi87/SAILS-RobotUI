@@ -98,5 +98,6 @@
 	"show_robots": "show_robots",
 	"delete": "delete",
 	"robots": "robots",
-	"my_robots": "my_robots"
+	"my_robots": "my_robots",
+	"public_robots": "public_robots"
 }

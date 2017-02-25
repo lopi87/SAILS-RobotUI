@@ -1,17 +1,33 @@
-<li class="col-sm-3">
-  <div class="fff">
-    <div class="thumbnail">
-      <a href="#"><img src="<%= robot.avatarUrl%>" alt="" style="width:360px;"></a>
+<div class="col-lg-4 col-md-6 col-xs-12">
+  <div class="card">
+    <header class="card-container card-light-grey">
+      <h3><%= robot.name %></h3>
+    </header>
+
+    <div class="card-container paddingtop10">
+      <img src="<%= sails.getBaseUrl() + robot.owner.avatarUrl %>" class="img-responsive card-circle marginleft5" height="32" width="32">
+      <%= robot.owner.name %>
+      <span id="label_state_<%=robot.id%>" class="label label-pill <%= robot.busy ? 'label-danger' : 'label-success' %>"> <%= robot.busy ? i18n('busy') : i18n('free') %> </span>
     </div>
-    <div class="caption">
-      <h4><%= robot.name%></h4>
-      <p><%= robot.description%></p>
-      <div class="row">
-       <div class="col-md-12">
-         <a id="btn_view_ <%= robot.id%>" href="/interface/view/<%= robot.iface %>" class="btn btn-sm btn-primary floatright"><i class="fa fa-eye" aria-hidden="true"></i></i> <%= i18n('view') %> </a>
-       </div>
+    <hr>
+
+    <div class="card-container">
+
+      <div class="thumbnail" >
+        <a href="#"><img src="<%= robot.avatarUrl%>"></a>
       </div>
+
+      <p>Address: <%= robot.ipaddress + ':' + robot.port %></p>
+      <p>Description: <%= robot.description %></p>
+      <br>
+
+      <div class="clear"></div>
+    </div>
+
+    <div class="card-dark-grey margintop10 card-btn-block">
+      <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.iface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+      <a id="btn_control_ <%= robot.id%>" href="/interface/show/<%= robot.iface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> <%= i18n('view') %> </a>
+      <a id="btn_config_ <%= robot.id%>" href="/interface/configure/<%= robot.iface %>" class="btn btn-sm btn-warning"><i class="fa fa-wrench" aria-hidden="true"></i> Configure</a>
     </div>
   </div>
-</li>
-
+</div>
