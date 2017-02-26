@@ -44,8 +44,10 @@ module.exports = {
 
   send: function(req, res, next) {
 
+    var doc = req.body;
+
     var msgObj = {
-      content: req.param('message'),
+      content: req.param('content'),
       from_user_id: req.session.User.id,
       to_user_id: req.param('to_user_id'),
       title: req.param('title')
@@ -68,7 +70,7 @@ module.exports = {
           return res.redirect('/message/index');
         }
 
-        //Mandar notificacion al usuario  FUNCIONA
+        //Mandar notificacion al usuario
         Session.findOne({user_id: req.param('to_user_id')}, function foundSession(err, session) {
           if (err) {
             console.log(err);
@@ -84,7 +86,6 @@ module.exports = {
           });
         });
         //
-
         //Mandar notificacion al usuario, a cada ventana que tiene abierta REVISAR SE MANDA MUCHAS VECES
         /*
         Session.find({user_id: req.param('to_user_id')}, function foundSession(err, sessions) {

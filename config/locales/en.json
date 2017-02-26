@@ -75,5 +75,16 @@
 	"my_viewer_robots": "my_viewer_robots",
 	"public_robots": "public_robots",
 	"admin": "admin",
-	"robots": "robots"
+	"robots": "robots",
+	"to": "to",
+	"subject": "subject",
+	"send": "send",
+	"read": "read",
+	"from": "from",
+	"message": "message",
+	"date": "date",
+	"action": "action",
+	"reply": "reply",
+	"mark_as_read": "mark_as_read",
+	"delete": "delete"
 }

@@ -493,11 +493,11 @@ module.exports = {
     }
 
 
-    Userdriverrobot.find().where({'user': req.session.User.id}).exec(function (err, user_d_robots) {
+    Userdriverobot.find().where({'user': req.session.User.id}).exec(function (err, user_d_robots) {
       if (err) return next(err);
 
 
-      Userviewerrobot.find().where({'user': req.session.User.id}).exec(function (err, user_v_robots) {
+      Userviewerobot.find().where({'user': req.session.User.id}).exec(function (err, user_v_robots) {
         if (err) return next(err);
 
         var d_robot = _.pluck(user_d_robots, 'robot');
