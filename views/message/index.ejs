@@ -26,7 +26,7 @@
             <a href="" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
           </div>
           <h2>
-            Messages
+            <%= i18n("messages") %>
           </h2>
         </div>
         <form id="msg-form" class="form-horizontal" action="send" method="post" data-parsley-validate>
@@ -35,7 +35,7 @@
               <input type="hidden" name="_csrf" value="<%= _csrf %>">
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">To:</label>
+                <label class="col-sm-2 control-label"><%= i18n("to") + ': ' %> </label>
                 <div class="col-sm-10">
                   <select data-placeholder="Choose users..." class="chosen-select-users" tabindex="2" name="to_user_id">
                     <option value=""></option>
@@ -50,7 +50,7 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">Subject:</label>
+                <label class="col-sm-2 control-label"><%= i18n("subject") + ': ' %></label>
                 <div class="col-sm-10"><input type="text" class="form-control" name="title" value=""></div>
               </div>
             </div>

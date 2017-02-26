@@ -66,5 +66,14 @@
 	"action.color_active_background.hexadecimal": "action.color_active_background.hexadecimal",
 	"joystick.event_name.string": "joystick.event_name.string",
 	"joystick.event_name.required": "joystick.event_name.required",
-	"action.code.string": "action.code.string"
+	"action.code.string": "action.code.string",
+	"users_administration": "users_administration",
+	"robots_administration": "robots_administration",
+	"messages": "messages",
+	"my_robots": "my_robots",
+	"my_driver_robots": "my_driver_robots",
+	"my_viewer_robots": "my_viewer_robots",
+	"public_robots": "public_robots",
+	"admin": "admin",
+	"robots": "robots"
 }

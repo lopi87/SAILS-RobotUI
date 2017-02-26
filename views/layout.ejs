@@ -94,16 +94,14 @@
 
         <% if (session.User.admin) { %>
         <li class="dropdown">
-          <a class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="#">
-            Admin
-            <span class="caret"></span>
+          <a class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="#"><%= i18n("admin") %><span class="caret"></span>
           </a>
           <ul class="dropdown-menu inverse-dropdown">
             <li>
-              <a href="/user"> User Administration</a>
+              <a href="/user"><%= i18n("users_administration") %></a>
             </li>
             <li>
-              <a href="/robot/admin_panel">Robots administration</a>
+              <a href="/robot/admin_panel"><%= i18n("robots_administration") %></a>
             </li>
           </ul>
         </li>
@@ -112,30 +110,30 @@
 
         <li class="nav-item" id="buttom_msg">
           <%if (typeof n_messages !== 'undefined' && n_messages > 0){%>
-          <a href="/message/index">Messages <span id="msg_new" class="label label-pill label-danger">+<%= n_messages %></span></a>
+          <a href="/message/index"><%= i18n("messages") + '   '%><span id="msg_new" class="label label-pill label-danger">+<%= n_messages %></span></a>
           <% } else { %>
-          <a href="/message/index">Messages <spam id="msg_new"></spam></a>
+          <a href="/message/index"><%= i18n("messages") %><spam id="msg_new"></spam></a>
           <%}%>
         </li>
 
         <li class="dropdown">
           <a class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="#">
-            Robots
+            <%= i18n("robots") %>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu inverse-dropdown">
             <li>
-              <a href="/robot/my_robots"> My Robots</a>
+              <a href="/robot/my_robots"><%= i18n("my_robots") %></a>
             </li>
             <li>
-              <a href="/robot/index_driver_robots"> My driver robots</a>
+              <a href="/robot/index_driver_robots"><%= i18n("my_driver_robots") %></a>
             </li>
             <li>
-              <a href="/robot/index_viewer_robots"> My viewer robots</a>
+              <a href="/robot/index_viewer_robots"><%= i18n("my_viewer_robots") %></a>
             </li>
             <li class="nav-dividernavbar-inverse" role="separator"></li>
             <li>
-              <a href="/robot/index_public_robots"> Public Robots</a>
+              <a href="/robot/index_public_robots"><%= i18n("public_robots") %></a>
             </li>
           </ul>
         </li>
@@ -199,7 +197,7 @@
 
         <form id="login_form" class="navbar-right" action="/session/create">
           <div class="form-group">
-            <input type="email" placeholder="<%= __("email") %>" name="email" data-parsley-trigger="change" required class="form-control">
+            <input type="email" placeholder="<%= i18n("email") %>" name="email" data-parsley-trigger="change" required class="form-control">
           </div>
           <div class="form-group">
             <input type="password" placeholder="<%= i18n("password") %>" required  name="password" class="form-control" style="width: 150px">
