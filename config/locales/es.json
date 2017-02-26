@@ -114,5 +114,7 @@
 	"reply": "Responder",
 	"mark_as_read": "Marcar como leido",
 	"to": "A",
-	"subject": "Título"
+	"subject": "Título",
+	"user_information": "user_information",
+	"administrator": "administrator"
 }

@@ -1,7 +1,7 @@
 <%- partial('../_alert.ejs', {flash: flash}) %>
 
 <div class="container">
-  <h2 class="form-sigin-heading">User information</h2>
+  <h2 class="form-sigin-heading"><%= i18n('user_information')%></h2>
 
   <div class="card" style="min-width:300px; width: 30%; margin: auto">
       <header class="card-container card-light-grey">
@@ -10,30 +10,30 @@
 
     <div class="card-container paddingtop10">
       <% if(user.admin){ %>
-      <img src="/images/admin.png" height="32" width="32" class="img-responsive"> admin
+      <img src="/images/admin.png" height="32" width="32" class="img-responsive"> <%= i18n('administrator')%>
       <% } else { %>
-      <img src="/images/pawn.png"  height="32" width="32" class="img-responsive"> pawn
+      <img src="/images/pawn.png"  height="32" width="32" class="img-responsive"> <%= i18n('user')%>
       <% } %>
       <% if(user.online || user.id == req.session.User.id){ %>
-        <img src="/images/online.png" height="32" width="32" class="img-responsive"> online
+        <img src="/images/online.png" height="32" width="32" class="img-responsive"> <%= i18n('online')%>
       <% } else { %>
-        <img src="/images/offline.png"  height="32" width="32" class="img-responsive"> offline
+        <img src="/images/offline.png"  height="32" width="32" class="img-responsive"> <%= i18n('offline')%>
       <% } %>
     </div>
     <hr>
 
       <div class="card-container">
         <img src="<%= sails.getBaseUrl() + user.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right img-responsive" style="width:75px">
-        <p>Email: <%= user.email%></p>
-        <p>Language: <img class="chose-image-small" src="/images/flags/<%= user.language.toUpperCase()%>.png"></p>
+        <p><%= i18n('email') +  ': ' +  user.email%></p>
+        <p><%= i18n('language') + ': '%><img class="chose-image-small" src="/images/flags/<%= user.language.toUpperCase()%>.png"></p>
 
         <br>
     <div class="clear"></div>
       </div>
 
       <div class="card-dark-grey margintop10 card-btn-block">
-        <a class="btn btn-medium btn-primary" href="/user/edit/<%= user.id%>">Edit</a>
-        <a class="btn btn-medium btn-primary btn-success" href="/robot/index/<%= user.id %>">Show robots</a>
+        <a class="btn btn-medium btn-primary" href="/user/edit/<%= user.id%>"><%= i18n('edit')%></a>
+        <a class="btn btn-medium btn-primary btn-success" href="/robot/index/<%= user.id %>"><%= i18n('robots')%></a>
       </div>
     </div>
   </div>

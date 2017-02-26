@@ -9,7 +9,6 @@
  */
 module.exports.seeds = {
   disable: true,
-
   user: {
     data: [
       {
@@ -23,7 +22,7 @@ module.exports.seeds = {
         confirmation: '12345678',
         avatarUrl: '/images/avatar/avatar.png',
         encryptedPassword: '$2a$10$ISyLb32.j/TE8VkMDmfJGeHu5o/aI3sddapt/GGzea.4KWuKGUeRC',
-        onLine: true,
+        onLine: false,
         latitude: 0
       },
       {
