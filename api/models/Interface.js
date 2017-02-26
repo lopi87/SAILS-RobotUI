@@ -51,7 +51,7 @@ module.exports = {
 
     panel_sizex: {
       type: 'float',
-      defaultsTo: 500,
+      defaultsTo: 910,
       ispositive:true
     },
 

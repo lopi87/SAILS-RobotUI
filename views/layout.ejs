@@ -153,7 +153,7 @@
             <script type="text/javascript">
               $('.chzn-select-lan option[value="<%= (typeof(req.session) !== 'undefined'  && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>"]').attr("selected",true);
               $('.chzn-select-lan').chosen({
-                "disable_search": true,
+                "disable_search": true
               });
             </script>
           </div>
@@ -257,8 +257,8 @@
             num_msg++;
           }
 
-          $('#buttom_msg').html('<a href="/message/index">Messages <span id="msg_new" class="label label-pill label-danger">' + '+' + num_msg + '</span></a>');
-         toastr.info('You have a new message! <a href="/message/show/' + message.data.msg.id + '">Open Here</a>' , 'Message');
+          $('#buttom_msg').html('<a href="/message/index"><%= i18n('messages')%><span id="msg_new" class="label label-pill label-danger">' + '+' + num_msg + '</span></a>');
+          toastr.info('You have a new message! <a href="/message/show/' + message.data.msg.id + '"><%= i18n('open_here')%></a>' , 'Message');
           break;
 
         default:

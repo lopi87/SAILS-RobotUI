@@ -2,9 +2,6 @@
 	"Welcome": "Bienvenido",
 	"createaccount": "Crear una cuenta",
 	"createrobot": "Crear un robot",
-	"testing": {
-		"test": "esta es una prueba"
-	},
 	"signupnow": "¡Registrese ahora!",
 	"password": "Contraseña",
 	"passwordconfirmation": "Confirmacion de contraseña",
@@ -116,5 +113,8 @@
 	"to": "A",
 	"subject": "Título",
 	"user_information": "user_information",
-	"administrator": "administrator"
+	"administrator": "administrator",
+	"user": "user",
+	"display": "display",
+	"open_here": "open_here"
 }

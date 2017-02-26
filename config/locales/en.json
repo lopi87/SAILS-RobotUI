@@ -86,5 +86,6 @@
 	"action": "action",
 	"reply": "reply",
 	"mark_as_read": "mark_as_read",
-	"delete": "delete"
+	"delete": "delete",
+	"open_here": "open_here"
 }

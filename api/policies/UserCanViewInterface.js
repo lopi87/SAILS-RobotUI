@@ -8,25 +8,23 @@ module.exports = function(req, res, next) {
       if (err) return next(err);
       if (!robot) return next(err);
 
-      var found = false;
+      if(robot.owner == req.session.User.id){
+        return next();
+      }
 
       if (robot.public_view){
-        found = true;
+        return next();
       }else{
         robot.viewers.forEach(function(user) {
           if(user.id === req.session.User.id){
-            found = true;
+            return next();
           }
         });
       }
 
-      if (found){
-        next();
-      } else {
-        msg = { err:  'You dont have permissions for this action.' };
-        FlashService.warning(req, msg );
-        return res.forbidden(msg);
-      }
+      msg = { err:  'You dont have permissions for this action.' };
+      FlashService.warning(req, msg );
+      return res.forbidden(msg);
 
     });
   });
