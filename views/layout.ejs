@@ -260,7 +260,7 @@
           }
 
           $('#buttom_msg').html('<a href="/message/index">Messages <span id="msg_new" class="label label-pill label-danger">' + '+' + num_msg + '</span></a>');
-          bootstrap_alert['info']('You have a new message! <a href="/message/show/' + message.data.msg.id + '">Open Here</a>' , 0 );
+         toastr.info('You have a new message! <a href="/message/show/' + message.data.msg.id + '">Open Here</a>' , 'Message');
           break;
 
         default:

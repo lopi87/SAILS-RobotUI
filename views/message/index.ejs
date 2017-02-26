@@ -26,7 +26,7 @@
           <a href="" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
         </div>
         <h2>
-          Compse mail
+          Messages
         </h2>
       </div>
       <form id="msg-form" class="form-horizontal" action="send" method="post" data-parsley-validate>
@@ -51,9 +51,15 @@
 
             <div class="form-group">
               <label class="col-sm-2 control-label">Subject:</label>
-              <div class="col-sm-10"><input type="text" class="form-control" value=""></div>
+              <div class="col-sm-10"><input type="text" class="form-control" name="title" value=""></div>
             </div>
         </div>
+
+        <div class="form-group">
+          <label for="message">Message (20 chars min, 100 max)* :</label>
+          <textarea id="message" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10"></textarea>
+        </div>
+
 
         <div class="mail-text h-200">
           <div class="summernote">
@@ -147,7 +153,9 @@
     });
   }
 
-
+  function subscribeAndListen() {
+    io.socket.get('/message/message_subscribe');
+  }
 
 </script>
 

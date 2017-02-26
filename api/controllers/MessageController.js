@@ -161,17 +161,27 @@ module.exports = {
   },
 
 
-
-  message_subscribe: function(req, res, next){
+  message_subscribe: function (req, res, next) {
     if (!req.isSocket) {
       return res.badRequest('HTTP request.');
     }
 
-    //Solo este usuario recibira el evento message
-    User.subscribe(req, req.session.User.id, 'message');
+    var socketId = sails.sockets.id(req);
 
-    return res.ok({
-      msg: 'suscribed'
+    Session.findOne({socket_id: socketId}, function foundSession(err, session) {
+      if (err) return next(err);
+      if (!session) return next();
+
+      User.findOne(session.user_id, function foundUser(err, user) {
+        if (err) return next(err);
+        if (!user) {return next(err);}
+
+        //Solo este usuario recibira el evento message
+        User.subscribe(req, user, 'message');
+
+        return res.json(user);
+      });
     });
   }
+
 };

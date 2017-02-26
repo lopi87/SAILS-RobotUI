@@ -85,12 +85,14 @@
 
 
 
-        <div class="checkbox">
-          <label><input type="checkbox" name="public_drive"><%= i18n('Public') %></label>
-        </div>
-
-        <div class="checkbox">
-          <label><input type="checkbox" name="public_view"><%= i18n('Public') %></label>
+        <div class="col-md-6">
+          <div class="control-group">
+            <label for="name"><%= i18n("public") %> * :</label>
+            <p class="paddingtop10">
+              <%= i18n('control') + ':' %><input class="i-checks pr-2" name="public_drive" type="checkbox">
+              <%= i18n('view') + ':' %><input class="i-checks pr-2" name="public_view" type="checkbox">
+            </p>
+          </div>
         </div>
 
 
