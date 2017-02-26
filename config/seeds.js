@@ -8,6 +8,7 @@
  * http://github.com/frostme/sails-seed
  */
 module.exports.seeds = {
+  disable: true,
 
   user: {
     data: [
@@ -39,7 +40,8 @@ module.exports.seeds = {
         latitude: 0
        }
     ],
-    unique: ['id']
+    unique: ['id'],
+    overwrite: false
   },
 
   robot:{
@@ -87,7 +89,8 @@ module.exports.seeds = {
         iface: '584f05aed5e35f4a1e727888'
       }
     ],
-    unique: ['id']
+    unique: ['id'],
+    overwrite: false
   },
 
 
@@ -113,7 +116,8 @@ module.exports.seeds = {
       }
 
     ],
-    unique: ['id']
+    unique: ['id'],
+    overwrite: false
   }
 
 };
