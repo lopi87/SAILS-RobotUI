@@ -28,3 +28,10 @@
     <a class="btn btn-md btn-success right marginright20" href="/message/reply/<%= message.id %>"><i class="fa fa-reply fa-lg"></i> Reply </a>
     <a class="btn btn-md btn-warning right marginright20" href="/message/index/">Back</a>
 </div>
+
+
+<script type="text/javascript">
+  function subscribeAndListen() {
+    io.socket.get('/message/message_subscribe');
+  }
+</script>

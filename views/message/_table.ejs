@@ -1,0 +1,57 @@
+
+<div class="jumbox">
+  <% if (flash != 'undefined' && flash['server_exit'].length > 0) { %>
+  <div class="bs-callout bs-callout-warning">
+    <h4>Ups!</h4>
+    <ul>
+      <% Object.keys(flash['server_exit']).forEach(function(error) { %>
+      <li><%- JSON.stringify(flash['server_exit'][error], null, "  ") %></li>
+      <% }); %>
+    </ul>
+  </div>
+  <% } %>
+
+  <h3>Inbox</h3>
+  <table class="table">
+    <tr>
+      <th>Read</th>
+      <th>From</th>
+      <th>Message</th>
+      <th>Fecha</th>
+      <th>Actions</th>
+
+    </tr>
+
+    <% _.each(data.messages, function(message){ %>
+    <tr id="line_msg_<%= message.id %>" data-model="message">
+      <td id="env_<%= message.id %>">
+        <% if(message.read){ %>
+        <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
+        <% } else { %>
+        <i class="fa fa-eye-slash fa-2x" aria-hidden="true"></i>
+        <% } %>
+      </td>
+
+      <td>
+        <img src="<%= sails.getBaseUrl() + message.from_user_id.avatarUrl %>" alt="Avatar" title="<%= message.from_user_id.name %>" class="card-left card-circle card-margin-right img-responsive" style="width:32px">
+        <a href="/user/show/<%= message.from_user_id.name %>"><%= message.from_user_id.name %></a>
+      </td>
+
+
+      <td><%=message.content.substring(0,20) %></td>
+      <td><%=message.createdAt %></td>
+      <td>
+        <a class="btn btn-sm btn-success" onclick="reply_msg('<%= message.id %>')"><i class="fa fa-reply"></i> Reply </a>
+        <a class="btn btn-sm btn-info" onclick=" window.location.href='<%='/message/show/' + message.id %>'">Read</a>
+        <% if(!message.read){ %>
+        <a id="mark_read_btn_<%= message.id %>" class="btn btn-sm btn-warning" onclick="msg_as_read('<%= message.id %>')">Mark as read</a>
+        <% } %>
+        <a class="btn btn-sm btn-danger" onclick="destroy_msg('<%= message.id %>')"><i class="fa fa-trash-o fa-lg"></i> Delete </a>
+      </td>
+    </tr>
+    <% })%>
+  </table>
+
+  <%- partial ('../_paginate.ejs', { paginate: data.meta.paginate } )%>
+
+</div>

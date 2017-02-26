@@ -1,12 +1,10 @@
 <%- partial('../_alert.ejs', {flash: flash}) %>
 
-<%- partial('config_panel.ejs', {interface: interface, events: events, actions: actions, video: video})%>
+<%- partial('_config_panel.ejs', {interface: interface, events: events, actions: actions, video: video})%>
 
 
-<!--TODO: ANALOGICO CONTROL Y USO DE BIBLIOTECA EN ROBOT-->
-  <%//STICK   http://scottlobdell.me/2015/09/creating-touch-controlled-joystick-html5/ %>
-  <!--https://github.com/jperkin/node-rpio-->
-
-  <!--TODO: MEJORAR CONFIGURACION Y DISEÑO DE LA INTERFAZ-->
-  <!--http://interactjs.io/-->
-
+<script type="text/javascript">
+  function subscribeAndListen() {
+    io.socket.get('/message/message_subscribe');
+  }
+</script>

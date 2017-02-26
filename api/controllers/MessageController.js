@@ -5,23 +5,31 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+var pager = require('sails-pager');
+
 module.exports = {
 
 
   index: function(req, res, next) {
-    Message.find({to_user_id: req.session.User.id}).populate('from_user_id').exec(function foundMessage(err, messages){
+    var page = 1;
+    if( typeof req.param('page') != 'undefined'  ){
+      page = parseInt(req.param('page'));
+    }
+
+    User.find(function foundUsers(err, users){
       if(err) return next(err);
 
-      User.find(function foundUsers(err, users){
-        if(err) return next(err);
-
+      Message.pagify('messages', {sort: ['createdAt DESC'], populate:[ 'from_user_id' ], page: page}).then(function(data){
         res.view({
-          user_messages: messages,
+          data: data,
           users:users
         });
+      }).catch(function(err){
+        return next(err);
       });
     });
   },
+
 
   create: function (req, res, next) {
     User.find(function foundUsers(err, users) {

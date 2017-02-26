@@ -66,3 +66,8 @@
 
 <%- partial('_js_interface_code.ejs')%>
 
+<script type="text/javascript">
+  function subscribeAndListen() {
+    io.socket.get('/message/message_subscribe');
+  }
+</script>
