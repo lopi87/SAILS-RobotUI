@@ -65,14 +65,6 @@ module.exports = {
             } else {
               return res.redirect('robot/index/');
             }
-
-
-            /*
-             ImageService.upload_robot_documentation(req.file('robot_documentation'), robot, function whenDone(err, files) {
-             if (err) return res.negotiate(err);
-             });
-             */
-
           });
         });
       });

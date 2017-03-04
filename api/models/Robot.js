@@ -41,8 +41,6 @@ module.exports = {
       type:'string'
     },
 
-
-    // Usuario al que pertenece
     owner: {
       model: 'user'
     },

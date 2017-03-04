@@ -91,5 +91,6 @@
 	"room.room_name.string": "room.room_name.string",
 	"room.room_name.required": "room.room_name.required",
 	"close": "close",
-	"new": "new"
+	"new": "new",
+	"index": "index"
 }

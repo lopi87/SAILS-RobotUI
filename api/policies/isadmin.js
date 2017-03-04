@@ -11,7 +11,6 @@ module.exports = function(req, res, ok) {
   else {
     msg = { err:  'You must be an admin.' };
     FlashService.warning(req, msg );
-    res.redirect('/');
-    return;
+    return res.forbidden(msg);
   }
 };
