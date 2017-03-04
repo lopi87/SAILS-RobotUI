@@ -35,10 +35,9 @@
         },
 
         success: function (data) {
-          $("#errors_container").html('');
           $('[id^=video_]').remove();
           $("#panel").prepend(data);
-          $('.modal').modal('toggle');
+          closeModal();
          toastr.info('A new video has been created!', 'Video');
         },
 

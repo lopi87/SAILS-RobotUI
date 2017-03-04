@@ -116,10 +116,10 @@
         },
 
         success: function (data) {
-          $("#errors_container").html('');
+
           $("#panel").append(data);
-          $('.modal').modal('toggle');
-         toastr.info('A new action has been created!', 5000);
+          closeModal();
+         toastr.info('A new action has been created!', 'Action');
         },
 
         error: function (xhr) {

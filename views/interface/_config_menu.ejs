@@ -103,9 +103,7 @@
         type: 'GET',
         data: {id: '<%= interface.id %>'},
         success: function(data){
-          $("#errors_container").html('');
-          $('#myModalLabel').html(title)
-          $("#container").html(data);
+          openModal(title, data);
         }
       });
   }

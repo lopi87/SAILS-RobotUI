@@ -67,9 +67,8 @@
         },
 
         success: function (data) {
-          $("#errors_container").html('');
           $("#panel").append(data);
-          $('.modal').modal('toggle');
+          closeModal();
          toastr.info('A new slider has been created!', 'Slider');
         },
 

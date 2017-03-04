@@ -33,9 +33,8 @@
         },
 
         success: function (data) {
-          $("#errors_container").html('');
           $('[id^=video_]').html(data);
-          $('.modal').modal('toggle');
+          closeModal();
          toastr.info('A new video has been updated!', 'User');
         },
 

@@ -1,59 +1,19 @@
 <div class="jumbox">
   <h2> <%= i18n("messages") %></h2>
-  <div class="wrapper wrapper-content">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 animated fadeInRight">
-
-        <form id="msg-form" class="form-horizontal" action="send" method="post" enctype="multipart/form-data">
-          <div class="mail-box">
-            <div class="mail-body">
-              <input type="hidden" name="_csrf" value="<%= _csrf %>">
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label"><%= i18n("to") + ': ' %> </label>
-                <div class="col-sm-10">
-                  <select data-placeholder="<%= i18n('chose_users')%>" class="chosen-select-users" tabindex="2" name="to_user_id">
-                    <option value=""></option>
-                    <% users.forEach(function(user)  { %>
-                    <option data-img-src="<%= sails.getBaseUrl() + user.avatarUrl %>" value="<%= user.id %>"><%= user.name %></option>
-                    <% }); %>
-                  </select>
-                  <script type="text/javascript">
-                    $('.chosen-select-users').chosen( { width: '100%', height:'20px' } );
-                  </script>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label"><%= i18n("subject") + ': ' %></label>
-                <div class="col-sm-10"><input type="text" class="form-control" name="title" value=""></div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="message">Message (20 chars min, 100 max)* :</label>
-              <textarea id="message" class="summernote" name="content"></textarea>
-            </div>
-
-            <div class="mail-body text-right tooltip-demo">
-              <a href='#' onclick="document.getElementById('msg-form').submit()" class="btn btn-sm btn-primary" type="submit"  data-toggle="tooltip" data-placement="top"> <i class="fa fa-reply"></i> <span><%= i18n('send') %></span></a>
-              <a href="" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 
   <%- partial('_table.ejs')%>
 
+  <div class="button_right">
+    <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#writeModal" onclick="new_message('/message/create', '<%= i18n('message') %>')">
+      <%= i18n('write') %>
+    </button>
+  </div>
 </div>
 
 
 <script type="text/javascript">
 
   function msg_as_read(id) {
-
     $.ajax({
       url: '/message/markasread/' + id,
       type: 'GET',
@@ -63,7 +23,6 @@
         $(env_id).html('<i class="fa fa-eye fa-2x" aria-hidden="true"></i>');
         var read_btn = '#mark_read_btn_' + id;
         $(read_btn).remove();
-
 
         // Update num msg
         var num_msg = document.getElementById('msg_new').innerHTML.replace('+','');
@@ -102,11 +61,8 @@
     $.ajax({
       url: action,
       type: 'GET',
-      data: {id: '<%= session.User.id %>'},
       success: function(data){
-        $("#errors_container").html('');
-        $('#myModalLabel').html(title)
-        $("#container").html(data);
+        openModal(title, data);
       }
     });
   }

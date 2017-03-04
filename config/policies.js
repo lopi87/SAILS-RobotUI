@@ -62,8 +62,9 @@ module.exports.policies = {
     '*': ['flash', 'sessionAuth', 'localize','message'],
     new: ['flash', 'sessionAuth', 'localize','message'],
     send: ['flash', 'sessionAuth', 'localize','message'],
-    destroy: ['flash', 'sessionAuth', 'localize','message'],
-    show: ['flash', 'sessionAuth', 'localize','message'],
+    destroy: ['flash', 'sessionAuth', 'localize','message', 'messagePermissions'],
+    show: ['flash', 'sessionAuth', 'localize','message', 'messagePermissions'],
+    markasread: ['flash', 'sessionAuth', 'localize','message', 'messagePermissions'],
     index: ['flash', 'sessionAuth', 'localize','message']
   },
 

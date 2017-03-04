@@ -89,5 +89,7 @@
 	"delete": "delete",
 	"open_here": "open_here",
 	"room.room_name.string": "room.room_name.string",
-	"room.room_name.required": "room.room_name.required"
+	"room.room_name.required": "room.room_name.required",
+	"close": "close",
+	"new": "new"
 }

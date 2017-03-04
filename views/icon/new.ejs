@@ -48,9 +48,8 @@
         },
 
         success: function (data) {
-          $("#errors_container").html('');
           $("#panel").html(data);
-          $('.modal').modal('toggle');
+          closeModal();
          toastr.info('A new icon has been added!', 'Icon');
         },
 

@@ -15,7 +15,19 @@ function addLoadEvent(func) {
 }
 
 
+//Modals
+function closeModal() {
+  $("#errors_container").html('');
+  $('.modal').modal('hide');
+  $('body').removeClass('modal-open');
+  $('.modal-backdrop').remove();
+}
 
+function openModal(title, data){
+  $("#errors_container").html('');
+  $('#myModalLabel').html(title);
+  $("#container").html(data);
+}
 
 //carga dinamica de archivos js, css, ...
 function loadjscssfile(filename, filetype){

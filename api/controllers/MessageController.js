@@ -44,71 +44,55 @@ module.exports = {
 
   send: function(req, res, next) {
 
-    var doc = req.body;
+    if (req.xhr){
+      var msgObj = {
+        content: req.param('content'),
+        from_user_id: req.session.User.id,
+        to_user_id: req.param('to_user_id'),
+        title: req.param('title')
+      };
 
-    var msgObj = {
-      content: req.param('content'),
-      from_user_id: req.session.User.id,
-      to_user_id: req.param('to_user_id'),
-      title: req.param('title')
-    };
-
-    User.findOne( req.param('to_user_id'), function foundUser(err, user) {
-      if (err) {
-        FlashService.server_exit(req, err);
-        return res.redirect('/message/index');
-      }
-      if (!user) {
-        msg = {err: 'No user selected'};
-        FlashService.error(req, msg);
-        return res.redirect('/message/index');
-      }
-
-      Message.create(msgObj, function messageCreated(err, msge){
+      User.findOne( req.param('to_user_id'), function foundUser(err, user) {
         if (err) {
           FlashService.server_exit(req, err);
           return res.redirect('/message/index');
         }
+        if (!user) {
+          msg = {err: 'No user selected'};
+          FlashService.error(req, msg);
+          return res.redirect('/message/index');
+        }
 
-        //Mandar notificacion al usuario
-        Session.findOne({user_id: req.param('to_user_id')}, function foundSession(err, session) {
+        Message.create(msgObj, function messageCreated(err, msge){
           if (err) {
-            console.log(err);
-            var error = {err: err};
-            FlashService.error(req, error);
+            FlashService.server_exit(req, err);
             return res.redirect('/message/index');
           }
 
-          if (!session) return next();
-          User.message(session.user_id, {
-            from: req.session.User.id,
-            msg: {msg: req.param('message'), id: msge.id}
-          });
-        });
-        //
-        //Mandar notificacion al usuario, a cada ventana que tiene abierta REVISAR SE MANDA MUCHAS VECES
-        /*
-        Session.find({user_id: req.param('to_user_id')}, function foundSession(err, sessions) {
-          if (err) return next(err);
-          if (!sessions) return next();
+          //Mandar notificacion al usuario
+          Session.findOne({user_id: req.param('to_user_id')}, function foundSession(err, session) {
+            if (err) {
+              console.log(err);
+              var error = {err: err};
+              FlashService.error(req, error);
+              return res.redirect('/message/index');
+            }
 
-          sessions.forEach(function(session, index){
+            if (!session) return next();
             User.message(session.user_id, {
               from: req.session.User.id,
-              msg: req.param('message')
+              msg: {msg: req.param('message'), id: msge.id}
             });
           });
+
+          res.ok({ msg: 'success' });
         });
-        */
-        ////////////////////////////////
 
-        msg = { err: '<i class="glyphicon glyphicon-send"></i>' + " Message send! " };
-        FlashService.success(req, msg );
-
-        return res.redirect('/message/index');
       });
-
-    });
+    }else{
+      err= 'No Ajax call';
+      return res.badRequest(err);
+    }
   },
 
 
@@ -153,20 +137,28 @@ module.exports = {
   },
 
   show: function(req, res, next){
-    var id = req.param('id');
 
-    Message.findOne(id, function foundMessage(err, message){
-      if(err) return next(err);
-      if(!message) return next();
+    if (req.xhr) {
 
-      Message.update( id, {read: true}, function msgUpdated(err){
-        if(err) return res.badRequest(err);
+      var id = req.param('id');
 
-        res.view({
-          message: message
+      Message.findOne(id).populate('from_user_id').exec(function (err, message) {
+        if (err) return next(err);
+        if (!message) return next();
+
+        Message.update(id, {read: true}, function msgUpdated(err) {
+          if (err) return res.badRequest(err);
+
+          return res.render('message/show.ejs', {
+            message: message
+          });
+
         });
       });
-    });
+    }else{
+      err= 'Ajax call';
+      return res.badRequest(err);
+    }
   },
 
 
