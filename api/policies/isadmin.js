@@ -6,8 +6,7 @@ module.exports = function(req, res, ok) {
   if (req.session.User && req.session.User.admin) {
     return ok();
   }
-
-  // Usuario no permitido
+  //not allowed
   else {
     msg = { err:  'You must be an admin.' };
     FlashService.warning(req, msg );
