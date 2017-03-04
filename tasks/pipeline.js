@@ -24,7 +24,6 @@ var cssFilesToInject = [
   'styles/parsley/parsley.css',
   'styles/jquery-ui/jquery-ui.css',
   'styles/summernote/summernote.css',
-  'styles/summernote/summernote-bs3.css',
   'styles/iCheck/custom.css',
   'styles/base/*.scss',
   'styles/toastr/toastr.min.css',

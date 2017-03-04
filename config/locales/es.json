@@ -120,5 +120,7 @@
 	"robot_information": "robot_information",
 	"room.room_name.string": "room.room_name.string",
 	"room.room_name.required": "room.room_name.required",
-	"commands": "commands"
+	"commands": "commands",
+	"chose_users": "chose_users",
+	"inbox": "inbox"
 }

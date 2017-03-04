@@ -14,7 +14,6 @@
       <img src="<%= sails.getBaseUrl() + robot.owner.avatarUrl %>" class="img-responsive card-circle marginleft5" height="32" width="32">
       <%= robot.owner.name %>
       <span id="label_state_<%=robot.id%>" class="label label-pill <%= robot.busy ? 'label-danger' : 'label-success' %>"> <%= robot.busy ? i18n('busy') : i18n('free') %> </span>
-
     </div>
     <hr>
 

@@ -10,16 +10,18 @@
   </div>
   <% } %>
 
-  <h3>Inbox</h3>
-  <table class="table">
+  <h2><%= i18n('inbox')%></h2>
+  <table class="table table-striped ">
+    <thead>
     <tr>
       <th><%= i18n("read") %></th>
       <th><%= i18n("from") %></th>
       <th><%= i18n("message") %></th>
       <th><%= i18n("date") %></th>
       <th><%= i18n("action") %></th>
-
     </tr>
+    </thead>
+    <tbody>
 
     <% _.each(data.messages, function(message){ %>
     <tr id="line_msg_<%= message.id %>" data-model="message">
@@ -36,7 +38,6 @@
         <a href="/user/show/<%= message.from_user_id.name %>"><%= message.from_user_id.name %></a>
       </td>
 
-
       <td><%=message.content.substring(0,20) + '...' %></td>
       <td><%=message.createdAt %></td>
       <td>
@@ -49,6 +50,7 @@
       </td>
     </tr>
     <% })%>
+    </tbody>
   </table>
 
   <%- partial ('../_paginate.ejs', { paginate: data.meta.paginate } )%>
