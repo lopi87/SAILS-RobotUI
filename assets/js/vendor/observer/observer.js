@@ -28,6 +28,7 @@ $(document).on('ajax:error', function(e, xhr, status, error){
 });
 
 
+//FUNCTIONS:
 
 function summernote_observer() {
   $('.summernote').summernote({
@@ -38,9 +39,7 @@ function summernote_observer() {
   });
 }
 
-//FUNCTIONS:
-
-function checkbox_observer () {
+function checkbox_observer() {
   $('.i-checks').iCheck({
     checkboxClass: 'icheckbox_square-green',
     radioClass: 'iradio_square-green',

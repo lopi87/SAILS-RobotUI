@@ -212,7 +212,7 @@ module.exports = {
 
       //Informar a otros clientes (sockets abiertos) que el robot queda liberado u ocupado
       Robot.publishUpdate(robot_id, {
-        busy: state,
+        online: state,
         id: robot_id
       });
 

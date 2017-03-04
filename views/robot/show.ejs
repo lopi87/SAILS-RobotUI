@@ -1,6 +1,5 @@
-
 <div class="container">
-    <h2 class="form-sigin-heading">Robot information</h2>
+    <h2 class="form-sigin-heading"><%= i18n('robot_information') %></h2>
 
     <div class="card" style="min-width:300px; width: 30%; margin: auto">
       <header class="card-container card-light-grey">
@@ -16,8 +15,8 @@
 
       <div class="card-container">
         <img src="<%= sails.getBaseUrl() + robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:75px">
-        <p>Address: <%= robot.ipaddress + ':' + robot.port %></p>
-        <p>Description: <%= robot.description %></p>
+        <p><%= i18n('ip_address') + ': ' + robot.ipaddress + ':' + robot.port %></p>
+        <p><%= i18n('description') + ': ' + robot.description %></p>
         <br>
 
         <div class="row">

@@ -132,17 +132,12 @@
       change_img_state('<%=robot.id %>', true);
     });
 
-
-
   });
 
 
-
-
-
-
   function subscribeAndListen() {
-    io.socket.get('/interface/view_subscribe/',{robot: '<%= robot.id%>', socket_id: io.socket.id});
+    io.socket.get('/message/message_subscribe');
+    io.socket.get('/interface/subscribe/', { robot_id: '<%= robot.id %>', socket_id: io.socket.id } );
 
     io.socket.on('message', function (obj) {
 
@@ -176,7 +171,7 @@
     $.ajax({
       url: '/interface/eject_viewer_user/',
       type: 'GET',
-      data: {user_id: user_id, '<%=robot.id %>': '<%= robot.id %>'},
+      data: {user_id: user_id, robot_id: '<%= robot.id %>'},
       done:function() {
       },
 
@@ -185,7 +180,7 @@
       },
 
       error: function(xhr, status, text) {
-        bootstrap_alert['danger'](xhr.responseText, 5000 );
+        toastr.error(xhr.responseText, 'User' );
       }
     });
   }

@@ -53,23 +53,19 @@ module.exports = {
       if (err) return next(err);
       if (!iface) return next(err);
 
-      //Almacenamos la room para los visitantes en la BD:
-      Room.findOrCreate({room_name: iface.robot_owner.id}, {room_name: iface.robot_owner.id}).exec(function createFindCB(err){
-        if (err) return res.badRequest(err);
-
-        Action.find({interface_owner: req.param('id')}).populate('icon').exec(function(err, actions) {
+        Action.find({interface_owner: req.param('id')}).populate('icon').exec(function (err, actions) {
           if (err) return res.badRequest(err);
 
 
-          Slider.find({interface_owner: req.param('id')}).exec(function(err, sliders) {
+          Slider.find({interface_owner: req.param('id')}).exec(function (err, sliders) {
             if (err) return res.badRequest(err);
 
 
-            User.findOne({id:  iface.robot_owner.owner}).exec(function Userfound(err, user){
+            User.findOne({id: iface.robot_owner.owner}).exec(function Userfound(err, user) {
               if (err) return res.badRequest(err);
 
               var geo = geoip.lookup(iface.robot_owner.ipaddress);
-              if(geo){
+              if (geo) {
                 iface.robot_owner.longitude = geo.ll[1];
                 iface.robot_owner.latitude = geo.ll[0];
               }
@@ -88,7 +84,6 @@ module.exports = {
           });
         });
       });
-    });
   },
 
 
@@ -101,9 +96,6 @@ module.exports = {
       Action.find({interface_owner: req.param('id')}).populate('icon').exec(function(err, actions) {
         if (err) return res.badRequest(err);
 
-        //Almacenamos la room para los visitantes en la BD:
-        Room.findOrCreate({room_name: iface.robot_owner.id}, {room_name: iface.robot_owner.id}).exec(function createFindCB(err) {
-          if (err) return res.badRequest(err);
 
           User.findOne({id:  iface.robot_owner.owner}).exec(function Userfound(error, user){
             if (err) return res.badRequest(err);
@@ -121,7 +113,6 @@ module.exports = {
           });
         });
       });
-    });
   },
 
 
@@ -212,36 +203,37 @@ module.exports = {
 
 
 //Modo visita en la interfaz, se subscribe para recibir los eventos que iran sucediendo
-  view_subscribe: function (req, res){
+  subscribe: function (req, res){
 
     if (!req.isSocket) return res.badRequest();
 
     //Nos unimos al room
-    sails.sockets.join(req.socket, req.param('robot'));
+    sails.sockets.join(req.socket, req.param('robot_id'));
 
     //Link socket with a room (into database)
     Session.findOne({socket_id: req.socket.id}).exec(function (err, session){
       if (err) return res.badRequest();
       if (!session) return res.badRequest();
 
-      Room.findOrCreate({room_name: req.param('robot')}, {room_name: req.param('robot')}).then(function(room){
+      Room.findOrCreate({room_name: req.param('robot_id')}, {room_name: req.param('robot_id')}).then(function(room){
         if (!room) return res.badRequest();
 
         //Link
-        room.sockets_room.add(session.id)
-        room.save(function(err) {
+        room.sockets_room.add(session.id);
+        room.save(function(err, room) {
           if (err) return res.badRequest();
+
+          //Aviso de una nueva conexion a todos los clientes de la room llamada con el valor de robot.id
+          User.findOne(session.user_id, function foundUser(err, user) {
+            if (err) return res.badRequest();
+            if (!user) return res.badRequest();
+
+            sails.sockets.broadcast(req.param('robot'), {type: 'new_viewer_user', id: '', msg: {user_name: user.name, avatar: user.avatarUrl, user_id: user.id}});
+            console.log('User ' + req.session.User.id + 'with socket id ' + sails.sockets.id(req) + ' is now subscribed to the model class \'Robot\'.');
+          });
+
         });
       }).catch( sails.log.error );
-
-      //Aviso de una nueva conexion a todos los clientes de la room llamada con el valor de robot.id
-      User.findOne(session.user_id, function foundUser(err, user) {
-        if (err) return res.badRequest();
-        if (!user) return res.badRequest();
-
-        sails.sockets.broadcast(req.param('robot'), {type: 'new_viewer_user', id: '', msg: {user_name: user.name, avatar: user.avatarUrl, user_id: user.id}});
-        console.log('User ' + req.session.User.id + 'with socket id ' + sails.sockets.id(req) + ' is now subscribed to the model class \'Robot\'.');
-      });
 
     });
   },

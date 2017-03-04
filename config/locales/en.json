@@ -87,5 +87,7 @@
 	"reply": "reply",
 	"mark_as_read": "mark_as_read",
 	"delete": "delete",
-	"open_here": "open_here"
+	"open_here": "open_here",
+	"room.room_name.string": "room.room_name.string",
+	"room.room_name.required": "room.room_name.required"
 }

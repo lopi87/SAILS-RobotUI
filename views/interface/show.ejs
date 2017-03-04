@@ -3,7 +3,7 @@
   <h1>Control panel <small> <%= robot.name %> </small></h1>
 </div>
 
-<div id="board" class="panel panel-success margintop20 paddingbottom20">
+<div id="board" class="panel panel-success iface_panel">
   <div class="panel-heading">
     <img style="max-width:150px;" src="/images/logo/logotipo.png">
     <!--<a href="#" onclick="openWin(200,200,'board')"><i class="fa fa-external-link fa-2x floatright" style="height: 20px"></i></a>-->
@@ -66,8 +66,3 @@
 
 <%- partial('_js_interface_code.ejs')%>
 
-<script type="text/javascript">
-  function subscribeAndListen() {
-    io.socket.get('/message/message_subscribe');
-  }
-</script>

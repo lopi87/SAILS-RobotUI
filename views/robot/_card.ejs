@@ -5,29 +5,40 @@
     </header>
 
     <div class="card-container paddingtop10">
+      <% if(robot.busy){ %>
+      <td> <img id="img_state_<%=robot.id%>" src="/images/online.png" height="30" width="30"></td>
+      <% } else { %>
+      <td> <img id="img_state_<%=robot.id%>" src="/images/offline.png" height="30" width="30"></td>
+      <% } %>
+
       <img src="<%= sails.getBaseUrl() + robot.owner.avatarUrl %>" class="img-responsive card-circle marginleft5" height="32" width="32">
       <%= robot.owner.name %>
       <span id="label_state_<%=robot.id%>" class="label label-pill <%= robot.busy ? 'label-danger' : 'label-success' %>"> <%= robot.busy ? i18n('busy') : i18n('free') %> </span>
+
     </div>
     <hr>
 
     <div class="card-container">
-
       <div class="thumbnail" >
-        <a href="#"><img src="<%= robot.avatarUrl%>"></a>
+        <a href="#"><img id="img_card_<%= robot.id %>" src="<%= robot.avatarUrl %>"></a>
       </div>
-
-      <p>Address: <%= robot.ipaddress + ':' + robot.port %></p>
-      <p>Description: <%= robot.description %></p>
+      <p><%= i18n('ip_address') + ': ' + robot.ipaddress + ':' + robot.port %></p>
       <br>
-
       <div class="clear"></div>
     </div>
 
     <div class="card-dark-grey margintop10 card-btn-block">
       <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.iface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
-      <a id="btn_control_ <%= robot.id%>" href="/interface/show/<%= robot.iface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> <%= i18n('view') %> </a>
+      <a id="btn_control_ <%= robot.id%>" href="/interface/view/<%= robot.iface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> <%= i18n('view') %> </a>
       <a id="btn_config_ <%= robot.id%>" href="/interface/configure/<%= robot.iface %>" class="btn btn-sm btn-warning"><i class="fa fa-wrench" aria-hidden="true"></i> Configure</a>
     </div>
   </div>
 </div>
+
+<div class="webui-popover-content" id="description">
+  <p><%= robot.description %></p>
+</div>
+
+<script type="text/javascript">
+  $('#img_card_<%= robot.id %>').webuiPopover( {title: '<%= i18n('description') %>', url:'#description', closeable: true, width: 150, placement:'right-bottom', animation:'pop'} );
+</script>

@@ -74,7 +74,7 @@
 <script type="text/javascript">
 
   function subscribeAndListen() {
-    io.socket.get('/interface/view_subscribe/',{robot: '<%= robot.id%>', socket_id: io.socket.id});
+    io.socket.get('/interface/subscribe/', { robot_id: '<%= robot.id %>', socket_id: io.socket.id } );
 
     io.socket.on('message', function (obj) {
       //EVENTOS CAPURADOS
@@ -126,9 +126,8 @@
           break;
 
         case 'out':
-          alert('expulsado');
           window.location.href = "<%= sails.getBaseUrl() %>";
-          bootstrap_alert['danger']('Exit!', 5000);
+          toast.danger('Exit!');
           break;
 
         default:

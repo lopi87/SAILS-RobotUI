@@ -28,6 +28,7 @@ var cssFilesToInject = [
   'styles/iCheck/custom.css',
   'styles/base/*.scss',
   'styles/toastr/toastr.min.css',
+  'styles/popover/webui-popover.css',
 
 
 
@@ -56,6 +57,7 @@ var jsFilesToInject = [
   'js/i18n/*.js',  //languages of parsley
   'js/vendor/toastr.js',
   'js/vendor/iCheck.js',
+  'js/vendor/webui-popover.js',
 
 
   'js/vendor/**/*.js',

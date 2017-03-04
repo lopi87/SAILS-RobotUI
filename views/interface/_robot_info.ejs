@@ -1,4 +1,3 @@
-
 <div class="row">
   <div class="col-md-7">
     <div class="panel panel-success margintop20">
@@ -8,6 +7,7 @@
         <tr>
           <th></th>
           <th><small><i class="fa fa-user marginright5" aria-hidden="true"></i><%= i18n('author').toUpperCase() %></small></th>
+          <th><small><i class="fa fa-info-circle marginright5" aria-hidden="true"></i><%= i18n('name').toUpperCase() %></small></th>
           <th><small><i class="fa fa-info-circle marginright5" aria-hidden="true"></i><%= i18n('description').toUpperCase() %></small></th>
         </tr>
         </thead>
@@ -15,7 +15,8 @@
         <tr>
           <td></td>
           <td><img src="<%= user.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:30px"><p class="margintop5"><%= user.name %></p></td>
-          <td><img src="<%= robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:45px"><p class="margintop5"><%= robot.description %></td>
+          <td><img src="<%= robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:45px"><p class="margintop5"><%= robot.name %></p></td>
+          <td><p class="margintop5"><%= robot.description %></td>
         </tr>
         <tr>
         <tr>

@@ -96,7 +96,7 @@
 	"delete": "Eliminar",
 	"robots": "Robots",
 	"my_robots": "Mis robots",
-	"public_robots": "Mis robots públicos",
+	"public_robots": "Robots públicos",
 	"control": "Control",
 	"users_administration": "Usuarios",
 	"robots_administration": "Robots",
@@ -116,5 +116,9 @@
 	"administrator": "administrator",
 	"user": "user",
 	"display": "display",
-	"open_here": "open_here"
+	"open_here": "open_here",
+	"robot_information": "robot_information",
+	"room.room_name.string": "room.room_name.string",
+	"room.room_name.required": "room.room_name.required",
+	"commands": "commands"
 }

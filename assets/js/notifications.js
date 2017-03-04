@@ -8,18 +8,18 @@
 
 toast = function() {};
 
-toast.success = function(message, time) {
+toast.success = function(message) {
   toastr.success('RobotUI', message);
 };
-toast.info = function(message, time) {
+toast.info = function(message) {
   toastr.info('RobotUI', message);
 };
 
-toast.warning = function(message, time) {
+toast.warning = function(message) {
   toastr.warning('RobotUI', message);
 };
 
-toast.danger = function(message, time) {
+toast.danger = function(message) {
   toastr.error('RobotUI', message);
 };
 
