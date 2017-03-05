@@ -12,8 +12,9 @@
 
   <%- partial ('../_paginate.ejs', { paginate: data.meta.paginate } )%>
 
-  <div class="button_right">
-    <a href="/robot/new" class="btn btn-lg btn-success">create robot!</a>
+
+  <div class="form-signin margintop20">
+    <a href="/robot/new" class="btn btn-lg btn-success btn-block"><%= i18n('create_robot') %></a>
   </div>
 
 </div>

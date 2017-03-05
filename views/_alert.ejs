@@ -1,5 +1,5 @@
 <div id="alert_placeholder"></div>
-<% if( flash != 'undefined'){ %>
+<% if( typeof flash != 'undefined'){ %>
 
   <% if(flash['error'].length > 0) { %>
     <% flash['error'].forEach(function(message) { %>

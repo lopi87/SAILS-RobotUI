@@ -100,6 +100,7 @@ module.exports.policies = {
 
   user:{
     '*': ['flash', 'localize', 'message'],
+    new: ['flash', 'localize', 'message'],
     show: ['flash', 'localize', 'message', 'sessionAuth','userCanSeeProfile'],
     edit: ['flash', 'localize', 'message', 'sessionAuth','userCanSeeProfile'],
     update: ['flash', 'localize', 'message', 'sessionAuth','userCanSeeProfile'],

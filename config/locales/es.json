@@ -130,5 +130,6 @@
 	"new": "Nuevo",
 	"offline": "offline",
 	"Permissions": "Permissions",
-	"select_file": "select_file"
+	"select_file": "select_file",
+	"create_robot": "create_robot"
 }
