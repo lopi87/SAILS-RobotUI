@@ -93,5 +93,11 @@
 	"close": "close",
 	"new": "new",
 	"index": "index",
-	"ip_address": "ip_address"
+	"ip_address": "ip_address",
+	"users": "users",
+	"online": "online",
+	"role": "role",
+	"add_robot": "add_robot",
+	"show_robots": "show_robots",
+	"interface": "interface"
 }

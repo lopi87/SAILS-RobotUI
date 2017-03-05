@@ -77,7 +77,8 @@ module.exports.policies = {
     update: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot'],
     destroy: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot'],
     my_robots: ['flash', 'sessionAuth','message', 'localize'],
-    index_public_robots: ['flash', 'sessionAuth','message', 'localize']
+    index_public_robots: ['flash', 'sessionAuth','message', 'localize'],
+    admin_panel: ['flash', 'localize', 'message', 'sessionAuth','isadmin']
   },
 
   room:{
