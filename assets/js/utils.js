@@ -314,6 +314,31 @@ function enable_menu(){
 
 
 
+
+//MESSAGES
+// Update num new msg
+function update_num_msg(text){
+  var num_msg = document.getElementById('msg_new').innerHTML.replace('+','');
+  num_msg--;
+  if(num_msg == 0) {
+    $('#buttom_msg').html('<a href="/message/index">' + text + '<spam id="msg_new"></spam></a>');
+  } else {
+    $('#buttom_msg').html('<a href="/message/index">' + text + '  ' + '<span id="msg_new" class="label label-pill label-danger">' + '+' + num_msg + '</span></a>');
+  }
+}
+
+function new_msg_num_update(text){
+  var num_msg = document.getElementById('msg_new').innerHTML.replace('+','');
+  if (document.getElementById('msg_new').innerHTML == ''){
+    num_msg = 1;
+  }else{
+    num_msg++;
+  }
+
+  $('#buttom_msg').html('<a href="/message/index">' + text + '   ' + '<span id="msg_new" class="label label-pill label-danger">' + '+' + num_msg + '</span></a>');
+
+}
+
 //
 // var canvas = document.createElement("canvas");
 // canvas.width = 24;

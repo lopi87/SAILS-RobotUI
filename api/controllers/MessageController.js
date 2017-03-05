@@ -99,7 +99,6 @@ module.exports = {
   markasread: function(req, res, next){
     if(req.xhr){
       var id =  req.param('id');
-      //Comprobar si puede editar
 
       Message.update( id, {read: true}, function msgUpdated(err){
         if(err) return res.badRequest(err);

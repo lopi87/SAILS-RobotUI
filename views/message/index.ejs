@@ -24,12 +24,9 @@
         var read_btn = '#mark_read_btn_' + id;
         $(read_btn).remove();
 
-        // Update num msg
-        var num_msg = document.getElementById('msg_new').innerHTML.replace('+','');
-        num_msg--;
-        $('#buttom_msg').html('<a href="/message/index">Messages <span id="msg_new" class="label label-pill label-danger">' + '+' + num_msg + '</span></a>');
-       toastr.info('', 5000 );
+        update_num_msg('<%= i18n('messages') %>');
 
+        toastr.info('', 5000 );
       },
 
       error: function (xhr, status, text) {
@@ -55,9 +52,17 @@
     });
   }
 
-
-
   function new_message(action, title){
+    $.ajax({
+      url: action,
+      type: 'GET',
+      success: function(data){
+        openModal(title, data);
+      }
+    });
+  }
+
+  function open_message(action, title){
     $.ajax({
       url: action,
       type: 'GET',

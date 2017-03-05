@@ -251,15 +251,9 @@
     io.socket.on('user', function messageReceived(message) {
       switch (message.verb) {
         case 'messaged':
-          var num_msg = document.getElementById('msg_new').innerHTML.replace('+','');
-          if (document.getElementById('msg_new').innerHTML == ''){
-            num_msg = 1;
-          }else{
-            num_msg++;
-          }
 
-          $('#buttom_msg').html('<a href="/message/index"><%= i18n('messages')%><span id="msg_new" class="label label-pill label-danger">' + '+' + num_msg + '</span></a>');
-          toastr.info('You have a new message! <a href="/message/show/' + message.data.msg.id + '"><%= i18n('open_here')%></a>' , 'Message');
+          new_msg_num_update('<%= i18n('messages') %>');
+           toastr.info('You have a new message! <a href="/message/show/' + message.data.msg.id + '"><%= i18n('open_here')%></a>' , 'Message');
           break;
 
         default:

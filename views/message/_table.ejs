@@ -44,16 +44,3 @@
   </table>
 
   <%- partial ('../_paginate.ejs', { paginate: data.meta.paginate } )%>
-
-
-  <script type="text/javascript">
-    function open_message(action, title){
-      $.ajax({
-        url: action,
-        type: 'GET',
-        success: function(data){
-          openModal(title, data);
-        }
-      });
-    }
-  </script>
