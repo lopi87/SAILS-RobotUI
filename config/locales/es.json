@@ -38,7 +38,7 @@
 	"createvideo": "createvideo",
 	"events": "events",
 	"description": "Descripción",
-	"ipaddress": "ipaddress",
+	"ipaddress": "Dirección IP",
 	"port": "Puerto",
 	"image": "Imagen",
 	"documentation": "Documentación",
@@ -128,5 +128,7 @@
 	"usuario": "Usuario",
 	"close": "Cerrar",
 	"new": "Nuevo",
-	"offline": "offline"
+	"offline": "offline",
+	"Permissions": "Permissions",
+	"select_file": "select_file"
 }

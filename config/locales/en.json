@@ -99,5 +99,9 @@
 	"role": "role",
 	"add_robot": "add_robot",
 	"show_robots": "show_robots",
-	"interface": "interface"
+	"interface": "interface",
+	"state": "state",
+	"user": "user",
+	"control": "control",
+	"display": "display"
 }

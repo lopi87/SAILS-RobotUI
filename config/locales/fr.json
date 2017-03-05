@@ -36,5 +36,13 @@
 	"my_viewer_robots": "my_viewer_robots",
 	"close": "close",
 	"new": "new",
-	"open_here": "open_here"
+	"open_here": "open_here",
+	"state": "state",
+	"user": "user",
+	"control": "control",
+	"display": "display",
+	"actions": "actions",
+	"public": "public",
+	"interface": "interface",
+	"edit": "edit"
 }

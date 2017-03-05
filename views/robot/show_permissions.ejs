@@ -1,25 +1,23 @@
+<h1 class="text-center login-title marginbottom20 margintop20"><%= i18n('permissions')%></h1>
 
-<div class="jumbox">
-  <h1 class="text-center login-title marginbottom20 margintop20"><%= i18n('permissions')%></h1>
-
-  <% if(perm.size == 0){ %>
-  <div class="alert alert-info margintop20 marginbottom20" role="alert">
-    <strong>Ups!</strong>
-    This robot is private.
-  </div>
-  <% } else { %>
+<% if(perm.size == 0){ %>
+<div class="alert alert-info margintop20 marginbottom20" role="alert">
+  <strong>Ups!</strong>
+  This robot is private.
+</div>
+<% } else { %>
 
 
-  <div class="row">
-    <div class="col-md-6">
-      <div class="control-group">
-        <label for="name"><%= i18n("public") %> * :</label>
-        <p class="paddingtop10">
-          <%= i18n('control') + ':' %><input class="i-checks pr-2" name="public_drive" type="checkbox" checked="<%= robot.public_drive %>">
-          <%= i18n('view') + ':' %><input class="i-checks pr-2" name="public_view" type="checkbox" checked="<%= robot.public_view %>">
-        </p>
-      </div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="control-group">
+      <label for="name"><%= i18n("public") %> * :</label>
+      <p class="paddingtop10">
+        <%= i18n('control') + ':' %><input class="i-checks pr-2" name="public_drive" type="checkbox" checked="<%= robot.public_drive %>">
+        <%= i18n('view') + ':' %><input class="i-checks pr-2" name="public_view" type="checkbox" checked="<%= robot.public_view %>">
+      </p>
     </div>
+  </div>
 
 
   <div class="row">
