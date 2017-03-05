@@ -31,9 +31,10 @@ $(document).on('ajax:error', function(e, xhr, status, error){
 //FUNCTIONS:
 
 function summernote_observer() {
-  $('.summernote').summernote({
-    height: null,                 // set editor height
-    minHeight: 300,             // set minimum height of editor
+  document.emojiSource = '../images/emoji/';
+    $('.summernote').summernote({
+    height: null,                // set editor height
+    minHeight: 300,              // set minimum height of editor
     maxHeight: null,             // set maximum height of editor
     focus: true                  // set focus to editable area after initializing summernote
   });
@@ -42,6 +43,6 @@ function summernote_observer() {
 function checkbox_observer() {
   $('.i-checks').iCheck({
     checkboxClass: 'icheckbox_square-green',
-    radioClass: 'iradio_square-green',
+    radioClass: 'iradio_square-green'
   });
 }

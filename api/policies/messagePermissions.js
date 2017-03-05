@@ -5,7 +5,7 @@ module.exports = function(req, res, next) {
     if (!message) return res.badRequest();
 
 
-    if (message.from_user_id != req.session.User.id) {
+    if (message.to_user_id != req.session.User.id) {
       msg = {err: 'You dont have permissions for this action.'};
       FlashService.warning(req, msg);
       return res.forbidden(msg);

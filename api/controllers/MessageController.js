@@ -35,6 +35,12 @@ module.exports = {
     User.find(function foundUsers(err, users) {
       if (err) return next(err);
 
+      users.forEach(function(user, index, object){
+        if (user.id == req.session.User.id){
+          object.splice(index, 1);
+        }
+      });
+
       return res.render('message/new.ejs', {
         users: users
       });

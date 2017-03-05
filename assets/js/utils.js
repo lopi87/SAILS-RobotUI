@@ -339,6 +339,12 @@ function new_msg_num_update(text){
 
 }
 
+function change_eye_icon(id){
+  var env_id = '#env_' + id;
+  $(env_id).html('<i class="fa fa-eye fa-2x" aria-hidden="true"></i>');
+  var read_btn = '#mark_read_btn_' + id;
+  $(read_btn).remove();
+}
 //
 // var canvas = document.createElement("canvas");
 // canvas.width = 24;
