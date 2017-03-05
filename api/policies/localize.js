@@ -8,6 +8,8 @@ module.exports = function(req, res, next) {
 
   if(req.param('locale') != req.session.languagePreference && req.param('locale') != undefined){
     req.session.languagePreference = req.param('locale');
+    msg = { err:  req.__('language') + ': ' + req.param('locale').toUpperCase() };
+    FlashService.info(req, msg );
   }
 
   req.setLocale(req.session.languagePreference);

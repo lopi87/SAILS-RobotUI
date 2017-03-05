@@ -1,5 +1,7 @@
 module.exports = function(req, res, next) {
 
+
+
   Interface.findOne(req.param('id'), function foundIface(err, iface) {
     if (err) return next(err);
     if (!iface) return next(err);
@@ -7,6 +9,12 @@ module.exports = function(req, res, next) {
     Robot.findOne(iface.robot_owner).populate('viewers').exec(function (err, robot) {
       if (err) return next(err);
       if (!robot) return next(err);
+
+      if( !robot.busy){
+        msg = { err:  'The Robot is offline.' };
+        FlashService.warning(req, msg );
+        return res.redirect('back');
+      }
 
       if(robot.owner == req.session.User.id){
         return next();

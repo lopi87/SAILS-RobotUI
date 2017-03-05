@@ -92,5 +92,6 @@
 	"room.room_name.required": "room.room_name.required",
 	"close": "close",
 	"new": "new",
-	"index": "index"
+	"index": "index",
+	"ip_address": "ip_address"
 }

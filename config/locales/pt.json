@@ -20,5 +20,21 @@
 	"remove": "Apagar",
 	"change": "Mudar",
 	"author": "author",
-	"about": "about"
+	"about": "about",
+	"public_robots": "public_robots",
+	"free": "free",
+	"ip_address": "ip_address",
+	"view": "view",
+	"description": "description",
+	"admin": "admin",
+	"users_administration": "users_administration",
+	"robots_administration": "robots_administration",
+	"messages": "messages",
+	"robots": "robots",
+	"my_robots": "my_robots",
+	"my_driver_robots": "my_driver_robots",
+	"my_viewer_robots": "my_viewer_robots",
+	"close": "close",
+	"new": "new",
+	"open_here": "open_here"
 }

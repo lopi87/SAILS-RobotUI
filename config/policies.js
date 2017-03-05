@@ -47,10 +47,10 @@ module.exports.policies = {
   },
 
   interface:{
-    '*': ['flash', 'sessionAuth','message', 'localize'],
-    configure: ['flash', 'sessionAuth','message', 'localize', 'userCanConfigureInterface'],
-    show: ['flash', 'sessionAuth','message', 'localize', 'userCanShowInterface'],
-    view: ['flash', 'sessionAuth','message', 'localize', 'userCanViewInterface']
+    '*': ['sessionAuth','message', 'localize', 'flash'],
+    configure: ['sessionAuth','message', 'localize', 'userCanConfigureInterface', 'flash'],
+    show: ['sessionAuth','message', 'localize', 'userCanShowInterface', 'flash'],
+    view: ['sessionAuth','message', 'localize', 'userCanViewInterface', 'flash']
   },
 
   language: {
@@ -75,7 +75,9 @@ module.exports.policies = {
     show_permissions: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot'],
     edit: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot'],
     update: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot'],
-    destroy: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot']
+    destroy: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot'],
+    my_robots: ['flash', 'sessionAuth','message', 'localize'],
+    index_public_robots: ['flash', 'sessionAuth','message', 'localize']
   },
 
   room:{
