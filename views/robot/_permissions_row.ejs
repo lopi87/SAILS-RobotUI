@@ -15,6 +15,6 @@
   <% } else { %>
   <td> <img src="/images/offline.png" height="30" width="30"></td>
   <% } %>
-  <td>    <a class="btn btn-sm btn-danger" onclick="delete_row_permissions('<%= robot.id %>', '<%= key %>')">Delete</a></td>
+  <td>    <a class="btn btn-sm btn-danger" onclick="delete_row_permissions('<%= robot.id %>', '<%= key %>')"><%= i18n('delete') %></a></td>
 </tr>
 <% }) %>
