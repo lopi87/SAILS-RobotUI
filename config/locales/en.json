@@ -103,5 +103,9 @@
 	"state": "state",
 	"user": "user",
 	"control": "control",
-	"display": "display"
+	"display": "display",
+	"control_panel": "control_panel",
+	"commands": "commands",
+	"information": "information",
+	"location": "location"
 }

@@ -128,10 +128,10 @@
         },
 
         success: function (data) {
-
-          $('#button_' + '<%= action.id %>').html(data);
+          $('#button_' + '<%= action.id %>').remove();
+          $("#panel").append(data);
           closeModal();
-         toastr.info('A new video has been updated!', 'Video');
+          toastr.info('A action has been updated!', 'Action');
         },
 
         error: function (xhr) {

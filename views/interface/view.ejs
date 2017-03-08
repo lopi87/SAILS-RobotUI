@@ -1,13 +1,10 @@
-
-
 <div class="text-center marginbottom20">
-  <h1>Control panel <small> <%= robot.name %> </small></h1>
+  <h1><%= i18n('control_panel') %><small> <%= robot.name %> </small></h1>
 </div>
 
 <div id="board" class="panel panel-success margintop20">
   <div class="panel-heading">
     <img style="max-width:150px;" src="/images/logo/logotipo.png">
-    <!--<a href="#" onclick="openWin(200,200,'board')"><i class="fa fa-external-link fa-2x floatright" style="height: 20px"></i></a>-->
   </div>
 
   <div class="paddingtop20 paddingleft20 paddingright20 paddingbottom20">
@@ -43,7 +40,7 @@
       </div>
       <div class="col-md-2">
           <div class="panel panel-info">
-            <div class="panel-heading">Users</div>
+            <div class="panel-heading"><%= i18n('users') %></div>
             <div class="panel-body">
               <div id="user_viewer_list">
               </div>
@@ -52,7 +49,7 @@
         <div id="chatContent">
           <div class="panel panel-success">
             <div class="panel-heading">
-              Comandos
+              <%= i18n('commands') %>
             </div>
             <div id="chat" class="panel-body" style="min-height: 250px; max-height: 250px; overflow-y: scroll;"></div>
           </div>

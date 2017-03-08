@@ -33,7 +33,8 @@
         },
 
         success: function (data) {
-          $('[id^=video_]').html(data);
+          $('[id^=video_]').remove();
+          $("#panel").prepend(data);
           closeModal();
          toastr.info('A new video has been updated!', 'User');
         },

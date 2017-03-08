@@ -46,10 +46,9 @@
         data: {name: $( "#e_name_field" ).val(), event_name: $( "#event_field" ).val(), unit: $( "#unit_field" ).val()},
 
         success: function (data) {
-
           $("#panel").append(data);
           closeModal();
-         toastr.info('A new action has been created!', 'Action');
+          toastr.info('A new action has been created!', 'Action');
         },
 
         error: function (xhr) {

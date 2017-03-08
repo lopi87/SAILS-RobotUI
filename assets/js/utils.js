@@ -163,24 +163,6 @@ function change_online_offline(id, online){
 
 }
 
-//Apertura de una ventana
-
-//Open the interface in a new window
-function openWin(width, height, content) {
-  var div = document.getElementById(content).outerHTML;
-  var myWindow = window.open('', '', 'width=' + width ,'height=' + height);
-  var doc = myWindow.document;
-
-  var head = '<!DOCTYPE html><html lang="es"><head>  <title>RobotUI</title>  <!--STYLES-->  <link rel="stylesheet" href="/styles/bootstrap/bootstrap.css">  <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.css">  <link rel="stylesheet" href="/styles/jasny-bootstrap/jasny-bootstrap.css">  <link rel="stylesheet" href="/styles/bootstrap-colorpicker/bootstrap-colorpicker.css">  <link rel="stylesheet" href="/styles/font-awesome/font-awesome.css">  <link rel="stylesheet" href="/styles/parsley/parsley.css">  <link rel="stylesheet" href="/styles/jquery-ui/jquery-ui.css">  <link rel="stylesheet" href="/styles/chosen/ImageSelect.css">  <link rel="stylesheet" href="/styles/chosen/chosen.min.css">  <link rel="stylesheet" href="/styles/importer.css">  <!--STYLES END-->  <!--SCRIPTS-->  <script src="/js/dependencies/sails.io.js"></script>  <script src="/js/vendor/jquery-2.2.4.js"></script>  <script src="/js/vendor/bootstrap.js"></script>  <script src="/js/vendor/chosen.jquery.js"></script>  <script src="/js/vendor/ImageSelect.jquery.js"></script>  <script src="/js/vendor/jasny-bootstrap.js"></script>  <script src="/js/vendor/bootstrap-colorpicker.js"></script>  <script src="/js/vendor/jquery-ui.js"></script>  <script src="/js/vendor/parsley.js"></script>  <script src="/js/i18n/de.js"></script>  <script src="/js/i18n/en.js"></script>  <script src="/js/i18n/es.js"></script>  <script src="/js/i18n/fr.js"></script>  <script src="/js/i18n/pt.js"></script>  <script src="/js/i18n/ru.js"></script>  <script src="/js/vendor/gridster.js"></script>  <script src="/js/utils.js"></script> <!--SCRIPTS END--></head><body><div id="alert_placeholder"></div>'
-  var foot = '</body></html><script type="text/javascript">  function savesocket() { io.socket.get("/session/saveSocketID");  }  addLoadEvent(savesocket);</script>'
-
-  doc.open();
-  doc.write(head);
-  doc.write(div);
-  doc.write(foot);
-
-  doc.close();
-}
 
 
 
@@ -192,19 +174,17 @@ function openWin(width, height, content) {
 
 
 
-
-
-
-
-
+//modes: 'create', 'edit' and 'delete'
 function setting_panel_mode( mode ){
   var menu_button = $('#action_' + mode );
-  var was_active = menu_button.hasClass('active');
+  var was_enabled = menu_button.hasClass('active');
   $('[id^=action_]').removeClass('active');
 
-  if ( was_active ){
+  if ( was_enabled ){
+    //turn off
     on_off_action( mode , 'off');
   } else {
+    //turn on
     menu_button.addClass('active');
     on_off_action( mode, 'on' )
   }
@@ -236,24 +216,28 @@ function on_off_action( mode, state ){
 
 
 function destroy_mode(state){
+  var fn;
   if (state == 'on'){
     $("[id^=play_]").each( function( ){
       $( this ).attr('data-toggle', '');
       $( this ).attr('data-target', '');
       var id = $( this ).attr('id').replace('play_','');
-      $("#play_" + id).click(function( ){ ajax_destroy_call('/video/destroy/' + id ); });
+      fn = "ajax_destroy_call('/video/destroy/" + id + "')";
+      $("#play_" + id).attr("onclick", fn);
     });
     $("[id^=button_]").each( function( ){
       $( this ).attr('data-toggle', '');
       $( this ).attr('data-target', '');
       var id = $( this ).attr('id').replace('button_','');
-      $("#button_" + id).click(function( ){ ajax_destroy_call('/action/destroy/' + id ); });
+      fn = "ajax_destroy_call('/action/destroy/" + id + "')";
+      $("#button_" + id).attr("onclick", fn);
     });
     $("[id^=slider_]").each( function( ){
       $( this ).attr('data-toggle', '');
       $( this ).attr('data-target', '');
       var id = $( this ).attr('id').replace('slider_','');
-      $("#slider_" + id).click(function(){ ajax_destroy_call('/slider/destroy/' + id ); });
+      fn = "ajax_destroy_call('/slider/destroy/" + id + "')";
+      $("#slider_" + id).attr("onclick", fn);
     });
   }else{
     off_click_events();
@@ -262,26 +246,29 @@ function destroy_mode(state){
 
 
 function edit_mode( state ){
-  var id;
+  var id, fn;
 
   if (state == 'on'){
     $("[id^=play_]").each( function( ){
       $( this ).attr('data-toggle', 'modal');
       $( this ).attr('data-target', '#writeModal');
       id = $( this ).attr('id').replace('play_','');
-      $("#play_" + id).click(function( ){ ajax_call('/video/edit/' + id, 'video');});
+      fn = "ajax_call('/video/edit/" + id + "','video')";
+      $("#play_" + id).attr("onclick", fn);
     });
     $("[id^=button_]").each( function( ){
       $( this ).attr('data-toggle', 'modal');
       $( this ).attr('data-target', '#writeModal');
       id = $( this ).attr('id').replace('button_','');
-      $("#button_" + id).click(function( ){ ajax_call('/action/edit/' + id, 'button');});
+      fn = "ajax_call('/action/edit/" + id + "','action')";
+      $("#button_" + id).attr("onclick", fn);
     });
     $("[id^=slider_]").each( function( ){
       $( this ).attr('data-toggle', 'modal');
       $( this ).attr('data-target', '#writeModal');
       id = $( this ).attr('id').replace('slider_','');
-      $("#slider_" + id).click(function( ){ ajax_call('/slider/edit/' + id, 'slider');});
+      fn = "ajax_call('/slider/edit/" + id + "','slider')";
+      $("#slider_" + id).attr("onclick", fn);
     });
   }else{
     off_click_events();
@@ -298,18 +285,36 @@ function off_click_events() {
 
 
 function disable_menu(){
-  $("[id^=new_]").addClass( "disabled" );
-  $("[id^=new_]").prop('onclick',null).off('click');
+  $("[id^=new_]").addClass('disabled');
+  $("[id^=new_]").removeAttr('data-toggle');
+  $("[id^=new_]").removeAttr('data-target');
+  $("[id^=new_]").removeAttr('onclick');
   interact('.draggable').draggable(false);
-  alert('DISABLE');
 }
 
 
 function enable_menu(){
+  var fn;
   $("[id^=new_]").removeClass( "disabled" );
-  $("[id^=new_]").prop('onclick',null).on('click');
+  $("[id^=new_]").attr('data-toggle', 'modal');
+  $("[id^=new_]").attr('data-target', '#writeModal');
+
+  fn = "ajax_call('/video/create/','video')";
+  $("#new_video").attr("onclick", fn);
+
+  fn = "ajax_call('/event/create/','event')";
+  $("#new_event").attr("onclick", fn);
+
+  fn = "ajax_call('/slider/create/','slider')";
+  $("#new_slider").attr("onclick", fn);
+
+  fn = "ajax_call('/action/create/','action')";
+  $("#new_action").attr("onclick", fn);
+
+  fn = "ajax_call('/icon/create/','icon')";
+  $("#new_icon").attr("onclick", fn);
+
   interact('.draggable').draggable(true);
-  alert('ENABLE');
 }
 
 
@@ -345,16 +350,3 @@ function change_eye_icon(id){
   var read_btn = '#mark_read_btn_' + id;
   $(read_btn).remove();
 }
-//
-// var canvas = document.createElement("canvas");
-// canvas.width = 24;
-// canvas.height = 24;
-// document.body.appendChild(canvas);
-// var ctx = canvas.getContext("2d");
-// ctx.fillStyle = "#000000";
-// ctx.font = "24px FontAwesome";
-// ctx.textAlign = "center";
-// ctx.textBaseline = "middle";
-// ctx.fillText("\uf047", 12, 12);
-// var dataURL = canvas.toDataURL('image/png');
-// $('body').css('cursor', 'url('+dataURL+'), auto');

@@ -100,7 +100,7 @@
     $('#action-form').parsley().validate()
     var ok = $('.parsley-error').length === 0;
 
-    if (true){
+    if (ok){
       $.ajax({
         url: '/action/newaction/' + '<%= interface.id %>',
         type: 'GET',
@@ -116,10 +116,9 @@
         },
 
         success: function (data) {
-
           $("#panel").append(data);
           closeModal();
-         toastr.info('A new action has been created!', 'Action');
+          toastr.info('A new action has been created!', 'Action');
         },
 
         error: function (xhr) {

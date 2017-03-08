@@ -41,22 +41,17 @@
         <div class="list-group">
           <a id="action_create" class="list-group-item active" onclick="setting_panel_mode( 'create' )">
             <i class="fa fa-plus fa-2 marginlef10" aria-hidden="true">
-              Create
+              <%= i18n('create')%>
             </i>
           </a>
           <a id="action_edit" class="list-group-item" onclick="setting_panel_mode( 'edit' )">
             <i class="fa fa-edit fa-2 marginlef10" aria-hidden="true">
-              Edit
+              <%= i18n('edit')%>
             </i>
           </a>
-          <!--<a id="action_move" class="list-group-item" onclick="set_function( 'move' )">-->
-            <!--<i class="fa fa-arrows fa-2 marginlef10" aria-hidden="true">-->
-              <!--Move-->
-            <!--</i>-->
-          <!--</a>-->
           <a id="action_delete" class="list-group-item" onclick="setting_panel_mode( 'delete' )">
             <i class="fa fa-remove fa-2 marginlef10" aria-hidden="true">
-              Remove
+              <%= i18n('remove')%>
             </i>
           </a>
         </div>
@@ -117,7 +112,8 @@
       success: function (data) {
         $("#video_" + data.id).remove();
         $("#button_" + data.id).remove();
-       toastr.info('A element has been deleted!', 5000 );
+        $("#slider_" + data.id).remove();
+        toastr.info('RobotUI','A element has been deleted!' );
       },
 
       error: function (xhr, status, text) {

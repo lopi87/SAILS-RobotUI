@@ -34,16 +34,16 @@
         done:function() {
         },
 
-        success: function (data) {
+        success: function (data){
           $('[id^=video_]').remove();
           $("#panel").prepend(data);
           closeModal();
-         toastr.info('A new video has been created!', 'Video');
+          toastr.info('A new video has been created!', 'Video');
         },
 
         error: function (xhr) {
           $("#errors_container").html('<p class="bg-danger">' + xhr.responseText + '</p>');
-          //bootstrap_alert['danger'](xhr.responseText, 5000);
+          bootstrap_alert['danger'](xhr.responseText, 5000);
         }
       });
 

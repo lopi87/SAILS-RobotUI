@@ -57,7 +57,33 @@
 
 <script type="text/javascript">
   addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
-  $('#event-form').parsley().on('field:validated', function() {
+
+  function submit_function() {
+    $('#event-form').parsley().validate()
     var ok = $('.parsley-error').length === 0;
-  })
+
+
+    if (ok){
+      $.ajax({
+        url: '/event/update/' + '<%= event.id %>',
+        type: 'GET',
+        data: {name: $( "#e_name_field" ).val(), event_name: $( "#event_field" ).val(), unit: $( "#unit_field" ).val()},
+        done:function() {
+        },
+
+        success: function (data) {
+          $('#event_' + '<%= event.id %>').remove();
+          $("#panel").append(data);
+          closeModal();
+          toastr.info('A new event has been created!', 'Event');
+        },
+
+        error: function (xhr) {
+          $("#errors_container").html('<p class="bg-danger">' + xhr.responseText + '</p>');
+          //bootstrap_alert['danger'](xhr.responseText, 5000);
+        }
+      });
+
+    }
+  }
 </script>

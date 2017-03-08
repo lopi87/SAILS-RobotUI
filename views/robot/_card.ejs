@@ -27,9 +27,9 @@
     </div>
 
     <div class="card-dark-grey margintop10 card-btn-block">
-      <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.iface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+      <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.iface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> <%= i18n('take_control') %> </a>
       <a id="btn_control_ <%= robot.id%>" href="/interface/view/<%= robot.iface %>" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></i> <%= i18n('view') %> </a>
-      <a id="btn_config_ <%= robot.id%>" href="/interface/configure/<%= robot.iface %>" class="btn btn-sm btn-warning"><i class="fa fa-wrench" aria-hidden="true"></i> Configure</a>
+      <a id="btn_config_ <%= robot.id%>" href="/interface/configure/<%= robot.iface %>" class="btn btn-sm btn-warning"><i class="fa fa-wrench" aria-hidden="true"></i> <%= i18n('configure') %></a>
     </div>
   </div>
 </div>

@@ -73,7 +73,7 @@
 	"max": "max",
 	"value": "valor",
 	"step": "step",
-	"button": "botón",
+	"button": "Botón",
 	"action.code.required": "Código es obligatorio",
 	"video": "Vídeo",
 	"slider": "Slider",
@@ -128,8 +128,14 @@
 	"usuario": "Usuario",
 	"close": "Cerrar",
 	"new": "Nuevo",
-	"offline": "offline",
+	"offline": "Offline",
 	"Permissions": "Permissions",
-	"select_file": "select_file",
-	"create_robot": "create_robot"
+	"select_file": "Seleccione archivo",
+	"create_robot": "Crear Robot",
+	"control_panel": "Panel de control",
+	"information": "Información",
+	"location": "Localización",
+	"take_control": "take_control",
+	"configure": "Configurar",
+	"create": "Crear"
 }

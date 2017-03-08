@@ -75,20 +75,20 @@ module.exports = {
         Action.create(actionObj, function actionCreated(err, action) {
           if (err) return res.badRequest(err.Errors);
 
-            if (req.param('icon')){
-              Action.findOne(action.id).populate('icon').exec(function(err, action) {
-                if (err) return res.badRequest(err);
+              if (req.param('icon')){
+                Action.findOne(action.id).populate('icon').exec(function(err, action) {
+                  if (err) return res.badRequest(err);
+                  return res.render('interface/_action.ejs', {
+                    action: action,
+                    layout: false
+                  });
+                });
+              }else{
                 return res.render('interface/_action.ejs', {
                   action: action,
                   layout: false
                 });
-              });
-            }else{
-              return res.render('interface/_action.ejs', {
-                action: action,
-                layout: false
-              });
-            }
+              }
         });
       });
 
@@ -162,9 +162,11 @@ module.exports = {
         msg = {err: 'The action has been updated'};
         FlashService.success(req, msg);
 
-        return res.render('interface/_action.ejs', {
-          action: action,
-          layout: false
+        Action.findOne(req.param('id')).populate('icon').exec(function(err, action) {
+          return res.render('interface/_action.ejs', {
+            action: action,
+            layout: false
+          });
         });
       });
     } else {

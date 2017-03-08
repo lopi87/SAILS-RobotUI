@@ -1,0 +1,84 @@
+<form id="slider-form" class="form-signin" slider="create" method="post" data-parsley-validate style="max-width: none">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="col-md-2"></div>
+      <div class="col-md-10">
+
+        <div class="form-group">
+          <label for="name"><%= i18n("name") %> * :</label>
+          <input id="s_name_field" type="text" class="form-control" placeholder="<%= i18n("name") %>" name="name" value="<%= slider.name %>">
+        </div>
+
+        <div class="form-group">
+          <label for="code"><%= i18n("code") %> * :</label>
+          <input id="s_code_field" type="text" class="form-control" placeholder="<%= i18n("code") %>" required="" name="code"  value="<%= slider.code %>">
+        </div>
+
+        <div class="form-group">
+          <label for="min"><%= i18n("min") %>:</label>
+          <input id="s_min_field" type="number" min="0" class="form-control" placeholder="<%= i18n("min") %>" name="min" data-parsley-maxlength="3"  value="<%= slider.min %>" >
+        </div>
+
+        <div class="form-group">
+          <label for="max"><%= i18n("max") %>:</label>
+          <input id="s_max_field" class="form-control" type="number" min="0" class="form-control" placeholder="<%= i18n("max") %>" name="max" data-parsley-maxlength="3"  value="<%= slider.max %>" >
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-10">
+
+        <div class="form-group">
+          <label for="value"><%= i18n("value") %>:</label>
+          <input id="s_value_field" type="number" min="0" class="form-control" placeholder="<%= i18n("value") %>" name="value" data-parsley-maxlength="3"  value="<%= slider.value %>" >
+        </div>
+
+        <div class="form-group">
+          <label for="step"><%= i18n("step") %>:</label>
+          <input id="s_step_field" type="number" min="0" class="form-control" placeholder="<%= i18n("step") %>" name="step" data-parsley-maxlength="3"  value="<%= slider.step %>">
+        </div>
+
+        <div class="form-group">
+          <label for="vertical"><%= i18n("vertical") %>:</label>
+          <input id="s_vertical_field" type="checkbox" class="paddingtop5" name="vertical" checked="<%= slider.vertical %>">
+        </div>
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+  <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+</form>
+
+<script type="text/javascript">
+  addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
+
+  function submit_function() {
+    $('#slider-form').parsley().validate()
+    var ok = $('.parsley-error').length === 0;
+
+    if (ok){
+      $.ajax({
+        url: '/slider/update/' + '<%= slider.id %>',
+        type: 'GET',
+        data: {name: $( "#s_name_field" ).val(),vertical: $("#s_vertical_field" ).is(':checked'), code: $( "#s_code_field" ).val(), min: $( "#s_min_field" ).val(), max: $( "#s_max_field" ).val(), value: $( "#s_value_field" ).val(), step: $( "#s_step_field" ).val() },
+        done:function() {
+        },
+
+        success: function (data) {
+          $('#slider_' + '<%= slider.id %>').remove();
+          $("#panel").append(data);
+          closeModal();
+          toastr.info('A new slider has been created!', 'Slider');
+        },
+
+        error: function (xhr) {
+          $("#errors_container").html('<p class="bg-danger">' + xhr.responseText + '</p>');
+          //bootstrap_alert['danger'](xhr.responseText, 5000);
+        }
+      });
+
+    }
+  }
+</script>
