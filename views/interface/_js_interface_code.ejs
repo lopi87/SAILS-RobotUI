@@ -25,6 +25,7 @@
         toastr.error('Failed to disconnect to the Robot!' + address_robot + error, 'Robot')
         io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
         change_img_state('<%=robot.id %>', false);
+        reset_canvas('play_<%= video.id %>')
       }
     });
 
@@ -35,6 +36,7 @@
       //Sincronizar con el resto de clientes:
       io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
       change_img_state('<%=robot.id %>', false);
+      reset_canvas('play_<%= video.id %>')
     });
 
 
@@ -74,7 +76,7 @@
       io.socket.get('/interface/emit_action/',{robot: '<%=robot.id %>', id: button_pressed_id, msg: code })
 
       if (code != ''){
-        $('#chat').prepend('- send: ' + code + '<br/>');
+        $('#chat').prepend('- ' + code + '<br/>');
         //Mandar instruccion al robot
         socket.emit('action', code);
         console.log('Emitiendo comando: ' + code );

@@ -78,7 +78,7 @@
       switch (obj.type) {
         case 'action':
           console.log('action ' + 'id: ' + obj.id + ' msg: ' + obj.msg);
-          $('#chat').prepend('- send: ' + obj.msg + '<br/>');
+          $('#chat').prepend('- ' + obj.msg + '<br/>');
           $('#buttom_custom_' + obj.id).addClass('focus');
           break;
 
@@ -119,7 +119,7 @@
           break;
 
         case 'command':
-          $('#chat').prepend('- send: ' + obj.msg + '<br/>');
+          $('#chat').prepend('- ' + obj.msg + '<br/>');
           break;
 
         case 'out':

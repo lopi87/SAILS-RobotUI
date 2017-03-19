@@ -1,5 +1,5 @@
 <div id="video_<%= video.id %>" class="draggable position_<%= video.id %>" style="width: 405px; height: 405px">
-  <canvas id="play_<%= video.id %>" width="400" height="400" style="background:src('/images/video/video.png');">
+  <canvas id="play_<%= video.id %>">
   ></canvas>
   <%- partial ('../video/style_video.ejs', {video: video})%>
 </div>

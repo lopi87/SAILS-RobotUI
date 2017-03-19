@@ -315,6 +315,21 @@ function enable_menu(){
   $("#new_icon").attr("onclick", fn);
 
   interact('.draggable').draggable(true);
+
+
+  $("[id^=play_]").each( function( ){
+    $( this ).attr('data-toggle', '');
+    $( this ).attr('data-target', '');
+  });
+  $("[id^=button_]").each( function( ){
+    $( this ).attr('data-toggle', '');
+    $( this ).attr('data-target', '');
+  });
+  $("[id^=slider_]").each( function( ){
+    $( this ).attr('data-toggle', '');
+    $( this ).attr('data-target', '');
+  });
+
 }
 
 
@@ -360,4 +375,14 @@ function change_eye_icon(id){
   $(env_id).html('<i class="fa fa-eye fa-2x" aria-hidden="true"></i>');
   var read_btn = '#mark_read_btn_' + id;
   $(read_btn).remove();
+}
+
+function reset_canvas(id){
+  var canvas = document.getElementById(id);
+  var context = canvas.getContext('2d');
+  var imageObj = new Image();
+  imageObj.src = '/images/video/video.png';
+  imageObj.onload = function(){
+    context.drawImage(imageObj,0,0,context.width,context.height);
+  };
 }

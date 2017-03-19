@@ -31,7 +31,6 @@ $(document).on('ajax:error', function(e, xhr, status, error){
 //FUNCTIONS:
 
 function summernote_observer() {
-  document.emojiSource = '../images/emoji/';
     $('.summernote').summernote({
     height: null,                // set editor height
     minHeight: 300,              // set minimum height of editor
