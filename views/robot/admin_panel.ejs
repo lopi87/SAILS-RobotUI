@@ -105,7 +105,7 @@
         if(data.busy){
          toastr.info('Robot connected!', 'Robot' );
         }else{
-         toastr.info('Robot disconnected!', 'Robot' );
+         toastr.error('Robot disconnected!', 'Robot' );
         }
         console.log('Robot has been updated to online:' + data.busy);
       }

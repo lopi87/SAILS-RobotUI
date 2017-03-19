@@ -1,13 +1,8 @@
 <script type="text/javascript">
-  // https://evothings.com/controlling-a-toy-car-with-evothings-and-raspberry-pi/
 
-  //ROBOT
-  //conexion con el robot
   var address_robot =    '<%= robot.ipaddress %>' + ":" + '<%= robot.port %>';
 
-  //INTERESANTE RECONCETAR AUTOMATICAMENTE-...... solucion ya que tarda en volver a conectar
-  //http://stackoverflow.com/questions/4432271/node-js-and-socket-io-how-to-reconnect-as-soon-as-disconnect-happens
-  $("#conectar").click(function() {
+  $("#connect").click(function() {
     try {
       // Connect to the server running on the Robot(raspberry pi).
       var socket = io.connect(address_robot, {
@@ -17,17 +12,17 @@
       });
 
     } catch (error) {
-      bootstrap_alert['danger']('Failed to connect to the Robot!' + address_robot + error, 5000)
+      toastr.error('Failed to connect to the Robot!' + address_robot + error, 'Robot')
       io.socket.get('/robot/changetobusy/', {robot: robot_id, state: false});
       change_img_state(robot_id, false);
     }
 
     //Presionar boton desconectar
-    $("#desconectar").click(function () {
+    $("#disconnect").click(function () {
       try {
         socket.disconnect();
       } catch (error) {
-        bootstrap_alert['danger']('Failed to disconnect to the Robot!' + address_robot + error, 5000)
+        toastr.error('Failed to disconnect to the Robot!' + address_robot + error, 'Robot')
         io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
         change_img_state('<%=robot.id %>', false);
       }
@@ -47,19 +42,8 @@
     <% if( typeof video !== 'undefined' ){ %>
       socket.on('<%= video.event_name %>', function(data) {
         //console.log(data);
-        try {
-          var canvas = document.getElementById('play_<%= video.id %>');
-          var context = canvas.getContext('2d');
-          var imageObj = new Image();
-          imageObj.src = "data:image/jpeg;base64,"+data;
-          imageObj.onload = function(){
-            context.height = imageObj.height;
-            context.width = imageObj.width;
-            context.drawImage(imageObj,0,0,context.width,context.height);
-          }
-        } catch(e){ }
-        io.socket.get('/interface/emit_video/',{robot: '<%=robot.id %>', id: '<%= video.id %>', msg: data })
-
+        io.socket.get('/interface/emit_video/',{robot: '<%=robot.id %>', id: '<%= video.id %>', msg: data });
+        draw_image_to_canvas('play_<%= video.id %>', data)
       });
     <% } %>
 
@@ -71,7 +55,7 @@
       if($message.val() != '' ){
         //Comunicar al servidor para difundir a los usuarios
         io.socket.get('/interface/emit_command/',{robot: '<%=robot.id %>', id: 'command', msg: $message.val() })
-        $('#chat').prepend('- send: ' + $message.val() + '<br/>');
+        $('#chat').prepend('- ' + $message.val() + '<br/>');
         //Mandar instruccion al robot
         socket.emit('direction', $message.val());
       }

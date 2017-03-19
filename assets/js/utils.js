@@ -318,6 +318,17 @@ function enable_menu(){
 }
 
 
+function draw_image_to_canvas(id, data){
+  var canvas = document.getElementById(id);
+  var context = canvas.getContext('2d');
+  var imageObj = new Image();
+  imageObj.src = "data:image/jpeg;base64,"+data;
+  imageObj.onload = function(){
+    context.height = imageObj.height;
+    context.width = imageObj.width;
+    context.drawImage(imageObj,0,0,context.width,context.height);
+  }
+}
 
 
 //MESSAGES
