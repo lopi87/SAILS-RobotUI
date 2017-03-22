@@ -24,6 +24,7 @@ module.exports = {
       });
   },
 
+
   update_position: function (req, res, next) {
     //Ajax call
     if (req.xhr) {
@@ -45,6 +46,7 @@ module.exports = {
     }
   },
 
+
   newevent: function (req, res, next) {
     if (req.xhr) {
       Interface.findOne(req.param('id'), function foundInterface(err, iface) {
@@ -52,26 +54,19 @@ module.exports = {
 
         var eventObj = {
           interface_owner: iface.id,
+          color: req.param('color'),
           name: req.param('name'),
-          event_name: req.param('event_name'),
-          element: 'num_field'
+          event_name: req.param('event_name')
         };
 
-
         Event.create(eventObj, function eventCreated(err, event) {
-          if (err) return res.badRequest(err);
+          if (err) return res.badRequest(err.Errors);
 
-          event.save(function (err) {
-            if (err) return res.badRequest(err);
-
-            console.log('The event has been created');
-
-            return res.render('interface/_event.ejs', {
-              event: event,
-              layout: false
-            });
-
+          return res.render('interface/_event.ejs', {
+            event: event,
+            layout: false
           });
+
         });
       });
 
@@ -82,17 +77,39 @@ module.exports = {
 
   },
 
+  update: function(req, res, next){
+    if (req.xhr) {
 
-  deleteevent: function (req, res, next) {
+      var eventObj = {
+        name: req.param('name'),
+        event_name: req.param('event_name'),
+        color: req.param('color')
+      };
+
+      Event.update(req.param('id'), eventObj, function eventUpdated(err, event) {
+        if (err){ return res.redirect('/event/edit' + req.param('id')); }
+        msg = {err: 'Event has been updated'};
+        FlashService.success(req, msg);
+
+        Event.findOne(req.param('id')).exec(function(err, event) {
+          return res.render('interface/_event.ejs', {
+            event: event,
+            layout: false
+          });
+        });
+
+      });
+    } else {
+      err = 'Ajax call';
+      return res.badRequest(err);
+    }
+  },
+
+
+  destroy: function (req, res, next) {
     if (req.xhr) {
       Event.destroy({id: req.param('id')}).exec(function deleteevent(err) {
-        console.log('The event has been deleted');
-
-        //Si hay error
-        if (err) {
-          console.log(err);
-          return res.next(err);
-        }
+        if (err) { return res.next(err); }
 
         return res.ok({id: req.param('id')});
       });
@@ -100,15 +117,16 @@ module.exports = {
       err = 'Ajax call';
       return res.badRequest(err);
     }
-
   },
+
 
   edit: function(req, res, next){
     Event.findOne(req.param('id'), function foundEvent(err, event){
       if(err) return next(err);
       if(!event) return next();
-      res.view({
-        event: event
+      return res.render('event/edit.ejs', {
+        event: event,
+        layout: false
       });
     });
   }

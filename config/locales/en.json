@@ -107,5 +107,12 @@
 	"control_panel": "control_panel",
 	"commands": "commands",
 	"information": "information",
-	"location": "location"
+	"location": "location",
+	"event.color.hexadecimal": "event.color.hexadecimal",
+	"error": "error",
+	"action.color_text.color": "action.color_text.color",
+	"action.color_background.color": "action.color_background.color",
+	"action.color_border.color": "action.color_border.color",
+	"action.color_active_background.color": "action.color_active_background.color",
+	"event.color.color": "event.color.color"
 }

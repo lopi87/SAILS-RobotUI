@@ -25,7 +25,7 @@ function closeModal() {
 
 function openModal(title, data){
   $("#errors_container").html('');
-  $('#myModalLabel').html(title);
+  $('#uimodal').html(title);
   $("#container").html(data);
 }
 
@@ -239,6 +239,14 @@ function destroy_mode(state){
       fn = "ajax_destroy_call('/slider/destroy/" + id + "')";
       $("#slider_" + id).attr("onclick", fn);
     });
+    $("[id^=event_]").each( function( ){
+      $( this ).attr('data-toggle', '');
+      $( this ).attr('data-target', '');
+      var id = $( this ).attr('id').replace('event_','');
+      fn = "ajax_destroy_call('/event/destroy/" + id + "')";
+      $("#event_" + id).attr("onclick", fn);
+    });
+
   }else{
     off_click_events();
   }
@@ -270,6 +278,14 @@ function edit_mode( state ){
       fn = "ajax_call('/slider/edit/" + id + "','slider')";
       $("#slider_" + id).attr("onclick", fn);
     });
+    $("[id^=event_]").each( function( ){
+      $( this ).attr('data-toggle', 'modal');
+      $( this ).attr('data-target', '#writeModal');
+      id = $( this ).attr('id').replace('event_','');
+      fn = "ajax_call('/event/edit/" + id + "','event')";
+      $("#event_" + id).attr("onclick", fn);
+    });
+
   }else{
     off_click_events();
   }
@@ -280,6 +296,7 @@ function off_click_events() {
   $("[id^=play_]").removeAttribute("onclick");
   $("[id^=button_]").removeAttribute("onclick");
   $("[id^=slider_]").removeAttribute("onclick");
+  $("[id^=event_]").removeAttribute("onclick");
 }
 
 
@@ -326,6 +343,11 @@ function enable_menu(){
     $( this ).attr('data-target', '');
   });
   $("[id^=slider_]").each( function( ){
+    $( this ).attr('data-toggle', '');
+    $( this ).attr('data-target', '');
+  });
+
+  $("[id^=event_]").each( function( ){
     $( this ).attr('data-toggle', '');
     $( this ).attr('data-target', '');
   });
@@ -385,4 +407,11 @@ function reset_canvas(id){
   imageObj.onload = function(){
     context.drawImage(imageObj,0,0,context.width,context.height);
   };
+}
+
+
+function show_errors(errors){
+  $("#errors_container").html('<p>' + errors + '</p>');
+  $("#error_panel").removeClass('hidden');
+  toastr.danger(errors, 'RobotUI');
 }

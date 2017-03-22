@@ -38,6 +38,11 @@ module.exports = {
       defaultsTo: 0
     },
 
+    color:{
+      type: 'string',
+      defaultsTo: '#130269',
+      color: true
+    },
 
     element: {
       type: 'string',
@@ -45,6 +50,12 @@ module.exports = {
       defaultsTo: 'num_field'
     }
 
+  },
+  types:{
+    color:function(color){
+      return (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color));
+    }
   }
 };
 
+///(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color)

@@ -1,62 +1,32 @@
-<form id="event-form" class="form-signin" action="event/update" method="post" data-parsley-validate style="max-width: none">
+<form id="event-form" class="form-signin" action="" method="post" data-parsley-validate style="max-width: none">
   <div class="row">
-    <h1 class="text-center login-title marginbottom20"><%= i18n('events') %></h1>
-    <div class="col-md-6">
-      <div class="col-md-2"></div>
-      <div class="col-md-10">
-
+      <div class="col-md-12">
         <div class="control-group marginbottom5">
           <label for="name"><%= i18n("name") %> * :</label>
-          <input id="e_name_field" type="text" class="form-control" required placeholder="<%= i18n("name") %>" name="name">
+          <input id="name_field" type="text" class="form-control" required placeholder="<%= i18n("name") %>" value="<%= event.name %>" name="name">
         </div>
 
         <div class="control-group marginbottom5">
           <label for="event"><%= i18n("eventname") %> * :</label>
-          <input id="event_field" type="text" class="form-control" required placeholder="<%= i18n("eventname") %>" name="event_name">
+          <input id="event_field" type="text" class="form-control" required placeholder="<%= i18n("eventname") %>" value="<%= event.event_name %>" name="event_name">
         </div>
 
-        <div class="control-group marginbottom5">
-          <label for="unit"><%= i18n("unit") %> * :</label>
-          <input id="unit_field" type="text" class="form-control" placeholder="<%= i18n("unit") %>" name="unit">
-        </div>
-
-        <div class="control-group marginbottom5">
-          <label for="type"><%= i18n("type") %> *:</label>
-          <div class="chosen_container">
-            <select data-placeholder="Choose a type..." class="chzn-select-type" tabindex="2" name="element">
-              <option value="button">Text field</option>
-              <option value="push">Num field</option>
-            </select>
-          </div>
-          <script type="text/javascript">
-            $('.chzn-select-type').chosen({width: '100%'});
-          </script>
-        </div>
-
-        <div class="row">
-          <div class="col-md-7">
-          </div>
-          <div class="col-md-5">
+        <div class="control-group">
+          <label for="color"><%= i18n("color") %> * :</label>
+          <div class="input-group colorpicker-component ">
+            <input id="color_field" type="text" class="form-control" value="<%= event.color %>" />
+            <span class="input-group-addon"><i></i></span>
           </div>
         </div>
-
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="col-md-10">
-
-      </div>
-      <div class="col-md-2"></div>
     </div>
   </div>
-  <div class="form-signin">
-    <input  type="submit" class="btn btn-lg btn-primary btn-block" value="<%= i18n('createevent') %>">
-  </div>
+
   <input type="hidden" name="_csrf" value="<%= _csrf %>" />
 </form>
 
 <script type="text/javascript">
   addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
+
 
   function submit_function() {
     $('#event-form').parsley().validate()
@@ -67,7 +37,7 @@
       $.ajax({
         url: '/event/update/' + '<%= event.id %>',
         type: 'GET',
-        data: {name: $( "#e_name_field" ).val(), event_name: $( "#event_field" ).val(), unit: $( "#unit_field" ).val()},
+        data: {name: $( "#name_field" ).val(), event_name: $( "#event_field" ).val(), color: $("#color_field").val() },
         done:function() {
         },
 
@@ -75,7 +45,7 @@
           $('#event_' + '<%= event.id %>').remove();
           $("#panel").append(data);
           closeModal();
-          toastr.info('A new event has been created!', 'Event');
+          toastr.info('A new event has been updated!', 'Event');
         },
 
         error: function (xhr) {

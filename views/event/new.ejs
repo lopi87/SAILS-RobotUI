@@ -3,28 +3,19 @@
     <div class="col-md-12">
       <div class="control-group marginbottom5">
         <label for="name"><%= i18n("name") %> * :</label>
-        <input id="e_name_field" type="text" class="form-control" required placeholder="<%= i18n("name") %>" name="name">
+        <input id="name_field" type="text" class="form-control" required placeholder="<%= i18n("name") %>" name="name">
       </div>
       <div class="control-group marginbottom5">
         <label for="event"><%= i18n("eventname") %> * :</label>
         <input id="event_field" type="text" class="form-control" required placeholder="<%= i18n("eventname") %>" name="event_name">
       </div>
-      <div class="control-group marginbottom5">
-        <label for="unit"><%= i18n("unit") %> * :</label>
-        <input id="unit_field" type="text" class="form-control" placeholder="<%= i18n("unit") %>" name="unit">
-      </div>
 
-      <div class="control-group marginbottom5">
-        <label for="type"><%= i18n("type") %> *:</label>
-        <div class="chosen_container">
-          <select data-placeholder="Choose a type..." class="chzn-select-type" tabindex="2" name="element">
-            <option value="button">Text field</option>
-            <option value="push">Num field</option>
-          </select>
+      <div class="control-group">
+        <label for="color"><%= i18n("color") %> * :</label>
+        <div class="input-group colorpicker-component ">
+          <input id="color_field" type="text" class="form-control" />
+          <span class="input-group-addon"><i></i></span>
         </div>
-        <script type="text/javascript">
-          $('.chzn-select-type').chosen({width: '100%'});
-        </script>
       </div>
     </div>
   </div>
@@ -39,11 +30,15 @@
     $('#event-form').parsley().validate()
     var ok = $('.parsley-error').length === 0;
 
-    if (true){
+    if (ok){
       $.ajax({
-        url: '/event/newevent/' + '<%= interface.id %>',
-        type: 'GET',
-        data: {name: $( "#e_name_field" ).val(), event_name: $( "#event_field" ).val(), unit: $( "#unit_field" ).val()},
+          url: '/event/newevent/' + '<%= interface.id %>',
+          type: 'GET',
+          data: {
+            name: $("#name_field").val(),
+            event_name: $("#event_field" ).val(),
+            color: $("#color_field").val()
+        },
 
         success: function (data) {
           $("#panel").append(data);
@@ -52,8 +47,10 @@
         },
 
         error: function (xhr) {
-          $("#errors_container").html('<p class="bg-danger">' + xhr.responseText + '</p>');
-          //bootstrap_alert['danger'](xhr.responseText, 5000);
+          show_errors(xhr.responseText);
+          $("#errors_container").html('<p>' + xhr.responseText + '</p>');
+          $("#error_panel").removeClass('hidden');
+          toastr.danger(xhr.responseText, 'RobotUI');
         }
       });
 

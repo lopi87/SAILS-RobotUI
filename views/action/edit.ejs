@@ -1,8 +1,6 @@
-<form id="action-form" class="form-signin" action="create" method="post" data-parsley-validate style="max-width: none">
+<form id="action-form" class="form-signin" action="" method="post" data-parsley-validate style="max-width: none">
   <div class="row">
-    <div class="col-md-6">
-      <div class="col-md-2"></div>
-      <div class="col-md-10">
+      <div class="col-md-5 col-md-offset-1">
 
         <div class="control-group marginbottom5">
           <label for="name"><%= i18n("name") %> * :</label>
@@ -36,28 +34,26 @@
         <div class="control-group marginbottom5">
           <label for="name"><%= i18n("color") %> * :</label>
           <p>
-            Default: <input name="color_default" id="default" value="true" required="" type="radio" onchange="disable_colorform()">
-            custom: <input name="color_default" id="custom" value="false" type="radio" onchange="enable_colorform()">
+            <%= i18n('custom') %>: <input name="color_default" id="custom" value="false" type="checkbox" onchange="enable_colorform()">
           </p>
         </div>
         <script type="text/javascript">
           function enable_colorform(){
-            $('#colorform').show();
-          }
-          function disable_colorform(){
-            $('#colorform').hide();
+            if($("#custom").is(':checked')) {
+              $('#colorform').show();
+            } else {
+              $('#colorform').hide();
+            }
           }
         </script>
 
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="col-md-10">
+      <div class="col-md-5">
 
         <div id="colorform" style="display:none">
           <div class="control-group">
             <label for="colortext"><%= i18n("text") %> * :</label>
-            <div id="cp4" class="input-group colorpicker-component ">
+            <div class="input-group colorpicker-component ">
               <input id="text_field" type="text" class="form-control" value="<%= action.color_text %>" />
               <span class="input-group-addon"><i></i></span>
             </div>
@@ -65,7 +61,7 @@
 
           <div class="control-group">
             <label for="colorbackground"><%= i18n("background") %> * :</label>
-            <div id="cp" class="input-group colorpicker-component ">
+            <div class="input-group colorpicker-component ">
               <input id="background_field" type="text" class="form-control" value="<%= action.color_background %>" />
               <span class="input-group-addon"><i></i></span>
             </div>
@@ -73,7 +69,7 @@
 
           <div class="control-group">
             <label for="colorbordert"><%= i18n("border") %> * :</label>
-            <div id="cp2" class="input-group colorpicker-component ">
+            <div class="input-group colorpicker-component ">
               <input id="border_field" type="text" class="form-control" value="<%= action.color_border %>" />
               <span class="input-group-addon"><i></i></span>
             </div>
@@ -81,35 +77,25 @@
 
           <div class="control-group">
             <label for="colorbordert"><%= i18n("activebackground") %> * :</label>
-            <div id="cp3" class="input-group colorpicker-component ">
-              <input id="active_background_field" type="text" class="form-control" value="<%= action.color_active_background %>"  />
+            <div class="input-group colorpicker-component ">
+              <input id="active_background_field" type="text" class="form-control" value="<%= action.color_active_background %>" />
               <span class="input-group-addon"><i></i></span>
             </div>
           </div>
-          <script type="text/javascript">
-            $('[id^=cp]').colorpicker({format: 'hex'});
-          </script>
         </div>
       </div>
-      <div class="col-md-2"></div>
-    </div>
   </div>
   <input id="action_csrf" type="hidden" name="_csrf" value="<%= _csrf %>" />
 </form>
 
 <script type="text/javascript">
   addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
-  $('#action-form').parsley().on('field:validated', function() {
-    var ok = $('.parsley-error').length === 0;
-  });
-
-
 
   function submit_function() {
     $('#action-form').parsley().validate()
     var ok = $('.parsley-error').length === 0;
 
-    if (true){
+    if (ok){
       $.ajax({
         url: '/action/update/' + '<%= action.id %>',
         type: 'GET',
@@ -121,7 +107,7 @@
           color_active_background: $("#active_background_field").val(),
           color_text: $("#text_field").val(),
           icon: $(".chzn-select-icon").val(),
-          color_default: $('input[name=color_default]:checked').val()
+          custom_color: $("#custom").is(':checked')
         },
 
         done:function() {

@@ -5,6 +5,7 @@
 function observers () {
   checkbox_observer();
   summernote_observer();
+  colorpicker_observer();
 }
 
 
@@ -44,4 +45,8 @@ function checkbox_observer() {
     checkboxClass: 'icheckbox_square-green',
     radioClass: 'iradio_square-green'
   });
+}
+
+function colorpicker_observer() {
+  $('.colorpicker-component').colorpicker({format: 'hex'});
 }

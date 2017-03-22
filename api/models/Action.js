@@ -29,23 +29,27 @@ module.exports = {
     },
 
     color_text: {
-      type: 'hexadecimal',
-      defaultsTo: 'FFFFFF'
+      type: 'string',
+      defaultsTo: 'FFFFFF',
+      color: true
     },
 
     color_background: {
-      type: 'hexadecimal',
-      defaultsTo: '611BBD'
+      type: 'string',
+      defaultsTo: '611BBD',
+      color: true
     },
 
     color_border: {
-      type: 'hexadecimal',
-      defaultsTo: '130269'
+      type: 'string',
+      defaultsTo: '130269',
+      color: true
     },
 
     color_active_background: {
-      type: 'hexadecimal',
-      defaultsTo: '49247A'
+      type: 'string',
+      defaultsTo: '49247A',
+      color: true
     },
 
     coordinate_x: {
@@ -58,18 +62,15 @@ module.exports = {
       defaultsTo: 0
     },
 
-    color_default: {
+    custom_color: {
       type: 'boolean',
-      defaultsTo: true
+      defaultsTo: false
     }
 
   },
   types:{
-    ispositive:function(value){
-      if(value >=0 ){
-        return true;
-      }
-      return false;
+    color:function(color){
+      return (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color));
     }
   }
 };

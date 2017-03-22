@@ -7,7 +7,7 @@
       // Connect to the server running on the Robot(raspberry pi).
       var socket = io.connect(address_robot, {
         'reconnection': true,
-        'reconnectionDelay': 500,
+        'reconnectionDelay': 10,
         'reconnectionAttempts': 10
       });
 

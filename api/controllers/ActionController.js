@@ -56,16 +56,12 @@ module.exports = {
           icon: req.param('icon')
         };
 
-        if(req.param("color_default") == 'false'){
-          var isOk1 = CssService.valid_color(req.param('color_text'));
-          var isOk2 = CssService.valid_color(req.param('color_background'));
-          var isOk3 = CssService.valid_color(req.param('color_border'));
-          var isOk4 = CssService.valid_color(req.param('color_active_background'));
-
-          if (!isOk1 || !isOk2 || !isOk3 || !isOk4) {
-            return res.badRequest('you have to give a valid hexadecimal color');
-          }
-          actionObj.color_default = false;
+        if(req.param("custom_color") == 'true') {
+          actionObj.custom_color = true;
+          actionObj.color_text = req.param('color_text');
+          actionObj.color_border = req.param('color_border');
+          actionObj.color_background = req.param('color_background');
+          actionObj.color_active_background = req.param('color_active_background');
         }
 
         if (req.param('name') == '' && req.param('icon') == 'undefined') {
@@ -145,12 +141,12 @@ module.exports = {
       };
 
 
-      if(req.param("color_default") == 'false') {
-        actionObj.color_default = false;
-        actionObj.color_text = CssService.valid_color(req.param('color_text')) == true ? req.param('color_text') : null
-        actionObj.color_text = CssService.valid_color(req.param('color_background')) == true ? req.param('color_background') : null
-        actionObj.color_text = CssService.valid_color(req.param('color_border')) == true ? req.param('color_border') : null
-        actionObj.color_text = CssService.valid_color(req.param('color_active_background')) == true ? req.param('color_active_background') : null
+      if(req.param("custom_color") == 'true') {
+        actionObj.custom_color = false;
+        actionObj.color_text = req.param('color_text');
+        actionObj.color_border = req.param('color_border');
+        actionObj.color_background = req.param('color_background');
+        actionObj.color_active_background = req.param('color_active_background');
       }
 
       if (req.param('name') == '' && req.param('icon') == 'undefined') {
