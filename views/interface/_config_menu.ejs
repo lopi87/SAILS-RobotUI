@@ -3,34 +3,34 @@
     <div class="col-md-2">
       <div class="bottom_col">
         <div class="list-group">
-          <a id='new_joystick' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/joystick/create', '<%= i18n('button') %>')">
-            <i class="fa fa-dot-circle-o fa-2 marginlef10" aria-hidden="true">
-              Joystick
-            </i>
-          </a>
+          <!--<a id='new_joystick' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/joystick/create', '<%= i18n('button') %>')">-->
+            <!--<i class="fa fa-dot-circle-o fa-2 marginlef10" aria-hidden="true">-->
+              <!--Joystick-->
+            <!--</i>-->
+          <!--</a>-->
           <a id='new_event' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/event/create', '<%= i18n('event') %>')">
             <i class="fa fa-tags fa-2 marginlef10" aria-hidden="true">
-              Event
+              <%= i18n('event') %>
             </i>
           </a>
           <a id='new_video' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/video/create', '<%= i18n('video') %>')">
             <i class="fa fa-video-camera fa-2 marginlef10" aria-hidden="true">
-              Video
+              <%= i18n('video') %>
             </i>
           </a>
           <a id='new_slider' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/slider/create', '<%= i18n('slider') %>')" >
             <i class="fa fa-sliders fa-2 marginlef10" aria-hidden="true">
-              Slider
+              <%= i18n('slider') %>
             </i>
           </a>
           <a id='new_action' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/action/create', '<%= i18n('button') %>')">
             <i class="fa fa-cog fa-2 marginlef10" aria-hidden="true">
-              Button
+              <%= i18n('button') %>
             </i>
           </a>
           <a id='new_icon' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/icon/create', '<%= i18n('icon') %>')">
             <i class="fa fa-plus fa-2 marginlef10" aria-hidden="true">
-              Add icon
+              <%= i18n('icon') %>
             </i>
           </a>
 
@@ -93,14 +93,24 @@
 
 <script type="text/javascript">
   function ajax_call(action, title){
-      $.ajax({
-        url: action,
-        type: 'GET',
-        data: {id: '<%= interface.id %>'},
-        success: function(data){
+
+    var edit = false;
+    if (action.includes('edit')){
+      edit = true;
+    }
+
+    $.ajax({
+      url: action,
+      type: 'GET',
+      data: {id: '<%= interface.id %>'},
+      success: function(data){
+        if (edit){
+          openEditModal(title, data, '<%= i18n('edit') %>');
+        } else {
           openModal(title, data);
         }
-      });
+      }
+    });
   }
 
 

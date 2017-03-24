@@ -61,21 +61,15 @@ module.exports = {
       ispositive:true
     },
 
-
     toJSON: function(){
       var obj = this.toObject();
       delete obj._csrf;
       return obj;
-    },
-
-    types: {
-      ispositive: function (value) {
-        if (value >= 0) {
-          console.log('value is a positive number');
-          return true;
-        }
-        return false;
-      }
+    }
+  },
+  types: {
+    ispositive: function (value) {
+      return value >= 0
     }
   }
 };

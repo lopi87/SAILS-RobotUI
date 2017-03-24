@@ -29,6 +29,13 @@ function openModal(title, data){
   $("#container").html(data);
 }
 
+function openEditModal(title, data, text){
+  $("#errors_container").html('');
+  $('#uimodal').html(title);
+  $("#container").html(data);
+  $("#btn_action_modal").html(text);
+}
+
 //carga dinamica de archivos js, css, ...
 function loadjscssfile(filename, filetype){
   var fileref;
@@ -415,3 +422,13 @@ function show_errors(errors){
   $("#error_panel").removeClass('hidden');
   toastr.danger(errors, 'RobotUI');
 }
+
+
+function enable_colorform(){
+  if($("#custom").is(':checked')) {
+    $('#colorform').show();
+  } else {
+    $('#colorform').hide();
+  }
+}
+
