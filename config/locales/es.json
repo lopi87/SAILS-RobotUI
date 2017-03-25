@@ -139,5 +139,12 @@
 	"configure": "Configurar",
 	"create": "Crear",
 	"error": "error",
-	"custom": "custom"
+	"custom": "custom",
+  "robotui": "La plataforma para interactuar con robots a través de Internet.",
+  "play_with_robots": "¡Juega con robots!",
+  "get_started": "¡Comencemos!",
+  "join_us": "!Regístrate y añade tu robot!",
+  "how_to_do_it": "¿Cómo lo hago?",
+  "robot_games": "Crea divertidos juegos robóticos",
+  "check_our_tutorial": "Si no sabes como empezar , check our tutorial!"
 }

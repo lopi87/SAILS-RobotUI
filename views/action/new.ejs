@@ -1,7 +1,6 @@
 <form id="action-form" class="form-signin" action="newaction" method="post" data-parsley-validate style="max-width: none">
   <div class="row">
     <div class="col-md-6">
-      <div class="col-md-10 col-md-offset-2">
 
         <div class="control-group marginbottom5">
           <label for="name"><%= i18n("name") %> * :</label>
@@ -13,6 +12,8 @@
           <input id="code_field" type="text" class="form-control" placeholder="<%= i18n("code") %>" required="" name="code">
         </div>
 
+    </div>
+    <div class="col-md-6">
         <div class="control-group marginbottom5">
           <label for="icon"><%= i18n("selectanicon") %> *:</label>
           <div>
@@ -28,58 +29,51 @@
           </script>
         </div>
 
-        <div class="control-group marginbottom5">
-          <label for="name"><%= i18n("color") %> * :</label>
+        <div class="control-group margintop10">
+          <label class="margintop5" for="name"><%= i18n("color") %> :</label>
           <p>
-            <%= i18n('custom') %>: <input name="color_default" id="custom" value="false" type="checkbox" onchange="enable_colorform()">
+            <%= i18n('custom') %>: <input id="chk_custom" name="color_default" class="i-checks" value="false" type="checkbox">
           </p>
         </div>
         <script type="text/javascript">
-          function enable_colorform(){
-            if($("#custom").is(':checked')) {
-              $('#colorform').show();
-            } else {
-              $('#colorform').hide();
-            }
-          }
+          $('#chk_custom').on('ifChecked', function (){ $('#colorform').show();})
+          $('#chk_custom').on('ifUnchecked', function () { $('#colorform').hide(); })
         </script>
-
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="col-md-10">
-
-        <div id="colorform" style="display:none">
-          <div class="control-group">
-            <label for="colortext"><%= i18n("text") %> * :</label>
-            <div id="cp4" class="input-group colorpicker-component ">
-              <input id="text_field" type="text" class="form-control" />
-              <span class="input-group-addon"><i></i></span>
-            </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div id="colorform" style="display:none">
+        <div class="control-group margintop5">
+          <label for="colortext"><%= i18n("text") %> * :</label>
+          <div id="cp4" class="input-group colorpicker-component ">
+            <input id="text_field" type="text" class="form-control" />
+            <span class="input-group-addon"><i></i></span>
           </div>
+        </div>
 
-          <div class="control-group">
-            <label for="colorbackground"><%= i18n("background") %> * :</label>
-            <div id="cp" class="input-group colorpicker-component ">
-              <input id="background_field" type="text" class="form-control" />
-              <span class="input-group-addon"><i></i></span>
-            </div>
+        <div class="control-group">
+          <label for="colorbackground"><%= i18n("background") %> * :</label>
+          <div id="cp" class="input-group colorpicker-component ">
+            <input id="background_field" type="text" class="form-control" />
+            <span class="input-group-addon"><i></i></span>
           </div>
+        </div>
 
-          <div class="control-group">
-            <label for="colorbordert"><%= i18n("border") %> * :</label>
-            <div id="cp2" class="input-group colorpicker-component ">
-              <input id="border_field" type="text" class="form-control" />
-              <span class="input-group-addon"><i></i></span>
-            </div>
+        <div class="control-group">
+          <label for="colorbordert"><%= i18n("border") %> * :</label>
+          <div id="cp2" class="input-group colorpicker-component ">
+            <input id="border_field" type="text" class="form-control" />
+            <span class="input-group-addon"><i></i></span>
           </div>
+        </div>
 
-          <div class="control-group">
-            <label for="colorbordert"><%= i18n("activebackground") %> * :</label>
-            <div id="cp3" class="input-group colorpicker-component ">
-              <input id="active_background_field" type="text" class="form-control" />
-              <span class="input-group-addon"><i></i></span>
-            </div>
+        <div class="control-group">
+          <label for="colorbordert"><%= i18n("activebackground") %> * :</label>
+          <div id="cp3" class="input-group colorpicker-component ">
+            <input id="active_background_field" type="text" class="form-control" />
+            <span class="input-group-addon"><i></i></span>
           </div>
         </div>
       </div>

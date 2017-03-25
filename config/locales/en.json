@@ -1,10 +1,14 @@
 {
+	"robotui": "The platform for all people can interact with robots through the Internet.",
+	"play_with_robots": "Play with robots!",
+	"get_started": "Get started!",
+	"join_us": "Join us and add your robot!",
+	"how_to_do_it": "How to do it?",
+	"robot_games": "Create robot games for people to have fun.",
+	"check_our_tutorial": "If you don't know how to do it, check our tutorial!",
 	"Welcome": "Welcome",
 	"createaccount": "Create an account",
 	"createrobot": "Create a robot",
-	"testing": {
-		"test": "this is a test"
-	},
 	"signupnow": "Sign up now",
 	"password": "Password",
 	"passwordconfirmation": "Password confirmation",
@@ -114,5 +118,13 @@
 	"action.color_background.color": "action.color_background.color",
 	"action.color_border.color": "action.color_border.color",
 	"action.color_active_background.color": "action.color_active_background.color",
-	"event.color.color": "event.color.color"
+	"event.color.color": "event.color.color",
+	"take_control": "take_control",
+	"configure": "configure",
+	"button": "button",
+	"event": "event",
+	"video": "video",
+	"slider": "slider",
+	"create": "create",
+	"custom": "custom"
 }
