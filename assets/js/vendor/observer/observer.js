@@ -6,6 +6,8 @@ function observers () {
   checkbox_observer();
   summernote_observer();
   colorpicker_observer();
+  iface_menu_observer();
+  chosen_observer();
 }
 
 
@@ -47,4 +49,19 @@ function checkbox_observer() {
 
 function colorpicker_observer() {
   $('.colorpicker-component').colorpicker({format: 'hex'});
+}
+
+
+function iface_menu_observer(){
+  if ( $('#action_edit' ).hasClass('active')){
+    edit_mode('on');
+  }
+}
+
+function chosen_observer(){
+  $('.chzn-select-icon').chosen({ allow_single_deselect: true, width: '100%', disable_search: true });
+  $('.chzn-select').chosen({width: '100%'});
+  $('.chosen-select-viewers').chosen({width: '100%'});
+  $('.chosen-select-drivers').chosen({width: '100%'});
+
 }
