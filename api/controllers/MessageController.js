@@ -17,7 +17,7 @@ module.exports = {
     }
 
     User.find(function foundUsers(err, users){
-      if(err) return next(err);
+      if(err) return res.badRequest(err);
 
       Message.pagify('messages', {sort: ['createdAt DESC'], populate:[ 'from_user_id' ], page: page}).then(function(data){
         res.view({
@@ -33,7 +33,7 @@ module.exports = {
 
   create: function (req, res, next) {
     User.find(function foundUsers(err, users) {
-      if (err) return next(err);
+      if(err) return res.badRequest(err);
 
       users.forEach(function(user, index, object){
         if (user.id == req.session.User.id){
@@ -93,8 +93,7 @@ module.exports = {
 
       });
     }else{
-      err= 'No Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
   },
 
@@ -110,8 +109,7 @@ module.exports = {
         });
       });
     }else{
-      err= 'Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
   },
 
@@ -133,8 +131,7 @@ module.exports = {
         return res.ok({id: req.param('id')});
       });
     }else{
-      err= 'Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
   },
 
@@ -158,8 +155,7 @@ module.exports = {
         });
       });
     }else{
-      err= 'Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
   },
 

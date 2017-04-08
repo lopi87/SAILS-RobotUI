@@ -10,7 +10,8 @@ module.exports = {
 
   create: function (req, res, next){
     Interface.findOne(req.param('id'), function foundInterface(err, iface) {
-      if (err) return next(err);
+      if(err) return res.badRequest(err);
+      if(!iface) return res.badRequest(__('not_found'));
 
         return res.render('icon/new.ejs', {
           interface: iface,

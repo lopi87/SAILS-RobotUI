@@ -168,7 +168,7 @@ module.exports = {
       }
 
       User.destroy(id, function userDestroyed(err) {
-        if (err) return next(err);
+        return res.badRequest(err);
 
         ImageService.delete_file(user);
 
@@ -186,7 +186,8 @@ module.exports = {
     if (req.isSocket) {
       //Update, destroy...
       User.find(function foundUsers(err, users) {
-        if (err) return next(err);
+        if (err) return res.badRequest(err);
+
         User.subscribe(req.socket, users);
       });
 
@@ -202,8 +203,8 @@ module.exports = {
   //Añade una nueva fila a la tabla usuarios (vista) cuando uno es creado.
   render: function (req, res, next) {
     User.findOne(req.param('id'), function foundUser(err, user) {
-      if (err) return next(err);
-      if (!user) return next();
+      return res.badRequest('Ajax call');
+      if (!user) return res.badRequest(__('not_found'));
 
       return res.render('user/_row.ejs', {
         user: user,
@@ -241,12 +242,7 @@ module.exports = {
 
   edit_avatar: function (req, res, next) {
 
-    if (req.method === 'GET')
-      return res.json({'status': 'GET not allowed'});
-    //	Call via GET is error
-
-    if (req.xhr) {
-      // Yup, it's AJAX alright.
+    if (req.xhr){
 
       req.file('avatar').upload({
         // don't allow the total upload size to exceed ~10MB
@@ -291,6 +287,9 @@ module.exports = {
           return res.ok({url: ''});
         });
       });
+    }else{
+      return res.badRequest('Ajax call');
     }
   }
+
 };

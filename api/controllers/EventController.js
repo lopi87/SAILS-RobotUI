@@ -9,14 +9,11 @@
 
 module.exports = {
 
-  'new': function(req, res){
-    res.view();
-  },
-
-
   create: function (req, res, next){
     Interface.findOne(req.param('id'), function foundInterface(err, iface) {
-      if (err) return next(err);
+      if(err) return res.badRequest(err);
+      if(!iface) return res.badRequest(__('not_found'));
+
         return res.render('event/new.ejs', {
           interface: iface,
           layout: false
@@ -41,8 +38,7 @@ module.exports = {
       });
 
     }else{
-      err= 'No Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
   },
 
@@ -71,8 +67,7 @@ module.exports = {
       });
 
     } else {
-      err = 'Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
 
   },
@@ -87,7 +82,8 @@ module.exports = {
       };
 
       Event.update(req.param('id'), eventObj, function eventUpdated(err, event) {
-        if (err){ return res.redirect('/event/edit' + req.param('id')); }
+        if(err) return res.badRequest(err);
+
         FlashService.success(req, 'Event has been updated');
 
         Event.findOne(req.param('id')).exec(function(err, event) {
@@ -99,8 +95,7 @@ module.exports = {
 
       });
     } else {
-      err = 'Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
   },
 
@@ -108,21 +103,21 @@ module.exports = {
   destroy: function (req, res, next) {
     if (req.xhr) {
       Event.destroy({id: req.param('id')}).exec(function deleteevent(err) {
-        if (err) { return res.next(err); }
+        if(err) return res.badRequest(err);
 
         return res.ok({id: req.param('id')});
       });
     } else {
-      err = 'Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
   },
 
 
   edit: function(req, res, next){
     Event.findOne(req.param('id'), function foundEvent(err, event){
-      if(err) return next(err);
-      if(!event) return next();
+      if(err) return res.badRequest(err);
+      if(!event) return res.badRequest(__('not_found'));
+
       return res.render('event/edit.ejs', {
         event: event,
         layout: false

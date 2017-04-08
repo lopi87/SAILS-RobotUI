@@ -41,8 +41,7 @@ module.exports = {
       });
 
     } else {
-      err = 'No Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
   },
 
@@ -84,8 +83,7 @@ module.exports = {
       });
 
     } else {
-      err = 'Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
 
   },
@@ -99,8 +97,7 @@ module.exports = {
       });
 
     } else {
-      err = 'Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
   },
 
@@ -117,8 +114,7 @@ module.exports = {
         });
       });
     } else {
-      err = 'Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
   },
 
@@ -143,8 +139,7 @@ module.exports = {
         });
       });
     } else {
-      err = 'Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
   }
 

@@ -15,16 +15,16 @@ module.exports = {
   configure: function (req, res, next) {
 
     Interface.findOne({id: req.param('id')}).populate('events').populate('video').populate('robot_owner').populate('sliders').exec(function (err, iface) {
-      if (err) return next(err);
-      if (!iface) return next(err);
+      if(err) return res.badRequest(err);
+      if(!iface) return res.badRequest(__('not_found'));
 
       //Mis iconos y los del sistema por defecto
       Icon.find({or: [{user_owner: req.session.User.id}, {default: true}]}).exec(function (err, icons) {
-        if (err) return next(err);
+        if(err) return res.badRequest(err);
 
         User.findOne({id:  iface.robot_owner.owner}).exec(function Userfound(err, user){
-          if (err) return res.badRequest(err);
-          if (!user) return next(err);
+          if(err) return res.badRequest(err);
+          if(!user) return res.badRequest(__('not_found'));
 
 
           Action.find({or: [{interface_owner: req.param('id')},{default: true}] }).populate('icon').exec(function(err, actions) {
@@ -50,8 +50,8 @@ module.exports = {
 
   show: function (req, res, next) {
     Interface.findOne(req.param('id')).populate('events').populate('joystick').populate('video').populate('robot_owner').exec(function (err, iface) {
-      if (err) return next(err);
-      if (!iface) return next(err);
+      if(err) return res.badRequest(err);
+      if(!iface) return res.badRequest(__('not_found'));
 
         Action.find({interface_owner: req.param('id')}).populate('icon').exec(function (err, actions) {
           if (err) return res.badRequest(err);
@@ -90,8 +90,8 @@ module.exports = {
   view: function(req, res, next){
 
     Interface.findOne({id: req.param('id')}).populate('events').populate('video').populate('joystick').populate('sliders').populate('robot_owner').exec(function (err, iface) {
-      if (err) return next(err);
-      if (!iface) return next(err);
+      if(err) return res.badRequest(err);
+      if(!iface) return res.badRequest(__('not_found'));
 
       Action.find({interface_owner: req.param('id')}).populate('icon').exec(function(err, actions) {
         if (err) return res.badRequest(err);
@@ -113,30 +113,6 @@ module.exports = {
           });
         });
       });
-  },
-
-
-
-  savecode: function (req, res, next) {
-    if (req.xhr) {
-      var code = req.param('code');
-      var iface_id = req.param('id');
-
-      Interface.findOne(iface_id, function foundInterface(err, iface) {
-        if (err) return res.badRequest(err);
-
-        iface.csscode = code.html;
-
-        Interface.update(iface_id, iface, function ifaceUpdated(err) {
-          if (err)  return res.badRequest(err);
-          return res.ok({code: code.html});
-        });
-      });
-    } else {
-      err = 'Ajax call';
-      return res.badRequest(err);
-    }
-
   },
 
 
