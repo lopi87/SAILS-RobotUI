@@ -72,9 +72,8 @@
           toastr.info('A new slider has been created!', 'Slider');
         },
 
-        error: function (xhr) {
-          $("#errors_container").html('<p class="bg-danger">' + xhr.responseText + '</p>');
-          //bootstrap_alert['danger'](xhr.responseText, 5000);
+        error: function (data) {
+          show_errors(data.responseText);
         }
       });
 

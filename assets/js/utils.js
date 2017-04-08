@@ -24,6 +24,7 @@ function closeModal() {
 }
 
 function openModal(title, data){
+  $("#error_panel").addClass('hidden');
   $("#errors_container").html('');
   $('#uimodal').html(title);
   $("#container").html(data);
@@ -176,11 +177,6 @@ function change_online_offline(id, online){
 
 
 
-
-
-
-
-
 //modes: 'create', 'edit' and 'delete'
 function setting_panel_mode( mode ){
   var menu_button = $('#action_' + mode );
@@ -244,7 +240,7 @@ function destroy_mode(state){
       $( this ).attr('data-target', '');
       var id = $( this ).attr('id').replace('slider_','');
       fn = "ajax_destroy_call('/slider/destroy/" + id + "')";
-      $("#slider_" + id).attr("onclick", fn);
+      $("#content_slider_" + id).attr("onclick", fn);
     });
     $("[id^=event_]").each( function( ){
       $( this ).attr('data-toggle', '');
@@ -283,7 +279,7 @@ function edit_mode( state ){
       $( this ).attr('data-target', '#writeModal');
       id = $( this ).attr('id').replace('slider_','');
       fn = "ajax_call('/slider/edit/" + id + "','slider')";
-      $("#slider_" + id).attr("onclick", fn);
+      $("#content_slider_" + id).attr("onclick", fn);
     });
     $("[id^=event_]").each( function( ){
       $( this ).attr('data-toggle', 'modal');
@@ -302,7 +298,7 @@ function edit_mode( state ){
 function off_click_events() {
   $("[id^=play_]").removeAttribute("onclick");
   $("[id^=button_]").removeAttribute("onclick");
-  $("[id^=slider_]").removeAttribute("onclick");
+  $("[id^=content_slider_]").removeAttribute("onclick");
   $("[id^=event_]").removeAttribute("onclick");
 }
 
@@ -310,9 +306,7 @@ function off_click_events() {
 
 function disable_menu(){
   $("[id^=new_]").addClass('disabled');
-  $("[id^=new_]").removeAttr('data-toggle');
-  $("[id^=new_]").removeAttr('data-target');
-  $("[id^=new_]").removeAttr('onclick');
+  remove_events( $("[id^=new_]") );
   interact('.draggable').draggable(false);
 }
 
@@ -340,25 +334,15 @@ function enable_menu(){
 
   interact('.draggable').draggable(true);
 
+  remove_events( $("[id^=play_]") );
+  remove_events( $("[id^=button_]") );
+  remove_events( $("[id^=content_slider_]") );
+  remove_events( $("[id^=event_]") );
+}
 
-  $("[id^=play_]").each( function( ){
-    $( this ).attr('data-toggle', '');
-    $( this ).attr('data-target', '');
-  });
-  $("[id^=button_]").each( function( ){
-    $( this ).attr('data-toggle', '');
-    $( this ).attr('data-target', '');
-  });
-  $("[id^=slider_]").each( function( ){
-    $( this ).attr('data-toggle', '');
-    $( this ).attr('data-target', '');
-  });
 
-  $("[id^=event_]").each( function( ){
-    $( this ).attr('data-toggle', '');
-    $( this ).attr('data-target', '');
-  });
-
+function remove_events( ids ){
+  ids.removeAttr('data-toggle').removeAttr('data-target').removeAttr('onclick');
 }
 
 
@@ -420,7 +404,12 @@ function reset_canvas(id){
 function show_errors(errors){
   $("#errors_container").html('<p>' + errors + '</p>');
   $("#error_panel").removeClass('hidden');
-  toastr.danger(errors, 'RobotUI');
+  toastr.error(errors, 'RobotUI');
+}
+
+
+function show_success(success){
+  toastr.info(success, 'RobotUI');
 }
 
 

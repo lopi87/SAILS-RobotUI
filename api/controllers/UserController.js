@@ -44,8 +44,7 @@ module.exports = {
         if (err) return next(err);
       });
 
-      msg = { err: 'User created' };
-      FlashService.success(req, msg );
+      FlashService.success(req, 'User created.' );
       User.publishCreate({id: user.id});
 
       ImageService.upload_avatar(req.file('avatar'), user, function whenDone(err, files) {
@@ -151,9 +150,7 @@ module.exports = {
           admin: req.param('admin')
         });
       }
-
-      msg = { err: 'User updated'};
-      FlashService.success(req, msg );
+      FlashService.success(req, 'User updated.' );
       res.redirect('/user/show/' + req.param('id'));
     });
 
@@ -166,8 +163,7 @@ module.exports = {
     User.findOne(id, function foundUser(err, user) {
       if (err) return next(err);
       if (!user) {
-        msg = {err: 'User doesn\'t exists.'};
-        FlashService.error(req, msg);
+        FlashService.error(req, 'User doesn\'t exists.');
         return res.redirect('user/index');
       }
 
@@ -178,8 +174,7 @@ module.exports = {
 
         User.publishDestroy(id, {id: user.id});
 
-        msg = {err: 'User deleted'};
-        FlashService.success(req, msg);
+        FlashService.success(req,  'User deleted.');
 
         res.redirect('/');
       });
@@ -278,8 +273,7 @@ module.exports = {
 
         // If no files were uploaded, respond with an error.
         if (file.length === 0){
-          msg = {err: 'No file was uploaded'};
-          FlashService.error(req, msg);
+          FlashService.error(req, 'No file was uploaded.');
           res.redirect('/user/new');
         }
 

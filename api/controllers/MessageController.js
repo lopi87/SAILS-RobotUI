@@ -64,8 +64,7 @@ module.exports = {
           return res.redirect('/message/index');
         }
         if (!user) {
-          msg = {err: 'No user selected'};
-          FlashService.error(req, msg);
+          FlashService.error(req, 'No user selected');
           return res.redirect('/message/index');
         }
 
@@ -78,9 +77,7 @@ module.exports = {
           //Mandar notificacion al usuario
           Session.findOne({user_id: req.param('to_user_id')}, function foundSession(err, session) {
             if (err) {
-              console.log(err);
-              var error = {err: err};
-              FlashService.error(req, error);
+              FlashService.server_exit(req, err);
               return res.redirect('/message/index');
             }
 

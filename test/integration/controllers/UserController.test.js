@@ -1,19 +1,15 @@
-var UserController = require('../../../api/controllers/UserController'),
-  sails = require('sails'),
-  sinon = require('sinon'),
-  assert = require('assert'),
-  request = require('supertest');
+var request = require('supertest');
 
-describe('UserController', function() {
+describe('SessionController', function() {
 
-    it ('should render the index view', function () {
-      var view = sinon.spy();
-      UserController.index(null, {
-        view: view
-      });
-      assert.ok(view.called);
+  describe('#index()', function() {
+    it('should Forbidden', function (done) {
+      request(sails.hooks.http.app)
+        .post('/user/index')
+        .send()
+        .expect(403)
+        .end(done)
     });
-
+  });
 
 });
-

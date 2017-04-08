@@ -36,5 +36,6 @@
 	"my_viewer_robots": "my_viewer_robots",
 	"close": "close",
 	"new": "new",
-	"open_here": "open_here"
+	"open_here": "open_here",
+	"error": "error"
 }

@@ -1,9 +1,5 @@
-var sails = require('sails'),
-    sinon = require('sinon'),
-    assert = require('assert'),
-    request = require('supertest');
+var sails = require('sails');
 
-// Global before hook
 before(function (done) {
   // Lift Sails with test database
   this.timeout(500000000);
@@ -13,29 +9,20 @@ before(function (done) {
       level: 'error'
     },
     models: {
-      connection: 'test',
+      connection: 'someMongodbServer',
       migrate: 'drop'
     }
   }, function(err) {
     if (err)
       return done(err);
 
-    // Load fixtures
-    var barrels = new Barrels();
+    sails.log.info('***** Starting tests... *****');
+    console.log('\n');
 
-    // Save original objects in `fixtures` variable
-    fixtures = barrels.data;
-
-    // Populate the DB
-    barrels.populate(function(err) {
-      done(err, sails);
-    });
-
+    done(null, sails);
   });
 });
 
-// Global after hook
 after(function (done) {
-  console.log(); // Skip a line before displaying Sails lowering logs
-  Sails.lower(done);
+  sails.lower(done);
 });

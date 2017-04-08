@@ -15,19 +15,17 @@ var ready = function() { observers() };
 
 $(document).ready( ready );                  //... once document ready
 $(document).ajaxComplete( ready );           //... once ajax is complete
-$(document).on('turbolinks:load', ready );   //... once a link is clicked
-// $(document).on('fields_added.nested_form_fields', ready);
-
-$(document).on('turbolinks:before-cache', function() {
-
-} );
 
 
-
-$(document).on('ajax:error', function(e, xhr, status, error){
-  toastr.error(error);
-});
-
+// $(document).on('ajax:error', function(e, xhr, status, error){
+//   toastr.error(error);
+//   alert('ERROR!');
+// });
+//
+// $(document).on('ajax:success', function(e, xhr, status, success){
+//   toastr.info(success);
+//   alert('SUCCESS');
+// });
 
 //FUNCTIONS:
 

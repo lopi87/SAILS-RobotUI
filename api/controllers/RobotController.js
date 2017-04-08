@@ -48,9 +48,7 @@ module.exports = {
 
         PermissionService.init_permissions(robot, req.param('driver_users'), req.param('viewer_users'), function whenDone(err) {
           if (err) return res.negotiate(err);
-
-          msg = {err: 'Robot has been created.'};
-          FlashService.success(req, msg);
+          FlashService.success(req, 'Robot has been created.');
 
           robot.save(function (err) {
             if (err) return next(err);
@@ -264,8 +262,7 @@ module.exports = {
     Robot.findOne(id, function foundRobot(err, robot) {
       if (err) return next(err);
       if (!robot) {
-        msg = {err: 'Robot doesn\'t exists.'};
-        FlashService.error(req, msg);
+        FlashService.error(req, 'Robot doesn\'t exists.');
         return res.redirect('robot/index');
       }
 
@@ -273,8 +270,7 @@ module.exports = {
       Interface.find({robot_owner: robot.id}).exec(function (err, interface) {
         if (err) return next(err);
         if (!interface) {
-          msg = {err: 'Interface doesn\'t exists.'};
-          FlashService.error(req, msg);
+          FlashService.error(req, 'Interface doesn\'t exists.');
           return res.redirect('robot/index');
         }
 
@@ -296,9 +292,7 @@ module.exports = {
                   ImageService.delete_file(robot);
 
                   Robot.publishDestroy(id, {id: robot.id});
-
-                  msg = {err: 'Robot deleted'};
-                  FlashService.success(req, msg);
+                  FlashService.success(req, 'Robot deleted');
                   return res.redirect('robot/index');
                 });
               });
@@ -355,8 +349,7 @@ module.exports = {
         if (err) {
           return res.redirect('/robot/edit' + req.param('id'));
         }
-        msg = {err: 'The Robot has been updated'};
-        FlashService.success(req, msg);
+        FlashService.success(req, 'The Robot has been updated.');
         res.redirect('/robot/show/' + req.param('id'));
       });
     });

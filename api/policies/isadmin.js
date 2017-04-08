@@ -8,8 +8,7 @@ module.exports = function(req, res, ok) {
   }
   //not allowed
   else {
-    msg = { err:  'You must be an admin.' };
-    FlashService.warning(req, msg );
+    FlashService.warning(req, 'You must be an admin.' );
     return res.forbidden();
   }
 };

@@ -60,8 +60,8 @@
             console.log('bottom position updated');
           },
 
-          error: function(xhr, status, text) {
-            bootstrap_alert['danger'](xhr.responseText, 5000 );
+          error: function(data) {
+            show_errors(data.responseText);
           }
         });
 
@@ -145,8 +145,8 @@
           console.log('board size updated');
         },
 
-        error: function(xhr, status, text) {
-          bootstrap_alert['danger'](xhr.responseText, 5000 );
+        error: function(data) {
+          show_errors(data.responseText);
         }
       });
     }

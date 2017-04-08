@@ -18,9 +18,8 @@ module.exports = function(req, res, next) {
 
   // User is not allowed
   // (default res.forbidden() behavior can be overridden in `config/403.js`)
-  msg = { err:  'Session expired.' };
-  FlashService.warning(req, msg );
-  res.redirect('/');
-  return;
-  //return res.forbidden('You are not permitted to perform this action.');
+  FlashService.warning(req, 'Session expired.' );
+
+  //return res.redirect('/');
+  return res.forbidden('You are not permitted to perform this action.');
 };

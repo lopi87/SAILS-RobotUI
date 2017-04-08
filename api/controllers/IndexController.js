@@ -9,11 +9,7 @@
 module.exports = {
 
   index: function (req, res) {
-    Robot.count({online: true}).exec(function countOnlineRobots(error, number) {
-      return res.view({
-        n_robots_online: number
-      });
-    });
+      return res.view();
   },
 
   about: function (req, res){

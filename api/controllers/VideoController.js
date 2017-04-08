@@ -49,6 +49,8 @@ module.exports = {
   new: function (req, res, next) {
     if (req.xhr) {
       Interface.findOne(req.param('id'), function foundInterface(err, iface) {
+        if(err) return res.badRequest(__('not_found'));
+
         if (err) return next(err);
 
         var videoObj = {
@@ -56,6 +58,11 @@ module.exports = {
           name: req.param('name'),
           event_name: req.param('event_name')
         };
+
+
+        if ( req.param('name') == '' ) return res.badRequest('you have to give a name ');
+        if ( req.param('event_name') == '' ) return res.badRequest( 'You have to give a event name.' );
+
 
         //Delete old videos before create new
         Video.destroy({interface_owner: iface.is}).exec(function (err, video) {
@@ -128,8 +135,7 @@ module.exports = {
         if (err){
           return res.redirect('/video/edit' + req.param('id'));
         }
-        msg = {err: 'The video has been updated'};
-        FlashService.success(req, msg);
+        FlashService.success(req, 'The video has been updated.');
 
         return res.render('interface/_video.ejs', {
           video: video,

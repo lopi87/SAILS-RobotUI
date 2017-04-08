@@ -11,8 +11,7 @@ module.exports = function(req, res, next) {
       if (!robot) return next(err);
 
       if( !robot.busy){
-        msg = { err:  'The Robot is offline.' };
-        FlashService.warning(req, msg );
+        FlashService.warning(req, 'The Robot is offline.' );
         return res.redirect('back');
       }
 
@@ -30,7 +29,7 @@ module.exports = function(req, res, next) {
         });
       }
 
-      msg = { err:  'You dont have permissions for this action.' };
+      msg = 'You dont have permissions for this action.';
       FlashService.warning(req, msg );
       return res.forbidden(msg);
 

@@ -11,7 +11,7 @@ module.exports = function(req, res, next) {
 
 
        if(robot.owner != req.session.User.id){
-         msg = { err:  'You dont have permissions for this action.' };
+         msg = 'You dont have permissions for this action.';
          FlashService.warning(req, msg );
          return res.forbidden(msg);
        }

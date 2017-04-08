@@ -13,9 +13,8 @@ var requestIp = require('request-ip');
 module.exports = {
 
   new: function(req, res){
-    res.view('session/new');
+    return res.ok();
   },
-
 
   //Almacenamiento en la base de datos la sesion de cada usuario de la pagina (PARA MANDAR MENSAJES)
   saveSocketID: function(req, res) {
@@ -72,9 +71,7 @@ module.exports = {
   create: function(req, res, next){
 
     if(!req.param('email') || !req.param('password')) {
-
-      msg = { err: 'You must enter both a username and password.' };
-      FlashService.error(req, msg );
+      FlashService.error(req, 'You must enter both a username and password.' );
 
       res.redirect('/session/new');
       return;
@@ -84,7 +81,7 @@ module.exports = {
       if (err) return next(err);
 
       if (!user){
-        msg = { err: 'The email address ' + req.param('email') + ' not found' };
+        msg = 'The email address ' + req.param('email') + ' not found';
         FlashService.error(req, msg );
 
         res.redirect('session/new');
@@ -95,8 +92,7 @@ module.exports = {
         if(err) return next(err);
 
         if(!valid){
-          msg = { err: 'Invalid username and password combination' };
-          FlashService.error(req, msg );
+          FlashService.error(req, 'Invalid username and password combination.' );
 
           res.redirect('session/new');
           return;
@@ -126,9 +122,7 @@ module.exports = {
           });
 
           req.session.languagePreference = req.setLocale(user.language.toLowerCase());
-
-          msg = { err: req.__('Welcome') };
-          FlashService.success(req, msg );
+          FlashService.success(req, req.__('Welcome') );
 
           if (req.session.User.admin) {
             res.redirect('/robot/index_public_robots/');
@@ -149,8 +143,7 @@ module.exports = {
       User.findOne(req.session.User.id, function foundUser(err, user){
         if(err) return next(err);
         if(!user){
-          msg = { err: 'User not found' };
-          FlashService.error(req, msg );
+          FlashService.error(req, 'User not found.' );
           return res.redirect('/');
         }
 

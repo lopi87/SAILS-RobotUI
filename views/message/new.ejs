@@ -7,7 +7,7 @@
 
   <div class="form-group margintop20">
         <label class="control-label"><%= i18n("user") + ': ' %> </label>
-          <select id="to_user_id" data-placeholder="<%= i18n('chose_users')%>" class="chosen-select-users" tabindex="2" name="to_user_id", required="">
+          <select id="to_user_id" data-placeholder="<%= i18n('chose_users')%>" class="chosen-select-users" tabindex="2" name="to_user_id" required="">
             <option value=""></option>
             <% users.forEach(function(user)  { %>
             <option data-img-src="<%= sails.getBaseUrl() + user.avatarUrl %>" value="<%= user.id %>"><%= user.name %></option>
@@ -57,9 +57,8 @@
           toastr.info('A new message has been send!', 'Message');
         },
 
-        error: function (xhr) {
-          $("#errors_container").html('<p class="bg-danger">' + xhr.responseText + '</p>');
-          //bootstrap_alert['danger'](xhr.responseText, 5000);
+        error: function (data) {
+          show_errors(data.responseText);
         }
       });
 

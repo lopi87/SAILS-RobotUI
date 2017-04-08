@@ -20,7 +20,7 @@ module.exports = function(req, res, next) {
           }
         });
       }
-      msg = { err: 'You dont have permissions for this action.' };
+      msg = 'You dont have permissions for this action.';
       FlashService.warning(req, msg );
       return res.forbidden(msg);
     });

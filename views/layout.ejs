@@ -175,8 +175,8 @@
                 window.location.reload();
               },
 
-              error: function(xhr, status, text) {
-                bootstrap_alert['danger'](xhr.responseText, 5000 );
+              error: function (data) {
+                show_errors(data.responseText);
               }
             });
 
@@ -193,7 +193,7 @@
 
 
         <div class="navbar-right marginleft10">
-          <a href="/user/new" class="btn btn-success navbar-btn"> <%= __("signupnow") %></a>
+          <a href="/user/new" class="btn btn-success navbar-btn"> <%= i18n("signupnow") %></a>
         </div>
 
         <form id="login_form" class="navbar-right" action="/session/create">
@@ -203,7 +203,7 @@
           <div class="form-group">
             <input type="password" placeholder="<%= i18n("password") %>" required  name="password" class="form-control" style="width: 150px">
           </div>
-          <button type="submit" class="btn btn-success navbar-btn"><%= __("signin") %></button>
+          <button type="submit" class="btn btn-success navbar-btn"><%= i18n("signin") %></button>
           <input type="hidden" name="_csrf" value="<%= _csrf %>">
         </form>
 

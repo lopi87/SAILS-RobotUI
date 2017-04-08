@@ -52,8 +52,8 @@
           $("#actualizar tr").remove();
          toastr.info('All sliders has been deleted!', 'Slider' );
         },
-        error: function(xhr, status, text) {
-          bootstrap_alert['danger'](xhr.responseText, 5000 );
+        error: function(data) {
+          show_errors(data.responseText);
         }
       });
     }
@@ -69,8 +69,8 @@
          toastr.info('A new slider has been deleted!', 'Slider' );
         },
 
-        error: function (xhr, status, text) {
-          bootstrap_alert['danger'](xhr.responseText, 5000 );
+        error: function (data) {
+          show_errors(data.responseText);
         }
       });
     }

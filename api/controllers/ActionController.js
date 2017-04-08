@@ -17,23 +17,23 @@ module.exports = {
       var y = req.param('y');
 
       Action.update(id, {coordinate_x: x, coordinate_y: y}, function actionUpdated(err){
-        if(err) return res.badRequest(err);
+        if(err) return res.badRequest(err.reason);
         res.ok({ msg: 'position updated' });
       });
     }else{
-      err= 'No Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
   },
 
 
   create: function (req, res, next){
     Interface.findOne(req.param('id'), function foundInterface(err, iface) {
-      if (err) return next(err);
+      if(err) return res.badRequest(err.reason);
+      if(!iface) return res.badRequest(__('not_found'));
 
       //Mis iconos y los del sistema por defecto
       Icon.find({or: [{user_owner: req.session.User.id}, {default: true}]}).exec(function (err, icons) {
-        if (err) return next(err);
+        if(err) return res.badRequest(err.reason);
 
         return res.render('action/new.ejs', {
           icons: icons,
@@ -47,7 +47,8 @@ module.exports = {
   newaction: function (req, res, next) {
     if (req.xhr) {
       Interface.findOne(req.param('id'), function foundInterface(err, iface) {
-        if (err) return next(err);
+        if(err) return res.badRequest(err.reason);
+        if(!iface) return res.badRequest(__('not_found'));
 
         var actionObj = {
           interface_owner: iface.id,
@@ -64,33 +65,34 @@ module.exports = {
           actionObj.color_active_background = req.param('color_active_background');
         }
 
-        if (req.param('name') == '' && req.param('icon') == 'undefined') {
-          return res.badRequest('you have to give a name or icon');
-        }
+        if ( req.param('name') == '' && req.param('icon') == '') return res.badRequest('you have to give a name or icon');
+        if ( req.param('code') == '' ) return res.badRequest( 'You have to give a code.' );
 
         Action.create(actionObj, function actionCreated(err, action) {
-          if (err) return res.badRequest(err.Errors);
+          if(err) return res.badRequest(err.reason);
 
-              if (req.param('icon')){
-                Action.findOne(action.id).populate('icon').exec(function(err, action) {
-                  if (err) return res.badRequest(err);
-                  return res.render('interface/_action.ejs', {
-                    action: action,
-                    layout: false
-                  });
-                });
-              }else{
-                return res.render('interface/_action.ejs', {
-                  action: action,
-                  layout: false
-                });
-              }
+          // FlashService.success(req, 'The action has been created');
+          // FlashService.ajax_flash(req, res, next);
+
+          if (req.param('icon')){
+            Action.findOne(action.id).populate('icon').exec(function(err, action) {
+              if (err) return res.badRequest(err);
+              return res.render('interface/_action.ejs', {
+                action: action,
+                layout: false
+              });
+            });
+          }else{
+            return res.render('interface/_action.ejs', {
+              action: action,
+              layout: false
+            });
+          }
         });
       });
 
     } else {
-      err = 'Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
 
   },
@@ -99,13 +101,12 @@ module.exports = {
   destroy: function (req, res, next) {
     if (req.xhr) {
       Action.destroy({id: req.param('id')}).exec(function deleteaction(err) {
-        if (err) return next(err);
+        if(err) return res.badRequest(err);
 
         return res.ok({id: req.param('id')});
       });
     } else {
-      err = 'Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
 
   },
@@ -113,12 +114,12 @@ module.exports = {
 
   edit: function(req, res, next){
     Action.findOne(req.param('id'), function foundAction(err, action){
-      if(err) return next(err);
-      if(!action) return next();
+      if(err) return res.badRequest(err.reason);
+      if(!action) return res.badRequest(__('not_found'));
 
       //Mis iconos y los del sistema por defecto
       Icon.find({or: [{user_owner: req.session.User.id}, {default: true}]}).exec(function (err, icons) {
-        if (err) return next(err);
+        if(err) return res.badRequest(err.reason);
 
         return res.render('action/edit.ejs', {
           action: action,
@@ -149,16 +150,19 @@ module.exports = {
         actionObj.color_active_background = req.param('color_active_background');
       }
 
-      if (req.param('name') == '' && req.param('icon') == 'undefined') {
-        return res.badRequest('you have to give a name or icon');
-      }
+      if ( req.param('name') == '' && req.param('icon') == '') return res.badRequest('you have to give a name or icon');
+      if ( req.param('code') == '' ) return res.badRequest( 'You have to give a code.' );
 
       Action.update(req.param('id'), actionObj, function actionUpdated(err, action) {
-        if (err){ return res.redirect('/action/edit' + req.param('id')); }
-        msg = {err: 'The action has been updated'};
-        FlashService.success(req, msg);
+        if(err) return res.badRequest(err);
 
         Action.findOne(req.param('id')).populate('icon').exec(function(err, action) {
+          if(err) return res.badRequest(err);
+          if(!action) return res.badRequest(__('not_found'));
+          //
+          // FlashService.success(req, 'The action has been updated');
+          // FlashService.ajax_flash(req, res, next);
+
           return res.render('interface/_action.ejs', {
             action: action,
             layout: false
@@ -166,15 +170,16 @@ module.exports = {
         });
       });
     } else {
-      err = 'Ajax call';
-      return res.badRequest(err);
+      return res.badRequest('Ajax call');
     }
   },
 
 
   index: function(req, res, next) {
     Action.find({interface_owner: req.session.User.id}).exec(function (err, actions) {
-      if (err) return next(err);
+      if(err) return res.badRequest(err.reason);
+      if(!actions) return res.badRequest(__('not_found'));
+
       res.view({
         actions: actions
       });

@@ -44,5 +44,13 @@
 	"actions": "actions",
 	"public": "public",
 	"interface": "interface",
-	"edit": "edit"
+	"edit": "edit",
+	"robotui": "robotui",
+	"play_with_robots": "play_with_robots",
+	"robot_games": "robot_games",
+	"get_started": "get_started",
+	"join_us": "join_us",
+	"how_to_do_it": "how_to_do_it",
+	"check_our_tutorial": "check_our_tutorial",
+	"error": "error"
 }

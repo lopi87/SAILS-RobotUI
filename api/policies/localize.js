@@ -6,9 +6,9 @@ module.exports = function(req, res, next) {
     req.session.languagePreference = sails.config.i18n.defaultLocale;
   }
 
-  if(req.param('locale') != req.session.languagePreference && req.param('locale') != undefined){
+  if(req.param('locale') != req.session.languagePreference && req.param('locale') != undefined ){
     req.session.languagePreference = req.param('locale');
-    msg = { err:  req.__('language') + ': ' + req.param('locale').toUpperCase() };
+    msg = req.__('language') + ': ' + req.param('locale').toUpperCase();
     FlashService.info(req, msg );
   }
 

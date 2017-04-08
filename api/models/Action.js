@@ -30,25 +30,25 @@ module.exports = {
 
     color_text: {
       type: 'string',
-      defaultsTo: 'FFFFFF',
+      defaultsTo: '#FFFFFF',
       color: true
     },
 
     color_background: {
       type: 'string',
-      defaultsTo: '611BBD',
+      defaultsTo: '#611BBD',
       color: true
     },
 
     color_border: {
       type: 'string',
-      defaultsTo: '130269',
+      defaultsTo: '#130269',
       color: true
     },
 
     color_active_background: {
       type: 'string',
-      defaultsTo: '49247A',
+      defaultsTo: '#49247A',
       color: true
     },
 

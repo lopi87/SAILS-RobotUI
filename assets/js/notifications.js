@@ -24,7 +24,7 @@ toast.danger = function(message) {
 };
 
 
-//BOOTSTARP NOTIFICATION
+//BOOTSTARP NOTIFICATION DEPRECATED
 bootstrap_alert = function() {};
 
 bootstrap_alert.success = function(message, time) {

@@ -58,8 +58,7 @@ module.exports = {
               iconUrl: require('util').format('/uploads/icons/%s', (icon.id + '.' + extension))
             }).exec(function iconUpdated(err, updated){
               if (err) {
-                err = {err: 'Err'};
-                FlashService.error(req, err);
+                FlashService.error(req, 'Err');
                 return;
               }
             });

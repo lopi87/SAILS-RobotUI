@@ -46,11 +46,8 @@
           toastr.info('A new action has been created!', 'Action');
         },
 
-        error: function (xhr) {
-          show_errors(xhr.responseText);
-          $("#errors_container").html('<p>' + xhr.responseText + '</p>');
-          $("#error_panel").removeClass('hidden');
-          toastr.danger(xhr.responseText, 'RobotUI');
+        error: function (data) {
+          show_errors(data.responseText);
         }
       });
 

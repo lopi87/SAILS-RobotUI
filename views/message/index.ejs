@@ -23,8 +23,8 @@
         update_num_msg('<%= i18n('messages') %>');
       },
 
-      error: function (xhr, status, text) {
-        bootstrap_alert['danger'](xhr.responseText, 5000 );
+      error: function (data) {
+        show_errors(data.responseText);
       }
     });
   }
@@ -40,8 +40,8 @@
        toastr.info('The message has been deleted!', 'Message' );
       },
 
-      error: function (xhr, status, text) {
-        bootstrap_alert['danger'](xhr.responseText, 5000 );
+      error: function (data) {
+        show_errors(data.responseText);
       }
     });
   }

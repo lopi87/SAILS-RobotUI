@@ -1,3 +1,5 @@
+<%- partial('../_alert.ejs') %>
+
 <% if (action.icon){ %>
 <button id="button_<%= action.id %>" class="btn position_<%= action.id %> btn-custom_<%= action.id %> draggable" value="<%= action.code %>">
   <img src="<%= action.icon.iconUrl %>" height="32" width="32" />

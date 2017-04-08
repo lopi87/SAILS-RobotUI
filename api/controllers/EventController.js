@@ -88,8 +88,7 @@ module.exports = {
 
       Event.update(req.param('id'), eventObj, function eventUpdated(err, event) {
         if (err){ return res.redirect('/event/edit' + req.param('id')); }
-        msg = {err: 'Event has been updated'};
-        FlashService.success(req, msg);
+        FlashService.success(req, 'Event has been updated');
 
         Event.findOne(req.param('id')).exec(function(err, event) {
           return res.render('interface/_event.ejs', {

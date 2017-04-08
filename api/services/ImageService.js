@@ -47,8 +47,7 @@ module.exports = {
           avatarUrl: require('util').format('/uploads/avatar/%s', user.id + '.' + extension)
         }).exec(function userUpdated(err, updated){
           if (err) {
-            err = {err: 'Err'};
-            FlashService.error(req, err);
+            FlashService.error(req, 'Err');
             return;
           }
         });
@@ -80,8 +79,7 @@ module.exports = {
           avatarUrl: require('util').format('/uploads/robot_avatar/%s', robot.id + '.' + extension)
         }).exec(function robotUpdated(err, updated){
           if (err) {
-            err = {err: 'Err'};
-            FlashService.error(req, err);
+            FlashService.error(req, 'Err');
             return;
           }
           return cb(null, Path);
@@ -110,8 +108,7 @@ module.exports = {
           avatarUrl: require('util').format('/uploads/robot_documentation/%s', robot.id + '.' + extension)
         }).exec(function robotUpdated(err, updated){
           if (err) {
-            err = {err: 'Err'};
-            FlashService.error(req, err);
+            FlashService.error(req, 'Err');
             return;
           }
 

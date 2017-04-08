@@ -8,7 +8,7 @@ module.exports = function(req, res, next) {
   //El id solicitado no coincide con el id del usuario
   // y no es un administrador
   if(!(sessionUserMatchesId || isAdmin)) {
-    msg = { err:  'You must be an admin.' };
+    msg = 'You must be an admin.';
     FlashService.warning(req, msg );
     return res.forbidden(msg);
   }

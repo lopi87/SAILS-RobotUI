@@ -165,8 +165,8 @@
        toastr.info('User out!', 'User' );
       },
 
-      error: function(xhr, status, text) {
-        toastr.error(xhr.responseText, 'User' );
+      error: function(data) {
+        show_errors(data.responseText);
       }
     });
   }

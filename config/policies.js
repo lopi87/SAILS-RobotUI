@@ -30,6 +30,7 @@ module.exports.policies = {
 
   action:{
     '*': ['flash', 'localize', 'sessionAuth','message'],
+    newaction: ['flash', 'localize', 'sessionAuth','message', 'userCanConfigureInterface'],
     update_position: ['flash', 'localize', 'sessionAuth','message', 'userCanConfigureInterface']
   },
 
@@ -86,7 +87,7 @@ module.exports.policies = {
   },
 
   session:{
-    create: ['flash', 'message', 'localize']
+    '*': ['flash', 'message', 'localize']
   },
 
   slider:{
