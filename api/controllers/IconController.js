@@ -24,17 +24,14 @@ module.exports = {
   //Subida de iconos via ajax para la creacion de botones
   new: function(req,res,next){
 
-    var def = req.session.User.admin ? req.param('default_icon') == 'on' : false;
-
     if (req.xhr) {
-
       if ( req.param('name') == '' ) return res.badRequest( 'You have to give a name.' );
 
       var uploadFile = req.file('iconfile');
       var iconObj = {
         user_owner: req.session.User.id,
         name: req.param('name'),
-        default_icon: def
+        default_icon: req.session.User.admin ? req.param('default_icon') == 'on' : false
       };
 
       Icon.create(iconObj, function iconCreated(err, icon) {
@@ -56,10 +53,7 @@ module.exports = {
             Icon.update(icon.id, {
               iconUrl: require('util').format('/uploads/icons/%s', (icon.id + '.' + extension))
             }).exec(function iconUpdated(err, updated){
-              if (err) {
-                FlashService.error(req, 'Err');
-                return;
-              }
+              if(err) return res.badRequest(err);
             });
 
             var Path = '../../.tmp/public/uploads/icons/' + icon.id + '.' + extension;
