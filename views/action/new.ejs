@@ -90,6 +90,13 @@
       $("#name_field").attr('required', 'required').parsley();
       $("#select_icon").attr('required', 'required').parsley();
     }
+
+    if ( ! $("#select_icon").parsley().isValid() ){
+      $( ".chosen-single" ).addClass('parsley-error');
+    }else{
+      $( ".chosen-single" ).removeClass('parsley-error');
+    }
+
   });
 
 

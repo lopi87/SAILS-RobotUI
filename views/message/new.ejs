@@ -35,6 +35,25 @@
 <script type="text/javascript">
   addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
 
+
+  $('#msg-form').parsley().subscribe('parsley:form:validate', function (formInstance) {
+    if ( ! $("#to_user_id").parsley().isValid() ){
+       $( ".chosen-single" ).addClass('parsley-error');
+    }else{
+      $( ".chosen-single" ).removeClass('parsley-error');
+    }
+  });
+
+  $(document).ready(function() {
+    $('#msg-form').parsley({
+      classHandler: function (el) {
+        return el.$element.closest('.chosen-single'); //working
+      }
+    });
+  });
+
+
+
   function submit_function() {
     $('#msg-form').parsley().validate()
     var ok = $('.parsley-error').length === 0;
