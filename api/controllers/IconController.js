@@ -24,13 +24,12 @@ module.exports = {
   //Subida de iconos via ajax para la creacion de botones
   new: function(req,res,next){
 
-    if (req.method === 'GET')
-      return res.json({ 'status': 'GET not allowed' });
-    //	Call to /newicon via GET is error
-
-    var def = req.session.User.admin ? req.param('default_icon') == 'on' : false
+    var def = req.session.User.admin ? req.param('default_icon') == 'on' : false;
 
     if (req.xhr) {
+
+      if ( req.param('name') == '' ) return res.badRequest( 'You have to give a name.' );
+
       var uploadFile = req.file('iconfile');
       var iconObj = {
         user_owner: req.session.User.id,
@@ -75,7 +74,7 @@ module.exports = {
         });
       });
     }else{
-      return res.next(err);
+      return res.badRequest('Ajax call');
     }
   }
 
