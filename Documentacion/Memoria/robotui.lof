@@ -4,12 +4,16 @@
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Logo RobotUI \footnotemark .\relax }}{3}{figure.caption.6}
 \contentsline {figure}{\numberline {1.2}{\ignorespaces Veh\IeC {\'\i }culo utilizado \footnotemark .\relax }}{3}{figure.caption.7}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Droplet desplegado en digital ocean\relax }}{9}{figure.caption.8}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Droplet desplegado en digital ocean\relax }}{11}{figure.caption.8}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Imagen de una Raspberry Pi 3 Model B\relax }}{14}{figure.caption.9}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Imagen de la controladora de motores L298n utilizada\relax }}{15}{figure.caption.10}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Panel de actividades - Trello\relax }}{15}{figure.caption.9}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Panel de actividades - Trello\relax }}{19}{figure.caption.11}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1}{\ignorespaces Iniciando Sails \footnotemark .\relax }}{20}{figure.caption.13}
-\contentsline {figure}{\numberline {2}{\ignorespaces Sails en funcionamiento \footnotemark .\relax }}{21}{figure.caption.14}
+\contentsline {figure}{\numberline {1}{\ignorespaces Iniciando Sails \footnotemark .\relax }}{24}{figure.caption.15}
+\contentsline {figure}{\numberline {2}{\ignorespaces Sails en funcionamiento \footnotemark .\relax }}{25}{figure.caption.16}
+\contentsline {figure}{\numberline {3}{\ignorespaces Utilizaci\IeC {\'o}n del gestor de procesos Pm2 en el entorno de producci\IeC {\'o}n.\relax }}{29}{figure.caption.17}
 \addvspace {10\p@ }

@@ -7,7 +7,9 @@
 
 
 %\newpage
-\section{Tecnologías utilizadas}
+\section{Tecnologías software utilizadas}
+\sectionmark{Tecnologías software}
+
 
 A continuación se detallan las diferentes tecnologías/bibliotecas/lenguajes que se han empleado para la elaboración del proyecto y por qué se han escogido por encima de otras posibles soluciones.
 
@@ -80,7 +82,7 @@ Node.js tiene una arquitectura basada en eventos capaz de E/S asíncronos. Estas
 \subsection{Sails js}
 
 \begin{center}
-\includegraphics[scale=0.5]{imagenes/sailsjs-logo.png}
+\includegraphics[scale=0.3]{imagenes/sailsjs-logo.png}
 \end{center}
 
 Web: \url{http://sailsjs.com/}\\
@@ -89,9 +91,34 @@ Sails.js es un framework web que facilita la creación de aplicaciones personali
 
 Utiliza Express para funciones como la gestión de peticiones HTTP y websockets. Su envoltorio intuitivo de websockets lo hace especialmente bueno para construir características en tiempo real como por ejemplo un Chat, por estas razones se ha considerado como el framework más adecuado hasta la fecha para la elaboración de este proyecto.
 
-\subsection{Socket io}
+
+\subsection{Npm}
+
+\begin{center}
+\includegraphics[scale=0.5]{imagenes/npm-logo.png}
+\end{center}
+
+Web: \url{https://www.npmjs.com/}\\
+
+npm es el manejador de paquetes por defecto para Node.js, un entorno de ejecución para JavaScript. Utilizado para la descarga de las librerías incorporadas al proyecto.
 
 
+\subsection{SocketIO}
+
+\begin{center}
+\includegraphics[scale=0.3]{imagenes/socketio-logo.png}
+\end{center}
+
+Web: \url{https://socket.io/}\\
+
+Socket.io es una librería que nos permite manejar eventos en tiempo real mediante una conexión TCP y todo ello en JavaScript desde un cliente.
+Es realmente potente y podemos hacer todo tipo de aplicaciones en tiempo real. 
+
+
+Socket.IO es una biblioteca de JavaScript para aplicaciones web en tiempo real. Permite la comunicación bidireccional en tiempo real entre clientes web y servidores. Consta de dos partes: una biblioteca del lado del cliente
+que se ejecuta en el navegador y una biblioteca del lado del servidor para Node.js. Ambos componentes tienen una API casi idéntica. Al igual que Node.js, es impulsado por eventos.
+
+Socket.IO puede usarse simplemente como un wrapper para WebSocket aunque proporciona muchas más funciones, incluyendo la transmisión a múltiples sockets, almacenamiento de datos asociados a cada cliente y E/S asíncronas.
 
 
 \subsection{Bootstrap}
@@ -130,4 +157,64 @@ MongoDB (de la palabra en inglés “humongous” que significa enorme) es un si
 
 MongoDB forma parte de la nueva familia de sistemas de base de datos NoSQL. En lugar de guardar los datos en tablas como se hace en las base de datos relacionales, MongoDB guarda estructuras de datos en documentos similares a JSON con un esquema dinámico (MongoDB utiliza una especificación llamada BSON), haciendo que la integración de los datos en ciertas aplicaciones sea más fácil y rápida.\\
 
+
+
+\subsection{Pm2}
+
+\begin{center}
+\includegraphics[scale=0.5]{imagenes/pm2-logo.png}
+\end{center}
+
+Web: \url{http://pm2.keymetrics.io/}\\
+
+
+PM2 es un gestor de procesos de producción para aplicaciones Node.js con un equilibrador de carga incorporado. Le permite mantener las aplicaciones vivas para siempre, recargarlas sin tiempo de inactividad
+y facilitar las tareas comunes del administrador del sistema.
+
+
+\section{Tecnologías hardware y materiales utilizados}
+\sectionmark{Tecnologías hardware}
+
+
+\subsection{Raspberry Pi Model B}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.5]{imagenes/raspberry-pi.jpg}\\
+    \caption{Imagen de una Raspberry Pi 3 Model B}
+  \end{center}
+\end{figure}
+
+Web: \url{https://www.raspberrypi.org}\\
+
+
+La Raspberry Pi 3 es la tercera generación de Raspberry Pi. Sus especificaciones son las siguientes:
+
+\begin{itemize}
+ \item Una CPU ARMv8 quad-core de 64 bits de 64 bits y 1.2 GHz
+ \item LAN inalámbrica 802.11n
+ \item Bluetooth 4.1
+ \item Bluetooth baja energía (BLE)
+ \item 1 GB de RAM
+ \item 4 puertos USB
+ \item 40 conexiones GPIO
+ \item Puerto HDMI
+ \item Puerto Ethernet
+ \item Conector de audio combinado de 3,5 mm y vídeo compuesto
+ \item Interfaz de la cámara (CSI)
+ \item Interfaz de pantalla (DSI)
+ \item Ranura para tarjeta Micro SD
+ \item VideoCore IV núcleo de gráficos 3D 
+\end{itemize}
+
+
+\subsection{Controladora de motores L298N}
+
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.6]{imagenes/l298n.jpg}\\
+    \caption{Imagen de la controladora de motores L298n utilizada}
+  \end{center}
+\end{figure}
 

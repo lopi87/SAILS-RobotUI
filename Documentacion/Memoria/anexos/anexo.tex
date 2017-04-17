@@ -54,11 +54,14 @@ Esta guía proporciona las pautas necesarias para la configuración de un entorn
 
 \subsection{Prerrequisitos}
 
-Partiendo de que se encuentra Node correctamente instalado en una máquina con Ubuntu 14.04 LTS. Ubuntu es una plataforma muy popular y utilizada en el desarrollo de Sails.js, al igual que otros sistemas operativos basados en Unix, como Mac OS X. La instalación es relativamente fácil y existe multitud de información gracias a su amplia comunidad de desarrolladores.\\
+Partiendo de que se encuentra Node correctamente instalado en una máquina con Ubuntu 16.04.2 LTS. Ubuntu es una plataforma muy popular y utilizada en el desarrollo de Sails.js, al igual que otros sistemas operativos basados en Unix, como Mac OS X. La instalación es relativamente fácil y existe multitud de información gracias a su amplia comunidad de desarrolladores.\\
 
 \begin{itemize}
-\item{Una máquina con Ubuntu 14.04.}
+
+\item{Una máquina con Ubuntu 16.04.2 LTS }
 \item{Node js instalado.}
+
+
 \end{itemize}
 
 \subsection{Instalación}
@@ -254,6 +257,108 @@ Hay muchas otras opciones que puede establecer, pero estos son los dos esenciale
 
 
 \section{Despliegue}
+
+Primaremanet, debemos definir el entorno de producción para nuestra aplicación Sails. Para ello editamos el fichero '/config/env/production.js' de la siguiente manera:\\
+
+
+\begin{lstlisting}[language=JavaScript]
+/**
+ * Production environment settings
+ *
+ * This file can include shared settings for a production environment,
+ * such as API keys or remote database passwords.  If you're using
+ * a version control solution for your Sails app, this file will
+ * be committed to your repository unless you add it to your .gitignore
+ * file.  If your repository will be publicly viewable, don't add
+ * any private information to this file!
+ *
+ */
+
+module.exports = {
+
+  /********************************************************************
+   * Set the default database connection for models in the production *
+   * environment (see config/connections.js and config/models.js )    *
+   ********************************************************************/
+
+  models: {
+    connection: 'MongodbServer'
+  },
+
+  /********************************************************************
+   * Set the port in the production environment to 80                 *
+   ********************************************************************/
+
+  port: 1337,
+
+  /********************************************************************
+   * Set the log level in production environment to "silent"          *
+   ********************************************************************/
+
+  log: {
+    level: "silent"
+  }
+
+  proxyHost: '46.101.102.33',
+  proxyPort: 1337
+
+};
+\end{lstlisting}
+
+
+
+En el servidor de producción se ha utilizado Nginx\footnote{Nginx es un servidor web/proxy inverso ligero de alto rendimiento y un proxy para protocolos de correo electrónico (IMAP/POP3)} con la siguiente configuración:\\
+
+\begin{lstlisting}[language=bash]
+
+server {
+  listen        80;
+  server_name   46.101.102.33;
+
+
+   listen 443 ssl;
+
+   ssl_certificate /etc/nginx/ssl/nginx.crt;
+   ssl_certificate_key /etc/nginx/ssl/nginx.key;
+
+   location / {
+        proxy_pass         http://46.101.102.33:1337/;
+
+	proxy_http_version 1.1;
+	proxy_set_header Upgrade $http_upgrade;
+	proxy_set_header Connection "upgrade";
+	proxy_set_header Host $host;
+
+    }
+
+}
+
+\end{lstlisting}
+
+Para arrancar la aplicación, se ha hecho uso del gestor de procesos Pm2, se introduce la siguiente orden: \\
+
+\begin{lstlisting}[language=bash]
+  sudo pm2 start app.js -x -- --prod
+\end{lstlisting}
+
+
+Para monitorizar la aplicación, Pm2 incorpora una herramienta de gestión de procesos. Para visualizarlo introducimos en una terminal:\\
+
+\begin{lstlisting}[language=bash]
+  sudo pm2 monit
+\end{lstlisting}
+
+
+Obteniendo un resultado similar al siguiente:
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.8]{imagenes/pm2-monit.jpg}\\
+    \caption{Utilización del gestor de procesos Pm2 en el entorno de producción.}
+  \end{center}
+\end{figure}
+
+
 
 
 
