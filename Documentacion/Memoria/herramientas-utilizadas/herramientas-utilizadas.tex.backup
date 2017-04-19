@@ -1,6 +1,6 @@
-\chapter[Estado del arte y tecnologías utilizadas]{Estado del arte y tecnologías utilizadas}
+\chapter[Estado del arte y herramientas utilizadas]{Estado del arte y herramientas utilizadas}
 \chaptermark{Arte y tecnologías}
-\label{chap:estado del arte}
+\label{chap:herramientas}
 
 \section[Estado del arte de herramientas para monitorizar información]{Estado del arte de herramientas para monitorizar información}
 \sectionmark{Estado del arte}
@@ -82,7 +82,7 @@ Node.js tiene una arquitectura basada en eventos capaz de E/S asíncronos. Estas
 \subsection{Sails js}
 
 \begin{center}
-\includegraphics[scale=0.5]{imagenes/sailsjs-logo.png}
+\includegraphics[scale=0.3]{imagenes/sailsjs-logo.png}
 \end{center}
 
 Web: \url{http://sailsjs.com/}\\
@@ -91,7 +91,19 @@ Sails.js es un framework web que facilita la creación de aplicaciones personali
 
 Utiliza Express para funciones como la gestión de peticiones HTTP y websockets. Su envoltorio intuitivo de websockets lo hace especialmente bueno para construir características en tiempo real como por ejemplo un Chat, por estas razones se ha considerado como el framework más adecuado hasta la fecha para la elaboración de este proyecto.
 
-\subsection{Socket io}
+
+\subsection{Npm}
+
+\begin{center}
+\includegraphics[scale=0.5]{imagenes/npm-logo.png}
+\end{center}
+
+Web: \url{https://www.npmjs.com/}\\
+
+npm es el manejador de paquetes por defecto para Node.js, un entorno de ejecución para JavaScript. Utilizado para la descarga de las librerías incorporadas al proyecto.
+
+
+\subsection{SocketIO}
 
 \begin{center}
 \includegraphics[scale=0.3]{imagenes/socketio-logo.png}
@@ -147,6 +159,17 @@ MongoDB forma parte de la nueva familia de sistemas de base de datos NoSQL. En l
 
 
 
+\subsection{Pm2}
+
+\begin{center}
+\includegraphics[scale=0.5]{imagenes/pm2-logo.png}
+\end{center}
+
+Web: \url{http://pm2.keymetrics.io/}\\
+
+
+PM2 es un gestor de procesos de producción para aplicaciones Node.js con un equilibrador de carga incorporado. Le permite mantener las aplicaciones vivas para siempre, recargarlas sin tiempo de inactividad
+y facilitar las tareas comunes del administrador del sistema.
 
 
 \section{Tecnologías hardware y materiales utilizados}
@@ -183,4 +206,48 @@ La Raspberry Pi 3 es la tercera generación de Raspberry Pi. Sus especificacione
  \item Ranura para tarjeta Micro SD
  \item VideoCore IV núcleo de gráficos 3D 
 \end{itemize}
+
+
+\subsection{Controladora de motores L298N}
+
+
+El módulo controlador de motores L298N H-bridge nos permite controlar la velocidad y la dirección de dos motores de corriente continua o un motor paso a paso de una forma muy sencilla,
+gracias a los 2 los dos H-bridge que dispone.\\
+
+básicamente un puente-H o H-bridge es un componente formado por 4 transistores que nos permite invertir el sentido de la corriente, y de esta forma podemos 
+invertir el sentido de giro del motor.\\
+
+El rango de tensiones en el que trabaja este módulo va desde 3V hasta 35V, y una intensidad de hasta 2A. A la hora de alimentarlo hay que tener en cuenta que la 
+electrónica del módulo consume unos 3V, así que los motores reciben 3V menos que la tensión con la que alimentemos el módulo.\\
+
+Además el L298N incluye un regulador de tensión que nos permite obtener del módulo una tensión de 5V, perfecta para alimentar nuestro Arduino. Eso sí, este regulador sólo 
+funciona si alimentamos el módulo con una tensión máxima de 12V.\\
+
+Es un módulo que se utiliza mucho en proyectos de robótica, por su facilidad de uso y su reducido precio.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.6]{imagenes/l298n.jpg}\\
+    \caption{Imagen de la controladora de motores L298n utilizada}
+  \end{center}
+\end{figure}
+
+
+
+\subsection{ Batería LiPo }
+
+Para alimentar el conjunto se ha empleado una batería LiPo de 1000mAh a 3,7V. Las batería de polímero de iones de litio, son pilas recargables (células de secundaria), compuestas generalmente de varias células secundarias idénticas en paralelo para aumentar la capacidad 
+de la corriente de descarga. Siendo ideales para este tipo de usos.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.4]{imagenes/robot/bateria-lipo.jpg}\\
+    \caption{Imagen de la batería LiPo utilizada.}
+  \end{center}
+\end{figure}
+
+
+
+
+
 

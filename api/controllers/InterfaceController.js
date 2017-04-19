@@ -183,7 +183,7 @@ module.exports = {
 
     if (!req.isSocket) return res.badRequest();
 
-    //Nos unimos al room
+    //Join to room
     sails.sockets.join(req.socket, req.param('robot_id'));
 
     //Link socket with a room (into database)

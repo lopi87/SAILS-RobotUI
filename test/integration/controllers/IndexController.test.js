@@ -1,35 +1,49 @@
-var IndexController = require('../../../api/controllers/IndexController'),
-  sinon = require('sinon'),
-  assert = require('assert');
+var IndexController = require('../../../api/controllers/IndexController');
+
+var request = require('supertest'),
+  should = require('should');
+
 
 describe('The Index Controller', function () {
   describe('when we load the about page', function () {
     it ('should render the view', function () {
-      var view = sinon.spy();
-      IndexController.about(null, {
-        view: view
-      });
-      assert.ok(view.called);
+      request(sails.hooks.http.app)
+        .get('/index/about')
+        .send()
+        .expect(200)
+        .end(function (err, res) {
+          if (err) return done(err);
+          should.exist(res.body);
+          done();
+        });
     });
   });
 
   describe('when we load the contact page', function () {
     it ('should render the view', function () {
-      var view = sinon.spy();
-      IndexController.contact(null, {
-        view: view
-      });
-      assert.ok(view.called);
+      request(sails.hooks.http.app)
+        .get('/index/contact')
+        .send()
+        .expect(200)
+        .end(function (err, res) {
+          if (err) return done(err);
+          should.exist(res.body);
+          done();
+        });
     });
   });
 
   describe('when we load the index page', function () {
     it ('should render the view', function () {
-      var view = sinon.spy();
-      IndexController.index(null, {
-        view: view
-      });
-      assert.ok(view.called);
+      request(sails.hooks.http.app)
+        .get('/index/index')
+        .send()
+        .expect(200)
+        .end(function (err, res) {
+          if (err) return done(err);
+          should.exist(res.body);
+          done();
+        });
     });
   });
 

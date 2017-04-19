@@ -48,9 +48,18 @@
 
 \section{Conclusiones}
 
-La elaboración de este proyecto ha resultado muy gratificante a nivel personal. Uno de los motivos principales ha sido la necesidad de trabajar en numerosas áreas de conocimiento entre las que encontramos, por un lado la programación web, haciendo uso del framework Sails js, junto con el empleo de una base de datos no relacional. Todo ello combinado con la robótica. Algunas de las plataformas mencionadas eran desconocidas al inicio del desarrollo de proyecto y han sido adquiridas tras una amplia labor de investigación.\\
+La elaboración de este proyecto ha resultado muy gratificante a nivel personal. Uno de los motivos principales ha sido la necesidad de trabajar en numerosas áreas de conocimiento entre las que encontramos, por un lado la programación web, haciendo uso del framework Sails js, junto con el empleo de una base de datos no relacional. 
+Todo ello combinado con la robótica. Algunas de las plataformas mencionadas eran desconocidas al inicio del desarrollo de proyecto y han sido adquiridas tras una amplia labor de investigación.\\
 
 Entre los elementos desarrollados se destaca:
+
+\begin{itemize}
+ \item La elaboración de un vehículo de pruebas haciendo uso de una Raspberry Pi+
+ \item Aprendizaje a la utilización del framework Sails.js
+ \item Aprendizaje al trabajo con eventos en tiempo real ( WebSockets )
+ \item Empl
+\end{itemize}
+
 
 
 

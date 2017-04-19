@@ -1,7 +1,6 @@
 var sails = require('sails');
 
 before(function (done) {
-  // Lift Sails with test database
   this.timeout(500000000);
 
   sails.lift({
@@ -16,7 +15,7 @@ before(function (done) {
     if (err)
       return done(err);
 
-    sails.log.info('***** Starting tests... *****');
+    sails.log.info('***** Starting tests *****');
     console.log('\n');
 
     done(null, sails);

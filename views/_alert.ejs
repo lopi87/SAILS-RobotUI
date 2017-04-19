@@ -1,7 +1,7 @@
 <div id="alert_placeholder"></div>
 <% if( typeof flash != 'undefined'){ %>
 
-  <% if(flash['error'].length > 0) { %>
+  <% if( "error" in flash ) { %>
     <% flash['error'].forEach(function(message) { %>
       <script type="text/javascript">
         //bootstrap_alert['danger']('<%- message.err %>', 0 )
@@ -10,7 +10,7 @@
     <% }); %>
   <% } %>
 
-  <% if(flash['warning'].length > 0) { %>
+  <% if( "warning" in flash ) { %>
     <% flash['warning'].forEach(function(message) { %>
       <script type="text/javascript">
         //bootstrap_alert['warning']('<%- message.err %>', 0 )
@@ -19,7 +19,7 @@
     <% }); %>
   <% } %>
 
-  <% if(flash['success'].length > 0) { %>
+  <% if( "success" in flash ) { %>
     <% flash['success'].forEach(function(message) { %>
       <script type="text/javascript">
         //bootstrap_alert['success']('<%-  message.err %>', 0 )
@@ -28,7 +28,7 @@
     <% }); %>
   <% } %>
 
-  <% if(flash['info'].length > 0) { %>
+  <% if( "info" in flash ) { %>
     <% flash['info'].forEach(function(message) { %>
       <script type="text/javascript">
         //bootstrap_alert['info']('<%-  message.err %>', 0 )
@@ -37,7 +37,7 @@
     <% }); %>
   <% } %>
 
-  <% if(flash['server_exit'].length > 0) { %>
+  <% if( "server_exit" in flash ) { %>
     <% flash['server_exit'].forEach(function(message) { %>
       <% Object.keys(flash['server_exit']).forEach(function(error){ %>
         <script type="text/javascript">

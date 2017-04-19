@@ -16,18 +16,18 @@
 \renewcommand{\tablename}{Tabla}
 \renewcommand{\listtablename}{Índice de tablas}
 
-\input{inicio/portada.tex}
+\input{0_inicio/portada.tex}
 \cleardoublepage
 
-\input{inicio/subportada.tex}
+\input{0_inicio/subportada.tex}
 \cleardoublepage
 
 \frontmatter
 \pagestyle{plain}
-\input{inicio/previo.tex}
+\input{0_inicio/previo.tex}
 \cleardoublepage
 
-\input{inicio/resumen.tex}
+\input{0_inicio/resumen.tex}
 \cleardoublepage
 
 
@@ -45,23 +45,19 @@
 \fancyhead[LO,RE]{\slshape \leftmark}
 %\fancyroot[C]{\thepage}
 
-\input{introduccion/introduccion.tex}
+\input{1_capitulo/introduccion.tex}
 
-\input{conceptos-basicos/conceptos-basicos.tex}
+\input{2_capitulo/conceptos-basicos.tex}
 
-\input{herramientas-utilizadas/herramientas-utilizadas.tex}
+\input{3_capitulo/herramientas-utilizadas.tex}
 
-\input{requisitos/requisitos.tex}
+\input{4_capitulo/requisitos.tex}
 
-\input{ comunicaciones/comunicaciones.tex }
+\input{7_capitulo/planificacion.tex}
 
-\input{ vehiculo/vehiculo.tex }
+\input{11_capitulo/conclusiones.tex}
 
-\input{planificacion/planificacion.tex}
 
-\input{manual-usuario/manual-usuario.tex}
-
-\input{conclusiones/conclusiones.tex}
 
 %\backmatter % Apéndices, bibliografía ...
 

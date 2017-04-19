@@ -10,13 +10,11 @@ var pager = require('sails-pager');
 module.exports = {
 
   //Carga la pag sign up
-  'new': function (req, res) {
+  new: function (req, res) {
     res.view();
   },
 
 
-  //Crea un usuario con los parametros del formulario
-  // new.ejs
   create: function (req, res, next) {
 
     var userObj = {
