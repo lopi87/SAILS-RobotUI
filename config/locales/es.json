@@ -1,7 +1,7 @@
 {
 	"Welcome": "Bienvenido",
-	"createaccount": "Crear una cuenta",
-	"createrobot": "Crear un robot",
+	"createaccount": "Crear cuenta",
+	"createrobot": "Crear",
 	"signupnow": "¡Registrese ahora!",
 	"password": "Contraseña",
 	"passwordconfirmation": "Confirmacion de contraseña",
@@ -42,8 +42,8 @@
 	"port": "Puerto",
 	"image": "Imagen",
 	"documentation": "Documentación",
-	"viewerusers": "viewerusers",
-	"driverusers": "driverusers",
+	"viewerusers": "Usuarios espectadores",
+	"driverusers": "Usuarios controladores",
 	"add user": "Añadir usuario",
 	"users": "Usuarios",
 	"permissions": "Permisos",
@@ -90,8 +90,8 @@
 	"state": "Estado",
 	"ip_address": "Dirección IP",
 	"avatar": "Avatar",
-	"add_robot": "add_robot",
-	"show_robots": "show_robots",
+	"add_robot": "Añadir robot",
+	"show_robots": "Mostar robots",
 	"delete": "Eliminar",
 	"robots": "Robots",
 	"my_robots": "Mis robots",
@@ -148,5 +148,8 @@
 	"robot_games": "Crea divertidos juegos robóticos",
 	"check_our_tutorial": "Si no sabes como empezar , check our tutorial!",
 	"user.name.string": "user.name.string",
-	"user.name.required": "user.name.required"
+	"user.name.required": "user.name.required",
+	"robot": "Robot",
+	"seeing": "Visión",
+	"not_found": "not_found"
 }

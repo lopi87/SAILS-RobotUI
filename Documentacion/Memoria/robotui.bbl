@@ -1,5 +1,9 @@
 \begin{thebibliography}{10}
 
+\bibitem{website:1}
+\newblock { Beginner's Guide to Getting Started with Sails.js }
+\newblock { \url{ https://www.codementor.io/codeforgeek/how-to-setup-sailsjs-tutorial-beginners-du107nl5i }
+
 \bibitem{book:javascript}
 Douglas Crockford.
 \newblock {\em JavaScript: The Good Parts}.
@@ -55,4 +59,61 @@ Rohit Rai.
 \newblock {The Book of LaTeX}.
 \newblock \url{http://en.wikibooks.org/wiki/LaTeX}.
 
-\end{thebibliography}
+
+\bibitem{book:LaTeX}
+  Stefan Kottwitz.
+\newblock {\em LaTeX Beginner's Guide}.
+\newblock Packt Publishing, 2011.
+ 
+\bibitem{website:12}
+{Official documentation}.
+\newblock {Sails JS Documentation }.
+\newblock \url{https://sailsjs.com/documentation/reference}.
+
+\bibitem{book:FFmpeg}
+ Frantisek Korbel.
+\newblock {\em FFmpeg Basics: Multimedia handling with a fast audio and video encoder}.
+\newblock CreateSpace, 2015.
+
+
+\bibitem{book:WebSocket}
+Andrew Lombardi.
+\newblock {\em WebSocket: Lightweight Client-Server Communications}.
+\newblock O'Reilly Media, 2012.
+
+
+\bibitem{book:Deploying}
+Sandro Pasquali.
+\newblock {\em Deploying Node.js}.
+\newblock  Packt Publishing, 2015.
+
+
+\bibitem{book:Raspberry}
+Eben Upton, Gareth Halfacree.
+\newblock {\em Raspberry Pi User Guide}.
+\newblock \url{ http://www.cs.unca.edu/~bruce/Fall14/360/RPiUsersGuide.pdf }.
+
+
+\bibitem{book:MongoDB}
+Kristina Chodorow.
+\newblock {\em MongoDB: The Definitive Guide, 2nd Edition}.
+\newblock   O'Reilly Media, 2013.
+
+
+\bibitem{website:14}
+\newblock { NoSQL vs SQL: SQL is the new NoNoSQL }
+\newblock { \url{http://www.nosql-vs-sql.com/ }
+
+
+\bibitem{website:15}
+\newblock { Digital Ocean }
+\newblock { Understanding SQL And NoSQL Databases And Different Database Models }
+\newblock { \url{https://www.digitalocean.com/community/tutorials/understanding-sql-and-nosql-databases-and-different-database-models }
+
+
+
+
+end{thebibliography}
+
+
+

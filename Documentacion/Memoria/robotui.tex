@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{book}
 
 \usepackage{estilosbase}
-
+\usepackage{textcomp}
 
 \headsep = 27 pt
 \clearpage{\pagestyle{empty}\cleardoublepage}
@@ -15,6 +15,7 @@
 \renewcommand{\listfigurename}{Índice de figuras}
 \renewcommand{\tablename}{Tabla}
 \renewcommand{\listtablename}{Índice de tablas}
+\newcommand{\icontext}[3]{\raisebox{-#1\height}{\includegraphics[scale=#2]{#3}}}
 
 \input{inicio/portada.tex}
 \cleardoublepage
@@ -51,7 +52,7 @@
 
 \input{herramientas-utilizadas/herramientas-utilizadas.tex}
 
-\input{requisitos/requisitos.tex}
+\input{desarrollo-software/desarrollo-software.tex}
 
 \input{ comunicaciones/comunicaciones.tex }
 

@@ -9,12 +9,41 @@
 \label{chap:conceptos-básicos}
 
 
+En el presente capítulo se recogen aquellos conceptos, definiciones y protocolos que resultan de especial interés y que ayudarán a la comprensión de los diferentes puntos tratados en el resto de 
+la memoria sin profundizar demasiado en detalles técnicos.
+
+Todos estos conceptos se encuentran estrechamente ligados con tecnologías de la comunicación y transmisión de información, más concretamente en el ámbito de la programación web.
+
+\section{Transmisión y comunicación}
+\label{sec:transmisión}
+
+Se denomina \emph{transmisión} como el proceso de transporte de una señal de un lugar a otro y \emph{comunicación} como el intercambio entre dos entes mediante una transmisión, los cuales son capaces de
+interpretar la información circundante entre ellos y en el cual existen un conjunto de reglas definidas, los protocolos\footnote{Protocolo: reglamento o una serie de instrucciones que se fijan por tradición o por convenio. },
+que rigen el proceso.
+
+
+\section{Socket}
+\label{sec:def-socket}
+
+\emph{Socket} designa un concepto abstracto mediante el cual dos programas, generalmente situados en computadoras distintas, pueden intercambiar cualquier flujo de datos de manera fiable y ordenada.\\
+
+El término \emph{socket} es también usado como el nombre de una interfaz de programación de aplicaciones (API) para la familia de protocolos de red TCP/IP \footnote{ TCP/IP es un conjunto de protocolos que
+permiten la comunicación entre los ordenadores pertenecientes a una red. La sigla TCP/IP significa Protocolo de control de transmisión/Protocolo de Internet. Proviene de los nombres de dos protocolos 
+importantes incluidos en el conjunto TCP/IP, es decir, del protocolo TCP y del protocolo IP. }, provista usualmente por el sistema operativo.\\
+
+Los sockets constituyen el mecanismo para la entrega de paquetes de datos provenientes de la tarjeta de red a los procesos o hilos apropiados. Un socket queda definido por un par de direcciones IP local
+y remota, un protocolo de transporte y un par de números de puerto local y remoto.\\
+
+Cuando se habla de dirección y puerto local/remoto, se sobreentiende que nos referimos a dos procesos (cliente/servidor o nodo/nodo) ya que ambas direcciones IP y puerto pueden coincidir para el intercambio de información entre procesos dentro de una misma máquina
+y; además, la comunicación puede ser perfectamente bidireccional, asumiendo que el par que la inicia es el cliente y su contrapartida un servidor pero pudiendo ejercer de forma ambivalente ambas partes.\\
+
 
 \section{WebSocket}
 \label{sec:def-websocket}
 
-WebSocket es una tecnología que proporciona un canal de comunicación bidireccional y full-duplex sobre un único socket TCP.
-Está diseñada para ser implementada en navegadores y servidores web, pero puede ser utilizada por cualquier aplicación cliente/servidor.\\
+Comprendido previamente el concepto de \emph{socket} descrito en el punto \ref{sec:def-socket}, definimos  \emph{websocket} como una tecnología que proporciona un canal de comunicación bidireccional y full-duplex 
+\footnote{Full Duplex: definido como la capacidad de transmisión y recepción en ambas direcciones al mismo tiempo. } utilizada por cualquier aplicación cliente/servidor.\\
+
 
 La API de WebSocket está siendo normalizada por el W3C, mientras que el protocolo WebSocket ya fue normalizado por la IETF\footnote{Internet Engineering Task Force (IETF) (en español, Grupo de Trabajo de Ingeniería de Internet)
 es una organización internacional abierta de normalización, que tiene como objetivos el contribuir a la ingeniería de Internet, actuando en diversas áreas, como transporte, encaminamiento, seguridad.

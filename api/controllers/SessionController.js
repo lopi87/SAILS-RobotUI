@@ -16,7 +16,7 @@ module.exports = {
     return res.ok();
   },
 
-  //Almacenamiento en la base de datos la sesion de cada usuario de la pagina (PARA MANDAR MENSAJES)
+  //Almacenamiento en la base de datos la sesion de cada usuario de la pagina
   saveSocketID: function(req, res) {
     if (!req.isSocket) return res.badRequest();
 

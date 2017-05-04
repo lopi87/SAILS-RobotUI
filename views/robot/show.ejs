@@ -15,13 +15,13 @@
 
       <div class="card-container">
         <img src="<%= sails.getBaseUrl() + robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:75px">
-        <p><%= i18n('ip_address') + ': ' + robot.ipaddress + ':' + robot.port %></p>
-        <p><%= i18n('description') + ': ' + robot.description %></p>
+        <p><label><%= i18n('ip_address') + ': ' %></label><%= robot.ipaddress + ':' + robot.port %></p>
+        <p><label><%= i18n('description') + ': ' %></label> <%= robot.description  %></p>
         <br>
 
         <div class="row">
           <div class="col-md-6">
-            <label>Drivers:</label>
+            <label><%= i18n('control')%>:</label>
             <% if (robot.public_drive){ %>
               <span class="label label-pill label-success"> <%= i18n('public')%> </span>
             <%} else {%>
@@ -36,7 +36,7 @@
             <% } %>
           </div>
           <div class="col-md-6">
-            <label>Viewers:</label>
+            <label><%= i18n('seeing')%>:</label>
             <% if (robot.public_view){ %>
               <span class="label label-pill label-success"> <%= i18n('public')%> </span>
             <%} else {%>
@@ -58,6 +58,8 @@
       <div class="card-dark-grey margintop10 card-btn-block">
         <a class="btn btn-medium btn-warning" href="/robot/edit/<%= robot.id%>"> <%= i18n('edit')%></a>
         <a class="btn btn-medium btn-primary" href="/interface/show/<%= robot.iface %>"> <%= i18n('interface')%></a>
+        <a id="btn_config_ <%= robot.id%>" href="/interface/configure/<%= robot.iface %>" class="btn btn-sm btn-warning"><i class="fa fa-wrench" aria-hidden="true"></i> Configure</a>
+
         <a class="btn btn-medium btn-primary btn-success" href="/robot/index/<%= robot.id%>"><%= i18n('menu') %></a>
       </div>
     </div>

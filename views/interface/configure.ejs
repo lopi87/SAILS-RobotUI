@@ -10,8 +10,8 @@
 
 
 <div class="margintop20 marginbottom20 floatright">
-  <a href="/robot/index" class="btn btn-sm btn-success bottom-right"><i class="fa fa-home" aria-hidden="true"></i> My Robots</a>
-  <a href="/interface/show/<%= interface.id %>" class="btn btn-sm btn-primary bottom-right"><i class="fa fa-gamepad" aria-hidden="true"></i> Take control</a>
+  <a href="/robot/index" class="btn btn-sm btn-success bottom-right"><i class="fa fa-home" aria-hidden="true"></i> <%= i18n("my_robots")%> </a>
+  <a href="/interface/show/<%= interface.id %>" class="btn btn-sm btn-primary bottom-right"><i class="fa fa-gamepad" aria-hidden="true"></i> <%= i18n("take_control")%> </a>
   <input id="_csrf" type="hidden" name="_csrf" value="<%= _csrf %>"/>
 </div>
 

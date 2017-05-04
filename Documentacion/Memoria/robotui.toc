@@ -1,72 +1,99 @@
 \select@language {spanish}
 \select@language {spanish}
-\contentsline {chapter}{\'{I}ndice general}{\es@scroman {i}}{chapter*.4}
-\contentsline {chapter}{\IeC {\'I}ndice de figuras}{\es@scroman {iii}}{chapter*.5}
+\contentsline {section}{\numberline {0.1}Agradecimientos}{\es@scroman {i}}{section.0.1}
+\contentsline {section}{\numberline {0.2}Licencia}{\es@scroman {iii}}{section.0.2}
+\contentsline {chapter}{\'{I}ndice general}{\es@scroman {i}}{chapter*.2}
+\contentsline {chapter}{\IeC {\'I}ndice de figuras}{\es@scroman {v}}{chapter*.3}
 \contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Introducci\IeC {\'o}n y antecedentes}{1}{section.1.1}
-\contentsline {section}{\numberline {1.2}Objetivos}{3}{section.1.2}
-\contentsline {section}{\numberline {1.3}Acerca de este documento}{4}{section.1.3}
+\contentsline {section}{\numberline {1.2}Objetivos}{4}{section.1.2}
+\contentsline {section}{\numberline {1.3}Acerca de este documento}{5}{section.1.3}
 \contentsline {chapter}{\numberline {2}Conceptos b\IeC {\'a}sicos}{7}{chapter.2}
-\contentsline {section}{\numberline {2.1}WebSocket}{7}{section.2.1}
-\contentsline {section}{\numberline {2.2}Streaming}{7}{section.2.2}
-\contentsline {chapter}{\numberline {3}Estado del arte y herramientas utilizadas}{9}{chapter.3}
-\contentsline {section}{\numberline {3.1}Estado del arte de herramientas para monitorizar informaci\IeC {\'o}n}{9}{section.3.1}
-\contentsline {section}{\numberline {3.2}Tecnolog\IeC {\'\i }as software utilizadas}{9}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}\LaTeX }{9}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}WebStorm}{9}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Github}{10}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Git}{10}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {3.2.5}Digital Ocean}{10}{subsection.3.2.5}
-\contentsline {subsection}{\numberline {3.2.6}Node js}{11}{subsection.3.2.6}
-\contentsline {subsection}{\numberline {3.2.7}Sails js}{12}{subsection.3.2.7}
-\contentsline {subsection}{\numberline {3.2.8}Npm}{12}{subsection.3.2.8}
-\contentsline {subsection}{\numberline {3.2.9}SocketIO}{12}{subsection.3.2.9}
-\contentsline {subsection}{\numberline {3.2.10}Bootstrap}{13}{subsection.3.2.10}
-\contentsline {subsection}{\numberline {3.2.11}JQuery}{13}{subsection.3.2.11}
-\contentsline {subsection}{\numberline {3.2.12}Mongo DB}{13}{subsection.3.2.12}
-\contentsline {subsection}{\numberline {3.2.13}Pm2}{14}{subsection.3.2.13}
-\contentsline {section}{\numberline {3.3}Tecnolog\IeC {\'\i }as hardware y materiales utilizados}{14}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Raspberry Pi Model B}{14}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Controladora de motores L298N}{15}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3} Bater\IeC {\'\i }a LiPo }{16}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4} Tarjeta de expansi\IeC {\'o}n con bater\IeC {\'\i }a de Litio para Raspberry Pi }{17}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5} c\IeC {\'a}mara USB de alta definici\IeC {\'o}n de 1080p }{17}{subsection.3.3.5}
-\contentsline {chapter}{\numberline {4}Requisitos}{19}{chapter.4}
-\contentsline {section}{\numberline {4.1}Especificaci\IeC {\'o}n}{19}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Requisitos funcionales}{19}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Requisitos no funcionales}{20}{subsection.4.1.2}
-\contentsline {chapter}{\numberline {5}Comunicaciones}{21}{chapter.5}
-\contentsline {chapter}{\numberline {6}Robot de pruebas}{23}{chapter.6}
-\contentsline {chapter}{\numberline {7}Organizaci\IeC {\'o}n temporal}{25}{chapter.7}
-\contentsline {section}{\numberline {7.1}Planificaci\IeC {\'o}n temporal de tareas}{28}{section.7.1}
-\contentsline {subsection}{\numberline {7.1.1}Hito 1: Planificaci\IeC {\'o}n y an\IeC {\'a}lisis }{28}{subsection.7.1.1}
-\contentsline {subsection}{\numberline {7.1.2}Hito 2: Definici\IeC {\'o}n de requisitos }{28}{subsection.7.1.2}
-\contentsline {subsection}{\numberline {7.1.3}Hito 3: Comienzo de desarrollo de la aplicaci\IeC {\'o}n}{29}{subsection.7.1.3}
-\contentsline {subsection}{\numberline {7.1.4} Hito 4: Desarrollo de la aplicaci\IeC {\'o}n, m\IeC {\'o}dulo componentes }{29}{subsection.7.1.4}
-\contentsline {subsection}{\numberline {7.1.5}Hito 5: Desarrollo de la aplicaci\IeC {\'o}n, m\IeC {\'o}dulo interfaz }{29}{subsection.7.1.5}
-\contentsline {subsection}{\numberline {7.1.6}Hito 6: Desarrollo del m\IeC {\'o}dulo de comunicaciones }{30}{subsection.7.1.6}
-\contentsline {subsection}{\numberline {7.1.7}Hito 7: Construcci\IeC {\'o}n del veh\IeC {\'\i }culo de pruebas }{30}{subsection.7.1.7}
-\contentsline {subsection}{\numberline {7.1.8}Hito 8: Programaci\IeC {\'o}n del veh\IeC {\'\i }culo de pruebas }{30}{subsection.7.1.8}
-\contentsline {subsection}{\numberline {7.1.9}Hito 9: Documentaci\IeC {\'o}n }{30}{subsection.7.1.9}
-\contentsline {section}{\numberline {7.2}Diagrama de Gantt}{30}{section.7.2}
-\contentsline {chapter}{\numberline {8}Comentarios finales}{33}{chapter.8}
-\contentsline {section}{\numberline {8.1}Presupuesto}{33}{section.8.1}
-\contentsline {section}{\numberline {8.2}Conclusiones}{34}{section.8.2}
-\contentsline {section}{\numberline {8.3}Mejoras futuras}{34}{section.8.3}
-\contentsline {chapter}{Anexos}{37}{appendix*.23}
-\contentsline {section}{\numberline {.1}Instalaci\IeC {\'o}n de Node.js}{37}{section.Alph0.1}
-\contentsline {section}{\numberline {.2}Instalaci\IeC {\'o}n Sails.js}{37}{section.Alph0.2}
-\contentsline {subsection}{\numberline {.2.1}Prerrequisitos}{37}{subsection.Alph0.2.1}
-\contentsline {subsection}{\numberline {.2.2}Instalaci\IeC {\'o}n}{38}{subsection.Alph0.2.2}
-\contentsline {section}{\numberline {.3}Instalaci\IeC {\'o}n de MongoDB}{39}{section.Alph0.3}
-\contentsline {subsection}{\numberline {.3.1}Prerrequisitos}{39}{subsection.Alph0.3.1}
-\contentsline {subsection}{\numberline {.3.2}Instalaci\IeC {\'o}n}{39}{subsection.Alph0.3.2}
-\contentsline {section}{\numberline {.4}Instalaci\IeC {\'o}n de WebStorm}{41}{section.Alph0.4}
-\contentsline {section}{\numberline {.5}Robomongo}{41}{section.Alph0.5}
-\contentsline {section}{\numberline {.6}Git}{41}{section.Alph0.6}
-\contentsline {subsection}{\numberline {.6.1}Prerrequisitos}{41}{subsection.Alph0.6.1}
-\contentsline {subsection}{\numberline {.6.2}Instalaci\IeC {\'o}n}{41}{subsection.Alph0.6.2}
-\contentsline {subsection}{\numberline {.6.3}Configuraci\IeC {\'o}n}{41}{subsection.Alph0.6.3}
-\contentsline {section}{\numberline {.7}Despliegue}{42}{section.Alph0.7}
-\contentsline {chapter}{Bibliograf\'{\i }a}{45}{appendix*.27}
-\contentsline {chapter}{GNU Documentation Free License}{47}{appendix*.28}
+\contentsline {section}{\numberline {2.1}Transmisi\IeC {\'o}n y comunicaci\IeC {\'o}n}{7}{section.2.1}
+\contentsline {section}{\numberline {2.2}Socket}{7}{section.2.2}
+\contentsline {section}{\numberline {2.3}WebSocket}{8}{section.2.3}
+\contentsline {section}{\numberline {2.4}Streaming}{8}{section.2.4}
+\contentsline {chapter}{\numberline {3}Herramientas utilizadas}{11}{chapter.3}
+\contentsline {section}{\numberline {3.1}Tecnolog\IeC {\'\i }as software utilizadas}{12}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}\LaTeX }{12}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}WebStorm}{12}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Github}{12}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Git}{13}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}DigitalOcean}{13}{subsection.3.1.5}
+\contentsline {subsection}{\numberline {3.1.6}Node js}{14}{subsection.3.1.6}
+\contentsline {subsection}{\numberline {3.1.7}Sails js}{14}{subsection.3.1.7}
+\contentsline {subsection}{\numberline {3.1.8}Npm}{15}{subsection.3.1.8}
+\contentsline {subsection}{\numberline {3.1.9}SocketIO}{15}{subsection.3.1.9}
+\contentsline {subsection}{\numberline {3.1.10} FFmpeg }{16}{subsection.3.1.10}
+\contentsline {subsection}{\numberline {3.1.11}Bootstrap}{17}{subsection.3.1.11}
+\contentsline {subsection}{\numberline {3.1.12}JQuery}{17}{subsection.3.1.12}
+\contentsline {subsection}{\numberline {3.1.13}Mongo DB}{17}{subsection.3.1.13}
+\contentsline {subsection}{\numberline {3.1.14}Pm2}{18}{subsection.3.1.14}
+\contentsline {subsection}{\numberline {3.1.15} Robomongo }{18}{subsection.3.1.15}
+\contentsline {section}{\numberline {3.2}Tecnolog\IeC {\'\i }as hardware y materiales utilizados}{19}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Raspberry Pi Model B}{19}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Controladora de motores L298N}{20}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3} Bater\IeC {\'\i }a LiPo }{20}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4} Tarjeta de expansi\IeC {\'o}n con bater\IeC {\'\i }a de Litio para Raspberry Pi }{21}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5} C\IeC {\'a}mara USB de alta definici\IeC {\'o}n }{21}{subsection.3.2.5}
+\contentsline {chapter}{\numberline {4} Desarrollo software }{23}{chapter.4}
+\contentsline {section}{\numberline {4.1}Metodolog\IeC {\'\i }a de desarrollo}{23}{section.4.1}
+\contentsline {section}{\numberline {4.2}Recolecci\IeC {\'o}n de requisitos}{24}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Requisitos funcionales}{24}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Requisitos no funcionales}{25}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}Diagramas de casos de uso}{26}{section.4.3}
+\contentsline {section}{\numberline {4.4}Especificaci\IeC {\'o}n de los casos de uso}{28}{section.4.4}
+\contentsline {chapter}{\numberline {5}Comunicaciones}{37}{chapter.5}
+\contentsline {subsection}{\numberline {5.0.1}Fundamentos}{37}{subsection.5.0.1}
+\contentsline {subsection}{\numberline {5.0.2} Comunicaciones en RobotUI}{38}{subsection.5.0.2}
+\contentsline {subsubsection}{ Conexi\IeC {\'o}n }{39}{section*.26}
+\contentsline {subsubsection}{ Desconexi\IeC {\'o}n }{41}{section*.27}
+\contentsline {chapter}{\numberline {6}Robot de pruebas}{45}{chapter.6}
+\contentsline {section}{\numberline {6.1}An\IeC {\'a}lisis}{45}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}An\IeC {\'a}lisis de requerimientos hardware}{46}{subsection.6.1.1}
+\contentsline {section}{\numberline {6.2}An\IeC {\'a}lisis de requerimientos de Software}{46}{section.6.2}
+\contentsline {section}{\numberline {6.3}Montaje}{47}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Interconexi\IeC {\'o}n de elementos}{47}{subsection.6.3.1}
+\contentsline {section}{\numberline {6.4}Software de control}{48}{section.6.4}
+\contentsline {subsubsection}{Entrada/Salida}{48}{section*.31}
+\contentsline {subsubsection}{Sockets}{49}{section*.33}
+\contentsline {subsubsection}{ Streaming de v\IeC {\'\i }deo }{50}{section*.34}
+\contentsline {subsubsection}{C\IeC {\'o}digo de ejemplo completo}{50}{section*.35}
+\contentsline {chapter}{\numberline {7}Organizaci\IeC {\'o}n temporal}{55}{chapter.7}
+\contentsline {section}{\numberline {7.1}Planificaci\IeC {\'o}n temporal de tareas}{58}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}Hito 1: Planificaci\IeC {\'o}n y an\IeC {\'a}lisis }{58}{subsection.7.1.1}
+\contentsline {subsection}{\numberline {7.1.2}Hito 2: Definici\IeC {\'o}n de requisitos }{58}{subsection.7.1.2}
+\contentsline {subsection}{\numberline {7.1.3}Hito 3: Comienzo de desarrollo de la aplicaci\IeC {\'o}n}{59}{subsection.7.1.3}
+\contentsline {subsection}{\numberline {7.1.4} Hito 4: Desarrollo de la aplicaci\IeC {\'o}n, m\IeC {\'o}dulo componentes }{59}{subsection.7.1.4}
+\contentsline {subsection}{\numberline {7.1.5}Hito 5: Desarrollo de la aplicaci\IeC {\'o}n, m\IeC {\'o}dulo interfaz }{59}{subsection.7.1.5}
+\contentsline {subsection}{\numberline {7.1.6}Hito 6: Desarrollo del m\IeC {\'o}dulo de comunicaciones }{60}{subsection.7.1.6}
+\contentsline {subsection}{\numberline {7.1.7}Hito 7: Construcci\IeC {\'o}n del veh\IeC {\'\i }culo de pruebas }{60}{subsection.7.1.7}
+\contentsline {subsection}{\numberline {7.1.8}Hito 8: Programaci\IeC {\'o}n del veh\IeC {\'\i }culo de pruebas }{60}{subsection.7.1.8}
+\contentsline {subsection}{\numberline {7.1.9}Hito 9: Documentaci\IeC {\'o}n }{60}{subsection.7.1.9}
+\contentsline {section}{\numberline {7.2}Diagrama de Gantt}{60}{section.7.2}
+\contentsline {chapter}{\numberline {8} Gu\IeC {\'\i }a de Usuario}{63}{chapter.8}
+\contentsline {subsection}{\numberline {8.0.1}Objetivo de esta gu\IeC {\'\i }a}{63}{subsection.8.0.1}
+\contentsline {subsection}{\numberline {8.0.2}Dirigido a}{64}{subsection.8.0.2}
+\contentsline {subsection}{\numberline {8.0.3}Obtener RobotUI}{64}{subsection.8.0.3}
+\contentsline {section}{\numberline {8.1} Uso de RobotUI }{64}{section.8.1}
+\contentsline {subsection}{\numberline {8.1.1} Registo de usuario }{65}{subsection.8.1.1}
+\contentsline {subsection}{\numberline {8.1.2}Creaci\IeC {\'o}n de un Robot}{65}{subsection.8.1.2}
+\contentsline {subsection}{\numberline {8.1.3}Configuraci\IeC {\'o}n de la interfaz}{66}{subsection.8.1.3}
+\contentsline {section}{\numberline {8.2} Programa tu robot }{68}{section.8.2}
+\contentsline {chapter}{\numberline {9}Comentarios finales}{69}{chapter.9}
+\contentsline {section}{\numberline {9.1}Presupuesto}{69}{section.9.1}
+\contentsline {section}{\numberline {9.2}Conclusiones}{70}{section.9.2}
+\contentsline {section}{\numberline {9.3}Mejoras futuras}{70}{section.9.3}
+\contentsline {chapter}{Anexos}{73}{appendix*.50}
+\contentsline {section}{\numberline {.1}Instalaci\IeC {\'o}n de Node.js}{73}{section.Alph0.1}
+\contentsline {section}{\numberline {.2}Instalaci\IeC {\'o}n Sails.js}{73}{section.Alph0.2}
+\contentsline {subsection}{\numberline {.2.1}Prerrequisitos}{73}{subsection.Alph0.2.1}
+\contentsline {subsection}{\numberline {.2.2}Instalaci\IeC {\'o}n}{74}{subsection.Alph0.2.2}
+\contentsline {section}{\numberline {.3}Instalaci\IeC {\'o}n de MongoDB}{75}{section.Alph0.3}
+\contentsline {subsection}{\numberline {.3.1}Prerrequisitos}{75}{subsection.Alph0.3.1}
+\contentsline {subsection}{\numberline {.3.2}Instalaci\IeC {\'o}n}{75}{subsection.Alph0.3.2}
+\contentsline {section}{\numberline {.4}Instalaci\IeC {\'o}n del control de versiones Git}{77}{section.Alph0.4}
+\contentsline {subsection}{\numberline {.4.1}Configuraci\IeC {\'o}n}{77}{subsection.Alph0.4.1}
+\contentsline {section}{\numberline {.5}Despliegue de una aplicaci\IeC {\'o}n Sails}{77}{section.Alph0.5}
+\contentsline {chapter}{Bibliograf\'{\i }a}{81}{appendix*.54}
+\contentsline {chapter}{GNU Documentation Free License}{83}{appendix*.55}

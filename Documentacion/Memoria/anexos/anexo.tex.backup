@@ -61,6 +61,7 @@ Partiendo de que se encuentra Node correctamente instalado en una máquina con U
 \item{Una máquina con Ubuntu 16.04.2 LTS }
 \item{Node js instalado.}
 
+
 \end{itemize}
 
 \subsection{Instalación}
@@ -206,54 +207,46 @@ service mongodb start
 
 
 
-\section{Git}
+\section{Instalación del control de versiones Git}
 
+Para seguir esta guía es necesario disponer de una máquina con:
 
-\subsection{Prerrequisitos}
-
-Para seguir esta guía es necesario:
 \begin{itemize}
-\item{Una máquina con Ubuntu 14.04.}
+\item{ Ubuntu 14.04.}
 \end{itemize}
 
-\subsection{Instalación}
+La forma más sencilla de tener Git instalado y configurado para su utilización es mediante el uso de los repositorios predeterminados de Ubuntu. 
+Este es el método más rápido, pero, por contra puede ser que la versión disponible no sea la más reciente. 
+Si necesita la última versión, deberá seguir los pasos para compilar Git desde el origen.\\
 
-La forma más sencilla de disponer Git instalado y listo para su utilización es mediante los repositorios predeterminados de Ubuntu. Este es el método más rápido, pero la versión puede ser más antigua que la versión más reciente. Si necesita la última versión, deberá seguir los pasos para compilar git desde el origen.
-
-Puede utilizar las herramientas de administración de paquetes de apt para actualizar su índice de paquetes local. Después, puede descargar e instalar. Para ello introduce los siguientes comandos:
+Si no necesitamos dispoer de la última versión podemos instalarlo desde el repositorio de Ubuntu. Para ello introducimos los siguientes comandos en una termina:\\
 
 \begin{lstlisting}[language=bash]
 sudo apt-get update
 sudo apt-get install git
 \end{lstlisting}
 
-Esto descargará e instalará git en su sistema. A continuación tendrá que completar los pasos de configuración.
+Esto descargará e instalará Git en el sistema. A continuación se describe los pasos para su configuración.
 
 \subsection{Configuración}
 
 Ahora que tiene git instalado, necesita hacer algunas cosas para que los mensajes de confirmación que se generarán para usted contendrán su información correcta.
 
-La forma más sencilla de hacerlo es a través del comando git config. Específicamente, necesitamos proporcionar nuestro nombre y dirección de correo electrónico porque git incorpora esta información en cada commit que hacemos. Podemos seguir adelante y agregar esta información escribiendo:
+La forma más sencilla de hacerlo es a través del comando \emph{git config} proporcionando nuestro nombre y dirección de correo electrónico. Esto es debido a que Git incorpora esta información en cada commit
+que hacemos. Por ejemplo, si nuestro nombre es \emph{RobotUI} y nuestro email \emph{email@robotui.com}, los comandos de configuración serían los siguientes:
 
 \begin{lstlisting}[language=bash]
- git config --global user.name "Su nombre"
- git config --global user.email "tuemail@dominio.com"
+ git config --global user.name "RobotUI"
+ git config --global user.email "email@robotui.com"
 \end{lstlisting}
 
-
-Podemos ver todos los elementos de configuración que se han establecido escribiendo:
+Finalmente podemos comprobar todos los valores de configuración establecidos escribiendo:
 
 \begin{lstlisting}[language=bash]
 git config --list
 \end{lstlisting}
 
-Configuración git
-
-User.name = Su nombre
-User.email=youremail@domain.com
-
-Hay muchas otras opciones que puede establecer, pero estos son los dos esenciales necesarios.
-
+Existen muchas más opciones configurables pero estos son los dos esenciales necesarios.
 
 \section{Despliegue}
 

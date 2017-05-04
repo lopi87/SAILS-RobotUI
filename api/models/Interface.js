@@ -30,17 +30,9 @@ module.exports = {
       via: 'interface_owner'
     },
 
-
     // Eventos de la interfaz
     events: {
       collection: 'event',
-      via: 'interface_owner'
-    },
-
-
-    // Eventos de la interfaz
-    joystick: {
-      collection: 'joystick',
       via: 'interface_owner'
     },
 

@@ -10,16 +10,13 @@
  */
 module.exports = function(req, res, next) {
 
-  // User is allowed, proceed to the next policy,
-  // or if this is the last policy, the controller
+  // Usuario logueado, procede a la siguiente policy o controlador si es la última.
   if (req.session.authenticated) {
     return next();
+  } else {
+    //Usuario no logueado no permitido
+    FlashService.warning(req, 'Session expired.' );
+    return res.redirect('/');
   }
 
-  // User is not allowed
-  // (default res.forbidden() behavior can be overridden in `config/403.js`)
-  FlashService.warning(req, 'Session expired.' );
-
-  //return res.redirect('/');
-  return res.forbidden('You are not permitted to perform this action.');
 };

@@ -71,6 +71,7 @@ module.exports.policies = {
 
   robot:{
     '*': ['flash', 'sessionAuth', 'message', 'localize'],
+    create: ['flash', 'sessionAuth', 'localize','message'],
     delete_permission: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot'],
     new_permissions: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot'],
     show_permissions: ['flash', 'sessionAuth','message', 'localize', 'UserCanEditRobot'],

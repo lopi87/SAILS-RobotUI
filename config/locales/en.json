@@ -127,5 +127,6 @@
 	"slider": "slider",
 	"create": "create",
 	"custom": "custom",
-	"user_information": "user_information"
+	"user_information": "user_information",
+  "403_message": "You don't have permission to see the page you're trying to reach."
 }

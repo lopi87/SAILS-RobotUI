@@ -1,12 +1,9 @@
-\chapter[Estado del arte y herramientas utilizadas]{Estado del arte y herramientas utilizadas}
-\chaptermark{Arte y tecnologías}
+\chapter[Herramientas utilizadas]{Tecnologías utilizadas}
+\chaptermark{Herramientas utilizaadas}
 \label{chap:herramientas}
 
-\section[Estado del arte de herramientas para monitorizar información]{Estado del arte de herramientas para monitorizar información}
-\sectionmark{Estado del arte}
+\newpage
 
-
-%\newpage
 \section{Tecnologías software utilizadas}
 \sectionmark{Tecnologías software}
 
@@ -50,18 +47,22 @@ Web: \url{https://git-scm.com/}\\
 
 Git es un sistema open-source de control de versiones diseñado para manejar integramente las fases de desarrollo de proyectos, simples y complejos, con velocidad y eficiencia.\\
 
-\subsection{Digital Ocean}
+\subsection{DigitalOcean}
 
 \begin{center}\includegraphics[scale=0.35]{imagenes/docean-logo.png}\end{center}
 
 Web: \url{https://www.digitalocean.com/}\\
 
-Servidor web para alojar proyectos en la nube. La ventaja de este servicio de VPS es que te permite desplegar máquinas de cualquier tipo (siempre que sean software libre) de una manera muy fácil y rápida. Además tiene un punto fuerte y es que la información se almacena en discos SSD, con lo que el procesamiento se ve muy mejorado a la hora de computar (en este caso trabajo con web sockets y transmisión de datos).\\
+Servidor web para alojar proyectos en la nube. La ventaja de este servicio de VPS \footnote{ VPS: Servidor Virtual Privado, del inglés virtual private server, es un método de particionar un servidor
+físico en varios servidores de tal forma que todo funcione como si se estuviese ejecutando en una única máquina. Cada servidor virtual es capaz de funcionar bajo su propio sistema operativo y
+además cada servidor puede ser reiniciado de forma independiente.} es que te permite desplegar máquinas de cualquier tipo (siempre que sean software libre) de una manera muy fácil y rápida. 
+Además tiene un punto fuerte y es que la información se almacena en discos SSD, con lo que el procesamiento se ve muy mejorado a la hora de computar (en este caso trabajo con websockets y 
+transmisión de datos).\\
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.45]{imagenes/droplets.png}
-\caption{Droplet desplegado en digital ocean}
+\caption{Droplet desplegado en DigitalOcean}
 \end{center}
 \end{figure}
 
@@ -121,6 +122,38 @@ que se ejecuta en el navegador y una biblioteca del lado del servidor para Node.
 Socket.IO puede usarse simplemente como un wrapper para WebSocket aunque proporciona muchas más funciones, incluyendo la transmisión a múltiples sockets, almacenamiento de datos asociados a cada cliente y E/S asíncronas.
 
 
+
+
+\subsection{ FFmpeg }
+
+
+\begin{center}
+\includegraphics[scale=0.8]{imagenes/Ffmpeg-logo.jpg}
+\end{center}
+
+Web: \url{https://ffmpeg.org/}\\
+
+FFmpeg es una colección de software libre que puede grabar, convertir (transcodificar) y hacer streaming de audio y vídeo. Incluye libavcodec, una biblioteca de códecs. FFmpeg está desarrollado en GNU/Linux, pero puede ser compilado
+en la mayoría de los sistemas operativos, incluyendo Windows.
+
+FFmpeg es un programa bastante sencillo y muy fácil de usar, orientado tanto a personas con conocimientos avanzados como usuarios inexpertos. 
+
+El proyecto FFmpeg está compuesto por:
+
+\begin{itemize}
+ \item ffmpeg: es una herramienta de línea de comandos para convertir audio o video de un formato a otro. También puede capturar y codificar en tiempo real desde DirectShow, una tarjeta de televisión u otro dispositivo compatible.
+ \item ffserver: es un servidor de streaming multimedia de emisiones en directo que soporta HTTP (la compatibilidad con RTSP está en desarrollo). Todavía no está en fase estable, y de momento no está disponible para Windows.
+ \item ffplay: es un reproductor multimedia basado en SDL y las bibliotecas FFmpeg.
+ \item libavcodec: es una biblioteca que contiene todos los códecs de FFmpeg. Muchos de ellos fueron desarrollados desde cero para asegurar una mayor eficiencia y un código altamente reutilizable.
+ \item libavformat: es una biblioteca que contiene los multiplexadores/demultiplexadores para los archivos contenedores multimedia.
+ \item libavutil: es una biblioteca de apoyo que contiene todas las rutinas comunes en las diferentes partes de FFmpeg.
+ \item libpostproc: es una biblioteca de funciones de postproceso de vídeo.
+ \item libswscale: es la biblioteca de escalado de vídeo.
+\end{itemize}
+
+Para el desarrollo de RobotUI, concretamente para la transmisión de vídeo desde el robot de pruebas desarrollado hacia el cliente, el módulo utilizado ha sido el de la herramienta de línea de comandos.
+
+
 \subsection{Bootstrap}
 
 
@@ -170,6 +203,18 @@ Web: \url{http://pm2.keymetrics.io/}\\
 
 PM2 es un gestor de procesos de producción para aplicaciones Node.js con un equilibrador de carga incorporado. Le permite mantener las aplicaciones vivas para siempre, recargarlas sin tiempo de inactividad
 y facilitar las tareas comunes del administrador del sistema.
+
+
+\subsection{ Robomongo }
+
+\begin{center}
+\includegraphics[scale=0.5]{imagenes/pm2-logo.png}
+\end{center}
+
+
+
+
+
 
 
 \section{Tecnologías hardware y materiales utilizados}
@@ -256,7 +301,16 @@ de la corriente de descarga. Siendo ideales para este tipo de usos.
   \end{center}
 \end{figure}
 
-\subsection{ cámara USB de alta definición de 1080p }
+\subsection{ Cámara USB de alta definición }
+
+Cámara USB para su conexión en la Raspberry para la emisión de imágenes. La cámara seleccionada dispone de las siguientes características:
+
+\begin{itemize}
+\item 2 megapíxeles de resolución.
+\item Ángulo de visión de 170 grados.
+\item Interfaz USB 2.0 de alta velocidad, refresco de 60 fps en resolución 1280X720, 30 fps en resolución 1920X1080
+\item Tamaño reducido y perfil delgado ideal para aplicaciones embebidas.
+\end{itemize}
 
 \begin{figure}[H]
   \begin{center}
