@@ -3,31 +3,35 @@ var io = require('./node_modules/socket.io').listen(8085, { log: false });
 
 // Load required modules.
 var sys = require('util'), exec = require('child_process').exec,
-    path = require('path'), ffmpeg_command, running_camera = false,
-    Gpio = require('pigpio').Gpio;
+  path = require('path'), ffmpeg_command, running_camera = false;
 
-var sockets = {};
+
+// Path to Raspbian's gpio driver, used for sending signals to the remote.
+var path = '/sys/class/gpio/',
 
 // Pin numbers on the Raspberry Pi connected to the car's remote.
-var gpio2 = new Gpio(2, {mode: Gpio.OUTPUT}),
-  gpio3 = new Gpio(3, {mode: Gpio.OUTPUT}),
-  gpio17 = new Gpio(17, {mode: Gpio.OUTPUT}),
-  gpio27 = new Gpio(27, {mode: Gpio.OUTPUT});
+  pins = [2, 3, 17, 27];
+// motor 1: 2 y 3
+// motor 2: 17 y 27
+
+// Enable sending signals to the car's remote control
+// which is connected to the Raspberry Pi.
+initPins()
 
 
 console.log('Waiting connection...');
+
+var sockets = {};
 
 io.sockets.on('connection', function (socket)
 {
 
   sockets[socket.id] = socket;
   console.log("Total clients connected : ", Object.keys(sockets).length);
-  socket.emit('robotmsg', {msg: "HELLO!!!"});
-
 
   socket.on('disconnect', function() {
-    console.log('Bye!');
-    stopStreaming(socket);
+    console.log('Bye!')
+    //stopStreaming(socket);
   });
 
 
@@ -35,38 +39,57 @@ io.sockets.on('connection', function (socket)
     startStreaming(socket);
   });
 
+  socket.emit('robotmsg', {msg: "HELLO!!!"});
+  console.log('emit: ' + "HELLO!!!");
 
-// Listen for direction messages from the app.
-  socket.on('action', function (data, req, res){
+  socket.on('action', function (data){
+
+    console.log('received action: ' + data);
 
     switch(data) {
       case 'UP':
-        gpio2.digitalWrite(1);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(1);
-        gpio27.digitalWrite(0);
+        exec_command( 'echo 1 > ' + path + 'gpio2/value'  );
+        exec_command( 'echo 0 > ' + path + 'gpio3/value'  )
+        exec_command( 'echo 0 > ' + path + 'gpio17/value' );
+        exec_command( 'echo 1 > ' + path + 'gpio27/value' );
         console.log('UP');
         break;
-      case 'DOWN':
-        gpio2.digitalWrite(0);
-        gpio3.digitalWrite(1);
-        gpio17.digitalWrite(0);
-        gpio27.digitalWrite(1);
-        console.log('DOWN')
+
+      case 'RIGHT':
+        exec_command( 'echo 0 > ' + path + 'gpio2/value'  );
+        exec_command( 'echo 0 > ' + path + 'gpio3/value'  )
+        exec_command( 'echo 1 > ' + path + 'gpio17/value' );
+        exec_command( 'echo 0 > ' + path + 'gpio27/value' );
         break;
+
+      case 'LEFT':
+        exec_command( 'echo 1 > ' + path + 'gpio2/value'  );
+        exec_command( 'echo 0 > ' + path + 'gpio3/value'  )
+        exec_command( 'echo 0 > ' + path + 'gpio17/value' );
+        exec_command( 'echo 0 > ' + path + 'gpio27/value' );
+        break;
+
+
+      case 'DOWN':
+        exec_command( 'echo 0 > ' + path + 'gpio2/value'  );
+        exec_command( 'echo 1 > ' + path + 'gpio3/value'  );
+        exec_command( 'echo 1 > ' + path + 'gpio17/value' );
+        exec_command( 'echo 0 > ' + path + 'gpio27/value' );
+        break;
+
       case 'STOP':
-        gpio2.digitalWrite(0);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(0);
-        gpio27.digitalWrite(0);
-        console.log('STOP');
+        exec_command( 'echo 0 > ' + path + 'gpio2/value'  );
+        exec_command( 'echo 0 > ' + path + 'gpio3/value'  );
+        exec_command( 'echo 0 > ' + path + 'gpio17/value' );
+        exec_command( 'echo 0 > ' + path + 'gpio27/value' );
         break;
       default:
         console.log('command not found');
     }
 
-  });
+  })
 });
+
 
 
 
