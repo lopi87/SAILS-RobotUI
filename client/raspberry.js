@@ -16,7 +16,7 @@ pins = [2, 3, 17, 27];
 // Activación de los pines
 initPins();
 
-console.log('Waiting connection...');
+console.log('Esperando conexión...');
 
 var sockets = {};
 
@@ -36,8 +36,8 @@ io.sockets.on('connection', function (socket)
     startStreaming(socket);
   });
 
-  socket.emit('robotmsg', {msg: "HELLO!!!"});
-  console.log('emit: ' + "HELLO!!!");
+  socket.emit('robotmsg', {msg: "¡¡¡Bienvenido!!!"});
+  console.log('emitiendo: ' + "¡¡¡Bienvenido!!!");
 
   socket.on('action', function (data){
 
