@@ -16,7 +16,7 @@ var path = '/sys/class/gpio/',
 
 // Enable sending signals to the car's remote control
 // which is connected to the Raspberry Pi.
-initPins()
+initPins();
 
 
 console.log('Waiting connection...');
@@ -50,8 +50,8 @@ io.sockets.on('connection', function (socket)
       case 'UP':
         exec_command( 'echo 1 > ' + path + 'gpio2/value'  );
         exec_command( 'echo 0 > ' + path + 'gpio3/value'  )
-        exec_command( 'echo 0 > ' + path + 'gpio17/value' );
-        exec_command( 'echo 1 > ' + path + 'gpio27/value' );
+        exec_command( 'echo 1 > ' + path + 'gpio17/value' );
+        exec_command( 'echo 0 > ' + path + 'gpio27/value' );
         console.log('UP');
         break;
 
@@ -73,8 +73,8 @@ io.sockets.on('connection', function (socket)
       case 'DOWN':
         exec_command( 'echo 0 > ' + path + 'gpio2/value'  );
         exec_command( 'echo 1 > ' + path + 'gpio3/value'  );
-        exec_command( 'echo 1 > ' + path + 'gpio17/value' );
-        exec_command( 'echo 0 > ' + path + 'gpio27/value' );
+        exec_command( 'echo 0 > ' + path + 'gpio17/value' );
+        exec_command( 'echo 1 > ' + path + 'gpio27/value' );
         break;
 
       case 'STOP':

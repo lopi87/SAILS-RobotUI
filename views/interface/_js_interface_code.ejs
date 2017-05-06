@@ -36,7 +36,7 @@
 
     //captura evento desconectar cuando el robot es apagado o pierde la señal
     socket.on('disconnect', function () {
-     toastr.info('Robot disconnect!' + address_robot, 'Robot' )
+      toastr.info('Robot disconnect!' + address_robot, 'Robot' )
       //Sincronizar con el resto de clientes:
       io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
       change_img_state('<%=robot.id %>', false);
@@ -119,7 +119,7 @@
 
       //if video then start stream
       <% if( typeof video !== 'undefined' ){ %>
-      socket.emit('start-stream');
+        socket.emit('start-stream');
       <%}%>
 
      toastr.info('Conectado con exito! ' + address_robot, 'Robot');
