@@ -131,13 +131,13 @@ var gpio2 = new Gpio(2, {mode: Gpio.OUTPUT}),
       \hline
       {\textbf{GPIO}} & \textbf{ Modo } & \textbf{ Control }\\
       \hline
-      {\textbf{ 2 }} & { OUTPUT } & { Motores lado derecho }  \\
+      {\textbf{ 2 }} & { OUTPUT } & { Motores lado izquierdo }  \\
      \hline
       {\textbf{ 3 }} & { OUTPUT } & { Motores lado izquierdo } \\
       \hline
       {\textbf{ 17 }} & { OUTPUT } & {  Motores lado derecho } \\
       \hline
-      {\textbf{ 27 }} & { OUTPUT } & { Motores lado izquierdo } \\
+      {\textbf{ 27 }} & { OUTPUT } & { Motores lado derecho } \\
      \hline   
     \end{tabular}
   \end{center}
@@ -147,8 +147,6 @@ var gpio2 = new Gpio(2, {mode: Gpio.OUTPUT}),
 
 Si para el vehículo que deseemos programar resultan necesarios más pines tan solo debemos inicializarlos e indicar si van a ser pines de entrada o de salida. Si existen dudas al respecto se puede 
 acceder a la documentación de la biblioteca \emph{pigpio} en el siguiente enlace: \url{https://www.npmjs.com/package/pigpio}
-
-
 
 \subsubsection{Sockets}
 
@@ -185,39 +183,78 @@ io.sockets.on('connection', function (socket)
 \end{lstlisting}
 
 Cuando un evento \emph{action} es recibido se activada la función que procesa el comando recibido y activa las salidas correspondientes, la cual establece los pines necesarios a los valores
-1 o 0 según el parámetro establecido. A continuación se muestra el ejemplo desarrollado para la activación de los motores en sentido de giro y dirección:\\
+1 o 0 según el parámetro establecido. La tabla \ref{} muestra las diferentes combinaciones de salidas y su acción correspondiente:
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+      \hline
+      {\textbf{Acción}} & \textbf{ GPIO 2 } & \textbf{ GPIO 3 } & \textbf{  GPIO 17 } & \textbf{ GPIO 27 }\\
+      \hline
+      { \textbf{ UP } } & { 1 } & { 0 }  & { 1 }  & { 0 }  \\
+      \hline
+      { \textbf{ DOWN } } & { 0 } & { 1 }  & { 0 }  & { 1 } \\
+      \hline
+      { \textbf{ LEFT } } & { 1 } & { 0 }  & { 0 }  & { 0 } \\
+      \hline
+      { \textbf{ RIGHT } } & { 0 } & { 0 }  & { 1 }  & { 0 } \\
+      \hline
+      { \textbf{ STOP } } & { 0 } & { 0 }  & { 0 }  & { 0 }  \\
+     \hline   
+    \end{tabular}
+  \end{center}
+\caption{ Combinaciones de salida para los puertos GPIO y su acción correspondiente. }
+\end{table}
+
+A continuación se muestra el ejemplo desarrollado para la activación de los motores en sentido de giro y dirección según la tabla anterior:\\
 
 \begin{lstlisting}[language=JavaScript]
   // Escucha de comandos.
-  socket.on('action', function (data, req, res){
+    socket.on('action', function (data){
+
+    console.log('Comando recibido: ' + data);
 
     switch(data) {
       case 'UP':
-        gpio2.digitalWrite(1);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(1);
-        gpio27.digitalWrite(0);
+        exec_command( 'echo 1 > ' + path + 'gpio2/value'  );
+        exec_command( 'echo 0 > ' + path + 'gpio3/value'  );
+        exec_command( 'echo 1 > ' + path + 'gpio17/value' );
+        exec_command( 'echo 0 > ' + path + 'gpio27/value' );
         console.log('UP');
         break;
-      case 'DOWN':
-        gpio2.digitalWrite(0);
-        gpio3.digitalWrite(1);
-        gpio17.digitalWrite(0);
-        gpio27.digitalWrite(1);
-        console.log('DOWN')
+
+      case 'RIGHT':
+        exec_command( 'echo 0 > ' + path + 'gpio2/value'  );
+        exec_command( 'echo 0 > ' + path + 'gpio3/value'  );
+        exec_command( 'echo 1 > ' + path + 'gpio17/value' );
+        exec_command( 'echo 0 > ' + path + 'gpio27/value' );
         break;
+
+      case 'LEFT':
+        exec_command( 'echo 1 > ' + path + 'gpio2/value'  );
+        exec_command( 'echo 0 > ' + path + 'gpio3/value'  )
+        exec_command( 'echo 0 > ' + path + 'gpio17/value' );
+        exec_command( 'echo 0 > ' + path + 'gpio27/value' );
+        break;
+
+      case 'DOWN':
+        exec_command( 'echo 0 > ' + path + 'gpio2/value'  );
+        exec_command( 'echo 1 > ' + path + 'gpio3/value'  );
+        exec_command( 'echo 0 > ' + path + 'gpio17/value' );
+        exec_command( 'echo 1 > ' + path + 'gpio27/value' );
+        break;
+
       case 'STOP':
-        gpio2.digitalWrite(0);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(0);
-        gpio27.digitalWrite(0);
-        console.log('STOP');
+        exec_command( 'echo 0 > ' + path + 'gpio2/value'  );
+        exec_command( 'echo 0 > ' + path + 'gpio3/value'  );
+        exec_command( 'echo 0 > ' + path + 'gpio17/value' );
+        exec_command( 'echo 0 > ' + path + 'gpio27/value' );
         break;
       default:
-        console.log('command not found');
+        console.log('Comando no encontrado');
     }
 
-  });
+  })
 \end{lstlisting}
 
 

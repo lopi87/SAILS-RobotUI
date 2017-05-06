@@ -9,10 +9,10 @@ En el presente capítulo se detalla los diferentes pasos que se han seguido a la
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.4]{imagenes/robot/robot-esquema.png}
+    \includegraphics[scale=0.2]{imagenes/robot2.jpg}
   \end{center}
   \caption{Imagen del robot de pruebas.}
-  \label{gantt:tareas01}
+  \label{robot:robot02}
 \end{figure}
 
 
@@ -26,7 +26,7 @@ En el presente capítulo se detalla los diferentes pasos que se han seguido a la
 \label{sec:requerimientos-hardware}
 
 Se ha optado por la construcción de un  pequeño robot móvil dotado de un chasis de 4 ruedas donde cada una de ellas está accionada por un motor. Los motores seleccionados funcionan a corriente continua
-de manera que en función de la polarizaciónde los terminales hace girar las ruedas en una dirección o la contraria (marcha adelante o atrás).\\
+de manera que en función de la polarización de los terminales hace girar las ruedas en una dirección o la contraria (marcha adelante o atrás).\\
 
 El chasis seleccionado permite añadir multitud de componentes que desees para construir tu robot gracias a sus dos paneles para instalar las diferentes
 placas electrónicas y sensores.\\
@@ -133,9 +133,9 @@ var gpio2 = new Gpio(2, {mode: Gpio.OUTPUT}),
       \hline
       {\textbf{ 2 }} & { OUTPUT } & { Motores lado derecho }  \\
      \hline
-      {\textbf{ 3 }} & { OUTPUT } & { Motores lado izquierdo } \\
+      {\textbf{ 3 }} & { OUTPUT } & { Motores lado derecho } \\
       \hline
-      {\textbf{ 17 }} & { OUTPUT } & {  Motores lado derecho } \\
+      {\textbf{ 17 }} & { OUTPUT } & {  Motores lado izquierdo } \\
       \hline
       {\textbf{ 27 }} & { OUTPUT } & { Motores lado izquierdo } \\
      \hline   
@@ -148,6 +148,29 @@ var gpio2 = new Gpio(2, {mode: Gpio.OUTPUT}),
 Si para el vehículo que deseemos programar resultan necesarios más pines tan solo debemos inicializarlos e indicar si van a ser pines de entrada o de salida. Si existen dudas al respecto se puede 
 acceder a la documentación de la biblioteca \emph{pigpio} en el siguiente enlace: \url{https://www.npmjs.com/package/pigpio}
 
+
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{2.5cm}|p{2.5cm}|p{4.5cm}|}
+      \hline
+      {\textbf{GPIO}} & \textbf{ 2 } & \textbf{ 3 } & \textbf{ 17 } & \textbf{ 27 } & \textbf{ Acción }\\
+      \hline
+      {\textbf{  }} & { 1 } & { 0 }  & { 1 }  & { 0 }  & { UP }  \\
+     \hline
+      {\textbf{  }} & { 0 } & { 1 }  & { 0 }  & { 1 }  & { DOWN }  \\
+      \hline
+      {\textbf{  }} & { 1 } & { 0 }  & { 0 }  & { 0 }  & { LEFT }  \\
+      \hline
+      {\textbf{  }} & { 0 } & { 0 }  & { 1 }  & { 0 }  & { RIGHT }  \\
+      \hline
+      {\textbf{  }} & { 0 } & { 0 }  & { 0 }  & { 0 }  & { STOP }  \\
+     \hline   
+    \end{tabular}
+  \end{center}
+\caption{ Configuración establecida para los puertos GPIO. }
+\end{table}
 
 
 \subsubsection{Sockets}
@@ -222,7 +245,52 @@ Cuando un evento \emph{action} es recibido se activada la función que procesa e
 
 
 
-\subsubsection{Vídeo streaming}
+\subsubsection{ Streaming de vídeo }
+
+
+
+Para el streaming de vídeo desde el robot hacia el cliente conectado se ha empleado las librerías FFmpeg, haciendo uso de su herramienta de línea de comandos.
+
+
+function startStreaming(socket) {
+  //ffmpeg -f video4linux2 -i /dev/video0 -s 300x150 -f mjpeg pipe:1 -b:v 28k -bufsize 28k
+
+  if (running_camera == false){
+    console.log('Starting streaming....');
+    var args = ["-f", "video4linux2", "-i", "/dev/video0", "-s", "300x150","-f","mjpeg", "pipe:1", "-b:v 28k", "-bufsize 28k"]
+    ffmpeg_command = require('child_process').spawn("ffmpeg", args);
+    running_camera = true
+  }
+
+  ffmpeg_command.on('error', function(err, stdout, stderr) {
+    console.log("ffmpeg stdout:\n" + stdout);
+    console.log("ffmpeg stderr:\n" + stderr);
+    running_camera = false
+  });
+
+
+  ffmpeg_command.on('close', function (code) {
+    console.log('ffmpeg exited' + code );
+    running_camera = false
+  });
+
+
+  ffmpeg_command.stderr.on('data', function (data) {
+    //console.log('stderr: ' + data);
+  });
+
+  ffmpeg_command.on('end', function() {
+    console.log('Finished');
+    running_camera = false
+  });
+
+  ffmpeg_command.stdout.on('data', function (data) {
+    //console.log('stdout: ' + data);
+    var frame = new Buffer(data).toString('base64');
+    socket.emit('canvas',frame);
+  });
+
+}
 
 
 

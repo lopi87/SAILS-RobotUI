@@ -58,8 +58,8 @@
 \contentsline {section}{\numberline {6.4}Software de control}{48}{section.6.4}
 \contentsline {subsubsection}{Entrada/Salida}{48}{section*.32}
 \contentsline {subsubsection}{Sockets}{49}{section*.34}
-\contentsline {subsubsection}{ Streaming de v\IeC {\'\i }deo }{50}{section*.35}
-\contentsline {subsubsection}{C\IeC {\'o}digo de ejemplo completo}{50}{section*.36}
+\contentsline {subsubsection}{ Streaming de v\IeC {\'\i }deo }{51}{section*.36}
+\contentsline {subsubsection}{C\IeC {\'o}digo de ejemplo completo}{51}{section*.37}
 \contentsline {chapter}{\numberline {7}Organizaci\IeC {\'o}n temporal}{55}{chapter.7}
 \contentsline {section}{\numberline {7.1}Planificaci\IeC {\'o}n temporal de tareas}{58}{section.7.1}
 \contentsline {subsection}{\numberline {7.1.1}Hito 1: Planificaci\IeC {\'o}n y an\IeC {\'a}lisis }{58}{subsection.7.1.1}
@@ -85,7 +85,7 @@
 \contentsline {section}{\numberline {9.1}Presupuesto}{69}{section.9.1}
 \contentsline {section}{\numberline {9.2}Conclusiones}{70}{section.9.2}
 \contentsline {section}{\numberline {9.3}Mejoras futuras}{70}{section.9.3}
-\contentsline {chapter}{Anexos}{73}{appendix*.51}
+\contentsline {chapter}{Anexos}{73}{appendix*.52}
 \contentsline {section}{\numberline {.1}Instalaci\IeC {\'o}n de Node.js}{73}{section.Alph0.1}
 \contentsline {section}{\numberline {.2}Instalaci\IeC {\'o}n Sails.js}{73}{section.Alph0.2}
 \contentsline {subsection}{\numberline {.2.1}Prerrequisitos}{73}{subsection.Alph0.2.1}
@@ -96,5 +96,5 @@
 \contentsline {section}{\numberline {.4}Instalaci\IeC {\'o}n del control de versiones Git}{77}{section.Alph0.4}
 \contentsline {subsection}{\numberline {.4.1}Configuraci\IeC {\'o}n}{77}{subsection.Alph0.4.1}
 \contentsline {section}{\numberline {.5}Despliegue de una aplicaci\IeC {\'o}n Sails}{77}{section.Alph0.5}
-\contentsline {chapter}{Bibliograf\'{\i }a}{81}{appendix*.55}
-\contentsline {chapter}{GNU Documentation Free License}{83}{appendix*.56}
+\contentsline {chapter}{Bibliograf\'{\i }a}{81}{appendix*.56}
+\contentsline {chapter}{GNU Documentation Free License}{83}{appendix*.57}

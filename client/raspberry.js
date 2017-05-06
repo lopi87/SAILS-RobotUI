@@ -1,23 +1,20 @@
-// Start a socket.io server that listens on port 8085.
+// Inicia servidor socket.io en el puerto 8085.
 var io = require('./node_modules/socket.io').listen(8085, { log: false });
 
-// Load required modules.
+// Carga de módulos necesarios.
 var sys = require('util'), exec = require('child_process').exec,
   path = require('path'), ffmpeg_command, running_camera = false;
 
 
-// Path to Raspbian's gpio driver, used for sending signals to the remote.
-var path = '/sys/class/gpio/',
+// Ruta a los drivers Gpio de la Raspberry, usado para enviar las señales.
+var path = '/sys/class/gpio/';
 
-// Pin numbers on the Raspberry Pi connected to the car's remote.
-  pins = [2, 3, 17, 27];
-// motor 1: 2 y 3
-// motor 2: 17 y 27
+// Pines utilizados. Motores izquierdos: 2 y 3, motores derechos: 17 y 27
+pins = [2, 3, 17, 27];
 
-// Enable sending signals to the car's remote control
-// which is connected to the Raspberry Pi.
+
+// Activación de los pines
 initPins();
-
 
 console.log('Waiting connection...');
 
@@ -27,10 +24,10 @@ io.sockets.on('connection', function (socket)
 {
 
   sockets[socket.id] = socket;
-  console.log("Total clients connected : ", Object.keys(sockets).length);
+  console.log("Clientes totales conectados: ", Object.keys(sockets).length);
 
   socket.on('disconnect', function() {
-    console.log('Bye!')
+    console.log('¡Adios!');
     //stopStreaming(socket);
   });
 
@@ -44,7 +41,7 @@ io.sockets.on('connection', function (socket)
 
   socket.on('action', function (data){
 
-    console.log('received action: ' + data);
+    console.log('Comando recibido: ' + data);
 
     switch(data) {
       case 'UP':
@@ -57,14 +54,14 @@ io.sockets.on('connection', function (socket)
 
       case 'RIGHT':
         exec_command( 'echo 0 > ' + path + 'gpio2/value'  );
-        exec_command( 'echo 0 > ' + path + 'gpio3/value'  )
+        exec_command( 'echo 0 > ' + path + 'gpio3/value'  );
         exec_command( 'echo 1 > ' + path + 'gpio17/value' );
         exec_command( 'echo 0 > ' + path + 'gpio27/value' );
         break;
 
       case 'LEFT':
         exec_command( 'echo 1 > ' + path + 'gpio2/value'  );
-        exec_command( 'echo 0 > ' + path + 'gpio3/value'  )
+        exec_command( 'echo 0 > ' + path + 'gpio3/value'  );
         exec_command( 'echo 0 > ' + path + 'gpio17/value' );
         exec_command( 'echo 0 > ' + path + 'gpio27/value' );
         break;
@@ -84,15 +81,11 @@ io.sockets.on('connection', function (socket)
         exec_command( 'echo 0 > ' + path + 'gpio27/value' );
         break;
       default:
-        console.log('command not found');
+        console.log('Comando no encontrado');
     }
 
   })
 });
-
-
-
-
 
 function stopStreaming(socket) {
   delete sockets[socket.id];
@@ -134,7 +127,7 @@ function startStreaming(socket) {
   });
 
   ffmpeg_command.on('end', function() {
-    console.log('Finished');
+    console.log('Fin');
     running_camera = false
   });
 
@@ -145,3 +138,47 @@ function startStreaming(socket) {
   });
 
 }
+
+function initPins()
+{
+  // Activa control de los Pines Gpio de la Raspberry Pi.
+  for (var pin in pins)
+  {
+    //console.log('Creando puerto ' + pins[pin] + '...');
+
+    // Primeramente comprueba si el puerto ya existe.
+    var command = 'if (! [ -f ' + path + 'gpio' + pins[pin] + '/direction ]); then ' +
+      'echo ' + pins[pin] + ' > ' + path + 'export; fi';
+
+    // Creación del puerto usando la línea de comandos.
+    exec(command, function(error, stdout, stderr)
+    {
+      if (error === null){
+        //console.log('Puerto creado con éxito.');
+      }else{
+        console.log('Error en la creación del puerto: ' + error + ' (' + stderr + ').');
+      }
+    })
+  }
+
+  // Configuración de los pines GPIO como salida.
+  for (var pin in pins)
+  {
+    //console.log('Configurando puerto ' + pins[pin] + '...');
+
+    // Configurando los puertos como salida.
+    var command = 'echo out > ' + path + 'gpio' + pins[pin] + '/direction';
+
+    // Configure the ports using Raspbian's command line.
+    exec(command, function(error, stdout, stderr)
+    {
+      if (error === null){
+        //console.log('Puerto configurado con éxito.');
+      }else{
+        console.log('Error configurando el puerto: ' + error + ' (' + stderr + ').');
+      }
+    })
+  }
+}
+
+
