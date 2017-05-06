@@ -5,40 +5,41 @@
 \contentsline {figure}{\numberline {1.2}{\ignorespaces P\IeC {\'a}gina principal de de RobotUI.\relax }}{3}{figure.caption.5}
 \contentsline {figure}{\numberline {1.3}{\ignorespaces Imagen del veh\IeC {\'\i }culo de pruebas desarrollado. \footnotemark .\relax }}{4}{figure.caption.6}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Representaci\IeC {\'o}n de los sockets como una interfaz de la capa de transporte del protocolo TCP/IP.\relax }}{8}{figure.caption.7}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Droplet desplegado en DigitalOcean\relax }}{14}{figure.caption.7}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Imagen de una Raspberry Pi 3 Model B\relax }}{19}{figure.caption.8}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Imagen de la controladora de motores L298n utilizada\relax }}{20}{figure.caption.9}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Imagen de la bater\IeC {\'\i }a LiPo utilizada.\relax }}{21}{figure.caption.10}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Imagen de la tarjeta de expansi\IeC {\'o}n con bater\IeC {\'\i }a de Litio utilizado.\relax }}{21}{figure.caption.11}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Imagen de la c\IeC {\'a}mara USB utilizada.\relax }}{22}{figure.caption.12}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Droplet desplegado en DigitalOcean\relax }}{14}{figure.caption.8}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Imagen de una Raspberry Pi 3 Model B\relax }}{19}{figure.caption.9}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Imagen de la controladora de motores L298n utilizada\relax }}{20}{figure.caption.10}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Imagen de la bater\IeC {\'\i }a LiPo utilizada.\relax }}{21}{figure.caption.11}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Imagen de la tarjeta de expansi\IeC {\'o}n con bater\IeC {\'\i }a de Litio utilizado.\relax }}{21}{figure.caption.12}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Imagen de la c\IeC {\'a}mara USB utilizada.\relax }}{22}{figure.caption.13}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Subsistemas existentes en el proyecto junto con el modelo de ciclo de vida utilizado para su desarrollo.\relax }}{24}{figure.caption.13}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagrama de casos de uso para la interacci\IeC {\'o}n con la aplicaci\IeC {\'o}n.\relax }}{27}{figure.caption.14}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagrama de casos de uso para la interacci\IeC {\'o}n con el robot de pruebas.\relax }}{28}{figure.caption.15}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Subsistemas existentes en el proyecto junto con el modelo de ciclo de vida utilizado para su desarrollo.\relax }}{24}{figure.caption.14}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagrama de casos de uso para la interacci\IeC {\'o}n con la aplicaci\IeC {\'o}n.\relax }}{27}{figure.caption.15}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagrama de casos de uso para la interacci\IeC {\'o}n con el robot de pruebas.\relax }}{28}{figure.caption.16}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces P\IeC {\'a}gina de gesti\IeC {\'o}n de usuarios actualizable en tiempo real.\relax }}{38}{figure.caption.24}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Esquema representativo del flujo de conexiones de RobotUI.\relax }}{38}{figure.caption.25}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces P\IeC {\'a}gina de gesti\IeC {\'o}n de usuarios actualizable en tiempo real.\relax }}{38}{figure.caption.25}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Esquema representativo del flujo de conexiones de RobotUI.\relax }}{38}{figure.caption.26}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Imagen del robot de pruebas.\relax }}{45}{figure.caption.28}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Esquema GPIO de una Raspberry Pi Model B+.\relax }}{47}{figure.caption.29}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Esquema de conexiones del robot de pruebas.\relax }}{48}{figure.caption.30}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Imagen del robot de pruebas.\relax }}{45}{figure.caption.29}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Esquema GPIO de una Raspberry Pi Model B+.\relax }}{47}{figure.caption.30}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Esquema de conexiones del robot de pruebas.\relax }}{48}{figure.caption.31}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Panel de actividades - Trello\relax }}{55}{figure.caption.36}
-\contentsline {figure}{\numberline {7.2}{\ignorespaces Descomposici\IeC {\'o}n de las tareas implicadas en el desarrollo del proyecto (Primera Parte).\relax }}{57}{figure.caption.37}
-\contentsline {figure}{\numberline {7.3}{\ignorespaces Descomposici\IeC {\'o}n de las tareas implicadas en el desarrollo del proyecto (Segunda parte).\relax }}{58}{figure.caption.38}
-\contentsline {figure}{\numberline {7.4}{\ignorespaces Diagrama de Gantt 1. Desarrollo del proyecto.\relax }}{61}{figure.caption.39}
-\contentsline {figure}{\numberline {7.5}{\ignorespaces Diagrama de Gantt 2. Desarrollo del proyecto.\relax }}{62}{figure.caption.40}
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Panel de actividades - Trello\relax }}{55}{figure.caption.37}
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Descomposici\IeC {\'o}n de las tareas implicadas en el desarrollo del proyecto (Primera Parte).\relax }}{57}{figure.caption.38}
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Descomposici\IeC {\'o}n de las tareas implicadas en el desarrollo del proyecto (Segunda parte).\relax }}{58}{figure.caption.39}
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Diagrama de Gantt 1. Desarrollo del proyecto.\relax }}{61}{figure.caption.40}
+\contentsline {figure}{\numberline {7.5}{\ignorespaces Diagrama de Gantt 2. Desarrollo del proyecto.\relax }}{62}{figure.caption.41}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces P\IeC {\'a}gina principal RobotUI.\relax }}{64}{figure.caption.41}
-\contentsline {figure}{\numberline {8.2}{\ignorespaces P\IeC {\'a}gina principal RobotUI.\relax }}{64}{figure.caption.42}
-\contentsline {figure}{\numberline {8.3}{\ignorespaces P\IeC {\'a}gina principal RobotUI.\relax }}{65}{figure.caption.43}
-\contentsline {figure}{\numberline {8.4}{\ignorespaces Formulario de creaci\IeC {\'o}n de un robot.\relax }}{66}{figure.caption.44}
-\contentsline {figure}{\numberline {8.5}{\ignorespaces Panel de configuraci\IeC {\'o}n de la interfaz.\relax }}{67}{figure.caption.45}
-\contentsline {figure}{\numberline {8.6}{\ignorespaces Panel de herramientas y panel de acciones para la configuraci\IeC {\'o}n de la interfaz.\relax }}{67}{figure.caption.46}
+\contentsline {figure}{\numberline {8.1}{\ignorespaces P\IeC {\'a}gina principal RobotUI.\relax }}{64}{figure.caption.42}
+\contentsline {figure}{\numberline {8.2}{\ignorespaces P\IeC {\'a}gina principal RobotUI.\relax }}{64}{figure.caption.43}
+\contentsline {figure}{\numberline {8.3}{\ignorespaces P\IeC {\'a}gina principal RobotUI.\relax }}{65}{figure.caption.44}
+\contentsline {figure}{\numberline {8.4}{\ignorespaces Formulario de creaci\IeC {\'o}n de un robot.\relax }}{66}{figure.caption.45}
+\contentsline {figure}{\numberline {8.5}{\ignorespaces Panel de configuraci\IeC {\'o}n de la interfaz.\relax }}{67}{figure.caption.46}
+\contentsline {figure}{\numberline {8.6}{\ignorespaces Panel de herramientas y panel de acciones para la configuraci\IeC {\'o}n de la interfaz.\relax }}{67}{figure.caption.47}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1}{\ignorespaces Iniciando Sails \footnotemark .\relax }}{74}{figure.caption.51}
-\contentsline {figure}{\numberline {2}{\ignorespaces Sails en funcionamiento \footnotemark .\relax }}{75}{figure.caption.52}
-\contentsline {figure}{\numberline {3}{\ignorespaces Utilizaci\IeC {\'o}n del gestor de procesos Pm2 en el entorno de producci\IeC {\'o}n.\relax }}{79}{figure.caption.53}
+\contentsline {figure}{\numberline {1}{\ignorespaces Iniciando Sails \footnotemark .\relax }}{74}{figure.caption.52}
+\contentsline {figure}{\numberline {2}{\ignorespaces Sails en funcionamiento \footnotemark .\relax }}{75}{figure.caption.53}
+\contentsline {figure}{\numberline {3}{\ignorespaces Utilizaci\IeC {\'o}n del gestor de procesos Pm2 en el entorno de producci\IeC {\'o}n.\relax }}{79}{figure.caption.54}
 \addvspace {10\p@ }

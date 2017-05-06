@@ -52,7 +52,7 @@ Así surgió \emph{RobotUI} y con él un nuevo concepto llamado \textit{RobotSha
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.3]{imagenes/logotipo.png}
+    \includegraphics[scale=0.5]{imagenes/logotipo.png}
   \end{center}
   \label{fig:logo}
  \caption{Logo RobotUI \protect\footnotemark.}
@@ -63,19 +63,30 @@ Así surgió \emph{RobotUI} y con él un nuevo concepto llamado \textit{RobotSha
 \emph{RobotUI} (nombre del sistema resultante) será una combinación de un elemento software (aplicación web) y hardware (vehículo de pruebas y demostración) surgido como muestra de la solución obtenida a los citados problemas.\\
 
 
-El elemento hardware de este proyecto se compone de un vehículo controlado vía WiFi el cual responde a una serie de señales \emph{comandos} a los que responde realizando determinadas acciones.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.3]{imagenes/manual-usuario/pagina-principal.png}
+  \end{center}
+  \label{fig:logo}
+ \caption{Página principal de de RobotUI.}
+\end{figure}
+
+
+El elemento hardware de este proyecto se compone de un vehículo controlado vía WiFi el cual responde a una serie de señales, \emph{comandos}\footnote{ Comando: instrucción u orden que el usuario proporciona a un sistema informático, 
+desde la línea de comandos (como una shell) o desde una llamada de programación.}, a los que responde realizando determinadas acciones.\\
+
 La interfaz web se configurará de tal manera que permita el control del susodicho vehículo.\\
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.3]{imagenes/f1.jpg}
+    \includegraphics[scale=0.3]{imagenes/robot.jpg}
   \end{center}
   \label{fig:logo}
- \caption{Vehículo utilizado \protect\footnotemark.}
+ \caption{Imagen del vehículo de pruebas desarrollado. \protect\footnotemark.}
 \end{figure}
 
-\footnotetext{Vehículo utilizado.}
-
+\footnotetext{Vehículo desarrollado para probar el funcionamiento de RobotUI. Su desarrollo y características quedan descritas en el capítulo \ref{chap:robot}.}
 
 
 \section{Objetivos}
@@ -106,8 +117,7 @@ Este documento se organiza en los siguientes capítulos:\\
 
 \item En el capítulo \ref{chap:herramientas}, Estado del arte y herramientas utilizadas, se realiza una descripción de las diferentes elementos hardware y software empleados durante el desarrollo del proyecto y necesarios para la utilización del mismo. Así como una breve descripción del conocimiento acumulado y tecnologías existentes hasta la fecha.
 
-\item En el capítulo \ref{chap:especificación}, Especificación y análisis de requisitos, se realiza una descripción de las diferentes elementos hardware y software empleados durante el desarrollo del proyecto y necesarios para la utilización del mismo. Así como una breve descripción del conocimiento acumulado y tecnologías existentes hasta la fecha.
-
+\item En el capítulo \ref{chap:requisitos}, Especificación y análisis de requisitos, se realiza una descripción de las diferentes elementos hardware y software empleados durante el desarrollo del proyecto y necesarios para la utilización del mismo. Así como una breve descripción del conocimiento acumulado y tecnologías existentes hasta la fecha.
 
 \item En el capítulo \ref{chap:planificación}, Organización temporal, se recoge todo lo que concierne a la distribución y duración de cada una de las tareas llevadas a cabo durante el desarrollo del proyecto que el presente documento describe.
 

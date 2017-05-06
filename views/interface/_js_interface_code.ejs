@@ -24,8 +24,12 @@
       } catch (error) {
         toastr.error('Failed to disconnect to the Robot!' + address_robot + error, 'Robot')
         io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
-        change_img_state('<%=robot.id %>', false);
-        reset_canvas('play_<%= video.id %>')
+        change_img_state('<%= robot.id %>', false);
+
+        <% if( typeof video !== 'undefined' ){ %>
+          reset_canvas('play_<%= video.id %>')
+        <% } %>
+
       }
     });
 
@@ -36,7 +40,11 @@
       //Sincronizar con el resto de clientes:
       io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
       change_img_state('<%=robot.id %>', false);
+
+      <% if( typeof video !== 'undefined' ){ %>
       reset_canvas('play_<%= video.id %>')
+      <% } %>
+
     });
 
 

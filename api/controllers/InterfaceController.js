@@ -49,7 +49,7 @@ module.exports = {
 
 
   show: function (req, res, next) {
-    Interface.findOne(req.param('id')).populate('events').populate('joystick').populate('video').populate('robot_owner').exec(function (err, iface) {
+    Interface.findOne(req.param('id')).populate('events').populate('video').populate('robot_owner').exec(function (err, iface) {
       if(err) return res.badRequest(err);
       if(!iface) return res.badRequest(__('not_found'));
 
@@ -89,7 +89,7 @@ module.exports = {
 
   view: function(req, res, next){
 
-    Interface.findOne({id: req.param('id')}).populate('events').populate('video').populate('joystick').populate('sliders').populate('robot_owner').exec(function (err, iface) {
+    Interface.findOne({id: req.param('id')}).populate('events').populate('video').populate('sliders').populate('robot_owner').exec(function (err, iface) {
       if(err) return res.badRequest(err);
       if(!iface) return res.badRequest(__('not_found'));
 
