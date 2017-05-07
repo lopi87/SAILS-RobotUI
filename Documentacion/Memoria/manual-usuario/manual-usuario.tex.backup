@@ -4,10 +4,10 @@
 RobotUI es una aplicación web creada con un claro propósito; el de  proporcionar a los usuarios un medio donde compartir sus dispositivos robóticos con el resto de usuarios.\\
 
 Para ello RobotUI proporciona una serie de herramientas para que, aquellas personas que no tengan los suficientes conocimientos de programación, puedan configurar un
-entorno para el manejo de sus proyectos robóticos y tener posibilidad de compartir sus experiencias con el resto.\\
+entorno para el manejo de sus proyectos robóticos y tener posibilidad de compartir sus experiencias con el resto de usuarios.\\
 
 La particularidad de RobotUI es que el usuario propietario del robot tiene la posibilidad de permitir el manejo de sus dispositivos robóticos al resto de usuarios que él mismo considere de una 
-manera controlada además de él mismo o, por otra parte, permitir que otros usuarios visualicen, como si de espectadores se tratase, el control que un determinado usuario realiza de un determinado robot.
+manera controlada o, por otra parte, permitir que otros usuarios visualicen, como si de espectadores se tratase, el control que un determinado usuario realiza de un determinado robot.
 Todo ello en tiempo real.\\
 
 Por tanto, tras esta breve introducción en el ámbito de la aplicación, en este manual se describen los diferentes paso a realizar para configurar sus dispositivos correctamente en el sistema
@@ -15,7 +15,7 @@ y abrirlo a toda una comunidad de usuarios. Además de tener abierto el acceso a
 
 \subsection{Objetivo de esta guía}
 
-Esta guía tiene como objetivo la de proporcionar al usuario un soporte de ayuda e
+Esta guía tiene como objetivo proporcionar al usuario un soporte de ayuda e
 iniciación a la utilización de RobotUI.\\
 
 Esta sección comprende:\\
@@ -29,7 +29,7 @@ Esta sección comprende:\\
 \subsection{Dirigido a}
 
 Esta guía esta dirigida al usuario final del proyecto RobotUI. Tiene la finalidad de proporcionar una guía descriptiva de los procedimientos de creación, configuración y utilización de los diferentes dispositivos 
-en sus dos modalidades disponibles, la de control y la de visualización.
+robóticos en sus dos modalidades disponibles, la de control y la de visualización.
 
 \subsection{Obtener RobotUI}
 
@@ -45,27 +45,12 @@ Git, escribiendo en la consola el siguiente comando:\\
 \label{sec:uso-robotui}
 
 
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.5]{imagenes/manual-usuario/barra-menu1.png}
-  \end{center}
-  \caption{Página principal RobotUI.}
-  \label{website:pagina-principal}
-\end{figure}
+\subsection{ Acceso a la aplicación }
+\label{sec:acceso-aplicacion}
 
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.5]{imagenes/manual-usuario/barra-menu2.png}
-  \end{center}
-  \caption{Página principal RobotUI.}
-  \label{website:pagina-principal}
-\end{figure}
+Para acceder a la aplicación, el usuario deberá accedes al siguiente enlace: \url{www.robotui.com}. \\
 
-
-
-
-\subsection{ Registo de usuario }
-\label{sec:creacion-usuario}
+Al dar clic en la url podrá ver el portal de entrada a la aplicación, desde donde puede acceder a la aplicación con sus credenciales y/o  acceder a los formularios de \emph{registro de usuario}.
 
 \begin{figure}[H]
   \begin{center}
@@ -75,10 +60,69 @@ Git, escribiendo en la consola el siguiente comando:\\
   \label{website:pagina-principal}
 \end{figure}
 
+
+\subsection{ Registo de usuario }
+\label{sec:creacion-usuario}
+
+
+Una vez en la página principal, figura \ref{website:pagina-principal}, podemos observar la barra superior, la cual posee dos estados, la de usuario sin identificar y la de usuario identificado.
+
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.5]{imagenes/manual-usuario/barra-menu1.png}
+  \end{center}
+  \caption{Vista de la barra superior en modalidad usuario no identificado en el sistema.}
+  \label{website:pagina-principal}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.5]{imagenes/manual-usuario/barra-menu2.png}
+  \end{center}
+  \caption{Vista de la barra superior en modalidad usuario identificado en el sistema.}
+  \label{website:pagina-principal}
+\end{figure}
+
+
+
+Para iniciar el proceso de registro de usuario hacemos clic sobre el botón de la barra superior \emph{¡Regístrese ahora!} mediante el cual accedemos al formulario \ref{website:formulario-registro}.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.4]{imagenes/manual-usuario/pagina-registro.png}
+  \end{center}
+  \caption{Formulario de registro de usuario.}
+  \label{website:formulario-registro}
+\end{figure}
+
+Para proceder con el registro necesitaremos los siguientes datos:
+
+\begin{enumerate}
+ \item Nombre: nombre de usuario.
+ \item Email: dirección de correo electrónico utilizada para acceder al sistema.
+ \item Contraseña: deberá proporcionar una contraseña para poder acceder al sistema.
+ \item Confirmación de contraseña: campo para comprobar que la contraseña es la deseada por el usuario.
+ \item Imagen: imagen avatar del usuario.
+ \item Idioma: establece el idioma por defecto del usuario.
+\end{enumerate}
+
+Una vez introducidos los datos correctamente podremos hacer clic en \emph{crear cuenta}. Si los datos introducidos son correctos dispondremos de un nuevo usuario en la aplicación redirigiéndonos
+a la página de información del nuevo usuario \ref{website:informacion-usuario}.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.4]{imagenes/manual-usuario/informacion-usuario.png}
+  \end{center}
+  \caption{Información de un usuario.}
+  \label{website:informacion-usuario}
+\end{figure}
+
+
 \subsection{Creación de un Robot}
 \label{sec:creacion-robot}
 
-Para el proceso de creación de un robot hacemos click al menú \emph{Robots} \textrightarrow \enspace \emph{Mis robots} accediendo al formulario de creación.
+Para el proceso de creación de un robot hacemos click al menú \emph{Robots} \textrightarrow \enspace \emph{Mis robots} accediendo al formulario de creación.\\
 
 En este caso registraremos nuestro robot de pruebas descrito en el capítulo \label{cap:robot}. Para ello introducimos los siguientes datos:
 
@@ -108,7 +152,7 @@ Una vez rellenado los campos como se muestran en la imagen \label{website:creaci
 
 \subsection{Configuración de la interfaz}
 
-Una vez creado nuestro robot en el sistema ya podemos configurar su interfaz. En la figura \ref{website:Configuracion-interfaz} podemos ver el canvas sobre el que iremos añadiendo los diferentes elementos que 
+Una vez creado nuestro robot en el sistema ya podemos configurar su interfaz. En la figura \ref{website:configuracion-interfaz} podemos ver el canvas sobre el que iremos añadiendo los diferentes elementos que 
 conformarán nuestro panel de control.
 
 \begin{figure}[H]
@@ -116,7 +160,7 @@ conformarán nuestro panel de control.
     \includegraphics[scale=0.4]{imagenes/manual-usuario/pagina-configurar-interfaz.png}
   \end{center}
   \caption{Panel de configuración de la interfaz.}
-  \label{website:Configuracion-interfaz}
+  \label{website:configuracion-interfaz}
 \end{figure}
 
 
@@ -130,24 +174,13 @@ conformarán nuestro panel de control.
 \end{figure}
 
 
-
 \begin{table}[H]
   \begin{center}
     \begin{tabular}{|p{2cm}|p{10cm}|}
       \hline
-      \centering{Tecla} & \qquad \quad Significado \\
+      \centering{Botón} & \qquad \quad Significado \\
       \hline
       \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-boton.png} & Apertura del formulario para la creación de un botón. \\
-      \hline
-      \includegraphics[width=2cm]{imagenes/nuevo-video.png} & \hspace*{-.8in} \vspace*{.8in}{Apertura del formulario para la creación de un canvas de vídeo.} \\
-      \hline
-      \includegraphics[width=2cm]{imagenes/flecha_derecha.png} & \hspace*{-.8in} \vspace*{.8in}{Giro cerrado a la derecha. Orden de giro a la derecha, el vehículo se detiene al soltar la tecla.} \\
-      \hline
-      \includegraphics[width=2cm]{imagenes/flecha_izquierda.png} & \hspace*{-.8in} \vspace*{.8in}{Giro cerrado a la izquierda. Orden de giro a la izquierda, el vehículo se detiene al soltar la tecla.} \\
-      \hline
-      \includegraphics[width=2cm]{imagenes/tecla_mas.png} & \hspace*{-.8in} \vspace*{.8in}{Incremento de velocidad. Se incrementa en una unidad la velocidad del vehículo.} \\
-      \hline
-      \includegraphics[width=2cm]{imagenes/tecla_menos.png} & \hspace*{-.8in} \vspace*{.8in}{Disminución de velocidad. Se disminuye en una unidad la velocidad del vehículo.} \\
       \hline
     \end{tabular}
   \end{center}

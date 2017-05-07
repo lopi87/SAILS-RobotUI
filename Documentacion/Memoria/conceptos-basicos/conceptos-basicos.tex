@@ -25,7 +25,14 @@ que rigen el proceso.
 \section{Socket}
 \label{sec:def-socket}
 
-\emph{Socket} designa un concepto abstracto mediante el cual dos programas, generalmente situados en computadoras distintas, pueden intercambiar cualquier flujo de datos de manera fiable y ordenada.\\
+\emph{Socket}, o también conocido como conector, designa un concepto abstracto mediante el cual dos programas, generalmente situados en computadoras distintas, pueden intercambiar cualquier flujo de datos
+de manera fiable y ordenada.\\
+
+La comunicación a través de una red de ordenadores es una tarea compleja en la que para resolverla se ha empleado un enfoque de diseño por capas, pudiéndose hablar por tanto de una arquitectura 
+o pila de protocolos donde cada capa utiliza servicios (funciones) de la capa inferior y ofrece servicios a la capa superior. \\
+
+El modelo de referencia para la comunicación de ordenadores es el denominado modelo de Interconexión de Sistemas Abiertos OSI ( Open Systems Interconection ), el cual queda descrito
+en la sección \ref{sec:modelo-osi} junto con la localización de los sockets en dicho modelo.\\
 
 El término \emph{socket} es también usado como el nombre de una interfaz de programación de aplicaciones (API) para la familia de protocolos de red TCP/IP \footnote{ TCP/IP es un conjunto de protocolos que
 permiten la comunicación entre los ordenadores pertenecientes a una red. La sigla TCP/IP significa Protocolo de control de transmisión/Protocolo de Internet. Proviene de los nombres de dos protocolos 
@@ -36,15 +43,6 @@ y remota, un protocolo de transporte y un par de números de puerto local y remo
 
 Cuando se habla de dirección y puerto local/remoto, se sobreentiende que nos referimos a dos procesos (cliente/servidor o nodo/nodo) ya que ambas direcciones IP y puerto pueden coincidir para el intercambio de información entre procesos dentro de una misma máquina
 y; además, la comunicación puede ser perfectamente bidireccional, asumiendo que el par que la inicia es el cliente y su contrapartida un servidor pero pudiendo ejercer de forma ambivalente ambas partes.\\
-
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.8]{imagenes/comunicaciones/socket.jpg}
-  \end{center}
-  \caption{ Representación de los sockets como una interfaz de la capa de transporte del protocolo TCP/IP.}
-  \label{diagram:socket}
-\end{figure}
 
 
 \section{WebSocket}
@@ -61,6 +59,40 @@ Se creó en los Estados Unidos, en 1986. Es mundialmente conocido porque se trat
 Debido a que las conexiones TCP comunes sobre puertos diferentes al 80 son habitualmente bloqueadas por los administradores de redes, el uso de esta tecnología proporcionaría una solución
 a este tipo de limitaciones proveyendo una funcionalidad similar a la apertura de varias conexiones en distintos puertos, pero multiplexando diferentes servicios WebSocket sobre un único
 puerto TCP a costa de una pequeña sobrecarga del protocolo.
+
+
+
+\section{La arquitectura TCP/IP y el modelo OSI}
+\label{sec:modelo-osi}
+
+En 1977 la Organización Internacional de Estandarización ( Internacional Standards Organization , ISO) estableció un subcomité encargado de diseñar una arquitectura de
+comunicación. El resultado fue el modelo de referencia para la Interconexión de Sistemas Abiertos OSI ( Open Systems Interconection ). Dicho modelo define una arquitectura de
+comunicación estructurada en siete niveles verticales. Dicho modelo es utilizado como base teórica para el desarrollo de la arquitectura TCP/IP, la cual está compuesta por una serie de capas
+o niveles en los que se encuentran los protocolos que implementan las funciones necesarias para la comunicación entre dos dispositivos en red.\\
+
+Siendo, por tanto, el modelo OSI el empleado en el estudio de las redes de datos y el modelo o arquitectura TCP/IP como un modelo real
+empleado es las redes actuales.\\
+
+En la siguiente figura \ref{diagram:modelo-osi-tcp} se aprecian los niveles o capas de los modelos OSI y TCP/IP.\\
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.8]{imagenes/osi-tcp.png}
+  \end{center}
+  \caption{ Representación de capas o niveles OSI y TCP/IP.}
+  \label{diagram:modelo-osi-tcp}
+\end{figure}
+
+Los sockets dentro del modelo TCP/IP se pueden ver como una interfaz con la capa de transporte.
+
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.5]{imagenes/modelo-tcp-ip-socket.png}
+  \end{center}
+  \caption{ Representación de los sockets como una interfaz de la capa de transporte del protocolo TCP/IP.}
+  \label{diagram:socket}
+\end{figure}
 
 
 \section{Streaming}

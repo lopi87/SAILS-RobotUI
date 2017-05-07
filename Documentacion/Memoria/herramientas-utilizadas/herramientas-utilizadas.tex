@@ -208,20 +208,25 @@ y facilitar las tareas comunes del administrador del sistema.
 \subsection{ Robomongo }
 
 \begin{center}
-\includegraphics[scale=0.5]{imagenes/pm2-logo.png}
+\includegraphics[scale=0.5]{imagenes/robomongo-logo.png}
 \end{center}
 
+Web: \url{https://robomongo.org/}\\
 
 
-
-
+Robomongo es una herramienta de gestión MongoDB de código abierto multi-plataforma basada en shell que incorpora el mismo motor de JavaScript que potencia el shell mongo de MongoDB.
+Robomongo no sólo analiza la semántica del código, sino que también lo ejecuta en una máquina virtual JavaScript interna, lo que nos permite darle un autocompletado en tiempo de ejecución, 
+imposible de obtener de forma estática. Siendo de especial ayuda para la gestión de la base de datos del proyecto.\\
 
 
 \section{Tecnologías hardware y materiales utilizados}
 \sectionmark{Tecnologías hardware}
+\label{sec:tecnologias-hardware}
+
 
 
 \subsection{Raspberry Pi Model B}
+\label{sec:raspberry}
 
 \begin{figure}[H]
   \begin{center}
@@ -272,7 +277,7 @@ Es un módulo que se utiliza mucho en proyectos de robótica, por su facilidad d
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.6]{imagenes/l298n.jpg}\\
+    \includegraphics[scale=0.8]{imagenes/l298n.jpg}\\
     \caption{Imagen de la controladora de motores L298n utilizada}
   \end{center}
 \end{figure}
@@ -281,7 +286,7 @@ Es un módulo que se utiliza mucho en proyectos de robótica, por su facilidad d
 
 \subsection{ Batería LiPo }
 
-Para alimentar el conjunto se ha empleado una batería LiPo de 1000mAh a 3,7V. Las batería de polímero de iones de litio, son pilas recargables (células de secundaria), compuestas generalmente de varias células secundarias idénticas en paralelo para aumentar la capacidad 
+Para alimentar los motores y su controladora se ha empleado una batería LiPo de 1000mAh a 3,7V. Las batería de polímero de iones de litio, son pilas recargables (células de secundaria), compuestas generalmente de varias células secundarias idénticas en paralelo para aumentar la capacidad 
 de la corriente de descarga. Siendo ideales para este tipo de usos.
 
 \begin{figure}[H]
@@ -293,6 +298,23 @@ de la corriente de descarga. Siendo ideales para este tipo de usos.
 
 
 \subsection{ Tarjeta de expansión con batería de Litio para Raspberry Pi }
+\label{componente:bateria-expansion}
+
+Para la alimentación de la placa se ha optado por un módulo de potencia diseñado especialmente para la Raspberry Pi 3 Model B, permitiendo que la placa maestra trabaje sin conexión hasta 9 horas
+de forma ininterrumpida.\\
+
+Por otra parte, esta placa dispone de 2 puertos USB adicionales: uno suministra energía para la Raspberry Pi y el otro para una posible pantalla LCD, resultlando interesante para otros proyectos.\\
+
+Sus características principales son las siguientes:
+
+\begin{enumerate}
+ \item Capacidad de la batería: 3800mAH
+ \item Corriente de descarga máxima: 1.8A
+ \item Tensión de salida sin carga: 5.1V ± 0.1V
+ \item Corriente / voltaje de carga estándar: 1.0A / 5.0V
+ \item Tensión de corte de la carga completa de la batería de iones de litio: 4.18V - 4.2V
+\end{enumerate}
+
 
 \begin{figure}[H]
   \begin{center}

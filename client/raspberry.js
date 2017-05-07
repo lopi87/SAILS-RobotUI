@@ -2,19 +2,14 @@
 var io = require('./node_modules/socket.io').listen(8085, { log: false });
 
 // Carga de módulos necesarios.
-var sys = require('util'), exec = require('child_process').exec,
-  path = require('path'), ffmpeg_command, running_camera = false;
-
-
-// Ruta a los drivers Gpio de la Raspberry, usado para enviar las señales.
-var path = '/sys/class/gpio/';
+var ffmpeg_command, running_camera = false, Gpio = require('pigpio').Gpio, child_process = require('child_process');
 
 // Pines utilizados. Motores izquierdos: 2 y 3, motores derechos: 17 y 27
-pins = [2, 3, 17, 27];
+var gpio2 = new Gpio(2, {mode: Gpio.OUTPUT}),
+  gpio3 = new Gpio(3, {mode: Gpio.OUTPUT}),
+  gpio17 = new Gpio(17, {mode: Gpio.OUTPUT}),
+  gpio27 = new Gpio(27, {mode: Gpio.OUTPUT});
 
-
-// Activación de los pines
-initPins();
 
 console.log('Esperando conexión...');
 
@@ -45,43 +40,47 @@ io.sockets.on('connection', function (socket)
 
     switch(data) {
       case 'UP':
-        exec_command( 'echo 1 > ' + path + 'gpio2/value'  );
-        exec_command( 'echo 0 > ' + path + 'gpio3/value'  )
-        exec_command( 'echo 1 > ' + path + 'gpio17/value' );
-        exec_command( 'echo 0 > ' + path + 'gpio27/value' );
+        gpio2.digitalWrite(1);
+        gpio3.digitalWrite(0);
+        gpio17.digitalWrite(1);
+        gpio27.digitalWrite(0);
         console.log('UP');
         break;
 
       case 'RIGHT':
-        exec_command( 'echo 0 > ' + path + 'gpio2/value'  );
-        exec_command( 'echo 0 > ' + path + 'gpio3/value'  );
-        exec_command( 'echo 1 > ' + path + 'gpio17/value' );
-        exec_command( 'echo 0 > ' + path + 'gpio27/value' );
+        gpio2.digitalWrite(0);
+        gpio3.digitalWrite(0);
+        gpio17.digitalWrite(1);
+        gpio27.digitalWrite(0);
+        console.log('UP');
         break;
 
       case 'LEFT':
-        exec_command( 'echo 1 > ' + path + 'gpio2/value'  );
-        exec_command( 'echo 0 > ' + path + 'gpio3/value'  );
-        exec_command( 'echo 0 > ' + path + 'gpio17/value' );
-        exec_command( 'echo 0 > ' + path + 'gpio27/value' );
+        gpio2.digitalWrite(1);
+        gpio3.digitalWrite(0);
+        gpio17.digitalWrite(0);
+        gpio27.digitalWrite(0);
+        console.log('UP');
         break;
 
-
       case 'DOWN':
-        exec_command( 'echo 0 > ' + path + 'gpio2/value'  );
-        exec_command( 'echo 1 > ' + path + 'gpio3/value'  );
-        exec_command( 'echo 0 > ' + path + 'gpio17/value' );
-        exec_command( 'echo 1 > ' + path + 'gpio27/value' );
+        gpio2.digitalWrite(0);
+        gpio3.digitalWrite(1);
+        gpio17.digitalWrite(0);
+        gpio27.digitalWrite(1);
+        console.log('UP');
         break;
 
       case 'STOP':
-        exec_command( 'echo 0 > ' + path + 'gpio2/value'  );
-        exec_command( 'echo 0 > ' + path + 'gpio3/value'  );
-        exec_command( 'echo 0 > ' + path + 'gpio17/value' );
-        exec_command( 'echo 0 > ' + path + 'gpio27/value' );
+        gpio2.digitalWrite(0);
+        gpio3.digitalWrite(0);
+        gpio17.digitalWrite(0);
+        gpio27.digitalWrite(0);
+        console.log('UP');
         break;
+
       default:
-        console.log('Comando no encontrado');
+        console.log('command not found');
     }
 
   })
@@ -105,7 +104,7 @@ function startStreaming(socket) {
   if (running_camera == false){
     console.log('Starting streaming....');
     var args = ["-f", "video4linux2", "-i", "/dev/video0", "-s", "300x150","-f","mjpeg", "pipe:1", "-b:v 28k", "-bufsize 28k"]
-    ffmpeg_command = require('child_process').spawn("ffmpeg", args);
+    ffmpeg_command = child_process.spawn("ffmpeg", args);
     running_camera = true
   }
 
@@ -138,47 +137,3 @@ function startStreaming(socket) {
   });
 
 }
-
-function initPins()
-{
-  // Activa control de los Pines Gpio de la Raspberry Pi.
-  for (var pin in pins)
-  {
-    //console.log('Creando puerto ' + pins[pin] + '...');
-
-    // Primeramente comprueba si el puerto ya existe.
-    var command = 'if (! [ -f ' + path + 'gpio' + pins[pin] + '/direction ]); then ' +
-      'echo ' + pins[pin] + ' > ' + path + 'export; fi';
-
-    // Creación del puerto usando la línea de comandos.
-    exec(command, function(error, stdout, stderr)
-    {
-      if (error === null){
-        //console.log('Puerto creado con éxito.');
-      }else{
-        console.log('Error en la creación del puerto: ' + error + ' (' + stderr + ').');
-      }
-    })
-  }
-
-  // Configuración de los pines GPIO como salida.
-  for (var pin in pins)
-  {
-    //console.log('Configurando puerto ' + pins[pin] + '...');
-
-    // Configurando los puertos como salida.
-    var command = 'echo out > ' + path + 'gpio' + pins[pin] + '/direction';
-
-    // Configure the ports using Raspbian's command line.
-    exec(command, function(error, stdout, stderr)
-    {
-      if (error === null){
-        //console.log('Puerto configurado con éxito.');
-      }else{
-        console.log('Error configurando el puerto: ' + error + ' (' + stderr + ').');
-      }
-    })
-  }
-}
-
-

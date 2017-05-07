@@ -1,10 +1,6 @@
-\chapter[Estado del arte y herramientas utilizadas]{Estado del arte y herramientas utilizadas}
-\chaptermark{Arte y tecnologías}
+\chapter[Herramientas utilizadas]{Tecnologías utilizadas}
+\chaptermark{Herramientas utilizaadas}
 \label{chap:herramientas}
-
-\section[Estado del arte de herramientas para monitorizar información]{Estado del arte de herramientas para control de dispositivos}
-\sectionmark{Estado del arte}
-
 
 \newpage
 
@@ -57,7 +53,7 @@ Git es un sistema open-source de control de versiones diseñado para manejar int
 
 Web: \url{https://www.digitalocean.com/}\\
 
-Servidor web para alojar proyectos en la nube. La ventaja de este servicio de VPS \footnote{ VPS: Servidor Virtual Privado, del inglés virtual private server, es un método de particionar un servidor
+Servidor web para alojar proyectos en la nube. La ventaja de este servicio de VPS \footnote{ VPS: Servidor Virtual Privado, del inglés Virtual Private Server, es un método de particionar un servidor
 físico en varios servidores de tal forma que todo funcione como si se estuviese ejecutando en una única máquina. Cada servidor virtual es capaz de funcionar bajo su propio sistema operativo y
 además cada servidor puede ser reiniciado de forma independiente.} es que te permite desplegar máquinas de cualquier tipo (siempre que sean software libre) de una manera muy fácil y rápida. 
 Además tiene un punto fuerte y es que la información se almacena en discos SSD, con lo que el procesamiento se ve muy mejorado a la hora de computar (en este caso trabajo con websockets y 
@@ -126,6 +122,38 @@ que se ejecuta en el navegador y una biblioteca del lado del servidor para Node.
 Socket.IO puede usarse simplemente como un wrapper para WebSocket aunque proporciona muchas más funciones, incluyendo la transmisión a múltiples sockets, almacenamiento de datos asociados a cada cliente y E/S asíncronas.
 
 
+
+
+\subsection{ FFmpeg }
+
+
+\begin{center}
+\includegraphics[scale=0.8]{imagenes/Ffmpeg-logo.jpg}
+\end{center}
+
+Web: \url{https://ffmpeg.org/}\\
+
+FFmpeg es una colección de software libre que puede grabar, convertir (transcodificar) y hacer streaming de audio y vídeo. Incluye libavcodec, una biblioteca de códecs. FFmpeg está desarrollado en GNU/Linux, pero puede ser compilado
+en la mayoría de los sistemas operativos, incluyendo Windows.
+
+FFmpeg es un programa bastante sencillo y muy fácil de usar, orientado tanto a personas con conocimientos avanzados como usuarios inexpertos. 
+
+El proyecto FFmpeg está compuesto por:
+
+\begin{itemize}
+ \item ffmpeg: es una herramienta de línea de comandos para convertir audio o video de un formato a otro. También puede capturar y codificar en tiempo real desde DirectShow, una tarjeta de televisión u otro dispositivo compatible.
+ \item ffserver: es un servidor de streaming multimedia de emisiones en directo que soporta HTTP (la compatibilidad con RTSP está en desarrollo). Todavía no está en fase estable, y de momento no está disponible para Windows.
+ \item ffplay: es un reproductor multimedia basado en SDL y las bibliotecas FFmpeg.
+ \item libavcodec: es una biblioteca que contiene todos los códecs de FFmpeg. Muchos de ellos fueron desarrollados desde cero para asegurar una mayor eficiencia y un código altamente reutilizable.
+ \item libavformat: es una biblioteca que contiene los multiplexadores/demultiplexadores para los archivos contenedores multimedia.
+ \item libavutil: es una biblioteca de apoyo que contiene todas las rutinas comunes en las diferentes partes de FFmpeg.
+ \item libpostproc: es una biblioteca de funciones de postproceso de vídeo.
+ \item libswscale: es la biblioteca de escalado de vídeo.
+\end{itemize}
+
+Para el desarrollo de RobotUI, concretamente para la transmisión de vídeo desde el robot de pruebas desarrollado hacia el cliente, el módulo utilizado ha sido el de la herramienta de línea de comandos.
+
+
 \subsection{Bootstrap}
 
 
@@ -185,11 +213,18 @@ y facilitar las tareas comunes del administrador del sistema.
 
 
 
+
+
+
+
 \section{Tecnologías hardware y materiales utilizados}
 \sectionmark{Tecnologías hardware}
+\label{sec:tecnologias-hardware}
+
 
 
 \subsection{Raspberry Pi Model B}
+\label{sec:raspberry}
 
 \begin{figure}[H]
   \begin{center}
@@ -240,7 +275,7 @@ Es un módulo que se utiliza mucho en proyectos de robótica, por su facilidad d
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.6]{imagenes/l298n.jpg}\\
+    \includegraphics[scale=0.8]{imagenes/l298n.jpg}\\
     \caption{Imagen de la controladora de motores L298n utilizada}
   \end{center}
 \end{figure}
@@ -249,7 +284,7 @@ Es un módulo que se utiliza mucho en proyectos de robótica, por su facilidad d
 
 \subsection{ Batería LiPo }
 
-Para alimentar el conjunto se ha empleado una batería LiPo de 1000mAh a 3,7V. Las batería de polímero de iones de litio, son pilas recargables (células de secundaria), compuestas generalmente de varias células secundarias idénticas en paralelo para aumentar la capacidad 
+Para alimentar los motores y su controladora se ha empleado una batería LiPo de 1000mAh a 3,7V. Las batería de polímero de iones de litio, son pilas recargables (células de secundaria), compuestas generalmente de varias células secundarias idénticas en paralelo para aumentar la capacidad 
 de la corriente de descarga. Siendo ideales para este tipo de usos.
 
 \begin{figure}[H]
@@ -261,6 +296,23 @@ de la corriente de descarga. Siendo ideales para este tipo de usos.
 
 
 \subsection{ Tarjeta de expansión con batería de Litio para Raspberry Pi }
+\label{componente:bateria-expansion}
+
+Para la alimentación de la placa se ha optado por un módulo de potencia diseñado especialmente para la Raspberry Pi 3 Model B, permitiendo que la placa maestra trabaje sin conexión hasta 9 horas
+de forma ininterrumpida.\\
+
+Por otra parte, esta placa dispone de 2 puertos USB adicionales: uno suministra energía para la Raspberry Pi y el otro para una posible pantalla LCD, resultlando interesante para otros proyectos.\\
+
+Sus características principales son las siguientes:
+
+\begin{enumerate}
+ \item Capacidad de la batería: 3800mAH
+ \item Corriente de descarga máxima: 1.8A
+ \item Tensión de salida sin carga: 5.1V ± 0.1V
+ \item Corriente / voltaje de carga estándar: 1.0A / 5.0V
+ \item Tensión de corte de la carga completa de la batería de iones de litio: 4.18V - 4.2V
+\end{enumerate}
+
 
 \begin{figure}[H]
   \begin{center}

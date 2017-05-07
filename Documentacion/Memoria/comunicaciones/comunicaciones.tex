@@ -57,7 +57,7 @@ Primeramente al realizarse una nueva conexión de un cliente en el sistema el se
 movimientos por toda la aplicación.\\
 
 \begin{lstlisting}[language=JavaScript]
-  //Funcion para tener en todo momento almacenado en la tabla session los sockets conectados junto con el usuario al que pertenece
+  \/\/Funcion para tener en todo momento almacenado en la tabla session los sockets conectados junto con el usuario al que pertenece
   function savesocket() {
     io.socket.get("/session/saveSocketID");
   }  
@@ -68,7 +68,7 @@ Función que realiza el registro de un nuevo cliente en la base de datos:\\
 
 \begin{lstlisting}[language=JavaScript]
 
-  //Almacenamiento en la base de datos la sesion de cada usuario de la página:
+  //Almacenamiento en la base de datos la sesión de cada usuario de la página:
   saveSocketID: function(req, res) {
     if (!req.isSocket) return res.badRequest();
 
@@ -121,8 +121,8 @@ Función que realiza el registro de un nuevo cliente en la base de datos:\\
 
 \end{lstlisting}
 
-Una vez finaliza el registro en el servidor del nuevo cliente se comprueba si existe definida la función \emph{subscribeAndListen} llamándose en caso afirmativo. Dicha función es específica para cada
-funcionalidad que queramos inicializar o a qué eventos nos deseemos suscribir. Por ejemplo, suscibirnos a los eventos de conexión y desconexión de usuarios del panel de administración descrito en el apartado
+Una vez finaliza el registro en el servidor del nuevo cliente se comprueba si existe definida la función \emph{ subscribeAndListen } llamándose en caso afirmativo. Dicha función es específica para cada
+funcionalidad que queramos inicializar o a qué eventos nos deseemos suscribir. Por ejemplo, suscribirnos a los eventos de conexión y desconexión de usuarios del panel de administración descrito en el apartado
 \ref{sec:fundamentos} mediante la definición de la función \emph{subscribeAndListen} en la vista correspondiente.\\
 
 
@@ -175,13 +175,12 @@ Finalmente mostramos el código JavaScript al completo localizado en el archivo 
 \subsubsection { Desconexión }
 \label{sec:deconexion}
 
-
 En este apartado describiremos los puntos de mayor relevancia a la hora de la desconexión de alguna de las diferentes comunicaciones establecidas comenzando con la desconexión de un usuario.\\
 
 Cuando un usuario realiza una desconexión, bien deslogueándose de la página o cerrando una de las ventanas abiertas, automáticamente se lanza una llamada a la 
 función \emph{afterDisconnect} localizada en el fichero \emph{config/Socket.js} del servidor. Función que será ejecutada cada vez que un socket es desconectado del sistema.\\
 
-Dicha función primeramente localiza qué sesión en la base de relacionada está relacionada con identificador del socket desconectado. Si este Socked estaba usando algún robot, éste se libera cambiando el estado
+Dicha función primeramente localiza qué sesión en la base de relacionada está relacionada con identificador del socket desconectado. Si este socked estaba usando algún robot, éste se libera cambiando el estado
 del robot a \emph{libre}. Y se informa a todos los sockets abiertos que el robot queda libreado y accesible al resto de usuarios.\\
 
 \begin{lstlisting}[language=JavaScript]
