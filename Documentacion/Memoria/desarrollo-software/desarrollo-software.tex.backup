@@ -110,15 +110,29 @@ Los diagramas de caso de uso muestra una representación del comportamiento ofre
 del sistema es representado como un conjunto de transacciones ejecutadas entre el sistema y los actores junto con la descripción sobre las de las relaciones de comunicación
 existentes entre un actor y el sistema.\\
 
-En la figura \ref{diagram:caso-uso} podemos observar el diagrama de casos de uso resultante tras la recolección de requisitos:
+En la figura \ref{diagram:caso-uso} podemos observar los diagramas de casos de uso resultantes tras la recolección de requisitos:
 
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=.5]{diagramas/casos-uso.png}
   \end{center}
-  \caption{Diagrama de casos de uso.}
+  \caption{Diagrama de casos de uso para la interacción con la aplicación.}
   \label{diagram:caso-uso}
 \end{figure}
+
+
+
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=.5]{diagramas/casos-uso-robot.png}
+  \end{center}
+  \caption{Diagrama de casos de uso para la interacción con el robot de pruebas.}
+  \label{diagram:caso-uso}
+\end{figure}
+
+
+
 
 
 \section{Especificación de los casos de uso}
@@ -353,8 +367,6 @@ A continuación se proporciona la especificaciones de cada uno de los casos de u
 \end{table}
 
 
-
-
 \begin{table}[H]
   \begin{center}
     \begin{tabular}{|p{3.5cm}|p{10cm}|}
@@ -484,32 +496,33 @@ A continuación se proporciona la especificaciones de cada uno de los casos de u
          {\textbf{Excepciones:}} & {
          \begin{enumerate}
          
-	    \item Si el usuario no se encuentra logueado en el sistema:
-	    \begin{itemize}
-	      \item El sistema informa de que es necesario identificarse.
-	      \item Se cancela el caso de uso.
-	    \end{itemize}
+	  \item Si el usuario no se encuentra logueado en el sistema:
+	  \begin{itemize}
+	    \item El sistema informa de que es necesario identificarse.
+	    \item Se cancela el caso de uso.
+	  \end{itemize}
+      
+	  \item Si el robot no pertenece al usuario:
+	  \begin{itemize}
+	    \item El sistema informa de que no tiene permisos.
+	    \item Se cancela el caso de uso.
+	  \end{itemize}
 	  
-	    \item Si el robot no pertenece al usuario:
-	    \begin{itemize}
-	      \item El sistema informa de que no tiene permisos.
-	      \item Se cancela el caso de uso.
-	    \end{itemize}
-	 
          
           \item Si faltan datos obligatorios:
-          \begin{itemize}
-           \item El sistema informa de que no se puede realizar la edición.
-           \item Vuelve al paso 2.
-          \end{itemize}
+	  \begin{itemize}
+	    \item El sistema informa de que no se puede realizar la edición.
+	    \item Vuelve al paso 2.
+	  \end{itemize}
+	    
 	  \item Si la dirección IP es inválida:
-	    \begin{itemize}
-	      \item El sistema informa de que no se puede realizar el registro.
-	      \item Vuelve al paso 2.
-	   \end{itemize}
+	  \begin{itemize}
+	    \item El sistema informa de que no se puede realizar el registro.
+	    \item Vuelve al paso 2.
+	  \end{itemize}
 	   
 	  \item Si el puerto no es un valor numérico:
-	    \begin{itemize}
+	   \begin{itemize}
 	      \item El sistema informa de que no se puede realizar el registro.
 	      \item Vuelve al paso 2.
 	   \end{itemize}
