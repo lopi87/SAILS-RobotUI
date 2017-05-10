@@ -199,21 +199,9 @@ service mongodb start
 \end{lstlisting}
 
 
-\section{Instalación de WebStorm}
-
-
-
-\section{Robomongo}
-
-
-
 \section{Instalación del control de versiones Git}
 
-Para seguir esta guía es necesario disponer de una máquina con:
-
-\begin{itemize}
-\item{ Ubuntu 14.04.}
-\end{itemize}
+Para seguir esta guía es necesario disponer de una máquina con Ubuntu 14.04.\\
 
 La forma más sencilla de tener Git instalado y configurado para su utilización es mediante el uso de los repositorios predeterminados de Ubuntu. 
 Este es el método más rápido, pero, por contra puede ser que la versión disponible no sea la más reciente. 
@@ -230,28 +218,35 @@ Esto descargará e instalará Git en el sistema. A continuación se describe los
 
 \subsection{Configuración}
 
-Ahora que tiene git instalado, necesita hacer algunas cosas para que los mensajes de confirmación que se generarán para usted contendrán su información correcta.
+Ahora que tiene git instalado, necesita hacer algunas cosas para que los mensajes de confirmación que se generarán para usted contendrán su información correcta.\\
 
 La forma más sencilla de hacerlo es a través del comando \emph{git config} proporcionando nuestro nombre y dirección de correo electrónico. Esto es debido a que Git incorpora esta información en cada commit
-que hacemos. Por ejemplo, si nuestro nombre es \emph{RobotUI} y nuestro email \emph{email@robotui.com}, los comandos de configuración serían los siguientes:
+que hacemos. Por ejemplo, si nuestro nombre es \emph{RobotUI} y nuestro email \emph{email@robotui.com}, los comandos de configuración serían los siguientes:\\
 
 \begin{lstlisting}[language=bash]
  git config --global user.name "RobotUI"
  git config --global user.email "email@robotui.com"
 \end{lstlisting}
 
-Finalmente podemos comprobar todos los valores de configuración establecidos escribiendo:
+Finalmente podemos comprobar todos los valores de configuración establecidos escribiendo:\\
 
 \begin{lstlisting}[language=bash]
 git config --list
 \end{lstlisting}
 
-Existen muchas más opciones configurables pero estos son los dos esenciales necesarios.
+Existen muchas más opciones configurables pero estos son los dos esenciales necesarios.\\
 
-\section{Despliegue}
+\section{Despliegue de una aplicación Sails}
 
-Primaremanet, debemos definir el entorno de producción para nuestra aplicación Sails. Para ello editamos el fichero '/config/env/production.js' de la siguiente manera:\\
+Primeramente, debemos definir el entorno de producción para nuestra aplicación Sails. Para ello editamos el fichero \emph{/config/env/production.js} introduciendo los siguientes datos:\\
 
+\begin{itemize}
+ \item Nombre de nuestra conexión de la base de datos la cual hemos definido en nuestro archivo \emph{config/connections.js}
+ \item Dirección IP de nuestro servidor.
+ \item Puerto por el que queremos correr nuestra aplicación.
+\end{itemize}
+  
+Un ejepmlo de configuración es el siguiente:
 
 \begin{lstlisting}[language=JavaScript]
 /**
@@ -297,9 +292,8 @@ module.exports = {
 };
 \end{lstlisting}
 
-
-
-En el servidor de producción se ha utilizado Nginx\footnote{Nginx es un servidor web/proxy inverso ligero de alto rendimiento y un proxy para protocolos de correo electrónico (IMAP/POP3)} con la siguiente configuración:\\
+En el servidor de producción se ha utilizado Nginx \footnote{Nginx es un servidor web/proxy inverso ligero de alto rendimiento y un proxy para protocolos de correo electrónico (IMAP/POP3)} 
+con la siguiente configuración:\\
 
 \begin{lstlisting}[language=bash]
 

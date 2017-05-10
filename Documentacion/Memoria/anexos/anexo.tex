@@ -13,7 +13,7 @@ Anexos con las instrucciones para la instalación de todos los componentes softw
 \section{Instalación de Node.js}
 
 
-Instalación de los prerequisitos:
+Instalación de los prerrequisitos:
 
 \begin{lstlisting}[language=bash]
 sudo apt-get install python-software-properties python g++ make
@@ -76,7 +76,7 @@ La opción -g, qe significa global, lo que hace es instalar Sails a nivel global
 
 Es posible que necesite permisos de administrador para instalar Sails a nivel global.\\
 
-Para comprobar que la instalación se realizó correctamente, crearemos un proyecto inicial y levantaremos el servidor. Para ello introducirmos en la terminal:\\
+Para comprobar que la instalación se realizó correctamente, crearemos un proyecto inicial y levantaremos el servidor. Para ello introducimos en la terminal:\\
 
 \begin{lstlisting}[language=bash]
 sails new my_first_app
@@ -131,38 +131,40 @@ Para seguir esta guía es necesario:
 \subsection{Instalación}
 
 
-MongoDB ya está incluido en los repositorios de paquetes de Ubuntu, pero el repositorio oficial MongoDB proporciona la versión más actualizada y es la forma recomendada de instalar el software. Ubuntu garantiza la autenticidad de los paquetes de software al verificar que están firmados con las claves GPG, por lo que primero tenemos que importar la clave para el repositorio oficial de MongoDB.
+Para la instalación de MongoDB se puede optar con la versión disponible en los repositorios de paquetes de Ubuntu a pesar de que no sea la última versión disponible. Los repositorios propios de MongoDB proporcionan
+la versión más actualizada siendo la forma recomendada de instalación. Para la instalación desde repositorios externos, Ubuntu garantiza la autenticidad de los paquetes de software al verificar que están firmados
+con las claves GPG, por lo que primero tenemos que importar la clave para el repositorio oficial de MongoDB.\\
 
-Para ello, ejecute:
+Para ello, ejecute:\\
 
 \begin{lstlisting}[language=bash]
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 \end{lstlisting}
 
 
-Después de importar con éxito la clave, verá lo siguiente:
+Después de importar con éxito la clave, verá lo siguiente:\\
 
 \begin{lstlisting}[language=bash]
 Gpg: Número total procesado: 1
 Gpg: importado: 1 (RSA: 1)
 \end{lstlisting}
 
-A continuación, tenemos que actualizar los detalles del repositorio de MongoDB para que APT sepa de dónde descargar los paquetes.
+A continuación, tenemos que actualizar los detalles del repositorio de MongoDB para que APT sepa de dónde descargar los paquetes.\\
 
-Introduzca el siguiente comando para crear un archivo de lista para MongoDB.
+Introduzca el siguiente comando para crear un archivo de lista para MongoDB.\\
 
 \begin{lstlisting}[language=bash]
 echo "deb http://repo.mongodb.org/apt/ubuntu "\$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
 \end{lstlisting}
 
-Después de agregar los detalles del repositorio, necesitamos actualizar la lista de paquetes.
+Después de agregar los detalles del repositorio, necesitamos actualizar la lista de paquetes.\\
 
 \begin{lstlisting}[language=bash]
 sudo apt-get update
 \end{lstlisting}
 
 
-Ahora podemos instalar el propio paquete MongoDB.
+Ahora podemos instalar el propio paquete MongoDB.\\
 
 \begin{lstlisting}[language=bash]
 sudo apt-get install -y mongodb-org
@@ -170,13 +172,13 @@ sudo apt-get install -y mongodb-org
 
 Este comando instalará varios paquetes que contengan la última versión estable de MongoDB junto con útiles herramientas de administración para el servidor MongoDB.\\
 
-Después de la instalación del paquete, MongoDB se iniciará automáticamente. Puede comprobarlo ejecutando el siguiente comando.
+Después de la instalación del paquete, MongoDB se iniciará automáticamente. Puede comprobarlo ejecutando el siguiente comando.\\
 
 \begin{lstlisting}[language=bash]
 service mongodb status
 \end{lstlisting}
 
-Si MongoDB se está ejecutando, verá una salida como la siguiente (con un ID de proceso diferente).
+Si MongoDB se está ejecutando, verá una salida como la siguiente (con un ID de proceso diferente).\\
 
 \begin{lstlisting}[language=bash]
  mongodb.service - An object/document-oriented database
@@ -191,7 +193,7 @@ Si MongoDB se está ejecutando, verá una salida como la siguiente (con un ID de
             - 807 /usr/bin/mongod --config /etc/mongodb.conf
 \end{lstlisting}
 
-También puede detener, iniciar y reiniciar MongoDB utilizando los siguientes comandos
+También puede detener, iniciar y reiniciar MongoDB utilizando los siguientes comandos:\\
 
 \begin{lstlisting}[language=bash]
 service mongodb stop
@@ -207,7 +209,7 @@ La forma más sencilla de tener Git instalado y configurado para su utilización
 Este es el método más rápido, pero, por contra puede ser que la versión disponible no sea la más reciente. 
 Si necesita la última versión, deberá seguir los pasos para compilar Git desde el origen.\\
 
-Si no necesitamos dispoer de la última versión podemos instalarlo desde el repositorio de Ubuntu. Para ello introducimos los siguientes comandos en una termina:\\
+Si no necesitamos disponer de la última versión podemos instalarlo desde el repositorio de Ubuntu. Para ello introducimos los siguientes comandos en una terminal:\\
 
 \begin{lstlisting}[language=bash]
 sudo apt-get update
@@ -246,7 +248,7 @@ Primeramente, debemos definir el entorno de producción para nuestra aplicación
  \item Puerto por el que queremos correr nuestra aplicación.
 \end{itemize}
   
-Un ejepmlo de configuración es el siguiente:
+Un ejemplo de configuración es el siguiente:
 
 \begin{lstlisting}[language=JavaScript]
 /**
