@@ -17,6 +17,8 @@ module.exports = {
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
+  hookTimeout: 40000,
+
   models: {
     connection: 'externalMongodbServer'
   },
