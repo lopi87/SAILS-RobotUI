@@ -333,8 +333,8 @@ module.exports = {
       ipaddress: req.param('ipaddress'),
       port: parseInt(req.param('port')),
       owner: req.session.User.id,
-      public_drive: req.param('public_drive') == 'on' ? true : false,
-      public_view: req.param('public_view') == 'on' ? true : false
+      public_drive: req.param('public_drive') == 'on',
+      public_view: req.param('public_view') == 'on'
     };
 
 
