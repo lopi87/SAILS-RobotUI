@@ -151,5 +151,7 @@
 	"user.name.required": "user.name.required",
 	"robot": "Robot",
 	"seeing": "Visión",
-	"not_found": "not_found"
+	"not_found": "not_found",
+	"403_message": "No tiene permisos para realizar la acción solicitada",
+	"index": "index"
 }

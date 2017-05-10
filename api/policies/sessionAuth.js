@@ -16,7 +16,7 @@ module.exports = function(req, res, next) {
   } else {
     //Usuario no logueado no permitido
     FlashService.warning(req, 'Session expired.' );
-    return res.redirect('/');
+    return res.forbidden('You are not permitted to perform this action.');
   }
 
 };

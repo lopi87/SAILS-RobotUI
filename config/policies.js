@@ -44,7 +44,8 @@ module.exports.policies = {
   },
 
   index:{
-    '*': ['flash', 'localize', 'flash', 'message']
+    '*': ['flash', 'localize', 'message'],
+    index: ['flash', 'localize', 'message']
   },
 
   interface:{
