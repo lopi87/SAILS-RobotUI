@@ -73,7 +73,7 @@ module.exports.connections = {
     host: 'localhost',
     port: 27017,
     user: '',
-    password: 'BXT53na1',
+    password: '',
     database: 'RobotUI'
     // url: process.env.DB_URL
   },
