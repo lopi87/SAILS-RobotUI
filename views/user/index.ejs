@@ -73,7 +73,7 @@
           data: {id: user.id},
           success: function(data){
             $("#user_list").append(data);
-           toastr.info('A new user has been created!', 'User' )
+           toastr.info('<%= i18n('user_created')%>', 'RobotUI' )
           }
         });
       }
@@ -84,9 +84,9 @@
 
         if (data.id != '<%= req.session.User.id %>') {
           if (data.loggedIn) {
-           toastr.info('<%= i18n('user_connected')%>', 'User');
+           toastr.info('<%= i18n('user_connected')%>', 'RobotUI');
           } else {
-           toastr.info('<%= i18n('user_disconnected')%>', 'User');
+           toastr.info('<%= i18n('user_disconnected')%>', 'RobotUI');
           }
           console.log('User has been updated to online:' + data.loggedIn);
         }
@@ -94,7 +94,7 @@
 
       if (obj.verb == 'destroyed') {
         $("#user_" + obj.id).remove();
-       toastr.info('An user has been deleted!', 'User' );
+       toastr.info('<%= i18n('user_destroyed') %>', 'RobotUI' );
       }
 
     });

@@ -137,6 +137,7 @@
 	"robot.port.required": "robot.port.required",
   "new_message": "You have a new message!",
   "user_connected": "User conected!",
-  "user_disconnected": "User disconnected!"
-
+  "user_disconnected": "User disconnected!",
+  "user_created": "A new user has been created!",
+  "user_destroyed": "An user has been destroyed!"
 }

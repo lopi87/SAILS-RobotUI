@@ -156,5 +156,7 @@
 	"index": "index",
   "new_message": "¡Tienes un nuevo mensaje!",
   "user_connected": "¡Usuario conectado!",
-  "user_disconnected": "¡Usuario desconectado!"
+  "user_disconnected": "¡Usuario desconectado!",
+  "user_created": "¡Un nuevo usuario ha sido creado!",
+  "user_destroyed": "¡Un usuario ha sido eliminado!"
 }
