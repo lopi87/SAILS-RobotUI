@@ -220,7 +220,7 @@
           }else{
             new_msg_num_update('<%= i18n('messages') %>');
           }
-          toastr.info('You have a new message! <a href="/message/show/' + message.data.msg.id + '"><%= i18n('open_here')%></a>' , 'Message');
+          toastr.info('<%= i18n('new_message')%>' + '<a href="/message/show/' + message.data.msg.id + '"><%= i18n('open_here')%></a>' , 'Message');
 
           break;
         default:

@@ -134,5 +134,6 @@
 	"robot.ipaddress.ip": "robot.ipaddress.ip",
 	"robot.ipaddress.required": "robot.ipaddress.required",
 	"robot.port.integer": "robot.port.integer",
-	"robot.port.required": "robot.port.required"
+	"robot.port.required": "robot.port.required",
+  "new_message": "You have a new message!"
 }
