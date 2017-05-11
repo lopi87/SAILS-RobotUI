@@ -152,10 +152,10 @@ module.exports = {
           req.session.destroy();
 
           //Informar a otros clientes (sockets abiertos) que el usuario no esta logueado
-          User.publishUpdate(user.id, {
-            loggedIn: false,
-            id: user.id
-          });
+          // User.publishUpdate(user.id, {
+          //   loggedIn: false,
+          //   id: user.id
+          // });
 
           res.clearCookie('io');
           res.clearCookie('sails.sid');

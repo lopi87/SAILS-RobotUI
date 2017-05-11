@@ -170,7 +170,7 @@ module.exports.sockets = {
       }
 
 
-      //Emit to every room that a socket leave the room ->  and leave the room
+      //Emite a cada room que un usuario la ha abandonado ->  abandona la room
       session.rooms.forEach(function (room) {
         //sails.sockets.leave(session.socket_id, room.room_name, function(err) {
         //  if (err) {return res.serverError(err);}
@@ -183,7 +183,7 @@ module.exports.sockets = {
       Session.count({user_id: session.user_id}).exec(function countUserSessions(error, n_sessions) {
         console.log('There are ' + n_sessions + ' users ' + session.user_id);
 
-        //Change user to offline state
+        //Cambiar usuario a offline
         if (n_sessions == 1) {
           User.update(session.user_id, {online: false}, function (err) {
             if (err) return cb(err);
