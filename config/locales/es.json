@@ -154,5 +154,7 @@
 	"not_found": "not_found",
 	"403_message": "No tiene permisos para realizar la acción solicitada",
 	"index": "index",
-  "new_message": "¡Tienes un nuevo mensaje!"
+  "new_message": "¡Tienes un nuevo mensaje!",
+  "user_connected": "¡Usuario conectado!",
+  "user_disconnected": "¡Usuario desconectado!"
 }

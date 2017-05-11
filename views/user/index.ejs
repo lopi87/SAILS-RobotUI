@@ -84,9 +84,9 @@
 
         if (data.id != '<%= req.session.User.id %>') {
           if (data.loggedIn) {
-           toastr.info('User connected!', 'User');
+           toastr.info('<%= i18n('user_connected')%>', 'User');
           } else {
-           toastr.info('User disconnected!', 'User');
+           toastr.info('<%= i18n('user_disconnected')%>', 'User');
           }
           console.log('User has been updated to online:' + data.loggedIn);
         }

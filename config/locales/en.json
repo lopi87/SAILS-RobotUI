@@ -135,5 +135,8 @@
 	"robot.ipaddress.required": "robot.ipaddress.required",
 	"robot.port.integer": "robot.port.integer",
 	"robot.port.required": "robot.port.required",
-  "new_message": "You have a new message!"
+  "new_message": "You have a new message!",
+  "user_connected": "User conected!",
+  "user_disconnected": "User disconnected!"
+
 }
