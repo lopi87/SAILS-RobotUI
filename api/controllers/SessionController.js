@@ -34,18 +34,18 @@ module.exports = {
       Session.count({user_id: req.session.User.id}).exec(function countUserSessions(error, n_sessions) {
         console.log('There are ' + n_sessions + ' sessions of user ' + req.session.User.id);
 
-        if (n_sessions == 0) {
-          //Cambio de estado del usuario a online
-          User.update(req.session.User.id, {online: true}, function (err) {
-            if (err) return res.badRequest();
-
-            //Informar a otros clientes (sockets abiertos) que el usuario esta logueado
-            User.publishUpdate(req.session.User.id, {
-              loggedIn: true,
-              id: req.session.User.id
-            });
-          });
-        }
+        // if (n_sessions == 0) {
+        //   //Cambio de estado del usuario a online
+        //   User.update(req.session.User.id, {online: true}, function (err) {
+        //     if (err) return res.badRequest();
+        //
+        //     //Informar a otros clientes (sockets abiertos) que el usuario esta logueado
+        //     User.publishUpdate(req.session.User.id, {
+        //       loggedIn: true,
+        //       id: req.session.User.id
+        //     });
+        //   });
+        // }
       });
 
     }else {
