@@ -1,7 +1,9 @@
 <div class="jumbox">
-  <h2> <%= i18n("messages") %></h2>
+  <h2> <%= i18n("inbox") %></h2>
+  <%- partial('_table.ejs', { data: inbox, paginate: inbox.meta.paginate, inbox: true })%>
 
-  <%- partial('_table.ejs')%>
+  <h2> <%= i18n("sent_messages") %></h2>
+  <%- partial('_table.ejs', { data: sent, paginate: sent.meta.paginate, inbox: false })%>
 
   <div class="button_right">
     <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#writeModal" onclick="new_message('/message/create', '<%= i18n('message') %>')">

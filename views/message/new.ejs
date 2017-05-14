@@ -73,7 +73,7 @@
 
         success: function (data) {
           closeModal();
-          toastr.info('A new message has been send!', 'Message');
+          toastr.info('<%= i18n('message_send') %>', 'RobotUI');
         },
 
         error: function (data) {

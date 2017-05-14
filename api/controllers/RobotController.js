@@ -247,9 +247,9 @@ module.exports = {
         Robot.subscribe(req.socket, robots);
       });
 
-      //Create
+      //Crear
       Robot.watch(req);
-      log.debug('User ' + req.session.User.id + 'with socket id ' + sails.sockets.id(req) + ' is now subscribed to the model class \'Robot\'.');
+      log.debug('Usuario ' + req.session.User.id + 'con socket id ' + sails.sockets.id(req) + ' está suscrito a la clase \'Robot\'.');
     } else {
       res.view();
     }

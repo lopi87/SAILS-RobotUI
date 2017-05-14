@@ -1,8 +1,16 @@
   <table class="table table-striped ">
     <thead>
     <tr>
-      <th><%= i18n("read") %></th>
-      <th><%= i18n("from") %></th>
+      <% if( inbox == true ){%>
+        <th><%= i18n("read") %></th>
+      <% } %>
+
+      <% if( inbox == true ){%>
+        <th><%= i18n("from") %></th>
+      <% } else { %>
+        <th><%= i18n("to") %></th>
+      <% } %>
+
       <th><%= i18n("message") %></th>
       <th><%= i18n("date") %></th>
       <th><%= i18n("action") %></th>
@@ -10,15 +18,18 @@
     </thead>
     <tbody>
 
-    <% _.each(data.messages, function(message){ %>
+    <% _.each( data.messages, function(message){ %>
     <tr id="line_msg_<%= message.id %>" data-model="message">
-      <td id="env_<%= message.id %>">
-        <% if(message.read){ %>
-        <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
-        <% } else { %>
-        <i class="fa fa-eye-slash fa-2x" aria-hidden="true"></i>
-        <% } %>
-      </td>
+
+      <% if( inbox == true){%>
+        <td id="env_<%= message.id %>">
+          <% if(message.read){ %>
+          <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
+          <% } else { %>
+          <i class="fa fa-eye-slash fa-2x" aria-hidden="true"></i>
+          <% } %>
+        </td>
+      <% } %>
 
       <td>
         <img src="<%= sails.getBaseUrl() + message.from_user_id.avatarUrl %>" alt="Avatar" title="<%= message.from_user_id.name %>" class="card-left card-circle card-margin-right img-responsive" style="width:32px">
@@ -33,14 +44,17 @@
             <%= i18n('open') %>
           </button>
         </a>
-        <% if(!message.read){ %>
-          <a id="mark_read_btn_<%= message.id %>" class="btn btn-sm btn-warning" onclick="msg_as_read('<%= message.id %>')"><%= i18n("mark_as_read") %></a>
-        <% } %>
-        <a class="btn btn-sm btn-danger" onclick="destroy_msg('<%= message.id %>')"><i class="fa fa-trash-o fa-lg"></i> <%= i18n("delete") %> </a>
+        <% if( inbox == true ){%>
+          <% if(!message.read){ %>
+            <a id="mark_read_btn_<%= message.id %>" class="btn btn-sm btn-warning" onclick="msg_as_read('<%= message.id %>')"><%= i18n("mark_as_read") %></a>
+          <% } %>
+          <a class="btn btn-sm btn-danger" onclick="destroy_msg('<%= message.id %>')"><i class="fa fa-trash-o fa-lg"></i> <%= i18n("delete") %> </a>
+        <% }%>
+
       </td>
     </tr>
     <% })%>
     </tbody>
   </table>
 
-  <%- partial ('../_paginate.ejs', { paginate: data.meta.paginate } )%>
+  <%- partial ('../_paginate.ejs', { paginate: paginate } )%>

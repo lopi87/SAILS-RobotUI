@@ -5,7 +5,7 @@
 	"join_us": "Join us and add your robot!",
 	"how_to_do_it": "How to do it?",
 	"robot_games": "Create robot games for people to have fun.",
-	"check_our_tutorial": "If you don't know how to do it, check our tutorial!",
+	"check_our_tutorial": "If you don't know how to do it: check our tutorial!",
 	"Welcome": "Welcome",
 	"createaccount": "Create an account",
 	"createrobot": "Create a robot",
@@ -75,9 +75,9 @@
 	"robots_administration": "robots_administration",
 	"messages": "messages",
 	"my_robots": "my_robots",
-	"my_driver_robots": "my_driver_robots",
-	"my_viewer_robots": "my_viewer_robots",
-	"public_robots": "public_robots",
+	"my_driver_robots": "controllables",
+	"my_viewer_robots": "Under monitoring",
+	"public_robots": "Public",
 	"admin": "admin",
 	"robots": "robots",
 	"to": "to",
@@ -139,5 +139,9 @@
   "user_connected": "User conected!",
   "user_disconnected": "User disconnected!",
   "user_created": "A new user has been created!",
-  "user_destroyed": "An user has been destroyed!"
+  "user_destroyed": "An user has been destroyed!",
+  "sent_messages": "Sent messages",
+  "message_sent": "A new message has been sent!"
+
+
 }

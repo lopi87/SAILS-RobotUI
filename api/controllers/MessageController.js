@@ -11,18 +11,28 @@ module.exports = {
 
 
   index: function(req, res, next) {
-    var page = 1;
-    if( typeof req.param('page') != 'undefined'  ){
+
+    var page = page2 = 1;
+    if (typeof req.param('page') != 'undefined') {
       page = parseInt(req.param('page'));
     }
+    if (typeof req.param('page2') != 'undefined') {
+      page2 = parseInt(req.param('page2'));
+    }
+
 
     User.find(function foundUsers(err, users){
       if(err) return res.badRequest(err);
 
-      Message.pagify('messages', {sort: ['createdAt DESC'], populate:[ 'from_user_id' ], page: page}).then(function(data){
-        res.view({
-          data: data,
-          users:users
+      Message.pagify('messages', { findQuery: { to_user_id: req.session.User.id }, sort: ['createdAt DESC'], page: page}).then(function(inbox){
+        Message.pagify('messages', { findQuery: { from_user_id: req.session.User.id }, sort: ['createdAt DESC'], page: page2}).then(function(send) {
+          res.view({
+            inbox: inbox,
+            sent: send,
+            users: users
+          });
+        }).catch(function(err){
+          return next(err);
         });
       }).catch(function(err){
         return next(err);
@@ -31,7 +41,7 @@ module.exports = {
   },
 
 
-  create: function (req, res, next) {
+create: function (req, res, next) {
     User.find(function foundUsers(err, users) {
       if(err) return res.badRequest(err);
 
@@ -81,11 +91,13 @@ module.exports = {
               return res.redirect('/message/index');
             }
 
-            if (!session) return next();
-            User.message(session.user_id, {
-              from: req.session.User.id,
-              msg: {msg: req.param('message'), id: msge.id}
-            });
+            if (session.user_id){
+              User.message(session.user_id, {
+                from: req.session.User.id,
+                msg: {msg: msge.content, id: msge.id}
+              });
+            }
+
           });
 
           res.ok({ msg: 'success' });
