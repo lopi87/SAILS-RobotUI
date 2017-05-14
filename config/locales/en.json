@@ -135,13 +135,16 @@
 	"robot.ipaddress.required": "robot.ipaddress.required",
 	"robot.port.integer": "robot.port.integer",
 	"robot.port.required": "robot.port.required",
-  "new_message": "You have a new message!",
-  "user_connected": "User conected!",
-  "user_disconnected": "User disconnected!",
-  "user_created": "A new user has been created!",
-  "user_destroyed": "An user has been destroyed!",
-  "sent_messages": "Sent messages",
-  "message_sent": "A new message has been sent!"
-
-
+	"new_message": "You have a new message!",
+	"user_connected": "User conected!",
+	"user_disconnected": "User disconnected!",
+	"user_created": "A new user has been created!",
+	"user_destroyed": "An user has been destroyed!",
+	"sent_messages": "Sent messages",
+	"message_sent": "A new message has been sent!",
+	"connect": "Connect",
+	"disconnect": "Disconnect",
+	"": "",
+	"my_robots_under_monitoring": "my_robots_under_monitoring",
+  "controllables_robots": "Robots controlables"
 }

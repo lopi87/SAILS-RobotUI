@@ -1,6 +1,6 @@
 
 <div class="jumbox">
-  <h3>My guest Robots</h3>
+  <h3><%= i18n('controllables_robots')%></h3>
 
   <% if(viewer_robots.size == 0){ %>
   <div class="alert alert-info margintop20 marginbottom20" role="alert">
@@ -11,9 +11,7 @@
   <%- partial('_table.ejs', {data: viewer_robots, type: 'my_viewer_robots'}) %>
   <% } %>
 
-  <div class="button_right">
-    <a href="/robot/share" class="btn btn-sm btn-success">Require a new robot!</a>
-  </div>
+
 </div>
 
 
@@ -28,7 +26,7 @@
 
       if (obj.verb == 'updated') {
         var data = obj.data;
-        change_img_state(data.id, data.online);
+        change_img_state(data.id, data.online, '<%= i18n('connect')%>', '<%= i18n('disconnect')%>');
         console.log('Robot has been updated to: online:' + data.online);
       }
 

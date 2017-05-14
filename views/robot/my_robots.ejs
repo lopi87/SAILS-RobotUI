@@ -30,7 +30,7 @@
 
       if (obj.verb == 'updated') {
         var data = obj.data;
-        change_img_state(data.id, data.online);
+        change_img_state(data.id, data.online, '<%= i18n('connect')%>', '<%= i18n('disconnect')%>');
         console.log('Robot has been updated to: online:' + data.online);
       }
 

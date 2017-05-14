@@ -80,7 +80,7 @@
 
       if (obj.verb == 'updated') {
         var data = obj.data;
-        change_img_state(data.id, data.loggedIn);
+        change_img_state(data.id, data.loggedIn, '<%= i18n('connect')%>', '<%= i18n('disconnect')%>');
 
         if (data.id != '<%= req.session.User.id %>') {
           if (data.loggedIn) {

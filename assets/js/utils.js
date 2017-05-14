@@ -114,7 +114,7 @@ window.Parsley.addValidator('filemimetypes', {
 //Utils
 
 //CAMBIAR IMAGEN ESTADO
-function change_img_state(id, boolean){
+function change_img_state(id, boolean, connect_text, disconnect_text){
   var img_id = '#img_state_' + id;
   var img_on= "online.png";
   var img_off= "offline.png";
@@ -123,9 +123,11 @@ function change_img_state(id, boolean){
   if (boolean){
     src = src.replace(img_off, img_on);
     $(img_id).attr("src", src);
+    $("#connect_btn").html("<button id=\"connect_btn\" type=\"button\" class=\"btn btn-sm btn-success\">" + connect_text + "</button></td>");
   }else{
     src = src.replace(img_on,img_off);
     $(img_id).attr("src", src);
+    $("#connect_btn").html("<button id=\"connect_btn\" type=\"button\" class=\"btn btn-sm btn-danger\">" + disconnect_text + "</button></td>");
   }
 }
 

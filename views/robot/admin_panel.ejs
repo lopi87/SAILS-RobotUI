@@ -55,7 +55,7 @@
           <% } %>
 
           <td>
-            <a href="/interface/view/<%= robot.iface.id %>" class="btn btn-sm btn-primary"><%= i18n('interface') %></a>
+            <a href="/interface/show/<%= robot.iface.id %>" class="btn btn-sm btn-primary"><%= i18n('interface') %></a>
           </td>
           <td>
             <a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a>
@@ -100,7 +100,7 @@
 
       if (obj.verb == 'updated') {
         var data = obj.data;
-        change_img_state(data.id, data.busy);
+        change_img_state(data.id, data.busy, '<%= i18n('connect')%>', '<%= i18n('disconnect')%>');
 
         if(data.busy){
          toastr.info('Robot connected!', 'Robot' );

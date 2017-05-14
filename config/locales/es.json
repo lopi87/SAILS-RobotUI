@@ -160,5 +160,11 @@
 	"user_created": "¡Un nuevo usuario ha sido creado!",
 	"user_destroyed": "¡Un usuario ha sido eliminado!",
 	"sent_messages": "Mensajes enviados",
-	"message_send": "¡Mensaje enviado!"
+	"message_send": "¡Mensaje enviado!",
+	"connect": "Conectar",
+	"disconnect": "Desconectar",
+	"robots_under_monitoring": "Robots bajo seguimiento",
+	"my_robots_under_monitoring": "my_robots_under_monitoring",
+  "controllables_robots": "Controllable robots"
+
 }
