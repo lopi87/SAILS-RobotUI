@@ -1,6 +1,6 @@
 
 <div class="jumbox">
-  <h3><%= i18n('robots_under_monitoring')%></h3>
+  <h3><%= i18n('controllables_robots')%></h3>
 
   <% if(driver_robots.size == 0){ %>
   <div class="alert alert-info margintop20 marginbottom20" role="alert">
@@ -14,20 +14,20 @@
 </div>
 
 <script type="text/javascript">
-
   addLoadEvent(subscribeAndListen_robot);
 
   function subscribeAndListen_robot(){
     io.socket.get('/robot/robot_subscribe/');
 
     io.socket.on('robot', function (obj) {
-
       if (obj.verb == 'updated') {
         var data = obj.data;
         change_img_state(data.id, data.online, '<%= i18n('connect')%>', '<%= i18n('disconnect')%>');
+        change_img_busy(data.id, data.busy, '<%= i18n('free') %>', '<%= i18n('busy') %>');
+        set_actions(data.id, data.busy, data.online);
+
         console.log('Robot has been updated to: online:' + data.online);
       }
-
     });
   }
 </script>

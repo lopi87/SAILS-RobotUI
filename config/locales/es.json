@@ -165,6 +165,11 @@
 	"disconnect": "Desconectar",
 	"robots_under_monitoring": "Robots bajo seguimiento",
 	"my_robots_under_monitoring": "my_robots_under_monitoring",
-  "controllables_robots": "Controllable robots"
-
+	"controllables_robots": "Robots controlables",
+	"status": "Estado",
+	"direction": "direction",
+	"owner": "Propietario",
+	"public_drive": "Conducción",
+	"public_view": "Visión",
+	"unlink": "unlink"
 }

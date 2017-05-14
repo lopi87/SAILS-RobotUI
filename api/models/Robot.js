@@ -22,6 +22,15 @@ module.exports = {
       defaultsTo: false
     },
 
+    online: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+
+    socket_id:{
+      type: 'string'
+    },
+
     ipaddress: {
       type: 'ip',
       required: true

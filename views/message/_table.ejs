@@ -40,7 +40,7 @@
       <td><%=message.createdAt %></td>
       <td>
         <a>
-          <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#writeModal" onclick="open_message('/message/show/<%= message.id %>', '<%= i18n('message') %>')">
+          <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#writeModal" onclick="open_message('/message/show/<%= message.id %>', '<%= i18n('message') %>' )">
             <%= i18n('open') %>
           </button>
         </a>

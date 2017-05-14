@@ -147,65 +147,78 @@ module.exports.sockets = {
 
 
   afterDisconnect: function(session, socket, cb) {
-     console.log('Cliente desconectado - id del socket: ' + socket.id);
 
     //Session del socket cerrado,
     Session.findOne({socket_id: socket.id}).populate('rooms').exec(function (err, session) {
       if (err) return cb();
-      if (!session) return cb();
 
-      //Comprobar si el soscket estaba usando algun robot para liberarlo:
-      if (session.robot_id) {
-        console.log('Socked was using a robot');
-
-        Robot.update({id: session.robot_id}, {busy: false}, function robotUpdated(err) {
+      if (!session) {
+        Robot.findOne({socket_id: socket.id}, function foundSession(err, robot) {
           if (err) return next(err);
+          if (!robot) return cb();
 
-          //Informar a otros clientes (sockets abiertos) que el robot queda liberado
-          Robot.publishUpdate(session.robot_id, {
-            busy: false,
-            id: session.robot_id
-          });
-        });
-      }
-
-
-      //Emite a cada room que un usuario la ha abandonado ->  abandona la room
-      session.rooms.forEach(function (room) {
-        //sails.sockets.leave(session.socket_id, room.room_name, function(err) {
-        //  if (err) {return res.serverError(err);}
-        //});
-        sails.sockets.broadcast(room.room_name, {type: 'exit', msg: {user_id: session.user_id}});
-      });
-
-
-      //Comprobar si el usuario tiene mas sockets abiertos:
-      Session.count({user_id: session.user_id}).exec(function countUserSessions(error, n_sessions) {
-        console.log('There are ' + n_sessions + ' users ' + session.user_id);
-
-        //Cambiar usuario a offline
-        if (n_sessions == 1) {
-          User.update(session.user_id, {online: false}, function (err) {
+          Robot.update(robot.id, {online: false}, function (err) {
             if (err) return cb(err);
 
             //Informar a otros clientes (sockets abiertos) que el usuario NO esta logueado
-            User.publishUpdate(session.user_id, {
+            Robot.publishUpdate(robot.id, {
               loggedIn: false,
-              id: session.user_id
+              id: robot.id
+            });
+          });
+        });
+      } else {
+        console.log('Cliente Usuario desconectado - id del socket: ' + socket.id);
+
+        //Comprobar si el soscket estaba usando algun robot para liberarlo:
+        if (session.robot_id) {
+          console.log('Socked was using a robot');
+
+          Robot.update({id: session.robot_id}, {busy: false}, function robotUpdated(err) {
+            if (err) return next(err);
+
+            //Informar a otros clientes (sockets abiertos) que el robot queda liberado
+            Robot.publishUpdate(session.robot_id, {
+              busy: false,
+              id: session.robot_id
             });
           });
         }
 
-        Session.destroy(session.id, function sessionDestroyed(err) {
-          if (err) return cb();
-          return cb();
+        //Emite a cada room que un usuario la ha abandonado ->  abandona la room
+        session.rooms.forEach(function (room) {
+          //sails.sockets.leave(session.socket_id, room.room_name, function(err) {
+          //  if (err) {return res.serverError(err);}
+          //});
+          sails.sockets.broadcast(room.room_name, {type: 'exit', msg: {user_id: session.user_id}});
         });
-      });
+
+
+        //Comprobar si el usuario tiene mas sockets abiertos:
+        Session.count({user_id: session.user_id}).exec(function countUserSessions(error, n_sessions) {
+          console.log('There are ' + n_sessions + ' users ' + session.user_id);
+
+          //Cambiar usuario a offline
+          if (n_sessions == 1) {
+            User.update(session.user_id, {online: false}, function (err) {
+              if (err) return cb(err);
+
+              //Informar a otros clientes (sockets abiertos) que el usuario NO esta logueado
+              User.publishUpdate(session.user_id, {
+                loggedIn: false,
+                id: session.user_id
+              });
+            });
+          }
+
+          Session.destroy(session.id, function sessionDestroyed(err) {
+            if (err) return cb();
+            return cb();
+          });
+        });
+      }
     });
   }
 
 };
-
-
-
 

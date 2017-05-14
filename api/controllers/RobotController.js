@@ -30,8 +30,8 @@ module.exports = {
       ipaddress: req.param('ipaddress'),
       port: parseInt(req.param('port')),
       owner: req.session.User.id, //Añadimos el propietario
-      public_drive: req.param('public_drive') == 'on' ? true : false,
-      public_view: req.param('public_view') == 'on' ? true : false
+      public_drive: req.param('public_drive') == 'on',
+      public_view: req.param('public_view') == 'on'
     };
 
 
@@ -195,24 +195,25 @@ module.exports = {
 
     if (!req.isSocket) return res.badRequest();
 
-    var robot_id = req.param('robot'), state = req.param('state');
+    var robot_id = req.param('robot'), status = req.param('state');
 
-    Robot.update({id: robot_id}, {busy: state}, function robotUpdated(err) {
+    Robot.update({id: robot_id}, {busy: status}, function robotUpdated(err) {
       if (err) return res.badRequest();
 
       //Informar a otros clientes (sockets abiertos) que el robot queda liberado u ocupado
       Robot.publishUpdate(robot_id, {
-        online: state,
+        busy: status,
+        online: true,
         id: robot_id
       });
 
       //Si el robot queda ocupado, lo alamcenamos en la session
-      if (state == true) {
+      if (status == true) {
         Session.update({socket_id: req.socket.id}, {robot_id: robot_id}, function sessionUpdated(err) {
           if (err) res.badRequest();
           log.debug('Robot ocupado...');
         });
-      } else if (state == false) {
+      } else if (status == false) {
         Session.update({socket_id: req.socket.id}, {robot_id: ''}, function sessionUpdated(err) {
           if (err) return res.badRequest();
           log.debug('Robot liberado...');
@@ -220,6 +221,28 @@ module.exports = {
       }
     });
   },
+
+
+  //Cambiar en la base de datos el estado del robot (Online), essperando conexión
+  changetoonline: function (req, res) {
+
+    if (!req.isSocket) return res.badRequest();
+
+    var robot_id = req.param('robot'), online = req.param('online');
+
+    Robot.update({id: robot_id}, {online: online, socket_id: req.socket.id }, function robotUpdated(err) {
+      if (err) return res.badRequest();
+
+      //Informar a otros clientes (sockets abiertos) que el robot queda online
+      Robot.publishUpdate(robot_id, {
+        online: online,
+        busy: false,
+        id: robot_id
+      });
+
+    });
+  },
+
 
 
   admin_panel: function(req, res, next){

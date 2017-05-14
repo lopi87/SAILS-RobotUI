@@ -146,5 +146,9 @@
 	"disconnect": "Disconnect",
 	"": "",
 	"my_robots_under_monitoring": "my_robots_under_monitoring",
-  "controllables_robots": "Robots controlables"
+  "controllables_robots": "Robots controlables",
+  "status": "Status",
+  "owner": "Owner",
+  "public_drive": "Driving",
+  "public_view": "Viewing"
 }

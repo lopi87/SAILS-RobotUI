@@ -1,7 +1,8 @@
 <div class="table-responsive">
   <table class="table">
     <tr>
-      <th><%= i18n('state') %></th>
+      <th><%= i18n('online') %></th>
+      <th><%= i18n('status') %></th>
       <th><%= i18n('name') %></th>
       <th><%= i18n('description') %></th>
       <th><%= i18n('ip_address') %></th>
@@ -14,11 +15,13 @@
     <% _.each(data.robots, function(robot){ %>
     <tr id="line_<%= robot.id %>" data-model="robot">
 
-      <% if(robot.busy){ %>
-        <td> <img id="img_state_<%=robot.id%>" src="/images/online.png" height="30" width="30"></td>
+      <% if(robot.online){ %>
+      <td> <img id="img_state_<%=robot.id%>" src="/images/online.png" height="30" width="30"></td>
       <% } else { %>
-        <td> <img id="img_state_<%=robot.id%>" src="/images/offline.png" height="30" width="30"></td>
+      <td> <img id="img_state_<%=robot.id%>" src="/images/offline.png" height="30" width="30"></td>
       <% } %>
+
+      <td><span id="label_state_<%=robot.id%>" class="label label-pill <%= robot.busy ? 'label-danger' : 'label-success' %>"> <%= robot.busy ? i18n('busy') : i18n('free') %> </span></td>
 
       <td>
         <img src="<%= sails.getBaseUrl() + robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:30px">
@@ -33,13 +36,9 @@
       </td>
 
       <% if(robot.public_view){ %>
-      <td>
-        <span class="label label-pill label-success"> <%= i18n('public')%> </span>
-      </td>
+        <td> <span class="label label-pill label-success"> <%= i18n('public')%> </span></td>
       <% } else { %>
-        <td>
-          <span class="label label-pill label-danger"> <%= i18n('private')%> </span>
-        </td>
+        <td><span class="label label-pill label-danger"> <%= i18n('private')%> </span></td>
       <% } %>
 
       <% if(robot.public_drive){ %>
@@ -48,16 +47,13 @@
       <td> <span class="label label-pill label-danger"> <%= i18n('private')%> </span></td>
       <% } %>
 
-      <% if(robot.busy){ %>
-        <td> <a href="/interface/view/<%= robot.iface %>" class="btn btn-sm btn-primary"><%= i18n('interface') %></a> </td>
-      <% } else { %>
-        <td> <a id="btn_tcontrol_ <%= robot.id%>" href="/interface/show/<%= robot.iface %>" class="btn btn-sm btn-primary"><i class="fa fa-gamepad" aria-hidden="true"></i> <%= i18n('take_control') %> </a></td>
-        <td> <a href="/interface/configure/<%= robot.iface %>" class="btn btn-sm btn-primary"><i class="fa fa-wrench" aria-hidden="true"></i><%= i18n('configure') %></a> </td>
-      <% } %>
-
       <td>
-        <a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a>
+        <a id="btn_tview_<%= robot.id%>" href="/interface/view/<%= robot.iface %>" class="btn btn-sm btn-primary <%= ( robot.online && robot.busy) ? '' : 'hidden' %>"><%= i18n('interface') %></a>
+        <a id="btn_tcontrol_<%= robot.id%>" href="/interface/show/<%= robot.iface %>" class="btn btn-sm btn-primary <%= ( robot.online && !robot.busy ) ? '' : 'hidden' %>" ><i class="fa fa-gamepad"></i> <%= i18n('take_control') %> </a>
+        <a id="btn_tconfigure_<%= robot.id%>" href="/interface/configure/<%= robot.iface %>" class="btn btn-sm btn-primary <%= robot.online ? 'hidden' : '' %> "><i class="fa fa-wrench" aria-hidden="true"></i><%= i18n('configure') %></a>
       </td>
+
+      <td><a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a></td>
       <td>
         <form action="/robot/destroy/<%=robot.id%>" method="post">
           <input type="hidden" name="_method" value="delete"/>

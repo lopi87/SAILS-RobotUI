@@ -123,39 +123,48 @@ function change_img_state(id, boolean, connect_text, disconnect_text){
   if (boolean){
     src = src.replace(img_off, img_on);
     $(img_id).attr("src", src);
-    $("#connect_btn").html("<button id=\"connect_btn\" type=\"button\" class=\"btn btn-sm btn-success\">" + connect_text + "</button></td>");
+    $("#connect_btn").html("<button id=\"connect_btn\" type=\"button\" class=\"btn btn-sm btn-success\">" + connect_text + "</button>");
   }else{
     src = src.replace(img_on,img_off);
     $(img_id).attr("src", src);
-    $("#connect_btn").html("<button id=\"connect_btn\" type=\"button\" class=\"btn btn-sm btn-danger\">" + disconnect_text + "</button></td>");
+    $("#connect_btn").html("<button id=\"connect_btn\" type=\"button\" class=\"btn btn-sm btn-danger\">" + disconnect_text + "</button>");
   }
 }
 
-//CAMBIAR FREE BUSY ROBOT
-function change_free_busy(id, busy){
-  var label_id = '[id="label_state_'+ id + '"]';
-  var label_free= '<span class="label label-pill label-success"> Free </span>';
-  var label_busy= '<span class="label label-pill label-danger"> Busy </span>';
-
-  var btn_config = '[id="btn_config_'+ id + '"]';
-  var btn_tcontrol =  '[id="btn_tcontrol_'+ id + '"]';
-  var btn_view =  '[id="btn_view_'+ id + '"]';
-
-
-  if (busy){
-    $(label_id).html(label_busy);
-
-    $(btn_config).addClass('hidden');
-    $(btn_view).removeClass('hidden');
-    $(btn_tcontrol).addClass('hidden');
-
+function change_img_busy(id, boolean, free_text, busy_text){
+  var label_id = '#label_state_' + id;
+  if (boolean){
+      $(label_id).replaceWith("<span id=\"" + label_id + "\" class=\"label label-pill label-danger \">" + busy_text + "</span>");
   }else{
-    $(label_id).html(label_free);
+      $(label_id).replaceWith("<span id=\"" + label_id + "\" class=\"label label-pill label-success \">" + free_text + "</span>");
+  }
+}
 
-    $(btn_config).removeClass('hidden');
-    $(btn_view).addClass('hidden');
+
+//CAMBIAR FREE BUSY ROBOT
+function set_actions(id, busy, online){
+  var btn_tconfig = '#btn_tconfigure_'+ id;
+  var btn_tcontrol =  '#btn_tcontrol_'+ id;
+  var btn_tview =  '#btn_tview_'+ id;
+
+  if(online && busy){
+    $(btn_tconfig).addClass('hidden');
+    $(btn_tview).removeClass('hidden');
+    $(btn_tcontrol).addClass('hidden');
+  }
+
+  if(online && !busy){
+    $(btn_tconfig).addClass('hidden');
+    $(btn_tview).addClass('hidden');
     $(btn_tcontrol).removeClass('hidden');
   }
+
+  if(!online){
+    $(btn_tconfig).removeClass('hidden');
+    $(btn_tview).addClass('hidden');
+    $(btn_tcontrol).addClass('hidden');
+  }
+
 }
 
 //CAMBIAR ONLINE OFFLINE ROBOT
