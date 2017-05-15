@@ -116,7 +116,7 @@ function change_connect_btn( mode, text_btn){
   if (mode == 'connect'){
     $("#connect").replaceWith("<button  id=\"connect\" type=\"button\" class=\"marginlef10 btn btn-sm btn-success\">" + text_btn + "</button>");
   } else {
-    $("#connect").replaceWith("<button  id=\"connect\" type=\"button\" class=\"marginlef10 btn btn-sm btn-danger\">" + text_btn + "</button>");
+    $("#connect").replaceWith("<button  id=\"disconnect\" type=\"button\" class=\"marginlef10 btn btn-sm btn-danger hidden \">" + text_btn + "</button>");
   }
 }
 

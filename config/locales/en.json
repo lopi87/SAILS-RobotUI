@@ -150,5 +150,6 @@
   "status": "Status",
   "owner": "Owner",
   "public_drive": "Driving",
-  "public_view": "Viewing"
+  "public_view": "Viewing",
+  "conect_success": "Conection success!"
 }

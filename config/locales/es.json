@@ -62,7 +62,7 @@
 	"menu": "Menú",
 	"Public": "Público",
 	"free": "Libre",
-	"view": "Seguir",
+	"view": "Ver",
 	"private": "Privado",
 	"busy": "Ocupado",
 	"sliders": "Sliders",
@@ -171,5 +171,6 @@
 	"owner": "Propietario",
 	"public_drive": "Conducción",
 	"public_view": "Visión",
-	"unlink": "unlink"
+	"unlink": "unlink",
+	"connect_success": "¡Conectado con exito!"
 }

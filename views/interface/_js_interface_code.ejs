@@ -4,7 +4,7 @@
 
   $("#connect").click(function() {
     try {
-      // Connect to the server running on the Robot(raspberry pi).
+      // Conectar con el robot(raspberry pi).
       var socket = io.connect(address_robot, {
         'reconnection': true,
         'reconnectionDelay': 10,
@@ -51,7 +51,7 @@
     });
 
 
-    //read video stream
+    //leer video stream
     <% if( typeof video !== 'undefined' ){ %>
       socket.on('<%= video.event_name %>', function(data) {
         //console.log(data);
@@ -95,7 +95,7 @@
     });
 
 
-    <!-- Insert events -->
+    // Insertar eventos -->
     <% _.each(events, function(event){ %>
     socket.on("<%= event.event_name %>", function messageReceived(message) {
       io.socket.get('/interface/emit_event/',{robot: '<%=robot.id %>', id: '<%= event.id %>', msg: {value: message.msg, name: '<%= event.name %>'}})
@@ -112,7 +112,7 @@
       io.socket.get('/interface/emit_slider/',{robot: '<%=robot.id %>', id: slider_id, msg:  ui.value })
       $('#chat').prepend('- slider value send: ' + ui.value + '<br/>');
       socket.emit('slider',  ui.value);
-      console.log('Emitiendo slider: ' + ui.value );
+      console.log('Slider value: ' + ui.value );
     });
 
 
@@ -125,7 +125,7 @@
         socket.emit('start-stream');
       <%}%>
 
-     toastr.info('Conectado con exito! ' + address_robot, 'Robot');
+     toastr.info('<%= i18n('connect_success')%>', 'Robot');
       change_img_state('<%=robot.id %>', true, '<%= i18n('connect')%>', '<%= i18n('disconnect')%>');
       change_connect_btn( 'disconnect','<%= i18n('disconnect')%>');
     });
@@ -154,7 +154,6 @@
 
         case 'out':
           $('#' + obj.msg.user_id).remove();
-          alert('Leave the room!');
           window.location.href = "<%= sails.getBaseUrl() %>";
           break;
 
