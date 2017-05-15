@@ -112,6 +112,14 @@ window.Parsley.addValidator('filemimetypes', {
 
 
 //Utils
+function change_connect_btn( mode, text_btn){
+  if (mode == 'connect'){
+    $("#connect").replaceWith("<button  id=\"connect\" type=\"button\" class=\"marginlef10 btn btn-sm btn-success\">" + text_btn + "</button>");
+  } else {
+    $("#connect").replaceWith("<button  id=\"connect\" type=\"button\" class=\"marginlef10 btn btn-sm btn-danger\">" + text_btn + "</button>");
+  }
+}
+
 
 //CAMBIAR IMAGEN ESTADO
 function change_img_state(id, boolean, connect_text, disconnect_text){

@@ -177,13 +177,12 @@ module.exports = {
     }
   },
 
-
-//Modo visita en la interfaz, se subscribe para recibir los eventos que iran sucediendo
+  //Modo visita en la interfaz, se subscribe para recibir los eventos que iran sucediendo
   subscribe: function (req, res){
 
     if (!req.isSocket) return res.badRequest();
 
-    //Join to room
+    //Nos unimos al room
     sails.sockets.join(req.socket, req.param('robot_id'));
 
     //Link socket with a room (into database)
@@ -204,7 +203,10 @@ module.exports = {
             if (err) return res.badRequest();
             if (!user) return res.badRequest();
 
-            sails.sockets.broadcast(req.param('robot'), {type: 'new_viewer_user', id: '', msg: {user_name: user.name, avatar: user.avatarUrl, user_id: user.id}});
+            sails.sockets.broadcast(req.param('robot_id'), {
+              type: 'new_viewer_user',
+              msg: {user_name: user.name, avatar: user.avatarUrl, user_id: user.id}
+            });
             console.log('User ' + req.session.User.id + 'with socket id ' + sails.sockets.id(req) + ' is now subscribed to the model class \'Robot\'.');
           });
 

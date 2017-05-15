@@ -15,6 +15,8 @@
       toastr.error('Failed to connect to the Robot!' + address_robot + error, 'Robot')
       io.socket.get('/robot/changetobusy/', {robot: robot_id, state: false});
       change_img_state(robot_id, false, '<%= i18n('connect')%>', '<%= i18n('disconnect')%>');
+      change_connect_btn( 'connect','<%= i18n('connect')%>');
+
     }
 
     //Presionar boton desconectar
@@ -25,6 +27,7 @@
         toastr.error('Failed to disconnect to the Robot!' + address_robot + error, 'Robot')
         io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
         change_img_state('<%= robot.id %>', false, '<%= i18n('connect')%>', '<%= i18n('disconnect')%>');
+        change_connect_btn( 'disconnect','<%= i18n('connect')%>');
 
         <% if( typeof video !== 'undefined' ){ %>
           reset_canvas('play_<%= video.id %>')
@@ -39,9 +42,10 @@
       //Sincronizar con el resto de clientes:
       io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
       change_img_state('<%=robot.id %>', false, '<%= i18n('connect')%>', '<%= i18n('disconnect')%>');
+      change_connect_btn( 'connect','<%= i18n('connect')%>');
 
       <% if( typeof video !== 'undefined' ){ %>
-      reset_canvas('play_<%= video.id %>')
+        reset_canvas('play_<%= video.id %>')
       <% } %>
 
     });
@@ -123,6 +127,7 @@
 
      toastr.info('Conectado con exito! ' + address_robot, 'Robot');
       change_img_state('<%=robot.id %>', true, '<%= i18n('connect')%>', '<%= i18n('disconnect')%>');
+      change_connect_btn( 'disconnect','<%= i18n('disconnect')%>');
     });
 
   });
@@ -133,7 +138,6 @@
     io.socket.get('/interface/subscribe/', { robot_id: '<%= robot.id %>', socket_id: io.socket.id } );
 
     io.socket.on('message', function (obj) {
-
       //EVENTOS CAPURADOS
       switch (obj.type) {
         case 'new_viewer_user':
@@ -151,6 +155,7 @@
         case 'out':
           $('#' + obj.msg.user_id).remove();
           alert('Leave the room!');
+          window.location.href = "<%= sails.getBaseUrl() %>";
           break;
 
         default:

@@ -1,7 +1,5 @@
 module.exports = function(req, res, next) {
 
-
-
   Interface.findOne(req.param('id'), function foundIface(err, iface) {
     if (err) return next(err);
     if (!iface) return next(err);
