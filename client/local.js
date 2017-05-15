@@ -11,13 +11,13 @@ var io = require('./node_modules/socket.io').listen(8085, { log: false });
 // Carga de módulos necesarios.
 var ffmpeg_command, running_camera = false, child_process = require('child_process');
 
-var Gpio = require('pigpio').Gpio;
-// Pines utilizados. Motores izquierdos: 2 y 3, motores derechos: 17 y 27
-var gpio2 = new Gpio(2, {mode: Gpio.OUTPUT}),
-  gpio3 = new Gpio(3, {mode: Gpio.OUTPUT}),
-  gpio17 = new Gpio(17, {mode: Gpio.OUTPUT}),
-  gpio27 = new Gpio(27, {mode: Gpio.OUTPUT});
-
+//var Gpio = require('pigpio').Gpio;
+// // Pines utilizados. Motores izquierdos: 2 y 3, motores derechos: 17 y 27
+// var gpio2 = new Gpio(2, {mode: Gpio.OUTPUT}),
+//   gpio3 = new Gpio(3, {mode: Gpio.OUTPUT}),
+//   gpio17 = new Gpio(17, {mode: Gpio.OUTPUT}),
+//   gpio27 = new Gpio(27, {mode: Gpio.OUTPUT});
+//
 
 console.log('Esperando conexión...');
 
@@ -42,56 +42,56 @@ io.sockets.on('connection', function (socket)
   socket.emit('robotmsg', {msg: "¡¡¡Bienvenido!!!"});
   console.log('emitiendo: ' + "¡¡¡Bienvenido!!!");
 
-  socket.on('action', function (data){
+  // socket.on('action', function (data){
+  //
+  //   console.log('Comando recibido: ' + data);
+  //
+  //   switch(data) {
+  //     case 'UP':
+  //       gpio2.digitalWrite(1);
+  //       gpio3.digitalWrite(0);
+  //       gpio17.digitalWrite(1);
+  //       gpio27.digitalWrite(0);
+  //       console.log('UP');
+  //       break;
+  //
+  //     case 'RIGHT':
+  //       gpio2.digitalWrite(0);
+  //       gpio3.digitalWrite(0);
+  //       gpio17.digitalWrite(1);
+  //       gpio27.digitalWrite(0);
+  //       console.log('UP');
+  //       break;
+  //
+  //     case 'LEFT':
+  //       gpio2.digitalWrite(1);
+  //       gpio3.digitalWrite(0);
+  //       gpio17.digitalWrite(0);
+  //       gpio27.digitalWrite(0);
+  //       console.log('UP');
+  //       break;
+  //
+  //     case 'DOWN':
+  //       gpio2.digitalWrite(0);
+  //       gpio3.digitalWrite(1);
+  //       gpio17.digitalWrite(0);
+  //       gpio27.digitalWrite(1);
+  //       console.log('UP');
+  //       break;
+  //
+  //     case 'STOP':
+  //       gpio2.digitalWrite(0);
+  //       gpio3.digitalWrite(0);
+  //       gpio17.digitalWrite(0);
+  //       gpio27.digitalWrite(0);
+  //       console.log('UP');
+  //       break;
+  //
+  //     default:
+  //       console.log('command not found');
+  //   }
 
-    console.log('Comando recibido: ' + data);
-
-    switch(data) {
-      case 'UP':
-        gpio2.digitalWrite(1);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(1);
-        gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
-      case 'RIGHT':
-        gpio2.digitalWrite(0);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(1);
-        gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
-      case 'LEFT':
-        gpio2.digitalWrite(1);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(0);
-        gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
-      case 'DOWN':
-        gpio2.digitalWrite(0);
-        gpio3.digitalWrite(1);
-        gpio17.digitalWrite(0);
-        gpio27.digitalWrite(1);
-        console.log('UP');
-        break;
-
-      case 'STOP':
-        gpio2.digitalWrite(0);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(0);
-        gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
-      default:
-        console.log('command not found');
-    }
-
-  })
+  //})
 });
 
 function stopStreaming(socket) {
