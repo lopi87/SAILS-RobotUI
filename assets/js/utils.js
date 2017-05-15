@@ -156,21 +156,21 @@ function set_actions(id, busy, online){
   var btn_tview =  '#btn_tview_'+ id;
 
   if(online && busy){
-    $(btn_tconfig).addClass('hidden');
-    $(btn_tview).removeClass('hidden');
-    $(btn_tcontrol).addClass('hidden');
+    $(btn_tconfig).addClass('disabled');
+    $(btn_tview).removeClass('disabled');
+    $(btn_tcontrol).addClass('disabled');
   }
 
   if(online && !busy){
-    $(btn_tconfig).addClass('hidden');
-    $(btn_tview).addClass('hidden');
-    $(btn_tcontrol).removeClass('hidden');
+    $(btn_tconfig).addClass('disabled');
+    $(btn_tview).addClass('disabled');
+    $(btn_tcontrol).removeClass('disabled');
   }
 
   if(!online){
-    $(btn_tconfig).removeClass('hidden');
-    $(btn_tview).addClass('hidden');
-    $(btn_tcontrol).addClass('hidden');
+    $(btn_tconfig).removeClass('disabled');
+    $(btn_tview).addClass('disabled');
+    $(btn_tcontrol).addClass('disabled');
   }
 
 }
