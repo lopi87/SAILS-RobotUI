@@ -4,10 +4,18 @@ var request = require('supertest'),
 
 describe('The Session controller', function() {
 
+
+  it('should fail accessing to a robot/index_public_robots/ page before login', function (done) {
+    request.agent(sails.hooks.http.app).get('/robot/index_public_robots/')
+      .expect(403)
+      .end(done)
+  });
+
+
   describe('SessionController', function() {
-    it('should redirect to robot/index_public_robots/', function (done) {
-      var req = request.agent(sails.hooks.http.app);
-      req.post("/session/create")
+    it('should redirect to robot/index_public_robots/ after login', function (done) {
+      request.agent(sails.hooks.http.app)
+        .post("/session/create")
         .send( { email: 'test@test.com', password: '12345678' } )
         .expect(302)
         .expect('Location', '/robot/index_public_robots/')
@@ -21,32 +29,26 @@ describe('The Session controller', function() {
 
 
   describe('Authenticated', function () {
-    // use supertest.agent for store cookies ...
-    // logged in agent
-    var agent;
-    // after authenticated requests login the user
     before(function (done) {
-      agent = request.agent(sails.hooks.http.app);
-      agent.post('/session/create')
-        .send({
+      request.agent(sails.hooks.http.app)
+      .post('/session/create')
+      .send({
           email: 'test@test.com',
           password: '12345678'
-        })
-        .end(function (err) {
+      })
+      .end(function (err) {
           done(err);
-        });
+      });
     });
 
 
     it ('Index public robots', function () {
-      agent
+      request.agent(sails.hooks.http.app)
         .get('/robot/index_public_robots')
         .send()
         .expect(200)
-        .end(function (err, res) {
-          if (err) return done(err);
-          should.exist(res.body);
-          done();
+        .end(function (err) {
+          done(err);
         });
     });
   });
