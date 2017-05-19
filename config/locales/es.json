@@ -172,5 +172,7 @@
 	"public_drive": "Conducción",
 	"public_view": "Visión",
 	"unlink": "unlink",
-	"connect_success": "¡Conectado con exito!"
+	"connect_success": "¡Conectado con exito!",
+	"session.user_id.required": "session.user_id.required",
+	"user.email.unique": "user.email.unique"
 }

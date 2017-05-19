@@ -1,48 +1,58 @@
-// var IndexController = require('../../../api/controllers/IndexController'),
-//   sinon = require('sinon'),
-//   assert = require('assert'),
-//   request = require('supertest');
 
-var url = 'http://localhost:1337/', request = require('supertest')(url), should = require('should');
-var jsdom = require("jsdom");
-var $ = require("jquery")(jsdom.jsdom().parentWindow);
+var request = require('supertest'),
+  should = require('should');
 
-describe('SessionController', function() {
-  it('should redirect to robot/index_public_robots/', function (done) {
-    var req = request.post("/sessions/create");
-    req.send( { email: 'er_lope@hotmail.com', password: '12345678' } );
-    req.expect(200);
-    req.expect('Location', 'robot/index_public_robots/');
-    req.end( function(err,res){
-      if(err) throw err;
-      console.log(res.text);
-      done();
-    })
+describe('The Session controller', function() {
+
+  describe('SessionController', function() {
+    it('should redirect to robot/index_public_robots/', function (done) {
+      var req = request.agent(sails.hooks.http.app);
+      req.post("/session/create")
+        .send( { email: 'test@test.com', password: '12345678' } )
+        .expect(302)
+        .expect('Location', '/robot/index_public_robots/')
+        .end( function(err,res){
+          if(err) throw err;
+          console.log(res.text);
+          done();
+        })
+    });
+  });
+
+
+  describe('Authenticated', function () {
+    // use supertest.agent for store cookies ...
+    // logged in agent
+    var agent;
+    // after authenticated requests login the user
+    before(function (done) {
+      agent = request.agent(sails.hooks.http.app);
+      agent.post('/session/create')
+        .send({
+          email: 'test@test.com',
+          password: '12345678'
+        })
+        .end(function (err) {
+          done(err);
+        });
+    });
+
+
+    it ('Index public robots', function () {
+      agent
+        .get('/robot/index_public_robots')
+        .send()
+        .expect(200)
+        .end(function (err, res) {
+          if (err) return done(err);
+          should.exist(res.body);
+          done();
+        });
+    });
   });
 });
 
 
-describe('Session', function () {
 
-  it('should login', function (done) {
-    request
-      .get('/')
-      .expect(200)
-      .end(function (err, res) {
-        if (err) return done(err);
-        should.not.exist(err);
-        var $html = $(res.text);
-        var csrf = $html.find('input[name=_csrf]').val();
-        console.log(csrf);
-        should.exist(csrf);
 
-        request
-          .post('/sessions/create')
-          .send( {_csrf: csrf, email: 'er_lope@hotmail.com', password: '12345678'} )
-          .expect(302)
-          .expect('Location', '/')
-          .end(done)
-      });
-  });
 
-});
