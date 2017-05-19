@@ -10,6 +10,8 @@
       <th><%= i18n('control') %></th>
       <th><%= i18n('display') %></th>
       <th colspan="3" ><%= i18n('actions') %></th>
+      <th></th>
+
     </tr>
 
     <% _.each(data.robots, function(robot){ %>
@@ -51,16 +53,17 @@
         <a id="btn_tview_<%= robot.id%>" href="/interface/view/<%= robot.iface %>" class="btn btn-sm btn-primary <%= ( robot.online && robot.busy) ? '' : 'disabled' %>"><%= i18n('view') %></a>
         <a id="btn_tcontrol_<%= robot.id%>" href="/interface/show/<%= robot.iface %>" class="btn btn-sm btn-primary <%= ( robot.online && !robot.busy ) ? '' : 'disabled' %>" ><i class="fa fa-gamepad"></i> <%= i18n('take_control') %> </a>
         <a id="btn_tconfigure_<%= robot.id%>" href="/interface/configure/<%= robot.iface %>" class="btn btn-sm btn-primary <%= robot.online ? 'disabled' : '' %> "><i class="fa fa-wrench" aria-hidden="true"></i><%= i18n('configure') %></a>
+        <a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a>
       </td>
 
-      <td><a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a></td>
       <td>
         <form action="/robot/destroy/<%=robot.id%>" method="post">
-          <input type="hidden" name="_method" value="delete"/>
-          <input type="submit"  class="btn btn-sm btn-danger" value=" <%= i18n('delete')%>"/>
-          <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
-        </form>
+            <input type="hidden" name="_method" value="delete"/>
+            <input type="submit"  class="btn btn-sm btn-danger" value=" <%= i18n('delete')%>"/>
+            <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+          </form>
       </td>
+
     </tr>
 
     <% }); %>

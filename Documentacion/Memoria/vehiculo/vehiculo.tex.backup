@@ -164,7 +164,7 @@ Imagen de la batería LiPo para la alimentación de los motores:
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.4]{imagenes/robot/robot-bateria-lipo.png}
+    \includegraphics[scale=0.4]{imagenes/robot/bateria-lipo.png}
   \end{center}
   \caption{Vista de la batería LiPo que alimenta los motores.}
   \label{figura:rpi-modulo-bateria}
@@ -177,9 +177,18 @@ Imagen de la batería LiPo para la alimentación de los motores:
 El siguiente gráfico \ref{diagrama:esquema-conexiones} muestra las conexiones de todo el conjunto:
 
 \begin{figure}[H]
-  \hspace*{.8in}{\includegraphics[scale=0.65,angle=270]{imagenes/robot/robot-esquema2.png}}
+  \hspace*{.5in}{\includegraphics[scale=0.65,angle=270]{imagenes/robot/robot-esquema2.png}}
   \caption{Esquema de conexiones del robot de pruebas.}
   \label{diagrama:esquema-conexiones}
+\end{figure}
+
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.4]{imagenes/robot/robot-bateria-lipo.png}
+  \end{center}
+  \caption{Vista superior del vehículo.}
+  \label{figura:rpi-modulo-bateria}
 \end{figure}
 
     
@@ -387,77 +396,73 @@ Para proceder a la captura de las imágenes nos bastaría con introducir el sigu
   ffmpeg -f video4linux2 -i /dev/video0 -s 300x150 -f mjpeg video_out.mpeg
 \end{lstlisting}
 
-Ahora bien, el comando anterior toma las imágenes de la cámara y las almacena en el archivo especificado \emph{video_out.mpeg}. Nosotros no deseamos exátamente ese comportamiento. Debemos canalizar esos datos capturados
-hacia el socket creado con la finalidad de ir transmitiendo los diferentes frames y no almacenándolos en disco tal y como realiza la instrucción anterior.\\
+Ahora bien, el comando anterior toma las imágenes de la cámara y las almacena en el archivo especificado \emph{ video\_out.mpeg} especificando una resolución de salida de 300x150 píxeles
+empleando la opción -s. Pero nosotros no deseamos exactamente ese comportamiento. Debemos canalizar esos datos capturados hacia el socket creado con la finalidad de ir transmitiendo los 
+diferentes frames y no almacenándolos en disco tal y como realiza la instrucción anterior.\\
 
 
-Para realizar dicha "canalización`` debemos utilizar las siguientes opciones, gracias al uso de las tuberías o canalizaciones UNIX \footnote{En cualquier sistema Unix se puede hacer que la salida de una determinada orden sea la entrada estándar de otra, lo que le confiere a las órdenes Unix una enorme potencia. }:
+Para resolver este problema podemos emplear el sistema de tuberías que implementan los sistemas UNIX \footnote{ Una tubería (pipe, cauce o '|') consiste en una cadena de 
+procesos conectados de forma tal que la salida de cada elemento de la cadena es la entrada del próximo. Permiten la comunicación y sincronización entre procesos. Es común el uso de
+buffer de datos entre elementos consecutivos. }.
 
-pipe:1 -b:v 28k -bufsize 28k
+En cualquier sistema Unix se puede hacer que la salida de una determinada orden sea la entrada estándar de otra, lo que le confiere a las órdenes Unix una enorme potencia.
+Para realizar dicha "canalización`` debemos utilizar las siguientes opciones:\\
 
-Con la opción pipe:1 accedemos al protocono pipe de UNIX, el cual lee y escrible de las ''tuberias`` UNIX siendo el número 1 la tubería correspondiente a stdout, la cual podría ser omitida puesto que es la 
-salida por defecto.
-
-pipe:[number]
-
-number is the number corresponding to the file descriptor of the pipe (e.g. 0 for stdin, 1 for stdout, 2 for stderr). If number is not specified, by default the stdout file descriptor will be used for writing, stdin for reading.
-
-For example to read from stdin with ffmpeg: 
+\begin{lstlisting}[language=bash]
+  pipe:1 -b:v 28k -bufsize 28k
+\end{lstlisting}
 
 
+Con la opción \emph{pipe:1} accedemos al protocolo pipe de UNIX, el cual lee y escribe de las \emph{tuberias} UNIX siendo el número 1 la tubería correspondiente a la salida estándar 
+stdout ( 0 para stdin y 2 para stderr), la cual podría ser omitida puesto que es la salida por defecto.\\
 
-Primeramente se debe capturar las imágenes a partir de la webcam conectada a uno de los puertos USB de la placa Raspberry Pi empleada.
+La opción \emph{-b:v 28k} establece la tasa de transferencia, en nuestro caso una tasa de 28 kbit/s.\\
 
-ffmpeg -f v4l2 -list_formats all -i /dev/video0
+La opción \emph{-bufsize 28k} establece un tamaño de buffer \footnote{Un buffer de datos es un espacio de la memoria en un disco o en un instrumento digital reservado para el almacenamiento
+temporal de información digital, mientras que está esperando ser procesada.} de 28 kbits.\\
 
-La opción -s define el tamaño de salida. En nuestro caso se ha definido un tamaño de 300x150 píxeles.
-
-
-A continuación mostramos el código completo:
+A continuación mostramos el código de transmisión de vídeo al completo junto con la captura de los diferentes eventos cuando se producen salida de datos por cada una de las salidas estándar:\\
 
 \begin{lstlisting}[language=JavaScript]
 
+  function startStreaming(socket) {
+    //ffmpeg -f video4linux2 -i /dev/video0 -s 300x150 -f mjpeg pipe:1 -b:v 28k -bufsize 28k
 
-function startStreaming(socket) {
-  //ffmpeg -f video4linux2 -i /dev/video0 -s 300x150 -f mjpeg pipe:1 -b:v 28k -bufsize 28k
+    if (running_camera == false){
+      console.log('Starting streaming....');
+      var args = ["-f", "video4linux2", "-i", "/dev/video0", "-s", "300x150","-f","mjpeg", "pipe:1", "-b:v 28k", "-bufsize 28k"]
+      ffmpeg_command = require('child_process').spawn("ffmpeg", args);
+      running_camera = true
+    }
 
-  if (running_camera == false){
-    console.log('Starting streaming....');
-    var args = ["-f", "video4linux2", "-i", "/dev/video0", "-s", "300x150","-f","mjpeg", "pipe:1", "-b:v 28k", "-bufsize 28k"]
-    ffmpeg_command = require('child_process').spawn("ffmpeg", args);
-    running_camera = true
+    ffmpeg_command.on('error', function(err, stdout, stderr) {
+      console.log("ffmpeg stdout:\n" + stdout);
+      console.log("ffmpeg stderr:\n" + stderr);
+      running_camera = false
+    });
+
+
+    ffmpeg_command.on('close', function (code) {
+      console.log('ffmpeg exited' + code );
+      running_camera = false
+    });
+
+
+    ffmpeg_command.stderr.on('data', function (data) {
+      //console.log('stderr: ' + data);
+    });
+
+    ffmpeg_command.on('end', function() {
+      console.log('Finished');
+      running_camera = false
+    });
+
+    ffmpeg_command.stdout.on('data', function (data) {
+      //console.log('stdout: ' + data);
+      var frame = new Buffer(data).toString('base64');
+      socket.emit('canvas',frame);
+    });
   }
-
-  ffmpeg_command.on('error', function(err, stdout, stderr) {
-    console.log("ffmpeg stdout:\n" + stdout);
-    console.log("ffmpeg stderr:\n" + stderr);
-    running_camera = false
-  });
-
-
-  ffmpeg_command.on('close', function (code) {
-    console.log('ffmpeg exited' + code );
-    running_camera = false
-  });
-
-
-  ffmpeg_command.stderr.on('data', function (data) {
-    //console.log('stderr: ' + data);
-  });
-
-  ffmpeg_command.on('end', function() {
-    console.log('Finished');
-    running_camera = false
-  });
-
-  ffmpeg_command.stdout.on('data', function (data) {
-    //console.log('stdout: ' + data);
-    var frame = new Buffer(data).toString('base64');
-    socket.emit('canvas',frame);
-  });
-
-}
-
 
 \end{lstlisting}
 

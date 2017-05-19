@@ -23,42 +23,16 @@ module.exports = {
     var socketId = sails.sockets.id(req);
     // => "BetX2G-2889Bg22xi-jy"
 
-    if(req.session.User != undefined) {
-      var sessionObj = {
-        socket_id: socketId,
-        user_id: req.session.User.id
-
-      };
-
-      //Comprobar si el usuario tiene mas sockets abiertos:
-      Session.count({user_id: req.session.User.id}).exec(function countUserSessions(error, n_sessions) {
-        console.log('There are ' + n_sessions + ' sessions of user ' + req.session.User.id);
-
-        // if (n_sessions == 0) {
-        //   //Cambio de estado del usuario a online
-        //   User.update(req.session.User.id, {online: true}, function (err) {
-        //     if (err) return res.badRequest();
-        //
-        //     //Informar a otros clientes (sockets abiertos) que el usuario esta logueado
-        //     User.publishUpdate(req.session.User.id, {
-        //       loggedIn: true,
-        //       id: req.session.User.id
-        //     });
-        //   });
-        // }
-      });
-
-    }else {
-      var sessionObj = {
-        socket_id: socketId
-      };
-    }
+    var sessionObj = {
+      socket_id: socketId,
+      user_id: req.session.User != undefined ? req.session.User.id : null
+    };
 
     Session.create(sessionObj).exec( function (err, session) {
       if (err) return res.badRequest();
 
       console.log('\n....................................................');
-      console.log('Conecting to Sails js...');
+      console.log('Conectando a Sails js...');
       console.log('Cliente conectado - id del socket: ' + socketId);
       console.log('....................................................');
 

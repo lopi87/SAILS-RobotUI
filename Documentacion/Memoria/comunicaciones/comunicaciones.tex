@@ -2,24 +2,81 @@
 \label{chap:robot}
 
 
-En el presente capítulo comenzaremos con una introducción del funcionamiento y los fundamentos teóricos de cómo se gestionan las diferentes conexiones y eventos del framework para,
-posteriormente, centrarnos en el ámbito específico de este proyecto con la finalidad de comprender mejor su funcionamiento.
+En el presente capítulo comenzaremos con una introducción sobre el funcionamiento y los fundamentos teóricos sobre cómo se gestionan las diferentes conexiones y eventos de cualquier aplicación
+Sails para, posteriormente, centrarnos específicamente en la descripción de un caso práctico desarrollado en el presente proyecto con la finalidad de comprender mejor su funcionamiento y poder afianzar
+conocimientos.
 
 
-\subsection{Fundamentos}
+\subsection{Introduccion}
 \label{sec:fundamentos}
 
-En esta sección se describe cómo Sails trabaja con websocket y socket.io. Para ello se explicará con un ejemplo que facilite su comprensión.
+En esta sección se comenzaremos destacando aquellos aspectos teóricos sobre cómo Sails, framework Node JS utilizado en el desarrollo, trabaja con websocket y socket.io.\\
 
-Bien, pero ¿qué diablos son los eventos en tiempo real del modelo? Al igual que creamos manejadores de eventos para eventos DOM usando jquery, voy a mostrar un patrón para configurar los controladores de eventos para los cambios en los modelos que se emiten a cualquier socket que esté suscrito al evento.
+Como sabemos, un servidor http no puede enviar datos a menos que un cliente los haya solicitado mediante una petición. Los Websockets, en cambio, presentan la particularidad de que
+permiten que un servidor envíe datos a un cliente sin la necesidad de que éstos sean solicitados, al menos de una manera inmediata. Estas solicitudes, realizadas con anterioridad, se formalizan mediante suscripciones, concepto que 
+iremos constantemente haciendo referencia a lo largo del presente capítulo y que debemos recordar.\\
 
-REVISAR INTRODUCCION http://irlnathan.github.io/sailscasts/blog/2013/10/10/building-a-sails-application-ep21-integrating-socket-dot-io-and-sails-with-custom-controller-actions-using-real-time-model-events/
+
+\begin{figure}%
+    \centering
+    \includegraphics[width=7cm]{diagramas/http-weboscket.png}
+    \qquad
+    \includegraphics[width=7cm]{diagramas/http+weboscket.png}
+    \caption{Peticiones entre un navegador y un servidor http con y sin el empleo de websockets.}%
+    \label{fig:http-request}%
+\end{figure}
+
+Anteriormente comentamos que el servidor http no puede enviar datos a menos que el cliente lo haya solicitado y los Websockets permiten que un servidor envíe datos no solicitados una vez que se hace 
+una conexión inicial (suscripción) desde el lado del cliente. Una aplicación Sails típica queda dividida en dos partes. La primera, en el lado del servidor, consta de un servidor http junto con un nodo
+central que actúa como un servidor de sockets.\\ 
+
+En segundo lugar, en el lado del cliente, se dispone de los diferentes códigos html y funciones JavaScript para realizar las conexiones con el servidor. Estas conexiones cliente-servidor permiten que 
+cualquier otro cliente conectado pueda enviar mensajes al servidor para que a su vez éstos sean emitidos a los clientes que se encuentren conectados en la aplicación en ese instante.\\
+
+Además cada socket posee un identificador único que identifica de manera inequívoca el cliente o, en nuestro, caso el navegador que está accediendo a la página.\\
+
+Destacar también el concepto de salas o rooms de Socket.io. Las salas nos permite agrupar los sockets de modo que en lugar de mensajes que son enviados a todos los sockets conectados, se puede enviar mensajes
+sólo a los sockets que están asociados con una sala. De esta podremos mandar mensajes específicos para un cliente concreto, todos ellos o un conjunto de los mismos. \\
+
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.35]{diagramas/salas-websocket.png}
+  \end{center}
+  \caption{Representación de una sala compuesta por dos clientes.}
+  \label{view:userindex}
+\end{figure}
+
+
+De todo los anterior podemos deducir que Sails es un framework especialmente potente, el cual proporciona infinidad de posibilidades a desarrollar. A continuación se cita un fragmento tal y 
+como podemos extraer de la página oficial de Sails:\\
+
+\begin{center}
+\emph{Sails.js facilita el desarrollo de aplicaciones Node.js empresariales. Ha sido diseñado para imitar el patrón MVC de frameworks como Ruby on Rails, pero con soporte para los requisitos de aplicaciones modernas: data-driven APIs con una arquitectura escalable y service-oriented. Es especialmente bueno para el desarrollo de chats, cuadros de mando en tiempo real o juegos multijugadores.} 
+\end{center}
+
+
+En este caso menciona diferentes aplicaciones tipo que pueden desarrollarse con Sails, desde un chat, cuadros de mando en tiempo real o juegos multijugadores. RobotUI resulta como una combinación de las 
+anteriores puesto que incorpora cuadros de mandos, sistema de mensajería y también es considerado como un juego ya que también está enfocado al entretenimiento.\\
 
 
 
-Centrémonos en el modelo usuario de RobotUI. Uno de sus atributos de este modelo es un booleano \emph{online}, el cual representa si un usuario se encuentra logueado en el sistema. Uno de los objetivos 
-es saber cuando el usuario cambia el estado para poder proporcionar una actualización en tiempo real de la página de gestión de usuarios siempre y cuando un usuario inicie sesión o salga de la 
-aplicación alternando entre las imágenes online: \icontext{.2}{.35}{imagenes/comunicaciones/online.png} y offline: \icontext{.2}{.35}{imagenes/comunicaciones/offline.png} sin necesidad de refrescar la página manualmente.\\
+
+
+\subsection{ Comunicaciones en RobotUI }
+\label{sec:comunicaciones-robotui}
+
+
+
+Tras la comprensión de los fundamentos teóricos descritos en el punto \ref{sec:fundamentos} donde se recogen los fundamentos del framework y sabiendo cómo trabaja y gestiona los sockets pasamos
+a trasladarlos a un caso práctico describiendo una de las funcionalidades del proyecto de tal manera que se facilite su comprensión.\\
+
+Como sabemos, Sails nos ayuda a incorporar funcionalidades en tiempo real a nuestra aplicación web. Sails gestiona los eventos aplicándolos sobre los modelos. Comenzamos realizando una descripción
+del ejemplo a desarrollar.\\
+
+Centrémonos en el modelo \emph{Usuario} de RobotUI. Uno de los atributos de este modelo es un booleano \emph{online}, el cual representa si un usuario se encuentra logueado en el sistema o no. El objetivo 
+es saber cuando el usuario cambia el estado para poder proporcionar una actualización en tiempo real de la página de gestión de usuarios \ref{view:userindex} de manera que cuando usuario inicie sesión o salga de la 
+aplicación se alterne entre las imágenes online: \icontext{.2}{.35}{imagenes/comunicaciones/online.png} y offline: \icontext{.2}{.35}{imagenes/comunicaciones/offline.png} sin necesidad de refrescar la página manualmente.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -29,10 +86,184 @@ aplicación alternando entre las imágenes online: \icontext{.2}{.35}{imagenes/c
   \label{view:userindex}
 \end{figure}
 
+Para capturar los eventos correspondientes al modelo \emph{Usuario} o cualquier otro debemos realizar una suscripción. Sails incorpora dos modalidades de suscripción. suscripción a clase y 
+suscripción a modelo.\\
+
+¿Cuál es la diferencia entre suscribirse a una ``clase'' frente a la suscripción a una ``instancia''? Al suscribirse a la ``clase'' del modelo, el socket podrá escuchar la creación de 
+nuevas instancias de modelo mediante un método denominado publishCreate(). Mientras que la suscripción a ``instancia'' permite al socket escuchar los cambios de modelos
+a través de los métodos publishUpdate y/o publishDestroy de una instancia o conjunto de instancias en concreto.\\
 
 
-\subsection{ Comunicaciones en RobotUI}
-\label{sec:comunicaciones-robotui}
+Por tanto, centrándonos en el ejemplo de los usuarios, debemos realizar la suscripción mediante la definición de una acción en el controlador de usuario. La acción se denominará \emph{user\_subscribe}.\\
+
+En dicha acción podremos acceder al socket solicitante vía req.socket. Así que, primeramente se realiza una suscripción a la sala de ``clase'' del usuario mediante User.watch y pasando 
+req.socket como argumento. De esta manera nos hemos suscrito a la clase del modelo de usuario.\\
+
+Seguidamente se realiza la suscripción a las instancias del modelo de usuario mediante el método User.subscribe pasando como parámetro el socket solicitante obtenido a través de req.socket seguido
+de un segundo argumento, que son las instancias existentes de usuarios. Las instancias de los usuarios existentes son recuperadas mediante un método de búsqueda para que, posteriormente, su salida 
+sea pasada al método de suscripción como segundo argumento. Con esto ya nos hemos suscrito a las salas de instancias del modelo de usuario.\\
+
+A continuación mostramos el código que realiza la suscripción al modelo Usuario en sus dos modalidades, suscripción a modelo y suscripción a instancias de modelo descrito anteriormente:
+
+\begin{lstlisting}[language=JavaScript]
+
+  user_subscribe: function (req, res, next) {
+    if (req.isSocket) {
+      //Update, destroy...
+      User.find(function foundUsers(err, users) {
+        if (err) return res.badRequest(err);
+
+        User.subscribe(req.socket, users);
+      });
+
+      //Create
+      User.watch(req);
+      console.log('User ' + req.session.User.id + 'with socket id ' + sails.sockets.id(req) + ' is now subscribed to the model class \'User\'.');
+    } else {
+      res.view();
+    }
+  }
+  
+\end{lstlisting}
+
+Ahora bien, ya nos encontramos suscritos a un modelo, pero... ¿Qué ocurre con publishCreate, publishUpdate y publishDestroy?, ¿Dónde se realiza la llamada a estos métodos?\\
+
+
+Para ello solamente debemos llamar al método en la acción deseada, por ejemplo, al crear una sessión, tan solo debemos actualizar el usuario como online y mandar el mensaje correspondiente mediante
+el método publishUpdate:\\
+
+\begin{lstlisting}[language=JavaScript]
+
+        //Cambio de estado a online
+        User.update(user.id, {online: true, longitude: long, latitude: lat}, function (err){
+          if (err) return next(err);
+
+          //Informar a otros clientes (sockets abiertos) que el usuario esta logueado
+          User.publishUpdate(user.id, {
+            loggedIn: true,
+            id: user.id
+          });
+         });
+
+\end{lstlisting}
+
+
+Del mismo modo para publishCreate o publishDestroy.\\
+
+
+¿Y desde el lado del cliente? ¿Cómo realizamos las llamadas a las diferentes acciones de suscripción y cómo capturamos los eventos?\\
+
+
+Las siguientes funciones resultan de vital importancia:\\
+
+\begin{lstlisting}[language=JavaScript]
+
+
+<script type="text/javascript">
+
+  $.when(savesocket()).done(function(){
+    if (typeof subscribeAndListen == 'function') {
+      subscribeAndListen();
+    }
+    listenMessages();
+  });
+
+  //Funcion para tener en to do momento almacenado en la tabla session los sockets conectados junto con el usuario al que pertenece
+  function savesocket() {
+    io.socket.get("/session/saveSocketID");
+  }
+</script>
+
+\end{lstlisting}
+
+
+Primeramente tenemos la función \emph{savesocket} la cual realiza la llamada al método saveSocketID del controlador \emph{session}. Dicho método realiza el registro en base de datos ligando el identificador del 
+socket abierto con el usuario al que corresponde, de tal manera que siempre sabremos qué socket corresponde con qué usuario.
+
+\begin{lstlisting}[language=JavaScript]
+
+
+  //Almacenamiento en la base de datos la sesion de cada usuario de la pagina
+  saveSocketID: function(req, res) {
+    if (!req.isSocket) return res.badRequest();
+
+    var socketId = sails.sockets.id(req);
+    // => "BetX2G-2889Bg22xi-jy"
+
+    var sessionObj = {
+      socket_id: socketId,
+      user_id: req.session.User != undefined ? req.session.User.id : null
+    };
+
+    Session.create(sessionObj).exec( function (err, session) {
+      if (err) return res.badRequest();
+
+      console.log('\n....................................................');
+      console.log('Conectando a Sails js...');
+      console.log('Cliente conectado - id del socket: ' + socketId);
+      console.log('....................................................');
+
+      return;
+    });
+  }
+  
+\end{lstlisting}
+
+Una vez tenemos almacenado el par socket-usuario buscamos la función subscribeAndListen, la cual será específica según la vista en la que nos encontremos, por ejemplo, si nos encontramos en el panel
+de administración de usuarios, la función subscribeAndListen será específica para 
+
+
+\begin{lstlisting}[language=JavaScript]
+
+
+<script type="text/javascript">
+
+  function subscribeAndListen() {
+    io.socket.get('/user/user_subscribe');
+
+    io.socket.on('user', function (obj) {
+      if (obj.verb == 'created') {
+        var user = obj.data;
+        $.ajax({
+          url: '/user/render',
+          type: 'GET',
+          data: {id: user.id},
+          success: function(data){
+            $("#user_list").append(data);
+           toastr.info('<%= i18n('user_created')%>', 'RobotUI' )
+          }
+        });
+      }
+
+      if (obj.verb == 'updated') {
+        var data = obj.data;
+        change_img_state(data.id, data.loggedIn, '<%= i18n('connect')%>', '<%= i18n('disconnect')%>');
+
+        if (data.id != '<%= req.session.User.id %>') {
+          if (data.loggedIn) {
+           toastr.info('<%= i18n('user_connected')%>', 'RobotUI');
+          } else {
+           toastr.info('<%= i18n('user_disconnected')%>', 'RobotUI');
+          }
+          console.log('User has been updated to online:' + data.loggedIn);
+        }
+      }
+
+      if (obj.verb == 'destroyed') {
+        $("#user_" + obj.id).remove();
+       toastr.info('<%= i18n('user_destroyed') %>', 'RobotUI' );
+      }
+
+    });
+
+  }
+
+</script>
+
+\end{lstlisting}
+
+
+
 
 
 \begin{figure}[H]
@@ -42,7 +273,6 @@ aplicación alternando entre las imágenes online: \icontext{.2}{.35}{imagenes/c
   \caption{Esquema representativo del flujo de conexiones de RobotUI.}
   \label{diagram:conexiones}
 \end{figure}
- 
 
 \subsubsection{ Conexión }
 \label{sec:conexion}
@@ -68,56 +298,30 @@ Función que realiza el registro de un nuevo cliente en la base de datos:\\
 
 \begin{lstlisting}[language=JavaScript]
 
-  //Almacenamiento en la base de datos la sesión de cada usuario de la página:
+
+  //Almacenamiento en la base de datos la sesion de cada usuario de la pagina
   saveSocketID: function(req, res) {
     if (!req.isSocket) return res.badRequest();
 
     var socketId = sails.sockets.id(req);
     // => "BetX2G-2889Bg22xi-jy"
 
-    if(req.session.User != undefined) {
-      var sessionObj = {
-        socket_id: socketId,
-        user_id: req.session.User.id
-
-      };
-
-      //Comprobar si el usuario tiene sockets abiertos:
-      Session.count({user_id: req.session.User.id}).exec(function countUserSessions(error, n_sessions) {
-        console.log('There are ' + n_sessions + ' sessions of user ' + req.session.User.id);
-
-        if (n_sessions == 0) {
-          //Cambio de estado del usuario a online:
-          User.update(req.session.User.id, {online: true}, function (err) {
-            if (err) return res.badRequest();
-
-            //Informar a otros clientes (sockets abiertos) que el usuario esta logueado:
-            User.publishUpdate(req.session.User.id, {
-              loggedIn: true,
-              id: req.session.User.id
-            });
-          });
-        }
-      });
-
-    }else {
-      var sessionObj = {
-        socket_id: socketId
-      };
-    }
+    var sessionObj = {
+      socket_id: socketId,
+      user_id: req.session.User != undefined ? req.session.User.id : null
+    };
 
     Session.create(sessionObj).exec( function (err, session) {
       if (err) return res.badRequest();
 
-      console.log('\n..................................................');
-      console.log('Conectando con Sails js.............................');
-      console.log('Cliente conectado - id del socket: ' + socketId );
+      console.log('\n....................................................');
+      console.log('Conectando a Sails js...');
+      console.log('Cliente conectado - id del socket: ' + socketId);
       console.log('....................................................');
 
       return;
     });
   },
-
 
 \end{lstlisting}
 
@@ -146,26 +350,6 @@ Finalmente mostramos el código JavaScript al completo localizado en el archivo 
   //Funcion para tener en todo momento almacenado en la tabla session los sockets conectados junto con el usuario al que pertenece
   function savesocket() {
     io.socket.get("/session/saveSocketID");
-  }
-
-  //Evento a la espera de recibir mensajes y notificar al usuario:
-  function listenMessages(){
-    io.socket.on('user', function messageReceived(message) {
-      switch (message.verb) {
-        case 'messaged':
-          var pathname = window.location.pathname;
-          if(pathname == '/message/index'){
-            location.reload();
-          }else{
-            new_msg_num_update('<%= i18n('messages') %>');
-          }
-          toastr.info('You have a new message! <a href="/message/show/' + message.data.msg.id + '"><%= i18n('open_here')%></a>' , 'Message');
-
-          break;
-        default:
-          break;
-      }
-    });
   }
 
 </script>
