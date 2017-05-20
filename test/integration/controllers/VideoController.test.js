@@ -1,25 +1,17 @@
 var request = require('supertest'),
   should = require('should');
 
-
-var Session = require('supertest-session')({
-  app: require('../../../app')
-});
-
-
 var FactoryGirl = require('factory_girl');
 FactoryGirl.definitionFilePaths = [__dirname + '/factories'];
 FactoryGirl.findDefinitions();
 
 
-describe('The Action controller', function() {
+describe('The Video controller', function() {
 
-  var action = FactoryGirl.create('action');
+  var video = FactoryGirl.create('video');
 
   describe('Authenticated', function () {
     before(function (done) {
-      //this.sess = new Session();
-
       request.agent(sails.hooks.http.app)
         .post('/session/create')
         .send({
@@ -31,9 +23,10 @@ describe('The Action controller', function() {
         });
     });
 
-    it ('Action new', function () {
+
+    it ('Video new', function () {
       request.agent(sails.hooks.http.app)
-        .get('/action/create')
+        .get('/video/create')
         .send()
         .expect(200)
         .end(function (err) {
@@ -42,14 +35,17 @@ describe('The Action controller', function() {
     });
 
     describe('#create()', function() {
-      it('should create an action', function (done) {
+      it('should create a video', function (done) {
         request.agent(sails.hooks.http.app)
-          .post('/action/newaction')
-          .send( action )
+          .post('/video/new')
+          .send( video )
           .expect(302)
-          .end(function (err) {
-            done(err);
-          });
+          .end(function(err, res){
+            if(err){
+              return done(err);
+            }
+            done();
+          })
       });
     });
 

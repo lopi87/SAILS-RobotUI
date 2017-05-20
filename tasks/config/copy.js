@@ -32,7 +32,11 @@ module.exports = function(grunt) {
 				src: ['**/*'],
 				dest: 'www'
 			}]
-		}
+		},
+    coverage: {
+      src: ['spec/api/**'],
+      dest: 'coverage/'
+    }
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-copy');

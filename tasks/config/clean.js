@@ -18,7 +18,10 @@ module.exports = function(grunt) {
       getFolderPath('styles/**'),
       getFolderPath('*.*')
     ],
-    build: ['www']
+    build: ['www'],
+    coverage: {
+      src: ['coverage/**']
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');

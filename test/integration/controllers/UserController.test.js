@@ -9,7 +9,7 @@ describe('The User controller', function() {
 
   describe('#index()', function() {
     it('should Forbidden', function (done) {
-      request(sails.hooks.http.app)
+      request.agent(sails.hooks.http.app)
         .get('/user/index')
         .send()
         .expect(403)
@@ -20,7 +20,7 @@ describe('The User controller', function() {
 
   describe('#sign_up()', function() {
     it('should get data', function (done) {
-      request(sails.hooks.http.app)
+      request.agent(sails.hooks.http.app)
         .get('/user/new')
         .send()
         .expect(200)
@@ -34,7 +34,7 @@ describe('The User controller', function() {
 
   describe('#create()', function() {
     it('should create an user', function (done) {
-      request(sails.hooks.http.app)
+      request.agent(sails.hooks.http.app)
         .post('/user/create')
         .send( user )
         .expect(302)
@@ -62,7 +62,7 @@ describe('The User controller', function() {
 
 
     it ('Index public robots', function () {
-      request(sails.hooks.http.app)
+      request.agent(sails.hooks.http.app)
         .get('/robot/index_public_robots')
         .send()
         .expect(200)
@@ -90,9 +90,9 @@ describe('The User controller', function() {
       it('should show an user', function (done) {
         console.log(user.id);
 
-        request(sails.hooks.http.app)
+        request.agent(sails.hooks.http.app)
           .get('/user/show/591f3a05ac59629c25d73c3c' )
-          .send({ id: user.id })
+          .send({ id: user._id })
           .expect(200)
           .end(function (err, res) {
             if (err) return done(err);
