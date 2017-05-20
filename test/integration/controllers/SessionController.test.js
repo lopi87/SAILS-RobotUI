@@ -1,9 +1,14 @@
-
 var request = require('supertest'),
   should = require('should');
 
+var FactoryGirl = require('factory_girl');
+FactoryGirl.definitionFilePaths = [__dirname + '/factories'];
+FactoryGirl.findDefinitions();
+
+
 describe('The Session controller', function() {
 
+  var user = FactoryGirl.create('user');
 
   it('should fail accessing to a robot/index_public_robots/ page before login', function (done) {
     request.agent(sails.hooks.http.app).get('/robot/index_public_robots/')
@@ -53,8 +58,3 @@ describe('The Session controller', function() {
     });
   });
 });
-
-
-
-
-

@@ -68,6 +68,18 @@ module.exports.connections = {
     // url: process.env.DB_URL
   },
 
+
+
+  testMongodbServer: {
+    adapter: 'sails-mongo',
+    host: 'localhost',
+    port: 27017,
+    user: '',
+    password: '',
+    database: 'TestRobotUI'
+    // url: process.env.DB_URL
+  },
+
   externalMongodbServer: {
     adapter: 'sails-mongo',
     host: 'localhost',
