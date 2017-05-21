@@ -13,8 +13,8 @@
     <div class="control-group">
       <label for="name"><%= i18n("public") %> * :</label>
       <p class="paddingtop10">
-        <%= i18n('control') + ':' %><input class="i-checks pr-2" name="public_drive" type="checkbox" checked="<%= robot.public_drive %>">
-        <%= i18n('seeing') + ':' %><input class="i-checks pr-2" name="public_view" type="checkbox" checked="<%= robot.public_view %>">
+        <%= i18n('control') + ':' %><input class="i-checks pr-2 <%= robot.public_drive ? 'checked' : '' %>" name="public_drive" type="checkbox">
+        <%= i18n('seeing') + ':' %><input class="i-checks pr-2 <%= robot.public_view ? 'checked' : '' %>" name="public_view" type="checkbox">
       </p>
     </div>
   </div>
