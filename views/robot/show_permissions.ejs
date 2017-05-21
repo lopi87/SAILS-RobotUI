@@ -14,7 +14,7 @@
       <label for="name"><%= i18n("public") %> * :</label>
       <p class="paddingtop10">
         <%= i18n('control') + ':' %><input class="i-checks pr-2" name="public_drive" type="checkbox" checked="<%= robot.public_drive %>">
-        <%= i18n('view') + ':' %><input class="i-checks pr-2" name="public_view" type="checkbox" checked="<%= robot.public_view %>">
+        <%= i18n('seeing') + ':' %><input class="i-checks pr-2" name="public_view" type="checkbox" checked="<%= robot.public_view %>">
       </p>
     </div>
   </div>
@@ -25,11 +25,11 @@
       <table class="table table-hover">
         <thead>
         <tr>
-          <th>Avatar</th>
-          <th>Username</th>
-          <th>Drive</th>
-          <th>View</th>
-          <th>Actions</th>
+          <th><%= i18n('user') %></th>
+          <th><%= i18n('name') %></th>
+          <th><%= i18n('drive') %></th>
+          <th><%= i18n('view') %></th>
+          <th><%= i18n('actions') %></th>
         </tr>
         </thead>
         <tbody id="actualizar">
@@ -51,7 +51,7 @@
           <% } else { %>
           <td> <img src="/images/offline.png" height="30" width="30"></td>
           <% } %>
-          <td> <a class="btn btn-sm btn-danger" onclick="delete_row_permissions('<%= robot.id %>', '<%= key %>')">Delete</a></td>
+          <td> <a class="btn btn-sm btn-danger" onclick="delete_row_permissions('<%= robot.id %>', '<%= key %>')"><%= i18n('delete') %></a></td>
         </tr>
         <% }) %>
         </tbody>

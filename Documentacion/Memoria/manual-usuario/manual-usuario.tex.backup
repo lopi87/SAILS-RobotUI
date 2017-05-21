@@ -140,7 +140,7 @@ En este caso registraremos nuestro robot de pruebas descrito en el capítulo \re
  y haciendo por tanto inválidos los parámetros de los selectores anteriores.
 \end{enumerate}
 
-Una vez rellenado los campos como se muestran en la imagen \label{website:creacion-robot} pulsamos en \icontext{.2}{.35}{imagenes/manual-usuario/btn-crear.png}.
+Una vez rellenado los campos como se muestran en la imagen \ref{website:creacion-robot} pulsamos en \icontext{.2}{.35}{imagenes/manual-usuario/btn-crear.png}.
 
 \begin{figure}[H]
   \begin{center}
@@ -148,6 +148,55 @@ Una vez rellenado los campos como se muestran en la imagen \label{website:creaci
   \end{center}
   \caption{Formulario de creación de un robot.}
   \label{website:creacion-robot}
+\end{figure}
+
+
+Si los campos se han introducido correctamente visualizaremos la siguiente página:
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.3]{imagenes/manual-usuario/show-robot.png}
+  \end{center}
+  \caption{Vista informativa de un robot.}
+  \label{website:creacion-robot}
+\end{figure}
+
+En esta vista podemos apreciar la siguiente información:
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{2cm}|p{10cm}|}
+      \hline
+      \centering{Elemento} & \qquad \quad Significado \\
+      \hline
+      \includegraphics[width=1cm]{imagenes/manual-usuario/offline.png} & Imagen indicativa de que el robot se encuentra apagado. \\
+      \hline
+      \includegraphics[width=1cm]{imagenes/manual-usuario/online.png} & Imagen indicativa de que el robot se encuentra encendido, reemplazará a la imagen apagado. \\
+      \hline
+      \includegraphics[width=2cm]{imagenes/manual-usuario/control-publico.png} & Imagen representativa de que un robot es de control público. \\
+      \hline
+      \includegraphics[width=1cm]{imagenes/manual-usuario/nuevo-evento.png} & Imagen representativa de que un robot es de control privado. \\
+      \hline
+      \includegraphics[width=2cm]{imagenes/manual-usuario/vision-publico.png} & Imagen representativa de que un robot es de visualización pública. \\
+      \hline
+      \includegraphics[width=1cm]{imagenes/manual-usuario/nuevo-evento.png} & Imagen representativa de que un robot es de visualización privada. \\
+      \hline
+    \end{tabular}
+  \end{center}
+\caption{Elementos de una interfaz.}
+\end{table}
+
+
+\subsubsection{Permisos}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=6cm]{imagenes/manual-usuario/robot-privado.png}
+    \qquad
+    \includegraphics[width=6.5cm]{imagenes/manual-usuario/robot-publico.png}
+    \caption{Panel informativo de un robot privado frente a uno público.}%
+    \label{fig:http-request}%
 \end{figure}
 
 

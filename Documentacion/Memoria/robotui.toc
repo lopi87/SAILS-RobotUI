@@ -88,6 +88,7 @@
 \contentsline {subsection}{\numberline {9.1.1} Acceso a la aplicaci\IeC {\'o}n }{84}{subsection.9.1.1}
 \contentsline {subsection}{\numberline {9.1.2} Registo de usuario }{85}{subsection.9.1.2}
 \contentsline {subsection}{\numberline {9.1.3}Registro de un Robot}{87}{subsection.9.1.3}
+\contentsline {subsubsection}{Permisos}{89}{section*.62}
 \contentsline {subsection}{\numberline {9.1.4}Configuraci\IeC {\'o}n de la interfaz}{89}{subsection.9.1.4}
 \contentsline {section}{\numberline {9.2} Programa tu robot }{91}{section.9.2}
 \contentsline {section}{\numberline {9.3} Controla tu robot }{95}{section.9.3}
@@ -96,7 +97,7 @@
 \contentsline {section}{\numberline {10.1}Presupuesto}{97}{section.10.1}
 \contentsline {section}{\numberline {10.2}Conclusiones}{98}{section.10.2}
 \contentsline {section}{\numberline {10.3}Mejoras futuras}{98}{section.10.3}
-\contentsline {chapter}{Anexos}{101}{appendix*.70}
+\contentsline {chapter}{Anexos}{101}{appendix*.72}
 \contentsline {section}{\numberline {.1}Instalaci\IeC {\'o}n de Node.js}{101}{section.Alph0.1}
 \contentsline {section}{\numberline {.2}Instalaci\IeC {\'o}n Sails.js}{101}{section.Alph0.2}
 \contentsline {subsection}{\numberline {.2.1}Prerrequisitos}{101}{subsection.Alph0.2.1}
@@ -107,5 +108,5 @@
 \contentsline {section}{\numberline {.4}Instalaci\IeC {\'o}n del control de versiones Git}{105}{section.Alph0.4}
 \contentsline {subsection}{\numberline {.4.1}Configuraci\IeC {\'o}n}{105}{subsection.Alph0.4.1}
 \contentsline {section}{\numberline {.5}Despliegue de una aplicaci\IeC {\'o}n Sails}{106}{section.Alph0.5}
-\contentsline {chapter}{Bibliograf\'{\i }a}{109}{appendix*.74}
-\contentsline {chapter}{GNU Documentation Free License}{111}{appendix*.75}
+\contentsline {chapter}{Bibliograf\'{\i }a}{109}{appendix*.76}
+\contentsline {chapter}{GNU Documentation Free License}{111}{appendix*.77}
