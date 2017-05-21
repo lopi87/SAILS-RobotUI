@@ -1,8 +1,23 @@
-\chapter[Herramientas utilizadas]{Tecnologías utilizadas}
-\chaptermark{Herramientas utilizaadas}
+
+\chapter[Herramientas utilizadas]{Estado del arte y tecnologías utilizadas}
+\chaptermark{Arte y tecnologías}
 \label{chap:herramientas}
 
-\newpage
+
+\section{Estado del arte}
+
+En la actualidad podemos observar cómo la robótica cada vez se encuentra más presente en nuestras vidas cotidianas tanto como para facilitarnos ciertas tareas como para entretenimiento. Si realizamos 
+cualquier búsqueda en internet podemos encontrar multitud de proyectos robóticos en la red. Existen excelentes portales como \url{http://blog.bricogeek.com/} por nombrar alguno de ellos, donde se
+publican multitud de proyectos novedosos y originales donde sus autores describen su desarrollo y por regla general lo acompañan de un vídeo donde se demuestra su funcionamiento.\\
+
+Existen también comunidades que organizan competiciones de drones, comunidades educativas o asociadas a alguna tecnología concreta como pueden ser Arduino o Raspberry Pi. Donde nuevamente todas las 
+descripciones de los diferentes proyectos se realizan con las explicaciones oportunas siempre acompañadas de un vídeo demostrativo.\\
+
+
+Dado lo anterior, considero que hay un campo sin cubrir y que resultaría interesante abarcar dicho espacio en la actualidad con una aplicación con las características de RobotUI, ya que no existe
+ninguna plataforma que permita esta interacción usuario-máquina o usuarios-máquina en tiempo real y que sea configurable para cualquier dispositivo que se encuentre conectado a la red.\\
+
+
 
 \section{Tecnologías software utilizadas}
 \sectionmark{Tecnologías software}
@@ -224,19 +239,24 @@ imposible de obtener de forma estática. Siendo de especial ayuda para la gesti�
 \label{sec:tecnologias-hardware}
 
 
+A continuación se detallan las diferentes tecnologías hardware que se han
+empleado para la elaboración del vehículo robótico con la finalidad de servir de prototipo durante el desarrollo de la aplicación y a modo demostrativo de la misma. En los sucesivos puntos
+se describen las características de cada una de ellas junto con el motivo de su elección.
+
 
 \subsection{Raspberry Pi Model B}
 \label{sec:raspberry}
 
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.5]{imagenes/raspberry-pi.jpg}\\
-    \caption{Imagen de una Raspberry Pi 3 Model B}
-  \end{center}
-\end{figure}
+
+
+\begin{center}
+\includegraphics[scale=0.3]{imagenes/RaspberryPi-logo.png}
+\end{center}
 
 Web: \url{https://www.raspberrypi.org}\\
 
+Raspberry Pi es un ordenador de tamaño reducido y de bajo coste desarrollado en Reino Unido por la Fundación Raspberry Pi, con el objetivo de estimular la enseñanza de ciencias de la computación
+en las escuelas. Es ampliamente utilizado y de uso muy extendido por lo que ha sido el principal motivo de su elección, además de su bajo cote y versatilidad.\\
 
 La Raspberry Pi 3 es la tercera generación de Raspberry Pi. Sus especificaciones son las siguientes:
 
@@ -258,6 +278,14 @@ La Raspberry Pi 3 es la tercera generación de Raspberry Pi. Sus especificacione
 \end{itemize}
 
 
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.5]{imagenes/raspberry-pi.jpg}\\
+    \caption{Imagen de una Raspberry Pi 3 Model B}
+  \end{center}
+\end{figure}
+
+
 \subsection{Controladora de motores L298N}
 
 
@@ -273,7 +301,7 @@ electrónica del módulo consume unos 3V, así que los motores reciben 3V menos 
 Además el L298N incluye un regulador de tensión que nos permite obtener del módulo una tensión de 5V, perfecta para alimentar nuestro Arduino. Eso sí, este regulador sólo 
 funciona si alimentamos el módulo con una tensión máxima de 12V.\\
 
-Es un módulo que se utiliza mucho en proyectos de robótica, por su facilidad de uso y su reducido precio.
+Es un módulo que se utiliza mucho en proyectos de robótica, por su facilidad de uso y su reducido precio, lo cual ha servido para que sea seleccionado para el presente proyecto.
 
 \begin{figure}[H]
   \begin{center}
@@ -340,3 +368,6 @@ Cámara USB para su conexión en la Raspberry para la emisión de imágenes. La 
     \caption{Imagen de la cámara USB utilizada.}
   \end{center}
 \end{figure}
+
+Los motivos de su elección ha sido principalmente su facilidad de puesta en funcionamiento ya que al tratarse de una cámara USB tando solo debemos conectarla para comenzar con su funcionamiento ya que es detectada 
+por prácticamente todas las distribuciones Linux. 

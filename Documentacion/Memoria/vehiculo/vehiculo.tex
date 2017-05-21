@@ -1,3 +1,7 @@
+
+\newpage
+
+
 \chapter{Robot de pruebas}
 \label{chap:robot}
 
@@ -247,19 +251,70 @@ Para el caso de este proyecto, la inicialización de los pines se ha realizado m
 \end{lstlisting}
 
 
-\subsection{Sockets}
 
-Ahora bien, una vez definidos los pines que activarán nuestros motores necesitamos que éstos sean activados cuando desde una red externa lo indiquemos. Para ello emplearemos la biblioteca Socket.io. 
-La cual debemos incluir en nuestro proyecto.
+\subsection{Comunicaciones}
 
-Para la creación del socket basta con la siguiente instrucción, la cual recibe un puerto que utilizará para mantenerse a la escucha: 
+En el punto anterior hemos visto las diferentes configuraciones de Entrada/Salida establecidas para el control de los diferentes motores y sensores. En el presente y sucesivos puntos describiremos los diferentes
+canales de comunicación abiertos y los flujos de información existentes. En la figura \ref{figura:comunicaciones-robot} se muestra un gráfico representativo de los diferentes flujos de datos existentes:
+
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.6]{diagramas/flujo-comunicaciones-robot.png}
+  \end{center}
+  \caption{Canales de comunicación abiertos por el robot.}
+  \label{figura:comunicaciones-robot}
+\end{figure}
+
+
+Primeramente al accionar el robot, éste envía una notificación al servidor indicando que se encuentra en modo \emph{online} y permanece a la espera de que algún usuario de la aplicación decida conectarse para su control.
+Canal de comunicación representado en amarillo en la figura \ref{figura:comunicaciones-robot}.\\
+
+Un usuario ve disponible el robot y decide conectarse. Entonces se establece un enlace entre el robot, servidor, y el usuario, cliente. Flujo de comunicación representado en negro, figura \ref{figura:comunicaciones-robot}.\\
+
+El usuario envía comandos al robot a través del canal abierto y las respuestas son enviadas a al cliente, transmisiones representados en verde para datos y en azul para el vídeo, figura \ref{figura:comunicaciones-robot}.\\
+
+Las tres vías de comunicación entre el robot y el usuario discurren dentro de un mismo canal de comunicación (socket). En el siguiente punto se describirá más detalladamente el procedimiento.
+
+
+\subsubsection{Sockets}
+
+Ahora bien, una vez definidos los pines que activarán nuestros motores y los canales de comunicación necesitamos que éstos sean activados cuando desde una red externa lo indiquemos haremos uso
+de la biblioteca Socket.io. Comenzamos el código incluyendo las librerías necesarias:
+
+\begin{lstlisting}[language=JavaScript]
+  var io_client = require('./node_modules/socket.io-client');
+  var sails_client = require('./node_modules/sails.io.js');
+\end{lstlisting}
+
+Para la comunicaciones usuario y dispositivo robótico se ha empleado la biblioteca socket.io-client.\\
+
+Para las comunicaciones directas con el servidor se ha empleado el SDK\footnote{Un kit de desarrollo de software o SDK (siglas en inglés de software development kit) es generalmente un conjunto de herramientas
+de desarrollo de software que le permite al programador o desarrollador de software crear aplicaciones para un sistema concreto, por ejemplo ciertos paquetes de software, frameworks, etc.} proporcionado por el framework
+para comunicarse con Sails a través de sockets desde una aplicación Node.js o desde el propio navegador.\\
+
+
+El siguiente paso una vez cargadas las librerías es establecer las diferentes conexiones. El primer comportamiento deseado es, por parte del robot, lanzar un mensaje al servidor indicando su disponibilidad al servidor con la finalidad de
+enviar las diferentes notificaciones a los usuarios que estén usando la aplicación. Para ello establecemos la conexión y enviamos un mensaje al servidor con el identificador del robot junto con su estado online igual a true. A continuación mostramos
+el código:\\
+
+\begin{lstlisting}[language=JavaScript]
+  var io_server = sails_client(io_client);
+  io_server.sails.url = 'http://46.101.102.33:80';
+  io_server.socket.get('/robot/changetoonline/', {robot: '59188631c8e94ba54f7a4bdc', online: true});
+\end{lstlisting}
+
+
+
+Una vez realizado el paso anterior, tenemos un robot que ha indicado a la aplicación web principal de que se encuentra en estado online pero nada más. El siguiente paso sería establecer alguna comunicación que se mantuviera a la escucha a 
+la espera de la llegada de nuevas conexiones. Para la creación del socket basta con la siguiente instrucción, la cual recibe un puerto que utilizará para mantenerse a la escucha:\\
 
 \begin{lstlisting}[language=JavaScript]
   var io = require('./node_modules/socket.io').listen(8085, { log: false });
 \end{lstlisting}
 
 
-Con la finalidad de ir capturando los diferentes eventos, se han definido las siguientes funciones para la conexión y desconexión de los clientes:
+Con la finalidad de ir capturando los diferentes eventos, se han definido las siguientes funciones para la conexión y desconexión de los clientes:\\
 
 \begin{lstlisting}[language=JavaScript]
 
@@ -367,9 +422,9 @@ A continuación se muestra el ejemplo desarrollado para la activación de los mo
 
 
 
-\subsection{ Streaming de vídeo }
+\subsubsection{ Streaming de vídeo }
 
-Para realizar la transferencia de vídeo desde el robot hacia el cliente se ha realizado empleado las librerías FFmpeg haciendo uso de su herramienta de línea de comandos.\\
+Para realizar la transferencia de vídeo desde el robot hacia el cliente se ha empleado la librería FFmpeg haciendo uso de su herramienta de línea de comandos.\\
 
 El procedimiento de captura de vídeo y su posterior transmisión es realizado mediante la siguiente instrucción de Ffmpeg:\\
 
@@ -390,7 +445,7 @@ El nombre del dispositivo de captura es un nodo de dispositivo de archivo, por l
 está conectado al sistema, y ​​tiene un nombre del tipo /dev/videoN, donde N es un número asociado al dispositivo.\\ 
 
 
-Para proceder a la captura de las imágenes nos bastaría con introducir el siguiente comando:
+Para proceder a la captura de las imágenes nos bastaría con introducir el siguiente comando:\\
 
 \begin{lstlisting}[language=bash]
   ffmpeg -f video4linux2 -i /dev/video0 -s 300x150 -f mjpeg video_out.mpeg
@@ -421,7 +476,7 @@ La opción \emph{-b:v 28k} establece la tasa de transferencia, en nuestro caso u
 La opción \emph{-bufsize 28k} establece un tamaño de buffer \footnote{Un buffer de datos es un espacio de la memoria en un disco o en un instrumento digital reservado para el almacenamiento
 temporal de información digital, mientras que está esperando ser procesada.} de 28 kbits.\\
 
-A continuación mostramos el código de transmisión de vídeo al completo junto con la captura de los diferentes eventos cuando se producen salida de datos por cada una de las salidas estándar:\\
+A continuación mostramos el código de transmisión de vídeo al completo junto con la captura de los diferentes eventos activados cuando se produce la salida de datos por cada una de las salidas estándar:\\
 
 \begin{lstlisting}[language=JavaScript]
 
@@ -468,18 +523,25 @@ A continuación mostramos el código de transmisión de vídeo al completo junto
 
 
 
-\subsection{Código de ejemplo completo}
+\subsubsection{Código de ejemplo completo}
 
-Finalmente se muestra el código completo para el robot de pruebas desarrollado. Dicho código puede emplearse como guía de referencia para futuros proyectos con la idea de integrarlos en la aplicación RobotUI.\\
+Finalmente se muestra el código completo para el robot de pruebas desarrollado. Dicho código puede emplearse como guía de referencia o plantilla para futuros proyectos con la idea de integrarlos en la aplicación RobotUI.\\
 
 
 \begin{lstlisting}[language=JavaScript]
+var io_client = require('./node_modules/socket.io-client');
+var sails_client = require('./node_modules/sails.io.js');
+var io_server = sails_client(io_client);
+io_server.sails.url = 'http://46.101.102.33:80';
+io_server.socket.get('/robot/changetoonline/', {robot: '59188631c8e94ba54f7a4bdc', online: true});
+
 // Inicia servidor socket.io en el puerto 8085.
-var io = require('./node_modules/socket.io').listen(8085, { log: false });
+var io =io_client.listen(8085, { log: false });
 
 // Carga de módulos necesarios.
-var ffmpeg_command, running_camera = false, Gpio = require('pigpio').Gpio, child_process = require('child_process');
+var ffmpeg_command, running_camera = false, child_process = require('child_process');
 
+var Gpio = require('pigpio').Gpio;
 // Pines utilizados. Motores izquierdos: 2 y 3, motores derechos: 17 y 27
 var gpio2 = new Gpio(2, {mode: Gpio.OUTPUT}),
   gpio3 = new Gpio(3, {mode: Gpio.OUTPUT}),

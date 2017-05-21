@@ -1,8 +1,23 @@
-\chapter[Herramientas utilizadas]{Tecnologías utilizadas}
-\chaptermark{Herramientas utilizaadas}
+
+\chapter[Herramientas utilizadas]{Estado del arte y tecnologías utilizadas}
+\chaptermark{Estado del arte y herramientas}
 \label{chap:herramientas}
 
-\newpage
+
+\section{Estado del arte}
+
+En la actualidad podemos observar cómo la robótica cada vez se encuentra más presente en nuestras vidas cotidianas tanto como para facilitarnos ciertas tareas como para entretenimiento. Si realizamos 
+cualquier búsqueda en internet podemos encontrar multitud de proyectos robóticos en la red. Existen excelentes portales como \url{http://blog.bricogeek.com/} por nombrar alguno de ellos, donde se
+publican multitud de proyectos novedosos y originales donde sus autores describen su desarrollo y por regla general lo acompañan de un vídeo donde se demuestra su funcionamiento.\\
+
+Existen también comunidades que organizan competiciones de drones, comunidades educativas o asociadas a alguna tecnología concreta como pueden ser Arduino o Raspberry Pi. Donde nuevamente todas las 
+descripciones de los diferentes proyectos se realizan con las explicaciones oportunas siempre acompañadas de un vídeo demostrativo.\\
+
+
+Dado lo anterior, considero que hay un campo sin cubrir y que resultaría interesante abarcar dicho espacio en la actualidad con una aplicación con las características de RobotUI, ya que no existe
+ninguna plataforma que permita esta interacción usuario-máquina o usuarios-máquina en tiempo real y que sea configurable para cualquier dispositivo que se encuentre conectado a la red.\\
+
+
 
 \section{Tecnologías software utilizadas}
 \sectionmark{Tecnologías software}
@@ -208,13 +223,15 @@ y facilitar las tareas comunes del administrador del sistema.
 \subsection{ Robomongo }
 
 \begin{center}
-\includegraphics[scale=0.5]{imagenes/pm2-logo.png}
+\includegraphics[scale=0.5]{imagenes/robomongo-logo.png}
 \end{center}
 
+Web: \url{https://robomongo.org/}\\
 
 
-
-
+Robomongo es una herramienta de gestión MongoDB de código abierto multi-plataforma basada en shell que incorpora el mismo motor de JavaScript que potencia el shell mongo de MongoDB.
+Robomongo no sólo analiza la semántica del código, sino que también lo ejecuta en una máquina virtual JavaScript interna, lo que nos permite darle un autocompletado en tiempo de ejecución, 
+imposible de obtener de forma estática. Siendo de especial ayuda para la gestión de la base de datos del proyecto.\\
 
 
 \section{Tecnologías hardware y materiales utilizados}

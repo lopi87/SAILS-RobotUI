@@ -1,12 +1,15 @@
-\chapter{ Desarrollo software }
-\label{chap:desarrollo-software}
+\newpage
+
+\chapter{ Requistos }
+\chaptermark{Requisitos}
+\label{chap:requisitos}
 
 
 \section{Metodología de desarrollo}
 
-Este proyecto ha sido obtenido empleando una metodología de desarrollo basada en
+Este proyecto ha sido elaborado empleando una metodología de desarrollo basada en
 el modelo de desarrollo incremental para la parte software referente a todos los subsistemas web y una metodología de desarrollo en cascada para el desarrollo de la parte
-software del robot de pruebas.\\
+software referente al robot de pruebas.\\
 
 El modelo de desarrollo incremental proporciona una serie de características que lo hacen idóneo para este proyecto. Dicho modelo se basa en la filosofía de construir 
 e ir incrementando las funcionalidades del sistema mediante el desarrollo de los diferentes módulos. Esto permite ir aumentando gradualmente las capacidades del software. \\
@@ -19,7 +22,11 @@ Dicha metodología de desarrollo resulta especialmente útil en las siguientes s
  \item A final de cada ciclo se entrega el software al cliente. En el caso que compete a este proyecto se mantenía una reunión con el director del proyecto para su aprobación.
 \end{itemize}
 
-Por otro lado, el modelo de desarrollo en cascada resulta adecuado en situaciones en las que:\\
+Centrándonos nuevamente en el desarrollo del proyecto, los motivos que llevaron a cabo la elección de un modelo de desarrollo incremental viene dada por la necesidad de simplificar e ir
+desarrollando de una forma gradual y modularizada debido a la extensión del proyecto. Más si cabe que el equipo de desarrollo solo consta de una persona.\\
+
+Por otro lado, para el desarrollo del vehículo de pruebas y por su simplicidad, se ha optado por un desarrollo en cascada. El modelo de desarrollo en cascada resulta adecuado en situaciones
+en las que:\\
 
 \begin{itemize}
  \item Se dispone de unos requisitos claros y precisos.
@@ -27,11 +34,8 @@ Por otro lado, el modelo de desarrollo en cascada resulta adecuado en situacione
  \item Las tecnologías utilizadas son conocidas por los desarrolladores.
 \end{itemize}
 
-
-Centrándonos nuevamente en el desarrollo del proyecto, los motivos que llevaron a cabo la elección de un modelo de desarrollo incremental viene dada por la necesidad de simplificar e ir
-desarrollando de una forma gradual y modularizada debido a la extensión del proyecto. Más si cabe que el equipo de desarrollo solo consta de una persona.\\
-
-Por otro lado, para el desarrollo del vehículo de pruebas y por su simplicidad, se ha optado por un desarrollo en cascada además de que en otras ocasiones ya había realizado trabajos similares.\\
+Siendo precisamente éstas las características del del proyecto del vehículo a desarrollar puesto que se trata de un desarrollo de pequeño tamaño y las herramientas empleadas ya me resultaban conocidas
+tras la realización de otros trabajos previos.\\
 
 Por tanto el proyecto queda distribuido en los siguientes subsistemas:\\
 
@@ -106,7 +110,7 @@ Un caso de uso es una descripción de los pasos o actividades que deberán reali
 \item Proporcionar una guía de todo el proceso de desarrollo del sistema de información. Los casos de uso proporcionan, por tanto, un modo claro y preciso de comunicación entre lo que desea el cliente y el desarrollador proporcionando desde el punto de vista del cliente una visión de ``caja negra'' del sistema eliminando los detalles de su construcción o desarrollo. Para los desarrolladores es utilizado como punto de partida y el eje sobre el que se apoya todo el desarrollo del sistema en los procesos de análisis y diseño.
 \end{itemize}
 
-Los diagramas de caso de uso muestra una representación del comportamiento ofrecido por el sistema de información desde el punto de vista del usuario. El comportamiento
+Los diagramas de caso de uso muestran una representación del comportamiento ofrecido por el sistema de información desde el punto de vista del usuario. El comportamiento
 del sistema es representado como un conjunto de transacciones ejecutadas entre el sistema y los actores junto con la descripción sobre las de las relaciones de comunicación
 existentes entre un actor y el sistema.\\
 
@@ -121,8 +125,6 @@ En la figura \ref{diagram:caso-uso} podemos observar los diagramas de casos de u
 \end{figure}
 
 
-
-
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=.5]{diagramas/casos-uso-robot.png}
@@ -132,12 +134,8 @@ En la figura \ref{diagram:caso-uso} podemos observar los diagramas de casos de u
 \end{figure}
 
 
-
-
-
-\section{Especificación de los casos de uso}
+\section{Descripción de los casos de uso}
 \label{sec:especificaciones-caso-uso}
-
 
 A continuación se proporciona la especificaciones de cada uno de los casos de uso de la figura \ref{diagram:caso-uso}:
 
@@ -535,4 +533,17 @@ A continuación se proporciona la especificaciones de cada uno de los casos de u
 \caption{Descripción del caso de uso: Editar robot.}
 \end{table}
 
+\section{Diagrama de clases}
+
+En esta sección de la arquitectura es dónde se define la parte de la interacción con la base de
+datos y que tablas se han definido y con que relaciones. La jerarquía
+de clases queda de la siguiente manera:
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.35,angle=270]{diagramas/ModeloUML.png}
+  \end{center}
+  \caption{Diagrama de clases para la BD.}
+  \label{diagram:caso-uso}
+\end{figure}
 

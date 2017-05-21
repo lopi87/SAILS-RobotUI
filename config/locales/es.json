@@ -174,5 +174,6 @@
 	"unlink": "unlink",
 	"connect_success": "¡Conectado con exito!",
 	"session.user_id.required": "session.user_id.required",
-	"user.email.unique": "user.email.unique"
+	"user.email.unique": "user.email.unique",
+	"id": "id"
 }

@@ -5,6 +5,9 @@
 
 % Copyright (C) 2017 Manuel López Urbina
 
+\newpage
+
+
 \chapter{Comentarios finales}
 \label{chap:conclusiones}
 
@@ -59,9 +62,9 @@ Todo ello combinado con la robótica. Algunas de las plataformas mencionadas era
 Entre los elementos desarrollados se destaca:
 
 \begin{itemize}
- \item La elaboración de un vehículo de pruebas haciendo uso de una Raspberry Pi 3 Modelo B
- \item Aprendizaje a la utilización del framework Sails.js
- \item Aprendizaje al trabajo con eventos en tiempo real mediante el empleo de WebSockets, tecnología nunca utilizada por mí hasta la fecha
+ \item La elaboración de un vehículo de pruebas haciendo uso de una Raspberry Pi 3 Modelo B.
+ \item Aprendizaje a la utilización del framework Sails.js.
+ \item Aprendizaje al trabajo con eventos en tiempo real mediante el empleo de WebSockets, tecnología nunca utilizada por mí hasta la fecha.
  \item Empleo de una base de datos no relacional como Mongo DB.
  \item Transmisión de gran cantidad de datos entre cliente servidor y servidor cliente. Streaming de vídeo y emisión de comandos entre otros datos.
 \end{itemize}
@@ -71,7 +74,7 @@ Pienso que el resultado final del proyecto es ideal para aquellas personas afici
 de cualquier proyecto robótico y que puedan compartirlo con el resto del mundo.\\
 
 Una vez presentado podré continuar añadiendo mejoras y muchas cosas que tengo pensadas y que, posiblemente, se realicen para el proyecto del máster de Ingeniería de Sistemas y Computación que me 
-encuentro realizando en la actualidad.
+encuentro realizando en la actualidad.\\
 
 \section{Mejoras futuras}
 
@@ -79,13 +82,12 @@ La aplicación puede mejorarse en diversos aspectos. A continuación, se citan a
 
 \begin{itemize}
 
-\item Incorporación de advertencias acústicas tras la detección de una señal de tráfico.
-
-\item Mejora del diseño de la interfaz gráfica.
-
 \item Permitir la definición de las teclas de control del teclado e incorporación de dispositivos tales como gamepads o joysticks.
 
-\item Elaborar un generador de código para la exportación en los dispositivos robóticos, reduciendo por tanto las labores de programación.
+\item Elaborar un generador de código para la exportación a los dispositivos robóticos, reduciendo por tanto las labores de programación. Es decir, proporcionar un generador de código
+en la aplicación de tal manera que a partir de una interfaz elaborada genere el código ejecutable para el robot según su interfaz de control definida\\
+
+\item Permitir el streaming de audio además del de vídeo.\\
 
 \end{itemize}
 
