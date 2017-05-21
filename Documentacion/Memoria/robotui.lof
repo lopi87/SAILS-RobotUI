@@ -47,13 +47,15 @@
 \contentsline {figure}{\numberline {9.4}{\ignorespaces Formulario de registro de usuario.\relax }}{86}{figure.caption.57}
 \contentsline {figure}{\numberline {9.5}{\ignorespaces Informaci\IeC {\'o}n de un usuario.\relax }}{86}{figure.caption.58}
 \contentsline {figure}{\numberline {9.6}{\ignorespaces Formulario de creaci\IeC {\'o}n de un robot.\relax }}{88}{figure.caption.59}
-\contentsline {figure}{\numberline {9.7}{\ignorespaces Panel de configuraci\IeC {\'o}n de la interfaz.\relax }}{89}{figure.caption.60}
-\contentsline {figure}{\numberline {9.8}{\ignorespaces Panel de herramientas y panel de acciones para la configuraci\IeC {\'o}n de la interfaz.\relax }}{89}{figure.caption.61}
-\contentsline {figure}{\numberline {9.9}{\ignorespaces Panel informativo de las caracter\IeC {\'\i }sticas del robot de la interfaz.\relax }}{93}{figure.caption.63}
-\contentsline {figure}{\numberline {9.10}{\ignorespaces Panel informativo de las \IeC {\'o}rdenes enviadas al robot junto con una entrada de comandos para enviar nuevas \IeC {\'o}rdenes directamente.\relax }}{94}{figure.caption.64}
+\contentsline {figure}{\numberline {9.7}{\ignorespaces Vista informativa de un robot.\relax }}{88}{figure.caption.60}
+\contentsline {figure}{\numberline {9.8}{\ignorespaces Panel de configuraci\IeC {\'o}n de la interfaz.\relax }}{90}{figure.caption.62}
+\contentsline {figure}{\numberline {9.9}{\ignorespaces Panel de herramientas y panel de acciones para la configuraci\IeC {\'o}n de la interfaz.\relax }}{91}{figure.caption.63}
+\contentsline {figure}{\numberline {9.10}{\ignorespaces Panel informativo del robot donde se aprecia su identificador.\relax }}{92}{figure.caption.65}
+\contentsline {figure}{\numberline {9.11}{\ignorespaces Panel informativo de las caracter\IeC {\'\i }sticas del robot de la interfaz.\relax }}{96}{figure.caption.66}
+\contentsline {figure}{\numberline {9.12}{\ignorespaces Panel informativo de las \IeC {\'o}rdenes enviadas al robot junto con una entrada de comandos para enviar nuevas \IeC {\'o}rdenes directamente.\relax }}{96}{figure.caption.67}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1}{\ignorespaces Iniciando Sails \footnotemark .\relax }}{100}{figure.caption.68}
-\contentsline {figure}{\numberline {2}{\ignorespaces Sails en funcionamiento \footnotemark .\relax }}{101}{figure.caption.69}
-\contentsline {figure}{\numberline {3}{\ignorespaces Utilizaci\IeC {\'o}n del gestor de procesos Pm2 en el entorno de producci\IeC {\'o}n.\relax }}{106}{figure.caption.70}
+\contentsline {figure}{\numberline {1}{\ignorespaces Iniciando Sails \footnotemark .\relax }}{102}{figure.caption.71}
+\contentsline {figure}{\numberline {2}{\ignorespaces Sails en funcionamiento \footnotemark .\relax }}{103}{figure.caption.72}
+\contentsline {figure}{\numberline {3}{\ignorespaces Utilizaci\IeC {\'o}n del gestor de procesos Pm2 en el entorno de producci\IeC {\'o}n.\relax }}{108}{figure.caption.73}
 \addvspace {10\p@ }

@@ -34,6 +34,7 @@
             <% if (robot.public_drive){ %>
               <span class="label label-pill label-success"> <%= i18n('public')%> </span>
             <%} else {%>
+              <td><span class="label label-pill label-danger"> <%= i18n('private')%> </span></td>
               <ul>
                 <% user_driver.forEach(function(user)  { %>
                 <li>
@@ -49,6 +50,7 @@
             <% if (robot.public_view){ %>
               <span class="label label-pill label-success"> <%= i18n('public')%> </span>
             <%} else {%>
+            <td> <span class="label label-pill label-danger"> <%= i18n('private')%> </span></td>
             <ul>
               <% user_viewer.forEach(function(user)  { %>
               <li>

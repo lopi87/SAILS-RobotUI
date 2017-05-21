@@ -121,12 +121,12 @@ a la página de información del nuevo usuario \ref{website:informacion-usuario}
 \end{figure}
 
 
-\subsection{Creación de un Robot}
+\subsection{Registro de un Robot}
 \label{sec:creacion-robot}
 
-Para el proceso de creación de un robot hacemos clic al menú \emph{Robots} \textrightarrow \enspace \emph{Mis robots} accediendo al formulario de creación.\\
+Para el proceso de creación de un robot hacemos clic al menú \emph{Robots} \textrightarrow \enspace \emph{Mis robots} accediendo al formulario de creación, figura \ref{}.\\
 
-En este caso registraremos nuestro robot de pruebas descrito en el capítulo \label{cap:robot}. Para ello introducimos los siguientes datos:
+En este caso registraremos nuestro robot de pruebas descrito en el capítulo \ref{chap:robot}. Para ello introducimos los siguientes datos:
 
 \begin{enumerate}
  \item Nombre: nombre de nuestro robot.
@@ -140,7 +140,7 @@ En este caso registraremos nuestro robot de pruebas descrito en el capítulo \la
  y haciendo por tanto inválidos los parámetros de los selectores anteriores.
 \end{enumerate}
 
-Una vez rellenado los campos como se muestran en la imagen \label{website:creacion-robot} pulsamos en \icontext{.2}{.35}{imagenes/manual-usuario/btn-crear.png}.
+Una vez rellenado los campos como se muestran en la imagen \ref{website:creacion-robot} pulsamos en \icontext{.2}{.35}{imagenes/manual-usuario/btn-crear.png}.
 
 \begin{figure}[H]
   \begin{center}
@@ -151,11 +151,51 @@ Una vez rellenado los campos como se muestran en la imagen \label{website:creaci
 \end{figure}
 
 
+Si los campos se han introducido correctamente visualizaremos la siguiente página:
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.3]{imagenes/manual-usuario/show-robot.png}
+  \end{center}
+  \caption{Vista informativa de un robot.}
+  \label{website:creacion-robot}
+\end{figure}
+
+En esta vista podemos apreciar la siguiente información:
+
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{2cm}|p{10cm}|}
+      \hline
+      \centering{Elemento} & \qquad \quad Significado \\
+      \hline
+      \includegraphics[width=1cm]{imagenes/manual-usuario/offline.png} & Imagen indicativa de que el robot se encuentra apagado. \\
+      \hline
+      \includegraphics[width=1cm]{imagenes/manual-usuario/online.png} & Imagen indicativa de que el robot se encuentra encendido, reemplazará a la imagen apagado. \\
+      \hline
+      \includegraphics[width=2cm]{imagenes/manual-usuario/control-publico.png} & Imagen representativa de que un robot es de control público. \\
+      \hline
+      \includegraphics[width=1cm]{imagenes/manual-usuario/nuevo-evento.png} & Imagen representativa de que un robot es de control privado. \\
+      \hline
+      \includegraphics[width=2cm]{imagenes/manual-usuario/vision-publico.png} & Imagen representativa de que un robot es de visualización pública. \\
+      \hline
+      \includegraphics[width=1cm]{imagenes/manual-usuario/nuevo-evento.png} & Imagen representativa de que un robot es de visualización privada. \\
+      \hline
+    \end{tabular}
+  \end{center}
+\caption{Elementos de una interfaz.}
+\end{table}
+
+
+
+
 
 \subsection{Configuración de la interfaz}
 
 Una vez creado nuestro robot en el sistema ya podemos configurar su interfaz. En la figura \ref{website:configuracion-interfaz} podemos ver el canvas sobre el que iremos añadiendo los diferentes elementos que 
-conformarán nuestro panel de control.
+conformarán nuestro panel de control. Esta interfaz servirá además de para controlar el dispositivo como ventana de seguimiento a los usuarios que visiten el funcionamiento del dispositivo.
 
 \begin{figure}[H]
   \begin{center}
@@ -165,6 +205,14 @@ conformarán nuestro panel de control.
   \label{website:configuracion-interfaz}
 \end{figure}
 
+La ventana de la figura \ref{website:configuracion-interfaz} se pueden apreciar los siguientes elementos:
+
+\begin{enumerate}
+  \item Panel de elementos (Evento, vídeo, Slider, Botón e Icono).
+ \item Panel de acciones (Crear, editar y eliminar).
+ \item Panel interfaz.
+ \item Panel informativo de las características del robot.
+\end{enumerate}
 
 
 \begin{figure}[H]
@@ -184,13 +232,13 @@ conformarán nuestro panel de control.
       \hline
       \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-boton.png} & Apertura del formulario para la creación de un botón. \\
       \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-boton.png} & Apertura del formulario para la creación de un canvas de vídeo. \\
+      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-video.png} & Apertura del formulario para la creación de un canvas de vídeo. \\
       \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-boton.png} & Apertura del formulario para la creación de un slider. \\
+      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-slider.png} & Apertura del formulario para la creación de un slider. \\
       \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-boton.png} & Apertura del formulario para la creación de una etiqueta. \\
+      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-evento.png} & Apertura del formulario para la creación de una etiqueta. \\
       \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-boton.png} & Apertura del formulario para la subida de un icono. \\
+      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-icono.png} & Apertura del formulario para la subida de un icono. \\
       \hline
     \end{tabular}
   \end{center}
@@ -205,11 +253,16 @@ NOTA: Esta guía comprende una serie de pasos para realizar la programación de 
 El sistema es compatible con cualquier dispositivo solo que se deberán emplear a nivel de programación las librerías adecuadas para activar las salidas correspondientes al modelo de placa utilizado.\\
 
 
-Para realizar la programación de nuestro dispositivo robótico debemos seguir una serie de pasos. Primero, al crear nuestro robot en la aplicación RobotUI como queda descrito en el punto PUNTO, y tomando nota
-del identificador único que la aplicación proporciona para dicho robot.\\	
+Para realizar la programación de nuestro dispositivo robótico debemos seguir una serie de pasos. Primero, al crear nuestro robot en la aplicación RobotUI como queda descrito en el punto \ref{sec:creacion-robot}
+}, y tomando nota del identificador único que la aplicación proporciona para dicho robot.\\	
 
-
-AÑADIR CAPTURA VISTA IDENTIFICADOR
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=.6]{imagenes/manual-usuario/identificador.png}
+  \end{center}
+  \caption{Panel informativo del robot donde se aprecia su identificador.}
+  \label{website:pagina-principal}
+\end{figure}
 
 
 Pasos:
@@ -218,9 +271,7 @@ Pasos:
   \item Generar una archivo con nombre client.js, por ejemplo, con el código base mostrado en el inferior.
   \item Reemplazar en el código la palabra \emph{IDENTIFICADOR} por el identificador de nuestro robot indicado en la vista show del mismo. Por ejemplo: 59188631c8e94ba54f7a4bdc
   \item Indicar el puerto en el que el rebot permanecerá a la escucha. Para ello debemos reemplazar palabra \emph{PUERTO} del código inferior por el puerto deseado. Por ejemplo 8085. 
-  
   \item El siguiente paso es es
-  
 \end{enumerate}
 
 
