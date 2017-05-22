@@ -1,7 +1,13 @@
 \documentclass[a4paper,12pt]{book}
 
+
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+
+
 \usepackage{estilosbase}
 \usepackage{textcomp}
+
 
 \headsep = 27 pt
 \clearpage{\pagestyle{empty}\cleardoublepage}
@@ -53,6 +59,8 @@
 \input{herramientas-utilizadas/herramientas-utilizadas.tex}
 
 \input{desarrollo-software/desarrollo-software.tex}
+
+\input{ frontend/frontend.tex }
 
 \input{ comunicaciones/comunicaciones.tex }
 

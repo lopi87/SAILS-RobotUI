@@ -176,19 +176,39 @@ En esta vista podemos apreciar la siguiente información:
       \hline
       \includegraphics[width=2cm]{imagenes/manual-usuario/control-publico.png} & Imagen representativa de que un robot es de control público. \\
       \hline
-      \includegraphics[width=1cm]{imagenes/manual-usuario/nuevo-evento.png} & Imagen representativa de que un robot es de control privado. \\
+      \includegraphics[width=2cm]{imagenes/manual-usuario/control-privado.png} & Imagen representativa de que un robot es de control privado. \\
       \hline
       \includegraphics[width=2cm]{imagenes/manual-usuario/vision-publico.png} & Imagen representativa de que un robot es de visualización pública. \\
       \hline
-      \includegraphics[width=1cm]{imagenes/manual-usuario/nuevo-evento.png} & Imagen representativa de que un robot es de visualización privada. \\
+      \includegraphics[width=2.2cm]{imagenes/manual-usuario/seguimiento-privado.png} & Imagen representativa de que un robot es de visualización privada. \\
       \hline
     \end{tabular}
   \end{center}
-\caption{Elementos de una interfaz.}
+\caption{Estados de un robot.}
 \end{table}
 
 
 \subsubsection{Permisos}
+
+
+
+Como hemos indicado en el procedimiento de registro de un robot, éste se puede configurar  con una serie de permisos. Existen dos modalidades en RobotUI, como sabemos, la de visualización y la de control,
+las cuales podemos hacer públicas o privadas, y, en el caso de que optemos por alguna modalidad privada, definir para qué usuarios estará disponible.\\
+
+Los permisos estarán disponibles en todo momento en la ventana de edición de un robot. En ella podremos visualizar los diferentes usuarios añadidos con los permisos de cada uno de ellos. Podremos eliminar usuarios o
+añadir otros nuevos estableciendo el acceso a alguna de las modalidades de acceso al robot como públicas o privadas.\\
+
+Si el robot es establecido como público en alguna de sus dos modalidades (control o seguimiento) entonces se ignorará toda la configuración de usuarios establecida para esa modalidad aunque
+permanecerán registradas en el sistema por si se desea volver al modo privado tan solo haciendo click en el checkbox correspondiente.\\
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.5]{imagenes/manual-usuario/panel-permisos.png}
+  \end{center}
+  \caption{Panel de configuración de los permisos de un robot.}
+  \label{website:creacion-robot}
+\end{figure}
+
 
 \begin{figure}[H]
     \centering
@@ -198,7 +218,6 @@ En esta vista podemos apreciar la siguiente información:
     \caption{Panel informativo de un robot privado frente a uno público.}%
     \label{fig:http-request}%
 \end{figure}
-
 
 
 \subsection{Configuración de la interfaz}
@@ -214,7 +233,7 @@ conformarán nuestro panel de control. Esta interfaz servirá además de para co
   \label{website:configuracion-interfaz}
 \end{figure}
 
-La ventana de la figura \ref{website:configuracion-interfaz} se pueden apreciar los siguientes elementos:
+En la figura \ref{website:configuracion-interfaz} correspondiente a la configuración de una interfaz se pueden apreciar los siguientes elementos:
 
 \begin{enumerate}
   \item Panel de elementos (Evento, vídeo, Slider, Botón e Icono).
@@ -251,8 +270,17 @@ La ventana de la figura \ref{website:configuracion-interfaz} se pueden apreciar 
       \hline
     \end{tabular}
   \end{center}
-\caption{Elementos de una interfaz.}
+\caption{Elementos añadibles a una interfaz.}
 \end{table}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=.4]{imagenes/manual-usuario/interfaz-creada.png}
+  \end{center}
+  \caption{Vista tipo de una interfaz configurada.}
+  \label{website:pagina-principal}
+\end{figure}
+
 
 
 \section{ Programa tu robot }
@@ -262,45 +290,44 @@ NOTA: Esta guía comprende una serie de pasos para realizar la programación de 
 El sistema es compatible con cualquier dispositivo solo que se deberán emplear a nivel de programación las librerías adecuadas para activar las salidas correspondientes al modelo de placa utilizado.\\
 
 
-Para realizar la programación de nuestro dispositivo robótico debemos seguir una serie de pasos. Primero, al crear nuestro robot en la aplicación RobotUI como queda descrito en el punto \ref{sec:creacion-robot}
-}, y tomando nota del identificador único que la aplicación proporciona para dicho robot.\\	
+Antes de proceder con la programación de nuestro robot debemos de realizar su creación en la aplicación RobotUI como queda descrito en el punto \ref{sec:creacion-robot} y 
+tomar nota del identificador único que la aplicación proporciona para dicho robot que posteriormente necesitaremos.\\	
 
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=.6]{imagenes/manual-usuario/identificador.png}
   \end{center}
-  \caption{Panel informativo del robot donde se aprecia su identificador.}
+  \caption{Panel informativo de un robot donde se aprecia su identificador.}
   \label{website:pagina-principal}
 \end{figure}
 
 
-Pasos:
+Una vez creado el robot y configurada su interfaz, podemos comenzar con la programación. Para ello debemos seguir una serie de pasos:\\
 
 \begin{enumerate}
-  \item Generar una archivo con nombre client.js, por ejemplo, con el código base mostrado en el inferior.
+  \item Generar una archivo con nombre client.js, por ejemplo, con el código base mostrado en el punto inferior.
   \item Reemplazar en el código la palabra \emph{IDENTIFICADOR} por el identificador de nuestro robot indicado en la vista show del mismo. Por ejemplo: 59188631c8e94ba54f7a4bdc
-  \item Indicar el puerto en el que el rebot permanecerá a la escucha. Para ello debemos reemplazar palabra \emph{PUERTO} del código inferior por el puerto deseado. Por ejemplo 8085. 
-  \item El siguiente paso es es
+  \item Indicar el puerto en el que el robot permanecerá a la escucha. Para ello debemos reemplazar palabra \emph{PUERTO} del código inferior por el puerto deseado. Por ejemplo 8085. 
+  \item El siguiente paso es es determinar qué puertos GPIO necesitaremos y si van a ser utilizado en modo Entrada, Salida o Entrada/Salida. 
+  En el caso de ejemplo se ha realizado empleando la biblioteca pigpio cuya documentación se encuentra en el siguiente enlace: \url{https://www.npmjs.com/package/pigpio}. Aunque se podría
+  haber empleado cualquier otra.
 \end{enumerate}
-
-
 
 
 \begin{lstlisting}[language=JavaScript]
 var io_client = require('./node_modules/socket.io-client');
 var sails_client = require('./node_modules/sails.io.js');
 var io_server = sails_client(io_client);
-// io.sails.url = 'http://46.101.102.33:80';
-io_server.sails.url = 'http://localhost:1337';
+io_server.sails.url = 'http://46.101.102.33:80';
 io_server.socket.get('/robot/changetoonline/', {robot: 'IDENTIFICADOR', online: true});
 
 // Inicia servidor socket.io en el puerto PUERTO.
 var io =io_client.listen( PUERTO, { log: false });
 
-// Carga de módulos necesarios.
 var ffmpeg_command, running_camera = false, child_process = require('child_process');
 
 var Gpio = require('pigpio').Gpio;
+
 // Pines utilizados. Motores izquierdos: 2 y 3, motores derechos: 17 y 27
 var gpio2 = new Gpio(2, {mode: Gpio.OUTPUT}),
   gpio3 = new Gpio(3, {mode: Gpio.OUTPUT}),
@@ -471,5 +498,3 @@ El panel de control de la interfaz podemos identificar los siguientes elementos:
 
 \section{ Visita otros robots }
 \label{sec:visita-robot}
-
-

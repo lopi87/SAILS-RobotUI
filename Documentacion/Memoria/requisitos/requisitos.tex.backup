@@ -1,7 +1,7 @@
 \chapter[Requisitos]{Especificación y análisis de requisitos}
 \label{chap:requisitos}
 
-Para el caso que nos concierte en el proyecto, dentro del marco de investigación que define la totalidad de la infraestructura, la funcionalidad principal del mismo será:
+Para el caso que nos concierne en el proyecto, dentro del marco de investigación que define la totalidad de la infraestructura, la funcionalidad principal del mismo será:
 
 \begin{itemize}
 \item Definir los pasos para dar de alta un dispositivo robótico en el sistema.

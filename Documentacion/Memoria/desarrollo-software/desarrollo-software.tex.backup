@@ -536,8 +536,44 @@ A continuación se proporciona la especificaciones de cada uno de los casos de u
 \section{Diagrama de clases}
 
 En esta sección de la arquitectura es dónde se define la parte de la interacción con la base de
-datos y que tablas se han definido y con que relaciones. La jerarquía
-de clases queda de la siguiente manera:
+datos y que tablas se han definido y con que relaciones.\\
+
+
+La clase o tabla que contendrá el peso de toda la jerarquía de base de datos será la clase Robot. Esta tabla contendrá referencias externas o “foreign keys” a cada tabla que
+haga participe en su definición, es decir:
+
+\begin{itemize}
+ \item Interfaz
+ \item Usuario propietario
+ \item Usuarios conductores
+ \item Usuarios espectadores
+ \item Room
+\end{itemize}
+
+Otra de las clases con mayor presencia en el modelo es la clase Interfaz, la cual esta directamente relacionada con el robot y que incorpora las siguientes relaciones:
+
+\begin{itemize}
+ \item Acción
+ \item Vídeo
+ \item Evento
+ \item Slider
+\end{itemize}
+
+Por último destacar la clase Usuario que incorpora las siguientes relaciones:
+
+\begin{itemize}
+ \item Robot en propiedas
+ \item Robot con permisos de conducción
+ \item Robots con permisos de visualización
+ \item Mensajes enviados
+ \item Mensajes recibidos
+ \item Sessiones abiertas
+ \item Iconos
+\end{itemize}
+
+
+
+La jerarquía de clases queda de la siguiente manera:
 
 \begin{figure}[H]
   \begin{center}
