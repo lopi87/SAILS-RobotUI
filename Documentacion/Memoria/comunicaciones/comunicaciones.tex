@@ -370,7 +370,7 @@ A continuación mostramos el código completo de la función \emph{afterDisconne
 \begin{lstlisting}[language=JavaScript]
 
   afterDisconnect: function(session, socket, cb) {
-     console.log('Cliente desconectado - id del socket: ' + socket.id);
+     console.log('Disconnected - id del socket: ' + socket.id);
 
     //Session del socket cerrado,
     Session.findOne({socket_id: socket.id}).populate('rooms').exec(function (err, session) {
@@ -474,7 +474,7 @@ El código inferior realiza el envío del comando al robot para su interpretaci�
         $('#chat').prepend('- ' + code + '<br/>');
         //Mandar instruccion al robot
         socket.emit('action', code);
-        console.log('Emitiendo comando: ' + code );
+        console.log('Emitting comand: ' + code );
       }
     });
 
@@ -491,12 +491,13 @@ El código inferior realiza el envío del comando al robot para su interpretaci�
   \begin{center}
     \includegraphics[scale=0.5]{diagramas/flujo_comunicaciones_captura.png}
   \end{center}
-  \caption{Esquema representativo del flujo de datos originado por un usuario controlador de un robot tras la captura de datos procedentes del robot.}
+  \caption{Esquema representativo del flujo de datos originado por un usuario tras la captura de datos procedentes del robot.}
   \label{diagram:conexiones-controlador}
 \end{figure}
  
  
- El código inferior se corresponde con el evento lanzado cada vez que un frame de vídeo es capturado. Dicho código envía al servidor el frame para su postreior difusión y ``dibuja'' los datos capturados en el canvas de la interfaz:\\
+El cógigo inferior muestra cómo se realiza la captura de los frames de vídeos procedentes del robot. Dicho código envía al servidor el frame para su posterior difusión con los clientes suscritos
+a robot y ``dibuja'' el frame capturado en el canvas de la interfaz de control del robot:\\
  
  
 \begin{lstlisting}[language=JavaScript] 
@@ -508,8 +509,8 @@ El código inferior realiza el envío del comando al robot para su interpretaci�
 \end{lstlisting}
 
 
-Código de la acción \emph{emit\_video}, la cual emite el frame capturado a todos los clientes que se encuentran suscritos al robot (broadcast a todos los clientes suscritos a la sala cuyo nombre se
-corresponde con el identificador del robot):\\
+Código de la acción \emph{emit\_video} localizada en el servidor y llamada desde el cliente (código superior), la cual emite el frame capturado a todos los clientes que se encuentran suscritos al robot 
+(broadcast a todos los clientes suscritos a la sala cuyo nombre se corresponde con el identificador del robot):\\
 
 \begin{lstlisting}[language=JavaScript] 
   //Emision de las acciones a los vivitantes de una interfaz

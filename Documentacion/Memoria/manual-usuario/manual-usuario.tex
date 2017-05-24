@@ -4,16 +4,22 @@
 \chapter{ Guía de Usuario}
 \label{chap:manual-usuario}
 
-RobotUI es una aplicación web creada con un claro propósito; el de  proporcionar a los usuarios un medio donde compartir sus dispositivos robóticos con el resto de usuarios.\\
+La aplicación RobotUI ha sido creada por Manuel López Urbina para el proyecto fin de carrera de la titulación de Ingeniería Informática de la Universidad de Cádiz.\\
 
-Para ello RobotUI proporciona una serie de herramientas para que, aquellas personas que no tengan los suficientes conocimientos de programación, puedan configurar un
-entorno para el manejo de sus proyectos robóticos y tener posibilidad de compartir sus experiencias con el resto de usuarios.\\
+Resulta de vital importancia consultar esta guía antes y/o durante la utilización de los diferentes elementos tanto hardware, robot de pruebas desarrollado, como software del presente proyecto ya 
+que le proporcionará una guía paso a paso en el manejo correcto de la aplicación.\\
+
+La resolución recomendada para la aplicación debe ser superior o igual a 1024x768 (Estándar XGA), aunque es adaptable a cualquier resolución debido a su diseño web responsive.\\
+
+RobotUI ha sido elaborado con un claro propósito; el de  proporcionar a los usuarios un medio donde compartir sus dispositivos robóticos con el resto de usuarios. Esto es posible gracias a una serie de
+herramientas desarrolladas para que, sin necesidad de tener grandes conocimientos en programación, puedan configurar un entorno para el manejo de sus proyectos robóticos y tener 
+posibilidad de compartir sus dispositivos y experiencias con el resto de usuarios.\\
 
 La particularidad de RobotUI es que el usuario propietario del robot tiene la posibilidad de permitir el manejo de sus dispositivos robóticos al resto de usuarios que él mismo considere de una 
 manera controlada o, por otra parte, permitir que otros usuarios visualicen, como si de espectadores se tratase, el control que un determinado usuario realiza de un determinado robot.
 Todo ello en tiempo real.\\
 
-Por tanto, tras esta breve introducción en el ámbito de la aplicación, en este manual se describen los diferentes paso a realizar para configurar sus dispositivos correctamente en el sistema
+Por tanto, tras esta breve introducción en el ámbito de la aplicación, en este manual se describen los diferentes pasos a realizar para configurar sus dispositivos correctamente en el sistema
 y abrirlo a toda una comunidad de usuarios. Además de tener abierto el acceso a otros muchos dispositivos de otras personas.\\
 
 \subsection{Objetivo de esta guía}
@@ -23,6 +29,7 @@ Esta guía tiene como objetivo proporcionar al usuario un soporte de ayuda e ini
 Esta sección comprende:\\
 
 \begin{itemize}
+ \item Introducción.
  \item Guía de acceso al código fuente de la aplicación.
  \item Guía de uso de la aplicación.
  \item Guía para la puesta en marcha y programación de un robot.
@@ -88,7 +95,7 @@ Una vez en la página principal, figura \ref{website:pagina-principal}, podemos 
 
 
 
-Para iniciar el proceso de registro de usuario hacemos clic sobre el botón de la barra superior \emph{¡Regístrese ahora!} mediante el cual accedemos al formulario \ref{website:formulario-registro}.
+Para iniciar el proceso de registro de usuario hacemos clic sobre el botón de la barra superior \icontext{.2}{.35}{imagenes/manual-usuario/btn-registro.png} mediante el cual accedemos al formulario \ref{website:formulario-registro}.
 
 \begin{figure}[H]
   \begin{center}
@@ -124,7 +131,7 @@ a la página de información del nuevo usuario \ref{website:informacion-usuario}
 \subsection{Registro de un Robot}
 \label{sec:creacion-robot}
 
-Para el proceso de creación de un robot hacemos clic al menú \emph{Robots} \textrightarrow \enspace \emph{Mis robots} accediendo al formulario de creación, figura \ref{}.\\
+Para el proceso de creación de un robot hacemos clic al menú \emph{Robots} \textrightarrow \enspace \emph{Mis robots} accediendo al formulario de creación, figura \ref{website:creacion-robot}.\\
 
 En este caso registraremos nuestro robot de pruebas descrito en el capítulo \ref{chap:robot}. Para ello introducimos los siguientes datos:
 
@@ -158,10 +165,10 @@ Si los campos se han introducido correctamente visualizaremos la siguiente pági
     \includegraphics[scale=0.3]{imagenes/manual-usuario/show-robot.png}
   \end{center}
   \caption{Vista informativa de un robot.}
-  \label{website:creacion-robot}
+  \label{website:show-robot}
 \end{figure}
 
-En esta vista podemos apreciar la siguiente información:
+En la figura \ref{website:show-robot} vista podemos apreciar la siguiente información:
 
 
 \begin{table}[H]
@@ -170,17 +177,19 @@ En esta vista podemos apreciar la siguiente información:
       \hline
       \centering{Elemento} & \qquad \quad Significado \\
       \hline
-      \includegraphics[width=1cm]{imagenes/manual-usuario/offline.png} & Imagen indicativa de que el robot se encuentra apagado. \\
+      \includegraphics[width=1cm]{imagenes/manual-usuario/offline.png} & Imagen indicativa de estado \emph{offline}. El robot se encuentra sin conexión. \\
       \hline
-      \includegraphics[width=1cm]{imagenes/manual-usuario/online.png} & Imagen indicativa de que el robot se encuentra encendido, reemplazará a la imagen apagado. \\
+      \includegraphics[width=1cm]{imagenes/manual-usuario/online.png} & Imagen indicativa de estado \emph{online}. El robot se encuentra conectado, reemplazará a la imagen de estado \emph{offline}. \\
       \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/control-publico.png} & Imagen representativa de que un robot es de control público. \\
+      \includegraphics[width=2cm]{imagenes/manual-usuario/control-publico.png} & Imagen representativa de robot de control público. \\
       \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/control-privado.png} & Imagen representativa de que un robot es de control privado. \\
+      \includegraphics[width=2cm]{imagenes/manual-usuario/control-privado.png} & Imagen representativa de robot de control privado. \\
       \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/vision-publico.png} & Imagen representativa de que un robot es de visualización pública. \\
+      \includegraphics[width=2cm]{imagenes/manual-usuario/vision-publico.png} & Imagen representativa de robot de seguimiento pública. \\
       \hline
-      \includegraphics[width=2.2cm]{imagenes/manual-usuario/seguimiento-privado.png} & Imagen representativa de que un robot es de visualización privada. \\
+      \includegraphics[width=2.2cm]{imagenes/manual-usuario/seguimiento-privado.png} & Imagen representativa de robot de seguimiento privado. \\
+      \hline
+      \includegraphics[width=2.2cm]{imagenes/manual-usuario/ocupado.png} & Imagen representativa de robot en uso. \\
       \hline
     \end{tabular}
   \end{center}
@@ -188,17 +197,16 @@ En esta vista podemos apreciar la siguiente información:
 \end{table}
 
 
-\subsubsection{Permisos}
+\subsection{Gestión de permisos}
 
-
-Como hemos indicado en el procedimiento de registro de un robot, éste se puede configurar  con una serie de permisos. Existen dos modalidades en RobotUI, como sabemos, la de visualización y la de control,
+Como hemos mencionado en el procedimiento de registro de un robot, éste se puede crear con una serie de permisos. Existen dos modalidades en RobotUI, como sabemos, la de visualización o seguimiento y la de control,
 las cuales podemos hacer públicas o privadas, y, en el caso de que optemos por alguna modalidad privada, definir para qué usuarios estará disponible.\\
 
-Los permisos estarán disponibles en todo momento en la ventana de edición de un robot. En ella podremos visualizar los diferentes usuarios añadidos con los permisos de cada uno de ellos. Podremos eliminar usuarios o
-añadir otros nuevos estableciendo el acceso a alguna de las modalidades de acceso al robot como públicas o privadas.\\
+Los permisos configurados estarán disponibles en todo momento en la ventana de edición de un robot. En ella podremos visualizar los diferentes usuarios añadidos con los permisos de cada uno de ellos.
+Podremos eliminar usuarios o añadir otros nuevos estableciendo el acceso a alguna de las modalidades de acceso al robot como públicas o privadas.\\
 
 Si el robot es establecido como público en alguna de sus dos modalidades (control o seguimiento) entonces se ignorará toda la configuración de usuarios establecida para esa modalidad aunque
-permanecerán registradas en el sistema por si se desea volver al modo privado tan solo haciendo click en el checkbox correspondiente.\\
+permanecerán registradas en el sistema por si se desea volver al modo privado tan solo haciendo clic en el checkbox correspondiente.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -221,8 +229,9 @@ permanecerán registradas en el sistema por si se desea volver al modo privado t
 
 \subsection{Configuración de la interfaz}
 
-Una vez creado nuestro robot en el sistema ya podemos configurar su interfaz. En la figura \ref{website:configuracion-interfaz} podemos ver el canvas sobre el que iremos añadiendo los diferentes elementos que 
-conformarán nuestro panel de control. Esta interfaz servirá además de para controlar el dispositivo como ventana de seguimiento a los usuarios que visiten el funcionamiento del dispositivo.
+Una vez creado nuestro robot en el sistema ya podremos configurar su interfaz. En la figura \ref{website:configuracion-interfaz} podemos ver el canvas sobre el que iremos añadiendo los diferentes elementos que 
+conformarán nuestro panel de control. El diseño resultante de esta ventana servirá tanto para panel de control del robot como ventana de seguimiento a los usuarios que sigan el funcionamiento del
+dispositivo.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -232,12 +241,12 @@ conformarán nuestro panel de control. Esta interfaz servirá además de para co
   \label{website:configuracion-interfaz}
 \end{figure}
 
-En la figura \ref{website:configuracion-interfaz} correspondiente a la configuración de una interfaz se pueden apreciar los siguientes elementos:
+La figura \ref{website:configuracion-interfaz} correspondiente al panel de configuración de una interfaz queda dividida en los siguientes elementos:
 
 \begin{enumerate}
-  \item Panel de elementos (Evento, vídeo, Slider, Botón e Icono).
- \item Panel de acciones (Crear, editar y eliminar).
- \item Panel interfaz.
+  \item Panel de elementos disponibles (Evento, Vídeo, Slider, Botón e Icono).
+ \item Panel de acciones sobre elementos (Crear, editar y eliminar).
+ \item Panel canvas sobre el que posicionar los elementos.
  \item Panel informativo de las características del robot.
 \end{enumerate}
 
@@ -246,32 +255,65 @@ En la figura \ref{website:configuracion-interfaz} correspondiente a la configura
   \begin{center}
     \includegraphics[scale=.6]{imagenes/manual-usuario/barra-herramientas-interfaz.png}
   \end{center}
-  \caption{Panel de herramientas  y panel de acciones para la configuración de la interfaz.}
+  \caption{Panel de elemento (izquierda) y panel de acciones (derecha) para la configuración de la interfaz.}
   \label{website:pagina-principal}
 \end{figure}
 
 
+En los siguientes subapartados se describen los procedimientos para la creación, edición y borrados de elementos:\\
+
+
+\subsubsection{Nuevo elemento}
+
+ Para la creación de elementos debemos tener seleccionado el modo creación en el panel de acciones y pulsar sobre el tipo de nuevo elemento deseado. La siguiente tabla muestra las diferentes combinaciones:
+  
 \begin{table}[H]
   \begin{center}
-    \begin{tabular}{|p{2cm}|p{10cm}|}
+    \begin{tabular}{|p{2cm}|p{2cm}|p{10cm}|}
       \hline
-      \centering{Botón} & \qquad \quad Significado \\
+      \centering{\textbf{Botón}} & \centering{\textbf{Modo}} & \qquad \quad \textbf{Acción} \\
       \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-boton.png} & Apertura del formulario para la creación de un botón. \\
+      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-boton.png} & \includegraphics[width=2cm]{imagenes/manual-usuario/btn-new.png} & Apertura del formulario para la creación de un botón. \\
       \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-video.png} & Apertura del formulario para la creación de un canvas de vídeo. \\
+      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-video.png} & \includegraphics[width=2cm]{imagenes/manual-usuario/btn-new.png} & Apertura del formulario para la creación de un canvas de vídeo. \\
       \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-slider.png} & Apertura del formulario para la creación de un slider. \\
+      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-slider.png} & \includegraphics[width=2cm]{imagenes/manual-usuario/btn-new.png} & Apertura del formulario para la creación de un slider. \\
       \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-evento.png} & Apertura del formulario para la creación de una etiqueta. \\
+      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-evento.png} & \includegraphics[width=2cm]{imagenes/manual-usuario/btn-new.png} & Apertura del formulario para la creación de una etiqueta. \\
       \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-icono.png} & Apertura del formulario para la subida de un icono. \\
+      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-icono.png} & \includegraphics[width=2cm]{imagenes/manual-usuario/btn-new.png} & Apertura del formulario para la subida de un icono. \\
       \hline
     \end{tabular}
   \end{center}
 \caption{Elementos añadibles a una interfaz.}
 \end{table}
 
+
+Una vez completado el formulario y creado el nuevo elemento tan solo debemos arrastrar el nuevo elemento a la posición deseada.
+
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=.4]{imagenes/manual-usuario/formulario-action.png}
+  \end{center}
+  \caption{Formulario para la creación de un botón.}
+  \label{website:pagina-principal}
+\end{figure}
+
+Del mismo modo para la creación del resto de tipos de elementos.
+
+\subsubsection{Editar elemento}
+
+Para la edición de elementos pulsaremos seleccionaremos el modo edición \icontext{.2}{.35}{imagenes/manual-usuario/btn-edit.png} y posteriormente haremos clic sobre el elemento que deseemos editar.\\
+
+Tras ello se abrirá el formulario correspondiente, modificamos los parámetros deseados y pulsamos guardar.\\
+
+\subsubsection{Eliminar elemento}
+
+Del mismo modo que en la edición de elementos, para borrar un elemento seleccionaremos el modo eliminar \icontext{.2}{.35}{imagenes/manual-usuario/btn-destroy.png}  del panel de acciones y posteriormente haremos clic sobre el elemento que deseemos borrar.\\
+
+
+\subsection{Ejemplo}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=.4]{imagenes/manual-usuario/interfaz-creada.png}
@@ -439,3 +481,21 @@ El panel de control de la interfaz podemos identificar los siguientes elementos:
 
 \section{ Visita otros robots }
 \label{sec:visita-robot}
+
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=.35]{imagenes/manual-usuario/robots-publicos.png}
+  \end{center}
+  \caption{ Vista de acceso a los robots públicos.}
+  \label{website:pagina-principal}
+\end{figure}
+
+
+
+
+\subsection{Panel de administración}
+
+
+  Menú accesible solo para usuarios administradores.
+

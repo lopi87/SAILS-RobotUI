@@ -62,18 +62,22 @@ Todo ello combinado con la robótica. Algunas de las plataformas mencionadas era
 Entre los elementos desarrollados se destaca:
 
 \begin{itemize}
- \item La elaboración de un vehículo de pruebas haciendo uso de una Raspberry Pi 3 Modelo B.
- \item Aprendizaje a la utilización del framework Sails.js.
- \item Aprendizaje al trabajo con eventos en tiempo real mediante el empleo de WebSockets, tecnología nunca utilizada por mí hasta la fecha.
+ \item \textbf{La elaboración de un vehículo de pruebas:} Realizado sobre una Raspberry Pi 3 Modelo B, el desarrollo del vehículo de pruebas ha permitido mediante la utilización del
+ sistema de Entrada/Salida GPIO en control de diferentes sensores o dispositivos. A nivel software se ha empleado el SDK de sails para la comunicación con la aplicación web desarrollada y recepción
+ de comandos de control.
+ 
+ 
+ \item \textbf{Aprendizaje a la utilización del framework Sails.js:} Para el desarrollo de la aplicación se ha empleado el framework node.js Sails.js
+ \item Aprendizaje al trabajo con eventos en tiempo real mediante el empleo de webSockets, tecnología nunca utilizada por mí hasta la fecha.
  \item Empleo de una base de datos no relacional como Mongo DB.
- \item Transmisión de gran cantidad de datos entre cliente servidor y servidor cliente. Streaming de vídeo y emisión de comandos entre otros datos.
+ \item Transmisión de gran cantidad de datos entre cliente servidor y servidor cliente. Streaming de vídeo y emisión de comandos entre otros datos.\\
 \end{itemize}
 
 
 Pienso que el resultado final del proyecto es ideal para aquellas personas aficionadas a la robótica y programación proporcionando una herramienta sea utilizable por la gran comunidad poseedora 
 de cualquier proyecto robótico y que puedan compartirlo con el resto del mundo.\\
 
-Una vez presentado podré continuar añadiendo mejoras y muchas cosas que tengo pensadas y que, posiblemente, se realicen para el proyecto del máster de Ingeniería de Sistemas y Computación que me 
+Una vez presentado podré continuar añadiendo mejoras y muchas cosas que tengo pensadas y que, posiblemente, se realicen para el proyecto del Máster Universitario en Ingeniería de Sistemas y Computación que me 
 encuentro realizando en la actualidad.\\
 
 \section{Mejoras futuras}
@@ -89,6 +93,6 @@ en la aplicación de tal manera que a partir de una interfaz elaborada genere el
 
 \item Permitir el streaming de audio además del de vídeo.\\
 
+\item Añadir autenticación por un sistema de certificados por clave pública y privada que garantice que la conectividad entre dispositivo robótico y usuario es la correcta.\\
+
 \end{itemize}
-
-
