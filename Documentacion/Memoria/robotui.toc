@@ -64,56 +64,56 @@
 \contentsline {subsection}{\numberline {7.2.1}Interconexi\IeC {\'o}n de elementos}{62}{subsection.7.2.1}
 \contentsline {subsubsection}{Alimentaci\IeC {\'o}n}{64}{section*.38}
 \contentsline {subsubsection}{Esquema de conexiones}{65}{section*.41}
-\contentsline {section}{\numberline {7.3}Software de control}{67}{section.7.3}
-\contentsline {subsection}{\numberline {7.3.1}Entrada/Salida}{67}{subsection.7.3.1}
-\contentsline {subsection}{\numberline {7.3.2}Comunicaciones}{68}{subsection.7.3.2}
-\contentsline {subsubsection}{Sockets}{69}{section*.46}
-\contentsline {subsubsection}{ Streaming de v\IeC {\'\i }deo }{72}{section*.48}
-\contentsline {subsubsection}{C\IeC {\'o}digo de ejemplo completo}{74}{section*.49}
-\contentsline {chapter}{\numberline {8}Organizaci\IeC {\'o}n temporal}{79}{chapter.8}
-\contentsline {section}{\numberline {8.1}Planificaci\IeC {\'o}n temporal de tareas}{82}{section.8.1}
-\contentsline {subsection}{\numberline {8.1.1}Hito 1: Planificaci\IeC {\'o}n y an\IeC {\'a}lisis }{82}{subsection.8.1.1}
-\contentsline {subsection}{\numberline {8.1.2}Hito 2: Definici\IeC {\'o}n de requisitos }{83}{subsection.8.1.2}
-\contentsline {subsection}{\numberline {8.1.3}Hito 3: Comienzo de desarrollo de la aplicaci\IeC {\'o}n}{83}{subsection.8.1.3}
-\contentsline {subsection}{\numberline {8.1.4} Hito 4: Desarrollo de la aplicaci\IeC {\'o}n, m\IeC {\'o}dulo componentes }{83}{subsection.8.1.4}
-\contentsline {subsection}{\numberline {8.1.5}Hito 5: Desarrollo de la aplicaci\IeC {\'o}n, m\IeC {\'o}dulo interfaz }{83}{subsection.8.1.5}
-\contentsline {subsection}{\numberline {8.1.6}Hito 6: Desarrollo del m\IeC {\'o}dulo de comunicaciones }{84}{subsection.8.1.6}
-\contentsline {subsection}{\numberline {8.1.7}Hito 7: Construcci\IeC {\'o}n del veh\IeC {\'\i }culo de pruebas }{84}{subsection.8.1.7}
-\contentsline {subsection}{\numberline {8.1.8}Hito 8: Programaci\IeC {\'o}n del veh\IeC {\'\i }culo de pruebas }{84}{subsection.8.1.8}
-\contentsline {subsection}{\numberline {8.1.9}Hito 9: Documentaci\IeC {\'o}n }{84}{subsection.8.1.9}
-\contentsline {section}{\numberline {8.2}Diagrama de Gantt}{84}{section.8.2}
-\contentsline {chapter}{\numberline {9} Gu\IeC {\'\i }a de Usuario}{87}{chapter.9}
-\contentsline {subsection}{\numberline {9.0.1}Objetivo de esta gu\IeC {\'\i }a}{88}{subsection.9.0.1}
-\contentsline {subsection}{\numberline {9.0.2}Dirigido a}{88}{subsection.9.0.2}
-\contentsline {subsection}{\numberline {9.0.3}Obtener RobotUI}{88}{subsection.9.0.3}
-\contentsline {section}{\numberline {9.1} Uso de RobotUI }{88}{section.9.1}
-\contentsline {subsection}{\numberline {9.1.1} Acceso a la aplicaci\IeC {\'o}n }{88}{subsection.9.1.1}
-\contentsline {subsection}{\numberline {9.1.2} Registo de usuario }{89}{subsection.9.1.2}
-\contentsline {subsection}{\numberline {9.1.3}Registro de un Robot}{91}{subsection.9.1.3}
-\contentsline {subsection}{\numberline {9.1.4}Gesti\IeC {\'o}n de permisos}{93}{subsection.9.1.4}
-\contentsline {subsection}{\numberline {9.1.5}Configuraci\IeC {\'o}n de la interfaz}{94}{subsection.9.1.5}
-\contentsline {subsubsection}{Nuevo elemento}{96}{section*.67}
-\contentsline {subsubsection}{Editar elemento}{97}{section*.70}
-\contentsline {subsubsection}{Eliminar elemento}{97}{section*.71}
-\contentsline {subsection}{\numberline {9.1.6}Ejemplo}{98}{subsection.9.1.6}
-\contentsline {section}{\numberline {9.2} Programa tu robot }{98}{section.9.2}
-\contentsline {section}{\numberline {9.3} Controla tu robot }{101}{section.9.3}
-\contentsline {subsection}{\numberline {9.3.1}Panel de administraci\IeC {\'o}n}{103}{subsection.9.3.1}
-\contentsline {section}{\numberline {9.4} Visita otros robots }{103}{section.9.4}
-\contentsline {chapter}{\numberline {10}Comentarios finales}{105}{chapter.10}
-\contentsline {section}{\numberline {10.1}Presupuesto}{105}{section.10.1}
-\contentsline {section}{\numberline {10.2}Conclusiones}{106}{section.10.2}
-\contentsline {section}{\numberline {10.3}Mejoras futuras}{107}{section.10.3}
-\contentsline {chapter}{Anexos}{109}{appendix*.79}
-\contentsline {section}{\numberline {.1}Instalaci\IeC {\'o}n de Node.js}{109}{section.Alph0.1}
-\contentsline {section}{\numberline {.2}Instalaci\IeC {\'o}n Sails.js}{109}{section.Alph0.2}
-\contentsline {subsection}{\numberline {.2.1}Prerrequisitos}{109}{subsection.Alph0.2.1}
-\contentsline {subsection}{\numberline {.2.2}Instalaci\IeC {\'o}n}{110}{subsection.Alph0.2.2}
-\contentsline {section}{\numberline {.3}Instalaci\IeC {\'o}n de MongoDB}{111}{section.Alph0.3}
-\contentsline {subsection}{\numberline {.3.1}Prerrequisitos}{111}{subsection.Alph0.3.1}
-\contentsline {subsection}{\numberline {.3.2}Instalaci\IeC {\'o}n}{111}{subsection.Alph0.3.2}
-\contentsline {section}{\numberline {.4}Instalaci\IeC {\'o}n del control de versiones Git}{113}{section.Alph0.4}
-\contentsline {subsection}{\numberline {.4.1}Configuraci\IeC {\'o}n}{113}{subsection.Alph0.4.1}
-\contentsline {section}{\numberline {.5}Despliegue de una aplicaci\IeC {\'o}n Sails}{114}{section.Alph0.5}
-\contentsline {chapter}{Bibliograf\'{\i }a}{117}{appendix*.83}
-\contentsline {chapter}{GNU Documentation Free License}{119}{appendix*.84}
+\contentsline {section}{\numberline {7.3}Software de control}{66}{section.7.3}
+\contentsline {subsection}{\numberline {7.3.1}Entrada/Salida}{66}{subsection.7.3.1}
+\contentsline {subsection}{\numberline {7.3.2}Comunicaciones}{67}{subsection.7.3.2}
+\contentsline {subsubsection}{Sockets}{68}{section*.46}
+\contentsline {subsubsection}{ Streaming de v\IeC {\'\i }deo }{71}{section*.48}
+\contentsline {subsubsection}{C\IeC {\'o}digo de ejemplo completo}{73}{section*.49}
+\contentsline {chapter}{\numberline {8}Organizaci\IeC {\'o}n temporal}{77}{chapter.8}
+\contentsline {section}{\numberline {8.1}Planificaci\IeC {\'o}n temporal de tareas}{80}{section.8.1}
+\contentsline {subsection}{\numberline {8.1.1}Hito 1: Planificaci\IeC {\'o}n y an\IeC {\'a}lisis }{80}{subsection.8.1.1}
+\contentsline {subsection}{\numberline {8.1.2}Hito 2: Definici\IeC {\'o}n de requisitos }{81}{subsection.8.1.2}
+\contentsline {subsection}{\numberline {8.1.3}Hito 3: Comienzo de desarrollo de la aplicaci\IeC {\'o}n}{81}{subsection.8.1.3}
+\contentsline {subsection}{\numberline {8.1.4} Hito 4: Desarrollo de la aplicaci\IeC {\'o}n, m\IeC {\'o}dulo componentes }{81}{subsection.8.1.4}
+\contentsline {subsection}{\numberline {8.1.5}Hito 5: Desarrollo de la aplicaci\IeC {\'o}n, m\IeC {\'o}dulo interfaz }{81}{subsection.8.1.5}
+\contentsline {subsection}{\numberline {8.1.6}Hito 6: Desarrollo del m\IeC {\'o}dulo de comunicaciones }{82}{subsection.8.1.6}
+\contentsline {subsection}{\numberline {8.1.7}Hito 7: Construcci\IeC {\'o}n del veh\IeC {\'\i }culo de pruebas }{82}{subsection.8.1.7}
+\contentsline {subsection}{\numberline {8.1.8}Hito 8: Programaci\IeC {\'o}n del veh\IeC {\'\i }culo de pruebas }{82}{subsection.8.1.8}
+\contentsline {subsection}{\numberline {8.1.9}Hito 9: Documentaci\IeC {\'o}n }{82}{subsection.8.1.9}
+\contentsline {section}{\numberline {8.2}Diagrama de Gantt}{82}{section.8.2}
+\contentsline {chapter}{\numberline {9} Gu\IeC {\'\i }a de Usuario}{85}{chapter.9}
+\contentsline {subsection}{\numberline {9.0.1}Objetivo de esta gu\IeC {\'\i }a}{86}{subsection.9.0.1}
+\contentsline {subsection}{\numberline {9.0.2}Dirigido a}{86}{subsection.9.0.2}
+\contentsline {subsection}{\numberline {9.0.3}Obtener RobotUI}{86}{subsection.9.0.3}
+\contentsline {section}{\numberline {9.1} Uso de RobotUI }{86}{section.9.1}
+\contentsline {subsection}{\numberline {9.1.1} Acceso a la aplicaci\IeC {\'o}n }{86}{subsection.9.1.1}
+\contentsline {subsection}{\numberline {9.1.2} Registo de usuario }{87}{subsection.9.1.2}
+\contentsline {subsection}{\numberline {9.1.3}Registro de un Robot}{89}{subsection.9.1.3}
+\contentsline {subsection}{\numberline {9.1.4}Gesti\IeC {\'o}n de permisos}{91}{subsection.9.1.4}
+\contentsline {subsection}{\numberline {9.1.5}Configuraci\IeC {\'o}n de la interfaz}{92}{subsection.9.1.5}
+\contentsline {subsubsection}{Nuevo elemento}{94}{section*.67}
+\contentsline {subsubsection}{Editar elemento}{95}{section*.70}
+\contentsline {subsubsection}{Eliminar elemento}{95}{section*.71}
+\contentsline {subsection}{\numberline {9.1.6}Ejemplo}{96}{subsection.9.1.6}
+\contentsline {section}{\numberline {9.2} Programa tu robot }{96}{section.9.2}
+\contentsline {section}{\numberline {9.3} Controla tu robot }{99}{section.9.3}
+\contentsline {section}{\numberline {9.4} Visita otros robots }{101}{section.9.4}
+\contentsline {subsection}{\numberline {9.4.1}Panel de administraci\IeC {\'o}n}{101}{subsection.9.4.1}
+\contentsline {chapter}{\numberline {10}Comentarios finales}{103}{chapter.10}
+\contentsline {section}{\numberline {10.1}Presupuesto}{103}{section.10.1}
+\contentsline {section}{\numberline {10.2}Conclusiones}{104}{section.10.2}
+\contentsline {section}{\numberline {10.3}Mejoras futuras}{105}{section.10.3}
+\contentsline {chapter}{Anexos}{107}{appendix*.79}
+\contentsline {section}{\numberline {.1}Instalaci\IeC {\'o}n de Node.js}{107}{section.Alph0.1}
+\contentsline {section}{\numberline {.2}Instalaci\IeC {\'o}n Sails.js}{107}{section.Alph0.2}
+\contentsline {subsection}{\numberline {.2.1}Prerrequisitos}{107}{subsection.Alph0.2.1}
+\contentsline {subsection}{\numberline {.2.2}Instalaci\IeC {\'o}n}{108}{subsection.Alph0.2.2}
+\contentsline {section}{\numberline {.3}Instalaci\IeC {\'o}n de MongoDB}{109}{section.Alph0.3}
+\contentsline {subsection}{\numberline {.3.1}Prerrequisitos}{109}{subsection.Alph0.3.1}
+\contentsline {subsection}{\numberline {.3.2}Instalaci\IeC {\'o}n}{109}{subsection.Alph0.3.2}
+\contentsline {section}{\numberline {.4}Instalaci\IeC {\'o}n del control de versiones Git}{111}{section.Alph0.4}
+\contentsline {subsection}{\numberline {.4.1}Configuraci\IeC {\'o}n}{111}{subsection.Alph0.4.1}
+\contentsline {section}{\numberline {.5}Despliegue de una aplicaci\IeC {\'o}n Sails}{112}{section.Alph0.5}
+\contentsline {chapter}{Bibliograf\'{\i }a}{115}{appendix*.83}
+\contentsline {chapter}{GNU Documentation Free License}{117}{appendix*.84}
