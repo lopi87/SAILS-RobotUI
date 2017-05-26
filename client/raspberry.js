@@ -6,7 +6,7 @@ io_server.sails.url = 'http://localhost:1337';
 io_server.socket.get('/robot/changetoonline/', {robot: '59188631c8e94ba54f7a4bdc', online: true});
 
 // Inicia servidor socket.io en el puerto 8085.
-var io =io_client.listen(8085, { log: false });
+var io = require('./node_modules/socket.io').listen(8085, { log: false });
 
 // Carga de módulos necesarios.
 var ffmpeg_command, running_camera = false, child_process = require('child_process');
