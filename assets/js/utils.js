@@ -60,8 +60,6 @@ function loadjscssfile(filename, filetype){
 //loadjscssfile("mystyle.css", "css") ////dynamically load and add this .css file
 
 
-
-
 //Parsley functions
 function set_parsley_lang(load_lang) {
   loadjscssfile( "/js/i18n/" + load_lang + ".js", "js"); //dynamically load and add this .js file
@@ -110,7 +108,6 @@ window.Parsley.addValidator('filemimetypes', {
   }
 });
 
-
 //Utils
 function change_connect_btn( mode, text_btn){
   if (mode == 'connect'){
@@ -147,7 +144,6 @@ function change_img_busy(id, boolean, free_text, busy_text){
       $(label_id).replaceWith("<span id=\"" + label_id + "\" class=\"label label-pill label-success \">" + free_text + "</span>");
   }
 }
-
 
 //CAMBIAR FREE BUSY ROBOT
 function set_actions(id, busy, online){
