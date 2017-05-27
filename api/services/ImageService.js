@@ -1,5 +1,3 @@
-//http://www.tysoncadenhead.com/blog/how-to-upload-remote-images-with-sails-js#.V6Mch16li1E
-
 var gm = require('gm'),
     fs = require('fs'),
     request = require('request');
@@ -89,7 +87,6 @@ module.exports = {
     }, done );
   },
 
-  //TODO: TERMINAR METODO SUBIDA PDF
   upload_robot_documentation: function(img, robot, done){
     img.upload({ maxBytes: 10000000, saveAs: function(file, cb){
 
@@ -129,16 +126,3 @@ module.exports = {
 
 
 };
-
-
-
-/*
-Ejemplo de uso
-
- image.downloadFile(
- 'http://www.google.com/intl/en_ALL/images/srpr/logo11w.png',
- './tmp/upload/googlelogo.png',
- function (data) {
- res.send(data);
- });
- */
