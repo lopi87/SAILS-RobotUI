@@ -3,7 +3,7 @@ var sails_client = require('./node_modules/sails.io.js');
 var io_server = sails_client(io_client);
 io_server.sails.url = 'http://46.101.102.33:80';
 // io_server.sails.url = 'http://localhost:1337';
-io_server.socket.get('/robot/changetoonline/', {robot: '59137bddffa5c302533c44a9', online: true});
+io_server.socket.get('/robot/changetoonline/', {robot: '59295a51743c43720851418d', online: true});
 
 // Inicia servidor socket.io en el puerto 8085.
 var io = require('./node_modules/socket.io').listen(8085, { log: false });
