@@ -157,7 +157,7 @@ module.exports = {
     Robot.pagify('robots', {
       findQuery: {or: [{public_view: true, public_drive: true}]},
       sort: ['createdAt DESC'],
-      populate: ['owner'],
+      populate: ['owner', 'iface'],
       page: page,
       perPage: 3
     }).then(function (data) {
