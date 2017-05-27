@@ -53,7 +53,7 @@ module.exports = {
           robot.save(function (err) {
             if (err) return next(err);
 
-            if (req.file('robot_avatar')) {
+            if (req._fileparser.upstreams.length) {
               ImageService.upload_robot_avatar(req.file('robot_avatar'), robot, function whenDone(err, files) {
                 if (err) return res.negotiate(err);
                 //Redirección a index
@@ -364,9 +364,12 @@ module.exports = {
     Robot.findOne(req.param('id'), function foundRobot(err, robot) {
       if (err) return next(err);
       if (!robot) return next();
-      ImageService.upload_robot_avatar(req.file('robot_avatar'), robot, function whenDone(err, files) {
-        if (err) return res.negotiate(err);
-      });
+
+      if (req._fileparser.upstreams.length) {
+        ImageService.upload_robot_avatar(req.file('robot_avatar'), robot, function whenDone(err, files) {
+          if (err) return res.negotiate(err);
+        });
+      }
 
       Robot.update(req.param('id'), robotObj, function robotUpdated(err) {
         if (err) {

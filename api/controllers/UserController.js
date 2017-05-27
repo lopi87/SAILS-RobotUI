@@ -45,9 +45,11 @@ module.exports = {
       FlashService.success(req, 'User created.' );
       User.publishCreate({id: user.id});
 
-      ImageService.upload_avatar(req.file('avatar'), user, function whenDone(err, files) {
-        if (err) return res.negotiate(err);
-      });
+      if (req._fileparser.upstreams.length) {
+        ImageService.upload_avatar(req.file('avatar'), user, function whenDone(err, files) {
+          if (err) return res.negotiate(err);
+        });
+      }
 
       //Mandar email de bienvenida
       EmailService.sendWelcomeEmail({
@@ -126,12 +128,16 @@ module.exports = {
         FlashService.server_exit(err);
         return res.redirect('/user/edit' + req.param('id'));
       }
-      ImageService.upload_avatar(req.file('avatar'), user, function whenDone(err, files) {
-        if (err){
-          FlashService.server_exit(err);
-          return res.redirect('/user/edit' + req.param('id'));
-        }
-      });
+
+      if (req._fileparser.upstreams.length) {
+        ImageService.upload_avatar(req.file('avatar'), user, function whenDone(err, files) {
+          if (err) {
+            FlashService.server_exit(err);
+            return res.redirect('/user/edit' + req.param('id'));
+          }
+        });
+      }
+
     });
 
 
