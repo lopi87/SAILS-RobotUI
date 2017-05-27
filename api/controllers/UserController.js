@@ -45,7 +45,7 @@ module.exports = {
       FlashService.success(req, 'User created.' );
       User.publishCreate({id: user.id});
 
-      if (req._fileparser.upstreams.length) {
+      if (req._fileparser.upstreams.length == 1) {
         ImageService.upload_avatar(req.file('avatar'), user, function whenDone(err, files) {
           if (err) return res.negotiate(err);
         });
@@ -129,7 +129,7 @@ module.exports = {
         return res.redirect('/user/edit' + req.param('id'));
       }
 
-      if (req._fileparser.upstreams.length) {
+      if (req._fileparser.upstreams.length == 1) {
         ImageService.upload_avatar(req.file('avatar'), user, function whenDone(err, files) {
           if (err) {
             FlashService.server_exit(err);
