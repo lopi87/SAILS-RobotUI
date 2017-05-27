@@ -73,7 +73,7 @@ module.exports.http = {
 
   bodyParser: (function () {
     var opts = {
-      maxTimeToWaitForFirstFile: 100,
+      maxTimeToWaitForFirstFile: 30000,
       maxTimeToBuffer: 30000
     };
     var fn;
