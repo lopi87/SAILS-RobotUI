@@ -71,6 +71,18 @@ module.exports.http = {
 
     // bodyParser: require('skipper')
 
+  bodyParser: (function () {
+    var opts = {
+      maxTimeToWaitForFirstFile: 100,
+      maxTimeToBuffer: 30000
+    };
+    var fn;
+
+    fn = require('skipper');
+    return fn(opts);
+  })
+
+
   // },
 
   /***************************************************************************
