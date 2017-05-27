@@ -11,7 +11,7 @@
   "email": "Email",
   "signin": "signin",
   "signout": "Salir",
-  "filesmallerthan %s": "Por favor proporcione un archivo menor que %skb:",
+  "filesmallerthan %s": "Por favor proporcione un archivo menor que %sMB:",
   "name": "Nombre",
   "nickname": "Nick",
   "language": "Idioma",

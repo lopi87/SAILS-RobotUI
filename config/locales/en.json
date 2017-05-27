@@ -15,7 +15,7 @@
 	"email": "Email",
 	"signin": "Sign-in",
 	"signout": "Sign-out",
-	"filesmallerthan %s": "Please provide a file smaller than %s Kb:",
+	"filesmallerthan %s": "Please provide a file smaller than %s MB:",
 	"name": "Name",
 	"nickname": "Nick",
 	"language": "Language",
