@@ -49,9 +49,9 @@
       <td> <span class="label label-pill label-danger"> <%= i18n('private')%> </span></td>
       <% } %>
 
-      <td> <a id="btn_tview_<%= robot.id%>" href="/interface/view/<%= robot.iface %>" class="btn btn-sm btn-primary <%= ( robot.online && robot.busy) ? '' : 'disabled' %>"><%= i18n('view') %></a> </td>
-      <td>  <a id="btn_tcontrol_<%= robot.id%>" href="/interface/show/<%= robot.iface %>" class="btn btn-sm btn-primary <%= ( robot.online && !robot.busy ) ? '' : 'disabled' %>" ><i class="fa fa-gamepad"></i> <%= i18n('take_control') %> </a> </td>
-      <td>  <a id="btn_tconfigure_<%= robot.id%>" href="/interface/configure/<%= robot.iface %>" class="btn btn-sm btn-primary <%= robot.online ? 'disabled' : '' %> "><i class="fa fa-wrench" aria-hidden="true"></i><%= i18n('configure') %></a> </td>
+      <td> <a id="btn_tview_<%= robot.id%>" href="/interface/view/<%= robot.iface.id %>" class="btn btn-sm btn-primary <%= ( robot.online && robot.busy) ? '' : 'disabled' %>"><%= i18n('view') %></a> </td>
+      <td>  <a id="btn_tcontrol_<%= robot.id%>" href="/interface/show/<%= robot.iface.id %>" class="btn btn-sm btn-primary <%= ( robot.online && !robot.busy ) ? '' : 'disabled' %>" ><i class="fa fa-gamepad"></i> <%= i18n('take_control') %> </a> </td>
+      <td>  <a id="btn_tconfigure_<%= robot.id%>" href="/interface/configure/<%= robot.iface.id %>" class="btn btn-sm btn-primary <%= robot.online ? 'disabled' : '' %> "><i class="fa fa-wrench" aria-hidden="true"></i><%= i18n('configure') %></a> </td>
       <td>  <a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a> </td>
       <td>  <a href="/robot/show/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('show') %></a> </td>
 

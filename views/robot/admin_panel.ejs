@@ -53,7 +53,7 @@
             <td><span class="label label-pill label-danger"> <%= i18n('private')%> </span></td>
           <% } %>
 
-          <td><a href="/interface/show/<%= robot.iface %>" class="btn btn-sm btn-primary"><%= i18n('interface') %></a></td>
+          <td><a href="/interface/show/<%= robot.iface.id %>" class="btn btn-sm btn-primary"><%= i18n('interface') %></a></td>
           <td><a href="/robot/edit/<%= robot.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a></td>
           <td>
             <form action="/robot/destroy/<%=robot.id%>" method="post">
