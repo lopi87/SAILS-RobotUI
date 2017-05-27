@@ -141,6 +141,7 @@
       //EVENTOS CAPURADOS
       switch (obj.type) {
         case 'new_viewer_user':
+          toastr.info('<%= i18n('user_connected')%>', 'RobotUI');
           if($("#" + obj.msg.user_id).length == 0 && obj.msg.user_id != '<%= req.session.User.id %>') {
             $('#user_viewer_list').append('<p id="' +  obj.msg.user_id + '"><img src="' + obj.msg.avatar + '" class="card-circle marginright10" height="32" width="32">' + obj.msg.user_name + '<span onclick=eject_viewer_user("' + obj.msg.user_id  + '")><i style="cursor: pointer; color: red" class="fa fa-sign-out marginleft5" aria-hidden="true"></i></span></p>');
           }else{
@@ -149,6 +150,7 @@
           break;
 
         case 'exit':
+          toastr.info('<%= i18n('user_disconnected')%>', 'RobotUI');
           $('#' + obj.msg.user_id).remove();
           break;
 
