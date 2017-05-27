@@ -102,20 +102,20 @@
 \contentsline {section}{\numberline {9.3} Controla tu robot }{100}{section.9.3}
 \contentsline {section}{\numberline {9.4} Visita otros robots }{101}{section.9.4}
 \contentsline {subsection}{\numberline {9.4.1}Panel de administraci\IeC {\'o}n}{104}{subsection.9.4.1}
-\contentsline {chapter}{\numberline {10}Comentarios finales}{105}{chapter.10}
-\contentsline {section}{\numberline {10.1}Presupuesto}{105}{section.10.1}
-\contentsline {section}{\numberline {10.2}Conclusiones}{106}{section.10.2}
-\contentsline {section}{\numberline {10.3}Mejoras futuras}{107}{section.10.3}
-\contentsline {chapter}{Anexos}{109}{appendix*.85}
-\contentsline {section}{\numberline {.1}Instalaci\IeC {\'o}n de Node.js}{109}{section.Alph0.1}
-\contentsline {section}{\numberline {.2}Instalaci\IeC {\'o}n Sails.js}{109}{section.Alph0.2}
-\contentsline {subsection}{\numberline {.2.1}Prerrequisitos}{109}{subsection.Alph0.2.1}
-\contentsline {subsection}{\numberline {.2.2}Instalaci\IeC {\'o}n}{110}{subsection.Alph0.2.2}
-\contentsline {section}{\numberline {.3}Instalaci\IeC {\'o}n de MongoDB}{111}{section.Alph0.3}
-\contentsline {subsection}{\numberline {.3.1}Prerrequisitos}{111}{subsection.Alph0.3.1}
-\contentsline {subsection}{\numberline {.3.2}Instalaci\IeC {\'o}n}{111}{subsection.Alph0.3.2}
-\contentsline {section}{\numberline {.4}Instalaci\IeC {\'o}n del control de versiones Git}{113}{section.Alph0.4}
-\contentsline {subsection}{\numberline {.4.1}Configuraci\IeC {\'o}n}{113}{subsection.Alph0.4.1}
-\contentsline {section}{\numberline {.5}Despliegue de una aplicaci\IeC {\'o}n Sails}{114}{section.Alph0.5}
-\contentsline {chapter}{Bibliograf\'{\i }a}{117}{appendix*.89}
-\contentsline {chapter}{GNU Documentation Free License}{119}{appendix*.90}
+\contentsline {chapter}{\numberline {10}Comentarios finales}{107}{chapter.10}
+\contentsline {section}{\numberline {10.1}Presupuesto}{107}{section.10.1}
+\contentsline {section}{\numberline {10.2}Conclusiones}{108}{section.10.2}
+\contentsline {section}{\numberline {10.3}Mejoras futuras}{109}{section.10.3}
+\contentsline {chapter}{Anexos}{111}{appendix*.85}
+\contentsline {section}{\numberline {.1}Instalaci\IeC {\'o}n de Node.js}{111}{section.Alph0.1}
+\contentsline {section}{\numberline {.2}Instalaci\IeC {\'o}n Sails.js}{111}{section.Alph0.2}
+\contentsline {subsection}{\numberline {.2.1}Prerrequisitos}{111}{subsection.Alph0.2.1}
+\contentsline {subsection}{\numberline {.2.2}Instalaci\IeC {\'o}n}{112}{subsection.Alph0.2.2}
+\contentsline {section}{\numberline {.3}Instalaci\IeC {\'o}n de MongoDB}{113}{section.Alph0.3}
+\contentsline {subsection}{\numberline {.3.1}Prerrequisitos}{113}{subsection.Alph0.3.1}
+\contentsline {subsection}{\numberline {.3.2}Instalaci\IeC {\'o}n}{113}{subsection.Alph0.3.2}
+\contentsline {section}{\numberline {.4}Instalaci\IeC {\'o}n del control de versiones Git}{115}{section.Alph0.4}
+\contentsline {subsection}{\numberline {.4.1}Configuraci\IeC {\'o}n}{115}{subsection.Alph0.4.1}
+\contentsline {section}{\numberline {.5}Despliegue de una aplicaci\IeC {\'o}n Sails}{116}{section.Alph0.5}
+\contentsline {chapter}{Bibliograf\'{\i }a}{119}{appendix*.89}
+\contentsline {chapter}{GNU Documentation Free License}{121}{appendix*.90}

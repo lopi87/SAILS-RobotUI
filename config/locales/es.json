@@ -175,5 +175,7 @@
 	"connect_success": "¡Conectado con exito!",
 	"session.user_id.required": "session.user_id.required",
 	"user.email.unique": "user.email.unique",
-	"id": "id"
+	"id": "id",
+  "my_guest_robots": "Mis robots en seguimiento",
+  "my_driver_robots": "Mis robots controlables"
 }
