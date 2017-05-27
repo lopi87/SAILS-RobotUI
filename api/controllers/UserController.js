@@ -250,7 +250,7 @@ module.exports = {
 
       req.file('avatar').upload({
         // don't allow the total upload size to exceed ~10MB
-        maxBytes: 2500,
+        maxBytes: 2500000,
         saveAs: function(file, cb){
 
           // setting allowed file types
