@@ -25,19 +25,19 @@ la robótica como una ciencia multidisciplinar.\\
 En la actualidad, los robots comerciales e industriales son ampliamente utilizados y cada día realizan tareas de forma más exacta o más barata que los humanos. También se les utiliza en trabajos demasiado sucios,
 peligrosos o tediosos. Los robots son muy utilizados en plantas de fabricación, montaje y embalaje, en transporte, en exploraciones en la Tierra y en el espacio, cirugía, armamento, investigación en laboratorios y 
 en la producción en masa de bienes industriales o de consumo. Otras aplicaciones incluyen la limpieza de residuos tóxicos, minería, búsqueda y rescate de personas y localización de minas terrestres. En definitiva, 
-la robótica está presente en prácticamente cualquier ámbito que podamos imaginar en la actualidad.\\
+la robótica está presente en prácticamente cualquier ámbito que podamos imaginar.\\
 
 Por otra parte, ninguno de los sistemas robóticos actuales podrían ser funcionales sin un software adecuado para su manejo y control, en ocasiones siendo éste tremendamente complejo y específico para garantizar
-una correcta sincronización entre los diferentes elementos hardware y software implicados con la finalidad de garantizar un correcto funcionamiento del conjunto robótico.\\
+una correcta sincronización entre los diferentes elementos hardware y software implicados con la finalidad de garantizar una correcta armonía del conjunto.\\
 
-Por estas razones cada vez son más las escuelas que hacen uso de la robótica para que los estudiantes se interesen en la tecnología, ya que pueden encontrar un entorno divertido donde aprender, y que ofrece multitud de ventajas: 
+Por estas razones cada vez son más las escuelas que hacen uso de la robótica para que los estudiantes se interesen en la tecnología, ya que pueden encontrar un entorno divertido donde aprender y que ofrece multitud de ventajas:\\
 
 \begin{enumerate}
-\item {Los niños lo encuentran divertido:} hay varios concursos orientados a distintos grupos de edad que pueden canalizar la competencia de una manera positiva. Por ejemplo, se le puede pedir a los niños que construyan un robot y luego hacer competiciones.\\
-\item{Es una manera eficaz de enseñarles programación a los estudiantes:}
+\item \textbf{Los niños lo encuentran divertido:} hay varios concursos orientados a distintos grupos de edad que pueden canalizar la competencia de una manera positiva. Por ejemplo, se le puede pedir a los niños que construyan un robot y luego hacer competiciones.\\
+\item \textbf{Es una manera eficaz de enseñarles programación a los estudiantes:}
  la programación puede ser muy abstracta. Al tener que controlar un robot físico y ver lo que sale mal, los estudiantes aprenden lo que los robots pueden y no pueden hacer. 
 También aprenden la necesidad de dar instrucciones precisas.\\
-\item{ Desarrolla habilidades útiles:}
+\item \textbf{ Desarrolla habilidades útiles:}
  capacidad de resolución de problemas, trabajo en equipo, capacidad de análisis, y un largo etcétera.
 \end{enumerate}
 
@@ -47,15 +47,14 @@ se permite el control de multitud de dispositivos, desde gestión de stocks, geo
 una empresa global con sede en San José, California, Estados Unidos, principalmente dedicada a la fabricación, venta, mantenimiento y consultoría de equipos de telecomunicaciones.}, en 2020 habrá en
 el mundo aproximadamente 50 mil millones de dispositivos con un sistema de conexión al internet de las cosas\footnote{ Estudio referenciado en el libro \textit{Internet of Things - From Research and Innovation to Market Deployment} 
 \cite{book:internet_things}.} ¿Por qué no añadir también nuestros proyectos robóticos a la red?.\\
-.
-De todo lo anterior se extrae, por tanto, la necesidad de elaborar un sistema que, además de acercar la robótica a los estudiantes, permita compartir las creaciones con otros usuarios en internet. Todos hemos
+
+De todo lo anterior se extrae, por tanto, la necesidad de elaborar un sistema que, además de acercar la robótica a los estudiantes, permita compartir sus proyectos con otros usuarios en internet. Todos hemos
 visto alguna vez vídeos en las redes sociales donde los usuarios nos muestran sus dispositivos en funcionamiento donde, en ocasiones, nos gustaría poder tomar control sobre ellos o visualizar su manejo en tiempo real.\\
 
-Por tanto el sistema resultante debe cubrir dos necesidades principales, la primera, dotar al usuario de las herramientas necesarias para permitir la configuración de una interfaz de control de sus 
+Por tanto el sistema resultante debe cubrir dos necesidades principales, la primera, dotar al usuario de las herramientas necesarias para permitir la configuración de una interfaz de control para 
 dispositivos sin necesidad de amplios conocimientos de programación, y la segunda, cubrir la necesidad paralela en la que los usuarios, orgullosos de sus creaciones, dispongan de una manera de 
 compartir sus robots con el resto del mundo de una manera más dinámica. Es decir, en la que otros usuarios, a modo de espectadores, puedan visualizar el control de los dispositivos por parte de 
-su creador, como si de una sesión de vídeo en streaming se tratara. También se dotará de la posibilidad de permitir el control por otros usuarios externos. En la actualidad no existe ningún medio 
-eficaz donde hacer una difusión de la robótica de una manera similar.\\
+su creador, como si de una sesión de vídeo en streaming se tratara. También se dotará de la posibilidad de permitir el control por otros usuarios externos.\\
 
 Así que dadas las motivaciones existentes y, junto que la programación web y la robótica son temas que causan en mi un especial interés, hicieron que me lanzara a la elaboración de este
 proyecto que unifica ambos campos anteriormente citados.\\
@@ -86,9 +85,9 @@ Así surgió \emph{RobotUI} y con él un nuevo concepto llamado \textit{RobotSha
 
 
 El elemento hardware de este proyecto se compone de un vehículo controlado vía WiFi el cual responde a una serie de señales, \emph{comandos}\footnote{ Comando: instrucción u orden que el usuario proporciona a un sistema informático, 
-desde la línea de comandos (como una shell) o desde una llamada de programación.}, a los que responde realizando determinadas acciones.\\
+desde la línea de comandos (como una shell) o desde una llamada de programación.}, a los que responde realizando determinadas acciones. Por otra parte también dispone de una cámara para la captura de imágenes\\
 
-La interfaz web se configurará de tal manera que permita el control del susodicho vehículo a modo demostrativo. Este procedimiento servirá de guía para que cualquier usuario pueda proceder a dar de alta sus dispositivos 
+La interfaz de control generada en la aplicación web se configurará de tal manera que permita el control del susodicho vehículo a modo demostrativo. Este procedimiento servirá de guía para que cualquier usuario pueda proceder a dar de alta sus dispositivos 
 robóticos para su control y difusión con otros usuarios.\\
 
 \begin{figure}[H]
@@ -138,9 +137,9 @@ Este documento se organiza en los siguientes capítulos:\\
 
 \item En el capítulo \ref{chap:desarrollo-software}, Desarrollo software, se realiza un análisis sobre la metodología empleada para el desarrollo software, describiendo los modelos de ciclo de vida utilizados, la descripción de los requisitos funcionales y no funcionales junto con los diagramas de casos de uso, de clases y de secuencia.
 
-\item En el capítulo \ref{chap:desarrollo-frontend}, Desarrollo frontend, se recogen aquellos aspectos técnicos de interés referentes a la elaboración de toda la parte visual de la aplicación.
+\item En el capítulo \ref{chap:desarrollo-frontend}, Desarrollo front-end, se recogen aquellos aspectos técnicos de interés referentes a la elaboración de toda la parte visual de la aplicación.
 
-\item En el capítulo \ref{chap:comunicaciones}, Comunicaciones, se hace una descripción de las diferentes herramientas proporcionadas por el SDK del framework Sails para la gestión de eventos en tiempo real y la descripción de su funcionamiento mediante la explicación de casos prácticos desarrollados en el presente proyecto.
+\item En el capítulo \ref{chap:comunicaciones}, Comunicaciones, se hace una descripción de las diferentes herramientas proporcionadas por el SDK del framework Sails.js para la gestión de eventos en tiempo real y la descripción de su funcionamiento mediante la explicación de casos prácticos desarrollados en el presente proyecto.
 
 \item En el capítulo \ref{chap:robot}, Robot de pruebas, se recogen aquellos aspectos referentes al montaje, configuración y programación de un robot de pruebas para la demostración y uso de la aplicación desarrollada en el presente proyecto. 
 

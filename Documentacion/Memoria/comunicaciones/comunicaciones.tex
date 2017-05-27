@@ -18,9 +18,9 @@ conocimientos.
 \section{Introduccion}
 \label{sec:fundamentos}
 
-En esta sección se comenzaremos destacando aquellos aspectos teóricos sobre cómo Sails, framework Node JS utilizado en el desarrollo, trabaja con websocket y socket.io.\\
+En esta sección comenzaremos destacando aquellos aspectos teóricos sobre cómo Sails, framework Node JS utilizado en el desarrollo, trabaja con Websocket y Socket.io.\\
 
-Como sabemos, un servidor http no puede enviar datos a menos que un cliente los haya solicitado mediante una petición. Los Websockets, en cambio, presentan la particularidad de que
+Como sabemos, un servidor HTTP no puede enviar datos a menos que un cliente los haya solicitado mediante una petición. Los Websockets, en cambio, presentan la particularidad de que
 permiten que un servidor envíe datos a un cliente sin la necesidad de que éstos sean solicitados, al menos de una manera inmediata. Estas solicitudes, realizadas con anterioridad, se formalizan mediante suscripciones, concepto que 
 iremos constantemente haciendo referencia a lo largo del presente capítulo y que debemos recordar.\\
 
@@ -34,11 +34,11 @@ iremos constantemente haciendo referencia a lo largo del presente capítulo y qu
     \label{fig:http-request}%
 \end{figure}
 
-Anteriormente comentamos que el servidor http no puede enviar datos a menos que el cliente lo haya solicitado y los Websockets permiten que un servidor envíe datos no solicitados una vez que se hace 
-una conexión inicial (suscripción) desde el lado del cliente. Una aplicación Sails típica queda dividida en dos partes. La primera, en el lado del servidor, consta de un servidor http junto con un nodo
+Anteriormente comentamos que el servidor HTTP no puede enviar datos a menos que el cliente lo haya solicitado y los Websockets permiten que un servidor envíe datos no solicitados una vez que se hace 
+una conexión inicial (suscripción) desde el lado del cliente. Una aplicación Sails típica queda dividida en dos partes. La primera, en el lado del servidor, consta de un servidor HTTP junto con un nodo
 central que actúa como un servidor de sockets.\\ 
 
-En segundo lugar, en el lado del cliente, se dispone de los diferentes códigos html y funciones JavaScript para realizar las conexiones con el servidor. Estas conexiones cliente-servidor permiten que 
+En segundo lugar, en el lado del cliente, se dispone de los diferentes códigos HTML y funciones JavaScript para realizar las conexiones con el servidor. Estas conexiones cliente-servidor permiten que 
 cualquier otro cliente conectado pueda enviar mensajes al servidor para que a su vez éstos sean emitidos a los clientes que se encuentren conectados en la aplicación en ese instante.\\
 
 Además cada socket posee un identificador único que identifica de manera inequívoca el cliente o, en nuestro, caso el navegador que está accediendo a la página.\\
@@ -188,10 +188,10 @@ de código realizando el almacenamiento del socket abierto por el usuario:\\
 \end{lstlisting}
 
 
-Función saveSocketID, la cual es llamada en cliente y que se encuentra implementada en el controlador \emph{session} en el lado del servidor. Esta función realiza el registro de un nuevo cliente en
+Función emph{saveSocketID}, la cual es llamada en cliente y que se encuentra implementada en el controlador \emph{session} en el lado del servidor. Esta función realiza el registro de un nuevo cliente en
 la base de datos tras recibir el identificador correspondiente al nuevo socket creado.\\
 
-El código inferior muestra la implementación en el lado del servidor de la función saveSocketID:\\
+El código inferior muestra la implementación en el lado del servidor de la función \emph{saveSocketID}:\\
 
 \begin{lstlisting}[language=JavaScript]
 
@@ -222,12 +222,12 @@ El código inferior muestra la implementación en el lado del servidor de la fun
   
 \end{lstlisting}
 
-Una vez tenemos almacenado el par socket-usuario en base de datos buscamos la función subscribeAndListen, la cual será específica según la vista en la que nos encontremos, por ejemplo, si nos encontramos en el panel
-de administración de usuarios, la función subscribeAndListen será específicaespecífica para cada funcionalidad que queramos inicializar o a qué eventos nos deseemos suscribir. Si nos encontramos en la vista de índice de robots, la función se suscribirá 
+Una vez tenemos almacenado el par socket-usuario en base de datos buscamos la función \emph{subscribeAndListen}, la cual será específica según la vista en la que nos encontremos, por ejemplo, si nos encontramos en el panel
+de administración de usuarios, la función \emph{subscribeAndListen} será específica para cada funcionalidad que queramos inicializar o a qué eventos nos deseemos suscribir. Si nos encontramos en la vista de índice de robots, la función se suscribirá 
 a los eventos de conexión y desconexión de robots. O si estamos visualizando el funcionamiento de un robot entonces la función capturará los eventos que se correspondan con la captación de los diferentes comandos o datos transmitidos.\\
 
-En el código inferior mostramos la función subscribeAndListen que implementa la suscripción a los eventos correspondiente a la conexión, desconexión y borrado de usuarios del panel de
-administración descrito en el apartado \ref{sec:fundamentos}. Esta función está localizada en el partial que implementa la vista correspondiente con el citado panel:\\
+En el código inferior mostramos la función \emph{subscribeAndListen} que implementa la suscripción a los eventos correspondiente a la conexión, desconexión y borrado de usuarios del panel de
+administración descrito en el apartado \ref{sec:fundamentos}. Esta función está localizada en el \emph{partial}\footnote{ Fragmentos del código HTML generados para romper el proceso de renderizado en bloques más manejables. Con un \epnh{partial}, puede establecer el código para representar por ejemplo una tabla HTML la cual es llamada en múltiples vistas.} que implementa la vista correspondiente con el citado panel:\\
 
 \begin{lstlisting}[language=JavaScript]
 
@@ -496,7 +496,7 @@ El código inferior realiza el envío del comando al robot para su interpretaci�
 \end{figure}
  
  
-El cógigo inferior muestra cómo se realiza la captura de los frames de vídeos procedentes del robot. Dicho código envía al servidor el frame para su posterior difusión con los clientes suscritos
+El código inferior muestra cómo se realiza la captura de los frames de vídeos procedentes del robot. Dicho código envía al servidor el frame para su posterior difusión con los clientes suscritos
 a robot y ``dibuja'' el frame capturado en el canvas de la interfaz de control del robot:\\
  
  

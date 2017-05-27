@@ -47,7 +47,7 @@
 \contentsline {section}{\numberline {4.3}Diagramas de casos de uso}{30}{section.4.3}
 \contentsline {section}{\numberline {4.4}Descripci\IeC {\'o}n de los casos de uso}{32}{section.4.4}
 \contentsline {section}{\numberline {4.5}Diagrama de clases}{41}{section.4.5}
-\contentsline {chapter}{\numberline {5} Desarrollo frontend }{43}{chapter.5}
+\contentsline {chapter}{\numberline {5} Desarrollo de la interfaz }{43}{chapter.5}
 \contentsline {section}{\numberline {5.1}Elementos de la interfaz}{43}{section.5.1}
 \contentsline {chapter}{\numberline {6}Comunicaciones}{45}{chapter.6}
 \contentsline {section}{\numberline {6.1}Introduccion}{45}{section.6.1}
@@ -89,31 +89,33 @@
 \contentsline {section}{\numberline {9.1} Uso de RobotUI }{86}{section.9.1}
 \contentsline {subsection}{\numberline {9.1.1} Acceso a la aplicaci\IeC {\'o}n }{86}{subsection.9.1.1}
 \contentsline {subsection}{\numberline {9.1.2} Registo de usuario }{87}{subsection.9.1.2}
-\contentsline {subsection}{\numberline {9.1.3}Registro de un Robot}{89}{subsection.9.1.3}
-\contentsline {subsection}{\numberline {9.1.4}Gesti\IeC {\'o}n de permisos}{91}{subsection.9.1.4}
-\contentsline {subsection}{\numberline {9.1.5}Configuraci\IeC {\'o}n de la interfaz}{92}{subsection.9.1.5}
+\contentsline {subsection}{\numberline {9.1.3} Ingreso al sistema }{89}{subsection.9.1.3}
+\contentsline {subsection}{\numberline {9.1.4}Registro de un Robot}{89}{subsection.9.1.4}
+\contentsline {subsection}{\numberline {9.1.5}Gesti\IeC {\'o}n de permisos}{91}{subsection.9.1.5}
+\contentsline {subsection}{\numberline {9.1.6}Configuraci\IeC {\'o}n de la interfaz}{92}{subsection.9.1.6}
 \contentsline {subsubsection}{Nuevo elemento}{94}{section*.67}
 \contentsline {subsubsection}{Editar elemento}{95}{section*.70}
 \contentsline {subsubsection}{Eliminar elemento}{95}{section*.71}
-\contentsline {subsection}{\numberline {9.1.6}Ejemplo}{96}{subsection.9.1.6}
+\contentsline {subsection}{\numberline {9.1.7}Ejemplo}{95}{subsection.9.1.7}
 \contentsline {section}{\numberline {9.2} Programa tu robot }{96}{section.9.2}
-\contentsline {section}{\numberline {9.3} Controla tu robot }{99}{section.9.3}
+\contentsline {subsubsection}{c\IeC {\'o}digo base}{98}{section*.74}
+\contentsline {section}{\numberline {9.3} Controla tu robot }{100}{section.9.3}
 \contentsline {section}{\numberline {9.4} Visita otros robots }{101}{section.9.4}
-\contentsline {subsection}{\numberline {9.4.1}Panel de administraci\IeC {\'o}n}{101}{subsection.9.4.1}
-\contentsline {chapter}{\numberline {10}Comentarios finales}{103}{chapter.10}
-\contentsline {section}{\numberline {10.1}Presupuesto}{103}{section.10.1}
-\contentsline {section}{\numberline {10.2}Conclusiones}{104}{section.10.2}
-\contentsline {section}{\numberline {10.3}Mejoras futuras}{105}{section.10.3}
-\contentsline {chapter}{Anexos}{107}{appendix*.79}
-\contentsline {section}{\numberline {.1}Instalaci\IeC {\'o}n de Node.js}{107}{section.Alph0.1}
-\contentsline {section}{\numberline {.2}Instalaci\IeC {\'o}n Sails.js}{107}{section.Alph0.2}
-\contentsline {subsection}{\numberline {.2.1}Prerrequisitos}{107}{subsection.Alph0.2.1}
-\contentsline {subsection}{\numberline {.2.2}Instalaci\IeC {\'o}n}{108}{subsection.Alph0.2.2}
-\contentsline {section}{\numberline {.3}Instalaci\IeC {\'o}n de MongoDB}{109}{section.Alph0.3}
-\contentsline {subsection}{\numberline {.3.1}Prerrequisitos}{109}{subsection.Alph0.3.1}
-\contentsline {subsection}{\numberline {.3.2}Instalaci\IeC {\'o}n}{109}{subsection.Alph0.3.2}
-\contentsline {section}{\numberline {.4}Instalaci\IeC {\'o}n del control de versiones Git}{111}{section.Alph0.4}
-\contentsline {subsection}{\numberline {.4.1}Configuraci\IeC {\'o}n}{111}{subsection.Alph0.4.1}
-\contentsline {section}{\numberline {.5}Despliegue de una aplicaci\IeC {\'o}n Sails}{112}{section.Alph0.5}
-\contentsline {chapter}{Bibliograf\'{\i }a}{115}{appendix*.83}
-\contentsline {chapter}{GNU Documentation Free License}{117}{appendix*.84}
+\contentsline {subsection}{\numberline {9.4.1}Panel de administraci\IeC {\'o}n}{104}{subsection.9.4.1}
+\contentsline {chapter}{\numberline {10}Comentarios finales}{105}{chapter.10}
+\contentsline {section}{\numberline {10.1}Presupuesto}{105}{section.10.1}
+\contentsline {section}{\numberline {10.2}Conclusiones}{106}{section.10.2}
+\contentsline {section}{\numberline {10.3}Mejoras futuras}{107}{section.10.3}
+\contentsline {chapter}{Anexos}{109}{appendix*.84}
+\contentsline {section}{\numberline {.1}Instalaci\IeC {\'o}n de Node.js}{109}{section.Alph0.1}
+\contentsline {section}{\numberline {.2}Instalaci\IeC {\'o}n Sails.js}{109}{section.Alph0.2}
+\contentsline {subsection}{\numberline {.2.1}Prerrequisitos}{109}{subsection.Alph0.2.1}
+\contentsline {subsection}{\numberline {.2.2}Instalaci\IeC {\'o}n}{110}{subsection.Alph0.2.2}
+\contentsline {section}{\numberline {.3}Instalaci\IeC {\'o}n de MongoDB}{111}{section.Alph0.3}
+\contentsline {subsection}{\numberline {.3.1}Prerrequisitos}{111}{subsection.Alph0.3.1}
+\contentsline {subsection}{\numberline {.3.2}Instalaci\IeC {\'o}n}{111}{subsection.Alph0.3.2}
+\contentsline {section}{\numberline {.4}Instalaci\IeC {\'o}n del control de versiones Git}{113}{section.Alph0.4}
+\contentsline {subsection}{\numberline {.4.1}Configuraci\IeC {\'o}n}{113}{subsection.Alph0.4.1}
+\contentsline {section}{\numberline {.5}Despliegue de una aplicaci\IeC {\'o}n Sails}{114}{section.Alph0.5}
+\contentsline {chapter}{Bibliograf\'{\i }a}{117}{appendix*.88}
+\contentsline {chapter}{GNU Documentation Free License}{119}{appendix*.89}

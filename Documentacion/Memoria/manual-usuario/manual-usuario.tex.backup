@@ -228,6 +228,7 @@ permanecerán registradas en el sistema por si se desea volver al modo privado t
 
 
 \subsection{Configuración de la interfaz}
+\label{subsec:configuracion-interfaz}
 
 Una vez creado nuestro robot en el sistema ya podremos configurar su interfaz. En la figura \ref{website:configuracion-interfaz} podemos ver el canvas sobre el que iremos añadiendo los diferentes elementos que 
 conformarán nuestro panel de control. El diseño resultante de esta ventana servirá tanto para panel de control del robot como ventana de seguimiento a los usuarios que sigan el funcionamiento del
@@ -327,12 +328,14 @@ Del mismo modo que en la edición de elementos, para borrar un elemento seleccio
 \section{ Programa tu robot }
 \label{sec:programacion-robot}
 
-NOTA: Esta guía comprende una serie de pasos para realizar la programación de un dispositivo robótico para la aplicación RobotUI que emplee como base una placa Raspberry Pi, ya que se hace uso de su sistema de Entrada/Salio Gpio. 
-El sistema es compatible con cualquier dispositivo solo que se deberán emplear a nivel de programación las librerías adecuadas para activar las salidas correspondientes al modelo de placa utilizado.\\
+NOTA: Esta guía comprende una serie de pasos para realizar la programación de un dispositivo robótico para la aplicación RobotUI. En este caso particular, el robot empleado posee como base una placa 
+Raspberry Pi, la cual emplea para la conexión de sensores y motores haciendo uso de su sistema de Entrada/Salio Gpio.\\
 
+El sistema es compatible con cualquier dispositivo, no solo limitado a las placas Raspberry. La única diferencia radica en que se deberán emplear a nivel de programación las bibliotecas adecuadas 
+para la activación o lectura de las Entadas/Salidas correspondientes al modelo de placa utilizado.\\
 
 Antes de proceder con la programación de nuestro robot debemos de realizar su creación en la aplicación RobotUI como queda descrito en el punto \ref{sec:creacion-robot} y 
-tomar nota del identificador único que la aplicación proporciona para dicho robot que posteriormente necesitaremos.\\	
+tomar nota del identificador único que la aplicación proporciona para dicho robot y que posteriormente necesitaremos.\\	
 
 \begin{figure}[H]
   \begin{center}
@@ -343,17 +346,24 @@ tomar nota del identificador único que la aplicación proporciona para dicho ro
 \end{figure}
 
 
-Una vez creado el robot y configurada su interfaz, podemos comenzar con la programación. Para ello debemos seguir una serie de pasos:\\
+Una vez creado el robot y configurada su interfaz, añadiendo los diferentes elementos disponibles como acciones, vídeo, etiquetas, etcétera, recogidos en el punto \ref{subsec:configuracion-interfaz}: Configuración de la interfaz.
+Podemos comenzar con la programación del robot.\\
+
+Para ello debemos seguir una serie de pasos:\\
 
 \begin{enumerate}
-  \item Generar una archivo de extensión .js, con el código base mostrado en el punto inferior.
-  \item Reemplazar en el código la palabra \emph{IDENTIFICADOR} por el identificador de nuestro robot indicado en la vista show del mismo. Por ejemplo: 59188631c8e94ba54f7a4bdc
+  \item Generar una archivo de extensión .js, con el código base mostrado en el punto \ref{codigo:base}.
+  \item Reemplazar en el código la palabra \emph{IDENTIFICADOR} por el identificador único de nuestro robot obtenido en la vista informativa del mismo.
+  Por ejemplo: 59188631c8e94ba54f7a4bdc.
   \item Indicar el puerto en el que el robot permanecerá a la escucha. Para ello debemos reemplazar palabra \emph{PUERTO} del código inferior por el puerto deseado. Por ejemplo 8085. 
-  \item El siguiente paso es es determinar qué puertos GPIO necesitaremos y si van a ser utilizado en modo Entrada, Salida o Entrada/Salida dentro de la sección \emph{PINES} de la plantilla. En este caso 
-  se ha empleando la biblioteca \emph{pigpio} cuya documentación se encuentra disponible en el siguiente enlace: \url{https://www.npmjs.com/package/pigpio}.
-  \item Definir el funcionamiento de los diferentes eventos dentro de la sección \emph{EVENTOS}. 
+  \item El siguiente paso es es determinar qué puertos GPIO necesitaremos y si van a ser utilizado en modo Entrada, Salida o Entrada/Salida dentro de la sección \emph{PINES} de la plantilla.
+  En este caso se ha empleando la biblioteca \emph{pigpio} cuya documentación se encuentra disponible en el siguiente enlace: \url{https://www.npmjs.com/package/pigpio}.
+  \item Definir el funcionamiento de los diferentes eventos dentro de la sección \emph{EVENTOS}.
 \end{enumerate}
 
+
+\subsubsection{código base}
+\label{codigo:base}
 
 \begin{lstlisting}[language=JavaScript]
 
@@ -447,13 +457,51 @@ function startStreaming(socket) {
 
 \end{lstlisting}
 
-Una vez generado el código debemos copiarlo a la placa Raspberry Pi o computador que actuará como Robot para nuestra aplicación y ejecutarlo. Para la ejecución del código introducimos el siguiente comando:\\
+A continuación mostramos dos posibles eventos para añadir al código base superior a modo orientativo:\\
+
+El primer fragmento de cógigo se activa al recibir un evento tipo \emph{action} (evento lanzado desde la interfaz al presionar cualquier botón generado por el usuario), captura el comando recibido,
+y si es igual a \emph{UP}, entonces habilita el pin gpio1 con el valor 1. Pin inicializado previamente en la sección de pines del código base.\\
+
+\begin{lstlisting}[language=JavaScript]
+
+socket.on('action', function (data){
+    if (data == 'UP') {
+        gpio1.digitalWrite(1);
+    }
+});
+
+\end{lstlisting}
+
+El segundo fragmento de código devuelve la lectura del pin \emph{gpio2} cada vez que recibe el comando \emph{READ} y mandando al cliente el valor de lectura obtenido:\\
+
+\begin{lstlisting}[language=JavaScript]
+
+  socket.on('action', function (data){
+      if (data == 'READ') {
+	var temp =  gpio2.digitalRead(1);
+	socket.emit('robot_temp', {msg: temp});
+    }
+  });
+\end{lstlisting}
+ 
+
+En la parte referente a la interfaz de control de la aplicacion RobotUI, para lanzar o capturar los comandos correspondientes a los ejemplos superiores, en el primer caso, debemos crear un botón 
+cuyo código a emitir sea \emph{UP} y para el segundo, debemos añadir un botón cuyo código de emisión sea \emph{READ} y una etiqueta cuyo nombre de evento se cprresponda con \emph{robot\_temp}.\\
+
+Una vez generado el código para nuestro robot debemos copiarlo a la placa Raspberry Pi o computador que actuará como Robot para nuestra aplicación y ejecutarlo. Para la ejecución del código
+introducimos el siguiente comando:\\
 
 \begin{lstlisting}[language=bash]
   sudo node raspberry.js
 \end{lstlisting}
 
 Siendo \emph{raspberry.js} el nombre del archivo que contiene nuestro código.
+
+
+Obteniendo el siguiente resultado:
+
+
+IMAGEN ROBOT A LA ESCUCHA!!!!!!!!!!!!!!!!!
 
 
 \section{ Controla tu robot }
@@ -479,11 +527,42 @@ El panel de control de la interfaz podemos identificar los siguientes elementos:
 \end{figure}
 
 
-\subsection{Panel de administración}
-
-
 \section{ Visita otros robots }
 \label{sec:visita-robot}
+
+
+En la aplicación accediendo desde el menú superior en el desplegable robots -> públicos podemos acceder en todo momento a los robots que tenemos accesibles.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=.6]{imagenes/manual-usuario/tarjeta_ocupado.png}
+  \end{center}
+  \caption{ Panel informativo de un robot en su modalidad \emh{ocupado}.}
+  \label{website:robot-ocupado}
+\end{figure}
+
+Para pulsamos sobre el botón seguir accediendo a su interfaz en modo espectador mostrando una vista similar a la de la figura \ref{website:ventana-seguimiento}:\\
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=.6]{imagenes/manual-usuario/vista_seguimiento.png}
+  \end{center}
+  \caption{ Panel de seguimiento de un en tiempo real.}
+  \label{website:ventana-seguimiento}
+\end{figure}
+
+
+El usuario que dispone del control del robot verá lo siguiente:
+
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=.6]{imagenes/manual-usuario/vista_control.png}
+  \end{center}
+  \caption{ Panel de control de un robot con el listado a la derecha de usuarios espectadores.}
+  \label{website:ventana-seguimiento}
+\end{figure}
+
 
 
 \begin{figure}[H]
@@ -494,4 +573,11 @@ El panel de control de la interfaz podemos identificar los siguientes elementos:
   \label{website:pagina-principal}
 \end{figure}
 
+
+
+
+\subsection{Panel de administración}
+
+
+  Menú accesible solo para usuarios administradores.
 

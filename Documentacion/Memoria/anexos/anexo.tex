@@ -57,7 +57,7 @@ Esta guía proporciona las pautas necesarias para la configuración de un entorn
 
 \subsection{Prerrequisitos}
 
-Partiendo de que se encuentra Node correctamente instalado en una máquina con Ubuntu 16.04.2 LTS. Ubuntu es una plataforma muy popular y utilizada en el desarrollo de Sails.js, al igual que otros sistemas operativos basados en Unix, como Mac OS X. La instalación es relativamente fácil y existe multitud de información gracias a su amplia comunidad de desarrolladores.\\
+Partiendo de que se encuentra Node.js correctamente instalado en una máquina con Ubuntu 16.04.2 LTS. Ubuntu es una plataforma muy popular y utilizada en el desarrollo de Sails.js, al igual que otros sistemas operativos basados en Unix, como Mac OS X. La instalación es relativamente fácil y existe multitud de información gracias a su amplia comunidad de desarrolladores.\\
 
 \begin{itemize}
 
@@ -85,7 +85,7 @@ Para comprobar que la instalación se realizó correctamente, crearemos un proye
 sails new my_first_app
 \end{lstlisting}
 
-Cambie de directorio (cd) al nuevo directorio creado, en el cual nos aseguraremos de que Sails está correctamente instalado. Para ello arrancaremos el servidor y comprobaremos en nuestro navegador en localhost 1337 (localhost: 1337) que Sails está funcionando correctamente.\\
+Cambiamos de directorio (cd) al nuevo directorio creado, en el cual nos aseguraremos de que Sails está correctamente instalado. Para ello arrancaremos el servidor y comprobaremos en nuestro navegador en localhost 1337 (localhost: 1337) que Sails está funcionando correctamente.\\
 
 
 \begin{lstlisting}[language=bash]
@@ -102,7 +102,7 @@ Tras introducir en nuestro navegador \emph{localhost: 1337} debemos obtener el s
     \includegraphics[scale=0.3]{imagenes/running_sails.png}
   \end{center}
   \label{fig:logo}
- \caption{Iniciando Sails \protect\footnotemark.}
+ \caption{Iniciando Sails.}
 \end{figure}
 
 
@@ -138,14 +138,14 @@ Para la instalación de MongoDB se puede optar con la versión disponible en los
 la versión más actualizada siendo la forma recomendada de instalación. Para la instalación desde repositorios externos, Ubuntu garantiza la autenticidad de los paquetes de software al verificar que están firmados
 con las claves GPG, por lo que primero tenemos que importar la clave para el repositorio oficial de MongoDB.\\
 
-Para ello, ejecute:\\
+Para ello, debemos ejecutar:\\
 
 \begin{lstlisting}[language=bash]
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 \end{lstlisting}
 
 
-Después de importar con éxito la clave, verá lo siguiente:\\
+Después de importar con éxito la clave, obtendremos el siguiente:\\
 
 \begin{lstlisting}[language=bash]
 Gpg: Número total procesado: 1
@@ -181,7 +181,7 @@ Después de la instalación del paquete, MongoDB se iniciará automáticamente. 
 service mongodb status
 \end{lstlisting}
 
-Si MongoDB se está ejecutando, verá una salida como la siguiente (con un ID de proceso diferente).\\
+Si MongoDB se está ejecutando, se mostrará una salida como la siguiente (con un ID de proceso diferente).\\
 
 \begin{lstlisting}[language=bash]
  mongodb.service - An object/document-oriented database
@@ -196,7 +196,7 @@ Si MongoDB se está ejecutando, verá una salida como la siguiente (con un ID de
             - 807 /usr/bin/mongod --config /etc/mongodb.conf
 \end{lstlisting}
 
-También puede detener, iniciar y reiniciar MongoDB utilizando los siguientes comandos:\\
+También es posible detener, iniciar y reiniciar MongoDB utilizando los siguientes comandos:\\
 
 \begin{lstlisting}[language=bash]
 service mongodb stop
@@ -223,7 +223,7 @@ Esto descargará e instalará Git en el sistema. A continuación se describe los
 
 \subsection{Configuración}
 
-Ahora que tiene git instalado, necesita hacer algunas cosas para que los mensajes de confirmación que se generarán para usted contendrán su información correcta.\\
+Una vez que disponemos de Git instalado, necesitamos realizar una serie de pasos para añadir nuestros datos de acceso de nuestro repositorio.\\
 
 La forma más sencilla de hacerlo es a través del comando \emph{git config} proporcionando nuestro nombre y dirección de correo electrónico. Esto es debido a que Git incorpora esta información en cada commit
 que hacemos. Por ejemplo, si nuestro nombre es \emph{RobotUI} y nuestro email \emph{email@robotui.com}, los comandos de configuración serían los siguientes:\\

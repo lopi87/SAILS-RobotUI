@@ -5,12 +5,13 @@
 
 % Copyright (C) 2017 Manuel López Urbina
 
+
 \chapter{Conceptos básicos}
 \label{chap:conceptos-básicos}
 
 
-En el presente capítulo se recogen aquellos conceptos, definiciones y protocolos que resultan de especial interés y que ayudarán a la comprensión de los diferentes puntos tratados en el resto de 
-la memoria sin profundizar demasiado en detalles técnicos.
+En el presente capítulo se recogen aquellos conceptos, definiciones, protocolos y diferentes aspectos que resultan de especial interés y que ayudarán a la comprensión de los diferentes puntos tratados en el resto de 
+la memoria sin profundizar demasiado en detalles técnicos.\\
 
 Todos estos conceptos se encuentran estrechamente ligados con tecnologías de la comunicación y transmisión de información, más concretamente en el ámbito de la programación web.
 
@@ -18,7 +19,7 @@ Todos estos conceptos se encuentran estrechamente ligados con tecnologías de la
 \label{sec:transmisión}
 
 Se denomina \emph{transmisión} como el proceso de transporte de una señal de un lugar a otro y \emph{comunicación} como el intercambio entre dos entes mediante una transmisión, los cuales son capaces de
-interpretar la información circundante entre ellos y en el cual existen un conjunto de reglas definidas, los protocolos\footnote{Protocolo: reglamento o una serie de instrucciones que se fijan por tradición o por convenio. },
+interpretar la información circundante entre ellos y en el cual existen un conjunto de reglas definidas, los protocolos\footnote{Protocolo: reglamento o serie de instrucciones que se fijan por tradición o por convenio. },
 que rigen el proceso.
 
 
@@ -29,8 +30,10 @@ que rigen el proceso.
 de manera fiable y ordenada.\\
 
 La comunicación a través de una red de ordenadores es una tarea compleja en la que para resolverla se ha empleado un enfoque de diseño por capas, pudiéndose hablar por tanto de una arquitectura 
-o pila de protocolos donde cada capa utiliza servicios (funciones) de la capa inferior y ofrece servicios a la capa superior. El modelo de referencia para la comunicación de ordenadores es el denominado
- modelo  de Interconexión de Sistemas Abiertos OSI ( Open Systems Interconection ), el cual queda descrito en la sección \ref{sec:modelo-osi} junto con la localización de los sockets en dicho modelo.
+o pila de protocolos donde cada capa utiliza servicios (funciones) de la capa inferior y ofrece servicios a la capa superior. \\
+
+El modelo de referencia para la comunicación de ordenadores es el denominado modelo de Interconexión de Sistemas Abiertos OSI ( Open Systems Interconection ), el cual queda descrito
+en la sección \ref{sec:modelo-osi} junto con la localización de los sockets en dicho modelo.\\
 
 El término \emph{socket} es también usado como el nombre de una interfaz de programación de aplicaciones (API) para la familia de protocolos de red TCP/IP \footnote{ TCP/IP es un conjunto de protocolos que
 permiten la comunicación entre los ordenadores pertenecientes a una red. La sigla TCP/IP significa Protocolo de control de transmisión/Protocolo de Internet. Proviene de los nombres de dos protocolos 
@@ -41,15 +44,6 @@ y remota, un protocolo de transporte y un par de números de puerto local y remo
 
 Cuando se habla de dirección y puerto local/remoto, se sobreentiende que nos referimos a dos procesos (cliente/servidor o nodo/nodo) ya que ambas direcciones IP y puerto pueden coincidir para el intercambio de información entre procesos dentro de una misma máquina
 y; además, la comunicación puede ser perfectamente bidireccional, asumiendo que el par que la inicia es el cliente y su contrapartida un servidor pero pudiendo ejercer de forma ambivalente ambas partes.\\
-
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.8]{imagenes/comunicaciones/socket.jpg}
-  \end{center}
-  \caption{ Representación de los sockets como una interfaz de la capa de transporte del protocolo TCP/IP.}
-  \label{diagram:socket}
-\end{figure}
 
 
 \section{WebSocket}
@@ -70,6 +64,7 @@ puerto TCP a costa de una pequeña sobrecarga del protocolo.
 
 
 \section{La arquitectura TCP/IP y el modelo OSI}
+\label{sec:modelo-osi}
 
 En 1977 la Organización Internacional de Estandarización ( Internacional Standards Organization , ISO) estableció un subcomité encargado de diseñar una arquitectura de
 comunicación. El resultado fue el modelo de referencia para la Interconexión de Sistemas Abiertos OSI ( Open Systems Interconection ). Dicho modelo define una arquitectura de
@@ -91,6 +86,14 @@ En la siguiente figura \ref{diagram:modelo-osi-tcp} se aprecian los niveles o ca
 
 Los sockets dentro del modelo TCP/IP se pueden ver como una interfaz con la capa de transporte.
 
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.5]{imagenes/modelo-tcp-ip-socket.png}
+  \end{center}
+  \caption{ Representación de los sockets como una interfaz de la capa de transporte del protocolo TCP/IP.}
+  \label{diagram:socket}
+\end{figure}
 
 
 \section{Streaming}
@@ -130,5 +133,4 @@ Los objetivos principales que persigue un framework son:
  \item Reutilización de código.
  \item Promover buenas prácticas de desarrollo como el uso de patrones.
 \end{itemize}
-
 

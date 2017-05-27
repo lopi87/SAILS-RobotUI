@@ -25,7 +25,6 @@ Dado lo anterior, considero que hay un campo sin cubrir y que resultaría intere
 ninguna plataforma que permita esta interacción usuario-máquina o usuarios-máquina en tiempo real y que sea configurable para cualquier dispositivo que se encuentre conectado a la red.\\
 
 
-
 \section{Tecnologías software utilizadas}
 \sectionmark{Tecnologías software}
 
@@ -263,20 +262,20 @@ en las escuelas. Es ampliamente utilizado y de uso muy extendido por lo que ha s
 La Raspberry Pi 3 es la tercera generación de Raspberry Pi. Sus especificaciones son las siguientes:
 
 \begin{itemize}
- \item Una CPU ARMv8 quad-core de 64 bits de 64 bits y 1.2 GHz
- \item LAN inalámbrica 802.11n
- \item Bluetooth 4.1
- \item Bluetooth baja energía (BLE)
- \item 1 GB de RAM
- \item 4 puertos USB
- \item 40 conexiones GPIO
- \item Puerto HDMI
- \item Puerto Ethernet
- \item Conector de audio combinado de 3,5 mm y vídeo compuesto
- \item Interfaz de la cámara (CSI)
- \item Interfaz de pantalla (DSI)
- \item Ranura para tarjeta Micro SD
- \item VideoCore IV núcleo de gráficos 3D 
+ \item Una CPU ARMv8 quad-core de 64 bits de 64 bits y 1.2 GHz.
+ \item LAN inalámbrica 802.11n.
+ \item Bluetooth 4.1.
+ \item Bluetooth baja energía (BLE).
+ \item 1 GB de RAM.
+ \item 4 puertos USB.
+ \item 40 conexiones GPIO.
+ \item Puerto HDMI.
+ \item Puerto Ethernet.
+ \item Conector de audio combinado de 3,5 mm y vídeo compuesto.
+ \item Interfaz de la cámara (CSI).
+ \item Interfaz de pantalla (DSI).
+ \item Ranura para tarjeta Micro SD.
+ \item VideoCore IV núcleo de gráficos 3D. 
 \end{itemize}
 
 
@@ -338,11 +337,11 @@ Por otra parte, esta placa dispone de 2 puertos USB adicionales: uno suministra 
 Sus características principales son las siguientes:
 
 \begin{enumerate}
- \item Capacidad de la batería: 3800mAH
- \item Corriente de descarga máxima: 1.8A
- \item Tensión de salida sin carga: 5.1V ± 0.1V
- \item Corriente / voltaje de carga estándar: 1.0A / 5.0V
- \item Tensión de corte de la carga completa de la batería de iones de litio: 4.18V - 4.2V
+ \item Capacidad de la batería: 3800mAH.
+ \item Corriente de descarga máxima: 1.8A.
+ \item Tensión de salida sin carga: 5.1V ± 0.1V.
+ \item Corriente / voltaje de carga estándar: 1.0A / 5.0V.
+ \item Tensión de corte de la carga completa de la batería de iones de litio: 4.18V - 4.2V.
 \end{enumerate}
 
 
@@ -360,7 +359,7 @@ Cámara USB para su conexión en la Raspberry para la emisión de imágenes. La 
 \begin{itemize}
 \item 2 megapíxeles de resolución.
 \item Ángulo de visión de 170 grados.
-\item Interfaz USB 2.0 de alta velocidad, refresco de 60 fps en resolución 1280X720, 30 fps en resolución 1920X1080
+\item Interfaz USB 2.0 de alta velocidad, refresco de 60 fps en resolución 1280X720, 30 fps en resolución 1920X1080.
 \item Tamaño reducido y perfil delgado ideal para aplicaciones embebidas.
 \end{itemize}
 
