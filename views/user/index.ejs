@@ -37,9 +37,15 @@
 
         <td>
           <a href="robot/new/<%= user.id %>" class="btn btn-sm btn-success"><%= i18n('add_robot') %></a>
+        </td>
 
+        <td>
           <a class="btn btn-sm btn-primary" href="/robot/index/<%= user.id %>"><%= i18n('show_robots') %></a>
+        </td>
+        <td>
           <a href="/user/edit/<%= user.id %>" class="btn btn-sm btn-warning"><%= i18n('edit') %></a>
+        </td>
+        <td>
           <form action="/user/destroy/<%=user.id%>" method="post" class="inline">
             <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
             <input type="submit"  class="btn btn-sm btn-danger" value="<%= i18n('delete') %>"/>

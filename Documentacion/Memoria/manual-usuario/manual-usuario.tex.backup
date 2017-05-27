@@ -59,7 +59,8 @@ Git, escribiendo en la consola el siguiente comando:\\
 
 Para acceder a la aplicación, el usuario deberá accedes al siguiente enlace: \url{www.robotui.com}. \\
 
-Al dar clic en la url podrá ver el portal de entrada a la aplicación, desde donde puede acceder a la aplicación con sus credenciales y/o  acceder a los formularios de \emph{registro de usuario}.
+Al acceder podrá ver el portal de entrada a la aplicación. En él puede acceder al resto de funcionalidades identificándose con sus credenciales y acceder a los formularios de registro
+de usuario.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -69,20 +70,17 @@ Al dar clic en la url podrá ver el portal de entrada a la aplicación, desde do
   \label{website:pagina-principal}
 \end{figure}
 
-
 \subsection{ Registo de usuario }
 \label{sec:creacion-usuario}
 
-
 Una vez en la página principal, figura \ref{website:pagina-principal}, podemos observar la barra superior, la cual posee dos estados, la de usuario sin identificar y la de usuario identificado.
-
 
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=0.5]{imagenes/manual-usuario/barra-menu1.png}
   \end{center}
   \caption{Vista de la barra superior en modalidad usuario no identificado en el sistema.}
-  \label{website:pagina-principal}
+  \label{website:barra-inicial}
 \end{figure}
 
 \begin{figure}[H]
@@ -90,9 +88,8 @@ Una vez en la página principal, figura \ref{website:pagina-principal}, podemos 
     \includegraphics[scale=0.5]{imagenes/manual-usuario/barra-menu2.png}
   \end{center}
   \caption{Vista de la barra superior en modalidad usuario identificado en el sistema.}
-  \label{website:pagina-principal}
+  \label{website:barra-usuario}
 \end{figure}
-
 
 
 Para iniciar el proceso de registro de usuario hacemos clic sobre el botón de la barra superior \icontext{.2}{.35}{imagenes/manual-usuario/btn-registro.png} mediante el cual accedemos al formulario \ref{website:formulario-registro}.
@@ -117,7 +114,8 @@ Para proceder con el registro necesitaremos los siguientes datos:
 \end{enumerate}
 
 Una vez introducidos los datos correctamente podremos hacer clic en \emph{crear cuenta}. Si los datos introducidos son correctos dispondremos de un nuevo usuario en la aplicación redirigiéndonos
-a la página de información del nuevo usuario \ref{website:informacion-usuario}.
+a la página de información del nuevo usuario
+\ref{website:informacion-usuario}.
 
 \begin{figure}[H]
   \begin{center}
@@ -128,26 +126,34 @@ a la página de información del nuevo usuario \ref{website:informacion-usuario}
 \end{figure}
 
 
+
+\subsection{ Ingreso al sistema }
+\label{sec:ingreso-sisetma}
+
+Una vez registrados, procedimiento descrito en \ref{sec:creacion-usuario}, podremos acceder al sistema mediante la introducción de nuestro usuario y contraseña en los campos disponibles en la barra
+superior localizado en la aplicación y haciendo clic en \icontext{.2}{.45}{imagenes/manual-usuario/btn-identifiquese.png} localizados en la barra superior.\\
+
 \subsection{Registro de un Robot}
 \label{sec:creacion-robot}
 
-Para el proceso de creación de un robot hacemos clic al menú \emph{Robots} \textrightarrow \enspace \emph{Mis robots} accediendo al formulario de creación, figura \ref{website:creacion-robot}.\\
+Para el iniciar el proceso de creación de un robot haremos clic en \emph{Robots} \textrightarrow \enspace \emph{Mis robots} del menú superior accediendo al formulario de creación, figura
+\ref{website:creacion-robot}.\\
 
-En este caso registraremos nuestro robot de pruebas descrito en el capítulo \ref{chap:robot}. Para ello introducimos los siguientes datos:
+En este caso registraremos nuestro robot de pruebas descrito en el capítulo \ref{chap:robot}. Para ello introducimos los siguientes datos:\\
 
 \begin{enumerate}
- \item Nombre: nombre de nuestro robot.
- \item Dirección IP: dirección donde se encontrará accesible nuestro robot.
- \item Puerto: puerto donde se encontrará nuestro robot a la escucha de conexiones.
- \item Descripción: campo opcional en el que podemos añadir una descripción de nuestro robot y que será visible al resto de usuarios.
- \item Imagen: campo opcional en el que podremos subir una imagen de nuestro robot.
- \item Usuarios espectadores: selector en el que podemos especificar qué usuarios del sistema tendrán permisos para visualizar el funcionamiento de nuestro robot.
- \item Usuarios controladores: selector para especificar qué usuarios podrán tomar control de nuestro robot.
- \item Público: checkboxes para indicar si por el contrario, el robot que abierto a todos los usuarios para su control o abierto para su visualización si marcamos el primero o el segundo checkbox respectivamente
+ \item \textbf{Nombre:} nombre de nuestro robot.
+ \item \textbf{Dirección IP:} dirección donde se encontrará accesible nuestro robot.
+ \item \textbf{Puerto:} puerto donde se encontrará nuestro robot a la escucha de conexiones.
+ \item \textbf{Descripción:} campo opcional en el que podemos añadir una descripción de nuestro robot y que será visible al resto de usuarios.
+ \item \textbf{Imagen:} campo opcional en el que podremos subir una imagen de nuestro robot.
+ \item \textbf{Usuarios espectadores:} selector en el que podemos especificar qué usuarios del sistema tendrán permisos para visualizar el funcionamiento de nuestro robot.
+ \item \textbf{Usuarios controladores:} selector para especificar qué usuarios podrán tomar control de nuestro robot.
+ \item \textbf{Público:} checkboxes para indicar si por el contrario, el robot que abierto a todos los usuarios para su control o abierto para su visualización si marcamos el primero o el segundo checkbox respectivamente
  y haciendo por tanto inválidos los parámetros de los selectores anteriores.
 \end{enumerate}
 
-Una vez rellenado los campos como se muestran en la imagen \ref{website:creacion-robot} pulsamos en \icontext{.2}{.35}{imagenes/manual-usuario/btn-crear.png}.
+Una vez introducidos los datos para el nuevo usuario pulsamos en \icontext{.2}{.35}{imagenes/manual-usuario/btn-crear.png}.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -158,7 +164,7 @@ Una vez rellenado los campos como se muestran en la imagen \ref{website:creacion
 \end{figure}
 
 
-Si los campos se han introducido correctamente visualizaremos la siguiente página:
+Si los campos introducidos son correctos la aplicación nos redireccionará a la página informativa de nuestro nuevo robot:\\
 
 \begin{figure}[H]
   \begin{center}
@@ -168,8 +174,8 @@ Si los campos se han introducido correctamente visualizaremos la siguiente pági
   \label{website:show-robot}
 \end{figure}
 
-En la figura \ref{website:show-robot} vista podemos apreciar la siguiente información:
-
+En la ventana informativa de un robot, figura \ref{website:show-robot}, podemos apreciar una serie de elementos representativos de los diferentes estados en los que se puede encontrar el dispositivo. La 
+tabla \ref{table:robot-estados} describe cada uno de los elementos:\\
 
 \begin{table}[H]
   \begin{center}
@@ -193,17 +199,18 @@ En la figura \ref{website:show-robot} vista podemos apreciar la siguiente inform
       \hline
     \end{tabular}
   \end{center}
-\caption{Estados de un robot.}
+\caption{Elementos representativos de los estados de un robot junto con su descripción.}
+\label{table:robot-estados}
 \end{table}
 
 
 \subsection{Gestión de permisos}
 
-Como hemos mencionado en el procedimiento de registro de un robot, éste se puede crear con una serie de permisos. Existen dos modalidades en RobotUI, como sabemos, la de visualización o seguimiento y la de control,
-las cuales podemos hacer públicas o privadas, y, en el caso de que optemos por alguna modalidad privada, definir para qué usuarios estará disponible.\\
+Como hemos mencionado en el procedimiento de registro de un robot, éste se puede crear con una serie de permisos. Existen dos modalidades en RobotUI, como sabemos, la de visualización o seguimiento
+y la de control. Funcionalidades que podemos hacer públicas o privadas, y, en el caso de que optemos por alguna modalidad privada, definir para qué usuarios estará disponible.\\
 
-Los permisos configurados estarán disponibles en todo momento en la ventana de edición de un robot. En ella podremos visualizar los diferentes usuarios añadidos con los permisos de cada uno de ellos.
-Podremos eliminar usuarios o añadir otros nuevos estableciendo el acceso a alguna de las modalidades de acceso al robot como públicas o privadas.\\
+La gestión y visualización de los permisos configurados estarán disponibles en todo momento en la ventana de edición de un robot. En ella podremos visualizar los diferentes usuarios añadidos con
+los permisos de cada uno de ellos. Podremos eliminar usuarios o añadir otros nuevos estableciendo el acceso a alguna de las modalidades existentes como pública o privada.\\
 
 Si el robot es establecido como público en alguna de sus dos modalidades (control o seguimiento) entonces se ignorará toda la configuración de usuarios establecida para esa modalidad aunque
 permanecerán registradas en el sistema por si se desea volver al modo privado tan solo haciendo clic en el checkbox correspondiente.\\
@@ -231,14 +238,16 @@ permanecerán registradas en el sistema por si se desea volver al modo privado t
 \label{subsec:configuracion-interfaz}
 
 Una vez creado nuestro robot en el sistema ya podremos configurar su interfaz. En la figura \ref{website:configuracion-interfaz} podemos ver el canvas sobre el que iremos añadiendo los diferentes elementos que 
-conformarán nuestro panel de control. El diseño resultante de esta ventana servirá tanto para panel de control del robot como ventana de seguimiento a los usuarios que sigan el funcionamiento del
+conformarán nuestro panel de control. \\
+
+El diseño resultante de esta ventana servirá tanto para panel de control del robot como ventana de seguimiento a los usuarios que sigan el funcionamiento del
 dispositivo.\\
 
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=0.4]{imagenes/manual-usuario/pagina-configurar-interfaz.png}
   \end{center}
-  \caption{Panel de configuración de la interfaz.}
+  \caption{Panel de configuración de la interfaz sin elementos añadidos.}
   \label{website:configuracion-interfaz}
 \end{figure}
 
@@ -315,12 +324,15 @@ Del mismo modo que en la edición de elementos, para borrar un elemento seleccio
 
 
 \subsection{Ejemplo}
+
+La figura \ref{interfaz-configurada} muestra una posible interfaz de control para un dispositivo robótico.
+
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=.4]{imagenes/manual-usuario/interfaz-creada.png}
   \end{center}
   \caption{Vista tipo de una interfaz configurada.}
-  \label{website:pagina-principal}
+  \label{website:interfaz-configurada}
 \end{figure}
 
 
@@ -497,12 +509,15 @@ introducimos el siguiente comando:\\
 
 Siendo \emph{raspberry.js} el nombre del archivo que contiene nuestro código.
 
-
 Obteniendo el siguiente resultado:
 
-
-IMAGEN ROBOT A LA ESCUCHA!!!!!!!!!!!!!!!!!
-
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=.6]{imagenes/manual-usuario/espera-conexion.png}
+  \end{center}
+  \caption{ Robot a la espera de conexión entrante.}
+  \label{website:pagina-principal}
+\end{figure}
 
 \section{ Controla tu robot }
 \label{sec:control-robot}
@@ -547,7 +562,7 @@ Para pulsamos sobre el botón seguir accediendo a su interfaz en modo espectador
   \begin{center}
     \includegraphics[scale=.6]{imagenes/manual-usuario/vista_seguimiento.png}
   \end{center}
-  \caption{ Panel de seguimiento de un en tiempo real.}
+  \caption{ Vista del panel de seguimiento de un robot en tiempo real.}
   \label{website:ventana-seguimiento}
 \end{figure}
 
@@ -557,27 +572,33 @@ El usuario que dispone del control del robot verá lo siguiente:
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=.6]{imagenes/manual-usuario/vista_control.png}
+    \includegraphics[scale=.4]{imagenes/manual-usuario/vista_control.png}
   \end{center}
-  \caption{ Panel de control de un robot con el listado a la derecha de usuarios espectadores.}
+  \caption{ Vista del panel de control de un robot junto con el listado de usuarios realizando el seguimiento.}
   \label{website:ventana-seguimiento}
 \end{figure}
-
 
 
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=.35]{imagenes/manual-usuario/robots-publicos.png}
   \end{center}
-  \caption{ Vista de acceso a los robots públicos.}
+  \caption{ Índice de robots públicos.}
   \label{website:pagina-principal}
 \end{figure}
-
-
 
 
 \subsection{Panel de administración}
 
 
-  Menú accesible solo para usuarios administradores.
+Menú accesible solo para usuarios administradores. Accesible desde la barra superior disponiendo de la entrada \emph{Usuarios} y \emph{Robots}.
 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=9.5cm]{imagenes/manual-usuario/administracion-usuarios.png}
+    \qquad
+    \includegraphics[width=.5cm]{imagenes/manual-usuario/administracion-robots.png}
+    \caption{Paneles de administración para robots y usuarios.}%
+    \label{fig:http-request}%
+\end{figure}
