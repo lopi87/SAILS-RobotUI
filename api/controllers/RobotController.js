@@ -518,7 +518,7 @@ module.exports = {
 
         Robot.pagify('robots', {
           findQuery: { or: [ { id: list_id }, { owner: req.session.User.id } ] },
-          populate: ['drivers', 'viewers', 'owner'],
+          populate: ['drivers', 'viewers', 'owner', 'iface'],
           page: page
         }).then(function (data_robots) {
 
