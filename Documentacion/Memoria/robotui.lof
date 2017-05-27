@@ -58,16 +58,17 @@
 \contentsline {figure}{\numberline {9.13}{\ignorespaces Vista tipo de una interfaz configurada.\relax }}{96}{figure.caption.72}
 \contentsline {figure}{\numberline {9.14}{\ignorespaces Panel informativo de un robot donde se aprecia su identificador.\relax }}{97}{figure.caption.73}
 \contentsline {figure}{\numberline {9.15}{\ignorespaces Robot a la espera de conexi\IeC {\'o}n entrante.\relax }}{100}{figure.caption.75}
-\contentsline {figure}{\numberline {9.16}{\ignorespaces Panel informativo de las caracter\IeC {\'\i }sticas del robot de la interfaz.\relax }}{101}{figure.caption.76}
-\contentsline {figure}{\numberline {9.17}{\ignorespaces Panel informativo de las \IeC {\'o}rdenes enviadas al robot junto con una entrada de comandos para enviar nuevas \IeC {\'o}rdenes directamente.\relax }}{101}{figure.caption.77}
-\contentsline {figure}{\numberline {9.18}{\ignorespaces Panel informativo de un robot en su modalidad {ocupado}.\relax }}{102}{figure.caption.78}
-\contentsline {figure}{\numberline {9.19}{\ignorespaces Vista del panel de seguimiento de un robot en tiempo real.\relax }}{102}{figure.caption.79}
-\contentsline {figure}{\numberline {9.20}{\ignorespaces Vista del panel de control de un robot junto con el listado de usuarios realizando el seguimiento.\relax }}{103}{figure.caption.80}
-\contentsline {figure}{\numberline {9.21}{\ignorespaces \IeC {\'I}ndice robots p\IeC {\'u}blicos.\relax }}{104}{figure.caption.81}
-\contentsline {figure}{\numberline {9.22}{\ignorespaces Paneles de administraci\IeC {\'o}n para robots y usuarios.\relax }}{105}{figure.caption.82}
+\contentsline {figure}{\numberline {9.16}{\ignorespaces \IeC {\'I}ndice robots p\IeC {\'u}blicos.\relax }}{101}{figure.caption.76}
+\contentsline {figure}{\numberline {9.17}{\ignorespaces Panel informativo de las caracter\IeC {\'\i }sticas del robot de la interfaz.\relax }}{101}{figure.caption.77}
+\contentsline {figure}{\numberline {9.18}{\ignorespaces Panel informativo de las \IeC {\'o}rdenes enviadas al robot junto con una entrada de comandos para enviar nuevas \IeC {\'o}rdenes directamente.\relax }}{102}{figure.caption.78}
+\contentsline {figure}{\numberline {9.19}{\ignorespaces Panel informativo de un robot en su modalidad {ocupado}.\relax }}{102}{figure.caption.79}
+\contentsline {figure}{\numberline {9.20}{\ignorespaces Vista del panel de seguimiento de un robot en tiempo real.\relax }}{103}{figure.caption.80}
+\contentsline {figure}{\numberline {9.21}{\ignorespaces Vista del panel de control de un robot junto con el listado de usuarios realizando el seguimiento.\relax }}{104}{figure.caption.81}
+\contentsline {figure}{\numberline {9.22}{\ignorespaces Formulario de redacci\IeC {\'o}n de un mensaje.\relax }}{105}{figure.caption.82}
+\contentsline {figure}{\numberline {9.23}{\ignorespaces Paneles de administraci\IeC {\'o}n para robots y usuarios.\relax }}{106}{figure.caption.83}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1}{\ignorespaces Iniciando Sails.\relax }}{112}{figure.caption.86}
-\contentsline {figure}{\numberline {2}{\ignorespaces Sails en funcionamiento \footnotemark .\relax }}{113}{figure.caption.87}
-\contentsline {figure}{\numberline {3}{\ignorespaces Utilizaci\IeC {\'o}n del gestor de procesos Pm2 en el entorno de producci\IeC {\'o}n.\relax }}{118}{figure.caption.88}
+\contentsline {figure}{\numberline {1}{\ignorespaces Iniciando Sails.\relax }}{112}{figure.caption.87}
+\contentsline {figure}{\numberline {2}{\ignorespaces Sails en funcionamiento \footnotemark .\relax }}{113}{figure.caption.88}
+\contentsline {figure}{\numberline {3}{\ignorespaces Utilizaci\IeC {\'o}n del gestor de procesos Pm2 en el entorno de producci\IeC {\'o}n.\relax }}{118}{figure.caption.89}
 \addvspace {10\p@ }

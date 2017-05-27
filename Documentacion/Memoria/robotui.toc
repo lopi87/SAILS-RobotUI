@@ -15,7 +15,7 @@
 \contentsline {section}{\numberline {2.4}La arquitectura TCP/IP y el modelo OSI}{9}{section.2.4}
 \contentsline {section}{\numberline {2.5}Streaming}{10}{section.2.5}
 \contentsline {section}{\numberline {2.6}Framework}{11}{section.2.6}
-\contentsline {chapter}{\numberline {3}Herramientas utilizadas}{13}{chapter.3}
+\contentsline {chapter}{\numberline {3}Estado del arte y herramientas utilizadas}{13}{chapter.3}
 \contentsline {section}{\numberline {3.1}Estado del arte}{13}{section.3.1}
 \contentsline {section}{\numberline {3.2}Tecnolog\IeC {\'\i }as software utilizadas}{13}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}\LaTeX }{14}{subsection.3.2.1}
@@ -97,16 +97,17 @@
 \contentsline {subsubsection}{Editar elemento}{95}{section*.70}
 \contentsline {subsubsection}{Eliminar elemento}{95}{section*.71}
 \contentsline {subsection}{\numberline {9.1.7}Ejemplo}{95}{subsection.9.1.7}
-\contentsline {section}{\numberline {9.2} Programa tu robot }{96}{section.9.2}
+\contentsline {subsection}{\numberline {9.1.8} Programa tu robot }{96}{subsection.9.1.8}
 \contentsline {subsubsection}{c\IeC {\'o}digo base}{98}{section*.74}
-\contentsline {section}{\numberline {9.3} Controla tu robot }{100}{section.9.3}
-\contentsline {section}{\numberline {9.4} Visita otros robots }{101}{section.9.4}
-\contentsline {subsection}{\numberline {9.4.1}Panel de administraci\IeC {\'o}n}{104}{subsection.9.4.1}
+\contentsline {subsection}{\numberline {9.1.9} Control de robots }{101}{subsection.9.1.9}
+\contentsline {subsection}{\numberline {9.1.10} Seguimiento de robots }{102}{subsection.9.1.10}
+\contentsline {subsection}{\numberline {9.1.11}Mensajes}{104}{subsection.9.1.11}
+\contentsline {subsection}{\numberline {9.1.12}Panel de administraci\IeC {\'o}n}{105}{subsection.9.1.12}
 \contentsline {chapter}{\numberline {10}Comentarios finales}{107}{chapter.10}
 \contentsline {section}{\numberline {10.1}Presupuesto}{107}{section.10.1}
 \contentsline {section}{\numberline {10.2}Conclusiones}{108}{section.10.2}
 \contentsline {section}{\numberline {10.3}Mejoras futuras}{109}{section.10.3}
-\contentsline {chapter}{Anexos}{111}{appendix*.85}
+\contentsline {chapter}{Anexos}{111}{appendix*.86}
 \contentsline {section}{\numberline {.1}Instalaci\IeC {\'o}n de Node.js}{111}{section.Alph0.1}
 \contentsline {section}{\numberline {.2}Instalaci\IeC {\'o}n Sails.js}{111}{section.Alph0.2}
 \contentsline {subsection}{\numberline {.2.1}Prerrequisitos}{111}{subsection.Alph0.2.1}
@@ -117,5 +118,5 @@
 \contentsline {section}{\numberline {.4}Instalaci\IeC {\'o}n del control de versiones Git}{115}{section.Alph0.4}
 \contentsline {subsection}{\numberline {.4.1}Configuraci\IeC {\'o}n}{115}{subsection.Alph0.4.1}
 \contentsline {section}{\numberline {.5}Despliegue de una aplicaci\IeC {\'o}n Sails}{116}{section.Alph0.5}
-\contentsline {chapter}{Bibliograf\'{\i }a}{119}{appendix*.89}
-\contentsline {chapter}{GNU Documentation Free License}{121}{appendix*.90}
+\contentsline {chapter}{Bibliograf\'{\i }a}{119}{appendix*.90}
+\contentsline {chapter}{GNU Documentation Free License}{121}{appendix*.91}

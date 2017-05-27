@@ -337,7 +337,7 @@ La figura \ref{interfaz-configurada} muestra una posible interfaz de control par
 
 
 
-\section{ Programa tu robot }
+\subsection{ Programa tu robot }
 \label{sec:programacion-robot}
 
 NOTA: Esta guía comprende una serie de pasos para realizar la programación de un dispositivo robótico para la aplicación RobotUI. En este caso particular, el robot empleado posee como base una placa 
@@ -519,8 +519,17 @@ Obteniendo el siguiente resultado:
   \label{website:pagina-principal}
 \end{figure}
 
-\section{ Controla tu robot }
+\subsection{ Control de robots }
 \label{sec:control-robot}
+
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=.25]{imagenes/manual-usuario/robots-publicos.png}
+  \end{center}
+  \caption{ Índice robots públicos.}
+  \label{website:pagina-principal}
+\end{figure}
 
 El panel de control de la interfaz podemos identificar los siguientes elementos:
 
@@ -542,11 +551,11 @@ El panel de control de la interfaz podemos identificar los siguientes elementos:
 \end{figure}
 
 
-\section{ Visita otros robots }
+\subsection{ Seguimiento de robots }
 \label{sec:visita-robot}
 
-
-En la aplicación accediendo desde el menú superior en el desplegable robots -> públicos podemos acceder en todo momento a los robots que tenemos accesibles.
+Para realizar el seguimiento de un robot accedemos desde el menú superior en el desplegable \emph{Robots} \textrightarrow \enspace \emph{Públicos}. En la nueva ventana
+tendremos acceso a todos los robots públicos existentes pudiendo realizar el seguimiento en aquellos cuyo estado es \emph{ocupado}.
 
 \begin{figure}[H]
   \begin{center}
@@ -556,7 +565,7 @@ En la aplicación accediendo desde el menú superior en el desplegable robots ->
   \label{website:robot-ocupado}
 \end{figure}
 
-Para pulsamos sobre el botón seguir accediendo a su interfaz en modo espectador mostrando una vista similar a la de la figura \ref{website:ventana-seguimiento}:\\
+Para pulsamos sobre el botón \emph{Seguir} que se encontrará habilitado accediendo a su interfaz en modo espectador. La página mostrada será de aspecto similar a la mostrada en la figura \ref{website:ventana-seguimiento}:\\
 
 \begin{figure}[H]
   \begin{center}
@@ -566,25 +575,32 @@ Para pulsamos sobre el botón seguir accediendo a su interfaz en modo espectador
   \label{website:ventana-seguimiento}
 \end{figure}
 
-
-El usuario que dispone del control del robot verá lo siguiente:
-
+Mientras tanto, el usuario que dispone del control del robot será notificado de la entrada de un nuevo espectador. La figura \ref{website:ventana-control} muestra la ventana de control de un robot junto con 
+el listado de usuarios espectadores actualizado en todo momento.
 
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=.4]{imagenes/manual-usuario/vista_control.png}
   \end{center}
   \caption{ Vista del panel de control de un robot junto con el listado de usuarios realizando el seguimiento.}
-  \label{website:ventana-seguimiento}
+  \label{website:ventana-control}
 \end{figure}
 
 
+\subsection{Mensajes}
+
+RobotUI incorpora un sistema de mensajería donde los usuarios de la aplicación se pueden enviar mensajes a otros usuarios y recibirlos. Para acceder a la página de mensajes pulsamos sobre \emph{Mensajes} de barra superior.\\
+
+En la página \emph{Mensajes} tenemos acceso a la bandeja de entrada y los mensajes enviados.\\
+
+Para mandar un mensaje pulsamos sobre \icontext{.2}{.35}{imagenes/manual-usuario/btn-redactar.png}, rellenamos el formulario con título, usuario destinatario y contenido del mensaje y pulsamos en \icontext{.2}{.45}{imagenes/manual-usuario/btn-nuevo.png}.
+
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=.35]{imagenes/manual-usuario/robots-publicos.png}
+    \includegraphics[scale=.35]{imagenes/manual-usuario/formulario-mensaje.png}
   \end{center}
-  \caption{ Índice robots públicos.}
-  \label{website:pagina-principal}
+  \caption{ Formulario de redacción de un mensaje.}
+  \label{website:formulario-mensaje}
 \end{figure}
 
 
