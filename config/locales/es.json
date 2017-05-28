@@ -169,6 +169,7 @@
 	"unlink": "Unlink",
 	"connect_success": "¡Conectado con exito!",
 	"id": "id",
-  "my_guest_robots": "Mis robots en seguimiento",
-  "my_driver_robots": "Mis robots controlables"
+	"my_guest_robots": "Mis robots en seguimiento",
+	"my_driver_robots": "Mis robots controlables",
+	"session.user_id.required": "session.user_id.required"
 }

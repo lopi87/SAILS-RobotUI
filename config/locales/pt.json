@@ -143,13 +143,13 @@
   "how_to_do_it": "Como eu faço?",
   "robot_games": "Cria jogos robóticos engraçados",
   "check_our_tutorial": "Se não sabes começar: revisa nosso tutorial!",
-  "user.name.string":
-  "user.name.required":
-  "robot":
+  "user.name.string":  "user.name.string",
+  "user.name.required": "user.name.required",
+  "robot": "robot",
   "seeing": "Seguimento",
   "not_found": "Não encontrado",
   "403_message": "Não tem permissão para fazer a ação solicitada",
-  "index":
+  "index": "index",
   "new_message": "Tens uma nova mensagem",
   "user_connected": "Usuário ligado",
   "user_disconnected": "Usuário desligado",
@@ -166,9 +166,9 @@
   "owner": "Propietário",
   "public_drive": "Condução",
   "public_view": "Visão",
-  "unlink":
+  "unlink": "unlink",
   "connect_success": "Ligado com sucesso!",
   "id": "id",
   "my_guest_robots": "Meus robots em seguimento",
-  "my_driver_robots": "Meus robots controláveis",
+  "my_driver_robots": "Meus robots controláveis"
 }
