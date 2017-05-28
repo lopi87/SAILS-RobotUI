@@ -29,9 +29,9 @@
  <div class="jumbotron">
    <div class="form-signin">
      <% if (!req.session.User) {%>
-     <a href="/user/new" class="btn btn-lg btn-block btn-success"> <%= __("signupnow") %></a>
+     <a href="/user/new" class="btn btn-lg btn-block btn-success"> <%= i18n("signupnow") %></a>
      <% } else { %>
-     <a href="/robot/index_public_robots" class="btn btn-lg btn-block btn-success"> <%= __("robots") %></a>
+     <a href="/robot/index_public_robots" class="btn btn-lg btn-block btn-success"> <%= i18n("robots") %></a>
      <% } %>
    </div>
  </div>
