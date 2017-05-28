@@ -337,7 +337,7 @@ La figura \ref{interfaz-configurada} muestra una posible interfaz de control par
 
 
 
-\section{ Programa tu robot }
+\subsection{ Programa tu robot }
 \label{sec:programacion-robot}
 
 NOTA: Esta guía comprende una serie de pasos para realizar la programación de un dispositivo robótico para la aplicación RobotUI. En este caso particular, el robot empleado posee como base una placa 
@@ -497,8 +497,8 @@ El segundo fragmento de código devuelve la lectura del pin \emph{gpio2} cada ve
 \end{lstlisting}
  
 
-En la parte referente a la interfaz de control de la aplicacion RobotUI, para lanzar o capturar los comandos correspondientes a los ejemplos superiores, en el primer caso, debemos crear un botón 
-cuyo código a emitir sea \emph{UP} y para el segundo, debemos añadir un botón cuyo código de emisión sea \emph{READ} y una etiqueta cuyo nombre de evento se cprresponda con \emph{robot\_temp}.\\
+En la parte referente a la interfaz de control de la aplicación RobotUI, para lanzar o capturar los comandos correspondientes a los ejemplos superiores, en el primer caso, debemos crear un botón 
+cuyo código a emitir sea \emph{UP} y para el segundo, debemos añadir un botón cuyo código de emisión sea \emph{READ} y una etiqueta cuyo nombre de evento se corresponda con \emph{robot\_temp}.\\
 
 Una vez generado el código para nuestro robot debemos copiarlo a la placa Raspberry Pi o computador que actuará como Robot para nuestra aplicación y ejecutarlo. Para la ejecución del código
 introducimos el siguiente comando:\\
@@ -519,19 +519,33 @@ Obteniendo el siguiente resultado:
   \label{website:pagina-principal}
 \end{figure}
 
-\section{ Control de robots }
+\subsection{ Control de robots }
 \label{sec:control-robot}
 
+
+Para el acceso al control de un robot debemos localizar en el índice de robots públicos un robot con el estado \emph{Online} y \emph{Libre}. Ver figura \ref{website:inice-public-robots}.\\
+
+Para acceder al robot pulsaremos sobre \icontext{.2}{.35}{imagenes/manual-usuario/btn-controlar.png}.\\
 
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=.25]{imagenes/manual-usuario/robots-publicos.png}
   \end{center}
   \caption{ Índice robots públicos.}
-  \label{website:pagina-principal}
+  \label{website:inice-public-robots}
 \end{figure}
 
-El panel de control de la interfaz podemos identificar los siguientes elementos:
+En la ventana de control \ref{website:ventana-control} pulsamos sobre conectar. En ese momento tendremos plena disponibilidad para el control del robot haciendo uso de todas las acciones previamente configuradas en la interfaz.\\
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=.3]{imagenes/manual-usuario/vista_control.png}
+  \end{center}
+  \caption{ Vista del panel de control de un robot junto con el listado de usuarios realizando el seguimiento.}
+  \label{website:ventana-control}
+\end{figure}
+
+En el panel de control de la interfaz podemos identificar los siguientes elementos:
 
 \begin{figure}[H]
   \begin{center}
@@ -543,15 +557,16 @@ El panel de control de la interfaz podemos identificar los siguientes elementos:
 
 
 \begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=.6]{imagenes/manual-usuario/panel-comandos.png}
-  \end{center}
-  \caption{ Panel informativo de las órdenes enviadas al robot junto con una entrada de comandos para enviar nuevas órdenes directamente.}
-  \label{website:pagina-principal}
+    \centering
+    \includegraphics[width=3.5cm]{imagenes/manual-usuario/panel-comandos.png}
+    \qquad
+    \includegraphics[width=3.5cm]{imagenes/manual-usuario/listado-usuarios.png}
+    \caption{Histórico de las órdenes enviadas al robot junto con una entrada de comandos para enviar nuevas órdenes directamente junto con el listado de usuarios presentes en la sesión de control. }%
+    \label{fig:http-request}%
 \end{figure}
 
 
-\section{ Seguimiento de robots }
+\subsection{ Seguimiento de robots }
 \label{sec:visita-robot}
 
 Para realizar el seguimiento de un robot accedemos desde el menú superior en el desplegable \emph{Robots} \textrightarrow \enspace \emph{Públicos}. En la nueva ventana
@@ -593,7 +608,6 @@ RobotUI incorpora un sistema de mensajería donde los usuarios de la aplicación
 
 En la página \emph{Mensajes} tenemos acceso a la bandeja de entrada y los mensajes enviados.\\
 
-
 Para mandar un mensaje pulsamos sobre \icontext{.2}{.35}{imagenes/manual-usuario/btn-redactar.png}, rellenamos el formulario con título, usuario destinatario y contenido del mensaje y pulsamos en \icontext{.2}{.45}{imagenes/manual-usuario/btn-nuevo.png}.
 
 \begin{figure}[H]
@@ -608,7 +622,7 @@ Para mandar un mensaje pulsamos sobre \icontext{.2}{.35}{imagenes/manual-usuario
 \subsection{Panel de administración}
 
 
-Páginas disponibles únicamente para usuarios administradores. Accesible desde la barra superior \emph{Administración}  \textrightarrow \enspace  \emph{Usuarios} o \emph{Administración}  \textrightarrow \enspace  \emph{Robots}.
+Entradas disponibles únicamente para usuarios administradores. Accesible desde la barra superior \emph{Administración}  \textrightarrow \enspace  \emph{Usuarios} o \emph{Administración}  \textrightarrow \enspace  \emph{Robots}.
 
 En ella podremos gestionar todos los usuarios o robots existentes en el sistema, editarlos, borrarlos o crear nuevos.\\
 

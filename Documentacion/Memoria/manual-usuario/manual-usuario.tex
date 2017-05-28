@@ -195,8 +195,10 @@ tabla \ref{table:robot-estados} describe cada uno de los elementos:\\
       \hline
       \includegraphics[width=2.2cm]{imagenes/manual-usuario/seguimiento-privado.png} & Imagen representativa de robot de seguimiento privado. \\
       \hline
-      \includegraphics[width=2.2cm]{imagenes/manual-usuario/ocupado.png} & Imagen representativa de robot en uso. \\
+      \includegraphics[width=2.2cm]{imagenes/manual-usuario/libre.png} & Imagen representativa de robot en disponible. \\
       \hline
+      \includegraphics[width=2.2cm]{imagenes/manual-usuario/ocupado.png} & Imagen representativa de robot en uso. \\
+      \hline     
     \end{tabular}
   \end{center}
 \caption{Elementos representativos de los estados de un robot junto con su descripción.}
@@ -497,8 +499,8 @@ El segundo fragmento de código devuelve la lectura del pin \emph{gpio2} cada ve
 \end{lstlisting}
  
 
-En la parte referente a la interfaz de control de la aplicacion RobotUI, para lanzar o capturar los comandos correspondientes a los ejemplos superiores, en el primer caso, debemos crear un botón 
-cuyo código a emitir sea \emph{UP} y para el segundo, debemos añadir un botón cuyo código de emisión sea \emph{READ} y una etiqueta cuyo nombre de evento se cprresponda con \emph{robot\_temp}.\\
+En la parte referente a la interfaz de control de la aplicación RobotUI, para lanzar o capturar los comandos correspondientes a los ejemplos superiores, en el primer caso, debemos crear un botón 
+cuyo código a emitir sea \emph{UP} y para el segundo, debemos añadir un botón cuyo código de emisión sea \emph{READ} y una etiqueta cuyo nombre de evento se corresponda con \emph{robot\_temp}.\\
 
 Una vez generado el código para nuestro robot debemos copiarlo a la placa Raspberry Pi o computador que actuará como Robot para nuestra aplicación y ejecutarlo. Para la ejecución del código
 introducimos el siguiente comando:\\
@@ -523,15 +525,29 @@ Obteniendo el siguiente resultado:
 \label{sec:control-robot}
 
 
+Para el acceso al control de un robot debemos localizar en el índice de robots públicos un robot con el estado \emph{Online} y \emph{Libre}. Ver figura \ref{website:inice-public-robots}.\\
+
+Para acceder al robot pulsaremos sobre \icontext{.2}{.35}{imagenes/manual-usuario/btn-controlar.png}.\\
+
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=.25]{imagenes/manual-usuario/robots-publicos.png}
   \end{center}
   \caption{ Índice robots públicos.}
-  \label{website:pagina-principal}
+  \label{website:inice-public-robots}
 \end{figure}
 
-El panel de control de la interfaz podemos identificar los siguientes elementos:
+En la ventana de control \ref{website:ventana-control} pulsamos sobre conectar. En ese momento tendremos plena disponibilidad para el control del robot haciendo uso de todas las acciones previamente configuradas en la interfaz.\\
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=.3]{imagenes/manual-usuario/vista_control.png}
+  \end{center}
+  \caption{ Vista del panel de control de un robot junto con el listado de usuarios realizando el seguimiento.}
+  \label{website:ventana-control}
+\end{figure}
+
+En el panel de control de la interfaz podemos identificar los siguientes elementos:
 
 \begin{figure}[H]
   \begin{center}
@@ -543,11 +559,12 @@ El panel de control de la interfaz podemos identificar los siguientes elementos:
 
 
 \begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=.6]{imagenes/manual-usuario/panel-comandos.png}
-  \end{center}
-  \caption{ Panel informativo de las órdenes enviadas al robot junto con una entrada de comandos para enviar nuevas órdenes directamente.}
-  \label{website:pagina-principal}
+    \centering
+    \includegraphics[width=3.5cm]{imagenes/manual-usuario/panel-comandos.png}
+    \qquad
+    \includegraphics[width=3.5cm]{imagenes/manual-usuario/listado-usuarios.png}
+    \caption{Histórico de las órdenes enviadas al robot junto con una entrada de comandos para enviar nuevas órdenes directamente junto con el listado de usuarios presentes en la sesión de control. }%
+    \label{fig:http-request}%
 \end{figure}
 
 
@@ -559,7 +576,7 @@ tendremos acceso a todos los robots públicos existentes pudiendo realizar el se
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=.6]{imagenes/manual-usuario/tarjeta_ocupado.png}
+    \includegraphics[scale=.8]{imagenes/manual-usuario/tarjeta_ocupado.png}
   \end{center}
   \caption{ Panel informativo de un robot en su modalidad \emh{ocupado}.}
   \label{website:robot-ocupado}
@@ -569,7 +586,7 @@ Para pulsamos sobre el botón \emph{Seguir} que se encontrará habilitado accedi
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=.6]{imagenes/manual-usuario/vista_seguimiento.png}
+    \includegraphics[scale=.55]{imagenes/manual-usuario/vista_seguimiento.png}
   \end{center}
   \caption{ Vista del panel de seguimiento de un robot en tiempo real.}
   \label{website:ventana-seguimiento}
@@ -580,7 +597,7 @@ el listado de usuarios espectadores actualizado en todo momento.
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=.4]{imagenes/manual-usuario/vista_control.png}
+    \includegraphics[scale=.38]{imagenes/manual-usuario/vista_control.png}
   \end{center}
   \caption{ Vista del panel de control de un robot junto con el listado de usuarios realizando el seguimiento.}
   \label{website:ventana-control}
@@ -604,18 +621,23 @@ Para mandar un mensaje pulsamos sobre \icontext{.2}{.35}{imagenes/manual-usuario
 \end{figure}
 
 
+El campo de entrada de texto para la redacción del mensaje incorpora un editor de texto WYSIWYG \footnote{ WYSIWYG es el acrónimo de What You See Is What You Get, (en español, "lo que ves es lo
+que obtienes"). Se aplica a los procesadores de texto y otros editores de texto con formato (como los editores de HTML) que permiten escribir un documento viendo directamente el resultado final,
+frecuentemente el resultado impreso.} en el cual podremos dar formato y etilo al mensaje añadiendo imágenes, enlaces, etcétera.
+
+
 \subsection{Panel de administración}
 
 
-Páginas disponibles únicamente para usuarios administradores. Accesible desde la barra superior \emph{Administración}  \textrightarrow \enspace  \emph{Usuarios} o \emph{Administración}  \textrightarrow \enspace  \emph{Robots}.
+Entradas disponibles únicamente para usuarios administradores. Accesible desde la barra superior \emph{Administración}  \textrightarrow \enspace  \emph{Usuarios} o \emph{Administración}  \textrightarrow \enspace  \emph{Robots}.
 
 En ella podremos gestionar todos los usuarios o robots existentes en el sistema, editarlos, borrarlos o crear nuevos.\\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=9.5cm]{imagenes/manual-usuario/administracion-usuarios.png}
+    \includegraphics[width=12.5cm]{imagenes/manual-usuario/administracion-usuarios.png}
     \qquad
-    \includegraphics[width=9.5cm]{imagenes/manual-usuario/administracion-robots.png}
+    \includegraphics[width=12.5cm]{imagenes/manual-usuario/administracion-robots.png}
     \caption{Paneles de administración para robots y usuarios.}%
     \label{fig:http-request}%
 \end{figure}
