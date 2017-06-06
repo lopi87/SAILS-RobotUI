@@ -60,7 +60,8 @@ De todo los anterior podemos deducir que Sails es un framework especialmente pot
 como podemos extraer de la página oficial de Sails:\\
 
 \begin{center}
-\emph{Sails.js facilita el desarrollo de aplicaciones Node.js empresariales. Ha sido diseñado para imitar el patrón MVC de frameworks como Ruby on Rails, pero con soporte para los requisitos de aplicaciones modernas: data-driven APIs con una arquitectura escalable y service-oriented. Es especialmente bueno para el desarrollo de chats, cuadros de mando en tiempo real o juegos multijugadores.} 
+\emph{Sails.js facilita el desarrollo de aplicaciones Node.js empresariales. Ha sido diseñado para imitar el patrón MVC de frameworks como Ruby on Rails, pero con soporte para los requisitos de aplicaciones modernas: data-driven APIs con una arquitectura escalable y service-oriented. Es especialmente bueno para el desarrollo de chats, cuadros de mando en tiempo real o juegos
+multijugadores.} 
 \end{center}
 
 
@@ -185,7 +186,7 @@ de código realizando el almacenamiento del socket abierto por el usuario:\\
 \end{lstlisting}
 
 
-Función emph{saveSocketID}, la cual es llamada en cliente y que se encuentra implementada en el controlador \emph{session} en el lado del servidor. Esta función realiza el registro de un nuevo cliente en
+Función \emph{saveSocketID}, la cual es llamada en cliente y que se encuentra implementada en el controlador \emph{session} en el lado del servidor. Esta función realiza el registro de un nuevo cliente en
 la base de datos tras recibir el identificador correspondiente al nuevo socket creado.\\
 
 El código inferior muestra la implementación en el lado del servidor de la función \emph{saveSocketID}:\\
@@ -219,12 +220,15 @@ El código inferior muestra la implementación en el lado del servidor de la fun
   
 \end{lstlisting}
 
-Una vez tenemos almacenado el par socket-usuario en base de datos buscamos la función \emph{subscribeAndListen}, la cual será específica según la vista en la que nos encontremos, por ejemplo, si nos encontramos en el panel
-de administración de usuarios, la función \emph{subscribeAndListen} será específica para cada funcionalidad que queramos inicializar o a qué eventos nos deseemos suscribir. Si nos encontramos en la vista de índice de robots, la función se suscribirá 
-a los eventos de conexión y desconexión de robots. O si estamos visualizando el funcionamiento de un robot entonces la función capturará los eventos que se correspondan con la captación de los diferentes comandos o datos transmitidos.\\
+Una vez tenemos almacenado el par socket-usuario en base de datos buscamos la función \emph{subscribeAndListen}, la cual será específica según la vista en la que nos encontremos, por ejemplo, si
+nos encontramos en el panel de administración de usuarios, la función \emph{subscribeAndListen} será específica para cada funcionalidad que queramos inicializar o a qué eventos nos deseamos suscribir.
+Si nos encontramos en la vista de índice de robots, la función se suscribirá a los eventos de conexión y desconexión de robots. Si estamos visualizando el funcionamiento de un robot la función 
+se suscribirá a la sesión abierta para ese robot y capturará los diferentes comandos o datos transmitidos y respuestas del robot en cuestión.\\
 
 En el código inferior mostramos la función \emph{subscribeAndListen} que implementa la suscripción a los eventos correspondiente a la conexión, desconexión y borrado de usuarios del panel de
-administración descrito en el apartado \ref{sec:fundamentos}. Esta función está localizada en el \emph{partial}\footnote{ Fragmentos del código HTML generados para romper el proceso de renderizado en bloques más manejables. Con un \epnh{partial}, puede establecer el código para representar por ejemplo una tabla HTML la cual es llamada en múltiples vistas.} que implementa la vista correspondiente con el citado panel:\\
+administración descrito en el apartado \ref{sec:fundamentos}. Esta función está localizada en el \emph{partial} \footnote{ Fragmentos del código HTML generados para romper el proceso de
+renderizado en bloques más manejables. Con un \emph{partial}, puede establecer el código para representar por ejemplo una tabla HTML la cual es llamada en múltiples vistas.} 
+que implementa la vista correspondiente con el citado panel:\\
 
 \begin{lstlisting}[language=JavaScript]
 

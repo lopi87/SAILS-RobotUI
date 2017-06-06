@@ -1,0 +1,102 @@
+\begin{thebibliography}{10}
+
+\bibitem{book:javascript}
+Douglas Crockford.
+\newblock {\em JavaScript: The Good Parts}.
+\newblock O'Reilly, 2008.
+
+\bibitem{website:5}
+{Digital Ocean}.
+\newblock {Digital Ocean}.
+\newblock \url{https://www.digitalocean.com/}.
+
+\bibitem{website:7}
+{Ffmpeg}.
+\newblock {Documentación Ffmeg}.
+\newblock \url{https://ffmpeg.org/documentation.html}.
+
+\bibitem{website:4}
+{Git Hub}.
+\newblock {Git Hub}.
+\newblock \url{https://github.com}.
+
+\bibitem{book:git}
+Pablo Hinojoda and JJ~Merelo.
+\newblock {\em Aprende Git: ... y, de camino, GitHub}.
+\newblock Editorial Reviews, 2015.
+
+\bibitem{book:sails}
+{Irl Nathan} {Mike McNeil}.
+\newblock {\em Sails.js in Action}.
+\newblock Manning Publications, 2017.
+
+\bibitem{website:metrica}
+{Ministerio de Administraciones Públicas, Gobierno de España}.
+\newblock {Métrica v3}.
+\newblock
+  \url{http://administracionelectronica.gob.es/pae_Home/pae_Documentacion/pae_Metodolog/pae_Metrica_v3.html#.WQ79WiclGkB}.
+
+\bibitem{website:2}
+{Irl Nathan}.
+\newblock {Activityoverlord, an application to learn sails.js}.
+\newblock \url{https://github.com/irlnathan/activityoverlord}.
+
+\bibitem{book:socketio}
+{Rohit Rai}.
+\newblock {\em Socket.IO Real-Time Web Application Development}.
+\newblock Packt, 2013.
+
+\bibitem{website:1}
+{Sails.js}.
+\newblock {Sails.js | Realtime MVC Framework for Node.js}.
+\newblock \url{http://sailsjs.com/}.
+
+\bibitem{book:internet_things}
+{Dr.~Ovidiu Vermesan and Dr.~Peter Friedss}.
+\newblock {\em Internet of Things - From Research and Innovation to Market
+  Deployment}.
+\newblock River Publishers Aalborg, 2014.
+
+\bibitem{website:6}
+{Wikibooks}.
+\newblock {The Book of LaTeX}.
+\newblock \url{http://en.wikibooks.org/wiki/LaTeX}.
+
+\bibitem{book:LaTeX}
+{Stefan Kottwitz}.
+\newblock {\em LaTeX Beginner's Guide}.
+\newblock Packt Publishing, 2011.
+
+\bibitem{website:12}
+{Official documentation}.
+\newblock {Sails JS Documentation }.
+\newblock \url{https://sailsjs.com/documentation/reference}.
+
+\bibitem{book:FFmpeg}
+{Frantisek Korbel}.
+\newblock {\em FFmpeg Basics: Multimedia handling with a fast audio and video encoder}.
+\newblock CreateSpace, 2015.
+
+\bibitem{book:WebSocket}
+{Andrew Lombardi}.
+\newblock {\em WebSocket: Lightweight Client-Server Communications}.
+\newblock O'Reilly Media, 2012.
+
+\bibitem{book:Deploying}
+{Sandro Pasquali}.
+\newblock {\em Deploying Node.js}.
+\newblock  Packt Publishing, 2015.
+
+\bibitem{book:Raspberry}
+{Eben Upton and Gareth Halfacree}.
+\newblock {\em Raspberry Pi User Guide}.
+\newblock \url{ http://www.cs.unca.edu/~bruce/Fall14/360/RPiUsersGuide.pdf }.
+
+\bibitem{book:MongoDB}
+{Kristina Chodorow}.
+\newblock {\em MongoDB: The Definitive Guide, 2nd Edition}.
+\newblock   O'Reilly Media, 2013.
+
+\end{thebibliography}
+
+

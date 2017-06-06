@@ -4,7 +4,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif
 kileprversion=2
 kileversion=2.1.3
-lastDocument=herramientas-utilizadas/herramientas-utilizadas.tex
+lastDocument=desarrollo-software/desarrollo-software.tex
 masterDocument=
 name=Project
 pkg_extIsRegExp=false
@@ -130,23 +130,23 @@ Mode=LaTeX
 
 [item:anexos/anexo.tex]
 archive=true
-column=0
+column=13
 encoding=UTF-8
 highlight=LaTeX
-line=155
-mode=LaTeX
-open=true
-order=1
-
-[item:comunicaciones/comunicaciones.tex]
-archive=true
-column=9
-encoding=UTF-8
-highlight=LaTeX
-line=398
+line=186
 mode=LaTeX
 open=true
 order=5
+
+[item:comunicaciones/comunicaciones.tex]
+archive=true
+column=31
+encoding=UTF-8
+highlight=LaTeX
+line=235
+mode=LaTeX
+open=true
+order=4
 
 [item:conceptos-basicos/conceptos-basicos.tex]
 archive=true
@@ -155,7 +155,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=21
 mode=LaTeX
-open=true
+open=false
 order=15
 
 [item:conclusiones/conclusiones.tex]
@@ -166,24 +166,24 @@ highlight=LaTeX
 line=68
 mode=LaTeX
 open=true
-order=7
+order=9
 
 [item:desarrollo-software/desarrollo-software.tex]
 archive=true
-column=0
+column=53
 encoding=UTF-8
 highlight=LaTeX
-line=4
+line=1391
 mode=LaTeX
 open=true
-order=10
+order=7
 
 [item:herramientas-utilizadas/herramientas-utilizadas.tex]
 archive=true
-column=30
+column=93
 encoding=UTF-8
 highlight=LaTeX
-line=248
+line=7
 mode=LaTeX
 open=true
 order=6
@@ -215,7 +215,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=0
 mode=LaTeX
-open=true
+open=false
 order=8
 
 [item:inicio/previo.tex]
@@ -225,7 +225,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=29
 mode=LaTeX
-open=true
+open=false
 order=2
 
 [item:inicio/resumen.tex]
@@ -236,7 +236,7 @@ highlight=LaTeX
 line=10
 mode=LaTeX
 open=true
-order=14
+order=3
 
 [item:inicio/subportada.tex]
 archive=true
@@ -246,7 +246,7 @@ highlight=LaTeX
 line=0
 mode=LaTeX
 open=true
-order=13
+order=2
 
 [item:introduccion/introduccion.tex]
 archive=true
@@ -255,18 +255,18 @@ encoding=UTF-8
 highlight=LaTeX
 line=126
 mode=LaTeX
-open=true
+open=false
 order=4
 
 [item:manual-usuario/manual-usuario.tex]
 archive=true
-column=37
+column=62
 encoding=UTF-8
 highlight=LaTeX
-line=242
+line=596
 mode=LaTeX
 open=true
-order=11
+order=0
 
 [item:memoriarobotui.kilepr]
 archive=true
@@ -285,7 +285,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=119
 mode=LaTeX
-open=true
+open=false
 order=9
 
 [item:requisitos/requisitos.tex]
@@ -295,7 +295,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=0
 mode=LaTeX
-open=true
+open=false
 order=3
 
 [item:robotui.tex]
@@ -306,29 +306,29 @@ highlight=LaTeX
 line=53
 mode=LaTeX
 open=true
-order=12
+order=1
 
 [item:vehiculo/vehiculo.tex]
 archive=true
-column=33
+column=12
 encoding=UTF-8
 highlight=LaTeX
-line=41
+line=84
 mode=LaTeX
 open=true
-order=0
+order=8
 
 [view-settings,view=0,item:anexos/anexo.tex]
-CursorColumn=0
-CursorLine=155
+CursorColumn=13
+CursorLine=186
 JumpList=
-ViMarks=.,195,87,[,195,86,],195,87
+ViMarks=.,225,127,[,225,118,],225,127
 
 [view-settings,view=0,item:comunicaciones/comunicaciones.tex]
-CursorColumn=9
-CursorLine=398
+CursorColumn=31
+CursorLine=235
 JumpList=
-ViMarks=.,446,0,[,446,0,],446,0
+ViMarks=.,229,50,[,229,50,],229,50
 
 [view-settings,view=0,item:conceptos-basicos/conceptos-basicos.tex]
 CursorColumn=152
@@ -343,16 +343,16 @@ JumpList=
 ViMarks=.,75,0,[,75,0,],75,0
 
 [view-settings,view=0,item:desarrollo-software/desarrollo-software.tex]
-CursorColumn=0
-CursorLine=4
+CursorColumn=53
+CursorLine=1391
 JumpList=
-ViMarks=
+ViMarks=.,1391,52,[,1391,47,],1391,52
 
 [view-settings,view=0,item:herramientas-utilizadas/herramientas-utilizadas.tex]
-CursorColumn=30
-CursorLine=248
+CursorColumn=93
+CursorLine=7
 JumpList=
-ViMarks=.,214,25,[,214,25,],214,25
+ViMarks=.,7,52,[,7,52,],7,92
 
 [view-settings,view=0,item:inicio/portada.tex]
 CursorColumn=0
@@ -385,10 +385,10 @@ JumpList=
 ViMarks=.,126,0,[,126,0,],126,0
 
 [view-settings,view=0,item:manual-usuario/manual-usuario.tex]
-CursorColumn=37
-CursorLine=242
+CursorColumn=62
+CursorLine=596
 JumpList=
-ViMarks=.,242,36,[,242,36,],242,36
+ViMarks=.,596,61,[,596,61,],596,61
 
 [view-settings,view=0,item:planificacion/planificacion.tex]
 CursorColumn=20
@@ -409,7 +409,7 @@ JumpList=
 ViMarks=.,53,0,[,53,0,],53,0
 
 [view-settings,view=0,item:vehiculo/vehiculo.tex]
-CursorColumn=33
-CursorLine=41
+CursorColumn=12
+CursorLine=84
 JumpList=
-ViMarks=.,54,3,[,54,3,],54,3
+ViMarks=.,82,68,[,82,68,],82,68

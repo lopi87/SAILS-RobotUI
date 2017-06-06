@@ -7,9 +7,8 @@
 
 \section{Metodología de desarrollo}
 
-Este proyecto ha sido elaborado empleando una metodología de desarrollo basada en
-el modelo de desarrollo incremental para la parte software referente a todos los subsistemas web y una metodología de desarrollo en cascada para el desarrollo de la parte
-software referente al robot de pruebas.\\
+Este proyecto ha sido elaborado empleando una metodología de desarrollo basada en el modelo de desarrollo incremental para la parte software referente a todos los subsistemas web y una metodología de 
+desarrollo en cascada para el desarrollo de la parte software referente al robot de pruebas.\\
 
 El modelo de desarrollo incremental proporciona una serie de características que lo hacen idóneo para este proyecto. Dicho modelo se basa en la filosofía de construir 
 e ir incrementando las funcionalidades del sistema mediante el desarrollo de los diferentes módulos. Esto permite ir aumentando gradualmente las capacidades del software. \\
@@ -101,7 +100,7 @@ Los requisitos no funcionales son aquellos que describen cualidades o restriccio
 \end{itemize}
 
 
-\section {Diagramas de casos de uso}
+\section {Diagrama de casos de uso}
 
 Un caso de uso es una descripción de los pasos o actividades que deberán realizarse para llevar a cabo algún proceso. Los objetivos de los casos de uso son los siguientes:
 
@@ -121,15 +120,6 @@ En la figura \ref{diagram:caso-uso} podemos observar los diagramas de casos de u
     \includegraphics[scale=.5]{diagramas/casos-uso.png}
   \end{center}
   \caption{Diagrama de casos de uso para la interacción con la aplicación.}
-  \label{diagram:caso-uso}
-\end{figure}
-
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=.5]{diagramas/casos-uso-robot.png}
-  \end{center}
-  \caption{Diagrama de casos de uso para la interacción con el robot de pruebas.}
   \label{diagram:caso-uso}
 \end{figure}
 
@@ -315,9 +305,6 @@ A continuación se proporciona la especificaciones de cada uno de los casos de u
 \end{table}
 
 
-
-
-
 \begin{table}[H]
   \begin{center}
     \begin{tabular}{|p{3.5cm}|p{10cm}|}
@@ -423,7 +410,7 @@ A continuación se proporciona la especificaciones de cada uno de los casos de u
       \begin{enumerate}
 	\item El actor usuario del sistema solicita el registro de un robot en el sistema.
 	\item El sistema solicita los datos del robot, nombre, dirección IP, puerto, descripción, imagen, usuarios espectadores, usuarios controladores y si es de control abierto o visualización abierta .
-	\item El usuario proporciona al sistema al menos los siguientes datos, nombre, dirección Ip, puerto, y permisos.
+	\item El usuario proporciona al sistema al menos los siguientes datos, nombre, dirección IP, puerto, y permisos.
 	\item El sistema realiza el registro de un nuevo robot e informa de que la creación se ha realizado con éxito.
       \end{enumerate}
       } \\
@@ -448,17 +435,32 @@ A continuación se proporciona la especificaciones de cada uno de los casos de u
 	    \begin{itemize}
 	      \item El sistema informa de que no se puede realizar el registro.
 	      \item Vuelve al paso 2.
-	   \end{itemize}
-	   
-	  \item Si el puerto no es un valor numérico:
-	    \begin{itemize}
-	      \item El sistema informa de que no se puede realizar el registro.
-	      \item Vuelve al paso 2.
-	   \end{itemize}
-	   
+	   \end{itemize}	   
          \end{enumerate}
          }\\
      \hline
+     \multicolumn{2}{c}{\emph{continua en la siguiente página ...}}\\
+    \end{tabular}
+  \end{center}
+\end{table}    
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+     \multicolumn{2}{c}{\emph{continua de la página anterior...}}\\
+     \hline
+         {\textbf{Excepciones:}} & {
+         \begin{enumerate}
+           \setcounter{enumi}{3}
+	    \item Si el puerto no es un valor numérico:
+	    \begin{itemize}
+	      \item El sistema informa de que no se puede realizar el registro.
+	      \item Vuelve al paso 2.
+	    \end{itemize}
+          \end{enumerate}
+          }\\
+       \hline
     \end{tabular}
   \end{center}
 \caption{Descripción del caso de uso: Registro de robot.}
@@ -488,6 +490,17 @@ A continuación se proporciona la especificaciones de cada uno de los casos de u
 	\item El sistema realiza la modificación de los datos del robot e informa de que la edición se ha realizado con éxito.
       \end{enumerate}
       } \\
+     \hline
+     \multicolumn{2}{c}{\emph{continua en la siguiente página ...}}\\
+    \end{tabular}
+  \end{center}
+\end{table}    
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+     \multicolumn{2}{c}{\emph{continua de la página anterior...}}\\
      \hline
      {\textbf{Postcondición}} & {Se realiza la edición de un robot en el sistema.}\\
      \hline
@@ -533,6 +546,855 @@ A continuación se proporciona la especificaciones de cada uno de los casos de u
 \caption{Descripción del caso de uso: Editar robot.}
 \end{table}
 
+
+
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Destruir robot.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita eliminar un robot existente en el sistema.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & { - } \\
+      \hline
+      {\textbf{Precondiciones:}} & { Usuario registrado e identificado en el sistema, robot existente y perteneciente al usuario. } \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema solicita el borrado de un robot en el sistema.
+      \end{enumerate}
+      } \\
+     \hline
+     {\textbf{Postcondición}} & {Se realiza el borrado del robot en el sistema junto con la interfaz y todas sus acciones asociadas.}\\
+     \hline
+         {\textbf{Excepciones:}} & {
+         \begin{enumerate}
+         
+          \item Si el usuario no se encuentra logueado en el sistema:
+	  \begin{itemize}
+	    \item El sistema informa de que es necesario identificarse.
+	    \item Se cancela el caso de uso.
+	  \end{itemize}
+         
+          \item Si no dispone de permisos para realizar el borrado:
+          \begin{itemize}
+           \item El sistema informa de que no se puede realizar el borrado.
+           \item Vuelve al paso 1.
+          \end{itemize}
+	  \item Si el robot no existe :
+	    \begin{itemize}
+	      \item El sistema informa de que no se puede realizar el borrado.
+	      \item Vuelve al paso 1.
+	   \end{itemize}	   
+         \end{enumerate}
+         }\\
+     \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Destruir robot.}
+\end{table}
+
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Configuración de la interfaz.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita la configuración de la interfaz de robot existente en el sistema 
+      y de su propiedad.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & { - } \\
+      \hline
+      {\textbf{Precondiciones:}} & { Usuario registrado e identificado en el sistema, robot existente y perteneciente al usuario. } \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema solicita la configuración de la interfaz de un robot en el sistema.
+        \item El sistema muestra el panel de configuración al usuario.
+      \end{enumerate}
+      } \\
+     \hline
+     {\textbf{Postcondición}} & {Se almacena en el sistema la configuración de la interfaz de control realizada.}\\
+     \hline
+         {\textbf{Excepciones:}} & {
+         \begin{enumerate}
+                   \item Si el usuario no se encuentra logueado en el sistema:
+	  \begin{itemize}
+	    \item El sistema informa de que es necesario identificarse.
+	    \item Se cancela el caso de uso.
+	  \end{itemize}
+         
+          \item Si no dispone de permisos para realizar la configuración:
+          \begin{itemize}
+           \item El sistema informa de que no se puede realizar la configuración.
+           \item Vuelve al paso 1.
+          \end{itemize}
+	  \item Si el robot no existe:
+	    \begin{itemize}
+	      \item El sistema informa de que no se puede realizar la configuración.
+	      \item Vuelve al paso 1.
+	   \end{itemize}	   
+         \end{enumerate}
+         }\\
+     \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Configurar interfaz.}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Visualización o seguimiento de un robot.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita realizar el seguimiento de un robot.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & {     
+	\begin{enumerate}
+	\item Usuario controlador del robot
+	\item Sistema de comunicaciones
+	\end{enumerate}
+      } \\
+      \hline
+      {\textbf{Precondiciones:}} & { El usuario debe estar registrado e identificado en el sistema además de poseer permisos para realizar el seguimiento del robot, el cual debe estar en modo \emph{online}.} \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema solicita comenzar el proceso de seguimiento de un robot.
+	\item El sistema añade al usuario en la sesión del robot y muestra su interfaz en modo seguimiento.
+	\item El sistema notifica al usuario controlador del robot la existencia de un nuevo usuario realizando el seguimiento.
+      \end{enumerate}
+      } \\
+     \hline
+     {\textbf{Postcondición}} & {Se realiza el seguimiento de un robot por parte de un usuario.}\\
+     \hline
+      {\textbf{Excepciones:}} & {
+	\begin{enumerate}
+	  \item Si el usuario no se encuentra logueado en el sistema:
+	  \begin{itemize}
+	    \item El sistema informa de que es necesario identificarse.
+	    \item Se cancela el caso de uso.
+	  \end{itemize}
+	  \item Si el usuario no posee permisos para realizar el seguimiento:
+	  \begin{itemize}
+	      \item El sistema informa de que no se puede realizar el seguimiento.
+	      \item Se regresa al punto 1.
+	  \end{itemize}
+	\end{enumerate}
+	}\\
+	\hline
+     \multicolumn{2}{c}{\emph{continua en la siguiente página ...}}\\
+    \end{tabular}
+  \end{center}
+\end{table}    
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+     \multicolumn{2}{c}{\emph{continua de la página anterior...}}\\
+     \hline
+         {\textbf{Excepciones:}} & {
+         \begin{enumerate}
+           \setcounter{enumi}{3}
+	  
+	  \item Si el robot no se encuentra en estado \emph{online}:
+	  \begin{itemize}
+	    \item El sistema informa de que no se puede realizar el control.
+	    \item Se regresa al punto 1.
+	  \end{itemize}
+  	  \item Si el robot no se encuentra en estado \emph{ocupado}:
+	  \begin{itemize}
+	    \item El sistema informa de que no se puede realizar el control.
+	    \item Se regresa al punto 1.
+	  \end{itemize}
+	\end{enumerate}
+	}\\
+      \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Visualización de un robot.}
+\end{table}
+
+
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Control de un robot.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita realizar el control de un robot.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & {     
+	Sistema de comunicaciones
+      } \\
+      \hline
+      {\textbf{Precondiciones:}} & { El usuario debe estar registrado e identificado en el sistema además de poseer permisos para realizar el control del robot, el cual debe estar en modo \emph{online} y \emph{libre}.} \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema solicita comenzar el proceso de control de un robot.
+	\item El sistema crea la sesión del robot y habilita el acceso para que otros usuarios realicen el seguimiento.
+	\item El sistema cambia el estado del robot a ocupado.
+	\item El sistema muestra al usuario la interfaz para comenzar el control del robot.
+      \end{enumerate}
+      } \\
+      \hline
+     \multicolumn{2}{c}{\emph{continua en la siguiente página ...}}\\
+    \end{tabular}
+  \end{center}
+\end{table}    
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+     \multicolumn{2}{c}{\emph{continua de la página anterior...}}\\
+     \hline
+      
+     {\textbf{Postcondición}} & {Se realiza el control de un robot por parte de un usuario.}\\
+     \hline
+      {\textbf{Excepciones:}} & {
+	\begin{enumerate}
+	\item Si el usuario no se encuentra logueado en el sistema:
+	\begin{itemize}
+	  \item El sistema informa de que es necesario identificarse.
+	  \item Se cancela el caso de uso.
+	\end{itemize}
+	\item Si el usuario no posee permisos para realizar el control:
+	  \begin{itemize}
+	    \item El sistema informa de que no se puede realizar el control.
+	    \item Se regresa al punto 1.
+	  \end{itemize}
+	  \item Si el robot no se encuentra en estado \emph{online}:
+	  \begin{itemize}
+	    \item El sistema informa de que no se puede realizar el seguimiento.
+	    \item Se regresa al punto 1.
+	  \end{itemize}
+	\end{enumerate}
+	}\\
+      \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Control de un robot.}
+\end{table}
+
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Crear vídeo.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita la creación de un elemento tipo vídeo para la interfaz de un robot.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & { - } \\
+      \hline
+      {\textbf{Precondiciones:}} & { El usuario debe estar registrado e identificado en el sistema y poseer permisos para la edición del robot } \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema solicita comenzar el proceso de creación de un elemento tipo vídeo.
+	\item El sistema solicita los nuevos datos del elemento vídeo (nombre y nombre del evento).
+	\item El usuario proporciona los datos anteriores y ordena la creación.
+	\item El sistema realiza la creación de un elemento tipo vídeo para la interfaz del robot indicado.
+      \end{enumerate}
+      } \\
+     \hline
+     {\textbf{Postcondición}} & {Se realiza la creación de un elemento tipo vídeo para la interfaz del robot indicado.}\\
+     \hline
+      {\textbf{Excepciones:}} & {
+	\begin{enumerate}
+	\item Si el usuario no se encuentra logueado en el sistema:
+	\begin{itemize}
+	  \item El sistema informa de que es necesario identificarse.
+	  \item Se cancela el caso de uso.
+	\end{itemize}
+	\item Si el usuario no ha introducido nombre y/o nombre del evento:
+	  \begin{itemize}
+	    \item El sistema informa de que no se puede realizar la creación del elemento. Faltan datos obligatorios.
+	    \item Se regresa al punto 2.
+	  \end{itemize}
+	\end{enumerate}
+	}\\
+      \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Creación de vídeo.}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Editar de elemento vídeo.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita editar un elemento tipo vídeo.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & { - } \\
+      \hline
+      {\textbf{Precondiciones:}} & { El usuario debe estar registrado e identificado en el sistema y con permisos de edición en el robot} \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema selecciona editar el elemento tipo vídeo de una interfaz.
+	\item El sistema solicita los nuevos datos del elemento vídeo ( nombre y nombre del evento).
+	\item El usuario modifica al menos uno de los datos anteriores.
+	\item El sistema realiza la modificación de los datos del elemento tipo vídeo de la interfaz perteneciente al robot.
+      \end{enumerate}
+      } \\
+     \hline
+     {\textbf{Postcondición}} & {Se realiza la modificación de los datos del elemento vídeo de la interfaz del robot.}\\
+     \hline
+      {\textbf{Excepciones:}} & {
+	\begin{enumerate}
+	\item No se han introducido algunos de los datos:
+	\begin{itemize}
+	  \item El sistema informa de que no se puede realizar la edición.
+	  \item Vuelve al punto 2.
+	\end{itemize}
+	\item Si el usuario no posee permisos de edición:
+	  \begin{itemize}
+	    \item El sistema informa de que no se puede realizar el registro.
+	    \item Se cancela el caso de uso.
+	  \end{itemize}
+	\item Si el usuario no se encuentra logueado en el sistema:
+	\begin{itemize}
+	  \item El sistema informa de que es necesario identificarse.
+	  \item Se cancela el caso de uso.
+	\end{itemize}
+	\end{enumerate}
+	}\\
+      \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Edición de elemento tipo vídeo.}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Destruir vídeo.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita eliminar un elemento tipo vídeo de la interfaz de un robot.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & { - } \\
+      \hline
+      {\textbf{Precondiciones:}} & { Usuario registrado e identificado en el sistema, robot existente y perteneciente al usuario. } \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema solicita el borrado de un elemento tipo vídeo de la interfaz de un robot existente en el sistema.
+      \end{enumerate}
+      } \\
+     \hline
+     {\textbf{Postcondición}} & {Se realiza el borrado del elemento tipo vídeo perteneciente a la interfaz de un robot.}\\
+     \hline
+         {\textbf{Excepciones:}} & {
+         \begin{enumerate}
+         
+          \item Si el usuario no se encuentra logueado en el sistema:
+	  \begin{itemize}
+	    \item El sistema informa de que es necesario identificarse.
+	    \item Se cancela el caso de uso.
+	  \end{itemize}
+         
+          \item Si no dispone de permisos para realizar el borrado:
+          \begin{itemize}
+           \item El sistema informa de que no se puede realizar el borrado.
+           \item Vuelve al paso 1.
+          \end{itemize}
+	  \item Si el robot no existe :
+	    \begin{itemize}
+	      \item El sistema informa de que no se puede realizar el borrado.
+	      \item Vuelve al paso 1.
+	   \end{itemize}	   
+         \end{enumerate}
+         }\\
+     \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Destruir vídeo.}
+\end{table}
+
+
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Crear acción.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita la creación de un elemento tipo acción o botón para la interfaz de un robot.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & { - } \\
+      \hline
+      {\textbf{Precondiciones:}} & { El usuario debe estar registrado e identificado en el sistema y poseer permisos para la edición del robot } \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema solicita comenzar el proceso de creación de un elemento tipo acción o botón.
+	\item El sistema solicita los nuevos datos del elemento acción (nombre y código, icono, y colores para el botón ).
+	\item El usuario proporciona los datos anteriores y ordena la creación.
+	\item El sistema realiza la creación de un elemento tipo acción para la interfaz del robot indicado.
+      \end{enumerate}
+      } \\
+     \hline
+     {\textbf{Postcondición}} & {Se realiza la creación de un elemento tipo acción para la interfaz del robot indicado.}\\
+     \hline
+      {\textbf{Excepciones:}} & {
+	\begin{enumerate}
+	\item Si el usuario no se encuentra logueado en el sistema:
+	\begin{itemize}
+	  \item El sistema informa de que es necesario identificarse.
+	  \item Se cancela el caso de uso.
+	\end{itemize}
+	\item Si el usuario no ha introducido alguno de los datos obligatorios:
+	  \begin{itemize}
+	    \item El sistema informa de que no se puede realizar la creación del elemento. Faltan datos obligatorios.
+	    \item Se regresa al punto 2.
+	  \end{itemize}
+	\end{enumerate}
+	}\\
+      \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Creación una acción.}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Editar de elemento acción o botón.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita editar un elemento tipo acción.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & { - } \\
+      \hline
+      {\textbf{Precondiciones:}} & { El usuario debe estar registrado e identificado en el sistema y con permisos de edición en el robot} \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema selecciona editar el elemento tipo acción de una interfaz.
+	\item El sistema solicita los nuevos datos del elemento acción ( nombre, código, icono y colores del botón).
+	\item El usuario modifica al menos uno de los datos anteriores.
+	\item El sistema realiza la modificación de los datos del elemento tipo acción de la interfaz perteneciente al robot.
+      \end{enumerate}
+      } \\
+     \hline
+     {\textbf{Postcondición}} & {Se realiza la modificación de los datos del elemento acción de la interfaz del robot.}\\
+     \hline
+      {\textbf{Excepciones:}} & {
+	\begin{enumerate}
+	\item No se han introducido algunos de los datos:
+	\begin{itemize}
+	  \item El sistema informa de que no se puede realizar la edición.
+	  \item Vuelve al punto 2.
+	\end{itemize}
+	\item Si el usuario no posee permisos de edición:
+	  \begin{itemize}
+	    \item El sistema informa de que no se puede realizar el registro.
+	    \item Se cancela el caso de uso.
+	  \end{itemize}
+	\item Si el usuario no se encuentra logueado en el sistema:
+	\begin{itemize}
+	  \item El sistema informa de que es necesario identificarse.
+	  \item Se cancela el caso de uso.
+	\end{itemize}
+	\end{enumerate}
+	}\\
+      \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Edición de elemento tipo acción.}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Destruir acción.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita eliminar un elemento tipo acción de la interfaz de un robot.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & { - } \\
+      \hline
+      {\textbf{Precondiciones:}} & { Usuario registrado e identificado en el sistema, robot existente y perteneciente al usuario. } \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema solicita el borrado de un elemento tipo acción de la interfaz de un robot existente en el sistema.
+      \end{enumerate}
+      } \\
+     \hline
+     {\textbf{Postcondición}} & {Se realiza el borrado del elemento tipo acción perteneciente a la interfaz de un robot.}\\
+     \hline
+         {\textbf{Excepciones:}} & {
+         \begin{enumerate}
+         
+          \item Si el usuario no se encuentra logueado en el sistema:
+	  \begin{itemize}
+	    \item El sistema informa de que es necesario identificarse.
+	    \item Se cancela el caso de uso.
+	  \end{itemize}
+         
+          \item Si no dispone de permisos para realizar el borrado:
+          \begin{itemize}
+           \item El sistema informa de que no se puede realizar el borrado.
+           \item Vuelve al paso 1.
+          \end{itemize}
+	  \item Si el robot no existe :
+	    \begin{itemize}
+	      \item El sistema informa de que no se puede realizar el borrado.
+	      \item Vuelve al paso 1.
+	   \end{itemize}	   
+         \end{enumerate}
+         }\\
+     \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Destruir acción.}
+\end{table}
+
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Crear evento o etiqueta.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita la creación de un elemento tipo evento o etiqueta para la interfaz de un robot.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & { - } \\
+      \hline
+      {\textbf{Precondiciones:}} & { El usuario debe estar registrado e identificado en el sistema y poseer permisos para la edición del robot } \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema solicita comenzar el proceso de creación de un elemento tipo evento.
+	\item El sistema solicita los nuevos datos del elemento evento (nombre y nombre del evento y color).
+	\item El usuario proporciona los datos anteriores y ordena la creación.
+	\item El sistema realiza la creación de un elemento tipo evento para la interfaz del robot indicado.
+      \end{enumerate}
+      } \\
+     \hline
+     {\textbf{Postcondición}} & {Se realiza la creación de un elemento tipo evento o etiqueta para la interfaz del robot indicado.}\\
+     \hline
+      {\textbf{Excepciones:}} & {
+	\begin{enumerate}
+	\item Si el usuario no se encuentra logueado en el sistema:
+	\begin{itemize}
+	  \item El sistema informa de que es necesario identificarse.
+	  \item Se cancela el caso de uso.
+	\end{itemize}
+	\item Si el usuario no ha introducido alguno de los datos obligatorios:
+	  \begin{itemize}
+	    \item El sistema informa de que no se puede realizar la creación del elemento. Faltan datos obligatorios.
+	    \item Se regresa al punto 2.
+	  \end{itemize}
+	\end{enumerate}
+	}\\
+      \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Creación de evento.}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Editar de elemento evento.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita editar un elemento tipo evento.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & { - } \\
+      \hline
+      {\textbf{Precondiciones:}} & { El usuario debe estar registrado e identificado en el sistema y con permisos de edición en el robot} \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema selecciona editar el elemento tipo evento de una interfaz.
+	\item El sistema solicita los nuevos datos del elemento vídeo ( nombre y nombre del evento y color).
+	\item El usuario modifica al menos uno de los datos anteriores.
+	\item El sistema realiza la modificación de los datos del elemento tipo evento de la interfaz perteneciente al robot.
+      \end{enumerate}
+      } \\
+     \hline
+     {\textbf{Postcondición}} & {Se realiza la modificación de los datos del elemento evento de la interfaz del robot.}\\
+     \hline
+      {\textbf{Excepciones:}} & {
+	\begin{enumerate}
+	\item No se han introducido algunos de los datos:
+	\begin{itemize}
+	  \item El sistema informa de que no se puede realizar la edición.
+	  \item Vuelve al punto 2.
+	\end{itemize}
+	\item Si el usuario no posee permisos de edición:
+	  \begin{itemize}
+	    \item El sistema informa de que no se puede realizar el registro.
+	    \item Se cancela el caso de uso.
+	  \end{itemize}
+	\item Si el usuario no se encuentra logueado en el sistema:
+	\begin{itemize}
+	  \item El sistema informa de que es necesario identificarse.
+	  \item Se cancela el caso de uso.
+	\end{itemize}
+	\end{enumerate}
+	}\\
+      \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Edición de evento.}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Destruir evento.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita eliminar un elemento tipo evento de la interfaz de un robot.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & { - } \\
+      \hline
+      {\textbf{Precondiciones:}} & { Usuario registrado e identificado en el sistema, robot existente y perteneciente al usuario. } \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema solicita el borrado de un elemento tipo evento de la interfaz de un robot existente en el sistema.
+      \end{enumerate}
+      } \\
+     \hline
+     {\textbf{Postcondición}} & {Se realiza el borrado del elemento tipo evento perteneciente a la interfaz de un robot.}\\
+     \hline
+         {\textbf{Excepciones:}} & {
+         \begin{enumerate}
+         
+          \item Si el usuario no se encuentra logueado en el sistema:
+	  \begin{itemize}
+	    \item El sistema informa de que es necesario identificarse.
+	    \item Se cancela el caso de uso.
+	  \end{itemize}
+         
+          \item Si no dispone de permisos para realizar el borrado:
+          \begin{itemize}
+           \item El sistema informa de que no se puede realizar el borrado.
+           \item Vuelve al paso 1.
+          \end{itemize}
+	  \item Si el robot no existe :
+	    \begin{itemize}
+	      \item El sistema informa de que no se puede realizar el borrado.
+	      \item Vuelve al paso 1.
+	   \end{itemize}	   
+         \end{enumerate}
+         }\\
+     \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Destruir evento.}
+\end{table}
+
+
+
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Crear slider.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita la creación de un elemento tipo slider para la interfaz de un robot.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & { - } \\
+      \hline
+      {\textbf{Precondiciones:}} & { El usuario debe estar registrado e identificado en el sistema y poseer permisos para la edición del robot } \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema solicita comenzar el proceso de creación de un elemento tipo slider.
+	\item El sistema solicita los nuevos datos del elemento slider (nombre y nombre del evento, valores mínimos, máximos, step y si es de tipo horizontal o vertical).
+	\item El usuario proporciona los datos anteriores y ordena la creación.
+	\item El sistema realiza la creación de un elemento tipo slider para la interfaz del robot indicado.
+      \end{enumerate}
+      } \\
+     \hline
+     {\textbf{Postcondición}} & {Se realiza la creación de un elemento tipo slider para la interfaz del robot indicado.}\\
+     \hline
+      {\textbf{Excepciones:}} & {
+	\begin{enumerate}
+	\item Si el usuario no se encuentra logueado en el sistema:
+	\begin{itemize}
+	  \item El sistema informa de que es necesario identificarse.
+	  \item Se cancela el caso de uso.
+	\end{itemize}
+	\item Si el usuario no ha introducido alguno de los datos obligatorios:
+	  \begin{itemize}
+	    \item El sistema informa de que no se puede realizar la creación del elemento. Faltan datos obligatorios.
+	    \item Se regresa al punto 2.
+	  \end{itemize}
+	\end{enumerate}
+	}\\
+      \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Creación de slider.}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Editar de slider.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita editar un elemento tipo slider.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & { - } \\
+      \hline
+      {\textbf{Precondiciones:}} & { El usuario debe estar registrado e identificado en el sistema y con permisos de edición en el robot} \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema selecciona editar el elemento tipo evento de una interfaz.
+	\item El sistema solicita los nuevos datos del elemento slider (nombre y nombre del evento, valores mínimos, máximos, step y si es de tipo horizontal o vertical).
+	\item El usuario modifica al menos uno de los datos anteriores.
+	\item El sistema realiza la modificación de los datos del elemento tipo slider de la interfaz perteneciente al robot.
+      \end{enumerate}
+      } \\
+     \hline
+     {\textbf{Postcondición}} & {Se realiza la modificación de los datos del elemento slider de la interfaz del robot.}\\
+     \hline
+      {\textbf{Excepciones:}} & {
+	\begin{enumerate}
+	\item No se han introducido algunos de los datos:
+	\begin{itemize}
+	  \item El sistema informa de que no se puede realizar la edición.
+	  \item Vuelve al punto 2.
+	\end{itemize}
+	\item Si el usuario no posee permisos de edición:
+	  \begin{itemize}
+	    \item El sistema informa de que no se puede realizar el registro.
+	    \item Se cancela el caso de uso.
+	  \end{itemize}
+	\item Si el usuario no se encuentra logueado en el sistema:
+	\begin{itemize}
+	  \item El sistema informa de que es necesario identificarse.
+	  \item Se cancela el caso de uso.
+	\end{itemize}
+	\end{enumerate}
+	}\\
+      \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Edición de slider.}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{3.5cm}|p{10cm}|}
+      \hline
+      {\textbf{Caso de uso:}} & { Destruir slider.} \\
+      \hline
+      {\textbf{Descripción:}} & { El sistema deberá actuar como describe en este caso de uso cuando el usuario solicita eliminar un elemento tipo slider de la interfaz de un robot.} \\
+     \hline
+      {\textbf{Actor principal:}} & { Usuario del sistema.} \\
+      \hline
+      {\textbf{Actor secundario:}} & { - } \\
+      \hline
+      {\textbf{Precondiciones:}} & { Usuario registrado e identificado en el sistema, robot existente y perteneciente al usuario. } \\
+     \hline   
+    {\textbf{Flujo principal:}} & { 
+      \begin{enumerate}
+	\item El actor usuario del sistema solicita el borrado de un elemento tipo slider de la interfaz de un robot existente en el sistema.
+      \end{enumerate}
+      } \\
+     \hline
+     {\textbf{Postcondición}} & {Se realiza el borrado del elemento tipo slider perteneciente a la interfaz de un robot.}\\
+     \hline
+         {\textbf{Excepciones:}} & {
+         \begin{enumerate}
+         
+          \item Si el usuario no se encuentra logueado en el sistema:
+	  \begin{itemize}
+	    \item El sistema informa de que es necesario identificarse.
+	    \item Se cancela el caso de uso.
+	  \end{itemize}
+         
+          \item Si no dispone de permisos para realizar el borrado:
+          \begin{itemize}
+           \item El sistema informa de que no se puede realizar el borrado.
+           \item Vuelve al paso 1.
+          \end{itemize}
+	  \item Si el robot no existe :
+	    \begin{itemize}
+	      \item El sistema informa de que no se puede realizar el borrado.
+	      \item Vuelve al paso 1.
+	   \end{itemize}	   
+         \end{enumerate}
+         }\\
+     \hline
+    \end{tabular}
+  \end{center}
+\caption{Descripción del caso de uso: Destruir slider.}
+\end{table}
+
+
+
+\pagebreak
+
 \section{Diagrama de clases}
 
 En esta sección de la arquitectura es dónde se define la parte de la interacción con la base de
@@ -540,37 +1402,36 @@ datos y que tablas se han definido y con que relaciones.\\
 
 
 La clase o tabla que contendrá el peso de toda la jerarquía de base de datos será la clase Robot. Esta tabla contendrá referencias externas o “foreign keys” a cada tabla que
-haga participe en su definición, es decir:
+haga partícipe en su definición, es decir:
 
 \begin{itemize}
- \item Interfaz
- \item Usuario propietario
- \item Usuarios conductores
- \item Usuarios espectadores
- \item Room
+ \item Interfaz.
+ \item Usuario propietario.
+ \item Usuarios conductores.
+ \item Usuarios espectadores.
+ \item Room.
 \end{itemize}
 
-Otra de las clases con mayor presencia en el modelo es la clase Interfaz, la cual esta directamente relacionada con el robot y que incorpora las siguientes relaciones:
+Otra de las clases con mayor presencia en el modelo es la clase Interfaz, la cual está directamente relacionada con el robot y que incorpora las siguientes relaciones:
 
 \begin{itemize}
- \item Acción
- \item Vídeo
- \item Evento
- \item Slider
+ \item Acción.
+ \item Vídeo.
+ \item Evento.
+ \item Slider.
 \end{itemize}
 
 Por último destacar la clase Usuario que incorpora las siguientes relaciones:
 
 \begin{itemize}
- \item Robot en propiedas
- \item Robot con permisos de conducción
- \item Robots con permisos de visualización
- \item Mensajes enviados
- \item Mensajes recibidos
- \item Sessiones abiertas
- \item Iconos
+ \item Robot en propiedad.
+ \item Robot con permisos de conducción.
+ \item Robots con permisos de visualización.
+ \item Mensajes enviados.
+ \item Mensajes recibidos.
+ \item Sesiones abiertas.
+ \item Iconos.
 \end{itemize}
-
 
 
 La jerarquía de clases queda de la siguiente manera:
