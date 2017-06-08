@@ -1,8 +1,16 @@
+% Este archivo es parte de la memoria del proyecto fin de carrera
+% de Manuel López Urbina. Protegida bajo la licencia GFDL.
+% Para más información, la licencia completa viene incluida en el
+% fichero fdl-1.3.tex
+
+% Copyright (C) 2017 Manuel López Urbina
 
 \newpage
 
 
 \chapter{Robot de pruebas}
+\chaptermark{Robot}
+
 \label{chap:robot}
 
 Con la finalidad de demostrar y hacer un primer uso de la aplicación RobotUI se ha decidido abordar la elaboración de un vehículo de pruebas. Dicho vehículo será utilizado de modelo o guía para el 
@@ -44,7 +52,7 @@ es decir, una serie de conexiones que se pueden usar como entradas o salidas par
 finalidad de ser utilizados en diferentes proyectos de una manera similar a la que se haría con Arduino\footnote{Arduino es una plataforma de prototipos electrónica de código abierto (open-source) 
 basada en hardware y software flexibles y fáciles de usar.}.
 
-\section{Análisis de requerimientos de Software}
+\subsection{Análisis de requerimientos software}
 
 Habiendo detallado los requerimientos hardware para la construcción del robot, pasamos al análisis de los diferentes requerimiento software para la correcta
 gestión de los diferentes elementos hardware y para su correcto funcionamiento.\\
@@ -65,6 +73,38 @@ se ha realizado haciendo uso de Websockets los cuales presentan algunas ventajas
 
 Como podemos ver las propiedades anteriormente descritas resultan esenciales para nuestro proyecto que, como cabe recordar, queremos realizar lectura de sensores y envío de órdenes desde un servidor 
 externo. Además de la transmisión de vídeo.\\
+
+\subsubsection{Diagrama de casos de uso}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=.5]{diagramas/casos-uso-robot.png}
+  \end{center}
+  \caption{Diagrama de casos de uso para la interacción con el robot.}
+  \label{diagram:caso-uso}
+\end{figure}
+
+\subsubsection{Estados del robot}
+
+Otro de los requerimientos es que el robot deberá de responder a una serie de estados de tal modo que en la aplicación se conozca las diferentes situaciones en la que se pueda encontrar un robot.
+En el autómata diseñado encontramos un modo desactivado, modo de espera y modo de conexión. El autómata representativo es el siguiente:\\
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.6]{imagenes/robot/automata-estados.png}
+  \end{center}
+  \caption{Autómata representativo de los diferentes estados del robot.}
+  \label{figura:automata-estados}
+\end{figure}
+
+Donde:\\
+
+\begin{itemize}
+  \item Estado q0 inicial y final se corresponde con el estado apagado.
+ \item Estado q1 se corresponde con el estado en escucha.
+ \item Estado q2 se corresponde con el estado en funcionamiento.
+\end{itemize}
+
 
 \section{Montaje}
 
@@ -96,21 +136,23 @@ Los pines empleados son los siguientes para la construcción del robot han sido 
 
 \begin{table}[H]
   \begin{center}
-    \begin{tabular}{|p{2.5cm}|p{2.5cm}|p{4.5cm}|}
+    \begin{tabular}{|p{2.5cm}|p{2.5cm}|p{3.5cm}|p{4.5cm}|}
       \hline
-      {\textbf{GPIO}} & \textbf{ Modo } & \textbf{ Control }\\
+      {\textbf{Raspberry Pi}} & \textbf{ Modo }  & \textbf{ Placa L298N } & \textbf{ Control }\\
       \hline
-      {\textbf{ 2 }} & { OUTPUT } & { Motores lado izquierdo }  \\
+      {\textbf{ GPIO 2 }} & { OUTPUT } & { IN2 } & { Motores lado izquierdo }  \\
      \hline
-      {\textbf{ 3 }} & { OUTPUT } & { Motores lado izquierdo } \\
+      {\textbf{ GPIO 3 }} & { OUTPUT } & { IN1 } &  { Motores lado izquierdo } \\
       \hline
-      {\textbf{ 17 }} & { OUTPUT } & {  Motores lado derecho } \\
+      {\textbf{ GPIO 17 }} & { OUTPUT } & { IN4 } &  {  Motores lado derecho } \\
       \hline
-      {\textbf{ 27 }} & { OUTPUT } & { Motores lado derecho } \\
+      {\textbf{ GPIO 27 }} & { OUTPUT } & { IN3 } &  { Motores lado derecho } \\
+      \hline
+      {\textbf{ GND 9 }} & {  } & { GND } &  { Conexión de masas } \\
      \hline   
     \end{tabular}
   \end{center}
-\caption{ Tabla con los puertos GPIO utilizados, su configuración establecida y su utilización. }
+\caption{ Tabla con los pines conectados entre la Raspberry Pi y la placa L298N, su configuración establecida y su utilización. }
 \end{table}
 
 
@@ -138,7 +180,7 @@ En la figura \ref{diagrama:L298N-salidas} se muestra el módulo empleado con sus
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=2.5]{imagenes/L298N-conexiones.jpg}
+    \includegraphics[scale=2]{imagenes/L298N-conexiones.jpg}
   \end{center}
   \caption{Pines de entrada/salida del módulo L298N empleado.}
   \label{diagrama:L298N-salidas}
@@ -168,9 +210,9 @@ Imagen de la batería LiPo para la alimentación de los motores:
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.4]{imagenes/robot/bateria-lipo.jpg}
+    \includegraphics[scale=0.3]{imagenes/robot/bateria-lipo.jpg}
   \end{center}
-  \caption{Vista de la batería LiPo que alimenta los motores.}
+  \caption{Batería LiPo que alimenta los motores.}
   \label{figura:rpi-modulo-bateria}
 \end{figure}
 
@@ -181,7 +223,7 @@ Imagen de la batería LiPo para la alimentación de los motores:
 El siguiente gráfico \ref{diagrama:esquema-conexiones} muestra las conexiones de todo el conjunto:
 
 \begin{figure}[H]
-  \hspace*{.5in}{\includegraphics[scale=0.65,angle=270]{imagenes/robot/robot-esquema2.png}}
+  \includegraphics[scale=0.55]{imagenes/robot/robot-esquema2.png}
   \caption{Esquema de conexiones del robot de pruebas.}
   \label{diagrama:esquema-conexiones}
 \end{figure}
@@ -193,18 +235,6 @@ El siguiente gráfico \ref{diagrama:esquema-conexiones} muestra las conexiones d
   \end{center}
   \caption{Vista superior del vehículo.}
   \label{figura:rpi-modulo-bateria}
-\end{figure}
-
-
-
-\subsection{Estados del robot}
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.6]{imagenes/robot/automata-estados.png}
-  \end{center}
-  \caption{Autómata representativo de los diferentes estados del robot.}
-  \label{figura:automata-estados}
 \end{figure}
 
 
@@ -437,7 +467,8 @@ A continuación se muestra el ejemplo desarrollado para la activación de los mo
 
 \subsubsection{ Streaming de vídeo }
 
-Para realizar la transferencia de vídeo desde el robot hacia el cliente se ha empleado la librería FFmpeg haciendo uso de su herramienta de línea de comandos.\\
+Para realizar la transferencia de vídeo desde el robot hacia el cliente se ha empleado la librería FFmpeg \footnote{ Los conocimientos necesarios para la comprensión de la herramienta FFmepg y sus modos de 
+utilización se han adquirido accediendo a la documentación disponible en la referencia \cite{website:7} correspondiente con la documentación oficial.} haciendo uso de su herramienta de línea de comandos.\\
 
 El procedimiento de captura de vídeo y su posterior transmisión es realizado mediante la siguiente instrucción de Ffmpeg:\\
 

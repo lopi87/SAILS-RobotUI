@@ -15,12 +15,12 @@ Sails para, posteriormente, centrarnos específicamente en la descripción de un
 conocimientos.
 
 
-\section{Introduccion}
+\section{Introducción}
 \label{sec:fundamentos}
 
 En esta sección comenzaremos destacando aquellos aspectos teóricos sobre cómo Sails, framework Node JS utilizado en el desarrollo, trabaja con Websocket y Socket.io.\\
 
-Como sabemos, un servidor HTTP no puede enviar datos a menos que un cliente los haya solicitado mediante una petición. Los Websockets, en cambio, presentan la particularidad de que
+Como sabemos, un servidor HTTP no puede enviar datos a menos que un cliente los haya solicitado mediante una petición. Los Websockets\cite{book:WebSocket}, en cambio, presentan la particularidad de que
 permiten que un servidor envíe datos a un cliente sin la necesidad de que éstos sean solicitados, al menos de una manera inmediata. Estas solicitudes, realizadas con anterioridad, se formalizan mediante suscripciones, concepto que 
 iremos constantemente haciendo referencia a lo largo del presente capítulo y que debemos recordar.\\
 
@@ -72,8 +72,10 @@ anteriores puesto que incorpora cuadros de mandos, sistema de mensajería y tamb
 \section{ Conexión y suscripción }
 \label{sec:comunicaciones-robotui}
 
-Tras la comprensión de los fundamentos descritos en el punto \ref{sec:fundamentos} donde se recogen los principios de comunicación con websockets pasamos
-a trasladarlos a un caso práctico describiendo una de las funcionalidades del proyecto donde éstos son aplicados de tal manera que se facilite su comprensión.\\
+Tras la comprensión de los fundamentos descritos en el punto \ref{sec:fundamentos} donde se recogen los principios de comunicación con Websockets pasamos
+a trasladarlos a un caso práctico describiendo una de las funcionalidades del proyecto donde éstos son aplicados de tal manera que se facilite su comprensión\footnote{ Referencias bibliográficas 
+consultadas que recogen casos prácticos acompañados de explicaciones y que han resultado de especial utilidad para el estudio y comprensión del funcionamiento
+de una aplicación con Websockets: \cite{book:socketio} y \cite{website:2} y que han sido trasladados al presente proyecto. }.\\
 
 Como sabemos, Sails nos ayuda a incorporar funcionalidades en tiempo real a nuestra aplicación web gestionando una serie de eventos aplicándolos sobre los modelos. Para el caso a describir nos
 centraremos en el modelo \emph{Usuario} de RobotUI. Uno de los atributos de este modelo es un booleano \emph{online}, el cual representa si un usuario se encuentra logueado en el sistema o no.
@@ -89,7 +91,7 @@ inicie sesión o salga de la aplicación se alterne entre las imágenes online: 
 \end{figure}
 
 Para capturar los eventos correspondientes al modelo \emph{Usuario} o cualquier otro debemos realizar una suscripción. Sails incorpora dos modalidades de suscripción. suscripción a clase y 
-suscripción a modelo.\\
+suscripción a modelo \cite{book:sails}.\\
 
 ¿Cuál es la diferencia entre suscribirse a una ``clase'' frente a la suscripción a una ``instancia'' de un modelo? Al suscribirse a la ``clase'' del modelo, el socket podrá escuchar la creación de 
 nuevas instancias de modelo mediante un método denominado publishCreate(). Mientras que la suscripción a ``instancia'' permite al socket escuchar los cambios de modelos a través de los métodos

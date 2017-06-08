@@ -365,6 +365,34 @@ anteriores puesto que incorpora cuadros de mandos, sistema de mensajería y tamb
 
 \section{ Interfaz gráfica }
 
+Para la elaboración de parte referente la capa de presentación\footnote{ Terminología también conocida como Front-End. Son todas aquellas tecnologías que corren del lado del cliente, es decir, todas aquellas 
+tecnologías que corren del lado del navegador web, generalizándose más que nada en tres lenguajes, Html , CSS Y JavaScript, normalmente el FrontEnd se encarga de estilizar la página de tal manera que la 
+página pueda quedar cómoda para la persona que la utiliza transmitiendo una experiencia de usuario cómoda. En contraposición con el back-end que engloba el motor de la aplicación.} de la aplicación se ha 
+empleado Bootstrap, un potente framework CSS que fue creado por Twitter para simplificar el proceso de maquetación. 
+
+Por otra parte, dada la cantidad de efectos dinámicos necesarios en la aplicación junto con múltiples llamadas Ajax, se ha utilizando jQuery que es un framework Javascript que facilita toda esta
+labor haciéndola compatible con los navegadores más comúnmente utilizados.\\
+
+Se consideró antes de comenzar a definir los diferentes estilos y características desarrollo de la interfaz gráfica, una serie de elementos mínimos imprescindibles que dicha interfaz debería incorporar.\\
+
+Dada las características del proyecto, era necesario proporcionar a la aplicación de un entorno gráfico sencillo, intuitivo pero a la vez funcional teniendo como principal objetivo ofrecer al usuario, tras 
+una visión rápida, la localización de los diferentes elementos para control del robot y deducir el funcionamiento general de la aplicación.\\
+
+Las vistas principales desarrolladas en la aplicación son los siguientes:
+
+\begin{itemize}
+ \item Vista principal de la aplicación.
+ \item Panel de administración para el visionado de los usuarios conectados en tiempo real.
+ \item Panel de administración para el visionado de los robots conectados en tiempo real.
+ \item Formularios de registro de usuarios y robots.
+ \item Panel de creación y edición de interfaces de control.
+ \item Panel de control de robots.
+ \item Panel de visualización de robots.
+ \item Índice de robots disponibles.
+\end{itemize}
+
+El desarrollo de todos los componentes anteriormente mencionados se han ido realizando paralelamente al desarrollo de la parte Back correspondiente.\\
+
 
 \subsection{Control por parte del usuario}
 
@@ -411,7 +439,6 @@ La aplicación puede mejorarse en diversos aspectos. A continuación, se citan a
   \item Añadir autenticación por un sistema de certificados por clave pública y privada que garantice que la conectividad entre dispositivo robótico y usuario es la correcta.\\
 \end{itemize}
 
-
 \section{ Guía de Usuario}
 
 El proyecto va acompañado de un manual de usuario, el cual resulta de vital importancia consultar antes y/o durante la utilización de los diferentes elementos tanto hardware, robot de pruebas desarrollado, como software del 
@@ -430,7 +457,7 @@ y abrirlo a toda una comunidad de usuarios. Además de tener abierto el acceso a
 
 \subsection{ Objetivos de la guía de usuario }
 
-La guía de usuario tiene como objetivo proporcionar al usuario un soporte de ayuda e iniciación a la utilización de RobotUI.\\
+La guía de usuario incluida en el presente proyecto tiene como objetivo proporcionar al usuario un soporte de ayuda e iniciación a la utilización de RobotUI.\\
 
 Comprende de las siguientes secciones:\\
 

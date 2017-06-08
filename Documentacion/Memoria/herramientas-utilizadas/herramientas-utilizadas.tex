@@ -36,8 +36,9 @@ A continuación se detallan las diferentes tecnologías/bibliotecas/lenguajes qu
 
 Web: \url{https://www.latex-project.org/}\\
 
-\LaTeX es un lenguaje de marcado que sirve para la redacción de documentos científicos o técnicos. Con esta herramienta o lenguaje se ha desarrollado la memoria actual del proyecto de final de carrera.
+\LaTeX \: es un lenguaje de marcado que sirve para la redacción de documentos científicos o técnicos. Con esta herramienta o lenguaje se ha desarrollado la memoria actual del proyecto de final de carrera.\\
 
+Para el estudio de la herramienta y realización de consultas se han empleado sobre los recursos bibliográficos \cite{book:LaTeX} y \cite{website:6}.\\
 
 
 \subsection{WebStorm}
@@ -53,7 +54,7 @@ WebStorm es un IDE de JavaScript ligero pero potente, perfectamente equipado par
 
 \hspace*{2.25in}{\includegraphics[scale=0.25]{imagenes/github-logo.png}}
 
-Web: \url{https://about.github.com/}\\
+Web: \url{https://about.github.com/} \cite{website:4} \\
 Repositorio: \url{https://github.com/lopi87/SAILS-RobotUI}\\
 
 
@@ -68,11 +69,15 @@ Web: \url{https://git-scm.com/}\\
 
 Git es un sistema open-source de control de versiones diseñado para manejar íntegramente las fases de desarrollo de proyectos, simples y complejos, con velocidad y eficiencia.\\
 
+Para su estudio y afianzado de conocimientos, ya que este sistema de control de versiones me resultaba muy familiar incluso antes de comenzar con el desarrollo del presente proyecto, se ha empleado 
+la referencia bibliográfica \cite{book:git}. La cual hace un recorrido por todas las posibilidades que brinda esta herramienta.\\
+
+
 \subsection{DigitalOcean}
 
 \begin{center}\includegraphics[scale=0.35]{imagenes/docean-logo.png}\end{center}
 
-Web: \url{https://www.digitalocean.com/}\\
+Web: \url{https://www.digitalocean.com/} \cite{website:5}\\
 
 Servidor web para alojar proyectos en la nube. La ventaja de este servicio de VPS \footnote{ VPS: Servidor Virtual Privado, del inglés Virtual Private Server, es un método de particionar un servidor
 físico en varios servidores de tal forma que todo funcione como si se estuviese ejecutando en una única máquina. Cada servidor virtual es capaz de funcionar bajo su propio sistema operativo y
@@ -95,11 +100,14 @@ transmisión de datos).\\
 \end{center}
 
 Web: \url{https://nodejs.org/es/}\\
+documentación: \url{https://nodejs.org/es/docs/}\cite{website:8}\\
 
 Node.js es un entorno de ejecución para JavaScript construido con el motor de JavaScript V8 de Chrome. Node.js usa un modelo de operaciones E/S sin bloqueo y orientado a eventos, que lo hace liviano y eficiente. Incorpora un sistema de gestión de paquetes llamado, npm, es el ecosistema mas grande de librerías de código abierto en el mundo.\\
 
 Node.js tiene una arquitectura basada en eventos capaz de E/S asíncronos. Estas opciones de diseño apuntan a optimizar el rendimiento y la escalabilidad en aplicaciones Web con muchas operaciones de entrada/salida, así como para aplicaciones Web en tiempo real (por ejemplo, programas de comunicación en tiempo real y juegos de navegador), lo que lo hacen ideal para este proyecto.\\
 
+Destacar la importancia de la referencia bibliográfica \cite{book:javascript} para el estudio de tanto Node.js como JavaScript y que han servido de guía y consulta en la elaboración del presente proyecto. 
+Sin olvidar la documentación oficial de Node.js \cite{website:8}.\\
 
 \subsection{Sails js}
 
@@ -107,11 +115,13 @@ Node.js tiene una arquitectura basada en eventos capaz de E/S asíncronos. Estas
 \includegraphics[scale=0.5]{imagenes/sailsjs-logo.png}
 \end{center}
 
-Web: \url{http://sailsjs.com/}\\
+Web: \url{http://sailsjs.com/} \cite{website:1}\\
+documentación: \url{https://sailsjs.com/documentation/reference} \cite{{website:12}}\\
 
 Sails.js es un framework web que facilita la creación de aplicaciones Node.js de nivel empresarial. Está diseñado para asemejarse a la arquitectura MVC de otros frameworks como Ruby on Rails, pero con soporte para el estilo de desarrollo de aplicaciones web más moderno y orientado a datos.\\
 
 Utiliza Express para funciones como la gestión de peticiones HTTP y Websockets. Su integración con el sistema de Websockets lo hacen especialmente bueno para construir características en tiempo real. Por estas razones se ha considerado como el framework más adecuado hasta la fecha para la elaboración de este proyecto.
+
 
 
 \subsection{Npm}
@@ -208,6 +218,12 @@ MongoDB ( cuyo nombre proviene de la palabra en inglés “humongous” que sign
 La principal particularidad de las bases de datos NoSQL es que en lugar de guardar los datos en tablas como se hace en las base de datos relacionales, guarda estructuras de datos en documentos 
 similares a JSON con un esquema dinámico (MongoDB utiliza una especificación llamada BSON), haciendo que la integración de los datos en ciertas aplicaciones sea más fácil y rápida.\\
 
+A pesar de no haber trabajado anteriormente con bases de datos no relacionales conocía de su existencia y cómo iban adquiriendo cada vez mayor popularidad entre los desarrolladores. Es por ello
+que los conceptos necesarios para correcta gestión y realización de operaciones sobre la base de datos se han adquirido a partir de la referencia bibliográfica \cite{book:MongoDB}.
+No obstante, Sails.js incorpora el ORM\footnote{Object-Relational mapping, o lo que es lo mismo, mapeo de objeto-relacional, es un modelo de programación que consiste en la transformación
+de las tablas de una base de datos, en una serie de entidades que simplifiquen las tareas básicas de acceso a los datos para el programador.} llamado Waterline que sirven de abstracción a la hora de operar
+con las bases de datos. 
+
 \subsection{Pm2}
 
 \begin{center}
@@ -247,7 +263,6 @@ se describen las características de cada una de ellas junto con el motivo de su
 
 \subsection{Raspberry Pi Model B}
 \label{sec:raspberry}
-
 
 
 \begin{center}

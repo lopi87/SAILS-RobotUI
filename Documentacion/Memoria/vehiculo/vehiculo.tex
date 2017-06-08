@@ -115,7 +115,8 @@ En esta sección se recogen todas las descripciones y procedimientos seguidos y 
 En el presente punto, se recoge todos aquellos puntos de interés referentes a la interconexión de elementos utilizados, los cuales quedaron descritos en la sección \emph{Tecnologías hardware}
 \ref{sec:tecnologias-hardware} junto con sus especificaciones.\\
 
-Comenzando por el módulo central del sistema, la placa Raspberry Pi Model B+, dispone de una serie de pines denominados GPIO (General Purpose Input/Output) es, como su propio nombre indica, 
+Comenzando por el módulo central del sistema, la placa Raspberry Pi Model B+\footnote{ Todo lo referente a la utilización de los puertos de Entrada/Salida, puesta en funcionamiento y
+utilización de la placa Raspberry Pi se encuentra disponible en el manual de usuario \cite{book:Raspberry} elaborado por uno sus creadores. }, dispone de una serie de pines denominados GPIO (General Purpose Input/Output) es, como su propio nombre indica, 
 un sistema de E/S (Entrada/Salida) de propósito general, es decir, una serie de conexiones que se pueden usar como entradas o salidas para usos múltiples. Estos pines se encuentran en todos
 los modelos de Raspberry Pi.\\
 
@@ -136,21 +137,23 @@ Los pines empleados son los siguientes para la construcción del robot han sido 
 
 \begin{table}[H]
   \begin{center}
-    \begin{tabular}{|p{2.5cm}|p{2.5cm}|p{4.5cm}|}
+    \begin{tabular}{|p{2.5cm}|p{2.5cm}|p{3.5cm}|p{4.5cm}|}
       \hline
-      {\textbf{GPIO}} & \textbf{ Modo } & \textbf{ Control }\\
+      {\textbf{Raspberry Pi}} & \textbf{ Modo }  & \textbf{ Placa L298N } & \textbf{ Control }\\
       \hline
-      {\textbf{ 2 }} & { OUTPUT } & { Motores lado izquierdo }  \\
+      {\textbf{ GPIO 2 }} & { OUTPUT } & { IN2 } & { Motores lado izquierdo }  \\
      \hline
-      {\textbf{ 3 }} & { OUTPUT } & { Motores lado izquierdo } \\
+      {\textbf{ GPIO 3 }} & { OUTPUT } & { IN1 } &  { Motores lado izquierdo } \\
       \hline
-      {\textbf{ 17 }} & { OUTPUT } & {  Motores lado derecho } \\
+      {\textbf{ GPIO 17 }} & { OUTPUT } & { IN4 } &  {  Motores lado derecho } \\
       \hline
-      {\textbf{ 27 }} & { OUTPUT } & { Motores lado derecho } \\
+      {\textbf{ GPIO 27 }} & { OUTPUT } & { IN3 } &  { Motores lado derecho } \\
+      \hline
+      {\textbf{ GND 9 }} & {  } & { GND } &  { Conexión de masas } \\
      \hline   
     \end{tabular}
   \end{center}
-\caption{ Tabla con los puertos GPIO utilizados, su configuración establecida y su utilización. }
+\caption{ Tabla con los pines conectados entre la Raspberry Pi y la placa L298N, su configuración establecida y su utilización. }
 \end{table}
 
 
@@ -465,7 +468,8 @@ A continuación se muestra el ejemplo desarrollado para la activación de los mo
 
 \subsubsection{ Streaming de vídeo }
 
-Para realizar la transferencia de vídeo desde el robot hacia el cliente se ha empleado la librería FFmpeg haciendo uso de su herramienta de línea de comandos.\\
+Para realizar la transferencia de vídeo desde el robot hacia el cliente se ha empleado la librería FFmpeg \footnote{ Los conocimientos necesarios para la comprensión de la herramienta FFmepg y sus modos de 
+utilización se han adquirido accediendo a la documentación disponible en la referencia \cite{website:7} correspondiente con la documentación oficial.} haciendo uso de su herramienta de línea de comandos.\\
 
 El procedimiento de captura de vídeo y su posterior transmisión es realizado mediante la siguiente instrucción de Ffmpeg:\\
 

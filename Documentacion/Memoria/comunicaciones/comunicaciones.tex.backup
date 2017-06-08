@@ -15,12 +15,12 @@ Sails para, posteriormente, centrarnos específicamente en la descripción de un
 conocimientos.
 
 
-\section{Introduccion}
+\section{Introducción}
 \label{sec:fundamentos}
 
 En esta sección comenzaremos destacando aquellos aspectos teóricos sobre cómo Sails, framework Node JS utilizado en el desarrollo, trabaja con Websocket y Socket.io.\\
 
-Como sabemos, un servidor HTTP no puede enviar datos a menos que un cliente los haya solicitado mediante una petición. Los Websockets, en cambio, presentan la particularidad de que
+Como sabemos, un servidor HTTP no puede enviar datos a menos que un cliente los haya solicitado mediante una petición. Los Websockets\cite{book:WebSocket}, en cambio, presentan la particularidad de que
 permiten que un servidor envíe datos a un cliente sin la necesidad de que éstos sean solicitados, al menos de una manera inmediata. Estas solicitudes, realizadas con anterioridad, se formalizan mediante suscripciones, concepto que 
 iremos constantemente haciendo referencia a lo largo del presente capítulo y que debemos recordar.\\
 
@@ -72,8 +72,9 @@ anteriores puesto que incorpora cuadros de mandos, sistema de mensajería y tamb
 \section{ Conexión y suscripción }
 \label{sec:comunicaciones-robotui}
 
-Tras la comprensión de los fundamentos descritos en el punto \ref{sec:fundamentos} donde se recogen los principios de comunicación con websockets pasamos
-a trasladarlos a un caso práctico describiendo una de las funcionalidades del proyecto donde éstos son aplicados de tal manera que se facilite su comprensión.\\
+Tras la comprensión de los fundamentos descritos en el punto \ref{sec:fundamentos} donde se recogen los principios de comunicación con Websockets pasamos
+a trasladarlos a un caso práctico\footnote{ Referencias bibliográficas que recogen casos prácticos que han resultado de especial utilidad para el estudio y comprensión del funcionamiento
+de una aplicación con Websockets quedan recogidos en \cite{book:socketio} y \cite{website:2}. Los cuales han servido para trasladarlos al presente desarrollo. } describiendo una de las funcionalidades del proyecto donde éstos son aplicados de tal manera que se facilite su comprensión.\\
 
 Como sabemos, Sails nos ayuda a incorporar funcionalidades en tiempo real a nuestra aplicación web gestionando una serie de eventos aplicándolos sobre los modelos. Para el caso a describir nos
 centraremos en el modelo \emph{Usuario} de RobotUI. Uno de los atributos de este modelo es un booleano \emph{online}, el cual representa si un usuario se encuentra logueado en el sistema o no.
@@ -226,8 +227,9 @@ Si nos encontramos en la vista de índice de robots, la función se suscribirá 
 se suscribirá a la sesión abierta para ese robot y capturará los diferentes comandos o datos transmitidos y respuestas del robot en cuestión.\\
 
 En el código inferior mostramos la función \emph{subscribeAndListen} que implementa la suscripción a los eventos correspondiente a la conexión, desconexión y borrado de usuarios del panel de
-administración descrito en el apartado \ref{sec:fundamentos}. Esta función está localizada en el \emph{partial}\footnote{ Fragmentos del código HTML generados para romper el proceso de renderizado en bloques más manejables. Con un \epnh{partial}, puede establecer el código para representar por ejemplo una tabla HTML la cual es llamada 
-en múltiples vistas.} que implementa la vista correspondiente con el citado panel:\\
+administración descrito en el apartado \ref{sec:fundamentos}. Esta función está localizada en el \emph{partial} \footnote{ Fragmentos del código HTML generados para romper el proceso de
+renderizado en bloques más manejables. Con un \emph{partial}, puede establecer el código para representar por ejemplo una tabla HTML la cual es llamada en múltiples vistas.} 
+que implementa la vista correspondiente con el citado panel:\\
 
 \begin{lstlisting}[language=JavaScript]
 
