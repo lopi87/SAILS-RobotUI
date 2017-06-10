@@ -7,6 +7,8 @@
 
 \newpage
 
+\renewcommand\mempartstarinfo[1]{\addcontentsline{toc}{part}{#1}}
+
 
 \chapter{Anexos}
 \label{appendix:anexos}
@@ -242,6 +244,11 @@ git config --list
 Existen muchas más opciones configurables pero estos son los dos esenciales necesarios.\\
 
 \section{Despliegue de una aplicación Sails}
+
+Para el despliegue de la aplicación se a empleado una serie de herramientas y procedimientos que se encuentran recogidos en el recurso bibliográfico \cite{book:Deploying}, una referencia de gran 
+utilidad para la puesta en producción de aquellas aplicaciones desarrolladas en cualquier framework Node.js. Caso del presente proyecto.\\
+
+A continuación se describe una guía elemental, la cual ha sido seguida para la puesta en producción de RobotUI y que ha sido elaborada a partir de la citada referencia.\\
 
 Primeramente, debemos definir el entorno de producción para nuestra aplicación Sails. Para ello editamos el fichero \emph{/config/env/production.js} introduciendo los siguientes datos:\\
 

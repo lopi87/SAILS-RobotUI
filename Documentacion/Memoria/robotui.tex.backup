@@ -1,0 +1,94 @@
+\documentclass[a4paper,12pt]{book}
+
+\usepackage{estilosbase}
+\usepackage{textcomp}
+
+
+
+
+
+\headsep = 27 pt
+\clearpage{\pagestyle{empty}\cleardoublepage}
+
+
+\begin{document}
+\selectlanguage{spanish}
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\diamond$}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\listfigurename}{Índice de figuras}
+\renewcommand{\tablename}{Tabla}
+\renewcommand{\listtablename}{Índice de tablas}
+\newcommand{\icontext}[3]{\raisebox{-#1\height}{\includegraphics[scale=#2]{#3}}}
+
+\input{inicio/portada.tex}
+\cleardoublepage
+
+\input{inicio/subportada.tex}
+\cleardoublepage
+
+\frontmatter
+\pagestyle{plain}
+\input{inicio/previo.tex}
+\cleardoublepage
+
+\input{inicio/resumen.tex}
+\cleardoublepage
+
+
+\frontmatter
+
+%\input{previo.tex}
+\cleardoublepage
+
+\tableofcontents
+\listoffigures
+\mainmatter
+
+\pagestyle{fancy}
+\fancyhead[LE,RO]{\rightmark}
+\fancyhead[LO,RE]{\slshape \leftmark}
+%\fancyroot[C]{\thepage}
+
+\input{introduccion/introduccion.tex}
+
+\input{conceptos-basicos/conceptos-basicos.tex}
+
+\input{herramientas-utilizadas/herramientas-utilizadas.tex}
+
+\input{desarrollo-software/desarrollo-software.tex}
+
+\input{ frontend/frontend.tex }
+
+\input{ comunicaciones/comunicaciones.tex }
+
+\input{ vehiculo/vehiculo.tex }
+
+\input{planificacion/planificacion.tex}
+
+\input{manual-usuario/manual-usuario.tex}
+
+\input{conclusiones/conclusiones.tex}
+
+%\backmatter % Apéndices, bibliografía ...
+
+\backmatter
+
+
+%\nocite{*}
+\appendix
+\input{anexos/anexo.tex}
+
+\clearpage
+
+
+\nocite{*}
+\bibliography{robotui}{}
+\bibliographystyle{plain}
+
+\clearpage
+\input{./licencia/fdl-1.3.tex}
+
+
+\end{document}
+

@@ -10,7 +10,7 @@
 \label{chap:herramientas}
 
 
-\section{Estado del arte}
+\section{ Introducción }
 
 En la actualidad podemos observar cómo la robótica cada vez se encuentra más presente en nuestras vidas cotidianas tanto como para facilitarnos ciertas tareas como para entretenimiento. Si realizamos 
 cualquier búsqueda en internet podemos encontrar multitud de proyectos robóticos en la red. Existen excelentes portales como \url{http://blog.bricogeek.com/} por nombrar alguno de ellos, donde se
@@ -21,8 +21,24 @@ descripciones de los diferentes proyectos se realizan con la documentación opor
 del usuario.\\
 
 
-Dado lo anterior, considero que hay un campo sin cubrir y que resultaría interesante abarcar este espacio con una aplicación con las características de RobotUI, ya que no existe
-ninguna plataforma que permita esta interacción usuario-máquina o usuarios-máquina en tiempo real y que sea configurable para cualquier dispositivo que se encuentre conectado a la red.\\
+\section{ Estado del arte }
+
+
+Tras la realización de un sondeo entre numerosas bases de datos de artículos científicos existentes, indicar la existencia de artículos cuya temática guardan similitud con la problemática presentada
+en cuanto a los requisitos y características del presente proyecto. Dichos artículos han sido tomados como punto de partida para el abordaje del problema y su estudio.\\
+
+Existen numerosos artículos en los que se aborda el diseño y desarrollo y teleoperación de sistemas robóticos mediante la utilización de WebSockets. Por citar algunos de ellos como; \emph{Design and Development of a Robotic Teleoperation System using
+Duplex WebSockets suitable for Variable Bandwidth Networks} \cite{article:1}, se describe el desarrollo de un sistema teleoperable por WebSockets.\\
+  
+Otros estudios, en cambio, se centran más en analizar las diferentes situaciones de sobrecarga en la red, anchos de banda, cargas del sistema, etcétera, con la finalidad de someter a pruebas de estrés
+los diferentes protocolos implicados. Como por ejemplo: \emph{Analysis of WebSockets as the New Age Protocol for Remote Robot Tele-operationt} \cite{article:2}.\\
+  
+Por otra parte, el artículo \emph{ Remote Monitoring System based on a Wi-Fi Controlled Car Using Raspberry Pi } \cite{ article:3 }, describe un sistema de monitorización construido sobre una placa 
+Raspberry Pi de las mismas características que la empleada para el robot de pruebas de RobotUI. El sistema descrito en este artículo tiene la particularidad de que permite que diferentes usuarios realicen tareas de videovigilancia en un sistema combinado entre cámaras de seguridad tradicionales y una cámara situada sobre un robot.\\ 
+  
+  
+En el presente proyecto se ha intentado dotar al sistema de una característica añadida. Permitir el seguimiento por parte parte del usuario que realiza las funciones de teleoperador. Además de enfocarlo
+desde la perspectiva del entretenimiento y la enseñanza.\\
 
 
 \section{Tecnologías software utilizadas}
@@ -159,11 +175,11 @@ Socket.IO puede usarse simplemente como un wrapper para WebSocket aunque proporc
 Web: \url{https://ffmpeg.org/}\\
 
 FFmpeg es una colección bibliotecas software libre que permiten grabar, convertir (transcodificar) y hacer streaming de audio y vídeo. Incluye libavcodec, una biblioteca de códecs. FFmpeg está desarrollado en GNU/Linux, pero puede ser compilado
-en la mayoría de los sistemas operativos, incluyendo Windows.
+en la mayoría de los sistemas operativos, incluyendo Windows.\\
 
-FFmpeg es un programa bastante sencillo y de fácil utilización, orientado tanto a personas con conocimientos avanzados como usuarios inexpertos. 
+FFmpeg es un programa bastante sencillo y de fácil utilización, orientado tanto a personas con conocimientos avanzados como usuarios inexpertos. \\
 
-El proyecto FFmpeg está compuesto por:
+El proyecto FFmpeg está compuesto por:\\
 
 \begin{itemize}
  \item ffmpeg: es una herramienta de línea de comandos para convertir audio o video de un formato a otro. También puede capturar y codificar en tiempo real desde DirectShow, una tarjeta de televisión u otro dispositivo compatible.
@@ -218,9 +234,9 @@ MongoDB ( cuyo nombre proviene de la palabra en inglés “humongous” que sign
 La principal particularidad de las bases de datos NoSQL es que en lugar de guardar los datos en tablas como se hace en las base de datos relacionales, guarda estructuras de datos en documentos 
 similares a JSON con un esquema dinámico (MongoDB utiliza una especificación llamada BSON), haciendo que la integración de los datos en ciertas aplicaciones sea más fácil y rápida.\\
 
-Previamente a la elaboración del presente proyecto conocía la existencia de las bases de datos NoSQL y cómo iban adquiriendo cada vez mayor popularidad entre los desarrolladores a pesar de 
-no haber trabajado anteriormente con la herramienta. Los conceptos necesarios para correcta gestión y operaciones sobre la base de datos se han adquirido a partir de la referencia bibliográfica \cite{book:MongoDB}.
-A pesar de que Sails.js incorpora el ORM\footnote{Object-Relational mapping, o lo que es lo mismo, mapeo de objeto-relacional, es un modelo de programación que consiste en la transformación
+A pesar de no haber trabajado anteriormente con bases de datos no relacionales conocía de su existencia y cómo iban adquiriendo cada vez mayor popularidad entre los desarrolladores. Es por ello
+que los conceptos necesarios para correcta gestión y realización de operaciones sobre la base de datos se han adquirido a partir de la referencia bibliográfica \cite{book:MongoDB}.
+No obstante, Sails.js incorpora el ORM\footnote{Object-Relational mapping, o lo que es lo mismo, mapeo de objeto-relacional, es un modelo de programación que consiste en la transformación
 de las tablas de una base de datos, en una serie de entidades que simplifiquen las tareas básicas de acceso a los datos para el programador.} llamado Waterline que sirven de abstracción a la hora de operar
 con las bases de datos. 
 

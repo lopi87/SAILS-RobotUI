@@ -2,22 +2,27 @@
 \contentsline {section}{\'{I}ndice}{1}{section*.1}
 \contentsline {section}{\numberline {1}Introducci\IeC {\'o}n y antecedentes}{3}{section.1}
 \contentsline {section}{\numberline {2}Objetivos}{6}{section.2}
-\contentsline {section}{\numberline {3}Acerca de este documento}{7}{section.3}
-\contentsline {section}{\numberline {4}Herramientas utilizadas}{8}{section.4}
-\contentsline {subsection}{\numberline {4.1}Herramientas software}{8}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Herramientas hardware}{8}{subsection.4.2}
-\contentsline {section}{\numberline {5}Licencia}{8}{section.5}
-\contentsline {section}{\numberline {6}Conceptos b\IeC {\'a}sicos}{9}{section.6}
-\contentsline {section}{\numberline {7}Organizaci\IeC {\'o}n temporal}{9}{section.7}
-\contentsline {section}{\numberline {8}Desarrollo software}{11}{section.8}
-\contentsline {subsection}{\numberline {8.1}Metodolog\IeC {\'\i }a de desarrollo}{11}{subsection.8.1}
-\contentsline {section}{\numberline {9} Comunicaciones }{12}{section.9}
-\contentsline {section}{\numberline {10}Introduccion}{13}{section.10}
-\contentsline {section}{\numberline {11} Interfaz gr\IeC {\'a}fica }{14}{section.11}
-\contentsline {subsection}{\numberline {11.1}Control por parte del usuario}{15}{subsection.11.1}
-\contentsline {subsection}{\numberline {11.2} Seguimiento por parte del usuario}{15}{subsection.11.2}
-\contentsline {section}{\numberline {12}Conclusiones}{15}{section.12}
-\contentsline {section}{\numberline {13}Mejoras futuras}{16}{section.13}
-\contentsline {section}{\numberline {14} Gu\IeC {\'\i }a de Usuario}{17}{section.14}
-\contentsline {subsection}{\numberline {14.1} Objetivos de la gu\IeC {\'\i }a de usuario }{17}{subsection.14.1}
-\contentsline {section}{Referencias}{18}{section*.10}
+\contentsline {section}{\numberline {3}Acerca de este documento}{6}{section.3}
+\contentsline {subsection}{\numberline {3.1}Licencia}{7}{subsection.3.1}
+\contentsline {section}{\numberline {4} Estado del arte }{8}{section.4}
+\contentsline {section}{\numberline {5}Herramientas utilizadas}{8}{section.5}
+\contentsline {subsection}{\numberline {5.1}Herramientas software}{9}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Herramientas hardware}{9}{subsection.5.2}
+\contentsline {section}{\numberline {6}Organizaci\IeC {\'o}n temporal}{9}{section.6}
+\contentsline {section}{\numberline {7}Desarrollo software}{12}{section.7}
+\contentsline {subsection}{\numberline {7.1}Metodolog\IeC {\'\i }a de desarrollo}{12}{subsection.7.1}
+\contentsline {section}{\numberline {8} Comunicaciones }{14}{section.8}
+\contentsline {subsection}{\numberline {8.1}Introducci\IeC {\'o}n}{14}{subsection.8.1}
+\contentsline {section}{\numberline {9}Robot de pruebas}{16}{section.9}
+\contentsline {subsection}{\numberline {9.1}Esquema de conexiones}{16}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.2}Software de control}{17}{subsection.9.2}
+\contentsline {section}{\numberline {10} Interfaz gr\IeC {\'a}fica }{17}{section.10}
+\contentsline {subsection}{\numberline {10.1} Panel de configuraci\IeC {\'o}n de interfaz }{18}{subsection.10.1}
+\contentsline {subsection}{\numberline {10.2} Panel Principal}{18}{subsection.10.2}
+\contentsline {subsection}{\numberline {10.3} Panel de control de robots }{19}{subsection.10.3}
+\contentsline {subsection}{\numberline {10.4} Panel seguimiento de robots }{20}{subsection.10.4}
+\contentsline {section}{\numberline {11} Gu\IeC {\'\i }a de Usuario}{20}{section.11}
+\contentsline {subsection}{\numberline {11.1} Objetivos de la gu\IeC {\'\i }a de usuario }{21}{subsection.11.1}
+\contentsline {section}{\numberline {12}Conclusiones}{21}{section.12}
+\contentsline {section}{\numberline {13}Mejoras futuras}{22}{section.13}
+\contentsline {section}{Referencias}{23}{section*.15}
