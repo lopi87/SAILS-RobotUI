@@ -3,11 +3,6 @@
     <div class="col-md-2">
       <div class="bottom_col">
         <div class="list-group">
-          <!--<a id='new_joystick' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/joystick/create', '<%= i18n('button') %>')">-->
-            <!--<i class="fa fa-dot-circle-o fa-2 marginlef10" aria-hidden="true">-->
-              <!--Joystick-->
-            <!--</i>-->
-          <!--</a>-->
           <a id='new_event' class="list-group-item" data-toggle="modal" data-target="#writeModal" onclick="ajax_call('/event/create', '<%= i18n('event') %>')">
             <i class="fa fa-tags fa-2 marginlef10" aria-hidden="true">
               <%= i18n('event') %>
@@ -33,7 +28,6 @@
               <%= i18n('icon') %>
             </i>
           </a>
-
         </div>
       </div>
 
@@ -122,7 +116,7 @@
       success: function (data) {
         $("#video_" + data.id).remove();
         $("#button_" + data.id).remove();
-        $("#slider_" + data.id).remove();
+        $("#content_slider_" + data.id).remove();
         $("#event_" + data.id).remove();
         toastr.info('RobotUI','A element has been deleted!' );
       },

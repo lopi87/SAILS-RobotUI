@@ -25,7 +25,7 @@
       restrict: {
         restriction: "parent",
         endOnly: true,
-        elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+        elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
       },
       // enable autoScroll
       autoScroll: true,
@@ -44,6 +44,10 @@
         var id_parts = id.split("_");
         var elem = $('#' + target.getAttribute('id'));
         id_parts[0] = id_parts[0] == 'button' ? 'action': id_parts[0]
+
+        //Slider case
+        id_parts[0] = id_parts[0] == 'content' ? 'slider': id_parts[0]
+        id_parts[1] = id_parts[0] == 'content' ? id_parts[2]: id_parts[1]
 
         var p = elem.position();
         $.ajax({

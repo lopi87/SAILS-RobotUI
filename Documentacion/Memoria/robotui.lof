@@ -37,39 +37,40 @@
 \contentsline {figure}{\numberline {7.9}{\ignorespaces Vista superior del veh\IeC {\'\i }culo.\relax }}{85}{figure.caption.64}
 \contentsline {figure}{\numberline {7.10}{\ignorespaces Canales de comunicaci\IeC {\'o}n abiertos por el robot.\relax }}{87}{figure.caption.66}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces Panel de actividades - Trello\relax }}{97}{figure.caption.71}
-\contentsline {figure}{\numberline {8.2}{\ignorespaces Descomposici\IeC {\'o}n de las tareas implicadas en el desarrollo del proyecto (Primera Parte).\relax }}{99}{figure.caption.72}
-\contentsline {figure}{\numberline {8.3}{\ignorespaces Descomposici\IeC {\'o}n de las tareas implicadas en el desarrollo del proyecto (Segunda parte).\relax }}{100}{figure.caption.73}
-\contentsline {figure}{\numberline {8.4}{\ignorespaces Diagrama de Gantt 1. Desarrollo del proyecto.\relax }}{103}{figure.caption.74}
-\contentsline {figure}{\numberline {8.5}{\ignorespaces Diagrama de Gantt 2. Desarrollo del proyecto.\relax }}{104}{figure.caption.75}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {9.1}{\ignorespaces P\IeC {\'a}gina principal RobotUI.\relax }}{107}{figure.caption.76}
-\contentsline {figure}{\numberline {9.2}{\ignorespaces Vista de la barra superior en modalidad usuario no identificado en el sistema.\relax }}{107}{figure.caption.77}
-\contentsline {figure}{\numberline {9.3}{\ignorespaces Vista de la barra superior en modalidad usuario identificado en el sistema.\relax }}{107}{figure.caption.78}
-\contentsline {figure}{\numberline {9.4}{\ignorespaces Formulario de registro de usuario.\relax }}{108}{figure.caption.79}
-\contentsline {figure}{\numberline {9.5}{\ignorespaces Informaci\IeC {\'o}n de un usuario.\relax }}{108}{figure.caption.80}
-\contentsline {figure}{\numberline {9.6}{\ignorespaces Formulario de creaci\IeC {\'o}n de un robot.\relax }}{110}{figure.caption.81}
-\contentsline {figure}{\numberline {9.7}{\ignorespaces Vista informativa de un robot.\relax }}{110}{figure.caption.82}
-\contentsline {figure}{\numberline {9.8}{\ignorespaces Panel de configuraci\IeC {\'o}n de los permisos de un robot.\relax }}{112}{figure.caption.84}
-\contentsline {figure}{\numberline {9.9}{\ignorespaces Panel informativo de un robot privado frente a uno p\IeC {\'u}blico.\relax }}{112}{figure.caption.85}
-\contentsline {figure}{\numberline {9.10}{\ignorespaces Panel de configuraci\IeC {\'o}n de la interfaz sin elementos a\IeC {\~n}adidos.\relax }}{113}{figure.caption.86}
-\contentsline {figure}{\numberline {9.11}{\ignorespaces Panel de elemento (izquierda) y panel de acciones (derecha) para la configuraci\IeC {\'o}n de la interfaz.\relax }}{114}{figure.caption.87}
-\contentsline {figure}{\numberline {9.12}{\ignorespaces Formulario para la creaci\IeC {\'o}n de un bot\IeC {\'o}n.\relax }}{115}{figure.caption.90}
-\contentsline {figure}{\numberline {9.13}{\ignorespaces Vista tipo de una interfaz configurada.\relax }}{116}{figure.caption.93}
-\contentsline {figure}{\numberline {9.14}{\ignorespaces Panel informativo de un robot donde se aprecia su identificador.\relax }}{117}{figure.caption.94}
-\contentsline {figure}{\numberline {9.15}{\ignorespaces Robot a la espera de conexi\IeC {\'o}n entrante.\relax }}{120}{figure.caption.96}
-\contentsline {figure}{\numberline {9.16}{\ignorespaces \IeC {\'I}ndice robots p\IeC {\'u}blicos.\relax }}{121}{figure.caption.97}
-\contentsline {figure}{\numberline {9.17}{\ignorespaces Vista del panel de control de un robot junto con el listado de usuarios realizando el seguimiento.\relax }}{121}{figure.caption.98}
-\contentsline {figure}{\numberline {9.18}{\ignorespaces Panel informativo de las caracter\IeC {\'\i }sticas del robot de la interfaz.\relax }}{122}{figure.caption.99}
-\contentsline {figure}{\numberline {9.19}{\ignorespaces Hist\IeC {\'o}rico de las \IeC {\'o}rdenes enviadas al robot junto con una entrada de comandos para enviar nuevas \IeC {\'o}rdenes directamente junto con el listado de usuarios presentes en la sesi\IeC {\'o}n de control. \relax }}{122}{figure.caption.100}
-\contentsline {figure}{\numberline {9.20}{\ignorespaces Panel informativo de un robot en su modalidad \emph {ocupado}.\relax }}{123}{figure.caption.101}
-\contentsline {figure}{\numberline {9.21}{\ignorespaces Vista del panel de seguimiento de un robot en tiempo real.\relax }}{123}{figure.caption.102}
-\contentsline {figure}{\numberline {9.22}{\ignorespaces Vista del panel de control de un robot junto con el listado de usuarios realizando el seguimiento.\relax }}{124}{figure.caption.103}
-\contentsline {figure}{\numberline {9.23}{\ignorespaces Formulario de redacci\IeC {\'o}n de un mensaje.\relax }}{125}{figure.caption.104}
-\contentsline {figure}{\numberline {9.24}{\ignorespaces Paneles de administraci\IeC {\'o}n para robots y usuarios.\relax }}{126}{figure.caption.105}
+\contentsline {figure}{\numberline {9.1}{\ignorespaces Panel de actividades - Trello\relax }}{99}{figure.caption.71}
+\contentsline {figure}{\numberline {9.2}{\ignorespaces Descomposici\IeC {\'o}n de las tareas implicadas en el desarrollo del proyecto (Primera Parte).\relax }}{101}{figure.caption.72}
+\contentsline {figure}{\numberline {9.3}{\ignorespaces Descomposici\IeC {\'o}n de las tareas implicadas en el desarrollo del proyecto (Segunda parte).\relax }}{102}{figure.caption.73}
+\contentsline {figure}{\numberline {9.4}{\ignorespaces Diagrama de Gantt 1. Desarrollo del proyecto.\relax }}{105}{figure.caption.74}
+\contentsline {figure}{\numberline {9.5}{\ignorespaces Diagrama de Gantt 2. Desarrollo del proyecto.\relax }}{106}{figure.caption.75}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {10.1}{\ignorespaces P\IeC {\'a}gina principal RobotUI.\relax }}{109}{figure.caption.76}
+\contentsline {figure}{\numberline {10.2}{\ignorespaces Vista de la barra superior en modalidad usuario no identificado en el sistema.\relax }}{109}{figure.caption.77}
+\contentsline {figure}{\numberline {10.3}{\ignorespaces Vista de la barra superior en modalidad usuario identificado en el sistema.\relax }}{109}{figure.caption.78}
+\contentsline {figure}{\numberline {10.4}{\ignorespaces Formulario de registro de usuario.\relax }}{110}{figure.caption.79}
+\contentsline {figure}{\numberline {10.5}{\ignorespaces Informaci\IeC {\'o}n de un usuario.\relax }}{110}{figure.caption.80}
+\contentsline {figure}{\numberline {10.6}{\ignorespaces Formulario de creaci\IeC {\'o}n de un robot.\relax }}{112}{figure.caption.81}
+\contentsline {figure}{\numberline {10.7}{\ignorespaces Vista informativa de un robot.\relax }}{112}{figure.caption.82}
+\contentsline {figure}{\numberline {10.8}{\ignorespaces Panel de configuraci\IeC {\'o}n de los permisos de un robot.\relax }}{114}{figure.caption.84}
+\contentsline {figure}{\numberline {10.9}{\ignorespaces Panel informativo de un robot privado frente a uno p\IeC {\'u}blico.\relax }}{114}{figure.caption.85}
+\contentsline {figure}{\numberline {10.10}{\ignorespaces Panel de configuraci\IeC {\'o}n de la interfaz sin elementos a\IeC {\~n}adidos.\relax }}{115}{figure.caption.86}
+\contentsline {figure}{\numberline {10.11}{\ignorespaces Panel de elemento (izquierda) y panel de acciones (derecha) para la configuraci\IeC {\'o}n de la interfaz.\relax }}{116}{figure.caption.87}
+\contentsline {figure}{\numberline {10.12}{\ignorespaces Formulario para la creaci\IeC {\'o}n de un bot\IeC {\'o}n.\relax }}{117}{figure.caption.90}
+\contentsline {figure}{\numberline {10.13}{\ignorespaces Vista tipo de una interfaz configurada.\relax }}{118}{figure.caption.93}
+\contentsline {figure}{\numberline {10.14}{\ignorespaces Panel informativo de un robot donde se aprecia su identificador.\relax }}{119}{figure.caption.94}
+\contentsline {figure}{\numberline {10.15}{\ignorespaces Robot a la espera de conexi\IeC {\'o}n entrante.\relax }}{122}{figure.caption.96}
+\contentsline {figure}{\numberline {10.16}{\ignorespaces \IeC {\'I}ndice robots p\IeC {\'u}blicos.\relax }}{123}{figure.caption.97}
+\contentsline {figure}{\numberline {10.17}{\ignorespaces Vista del panel de control de un robot junto con el listado de usuarios realizando el seguimiento.\relax }}{123}{figure.caption.98}
+\contentsline {figure}{\numberline {10.18}{\ignorespaces Panel informativo de las caracter\IeC {\'\i }sticas del robot de la interfaz.\relax }}{124}{figure.caption.99}
+\contentsline {figure}{\numberline {10.19}{\ignorespaces Hist\IeC {\'o}rico de las \IeC {\'o}rdenes enviadas al robot junto con una entrada de comandos para enviar nuevas \IeC {\'o}rdenes directamente junto con el listado de usuarios presentes en la sesi\IeC {\'o}n de control. \relax }}{124}{figure.caption.100}
+\contentsline {figure}{\numberline {10.20}{\ignorespaces Panel informativo de un robot en su modalidad \emph {ocupado}.\relax }}{125}{figure.caption.101}
+\contentsline {figure}{\numberline {10.21}{\ignorespaces Vista del panel de seguimiento de un robot en tiempo real.\relax }}{125}{figure.caption.102}
+\contentsline {figure}{\numberline {10.22}{\ignorespaces Vista del panel de control de un robot junto con el listado de usuarios realizando el seguimiento.\relax }}{126}{figure.caption.103}
+\contentsline {figure}{\numberline {10.23}{\ignorespaces Formulario de redacci\IeC {\'o}n de un mensaje.\relax }}{127}{figure.caption.104}
+\contentsline {figure}{\numberline {10.24}{\ignorespaces Paneles de administraci\IeC {\'o}n para robots y usuarios.\relax }}{128}{figure.caption.105}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1}{\ignorespaces Iniciando Sails.\relax }}{133}{figure.caption.109}
-\contentsline {figure}{\numberline {2}{\ignorespaces Sails en funcionamiento \footnotemark .\relax }}{133}{figure.caption.110}
-\contentsline {figure}{\numberline {3}{\ignorespaces Utilizaci\IeC {\'o}n del gestor de procesos Pm2 en el entorno de producci\IeC {\'o}n.\relax }}{138}{figure.caption.111}
+\contentsline {figure}{\numberline {1}{\ignorespaces Iniciando Sails.\relax }}{135}{figure.caption.109}
+\contentsline {figure}{\numberline {2}{\ignorespaces Sails en funcionamiento \footnotemark .\relax }}{135}{figure.caption.110}
+\contentsline {figure}{\numberline {3}{\ignorespaces Utilizaci\IeC {\'o}n del gestor de procesos Pm2 en el entorno de producci\IeC {\'o}n.\relax }}{140}{figure.caption.111}
 \addvspace {10\p@ }
