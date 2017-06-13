@@ -1,0 +1,6 @@
+https://github.com/kriswill/sails-docker-boilerplate
+
+
+sudo apt-get install docker
+
+docker-machine create -d virtualbox --virtualbox-cpu-count=4 --virtualbox-disk-size=40960 --virtualbox-memory=4096 default

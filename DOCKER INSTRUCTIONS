@@ -1,0 +1,3 @@
+Run ./start-dependencies.sh
+
+Run ./start-dev.sh or ./start-prod.sh
