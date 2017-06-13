@@ -9,7 +9,6 @@ var pager = require('sails-pager');
 
 module.exports = {
 
-  //Carga la pag sign up
   new: function (req, res) {
     res.view();
   },

@@ -51,21 +51,18 @@ module.exports = {
       type: 'string'
     },
 
-    // Add a reference to Robot
     d_robots:{
       collection: 'robot',
       via: 'drivers',
       dominant: true
     },
 
-    // Add a reference to Robot
     v_robots:{
       collection: 'robot',
       via: 'viewers',
       dominant: true
     },
 
-    // Add a reference to Robot
     robots:{
       collection: 'robot',
       via: 'owner',

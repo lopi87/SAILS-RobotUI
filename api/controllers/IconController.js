@@ -22,7 +22,6 @@ module.exports = {
 
 
 
-  //Subida de iconos via ajax para la creacion de botones
   new: function(req,res,next){
 
     if (req.xhr) {

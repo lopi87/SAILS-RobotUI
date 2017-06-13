@@ -9,7 +9,6 @@ module.exports = {
 
   attributes: {
 
-    // Add a reference to socket
     sockets_room: {
       collection: 'session',
       via: 'rooms'

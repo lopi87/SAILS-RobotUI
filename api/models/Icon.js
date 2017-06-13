@@ -9,7 +9,6 @@ module.exports = {
 
   attributes: {
 
-    //El icono pertenece a un usuario
     user_owner: {
       model: 'user'
     },

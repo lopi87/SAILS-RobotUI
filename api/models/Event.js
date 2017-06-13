@@ -10,7 +10,6 @@ module.exports = {
 
   attributes: {
 
-    //El evento pertenece a una interfaz
     interface_owner:{
       model: 'interface'
     },

@@ -1,5 +1,0 @@
---reporter spec
---colors
---timeout 5000
---compilers js:babel/register
---use_strict

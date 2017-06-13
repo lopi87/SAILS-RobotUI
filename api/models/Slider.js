@@ -9,7 +9,6 @@ module.exports = {
 
   attributes: {
 
-    //El slider pertenece a una interfaz
     interface_owner:{
       model: 'interface'
     },

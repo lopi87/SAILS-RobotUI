@@ -4,7 +4,6 @@
 
   $("#connect").click(function() {
     try {
-      // Conectar con el robot(raspberry pi).
       var socket = io.connect(address_robot, {
         'reconnection': true,
         'reconnectionDelay': 10,
@@ -19,7 +18,6 @@
 
     }
 
-    //Presionar boton desconectar
     $("#disconnect").click(function () {
       try {
         socket.disconnect();
@@ -36,10 +34,8 @@
     });
 
 
-    //captura evento desconectar cuando el robot es apagado o pierde la señal
     socket.on('disconnect', function () {
       toastr.info('Robot disconnect!' + address_robot, 'Robot' )
-      //Sincronizar con el resto de clientes:
       io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
       change_img_state('<%=robot.id %>', false, '<%= i18n('connect')%>', '<%= i18n('disconnect')%>');
       change_connect_btn( 'connect','<%= i18n('connect')%>');
@@ -51,7 +47,6 @@
     });
 
 
-    //leer video stream
     <% if( typeof video !== 'undefined' ){ %>
       socket.on('<%= video.event_name %>', function(data) {
         //console.log(data);

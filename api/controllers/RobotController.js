@@ -12,7 +12,6 @@ var pager = require('sails-pager');
 module.exports = {
 
 
-  //Carga la pag new
   new: function (req, res) {
 
     User.find(function foundUsers(err, users) {
@@ -89,17 +88,6 @@ module.exports = {
 
 
   index: function (req, res, next) {
-
-    //   var ping = require('ping');
-    //   var address;
-    //   robots.forEach(function(robot){
-    //     address = robot.ipaddress + ':' + robot.port;
-    //     ping.sys.probe(robot.ipaddress, function(isAlive){
-    //       var msg = isAlive ? 'host ' + address + ' is alive' : 'host ' + address + ' is dead';
-    //       robot.isAlive = isAlive;
-    //       console.log(msg);
-    //     });
-    //   });
 
     var page = page2 = page3 = 1;
     if (typeof req.param('page') != 'undefined') {

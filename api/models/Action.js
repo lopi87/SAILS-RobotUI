@@ -9,12 +9,10 @@ module.exports = {
 
   attributes: {
 
-    //La acción pertenece a una interfaz
     interface_owner:{
       model: 'interface'
     },
 
-    //La acción tiene un icono
     icon:{
       model: 'icon'
     },

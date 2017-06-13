@@ -23,12 +23,10 @@ module.exports = {
       model: 'robot'
     },
 
-    //Rooms of socket
     rooms: {
       collection: 'room',
       via: 'sockets_room'
     },
-
 
     toJSON: function(){
       var obj = this.toObject();

@@ -17,26 +17,22 @@ module.exports = {
       model: 'robot'
     },
 
-    // Acciones de la interfaz
     actions: {
       collection: 'action',
       via: 'interface_owner'
     },
 
 
-    // Sliders de la interfaz
     sliders: {
       collection: 'slider',
       via: 'interface_owner'
     },
 
-    // Eventos de la interfaz
     events: {
       collection: 'event',
       via: 'interface_owner'
     },
 
-    //Video de la interfaz
     video: {
       model: 'video'
     },
