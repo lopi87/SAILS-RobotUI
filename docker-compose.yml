@@ -1,11 +1,4 @@
-dev:
-  image: robotui_2
+mongo:
+  image: mongo:3
   ports:
-    - 8080:1337
-prod:
-  image: robotui_2
-  ports:
-    - 8081:1337
-  environment:
-    - NODE_ENV=production
-
+    - 27017:27017

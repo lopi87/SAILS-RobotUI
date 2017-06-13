@@ -1,25 +1,17 @@
-FROM nodesource/jessie:6.2
+FROM node:4
+
+MAINTAINER Manuel Lopez
 
 RUN apt-get update
-RUN npm install sails@0.12.3 -g
-RUN npm install pm2 -g
+RUN apt-get upgrade -y
+RUN apt-get install gcc make build-essential g++ -y
+RUN npm install -g node-gyp
+RUN npm install -g pm2
 
 RUN mkdir -p /app
 WORKDIR /app
 
 COPY . /app
-
-MAINTAINER Manuel Lopez
-
-USER root
-
-ADD . /app/
-
-EXPOSE 8080
+RUN npm install
 
 CMD [ "pm2", "start", "--no-daemon", "app.js" ]
-
-
-FROM mongo:latest
-RUN apt-get install mongodb
-
