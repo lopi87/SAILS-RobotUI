@@ -1,23 +1,22 @@
-<%- partial('../_alert.ejs') %>
-
-<div id="content_slider_<%= slider.id %>">
-  <div id="slider_<%= slider.id %>" class=" position_<%= slider.id %> draggable"></div>
-  <%- partial ('../slider/style_slider.ejs', {slider: slider})%>
-
-  <script type="text/javascript">
-    $("#slider_<%= slider.id %>").slider(
-      {
-        <% if (slider.vertical == true){ %>
-        orientation: 'vertical',
-        <% } else { %>
-        orientation: 'horizontal',
-        <% } %>
-        value: parseInt('<%= slider.value %>'),
-        min: parseInt('<%= slider.min %>'),
-        max: parseInt('<%= slider.max %>'),
-        step: parseInt('<%= slider.step %>')
-      }
-    );
-  </script>
-
+<div id="content_slider_<%= slider.id %>" class="content_slider_<%= slider.id %> position_<%= slider.id %> draggable" style="max-width: 100px">
+  <div id="slider_<%= slider.id %>"></div>
 </div>
+
+
+<%- partial ('../slider/style_slider.ejs', {slider: slider})%>
+
+<script type="text/javascript">
+  $("#slider_<%= slider.id %>").slider(
+    {
+      <% if (slider.vertical == true){ %>
+      orientation: 'vertical',
+      <% } else { %>
+      orientation: 'horizontal',
+      <% } %>
+      value: parseInt('<%= slider.value %>'),
+      min: parseInt('<%= slider.min %>'),
+      max: parseInt('<%= slider.max %>'),
+      step: parseInt('<%= slider.step %>')
+    }
+  );
+</script>

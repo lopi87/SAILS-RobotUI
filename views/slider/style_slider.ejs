@@ -6,11 +6,12 @@
     height: 200px;
   }
 
-
-  .slider_<%= slider.id %>.position_<%= slider.id %>{
+  .content_slider_<%= slider.id %>.position_<%= slider.id %>{
     left: <%= slider.coordinate_x + 'px'%>;
     top: <%= slider.coordinate_y + 'px'%>;
-    position: absolute;
+    position: absolute !important;
+    float: left !important;
+    z-index: 2500;
   }
 
 </style>

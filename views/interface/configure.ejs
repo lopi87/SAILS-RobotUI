@@ -46,10 +46,10 @@
         id_parts[0] = id_parts[0] == 'button' ? 'action': id_parts[0]
 
         //Slider case
-        id_parts[0] = id_parts[0] == 'content' ? 'slider': id_parts[0]
-        id_parts[1] = id_parts[0] == 'content' ? id_parts[2]: id_parts[1]
-
+        id_parts[0] =  id_parts[0] == 'content' ? id_parts[1] : id_parts[0]
+        id_parts[1] =  id_parts[1] == 'slider' ? id_parts[2] : id_parts[1]
         var p = elem.position();
+
         $.ajax({
           type: "POST",
           url: "/" + id_parts[0] + "/update_position",
@@ -58,10 +58,10 @@
             xhr.setRequestHeader('X-CSRF-Token', $("#_csrf").val());
           },
           done: function () {
-            console.log('bottom position updated');
+            console.log('position updated');
           },
           success: function(data){
-            console.log('bottom position updated');
+            console.log('position updated');
           },
 
           error: function(data) {

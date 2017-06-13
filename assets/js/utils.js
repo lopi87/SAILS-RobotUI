@@ -250,10 +250,10 @@ function destroy_mode(state){
       fn = "ajax_destroy_call('/action/destroy/" + id + "')";
       $("#button_" + id).attr("onclick", fn);
     });
-    $("[id^=slider_]").each( function( ){
+    $("[id^=content_slider_]").each( function( ){
       $( this ).attr('data-toggle', '');
       $( this ).attr('data-target', '');
-      var id = $( this ).attr('id').replace('slider_','');
+      var id = $( this ).attr('id').replace('content_slider_','');
       fn = "ajax_destroy_call('/slider/destroy/" + id + "')";
       $("#content_slider_" + id).attr("onclick", fn);
     });
@@ -289,10 +289,10 @@ function edit_mode( state ){
       fn = "ajax_call('/action/edit/" + id + "','action')";
       $("#button_" + id).attr("onclick", fn);
     });
-    $("[id^=slider_]").each( function( ){
+    $("[id^=content_slider_]").each( function( ){
       $( this ).attr('data-toggle', 'modal');
       $( this ).attr('data-target', '#writeModal');
-      id = $( this ).attr('id').replace('slider_','');
+      id = $( this ).attr('id').replace('content_slider_','');
       fn = "ajax_call('/slider/edit/" + id + "','slider')";
       $("#content_slider_" + id).attr("onclick", fn);
     });
