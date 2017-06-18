@@ -108,18 +108,21 @@ module.exports = {
       Robot.pagify('robots', {
         findQuery: {owner: user.id},
         sort: ['createdAt DESC'],
+        populate: ['drivers', 'viewers', 'owner', 'iface'],
         page: page
       }).then(function (data_robots) {
 
         Robot.pagify('robots', {
           findQuery: {viewers: user.id},
           sort: ['createdAt DESC'],
+          populate: ['drivers', 'viewers', 'owner', 'iface'],
           page: page2
         }).then(function (data_d_robots) {
 
           Robot.pagify('robots', {
             findQuery: {drivers: user.id},
             sort: ['createdAt DESC'],
+            populate: ['drivers', 'viewers', 'owner', 'iface'],
             page: page3
           }).then(function (data_v_robots) {
 
@@ -278,7 +281,7 @@ module.exports = {
       }
 
       //Eliminar la interfaz del robot
-      Interface.find({robot_owner: robot.id}).exec(function (err, interface) {
+      Interface.findOne( robot.iface, function foundRobot(err, interface) {
         if (err) return next(err);
         if (!interface) {
           FlashService.error(req, 'Interface doesn\'t exists.');
@@ -294,15 +297,14 @@ module.exports = {
             Video.destroy({interface_owner: interface.id}).exec(function (err) {
               if (err) return next(err);
 
-              Interface.destroy(interface.id, function interfaceDestroyed(err) {
+              Interface.destroy({ id: interface.id }, function interfaceDestroyed(err) {
                 if (err) return next(err);
 
+                ImageService.delete_file(robot);
                 Robot.destroy(id, function robotDestroyed(err) {
                   if (err) return next(err);
 
-                  ImageService.delete_file(robot);
-
-                  Robot.publishDestroy(id, {id: robot.id});
+                  Robot.publishDestroy(id, {id: id});
                   FlashService.success(req, 'Robot deleted');
                   return res.redirect('robot/index');
                 });
