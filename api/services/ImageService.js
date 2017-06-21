@@ -60,7 +60,8 @@ module.exports = {
   upload_robot_avatar: function(img, robot){
 
     img.upload({
-      maxBytes: 10000000
+      maxBytes: 10000000,
+      dirname: require('path').resolve(sails.config.appPath, 'assets/images/robot_avatar')
     },function whenDone(err, uploadedFiles) {
       if (err) {
         return res.negotiate(err);
@@ -71,10 +72,7 @@ module.exports = {
         return res.badRequest('No file was uploaded');
       }
 
-      var extension = uploadedFiles[0].fd.split('.').pop();
-
-      // Save the "fd" and the url where the avatar for a user can be accessed
-      Robot.update(robot.id, { avatarUrl: require('util').format('/uploads/robot_avatar/%s', robot.id + '.' + extension)}).exec(function updated(err, updated) {
+      Robot.update(robot.id, { avatarUrl: require('util').format('/assets/images/robot_avatar/%s', uploadedFiles[0].fd.split('/').pop()) }).exec(function updated(err, updated) {
         if (err) return res.negotiate(err);
         return;
       });
