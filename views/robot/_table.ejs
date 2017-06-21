@@ -22,7 +22,7 @@
       <td><span id="label_state_<%=robot.id%>" class="label label-pill <%= robot.busy ? 'label-danger' : 'label-success' %>"> <%= robot.busy ? i18n('busy') : i18n('free') %> </span></td>
 
       <td>
-        <img src="<%= sails.getBaseUrl() + robot.avatarUrl %>" alt="Avatar" title="<%= robot.name %>" class="card-left card-circle card-margin-right img-responsive" style="width:32px">
+        <img src="<%= robot.avatarUrl %>" alt="Avatar" title="<%= robot.name %>" class="card-left card-circle card-margin-right img-responsive" style="width:32px">
         <a href="/robot/show/<%= robot.id %>"><%= robot.name %></a>
       </td>
 
