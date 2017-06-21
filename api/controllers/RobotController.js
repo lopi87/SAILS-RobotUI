@@ -53,19 +53,13 @@ module.exports = {
             if (err) return next(err);
 
             if (req._fileparser.upstreams.length == 1) {
-              ImageService.upload_robot_avatar(req.file('robot_avatar'), robot, function whenDone(err, files) {
-                if (err) return res.negotiate(err);
-                //Redirección a index
-                return res.redirect('robot/index/');
-              });
-
-            } else {
-              return res.redirect('robot/index/');
+              ImageService.upload_robot_avatar(req.file('robot_avatar'), robot);
             }
           });
         });
       });
     });
+    return res.redirect('robot/index/');
   },
 
 
