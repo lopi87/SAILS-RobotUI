@@ -61,7 +61,7 @@ module.exports = {
 
     img.upload({
       maxBytes: 10000000,
-      dirname: require('path').resolve(sails.config.appPath, 'uploads/robot_avatar/')
+      dirname: require('path').resolve(sails.config.appPath, 'images/robot_avatar/')
     },function whenDone(err, uploadedFiles) {
       if (err) {
         return res.negotiate(err);
@@ -72,7 +72,7 @@ module.exports = {
         return res.badRequest('No file was uploaded');
       }
 
-      Robot.update(robot.id, { avatarUrl: require('util').format('/uploads/robot_avatar/%s', uploadedFiles[0].fd.split('/').pop()) }).exec(function updated(err, updated) {
+      Robot.update(robot.id, { avatarUrl: require('util').format('/images/robot_avatar/%s', uploadedFiles[0].fd.split('/').pop()) }).exec(function updated(err, updated) {
         if (err) return res.negotiate(err);
         return;
       });
