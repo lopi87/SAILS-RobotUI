@@ -10,6 +10,29 @@
 \usepackage{graphicx}
 \usepackage{framed}
 \usepackage[version=0.96]{pgf}
+\usepackage{listings}
+
+\usepackage{changepage}
+\usepackage{lipsum}
+
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+
+
 
 
 \definecolor{shadecolor}{RGB}{243,243,243}
@@ -107,54 +130,325 @@ robots en tiempo real}}
 
 
 
-
 \begin{document}
 \scriptsize{
 
-\frame{\titlepage
-
-}
+\frame{\titlepage}
 
 \section{Índice}
 \frame{\frametitle{\textcolor{black}{Índice}}
   \textcolor{black}{\tableofcontents}
 }
 
-\section{Planificación}
 
-\frame{\frametitle{\textcolor{black}{Tareas}}
+
+\section{Introducción}
+
+\frame{\frametitle{\textcolor{black}{ Introducción }}
+
+
+\begin{center}
+ \fontsize{16pt}{12pt}\selectfont
+¿Por qué no añadir nuestros proyectos robóticos a la red?
+ \end{center}
+}
+
+
+\section{Objetivos}
+
+\frame{\frametitle{\textcolor{black}{ Objetivos }}
+
+RobotUI es una combinación de un elemento software (aplicación web) y hardware (vehículo de pruebas y demostración).
+
+
+\begin{itemize}
+ \item Desarrollar un sistema mediante el cual los usuarios puedan configurar una interfaz para el control de sus dispositivos robóticos.
+ \item Permitir el control de los dispositivos robóticos haciendo uso de la interfaz previamente configurada tanto por su creador como por otros usuarios.
+ \item Permitir la visualización del control que otros usuarios realizan de los dispositivos en tiempo real.
+ \item No se debe requerir de amplios conocimientos de programación para su utilización.
+\end{itemize}
+
+\begin{center}
+ \fontsize{20pt}{12pt}\selectfont
+ \emph{RobotSharing}
+\end{center}
+
+}
+
+
+
+\section{Herramientas software}
+
+\frame{\frametitle{\textcolor{black}{Herramientas software}}
 
 \begin{figure}[H]
-\includegraphics[width=6.5cm]{descomposicion_tareas01.png}
+\includegraphics[width=4cm]{nodejs-logo.png}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=4cm]{sailsjs-logo.png}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=4cm]{socketio-logo.png}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=4cm]{logo_mongo.png}
+\end{figure}
+
+
+}
+
+
+\section{Comunicaciones}
+
+\frame{\frametitle{\textcolor{black}{Comunicaciones}}
+
+
+\begin{figure}%
+    \centering
+    \includegraphics[width=5cm]{http-weboscket.png}
+    \qquad
+    \includegraphics[width=5cm]{http+weboscket.png}
+\end{figure}
+
+\begin{center}
+  Peticiones entre un navegador y un servidor HTTP con y sin el empleo de Websockets.
+\end{center}
+ 
+}
+
+\subsection{Salas}
+
+\frame{\frametitle{\textcolor{black}{ Comunicaciones - Salas }}
+
+\begin{figure}%
+    \centering
+    \includegraphics[scale=0.35]{salas-websocket.png}
+\end{figure}
+
+\begin{center}
+Representación de una sala compuesta por dos clientes.
+\end{center}
+
+}
+
+
+\subsection{Subscripción}
+
+\begin{frame}[fragile]
+\frametitle{\textcolor{black}{ Comunicaciones - Subscripción}}
+Sails incorpora dos modalidades de suscripción:
+
+\begin{itemize}
+ \item \textbf{ Subscripción a clase:} Permite al socket escuchar la creación de nuevas instancias de modelo mediante el método \emph{publishCreate()}. 
+ \item \textbf{Subscripción a modelo:} Permite al socket escuchar los cambios de modelos a través de los métodos \emph{publishUpdate} y/o \emph{publishDestroy} de una instancia o conjunto de instancias en concreto.
+\end{itemize}
+
+\begin{adjustwidth}{-2em}{-1em}
+
+  \begin{lstlisting}[language=JavaScript]
+
+    user_subscribe: function (req, res, next) {
+	//Update and destroy
+	User.find(function foundUsers(err, users) {
+          if (err) return next(err);
+	  User.subscribe(req.socket, users);
+	});
+
+	//Create
+	User.watch(req);
+    }
+    
+  \end{lstlisting}
+\end{adjustwidth}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{\textcolor{black}{ Comunicaciones - Envío de mensajes }}
+
+
+\begin{adjustwidth}{-8em}{-1em}
+      \begin{lstlisting}[language=JavaScript]
+
+	      //Cambio de estado a online
+	      User.update( user.id, { online: true }, function (err){
+		if (err) return next(err);
+
+		// Informar a otros clientes (sockets abiertos) 
+		// que el usuario esta logueado
+		User.publishUpdate(user.id, {
+		  loggedIn: true,
+		  id: user.id
+		});
+	      });
+
+      \end{lstlisting}
+\end{adjustwidth}
+
+\end{frame}
+
+
+
+\subsection{Flujo de datos}
+
+\frame{\frametitle{\textcolor{black}{ Comunicaciones - Flujo de datos }}
+
+\begin{figure}%
+    \centering
+    \includegraphics[scale=0.35]{flujo_comunicaciones_controlador.png}
+\end{figure}
+
+\begin{center}
+  Envío de instrucciones al robot.
+\end{center}
+}
+
+
+
+\frame{\frametitle{\textcolor{black}{ Comunicaciones - Flujo de datos }}
+
+\begin{figure}%
+    \centering
+    \includegraphics[scale=0.35]{flujo_comunicaciones_captura.png}
+\end{figure}
+
+
+
+\begin{center}
+  Captura y difusión de datos obtenidos del robot.
+\end{center}
+
+}
+
+\frame{\frametitle{\textcolor{black}{ Comunicaciones - Flujo de datos }}
+
+\begin{figure}%
+    \centering
+    \includegraphics[scale=0.35]{flujo-comunicaciones-robot.png}
+\end{figure}
+
+
+\begin{center}
+  Envío de notificación de robot disponible.
+\end{center}
+
+}
+
+\section{Interfaz}
+
+\subsection{Configuración }
+
+\frame{\frametitle{\textcolor{black}{ Interfaz - Configuracion }}
+
+\begin{figure}%
+    \centering
+    \includegraphics[scale=0.25]{interfaz-creada.png}
+\end{figure}
+}
+
+\subsection{Control }
+
+\frame{\frametitle{\textcolor{black}{ Interfaz - Control }}
+
+\begin{figure}%
+    \centering
+    \includegraphics[scale=0.25]{vista_control.png}
 \end{figure}
 
 }
 
-\frame{\frametitle{\textcolor{black}{Diagrama de Gantt}}
 
-\begin{figure}[H]
-\includegraphics[width=4.4cm]{gantt01.png}
-\includegraphics[width=4.4cm]{gantt02.png}
+\subsection{Seguimiento}
+\frame{\frametitle{\textcolor{black}{ Interfaz - Seguimiento }}
+\begin{figure}%
+    \centering
+    \includegraphics[scale=0.35]{vista_seguimiento.png}
 \end{figure}
+}
 
+\subsection{Permisos}
+
+\frame{\frametitle{\textcolor{black}{ Interfaz - Modalidades }}
+  \begin{figure}[H]
+      \centering
+      \includegraphics[width=10cm]{permisos.png}
+  \end{figure}
+
+  \begin{center}
+    Panel informativo de un robot privado frente a uno público.
+  \end{center}
 }
 
 
+\subsection{Índice}
+
+\frame{\frametitle{\textcolor{black}{ Interfaz - Robots disponibles }}
+\begin{figure}%
+    \centering
+    \includegraphics[scale=0.20]{robots-publicos.png}
+\end{figure}
+}
+
+
+
+\section{Robot de pruebas}
+
+\subsection{Tecnologías}
+
+\frame{\frametitle{\textcolor{black}{ Robot de pruebas - Tecnologías }}
+  \begin{figure}[H]
+  \includegraphics[width=7.5cm]{tecnologias-robot.png}
+  \end{figure}
+}
+
+\subsection{Fotografía}
+
+\frame{\frametitle{\textcolor{black}{ Robot de pruebas }}
+\begin{figure}[H]
+\includegraphics[width=8.5cm]{robot2.jpg}
+\end{figure}
+}
 
 
 \section{Conclusiones}
 
-\frame{\frametitle{\textcolor{black}{Objetivos logrados}}
-  Durante la realización del proyecto \emph{OpenTSR: Vehículo reconocedor de señales de tráfico} como trabajo de fin de carrera, he conseguido profundizar mi conocimiento en los siguientes campos:
+\frame{\frametitle{\textcolor{black}{Conclusiones}}
+  La realización del proyecto \emph{RobotUI: Asistente de diseño de interfaz de control, seguimiento y sharing de
+robots en tiempo real} como trabajo de fin de carrera, se ha caracterizado por:
 
   \begin{itemize}
   \item La elaboración de un vehículo de pruebas haciendo uso de una Raspberry Pi 3 Model B.
   \item Aprendizaje a la utilización del framework Sails.js.
-  \item Trabajo con eventos en tiempo real mediante el empleo de WebSockets, de la cual se han adquirido conocimientos que no dudo que me serán de utilidad para futuros proyectos y desarrollos.
+  \item Trabajo con eventos en tiempo real mediante el empleo de WebSockets, biblioteca Socket.io.
   \item Empleo de una base de datos no relacional como Mongo DB.
   \item Transmisión de gran cantidad de datos entre cliente servidor y servidor cliente. Streaming de vídeo y emisión de comandos entre otros datos.
   \end{itemize}
 }
 
 
+\section{Preguntas}
+
+\frame{\frametitle{\textcolor{black}{Preguntas}}
+
+\begin{center}
+ \huge{¿Preguntas?}
+\end{center}
+
+
+\begin{figure}[H]
+\includegraphics[width=4.5cm]{preguntas.jpg}
+\end{figure}
+
+
+}
+
 \end{document}
+
+
+
+

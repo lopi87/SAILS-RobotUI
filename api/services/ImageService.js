@@ -80,36 +80,7 @@ module.exports = {
             FlashService.error(req, 'Err');
             return;
           }
-          return cb(null, Path);
-        });
-      }
-    }
-    }, done );
-  },
-
-  upload_robot_documentation: function(img, robot, done){
-    img.upload({ maxBytes: 10000000, saveAs: function(file, cb){
-
-      // setting allowed file types
-      var allowedTypes = ['application/pdf'];
-      var Path = '../../.tmp/public/uploads/robot_documentation/disallowed.disallowed';
-
-      // seperate allowed and disallowed file types
-      if(allowedTypes.indexOf(file.headers['content-type']) != -1 && file.length != 0) {
-        var extension = file.filename.split('.').pop();
-        Path = '../../.tmp/public/uploads/robot_documentation/' + robot.id + '.' + extension;
-
-        // Save the url where the avatar for a user can be accessed
-        Robot.update(robot.id, {
-          // Generate a unique URL where the avatar can be downloaded.
-          avatarUrl: require('util').format('/uploads/robot_documentation/%s', robot.id + '.' + extension)
-        }).exec(function robotUpdated(err, updated){
-          if (err) {
-            FlashService.error(req, 'Err');
-            return;
-          }
-
-          return cb(null, Path);
+          return cb(null, updated);
         });
       }
     }
