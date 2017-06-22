@@ -21,7 +21,7 @@
       <hr>
 
       <div class="card-container">
-        <img src="<%= robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:75px">
+        <img src="<%= sails.getBaseUrl() + robot.avatarUrl %>" alt="Avatar" class="card-left card-circle card-margin-right" style="width:75px">
         <p><label><%= i18n('ip_address') + ': ' %></label><%= robot.ipaddress + ':' + robot.port %></p>
         <p><label><%= i18n('description') + ': ' %></label> <%= robot.description  %></p>
         <p><label><%= i18n('id') + ': ' %></label> <%= robot.id  %></p>

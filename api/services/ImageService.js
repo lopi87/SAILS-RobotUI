@@ -56,12 +56,49 @@ module.exports = {
   },
 
 
+  // upload_robot_avatar: function(img, robot){
+  //   img.upload({
+  //     maxBytes: 10000000,
+  //     adapter: require('skipper-gridfs'),
+  //     uri: 'mongodb://127.0.0.1:27017/RobotUI.images',
+  //     metadata: { robot: robot.id }
+  //
+  //   }, function (err, filesUploaded) {
+  //     if (err) return;
+  //
+  //       Robot.update(robot.id, { avatarUrl: filesUploaded[0].fd }).exec(function updated(err, updated) {
+  //         if (err) return res.negotiate(err);
+  //         return;
+  //       });
+  //
+  //     return;
+  //   });
+  // },
+  //
+  //
+  //
+  //
+  // download_robot_avatar: function ( filename, res) {
+  //   var blobAdapter = require('skipper-gridfs')({
+  //     uri: 'mongodb://127.0.0.1:27017/RobotUI.images',
+  //   });
+  //
+  //   blobAdapter.read(filename, function(error , file) {
+  //     if(error) {
+  //       res.json(error);
+  //     } else {
+  //       res.contentType('image/png');
+  //       res.send(new Buffer(file));
+  //     }
+  //   });
+  // },
+
 
   upload_robot_avatar: function(img, robot){
 
     img.upload({
       maxBytes: 10000000,
-      dirname: require('path').resolve(sails.config.appPath, 'images/robot_avatar/')
+      dirname: require('path').resolve(sails.config.appPath, 'avatars/robots/')
     },function whenDone(err, uploadedFiles) {
       if (err) {
         return res.negotiate(err);
@@ -72,7 +109,7 @@ module.exports = {
         return res.badRequest('No file was uploaded');
       }
 
-      Robot.update(robot.id, { avatarUrl: require('util').format('images/robot_avatar/%s', uploadedFiles[0].fd.split('/').pop()) }).exec(function updated(err, updated) {
+      Robot.update(robot.id, { avatarUrl: require('util').format('/avatars/robots/%s', uploadedFiles[0].fd.split('/').pop()) }).exec(function updated(err, updated) {
         if (err) return res.negotiate(err);
         return;
       });
@@ -82,7 +119,7 @@ module.exports = {
   delete_file: function(element){
     var location = '.tmp/public' + element.avatarUrl;
     if (fs.existsSync(location)){
-      fs.unlinkSync(location);
+      //fs.unlinkSync(location);
     }
   }
 

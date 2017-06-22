@@ -128,7 +128,7 @@ module.exports = {
   beforeUpdate: function (values, next) {
 
     if(values.newPassword){
-      if(!values.password || values.password != values.confirmation){
+      if(!values.password || values.password   != values.confirmation){
         return next({err: ["Password doesn't match password confirmation."]})
       }
 

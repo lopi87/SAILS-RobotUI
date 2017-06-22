@@ -19,7 +19,7 @@
 
     <div class="card-container">
       <div class="thumbnail" >
-        <a href="#"><img id="img_card_<%= robot.id %>" src="<%= robot.avatarUrl %>"></a>
+        <a href="#"><img id="img_card_<%= robot.id %>" src="<%= sails.getBaseUrl() + robot.avatarUrl %>"></a>
       </div>
       <p><%= i18n('ip_address') + ': ' + robot.ipaddress + ':' + robot.port %></p>
       <br>
