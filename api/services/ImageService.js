@@ -98,7 +98,7 @@ module.exports = {
 
     img.upload({
       maxBytes: 10000000,
-      dirname: require('path').resolve(sails.config.appPath, 'avatars/robots/')
+      dirname: require('path').resolve(sails.config.appPath, 'assets/images/robot_avatar')
     },function whenDone(err, uploadedFiles) {
       if (err) {
         return res.negotiate(err);
