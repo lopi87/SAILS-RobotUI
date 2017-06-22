@@ -100,23 +100,17 @@ module.exports = {
       maxBytes: 10000000,
       dirname: require('path').resolve(sails.config.appPath, 'assets/images/robot_avatar')
     },function whenDone(err, uploadedFiles) {
-      if (err) {
-        return res.negotiate(err);
-      }
+      if (err) { return res.negotiate(err); }
 
-      // If no files were uploaded, respond with an error.
       if (uploadedFiles.length === 0){
         return res.badRequest('No file was uploaded');
       }
-
 
       var filename = uploadedFiles[0].fd.split('/').pop();
       var uploadLocation = process.cwd() +'/assets/images/robot_avatar/' + filename;
       var tempLocation = process.cwd() + '/.tmp/public/images/robot_avatar/' + filename;
 
-      //Copy the file to the temp folder so that it becomes available immediately
       fs.createReadStream(uploadLocation).pipe(fs.createWriteStream(tempLocation));
-
 
       Robot.update(robot.id, { avatarUrl: require('util').format('/images/robot_avatar/%s',  filename ) }).exec(function updated(err, updated) {
         if (err) return res.negotiate(err);
@@ -124,12 +118,6 @@ module.exports = {
       });
     });
   },
-
-
-
-
-
-
 
 
   delete_file: function(element){

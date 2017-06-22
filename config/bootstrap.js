@@ -29,11 +29,11 @@ module.exports.bootstrap = function(cb) {
     // });
   });
 
-  fs.lstat('.tmp/public/images/robot_avatar', function(err) {cb(err); });
-  fs.lstat('.tmp/public/images/avatar', function(err) {cb(err); });
-
-  fs.symlink('avatars/robots', '.tmp/public/images/robot_avatar', 'dir', function(err) { cb(err); });
-  fs.symlink('avatars/users', '.tmp/public/images/avatar', 'dir', function(err) { cb(err); });
+  // fs.lstat('.tmp/public/images/robot_avatar', function(err) {cb(err); });
+  // fs.lstat('.tmp/public/images/avatar', function(err) {cb(err); });
+  //
+  // fs.symlink('avatars/robots', '.tmp/public/images/robot_avatar', 'dir', function(err) { cb(err); });
+  // fs.symlink('avatars/users', '.tmp/public/images/avatar', 'dir', function(err) { cb(err); });
 
 
   // var robotsSource = path.join(process.cwd(), 'avatars/robots')
