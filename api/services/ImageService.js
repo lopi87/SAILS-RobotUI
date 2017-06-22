@@ -109,7 +109,7 @@ module.exports = {
         return res.badRequest('No file was uploaded');
       }
 
-      Robot.update(robot.id, { avatarUrl: require('util').format('/avatars/robots/%s', uploadedFiles[0].fd.split('/').pop()) }).exec(function updated(err, updated) {
+      Robot.update(robot.id, { avatarUrl: require('util').format('/images/robot_avatar/%s', uploadedFiles[0].fd.split('/').pop()) }).exec(function updated(err, updated) {
         if (err) return res.negotiate(err);
         return;
       });
