@@ -111,7 +111,7 @@ module.exports = {
 
 
       var filename = uploadedFiles[0].fd.split('/').pop();
-      var uploadLocation = process.cwd() + 'assets/images/robot_avatar' + filename;
+      var uploadLocation = process.cwd() +'/assets/images/robot_avatar/' + filename;
       var tempLocation = process.cwd() + '/.tmp/public/images/robot_avatar/' + filename;
 
       //Copy the file to the temp folder so that it becomes available immediately
@@ -126,31 +126,6 @@ module.exports = {
   },
 
 
-
-  upload: function(req, res){
-
-    if (req.method === 'POST') {
-
-      req.file('filename').upload({dirname : process.cwd() + '/assets/images/uploads/'}, function (err, uploadedFiles) {
-        if (err) return res.send(500, err);
-
-        var filename = uploadedFiles[0].fd.substring(uploadedFiles[0].fd.lastIndexOf('/')+1);
-        var uploadLocation = process.cwd() +'/assets/images/uploads/' + filename;
-        var tempLocation = process.cwd() + '/.tmp/public/images/uploads/' + filename;
-
-        //Copy the file to the temp folder so that it becomes available immediately
-        fs.createReadStream(uploadLocation).pipe(fs.createWriteStream(tempLocation));
-
-        //Redirect or do something
-        res.view();
-      });
-
-    } else {
-
-      res.view();
-
-    }
-  },
 
 
 
