@@ -1,7 +1,7 @@
 <div class="container">
     <h2 class="form-sigin-heading"><%= i18n('robot_information') %></h2>
 
-    <div class="card marginbottom20" style="min-width:300px; width: 30%; margin: auto">
+    <div class="card">
       <header class="card-container card-light-grey">
         <h3><%= robot.name %></h3>
       </header>
@@ -14,7 +14,7 @@
           <img id="img_state_<%=robot.id%>" src="/images/offline.png" height="30" width="30">
         <% } %>
 
-        <span id="label_state_<%=robot.id%>" class="label label-pill <%= robot.busy ? 'label-danger' : 'label-danger' %>"> <%= robot.busy ? i18n('busy') : i18n('busy') %> </span>
+        <span id="label_state_<%=robot.id%>" class="label label-pill <%= robot.busy ? 'label-danger' : 'label-success' %>"> <%= robot.busy ? i18n('busy') : i18n('free') %> </span>
         <img src="<%= sails.getBaseUrl() + user.avatarUrl %>" class="card-circle marginleft5" height="32" width="32">
         <%= user.name %>
       </div>
