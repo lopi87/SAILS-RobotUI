@@ -116,7 +116,7 @@
       io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: true});
 
       <% if( typeof video !== 'undefined' ){ %>
-        socket.emit('<%= video.event_name %>');
+        socket.emit('start-stream');
       <%}%>
 
      toastr.info('<%= i18n('connect_success')%>', 'Robot');

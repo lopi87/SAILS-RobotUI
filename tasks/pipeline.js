@@ -28,7 +28,7 @@ var cssFilesToInject = [
   'styles/base/*.scss',
   'styles/toastr/toastr.min.css',
   'styles/popover/webui-popover.css',
-  'styñes/canvas.css',
+  'styles/canvas.css',
 
 
   'styles/**/*.css'
