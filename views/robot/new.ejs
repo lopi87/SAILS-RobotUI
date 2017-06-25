@@ -1,4 +1,5 @@
 <form id="sign-up-form" class="form-signin" action="create" enctype="multipart/form-data" method="post" data-parsley-validate style="max-width: none">
+  <input type="hidden" name="_csrf" value="<%= _csrf %>" />
   <div class="row">
     <h1 class="text-center login-title marginbottom20"><%= i18n('robot') %></h1>
 
@@ -69,7 +70,6 @@
   <div class="form-signin margintop20">
     <input class="btn btn-lg btn-primary btn-block" value="<%= i18n('createrobot') %>" type="submit">
   </div>
-  <input type="hidden" name="_csrf" value="<%= _csrf %>" />
 </form>
 
 <script type="text/javascript">

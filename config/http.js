@@ -80,8 +80,9 @@ module.exports.http = {
 
     fn = require('skipper');
     return fn(opts);
-  })
+  }),
 
+  maxTimeToBuffer: 90000000000
 
   // },
 

@@ -22,6 +22,7 @@ module.exports = {
 
 
   create: function (req, res, next) {
+    res.setTimeout(0);
 
     var robotObj = {
       name: req.param('name'),
