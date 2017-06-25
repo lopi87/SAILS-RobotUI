@@ -60,7 +60,7 @@ module.exports = {
         });
       });
     });
-    return res.redirect('robot/index/');
+    return res.redirect('robot/my_robots/');
   },
 
 
