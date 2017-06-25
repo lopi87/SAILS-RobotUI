@@ -64,7 +64,7 @@ module.exports = {
 
 
   show: function (req, res, next) {
-    Robot.findOne(req.param('id')).populate('drivers').populate('viewers').exec(function (err, robot) {
+    Robot.findOne(req.param('id')).populate('drivers').populate('viewers').populate('iface').exec(function (err, robot) {
       if (err) return next(err);
       if (!robot) return next();
 
