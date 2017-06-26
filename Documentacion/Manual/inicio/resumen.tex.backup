@@ -1,0 +1,23 @@
+% Este archivo es parte de la memoria del proyecto fin de carrera
+% de Manuel López Urbina. Protegida bajo la licencia GFDL.
+% Para más información, la licencia completa viene incluida en el
+% fichero fdl-1.3.tex
+
+% Copyright (C) 2017 Manuel López Urbina
+
+\section*{Resumen}
+\label{resumen}
+
+RobotUI es un proyecto web elaborado con el framework Sails.js cuya intención principal es la de permitir que usuarios compartan sus dispositivos robóticos a través de internet.
+
+RobotUI es un sistema creado para cubrir dos necesidades principales, la primera, dotar al usuario de las herramientas necesarias para permitir la configuración de una
+interfaz de control para dispositivos sin necesidad de amplios conocimientos de pro-
+gramación, y la segunda, cubrir la necesidad paralela en la que los usuarios, orgullosos
+de sus creaciones, dispongan de una manera de compartir sus robots con el resto del
+mundo de una manera más dinámica. Es decir, en la que otros usuarios, a modo de
+espectadores, puedan visualizar el control de los dispositivos por parte de su creador,
+
+
+
+\textbf{Palabras clave:} Internet, aplicación web, robótica, robots, interfaz de usuario, streaming de vídeo, control remoto, robot sharing, Sails.js, Node.js, Socket.io, Websockets, compartir, 
+asistente, tiempo real, Raspberry Pi.

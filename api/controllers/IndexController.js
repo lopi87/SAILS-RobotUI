@@ -20,6 +20,12 @@ module.exports = {
   contact: function (req, res){
 
     return res.view();
+  },
+
+  documentation: function (req, res) {
+
+    return res.download('documentation/robotui.pdf');
   }
+
 
 };

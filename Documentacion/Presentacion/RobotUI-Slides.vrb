@@ -1,0 +1,21 @@
+\frametitle{\textcolor{black}{ Comunicaciones - Envío de mensajes }}
+
+
+\begin{adjustwidth}{-8em}{-1em}
+      \begin{lstlisting}[language=JavaScript]
+
+	      //Cambio de estado a online
+	      User.update( user.id, { online: true }, function (err){
+		if (err) return next(err);
+
+		// Informar a otros clientes (sockets abiertos)
+		// que el usuario esta logueado
+		User.publishUpdate(user.id, {
+		  loggedIn: true,
+		  id: user.id
+		});
+	      });
+
+      \end{lstlisting}
+\end{adjustwidth}
+

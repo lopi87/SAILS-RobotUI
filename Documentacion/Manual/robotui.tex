@@ -1,0 +1,44 @@
+\documentclass[a4paper,12pt]{book}
+
+\usepackage{estilosbase}
+\usepackage{textcomp}
+
+\headsep = 27 pt
+\clearpage{\pagestyle{empty}\cleardoublepage}
+
+
+\begin{document}
+\selectlanguage{spanish}
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\diamond$}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\listfigurename}{Índice de figuras}
+\renewcommand{\tablename}{Tabla}
+\renewcommand{\listtablename}{Índice de tablas}
+\newcommand{\icontext}[3]{\raisebox{-#1\height}{\includegraphics[scale=#2]{#3}}}
+
+\input{inicio/portada.tex}
+\cleardoublepage
+
+\frontmatter
+\pagestyle{plain}
+
+\frontmatter
+
+\tableofcontents
+\listoffigures
+\mainmatter
+
+\pagestyle{fancy}
+\fancyhead[LE,RO]{\rightmark}
+\fancyhead[LO,RE]{\slshape \leftmark}
+%\fancyroot[C]{\thepage}
+
+\input{manual-usuario/manual-usuario.tex}
+
+%\backmatter % Apéndices, bibliografía ...
+
+\backmatter
+
+\end{document}
+

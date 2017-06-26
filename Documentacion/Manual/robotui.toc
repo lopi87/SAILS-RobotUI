@@ -1,0 +1,25 @@
+\select@language {spanish}
+\select@language {spanish}
+\contentsline {chapter}{\'{I}ndice general}{\es@scroman {i}}{chapter*.1}
+\contentsline {chapter}{\IeC {\'I}ndice de figuras}{\es@scroman {iii}}{chapter*.2}
+\contentsline {chapter}{\numberline {1} Gu\IeC {\'\i }a de Usuario}{1}{chapter.1}
+\contentsline {subsection}{\numberline {1.0.1}Objetivo de esta gu\IeC {\'\i }a}{2}{subsection.1.0.1}
+\contentsline {subsection}{\numberline {1.0.2}Dirigido a}{2}{subsection.1.0.2}
+\contentsline {subsection}{\numberline {1.0.3}Obtener RobotUI}{2}{subsection.1.0.3}
+\contentsline {section}{\numberline {1.1} Uso de RobotUI }{2}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1} Acceso a la aplicaci\IeC {\'o}n }{2}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2} Registo de usuario }{3}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.1.3} Ingreso al sistema }{5}{subsection.1.1.3}
+\contentsline {subsection}{\numberline {1.1.4}Registro de un Robot}{5}{subsection.1.1.4}
+\contentsline {subsection}{\numberline {1.1.5}Gesti\IeC {\'o}n de permisos}{7}{subsection.1.1.5}
+\contentsline {subsection}{\numberline {1.1.6}Configuraci\IeC {\'o}n de la interfaz}{8}{subsection.1.1.6}
+\contentsline {subsubsection}{Nuevo elemento}{10}{section*.15}
+\contentsline {subsubsection}{Editar elemento}{11}{section*.18}
+\contentsline {subsubsection}{Eliminar elemento}{11}{section*.19}
+\contentsline {subsection}{\numberline {1.1.7}Ejemplo}{11}{subsection.1.1.7}
+\contentsline {subsection}{\numberline {1.1.8} Programa tu robot }{12}{subsection.1.1.8}
+\contentsline {subsubsection}{c\IeC {\'o}digo base}{14}{section*.22}
+\contentsline {subsection}{\numberline {1.1.9} Control de robots }{16}{subsection.1.1.9}
+\contentsline {subsection}{\numberline {1.1.10} Seguimiento de robots }{18}{subsection.1.1.10}
+\contentsline {subsection}{\numberline {1.1.11}Mensajes}{20}{subsection.1.1.11}
+\contentsline {subsection}{\numberline {1.1.12}Panel de administraci\IeC {\'o}n}{21}{subsection.1.1.12}
