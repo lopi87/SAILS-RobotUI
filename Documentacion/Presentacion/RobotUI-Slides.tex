@@ -14,6 +14,7 @@
 
 \usepackage{changepage}
 \usepackage{lipsum}
+\usepackage{multicol}
 
 
 \lstdefinelanguage{JavaScript}{
@@ -57,8 +58,8 @@
 robots en tiempo real}}
 \newcommand{\shorttitulo}{RobotUI}
 \newcommand{\email}{\vspace*{.1in}{\includegraphics[width=5.5cm]{logotipo.png}}}
-\newcommand{\web}{}
-\newcommand{\institucion}{Universidad de Cádiz  \\ Escuela Superior de Ingeniería}
+\newcommand{\web}{Ingeniería Informática}
+\newcommand{\institucion}{Universidad de Cádiz  \\ Escuela Superior de Ingeniería \\ Ingeniería Informática}
 \newcommand{\authornombre}{Manuel López Urbina}
 \vspace*{2ex} 
 \newcommand{\tutor}{Arturo Morgado Estévez}
@@ -135,10 +136,20 @@ robots en tiempo real}}
 
 \frame{\titlepage}
 
+%\section{Índice}
+%\frame{\frametitle{\textcolor{black}{Índice}}
+%  \textcolor{black}{\tableofcontents}
+%}
+
+
+
 \section{Índice}
-\frame{\frametitle{\textcolor{black}{Índice}}
+
+\begin{frame}{\contentsname}
+\begin{multicols}{2}
   \textcolor{black}{\tableofcontents}
-}
+\end{multicols}
+\end{frame}
 
 
 
@@ -174,6 +185,44 @@ RobotUI es una combinación de un elemento software (aplicación web) y hardware
 \end{center}
 
 }
+
+
+\section{Desarrollo}
+
+\frame{\frametitle{\textcolor{black}{ Subsistemas }}
+
+\begin{figure}[H]
+\includegraphics[width=11cm]{subsistemas.png}
+\end{figure}
+
+
+}
+
+
+\section{Temporización}
+
+\frame{\frametitle{\textcolor{black}{ Temporización }}
+
+\begin{figure}[H]
+\includegraphics[width=11cm]{planificacion.png}
+\end{figure}
+
+
+}
+
+
+\frame{\frametitle{\textcolor{black}{ Temporización }}
+
+\begin{adjustwidth}{-2em}{-1em}
+
+\begin{figure}[H]
+\includegraphics[width=12cm]{gantt.png}
+\end{figure}
+
+\end{adjustwidth}
+
+}
+
 
 
 
@@ -341,6 +390,18 @@ Sails incorpora dos modalidades de suscripción:
 
 \section{Interfaz}
 
+
+\subsection{Inicio }
+
+\frame{\frametitle{\textcolor{black}{ Interfaz - Inicio }}
+
+\begin{figure}%
+    \centering
+    \includegraphics[scale=0.2]{pagina-principal.png}
+\end{figure}
+}
+
+
 \subsection{Configuración }
 
 \frame{\frametitle{\textcolor{black}{ Interfaz - Configuracion }}
@@ -373,7 +434,7 @@ Sails incorpora dos modalidades de suscripción:
 
 \subsection{Permisos}
 
-\frame{\frametitle{\textcolor{black}{ Interfaz - Modalidades }}
+\frame{\frametitle{\textcolor{black}{ Interfaz - Permisos }}
   \begin{figure}[H]
       \centering
       \includegraphics[width=10cm]{permisos.png}
@@ -385,7 +446,19 @@ Sails incorpora dos modalidades de suscripción:
 }
 
 
-\subsection{Índice}
+\frame{\frametitle{\textcolor{black}{ Interfaz - Permisos }}
+  \begin{figure}[H]
+      \centering
+      \includegraphics[width=6cm]{panel-permisos.png}
+  \end{figure}
+
+  \begin{center}
+    Panel de configuración de permisos.
+  \end{center}
+}
+
+
+\subsection{Menú principal}
 
 \frame{\frametitle{\textcolor{black}{ Interfaz - Robots disponibles }}
 \begin{figure}%
@@ -408,9 +481,9 @@ Sails incorpora dos modalidades de suscripción:
 
 \subsection{Fotografía}
 
-\frame{\frametitle{\textcolor{black}{ Robot de pruebas }}
+\frame{\frametitle{\textcolor{black}{ Robot de pruebas - Esquema }}
 \begin{figure}[H]
-\includegraphics[width=8.5cm]{robot2.jpg}
+\includegraphics[width=10cm]{robot-esquema.png}
 \end{figure}
 }
 
@@ -431,21 +504,74 @@ robots en tiempo real} como trabajo de fin de carrera, se ha caracterizado por:
 }
 
 
-\section{Preguntas}
+\section{Referencias}
 
-\frame{\frametitle{\textcolor{black}{Preguntas}}
+ 
+\begin{thebibliography}{8}
+\beamertemplatebookbibitems 
 
-\begin{center}
- \huge{¿Preguntas?}
-\end{center}
+\bibitem{book:node}\color{black}
+Mike Cantelon, Alex~R. Young, Marc Harter, T.J. Holowaychuk, and Nathan
+  Rajlich.
+\newblock {\em Node.js in Action. Manning Publications, 2017.}
+
+  
+\bibitem{book:sails}\color{black}
+{Irl Nathan} {Mike McNeil}.
+\newblock {\em Sails.js in Action. Manning Publications, 2017.}
 
 
-\begin{figure}[H]
-\includegraphics[width=4.5cm]{preguntas.jpg}
-\end{figure}
+\bibitem{website:2}\color{black}
+Irl Nathan.
+\newblock {Activityoverlord, an application to learn sails.js. \url{https://github.com/irlnathan/activityoverlord}. Visitado el 19-01-2017.}
 
 
-}
+\bibitem{book:WebSocket}\color{black}
+{Andrew Lombardi}.
+\newblock {\em WebSocket: Lightweight Client-Server Communications. O'Reilly Media, 2012.}
+ 
+
+\bibitem{website:8}\color{black}
+{Official documentation}.
+\newblock {Node JS Documentation. \url{https://nodejs.org/es/docs/}. Visitado el 02-05-2017.}
+
+\bibitem{website:12}\color{black}
+{Official documentation}.
+\newblock {Sails JS Documentation. \url{https://sailsjs.com/documentation/reference}. Visitado el 14-03-2017.}
+
+\bibitem{book:socketio}\color{black}
+Rohit Rai.
+\newblock {\em Socket.IO Real-Time Web Application Development. Packt, 2013.}
+
+
+\bibitem{article:2}\color{black}
+Lakshminarasimhan Srinivasan, Julian Scharnagl, and Klaus Schilling.
+\newblock {Analysis of WebSockets as the New Age Protocol for Remote Robot
+  Tele-operation. Technical report, University of Wuerzburg, Department of Robotics and
+  Telematics, 11 2013.}
+
+\bibitem{article:1}\color{black}
+Lakshminarasimhan Srinivasan, Julian Scharnagl, Zhihao Xu, Nicolas Faerber,
+  Dinesh~K. Babu, and Klaus Schilling.
+\newblock {Design and Development of a Robotic Teleoperation System using
+  Duplex WebSockets suitable for Variable Bandwidth Networks. Technical report, University of Wuerzburg, Department of Robotics and
+  Telematics, 11 2013.}
+
+
+\bibitem{article:3}\color{black}
+Nazirah~Ahmad Zaini, Norliza Zaini, Mohd Fuad~Abdul Latip, and Nabilah Hamzah.
+\newblock {Remote Monitoring System based on a Wi-Fi Controlled Car Using
+  Raspberry Pi. Technical report, Universiti Teknologi MARA (UiTM) Shah Alam,
+  Malaysia, Faculty of Electrical Engineering, 12 2016.}
+
+\end{thebibliography}
+
+
+
+
+\begin{frame}[label=firstframe]
+    \titlepage % (Or whatever else goes here.)
+\end{frame}
 
 \end{document}
 
