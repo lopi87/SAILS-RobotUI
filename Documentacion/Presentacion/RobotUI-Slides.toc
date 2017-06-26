@@ -17,8 +17,9 @@
 \beamer@subsectionintoc {8}{4}{Seguimiento}{19}{0}{8}
 \beamer@subsectionintoc {8}{5}{Permisos}{20}{0}{8}
 \beamer@subsectionintoc {8}{6}{Men\IeC {\'u} principal}{22}{0}{8}
-\beamer@sectionintoc {9}{Robot de pruebas}{23}{0}{9}
-\beamer@subsectionintoc {9}{1}{Tecnolog\IeC {\'\i }as}{23}{0}{9}
-\beamer@subsectionintoc {9}{2}{Fotograf\IeC {\'\i }a}{24}{0}{9}
-\beamer@sectionintoc {10}{Conclusiones}{25}{0}{10}
-\beamer@sectionintoc {11}{Referencias}{26}{0}{11}
+\beamer@subsectionintoc {8}{7}{Panel de administraci\IeC {\'o}n}{23}{0}{8}
+\beamer@sectionintoc {9}{Robot de pruebas}{24}{0}{9}
+\beamer@subsectionintoc {9}{1}{Tecnolog\IeC {\'\i }as}{24}{0}{9}
+\beamer@subsectionintoc {9}{2}{Esquema}{25}{0}{9}
+\beamer@sectionintoc {10}{Conclusiones}{26}{0}{10}
+\beamer@sectionintoc {11}{Referencias}{27}{0}{11}

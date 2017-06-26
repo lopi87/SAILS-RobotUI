@@ -157,6 +157,9 @@ robots en tiempo real}}
 
 \frame{\frametitle{\textcolor{black}{ Introducción }}
 
+\begin{figure}[H]
+\includegraphics[width=6cm]{internet-of-things.jpg}
+\end{figure}
 
 \begin{center}
  \fontsize{16pt}{12pt}\selectfont
@@ -179,6 +182,10 @@ RobotUI es una combinación de un elemento software (aplicación web) y hardware
  \item No se debe requerir de amplios conocimientos de programación para su utilización.
 \end{itemize}
 
+\begin{figure}[H]
+\includegraphics[width=6cm]{objetivos.png}
+\end{figure}
+
 \begin{center}
  \fontsize{20pt}{12pt}\selectfont
  \emph{RobotSharing}
@@ -195,7 +202,6 @@ RobotUI es una combinación de un elemento software (aplicación web) y hardware
 \includegraphics[width=11cm]{subsistemas.png}
 \end{figure}
 
-
 }
 
 
@@ -206,7 +212,6 @@ RobotUI es una combinación de un elemento software (aplicación web) y hardware
 \begin{figure}[H]
 \includegraphics[width=11cm]{planificacion.png}
 \end{figure}
-
 
 }
 
@@ -222,8 +227,6 @@ RobotUI es una combinación de un elemento software (aplicación web) y hardware
 \end{adjustwidth}
 
 }
-
-
 
 
 \section{Herramientas software}
@@ -479,7 +482,7 @@ Sails incorpora dos modalidades de suscripción:
   \end{figure}
 }
 
-\subsection{Fotografía}
+\subsection{Esquema}
 
 \frame{\frametitle{\textcolor{black}{ Robot de pruebas - Esquema }}
 \begin{figure}[H]
@@ -510,145 +513,59 @@ robots en tiempo real} como trabajo de fin de carrera, se ha caracterizado por:
 \begin{thebibliography}{8}
 \beamertemplatebookbibitems 
 
+\bibitem{book:node}\color{black}
+Mike Cantelon, Alex~R. Young, Marc Harter, T.J. Holowaychuk, and Nathan
+  Rajlich.
+\newblock {\em Node.js in Action. Manning Publications, 2017.}
 
-
-  \bibitem{book:WebSocket}\color{black}
-  {Andrew Lombardi}.
-  \newblock {\em WebSocket: Lightweight Client-Server Communications}.
-  \newblock O'Reilly Media, 2012.
-
-  \bibitem{book:node}\color{black}
-  Mike Cantelon, Alex~R. Young, Marc Harter, T.J. Holowaychuk, and Nathan
-    Rajlich.
-  \newblock {\em Node.js in Action}.
-  \newblock Manning Publications, 2017.
-
-  \bibitem{book:javascript}\color{black}
-  Douglas Crockford.
-  \newblock {\em JavaScript: The Good Parts}.
-  \newblock O'Reilly, 2008.
-
-  \bibitem{website:5}\color{black}
-  {Digital Ocean}.
-  \newblock {Digital Ocean}.
-  \newblock \url{https://www.digitalocean.com/}.
-  \newblock {Visitado el 15-06-2017}.
-
-  \bibitem{book:Raspberry}\color{black}
-  {Eben Upton and Gareth Halfacree}.
-  \newblock {\em Raspberry Pi User Guide}.
-  \newblock Rasoberry Pi, 2013.
-  \newblock \url{http://www.cs.unca.edu/~bruce/Fall14/360/RPiUsersGuide.pdf},
-    visitado el 10-04-2017.
-
-
-\bibitem{book:FFmpeg}\color{black}
-{Frantisek Korbel}.
-\newblock {\em FFmpeg Basics: Multimedia handling with a fast audio and video
-  encoder}.
-\newblock CreateSpace, 2015.
-
-\bibitem{website:4}\color{black}
-{Git Hub}.
-\newblock {Git Hub}.
-\newblock \url{https://github.com}.
-\newblock Visitado el 03-07-2017.
-
-\bibitem{book:git}\color{black}
-Pablo Hinojoda and JJ~Merelo.
-\newblock {\em Aprende Git: ... y, de camino, GitHub}.
-\newblock Editorial Reviews, 2015.
-
-\bibitem{book:MongoDB}\color{black}
-{Kristina Chodorow}.
-\newblock {\em MongoDB: The Definitive Guide, 2nd Edition}.
-\newblock O'Reilly Media, 2013.
-
+  
 \bibitem{book:sails}\color{black}
 {Irl Nathan} {Mike McNeil}.
-\newblock {\em Sails.js in Action}.
-\newblock Manning Publications, 2017.
+\newblock {\em Sails.js in Action. Manning Publications, 2017.}
 
-
-\bibitem{website:metrica}\color{black}
-{Ministerio de Administraciones Públicas, Gobierno de España}.
-\newblock {Métrica v3}.
-\newblock
-  \url{http://administracionelectronica.gob.es/pae_Home/pae_Documentacion/pae_Metodolog/pae_Metrica_v3.html#.WQ79WiclGkB}.
-\newblock Visitado el 10-01-2017.
 
 \bibitem{website:2}\color{black}
 Irl Nathan.
-\newblock {Activityoverlord, an application to learn sails.js}.
-\newblock \url{https://github.com/irlnathan/activityoverlord}.
-\newblock Visitado el 19-01-2017.
+\newblock {Activityoverlord, an application to learn sails.js. \url{https://github.com/irlnathan/activityoverlord}. Visitado el 19-01-2017.}
+
+
+\bibitem{book:WebSocket}\color{black}
+{Andrew Lombardi}.
+\newblock {\em WebSocket: Lightweight Client-Server Communications. O'Reilly Media, 2012.}
+ 
 
 \bibitem{website:8}\color{black}
 {Official documentation}.
-\newblock {Node JS Documentation}.
-\newblock \url{https://nodejs.org/es/docs/}.
-\newblock Visitado el 02-05-2017.
+\newblock {Node JS Documentation. \url{https://nodejs.org/es/docs/}. Visitado el 02-05-2017.}
 
 \bibitem{website:12}\color{black}
 {Official documentation}.
-\newblock {Sails JS Documentation}.
-\newblock \url{https://sailsjs.com/documentation/reference}.
-\newblock Visitado el 14-03-2017.
+\newblock {Sails JS Documentation. \url{https://sailsjs.com/documentation/reference}. Visitado el 14-03-2017.}
 
 \bibitem{book:socketio}\color{black}
 Rohit Rai.
-\newblock {\em Socket.IO Real-Time Web Application Development}.
-\newblock Packt, 2013.
+\newblock {\em Socket.IO Real-Time Web Application Development. Packt, 2013.}
 
-\bibitem{website:1}\color{black}
-{Sails.js}.
-\newblock {Sails.js | Realtime MVC Framework for Node.js}.
-\newblock \url{http://sailsjs.com/}.
-\newblock Visitado el 27-06-2017.
-
-\bibitem{book:Deploying}\color{black}
-{Sandro Pasquali}.
-\newblock {\em Deploying Node.js}.
-\newblock Packt Publishing, 2015.
 
 \bibitem{article:2}\color{black}
 Lakshminarasimhan Srinivasan, Julian Scharnagl, and Klaus Schilling.
 \newblock {Analysis of WebSockets as the New Age Protocol for Remote Robot
-  Tele-operation}.
-\newblock Technical report, University of Wuerzburg, Department of Robotics and
-  Telematics, 11 2013.
+  Tele-operation. Technical report, University of Wuerzburg, Department of Robotics and
+  Telematics, 11 2013.}
 
 \bibitem{article:1}\color{black}
 Lakshminarasimhan Srinivasan, Julian Scharnagl, Zhihao Xu, Nicolas Faerber,
   Dinesh~K. Babu, and Klaus Schilling.
 \newblock {Design and Development of a Robotic Teleoperation System using
-  Duplex WebSockets suitable for Variable Bandwidth Networks}.
-\newblock Technical report, University of Wuerzburg, Department of Robotics and
-  Telematics, 11 2013.
+  Duplex WebSockets suitable for Variable Bandwidth Networks. Technical report, University of Wuerzburg, Department of Robotics and
+  Telematics, 11 2013.}
 
-\bibitem{book:LaTeX}\color{black}
-{Stefan Kottwitz}.
-\newblock {\em LaTeX Beginner's Guide}.
-\newblock Packt Publishing, 2011.
-
-\bibitem{book:internet_things}\color{black}
-Dr.~Ovidiu Vermesan and Dr.~Peter Friedss.
-\newblock {\em Internet of Things - From Research and Innovation to Market
-  Deployment}.
-\newblock River Publishers Aalborg, 2014.
-
-\bibitem{website:6}\color{black}
-{Wikibooks}.
-\newblock {The Book of LaTeX}.
-\newblock \url{http://en.wikibooks.org/wiki/LaTeX}.
-\newblock Visitado el 08-06-2017.
 
 \bibitem{article:3}\color{black}
 Nazirah~Ahmad Zaini, Norliza Zaini, Mohd Fuad~Abdul Latip, and Nabilah Hamzah.
 \newblock {Remote Monitoring System based on a Wi-Fi Controlled Car Using
-  Raspberry Pi}.
-\newblock Technical report, Universiti Teknologi MARA (UiTM) Shah Alam,
-  Malaysia, Faculty of Electrical Engineering, 12 2016.
+  Raspberry Pi. Technical report, Universiti Teknologi MARA (UiTM) Shah Alam,
+  Malaysia, Faculty of Electrical Engineering, 12 2016.}
 
 \end{thebibliography}
 
