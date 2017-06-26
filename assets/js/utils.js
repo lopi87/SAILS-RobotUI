@@ -136,6 +136,24 @@ function change_img_state(id, boolean, connect_text, disconnect_text){
   }
 }
 
+
+//CAMBIAR IMAGEN ESTADO
+function change_img_status(id, boolean){
+  var img_id = '#img_state_' + id;
+  var img_on= "online.png";
+  var img_off= "offline.png";
+  var src = $(img_id).attr("src");
+
+  if (boolean){
+    src = src.replace(img_off, img_on);
+    $(img_id).attr("src", src);
+  }else{
+    src = src.replace(img_on,img_off);
+    $(img_id).attr("src", src);
+  }
+}
+
+
 function change_img_busy(id, boolean, free_text, busy_text){
   var label_id = '#label_state_' + id;
   if (boolean == 'true'){

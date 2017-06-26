@@ -59,6 +59,9 @@
     io.socket.on('robot', function (obj) {
       if (obj.verb == 'updated') {
         var data = obj.data;
+
+        change_img_status(data.id, data.online);
+
         console.log('Robot ' + data.id + ' has been updated to: busy:' + data.busy);
 
         if (data.busy){
