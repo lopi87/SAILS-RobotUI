@@ -156,7 +156,7 @@ function change_img_status(id, boolean){
 
 function change_img_busy(id, boolean, free_text, busy_text){
   var label_id = '#label_state_' + id;
-  if (boolean == 'true'){
+  if (boolean == true){
     $(label_id).replaceWith("<span id=\"label_state_" + id + "\" class=\"label label-pill label-success \">" + free_text + "</span>");
   }else{
     $(label_id).replaceWith("<span id=\"label_state_" + id + "\" class=\"label label-pill label-danger \">" + busy_text + "</span>");
