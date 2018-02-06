@@ -21,7 +21,7 @@ module.exports = {
      connection: 'someMongodbServer'
   },
 
-  proxyHost: '10.182.157.191',
+  // proxyHost: '10.182.157.191',
   proxyPort: 1337
 
 };
