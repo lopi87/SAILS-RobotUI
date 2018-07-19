@@ -8,6 +8,7 @@
 var Log = require('log');
 log = new Log('debug');
 var pager = require('sails-pager');
+var fs = require('fs');
 
 module.exports = {
 
@@ -507,13 +508,43 @@ module.exports = {
           page: page
         }).then(function (data_robots) {
 
-        // Robot.find().where( { or: [ {'id': list_id}, { owner: req.session.User.id } ] } ).populate('drivers').populate('viewers').populate('owner').exec(function (err, robots) {
-            return res.view({
-              data: data_robots
-            });
+          // Robot.find().where( { or: [ {'id': list_id}, { owner: req.session.User.id } ] } ).populate('drivers').populate('viewers').populate('owner').exec(function (err, robots) {
+          return res.view({
+            data: data_robots
           });
         });
+      });
     });
+  },
+
+
+  download_code: function (req, res, next) {
+    var robot_id = req.param('id');
+
+    Robot.findOne(robot_id).exec(function (err, robot) {
+      if (err) return res.badRequest(err);
+      if (!robot) return res.badRequest(err);
+
+
+      var file_content = 'CONTENIDO';
+
+      var fs = require('fs');
+      fs.writeFile("/tmp/test", "Hey there!", function(err) {
+        if(err) {
+          return console.log(err);
+        }
+
+        console.log("The file was saved!");
+      });
+
+
+
+      return res.ok({
+        msg: 'code generated'
+      });
+    });
+
+
   }
 
 
