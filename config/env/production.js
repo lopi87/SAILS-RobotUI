@@ -37,7 +37,7 @@ module.exports = {
   //  level: "silent"
   //}
 
-  proxyHost: '46.101.102.33',
+  proxyHost: '54-201-223-253',
   proxyPort: 1337
 
 };

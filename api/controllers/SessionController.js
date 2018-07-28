@@ -61,7 +61,7 @@ module.exports = {
         return;
       }
 
-      require('bcrypt').compare(req.param('password'), user.encryptedPassword, function checkPassword(err, valid){
+      require('bcrypt-nodejs').compare(req.param('password'), user.encryptedPassword, function checkPassword(err, valid){
         if(err) return next(err);
 
         if(!valid){
