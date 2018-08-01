@@ -114,7 +114,8 @@ module.exports = {
       return next({err: ["Password doesn't match password confirmation."]})
     }
 
-    require('bcrypt-nodejs').hash(user.password, 10, null, function passwordEncrypted(err, encryptedPassword){
+    var bcrypt = require('bcrypt-nodejs');
+    bcrypt.hash(user.password, bcrypt.genSaltSync(10), null, function passwordEncrypted(err, encryptedPassword){
       if(err) return next(err);
       user.encryptedPassword = encryptedPassword;
       user.online = true;

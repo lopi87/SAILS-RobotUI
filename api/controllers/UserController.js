@@ -42,7 +42,7 @@ module.exports = {
       FlashService.success(req, 'User created.' );
       User.publishCreate({id: user.id});
 
-      if (req._fileparser.upstreams.length == 1) {
+      if (req._fileparser && req._fileparser.upstreams.length == 1) {
         ImageService.upload_avatar(req.file('avatar'), user, function whenDone(err, files) {
           if (err) return res.negotiate(err);
         });
