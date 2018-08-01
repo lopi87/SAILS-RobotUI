@@ -5,8 +5,6 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-var pager = require('sails-pager');
-
 module.exports = {
 
   new: function (req, res) {
@@ -49,15 +47,6 @@ module.exports = {
           if (err) return res.negotiate(err);
         });
       }
-
-      //Mandar email de bienvenida
-      EmailService.sendWelcomeEmail({
-        emailAddress: user.email,
-        firstName: user.name
-      }, function (err) {
-        if (err) { return res.serverError(err); }
-      });
-
 
       if (req.session.User.admin) return res.redirect('/user');
       return res.redirect('user/show/' + user.id);

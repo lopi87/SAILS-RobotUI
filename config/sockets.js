@@ -136,7 +136,6 @@ module.exports.sockets = {
    ***************************************************************************/
   // transports: ["polling", "websocket"]
 
-
 //https://github.com/davesag/sails-i18n-example/blob/master/config/sockets.js
 //EJEMPLOS INTERESANTE
 

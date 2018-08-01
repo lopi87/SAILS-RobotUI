@@ -57,7 +57,7 @@ var jsFilesToInject = [
   'js/vendor/toastr.js',
   'js/vendor/iCheck.js',
   'js/vendor/webui-popover.js',
-
+  'js/vendor/gamepad_events.js',
 
   'js/vendor/**/*.js',
   'js/utils.js',
