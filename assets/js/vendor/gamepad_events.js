@@ -40,17 +40,34 @@ function ifaceLoop() {
 
   var gp = gamepads[0];
   if (buttonPressed(gp.buttons[0])) {
-    console.log('btn_pressed');
+    console.log('btn 3 pressed');
   } else if (buttonPressed(gp.buttons[2])) {
-    console.log('btn_pressed');
+    console.log('btn 2 pressed');
   }
   if (buttonPressed(gp.buttons[1])) {
-    console.log('btn_pressed');
+    console.log('btn 1 pressed');
   } else if (buttonPressed(gp.buttons[3])) {
-    console.log('btn_pressed');
+    console.log('btn 3 pressed');
   }
 
-  console.log('loop....');
+  reportOnGamepad(gp);
+  start = requestAnimationFrame(ifaceLoop);
+}
+
+
+function reportOnGamepad(gp) {
+  for(var i=0;i<gp.buttons.length;i++) {
+    if(gp.buttons[i].pressed){
+      console.log('pressed')
+    }
+  }
+  for(var i=0;i<gp.axes.length; i+=2) {
+    console.log("Stick "+(Math.ceil(i/2)+1)+": "+gp.axes[i]+","+gp.axes[i+1]);
+  }
 
 }
 
+
+function send_action(btn){
+
+}
