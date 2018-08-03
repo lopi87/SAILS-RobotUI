@@ -6,8 +6,7 @@
         <h3><%= robot.name %></h3>
       </header>
 
-      <div class="card-container paddingtop10">
-
+      <div class="card-container paddingtop20 paddingbottom20">
         <% if(robot.online){ %>
           <img id="img_state_<%=robot.id%>" src="/images/online.png" height="30" width="30">
         <% } else { %>
@@ -15,8 +14,10 @@
         <% } %>
 
         <span id="label_state_<%=robot.id%>" class="label label-pill <%= robot.busy ? 'label-danger' : 'label-success' %>"> <%= robot.busy ? i18n('busy') : i18n('free') %> </span>
-        <img src="<%= sails.getBaseUrl() + user.avatarUrl %>" class="card-circle marginleft5" height="32" width="32">
-        <%= user.name %>
+        <% if(robot.pad_enabled){ %>
+          <span class="fa fa-gamepad fa-5 marginleft10" aria-hidden="true"></span>
+        <% } %>
+        <a href="/user/show/<%= session.User.id%>"><img src="<%= sails.getBaseUrl() + session.User.avatarUrl %>" alt="Avatar" title="<%=session.User.name%>" class="card-circle card-margin-right floatright" style="width:32px" title="<%= user.name %>"></a>
       </div>
       <hr>
 
@@ -25,7 +26,6 @@
         <p><label><%= i18n('ip_address') + ': ' %></label><%= robot.ipaddress + ':' + robot.port %></p>
         <p><label><%= i18n('description') + ': ' %></label> <%= robot.description  %></p>
         <p><label><%= i18n('id') + ': ' %></label> <%= robot.id  %></p>
-
         <br>
 
         <div class="row">

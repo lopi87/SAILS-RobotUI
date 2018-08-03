@@ -32,7 +32,8 @@ module.exports = {
       port: parseInt(req.param('port')),
       owner: req.session.User.id, //Añadimos el propietario
       public_drive: req.param('public_drive') == 'on',
-      public_view: req.param('public_view') == 'on'
+      public_view: req.param('public_view') == 'on',
+      pad_enabled: req.param('pad_enabled')
     };
 
 
@@ -343,7 +344,8 @@ module.exports = {
       port: parseInt(req.param('port')),
       owner: req.session.User.id,
       public_drive: req.param('public_drive') == 'on',
-      public_view: req.param('public_view') == 'on'
+      public_view: req.param('public_view') == 'on',
+      pad_enabled: req.param('pad_enabled') == 'on'
     };
 
 

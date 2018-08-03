@@ -172,5 +172,6 @@
 	"my_guest_robots": "Mis robots en seguimiento",
 	"my_driver_robots": "Mis robots controlables",
 	"session.user_id.required": "session.user_id.required",
-	"donwload_code": "donwload_code"
+	"donwload_code": "donwload_code",
+	"pad": "pad"
 }

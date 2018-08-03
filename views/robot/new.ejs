@@ -24,6 +24,13 @@
           <textarea id="message" class="form-control" name="description" placeholder="<%= i18n("description") %>" data-parsley-trigger="keyup" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10"></textarea>
         </div>
 
+        <div class="form-group">
+          <label for="name"><%= i18n("public") %> * :</label>
+          <p class="paddingtop10">
+            <%= i18n('pad') + ':' %><input class="i-checks pr-2" name="pad_enabled" type="checkbox">
+          </p>
+        </div>
+
       </div>
     <div class="col-lg-5">
 

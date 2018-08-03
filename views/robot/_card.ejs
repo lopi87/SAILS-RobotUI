@@ -23,6 +23,11 @@
       </div>
       <p><%= i18n('ip_address') + ': ' + robot.ipaddress + ':' + robot.port %></p>
       <br>
+
+      <% if(robot.pad_enabled){ %>
+        <small><i class="fa fa-gamepad" aria-hidden="true"></i><%= i18n('pad').toUpperCase() %></small>
+      <% } %>
+
       <div class="clear"></div>
     </div>
 
