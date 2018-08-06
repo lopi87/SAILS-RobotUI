@@ -3,13 +3,13 @@
   var address_robot =    '<%= robot.ipaddress %>' + ":" + '<%= robot.port %>';
 
   $("#connect").click(function() {
+
     try {
       var socket = io.connect(address_robot, {
         'reconnection': true,
         'reconnectionDelay': 10,
         'reconnectionAttempts': 10
       });
-
     } catch (error) {
       toastr.error('Failed to connect to the Robot!' + address_robot + error, 'Robot')
       io.socket.get('/robot/changetobusy/', {robot: robot_id, state: false});
@@ -46,6 +46,8 @@
 
     });
 
+    //pad initializations
+    gamepad_observer(socket);
 
     <% if( typeof video !== 'undefined' ){ %>
       socket.on('<%= video.event_name %>', function(data) {

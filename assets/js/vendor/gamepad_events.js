@@ -1,6 +1,5 @@
 
-function gamepad_observer() {
-
+function gamepad_observer( socket ) {
   // var gamepadInfo = document.getElementById("gamepad-info");
   window.addEventListener("gamepadconnected", function(e) {
 
@@ -8,10 +7,10 @@ function gamepad_observer() {
       e.gamepad.index, e.gamepad.id,
       e.gamepad.buttons.length, e.gamepad.axes.length);
 
-    var gp = navigator.getGamepads()[e.gamepad.index];
+    // var gp = navigator.getGamepads()[e.gamepad.index];
     // gamepadInfo.innerHTML = "Gamepad connected at index " + gp.index + ": " + gp.id + ". It has " + gp.buttons.length + " buttons and " + gp.axes.length + " axes.";
 
-    ifaceLoop();
+    setInterval(function(){ ifaceLoop( socket ); }, 10);
   });
 
 
@@ -22,8 +21,6 @@ function gamepad_observer() {
 
 }
 
-
-
 function buttonPressed(b) {
   if (typeof(b) == "object") {
     return b.pressed;
@@ -31,43 +28,28 @@ function buttonPressed(b) {
   return b == 1.0;
 }
 
-function ifaceLoop() {
+function ifaceLoop( socket ) {
   var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
   if (!gamepads) {
     console.log('no gamepads');
     return;
   }
-
   var gp = gamepads[0];
-  if (buttonPressed(gp.buttons[0])) {
-    console.log('btn 3 pressed');
-  } else if (buttonPressed(gp.buttons[2])) {
-    console.log('btn 2 pressed');
-  }
-  if (buttonPressed(gp.buttons[1])) {
-    console.log('btn 1 pressed');
-  } else if (buttonPressed(gp.buttons[3])) {
-    console.log('btn 3 pressed');
-  }
-
-  reportOnGamepad(gp);
-  start = requestAnimationFrame(ifaceLoop);
+  reportOnGamepad(gp, socket);
 }
 
 
-function reportOnGamepad(gp) {
+function reportOnGamepad(gp, socket) {
+
   for(var i=0;i<gp.buttons.length;i++) {
     if(gp.buttons[i].pressed){
-      console.log('pressed')
+      socket.emit('pad_action', i);
     }
   }
+
   for(var i=0;i<gp.axes.length; i+=2) {
-    console.log("Stick "+(Math.ceil(i/2)+1)+": "+gp.axes[i]+","+gp.axes[i+1]);
+    socket.emit('axes_action', [ gp.axes[i], gp.axes[i+1] ] );
   }
 
 }
 
-
-function send_action(btn){
-
-}

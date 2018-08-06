@@ -3,7 +3,6 @@
 
 //In here is where the different observers functions are added to execute them.
 function observers () {
-  gamepad_observer();
   checkbox_observer();
   summernote_observer();
   colorpicker_observer();
