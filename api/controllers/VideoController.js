@@ -55,7 +55,8 @@ module.exports = {
         var videoObj = {
           interface_owner: iface.id,
           name: req.param('name'),
-          event_name: req.param('event_name')
+          event_name: req.param('event_name'),
+          port: req.param('port')
         };
 
 
