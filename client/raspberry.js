@@ -62,6 +62,38 @@ io.sockets.on('connection', function (socket)
     console.log('Comando recibido: ' + data);
 
     switch(data) {
+      case 'ON':
+        setTimeout(function() {
+          // Sending String character by character
+          for(var i=0; i<data.length; i++){
+            port.write(new Buffer(data[i], 'ascii'), function(err, results) {
+              // console.log('Error: ' + err);
+              // console.log('Results ' + results);
+            });
+          }
+          // Sending the terminate character
+          port.write(new Buffer('\n', 'ascii'), function(err, results) {
+            // console.log('err ' + err);
+            // console.log('results ' + results);
+          });
+        },1500);
+
+      case 'OFF':
+        setTimeout(function() {
+          // Sending String character by character
+          for(var i=0; i<data.length; i++){
+            port.write(new Buffer(data[i], 'ascii'), function(err, results) {
+              // console.log('Error: ' + err);
+              // console.log('Results ' + results);
+            });
+          }
+          // Sending the terminate character
+          port.write(new Buffer('\n', 'ascii'), function(err, results) {
+            // console.log('err ' + err);
+            // console.log('results ' + results);
+          });
+        },1500);
+
       case 'UP':
         // gpio2.digitalWrite(1);
         // gpio3.digitalWrite(0);
