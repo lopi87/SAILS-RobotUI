@@ -67,7 +67,7 @@
 
     <% if( typeof video !== 'undefined' ){ %>
       video_socket.on('<%= video.event_name %>', function(data) {
-        console.log(data);
+        // console.log(data);
         io.socket.get('/interface/emit_video/',{robot: '<%=robot.id %>', id: '<%= video.id %>', msg: data });
         draw_image_to_canvas('play_<%= video.id %>', data)
       });
