@@ -1,6 +1,6 @@
 <script type="text/javascript">
 
-  var address_robot =    '<%= robot.ipaddress %>' + ":" + '<%= robot.port %>';
+  var address_robot = '<%= robot.ipaddress %>' + ":" + '<%= robot.port %>';
 
   $("#connect").click(function() {
 
@@ -15,12 +15,28 @@
       io.socket.get('/robot/changetobusy/', {robot: robot_id, state: false});
       change_img_state(robot_id, false, '<%= i18n('connect')%>', '<%= i18n('disconnect')%>');
       change_connect_btn( 'connect','<%= i18n('connect')%>');
-
     }
 
-    $("#disconnect").click(function () {
+    <% if( typeof video !== 'undefined' ){ %>
+      var address_video_robot = '<%= robot.ipaddress %>' + ":" + '<%= video.port %>';
+      try {
+        var video_socket = io.connect(address_video_robot, {
+          'reconnection': true,
+          'reconnectionDelay': 10,
+          'reconnectionAttempts': 10
+        });
+      } catch (error) {
+        toastr.error('Failed to connect to the Robot!' + address_video_robot + error, 'Robot Video')
+        change_img_state(robot_id, false, '<%= i18n('connect')%>', '<%= i18n('disconnect')%>');
+        change_connect_btn( 'connect','<%= i18n('connect')%>');
+      }
+  <% } %>
+
+
+  $("#disconnect").click(function () {
       try {
         socket.disconnect();
+        video_socket.disconnect();
       } catch (error) {
         toastr.error('Failed to disconnect to the Robot!' + address_robot + error, 'Robot')
         io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
@@ -50,8 +66,8 @@
     gamepad_observer(socket);
 
     <% if( typeof video !== 'undefined' ){ %>
-      socket.on('<%= video.event_name %>', function(data) {
-        //console.log(data);
+      video_socket.on('<%= video.event_name %>', function(data) {
+        console.log(data);
         io.socket.get('/interface/emit_video/',{robot: '<%=robot.id %>', id: '<%= video.id %>', msg: data });
         draw_image_to_canvas('play_<%= video.id %>', data)
       });
@@ -113,12 +129,12 @@
     });
 
 
-    socket.on('connect', function () {
-      console.log('robot connected!');
-      io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: true});
+    video_socket.on('connect', function () {
+      console.log('robot video connected!');
 
       <% if( typeof video !== 'undefined' ){ %>
-        socket.emit('start-stream');
+        console.log('video transfering')
+        video_socket.emit('<%= video.event_name %>');
       <%}%>
 
      toastr.info('<%= i18n('connect_success')%>', 'Robot');
