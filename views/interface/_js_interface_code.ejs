@@ -26,9 +26,7 @@
           'reconnectionAttempts': 10
         });
       } catch (error) {
-        toastr.error('Failed to connect to the Robot!' + address_video_robot + error, 'Robot Video')
-        change_img_state(robot_id, false, '<%= i18n('connect')%>', '<%= i18n('disconnect')%>');
-        change_connect_btn( 'connect','<%= i18n('connect')%>');
+        toastr.error('Failed to connect to video socket!' + address_video_robot + error, 'Robot Video')
       }
   <% } %>
 
@@ -36,7 +34,12 @@
   $("#disconnect").click(function () {
       try {
         socket.disconnect();
-        video_socket.disconnect();
+        if ( typeof video_socket !== 'undefined'  ){
+          video_socket.disconnect();
+        }
+        if ( typeof audio_socket !== 'undefined'  ){
+          audio_socket.disconnect();
+        }
       } catch (error) {
         toastr.error('Failed to disconnect to the Robot!' + address_robot + error, 'Robot')
         io.socket.get('/robot/changetobusy/', {robot: '<%=robot.id %>', state: false});
@@ -67,9 +70,16 @@
 
     <% if( typeof video !== 'undefined' ){ %>
       video_socket.on('<%= video.event_name %>', function(data) {
-        // console.log(data);
+        console.log(data);
         io.socket.get('/interface/emit_video/',{robot: '<%=robot.id %>', id: '<%= video.id %>', msg: data });
-        draw_image_to_canvas('play_<%= video.id %>', data)
+        <!--draw_image_to_canvas('play_<%= video.id %>', data)-->
+
+
+        var blob = new Blob([data], { 'type' : 'audio/mpeg' });
+        var audio = document.createElement('audio');
+        audio.src = window.URL.createObjectURL(blob);
+        audio.play();
+
       });
     <% } %>
 

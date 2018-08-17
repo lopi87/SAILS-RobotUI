@@ -37,6 +37,8 @@ console.log('Esperando conexión...');
 
 var sockets = {};
 
+//Servo variables
+var x, y, servo_previous_status = 0;
 
 io.sockets.on('connection', function (socket)
 {
@@ -57,43 +59,32 @@ io.sockets.on('connection', function (socket)
   socket.emit('robotmsg', {msg: "¡¡¡Bienvenido!!!"});
   console.log('emitiendo: ' + "¡¡¡Bienvenido!!!");
 
-  socket.on('action', function (data){
+  socket.on('axes_action', function (data) {
+    if(data['x'] > 0){ //Derecha
+      x = data['x'] * 100 + 50;
+    } else { //Izquierda
+      x = ((data['x'] * 100 ) + 100);
+    }
+
+    x = Math.round(x);
+    var difference = Math.abs(servo_previous_status - x);
+    if( difference > 10){
+      servo_previous_status = x;
+      serial_transmission('SRV-' + x, 50 );
+      console.log(x);
+    }
+  });
+
+
+    socket.on('action', function (data){
 
     console.log('Comando recibido: ' + data);
 
     switch(data) {
       case 'ON':
-        setTimeout(function() {
-          // Sending String character by character
-          for(var i=0; i<data.length; i++){
-            port.write(new Buffer(data[i], 'ascii'), function(err, results) {
-              // console.log('Error: ' + err);
-              // console.log('Results ' + results);
-            });
-          }
-          // Sending the terminate character
-          port.write(new Buffer('\n', 'ascii'), function(err, results) {
-            // console.log('err ' + err);
-            // console.log('results ' + results);
-          });
-        },1500);
-
+        serial_transmission(data, 1500);
       case 'OFF':
-        setTimeout(function() {
-          // Sending String character by character
-          for(var i=0; i<data.length; i++){
-            port.write(new Buffer(data[i], 'ascii'), function(err, results) {
-              // console.log('Error: ' + err);
-              // console.log('Results ' + results);
-            });
-          }
-          // Sending the terminate character
-          port.write(new Buffer('\n', 'ascii'), function(err, results) {
-            // console.log('err ' + err);
-            // console.log('results ' + results);
-          });
-        },1500);
-
+        serial_transmission(data, 1500);
       case 'UP':
         // gpio2.digitalWrite(1);
         // gpio3.digitalWrite(0);
@@ -155,7 +146,6 @@ io_video.sockets.on('connection', function (socket) {
 
 });
 
-
 function stopStreaming(socket) {
   delete sockets[socket.id];
   // no more sockets, kill the stream
@@ -169,11 +159,24 @@ function stopStreaming(socket) {
 }
 
 function startStreaming(socket) {
-  //ffmpeg -f video4linux2 -i /dev/video0 -s 300x150 -f mjpeg pipe:1 -b:v 28k -bufsize 28k
+  // video
+  // ffmpeg -f video4linux2 -i /dev/video0 -s 300x150 -f mjpeg pipe:1 -b:v 28k -bufsize 28k
+
+  // video with audio
+  // ffmpeg -f alsa -i default -f video4linux2 -i /dev/video0 -s 300x150 -f mjpeg pipe:1 -b:v 28k -bufsize 28k
+
+  // only audio
+  // ffmpeg -f alsa -i default -f mpeg pipe:1 -b:v 28k -bufsize 28k
+
+
+  //ffmpeg -f alsa -i default -acodec libopus -b:a bitrate -vbr on -compression_level 10 -f ogg pipe:1
+
+  //ffmpeg -ac 1 -f alsa -i default -acodec libmp3lame -ab 32k -ac 1 -content_type audio/mpeg -f mp3 out2.mp3
 
   if (running_camera == false){
     console.log('Starting streaming....');
-    var args = ["-f", "video4linux2", "-i", "/dev/video0", "-s", "300x150","-f","mjpeg", "pipe:1", "-b:v 16k", "-bufsize 28k"]
+    var args =  ["-ac", "1", "-f", "alsa", "-i", "default", "-f", "mp3", "pipe:1"];
+
     ffmpeg_command = child_process.spawn("ffmpeg", args);
     running_camera = true
   }
@@ -202,8 +205,21 @@ function startStreaming(socket) {
 
   ffmpeg_command.stdout.on('data', function (data) {
     //console.log('stdout: ' + data);
-    var frame = new Buffer(data).toString('base64');
-    socket.emit('video_canvas',frame);
+    var frame = new Buffer(data);
+    //socket.emit('video_canvas',frame);
   });
+
+}
+
+function serial_transmission( data, delay ){
+  setTimeout(function() {
+    // Sending String character by character
+    for(var i=0; i<data.length; i++){
+      port.write(new Buffer(data[i], 'ascii'));
+    }
+    // Sending the terminate character
+    port.write(new Buffer('\n', 'ascii'));
+
+  }, 1);
 
 }

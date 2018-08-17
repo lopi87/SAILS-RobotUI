@@ -40,9 +40,8 @@ void loop() {
       //SERVO
       if (inData.startsWith("SRV")){
 
-          if (sscanf(inData.c_str(), "SRV - %d - %d", &servo_x, &servo_y) == 2) {
+          if (sscanf(inData.c_str(), "SRV-%d", &servo_x) == 1) {
             Serial.println(servo_x);
-            Serial.println(servo_y);
           }
 
           if(servo_x < 30){
@@ -51,19 +50,13 @@ void loop() {
           if (servo_x > 150){
             servo_x = 150;
           }
-
           servoMotor.write(servo_x);
-          // Esperamos 1 segundo
-          delay(1000);
-          Serial.println(inData);
       }
-
       inData = "";
     }
 
   }
 
-  delay(30);
   // read without samples.
   byte temperature = 0;
   byte humidity = 0;
