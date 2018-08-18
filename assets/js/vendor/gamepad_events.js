@@ -13,7 +13,6 @@ function gamepad_observer( socket ) {
     setInterval(function(){ ifaceLoop( socket ); }, 10);
   });
 
-
   window.addEventListener("gamepaddisconnected", function(e) {
     // gamepadInfo.innerHTML = "Waiting for gamepad.";
     console.log("Waiting for gamepad.");

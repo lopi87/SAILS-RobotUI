@@ -75,10 +75,15 @@
         <!--draw_image_to_canvas('play_<%= video.id %>', data)-->
 
 
-        var blob = new Blob([data], { 'type' : 'audio/mpeg' });
-        var audio = document.createElement('audio');
-        audio.src = window.URL.createObjectURL(blob);
-        audio.play();
+        // var blob = new Blob([data], { 'type' : 'audio/mp3;codecs=lame' });
+        // var audio = document.createElement('audio');
+        // audio.src = window.URL.createObjectURL(blob);
+        // audio.play();
+
+        arraybuffer = _base64ToArrayBuffer(data);
+
+        console.log(arraybuffer);
+
 
       });
     <% } %>
@@ -205,5 +210,18 @@
       }
     });
   }
+
+
+
+  function _base64ToArrayBuffer(base64) {
+    var binary_string =  window.atob(base64);
+    var len = binary_string.length;
+    var bytes = new Uint8Array( len );
+    for (var i = 0; i < len; i++)        {
+      bytes[i] = binary_string.charCodeAt(i);
+    }
+    return bytes.buffer;
+  }
+
 
 </script>

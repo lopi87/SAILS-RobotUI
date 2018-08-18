@@ -1,7 +1,7 @@
 // Serial functions
 const SerialPort = require('serialport');
 const Readline = SerialPort.parsers.Readline;
-const port = new SerialPort('/dev/ttyACM0', {
+const port = new SerialPort('/dev/ttyACM1', {
   baudRate: 9600
 });
 
@@ -81,10 +81,10 @@ io.sockets.on('connection', function (socket)
     console.log('Comando recibido: ' + data);
 
     switch(data) {
-      case 'ON':
-        serial_transmission(data, 1500);
-      case 'OFF':
-        serial_transmission(data, 1500);
+      case 'H':
+        serial_transmission(data, 50);
+      case 'L':
+        serial_transmission(data, 50);
       case 'UP':
         // gpio2.digitalWrite(1);
         // gpio3.digitalWrite(0);
@@ -220,6 +220,6 @@ function serial_transmission( data, delay ){
     // Sending the terminate character
     port.write(new Buffer('\n', 'ascii'));
 
-  }, 1);
+  }, delay  );
 
 }
