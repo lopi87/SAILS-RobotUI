@@ -88,10 +88,22 @@ io.sockets.on('connection', function (socket)
     }
   });
 
-    socket.on('action', function (data){
 
+  socket.on('pad_action', function (pad_btn) {
+    console.log(pad_btn);
+    if(pad_btn == 2){
+      serial_transmission('H', 50);
+    }
+
+    if(pad_btn == 1){
+      serial_transmission('L', 50);
+    }
+
+  });
+
+
+  socket.on('action', function (data){
     console.log('Comando recibido: ' + data);
-
     switch(data) {
       case 'H':
         serial_transmission(data, 50);

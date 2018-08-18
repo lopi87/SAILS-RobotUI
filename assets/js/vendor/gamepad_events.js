@@ -42,9 +42,12 @@ function reportOnGamepad(gp, socket) {
 
   for(var i=0;i<gp.buttons.length;i++) {
     if(gp.buttons[i].pressed){
+      console.log(gp.buttons[i]);
       socket.emit('pad_action', i);
     }
   }
+
+  gp.buttonsStatus = [];
 
   data = { x: gp.axes[0], y: gp.axes[1] };
   socket.emit('axes_action_a', data );
