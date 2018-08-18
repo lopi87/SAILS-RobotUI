@@ -46,10 +46,10 @@ function reportOnGamepad(gp, socket) {
     }
   }
 
-  //for(var i=0;i<gp.axes.length; i+=2) {
-    data = { x: gp.axes[0], y: gp.axes[1] };
-    socket.emit('axes_action', data );
-  //}
+  data = { x: gp.axes[0], y: gp.axes[1] };
+  socket.emit('axes_action_a', data );
+  data = { x: gp.axes[2], y: gp.axes[3] };
+  socket.emit('axes_action_b', data );
 
 }
 

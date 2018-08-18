@@ -1,7 +1,7 @@
 // Serial functions
 const SerialPort = require('serialport');
 const Readline = SerialPort.parsers.Readline;
-const port = new SerialPort('/dev/ttyACM1', {
+const port = new SerialPort('/dev/ttyACM0', {
   baudRate: 9600
 });
 
@@ -15,7 +15,6 @@ var io_server = sails_client(io_client);
 io_server.sails.url = 'http://localhost:1337';
 io_server.socket.get('/robot/changetoonline/', {robot: '5b64917f7510da0d68a140ec', online: true});
 
-
 // Inicia servidor socket.io en el puerto 8085.
 var io = require('../node_modules/socket.io').listen(8085, { log: false });
 
@@ -25,20 +24,16 @@ var io_video = require('../node_modules/socket.io').listen(3535, { log: false })
 // Carga de módulos necesarios.
 var ffmpeg_command, running_camera = false, child_process = require('child_process');
 
-// var Gpio = require('../node_modules/pigpio').Gpio;
-// Pines utilizados. Motores izquierdos: 2 y 3, motores derechos: 17 y 27
-// var gpio2 = new Gpio(2, {mode: Gpio.OUTPUT}),
-//   gpio3 = new Gpio(3, {mode: Gpio.OUTPUT}),
-//   gpio17 = new Gpio(17, {mode: Gpio.OUTPUT}),
-//   gpio27 = new Gpio(27, {mode: Gpio.OUTPUT});
-
-
 console.log('Esperando conexión...');
 
 var sockets = {};
 
 //Servo variables
-var x, y, servo_previous_status = 0;
+var x, servo_previous_status = 0;
+
+//Motor vairables
+var y, motor_previous_status = 0;
+
 
 io.sockets.on('connection', function (socket)
 {
@@ -59,7 +54,7 @@ io.sockets.on('connection', function (socket)
   socket.emit('robotmsg', {msg: "¡¡¡Bienvenido!!!"});
   console.log('emitiendo: ' + "¡¡¡Bienvenido!!!");
 
-  socket.on('axes_action', function (data) {
+  socket.on('axes_action_a', function (data) {
     if(data['x'] > 0){ //Derecha
       x = data['x'] * 100 + 50;
     } else { //Izquierda
@@ -75,6 +70,23 @@ io.sockets.on('connection', function (socket)
     }
   });
 
+  socket.on('axes_action_b', function (data) {
+    if(data['y'] > 0){ //atrás
+      y = data['y'] * -2 * 100 - 50;
+    } else { //delante
+      y = data['y'] * -2 * 100 + 50;
+    }
+    if(y == 50){
+      y = 0;
+    }
+    y = Math.round(y);
+    var speed_difference = Math.abs(motor_previous_status - y);
+    if( speed_difference > 10){
+      motor_previous_status = y;
+      serial_transmission('MOTOR-' + y, 50 );
+      console.log(y);
+    }
+  });
 
     socket.on('action', function (data){
 
@@ -85,46 +97,6 @@ io.sockets.on('connection', function (socket)
         serial_transmission(data, 50);
       case 'L':
         serial_transmission(data, 50);
-      case 'UP':
-        // gpio2.digitalWrite(1);
-        // gpio3.digitalWrite(0);
-        // gpio17.digitalWrite(1);
-        // gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
-      case 'RIGHT':
-        // gpio2.digitalWrite(0);
-        // gpio3.digitalWrite(0);
-        // gpio17.digitalWrite(1);
-        // gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
-      case 'LEFT':
-        // gpio2.digitalWrite(1);
-        // gpio3.digitalWrite(0);
-        // gpio17.digitalWrite(0);
-        // gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
-      case 'DOWN':
-        // gpio2.digitalWrite(0);
-        // gpio3.digitalWrite(1);
-        // gpio17.digitalWrite(0);
-        // gpio27.digitalWrite(1);
-        console.log('UP');
-        break;
-
-      case 'STOP':
-        // gpio2.digitalWrite(0);
-        // gpio3.digitalWrite(0);
-        // gpio17.digitalWrite(0);
-        // gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
       default:
         console.log('command not found');
     }
