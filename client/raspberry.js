@@ -159,7 +159,7 @@ function startStreaming(socket) {
 
   if (running_camera == false){
     console.log('Starting streaming....');
-    var args =  ["-ac", "1", "-f", "alsa", "-i", "default", "-f", "mp3", "pipe:1"];
+    var args = ["-f", "video4linux2", "-i", "/dev/video0", "-s", "300x150","-f","mjpeg", "pipe:1", "-b:v 16k", "-bufsize 28k"];
 
     ffmpeg_command = child_process.spawn("ffmpeg", args);
     running_camera = true
@@ -188,9 +188,9 @@ function startStreaming(socket) {
   });
 
   ffmpeg_command.stdout.on('data', function (data) {
-    //console.log('stdout: ' + data);
-    var frame = new Buffer(data);
-    //socket.emit('video_canvas',frame);
+    // console.log('stdout: ' + data);
+    var frame = new Buffer(data).toString('base64');
+    socket.emit('video_canvas',frame);
   });
 
 }

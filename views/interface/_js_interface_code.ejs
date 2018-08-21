@@ -70,21 +70,9 @@
 
     <% if( typeof video !== 'undefined' ){ %>
       video_socket.on('<%= video.event_name %>', function(data) {
-        console.log(data);
+        // console.log(data);
         io.socket.get('/interface/emit_video/',{robot: '<%=robot.id %>', id: '<%= video.id %>', msg: data });
-        <!--draw_image_to_canvas('play_<%= video.id %>', data)-->
-
-
-        // var blob = new Blob([data], { 'type' : 'audio/mp3;codecs=lame' });
-        // var audio = document.createElement('audio');
-        // audio.src = window.URL.createObjectURL(blob);
-        // audio.play();
-
-        arraybuffer = _base64ToArrayBuffer(data);
-
-        console.log(arraybuffer);
-
-
+        draw_image_to_canvas('play_<%= video.id %>', data);
       });
     <% } %>
 
