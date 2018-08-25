@@ -33,7 +33,14 @@ module.exports.routes = {
   ***************************************************************************/
 
 
-  'get /': 'IndexController.index'
+  'get /': 'IndexController.index',
+
+  'get /interface/full_screen': {
+    view: 'interface/full_screen',
+    locals: {
+      layout: 'full_screen_layout'
+    }
+  },
 
   /***************************************************************************
   *                                                                          *

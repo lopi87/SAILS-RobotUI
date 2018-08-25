@@ -27,7 +27,7 @@ void loop() {
 
     if (received == '\n') {
       inData.trim();
-      Serial.print(inData);
+      Serial.print(inData);192.168.1.132
 
       // ON OFF LED
       if (inData == "H") {

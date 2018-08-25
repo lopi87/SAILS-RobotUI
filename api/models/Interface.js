@@ -22,7 +22,6 @@ module.exports = {
       via: 'interface_owner'
     },
 
-
     sliders: {
       collection: 'slider',
       via: 'interface_owner'

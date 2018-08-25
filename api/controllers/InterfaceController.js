@@ -86,6 +86,43 @@ module.exports = {
       });
   },
 
+  full_screen: function (req, res, next) {
+    Interface.findOne(req.param('id')).populate('events').populate('video').populate('robot_owner').exec(function (err, iface) {
+      if(err) return res.badRequest(err);
+      if(!iface) return res.badRequest(__('not_found'));
+
+      Action.find({interface_owner: req.param('id')}).populate('icon').exec(function (err, actions) {
+        if (err) return res.badRequest(err);
+
+        Slider.find({interface_owner: req.param('id')}).exec(function (err, sliders) {
+          if (err) return res.badRequest(err);
+
+          User.findOne({id: iface.robot_owner.owner}).exec(function Userfound(err, user) {
+            if (err) return res.badRequest(err);
+
+            var geo = geoip.lookup(iface.robot_owner.ipaddress);
+            if (geo) {
+              iface.robot_owner.longitude = geo.ll[1];
+              iface.robot_owner.latitude = geo.ll[0];
+            }
+
+            res.locals.layout = 'full_screen_layout';
+
+            res.view({
+              iface: iface,
+              actions: actions,
+              sliders: sliders,
+              events: iface.events,
+              video: iface.video,
+              joysticks: iface.joysticks,
+              robot: iface.robot_owner,
+              user: user
+            });
+          });
+        });
+      });
+    });
+  },
 
   view: function(req, res, next){
 
@@ -95,7 +132,6 @@ module.exports = {
 
       Action.find({interface_owner: req.param('id')}).populate('icon').exec(function(err, actions) {
         if (err) return res.badRequest(err);
-
 
           User.findOne({id:  iface.robot_owner.owner}).exec(function Userfound(error, user){
             if (err) return res.badRequest(err);

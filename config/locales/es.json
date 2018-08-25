@@ -173,5 +173,6 @@
 	"my_driver_robots": "Mis robots controlables",
 	"session.user_id.required": "session.user_id.required",
 	"donwload_code": "donwload_code",
-	"pad": "pad"
+	"pad": "pad",
+	"full_screen": "Pantalla completa"
 }

@@ -1,0 +1,60 @@
+<!--<div id="board" class="container-fluid">-->
+  <!--<h1>Hello World!</h1>-->
+  <!--<div class="row">-->
+    <!--<div class="col-sm-3" style="background-color:yellow;">-->
+      <!--<p>Lorem ipsum...</p>-->
+    <!--</div>-->
+    <!--<div class="col-sm-9" style="background-color:pink;">-->
+      <!--<p>Sed ut perspiciatis...</p>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+
+
+<div id="board" class="panel panel-success">
+  <div class="panel-heading">
+    <img style="max-width:150px;" src="/images/logo/logotipo.png">
+    <!--<a href="#" onclick="openWin(200,200,'board')"><i class="fa fa-external-link fa-2x floatright" style="height: 20px"></i></a>-->
+  </div>
+
+  <div class="paddingtop10">
+    <div class="row marginbottom10 marginleft20">
+      <img id="img_state_<%= robot.id %>" height="30" width="30" src="/images/offline.png" class="marginright20">
+      <button  id="connect" type="button" class="marginlef10 btn btn-sm btn-success"> <%= i18n('connect') %></button></td>
+    </div>
+
+      <div id="panel" class="panel panel-default">
+
+        <!-- Insert video -->
+        <% if (video){%>
+        <%- partial ('_video.ejs', {video: video})%>
+        <%}%>
+
+        <!-- Insert actions -->
+        <% _.each(actions, function(action){ %>
+        <%- partial ('_action.ejs', {action: action})%>
+        <% })%>
+
+        <!-- Insert sliders -->
+        <% _.each(sliders, function(slider){ %>
+        <%- partial ('_slider.ejs', {slider: slider})%>
+        <% })%>
+
+        <!-- Insert events -->
+        <% _.each(events, function(event){ %>
+        <%- partial ('_event.ejs', {event: event})%>
+        <% })%>
+      </div>
+
+    <script type="text/javascript">
+      $("#board").css({ "min-width": "350px" });
+      $("#panel").css({
+        "min-width": "300px",
+        "height": "<%= iface.panel_sizey %>"
+      });
+    </script>
+  </div>
+</div>
+
+<%- partial('_js_interface_code.ejs')%>

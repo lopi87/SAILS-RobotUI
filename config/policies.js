@@ -53,6 +53,7 @@ module.exports.policies = {
     '*': ['sessionAuth','message', 'localize', 'flash'],
     configure: ['sessionAuth','message', 'localize', 'userCanConfigureInterface', 'flash'],
     show: ['sessionAuth','message', 'localize', 'userCanShowInterface', 'flash'],
+    full_screen: ['sessionAuth','message', 'localize', 'userCanShowInterface', 'flash'],
     view: ['sessionAuth','message', 'localize', 'userCanViewInterface', 'flash']
   },
 

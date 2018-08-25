@@ -14,6 +14,7 @@
     <div class="row marginbottom10 marginleft20">
       <img id="img_state_<%= robot.id %>" height="30" width="30" src="/images/offline.png" class="marginright20">
       <button  id="connect" type="button" class="marginlef10 btn btn-sm btn-success"> <%= i18n('connect') %></button></td>
+      <a href="/interface/full_screen/<%= interface.id %>" class="btn btn-sm btn-primary" ><i class="fa fa-expand"></i> <%= i18n('full_screen') %> </a>
     </div>
 
     <div class="row">
@@ -59,4 +60,3 @@
 <%- partial ('_robot_info.ejs')%>
 
 <%- partial('_js_interface_code.ejs')%>
-
