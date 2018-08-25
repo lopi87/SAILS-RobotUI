@@ -174,5 +174,6 @@
 	"session.user_id.required": "session.user_id.required",
 	"donwload_code": "donwload_code",
 	"pad": "pad",
-	"full_screen": "Pantalla completa"
+	"full_screen": "Pantalla completa",
+	"back": "Atrás"
 }
