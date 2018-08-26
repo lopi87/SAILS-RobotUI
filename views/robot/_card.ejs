@@ -1,43 +1,35 @@
-<div class="col-lg-4 col-md-6 col-xs-12">
-  <div class="card">
-    <header class="card-container card-light-grey">
+  <div class="card ">
+    <div class="card-header">
       <h3><%= robot.name %></h3>
-    </header>
-
-    <div class="card-container paddingtop10">
       <% if(robot.online){ %>
-        <img id="img_state_<%=robot.id%>" src="/images/online.png" height="30" width="30">
+      <img id="img_state_<%=robot.id%>" src="/images/online.png" height="30" width="30">
       <% } else { %>
-        <img id="img_state_<%=robot.id%>" src="/images/offline.png" height="30" width="30">
+      <img id="img_state_<%=robot.id%>" src="/images/offline.png" height="30" width="30">
       <% } %>
-
       <span id="label_state_<%=robot.id%>" class="label label-pill <%= robot.busy ? 'label-danger' : 'label-success' %>"> <%= robot.busy ? i18n('busy') : i18n('free') %> </span>
-      <img src="<%= sails.getBaseUrl() + robot.owner.avatarUrl %>" class="img-responsive card-circle marginleft5" height="32" width="32">
-      <%= robot.owner.name %>
+      <a href="/user/show/<%= robot.owner.id%>"><img src="<%= sails.getBaseUrl() + robot.owner.avatarUrl %>" alt="Avatar" title="<%=robot.owner.name%>" class="card-circle card-margin-right floatright" style="width:32px" title="<%= robot.owner.name %>"></a>
     </div>
-    <hr>
-
-    <div class="card-container">
-      <div class="thumbnail" >
-        <a href="#"><img id="img_card_<%= robot.id %>" src="<%= sails.getBaseUrl() + robot.avatarUrl %>"></a>
-      </div>
-      <p><%= i18n('ip_address') + ': ' + robot.ipaddress + ':' + robot.port %></p>
+    <div class="card-body paddingtop10">
+      <p><label><%= i18n('description') + ': ' %></label> <%= robot.description  %></p>
+      <p><label><%= i18n('id') + ': ' %></label> <%= robot.id  %></p>
       <br>
 
-      <% if(robot.pad_enabled){ %>
-        <small><i class="fa fa-gamepad" aria-hidden="true"></i><%= i18n('pad').toUpperCase() %></small>
-      <% } %>
 
-      <div class="clear"></div>
-    </div>
+      <div class="card-container">
+        <div class="thumbnail" >
+          <a href="#"><img id="img_card_<%= robot.id %>" src="<%= sails.getBaseUrl() + robot.avatarUrl %>"></a>
+        </div>
+        <p><%= i18n('ip_address') + ': ' + robot.ipaddress + ':' + robot.port %></p>
+        <br>
+      </div>
 
-    <div class="card-dark-grey margintop10 card-btn-block">
+   </div>
+    <div class="card-footer">
       <a id="btn_tview_<%= robot.id%>" href="/interface/view/<%= robot.iface.id %>" class="btn btn-sm btn-primary <%= ( robot.online && robot.busy) ? '' : 'disabled' %>"><%= i18n('view') %></a>
       <a id="btn_tcontrol_<%= robot.id%>" href="/interface/show/<%= robot.iface.id %>" class="btn btn-sm btn-primary <%= ( robot.online && !robot.busy ) ? '' : 'disabled' %>" ><i class="fa fa-gamepad"></i> <%= i18n('take_control') %> </a>
       <a id="btn_tconfigure_<%= robot.id%>" href="/interface/configure/<%= robot.iface.id %>" class="btn btn-sm btn-primary <%= robot.online ? 'disabled' : '' %> "><i class="fa fa-wrench" aria-hidden="true"></i><%= i18n('configure') %></a>
     </div>
   </div>
-</div>
 
 <div class="webui-popover-content" id="description">
   <p><%= robot.description %></p>
