@@ -29,10 +29,10 @@ console.log('Esperando conexión...');
 var sockets = {};
 
 //Servo variables
-var x, servo_previous_status = 0;
+var y, servo_previous_status = 0;
 
 //Motor vairables
-var y, motor_previous_status = 0;
+var x, motor_previous_status = 0;
 
 
 io.sockets.on('connection', function (socket)
@@ -55,19 +55,25 @@ io.sockets.on('connection', function (socket)
   console.log('emitiendo: ' + "¡¡¡Bienvenido!!!");
 
   socket.on('axes_action_a', function (data) {
-    if(data['x'] > 0){ //Derecha
-      x = data['x'] * 100 + 50;
-    } else { //Izquierda
-      x = ((data['x'] * 100 ) + 100);
+
+    if(data['x'] > 0){ //derecha
+      y = data['y'] * -2 * 100 - 50;
+    } else { //izquierda
+      y = data['y'] * -2 * 100 + 50;
     }
 
-    x = Math.round(x);
-    var difference = Math.abs(servo_previous_status - x);
-    if( difference > 10){
-      servo_previous_status = x;
-      serial_transmission('SRV-' + x, 50 );
-      console.log(x);
+    if(y >= 49 && y <= 52 ){
+      y = 0;
     }
+
+    y = Math.round(y);
+    var difference = Math.abs(servo_previous_status - y);
+    if( difference > 10){
+      servo_previous_status = y;
+      serial_transmission('SRV-' + y, 10 );
+      console.log(y);
+    }
+
   });
 
   socket.on('axes_action_b', function (data) {
@@ -79,11 +85,12 @@ io.sockets.on('connection', function (socket)
     if(y == 50){
       y = 0;
     }
+
     y = Math.round(y);
     var speed_difference = Math.abs(motor_previous_status - y);
     if( speed_difference > 10){
       motor_previous_status = y;
-      serial_transmission('MOTOR-' + y, 50 );
+      serial_transmission('MOTOR-' + y, 10 );
       console.log(y);
     }
   });
