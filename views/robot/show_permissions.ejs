@@ -7,15 +7,22 @@
 </div>
 <% } else { %>
 
-
-<div class="row">
+  <div class="row">
   <div class="col-md-6">
     <div class="control-group">
-      <label for="name"><%= i18n("public") %> * :</label>
-      <p class="paddingtop10">
-        <%= i18n('control') + ':' %><input class="i-checks pr-2 <%= robot.public_drive ? 'checked' : '' %>" name="public_drive" type="checkbox">
-        <%= i18n('seeing') + ':' %><input class="i-checks pr-2 <%= robot.public_view ? 'checked' : '' %>" name="public_view" type="checkbox">
-      </p>
+      <b><%= i18n("public") %> * :</b>
+      <div class="form-group">
+        <b><%= i18n('public') + ':' %></b>
+        <div class="checkbox checkbox-info margintop10">
+          <input id="check_public_drive" name="public_drive" <%= robot.public_drive ? 'checked' : '' %> class="styled" type="checkbox">
+          <label for="check_public_drive"><%= i18n('control') + ':' %></label>
+        </div>
+
+        <div class="checkbox checkbox-info">
+          <input id="check_public_view" name="public_view" <%= robot.public_view ? 'checked' : '' %> class="styled" type="checkbox">
+          <label for="check_public_view"><%= i18n('view') + ':' %></label>
+        </div>
+      </div>
     </div>
   </div>
 

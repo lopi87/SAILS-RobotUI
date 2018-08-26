@@ -1,47 +1,37 @@
 <form id="sign-up-form" class="form-signin" action="/robot/update/<%= robot.id %>" enctype="multipart/form-data" method="post" data-parsley-validate style="max-width: none">
+  <h1 class="text-center login-title marginbottom20"><%= i18n('editrobot') + ' ' + robot.name %></h1>
+
   <input type="hidden" name="_csrf" value="<%= _csrf %>" />
-  <div class="row">
-    <h1 class="text-center login-title marginbottom20"><%= i18n('editrobot') + ' ' + robot.name %></h1>
+  <div class="row justify-content-md-center">
 
-    <div class="col-md-6">
-      <div class="col-md-2"></div>
-      <div class="col-md-10">
-        <div class="form-group">
-          <label for="name"><%= i18n("name") %> * :</label>
-          <input class="form-control" name="name" placeholder="<%= i18n("name") %>" value="<%=robot.name%>" required="" type="text">
+    <div class="col-md-5">
+      <div class="form-group">
+        <label for="name"><%= i18n("name") %> * :</label>
+        <input class="form-control" name="name" placeholder="<%= i18n("name") %>" value="<%=robot.name%>" required="" type="text">
+      </div>
+
+      <div class="form-group">
+        <label for="message"><%= i18n("ipaddress") %>:</label>
+        <input class="form-control" name="ipaddress" id="ip" value="<%=robot.ipaddress%>" type="text" class="form-control" placeholder="<%= i18n("ipaddress") %>" required=""  data-parsley-pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$">
+      </div>
+
+      <div class="form-group">
+        <label for="message"><%= i18n("port") %>:</label>
+        <input class="form-control" type="number" min="0" value="<%=robot.port%>" placeholder="<%= i18n("port") %>" name="port" required="" data-parsley-maxlength="4">
+      </div>
+
+      <div class="form-group">
+        <label for="message"><%= i18n("description") %>:</label>
+        <textarea id="message" class="form-control" name="description" placeholder="<%= i18n("description") %>" data-parsley-trigger="keyup" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10"><%= robot.description %></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><%= i18n("filesmallerthan %s","2.5") %></label>
+        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+          <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+          <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new"><%= i18n("selectfile") %></span><span class="fileinput-exists"><%= i18n("change") %></span><input id="input_avatar" type="file" name="robot_avatar" data-parsley-filemaxmegabytes="2500" data-parsley-trigger="change" data-parsley-filemimetypes="image/jpeg, image/png"></span>
+          <a id="remove_iconfile_input" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput"><%= i18n("remove") %></a>
         </div>
-
-        <div class="form-group">
-          <label for="message"><%= i18n("ipaddress") %>:</label>
-          <input class="form-control" name="ipaddress" id="ip" value="<%=robot.ipaddress%>" type="text" class="form-control" placeholder="<%= i18n("ipaddress") %>" required=""  data-parsley-pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$">
-        </div>
-
-        <div class="form-group">
-          <label for="message"><%= i18n("port") %>:</label>
-          <input class="form-control" type="number" min="0" value="<%=robot.port%>" placeholder="<%= i18n("port") %>" name="port" required="" data-parsley-maxlength="4">
-        </div>
-
-        <div class="form-group">
-          <label for="message"><%= i18n("description") %>:</label>
-          <textarea id="message" class="form-control" name="description" placeholder="<%= i18n("description") %>" data-parsley-trigger="keyup" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10"><%= robot.description %></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="name"><%= i18n("pad") %> * :</label>
-          <p class="paddingtop10">
-            <%= i18n('pad') + ':' %><input class="i-checks pr-2" name="pad_enabled" type="checkbox">
-          </p>
-        </div>
-
-        <div class="form-group">
-          <label><%= i18n("filesmallerthan %s","2.5") %></label>
-          <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-            <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
-            <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new"><%= i18n("selectfile") %></span><span class="fileinput-exists"><%= i18n("change") %></span><input id="input_avatar" type="file" name="robot_avatar" data-parsley-filemaxmegabytes="2500" data-parsley-trigger="change" data-parsley-filemimetypes="image/jpeg, image/png"></span>
-            <a id="remove_iconfile_input" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput"><%= i18n("remove") %></a>
-          </div>
-        </div>
-
       </div>
     </div>
     <div class="col-lg-5">

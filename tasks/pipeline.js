@@ -29,6 +29,7 @@ var cssFilesToInject = [
   'styles/toastr/toastr.min.css',
   'styles/popover/webui-popover.css',
   'styles/canvas.css',
+  'styles/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css',
 
 
   'styles/**/*.css'

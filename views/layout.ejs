@@ -41,6 +41,7 @@
   <link rel="stylesheet" href="/styles/toastr/toastr.min.css">
   <link rel="stylesheet" href="/styles/popover/webui-popover.css">
   <link rel="stylesheet" href="/styles/canvas.css">
+  <link rel="stylesheet" href="/styles/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
   <link rel="stylesheet" href="/styles/chosen/ImageSelect.css">
   <link rel="stylesheet" href="/styles/chosen/chosen.min.css">
   <link rel="stylesheet" href="/styles/importer.css">
@@ -77,88 +78,107 @@
 
 <body class="grad">
   <%- partial('_alert.ejs') %>
-  <nav class="navbar navbar-fixed-top navbar-inverse">
-    <div class="container">
-      <div class="navbar-header">
-        <button class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" rel="home" href="/" title="Home page">
-          <img src="/images/logo/logotipo_header.png" style="max-width:100px;">
-        </a>
-      </div>
 
-      <div id="bs-example-navbar-collapse-1" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
-      <ul class="nav navbar-nav">
+  <navbar class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" rel="home" href="/" title="Home page">
+      <img src="/images/logo/logotipo_header.png" style="max-width:100px;">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
         <% if (session.authenticated) { %>
-
-        <% if (session.User.admin) { %>
-        <li class="dropdown">
-          <a class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="#"><%= i18n("admin") %><span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu inverse-dropdown">
-            <li>
-              <a href="/user"><%= i18n("users_administration") %></a>
-            </li>
-            <li>
-              <a href="/robot/admin_panel"><%= i18n("robots_administration") %></a>
-            </li>
-          </ul>
-        </li>
-        <% } %>
-
+          <% if (session.User.admin) { %>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="#"><%= i18n("admin") %><span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu inverse-dropdown">
+                  <li>
+                    <a class="nav-link" href="/user"><%= i18n("users_administration") %></a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="/robot/admin_panel"><%= i18n("robots_administration") %></a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          <% } %>
 
         <li class="nav-item" id="buttom_msg">
           <%if (typeof n_messages !== 'undefined' && n_messages > 0){%>
-          <a href="/message/index"><%= i18n("messages") + '   '%><span id="msg_new" class="label label-pill label-danger">+<%= n_messages %></span></a>
+          <a class="nav-link" href="/message/index"><%= i18n("messages") + '   '%><span id="msg_new" class="label label-pill label-danger">+<%= n_messages %></span></a>
           <% } else { %>
-          <a href="/message/index"><%= i18n("messages") %><spam id="msg_new"></spam></a>
+          <a class="nav-link" href="/message/index"><%= i18n("messages") %><spam id="msg_new"></spam></a>
           <%}%>
         </li>
 
-        <li class="dropdown">
-          <a class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="#">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" aria-expanded="false" role="button" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
             <%= i18n("robots") %>
-            <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu inverse-dropdown">
-            <li>
-              <a href="/robot/my_robots"><%= i18n("my_robots") %></a>
-            </li>
-            <li>
-              <a href="/robot/index_driver_robots"><%= i18n("my_driver_robots") %></a>
-            </li>
-            <li>
-              <a href="/robot/index_viewer_robots"><%= i18n("my_guest_robots") %></a>
-            </li>
-            <li class="nav-dividernavbar-inverse" role="separator"></li>
-            <li>
-              <a href="/robot/index_public_robots"><%= i18n("public_robots") %></a>
-            </li>
-          </ul>
+
+          <div class="dropdown-menu list-group-item-dark" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/robot/my_robots"><%= i18n("my_robots") %></a>
+            <a class="dropdown-item" href="/robot/index_driver_robots"><%= i18n("my_driver_robots") %></a>
+            <a class="dropdown-item" href="/robot/index_viewer_robots"><%= i18n("my_guest_robots") %></a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/robot/index_public_robots"><%= i18n("public_robots") %></a>
+          </div>
         </li>
         <% } %>
       </ul>
 
-      <div class="form-inline pull-xs-right">
-        <form class="navbar-form navbar-right">
+      <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+        <% if (session.authenticated) { %>
+          <li class="nav-item navbar-right">
+            <a class="navbar-brand" href="/user/show/<%= session.User.id%>">
+              <img src="<%= sails.getBaseUrl() + session.User.avatarUrl %>" alt="Avatar" title="<%=session.User.name%>" class=" card-left card-circle" style="width:32px">
+            </a>
+            <a class="btn btn-default navbar-btn navbar-always-right" href="/session/destroy"> <i class="fa fa-sign-out"></i> <span><%= __("signout") %></span></a>
+          </li>
+        <% } %>
+
+        <% if (!session.authenticated) { %>
+          <form id="login_form" class="form-inline my-2 my-lg-0 marginright10" action="/session/create">
+            <input type="email" placeholder="<%= i18n("email") %>" name="email" data-parsley-trigger="change" required>
+            <input type="password" placeholder="<%= i18n("password") %>" required  name="password">
+            <input type="hidden" name="_csrf" value="<%= _csrf %>">
+            <button class="btn btn-outline-success my-2 my-sm-0 marginleft10" type="submit" ><%= i18n("signin") %></button>
+          </form>
+
+          <form action="/user/new" class="form-inline my-2 my-lg-0 marginright10">
+            <button class="btn btn-outline-success my-2 my-sm-0 marginleft10" type="submit"><%= i18n("signupnow") %></button>
+          </form>
+
+
+          <script type="text/javascript">
+            addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
+            $('#login_form').parsley().on('field:validated', function() {
+              var ok = $('.parsley-error').length === 0;
+            })
+          </script>
+        <% } %>
+
+
+        <form class="form-inline my-2 my-lg-0 marginleft10">
           <div class="form-group">
-            <select data-placeholder="Choose a language" class="chzn-select-lan" style="width:75px;" tabindex="2">
-              <option data-img-src="/images/flags/EN.png" value="en">EN</option>
-              <option data-img-src="/images/flags/ES.png" value="es">ES</option>
-              <option data-img-src="/images/flags/FR.png" value="fr">FR</option>
-              <option data-img-src="/images/flags/PT.png" value="pt">PT</option>
-            </select>
+            <select data-placeholder="Choose a language" class="chzn-select-lan btn btn-default navbar-btn" style="width:75px;" tabindex="2">
+                <option data-img-src="/images/flags/EN.png" value="en">EN</option>
+                <option data-img-src="/images/flags/ES.png" value="es">ES</option>
+                <option data-img-src="/images/flags/FR.png" value="fr">FR</option>
+                <option data-img-src="/images/flags/PT.png" value="pt">PT</option>
+              </select>
+          </div>
             <script type="text/javascript">
               $('.chzn-select-lan option[value="<%= (typeof(req.session) !== 'undefined'  && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>"]').attr("selected",true);
               $('.chzn-select-lan').chosen({
                 "disable_search": true
               });
             </script>
-          </div>
         </form>
         <script type="text/javascript">
           $('.chzn-select-lan').on('change',function(){
@@ -183,48 +203,17 @@
 
           });
         </script>
+      </ul>
 
-        <% if (session.authenticated) { %>
-        <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy"> <i class="fa fa-sign-out"></i> <span><%= __("signout") %></span></a>
-        <a class="navbar-btn navbar-right" href="/user/show/<%= session.User.id%>">
-          <img src="<%= sails.getBaseUrl() + session.User.avatarUrl %>" alt="Avatar" title="<%=session.User.name%>" class=" card-left card-circle card-margin-right" style="width:32px">
-        </a>
-        <% } %>
-        <% if (!session.authenticated) { %>
-
-
-        <div class="navbar-right marginleft10">
-          <a href="/user/new" class="btn btn-success navbar-btn"> <%= i18n("signupnow") %></a>
-        </div>
-
-        <form id="login_form" class="navbar-right" action="/session/create">
-          <div class="form-group">
-            <input type="email" placeholder="<%= i18n("email") %>" name="email" data-parsley-trigger="change" required class="form-control">
-          </div>
-          <div class="form-group">
-            <input type="password" placeholder="<%= i18n("password") %>" required  name="password" class="form-control" style="width: 150px">
-          </div>
-          <button type="submit" class="btn btn-success navbar-btn"><%= i18n("signin") %></button>
-          <input type="hidden" name="_csrf" value="<%= _csrf %>">
-        </form>
-
-
-        <script type="text/javascript">
-          addLoadEvent(set_parsley_lang('<%= (typeof(req.session) !== 'undefined' && req.session.languagePreference) ? req.session.languagePreference : sails.config.i18n.defaultLocale  %>'));
-          $('#login_form').parsley().on('field:validated', function() {
-            var ok = $('.parsley-error').length === 0;
-          })
-        </script>
-
-        <% } %>
-      </div>
-      <script type="text/javascript">
-        $('ul.nav > li > a[href="' + document.location.pathname + '"]').parent().addClass('active');
-      </script>
     </div>
-      </div>
-  </nav>
-  <div class="container box">
+  </navbar>
+
+
+  <script type="text/javascript">
+    $('ul.navbar-nav > li > a[href="' + document.location.pathname + '"]').parent().addClass('active');
+  </script>
+
+  <div class="box paddingright10 paddingleft10">
     <%- partial ('_modal.ejs')%>
     <%- body %>
   </div>

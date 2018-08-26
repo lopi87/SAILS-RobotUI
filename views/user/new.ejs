@@ -1,8 +1,9 @@
 <form id="sign-up-form" class="form-signin" action="create" method="PUT" data-parsley-validate style="max-width: none">
-  <div class="row">
-    <h1 class="text-center login-title marginbottom20"><%= i18n('createaccount') %></h1>
 
-    <div class="col-lg-5 col-lg-offset-1">
+  <h1 class="text-center login-title marginbottom20"><%= i18n('createaccount') %></h1>
+
+  <div class="row justify-content-md-center">
+    <div class="col-lg-5">
       <div class="form-group">
         <label for="name"><%= i18n("name") %> * :</label>
         <input class="form-control" name="name" placeholder="<%= i18n("name") %>" required="" type="text">
@@ -16,8 +17,8 @@
       <div class="form-group">
         <label><%= i18n("filesmallerthan %s","2.5") %></label>
         <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-          <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
-          <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new"><%= i18n("selectfile") %></span><span class="fileinput-exists"><%= i18n("change") %></span><input id="input_avatar" type="file" name="avatar" data-parsley-filemaxmegabytes="2500" data-parsley-trigger="change" data-parsley-filemimetypes="image/jpeg, image/png"></span>
+          <div class="form-control" data-trigger="fileinput" style="min-width: 70%;"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+          <span class="input-group-addon btn btn-default btn-file float-right"><span class="fileinput-new"><%= i18n("selectfile") %></span><span class="fileinput-exists"><%= i18n("change") %></span><input id="input_avatar" type="file" name="avatar" data-parsley-filemaxmegabytes="2500" data-parsley-trigger="change" data-parsley-filemimetypes="image/jpeg, image/png"></span>
           <a id="remove_iconfile_input" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput"><%= i18n("remove") %></a>
         </div>
       </div>

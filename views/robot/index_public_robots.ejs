@@ -1,7 +1,7 @@
 <div class="jumbox">
   <h1 class="text-center login-title marginbottom20"><%= i18n('public_robots') %></h1>
 
-  <div class="row">
+  <div class="row justify-content-md-center">
     <% _.each(data.robots, function(robot){ %>
     <%- partial('_card.ejs', {robot: robot}) %>
     <% }) %>

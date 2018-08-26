@@ -1,21 +1,21 @@
 <form id="sign-up-form" class="form-signin" action="create" enctype="multipart/form-data" method="post" data-parsley-validate style="max-width: none">
   <input type="hidden" name="_csrf" value="<%= _csrf %>" />
-  <div class="row">
-    <h1 class="text-center login-title marginbottom20"><%= i18n('robot') %></h1>
+  <h1 class="text-center login-title marginbottom20"><%= i18n('robot') %></h1>
 
-    <div class="col-lg-5 col-lg-offset-1">
+  <div class="row justify-content-md-center">
+    <div class="col-lg-5">
         <div class="form-group">
           <label for="name"><%= i18n("name") %> * :</label>
           <input class="form-control" name="name" placeholder="<%= i18n("name") %>" required="" type="text">
         </div>
 
         <div class="form-group">
-          <label for="message"><%= i18n("ipaddress") %>*:</label>
+          <label for="message"><%= i18n("ipaddress") %> *:</label>
           <input class="form-control" name="ipaddress" id="ip" type="text" class="form-control" placeholder="<%= i18n("ipaddress") %>" required=""  data-parsley-pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$">
         </div>
 
         <div class="form-group">
-          <label for="message"><%= i18n("port") %>*:</label>
+          <label for="message"><%= i18n("port") %> *:</label>
           <input class="form-control" type="number" min="0" max="9999" class="form-control" placeholder="<%= i18n("port") %>" name="port" required="" data-parsley-maxlength="4">
         </div>
 
@@ -55,13 +55,16 @@
         </select>
       </div>
 
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="name"><%= i18n("public") %> * :</label>
-          <p class="paddingtop10">
-            <%= i18n('control') + ':' %><input class="i-checks pr-2" name="public_drive" type="checkbox">
-            <%= i18n('view') + ':' %><input class="i-checks pr-2" name="public_view" type="checkbox">
-          </p>
+      <div class="form-group">
+        <b><%= i18n('public') + ':' %></b>
+        <div class="checkbox checkbox-info margintop10">
+          <input id="check_public_drive" name="public_drive" class="styled" type="checkbox">
+          <label for="check_public_drive"><%= i18n('control') + ':' %></label>
+        </div>
+
+        <div class="checkbox checkbox-info">
+          <input id="check_public_view" name="public_view" class="styled" type="checkbox">
+          <label for="check_public_view"><%= i18n('view') + ':' %></label>
         </div>
       </div>
 

@@ -61,7 +61,7 @@
 	"menu": "Menú",
 	"Public": "Público",
 	"free": "Libre",
-	"view": "Seguir",
+	"view": "Seguimiento",
 	"private": "Privado",
 	"busy": "Ocupado",
 	"sliders": "Sliders",
@@ -172,7 +172,7 @@
 	"my_guest_robots": "Mis robots en seguimiento",
 	"my_driver_robots": "Mis robots controlables",
 	"session.user_id.required": "session.user_id.required",
-	"donwload_code": "donwload_code",
+	"donwload_code": "Descargar código",
 	"pad": "pad",
 	"full_screen": "Pantalla completa",
 	"back": "Atrás"

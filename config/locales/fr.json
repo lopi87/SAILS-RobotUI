@@ -53,5 +53,9 @@
 	"how_to_do_it": "how_to_do_it",
 	"check_our_tutorial": "check_our_tutorial",
 	"error": "error",
-	"new_message": "new_message"
+	"new_message": "new_message",
+	"connect": "connect",
+	"disconnect": "disconnect",
+	"busy": "busy",
+	"my_guest_robots": "my_guest_robots"
 }
