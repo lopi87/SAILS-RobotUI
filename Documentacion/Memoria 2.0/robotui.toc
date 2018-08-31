@@ -13,7 +13,7 @@
 \contentsline {section}{\numberline {2.2}Sensor}{10}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Clasificaci\IeC {\'o}n de errores de medici\IeC {\'o}n}{10}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Tipos de sensores}{11}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Caracter\IeC {\'\i }sticas}{13}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.3}Caracter\IeC {\'\i }sticas de los sensores}{13}{subsection.2.2.3}
 \contentsline {subsubsection}{\numberline {2.2.3.1}Est\IeC {\'a}ticas}{14}{subsubsection.2.2.3.1}
 \contentsline {subsubsection}{\numberline {2.2.3.2}Din\IeC {\'a}micas}{14}{subsubsection.2.2.3.2}
 \contentsline {section}{\numberline {2.3}Transmisi\IeC {\'o}n y comunicaci\IeC {\'o}n}{15}{section.2.3}
@@ -31,16 +31,18 @@
 \contentsline {section}{\numberline {3.2}Tecnolog\IeC {\'\i }as software utilizadas}{22}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}\LaTeX }{22}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}WebStorm}{23}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Github}{23}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Git}{23}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {3.2.5}Amazon Web Services (AWS) }{24}{subsection.3.2.5}
-\contentsline {subsection}{\numberline {3.2.6}Node js}{24}{subsection.3.2.6}
-\contentsline {subsection}{\numberline {3.2.7}Npm}{25}{subsection.3.2.7}
-\contentsline {subsection}{\numberline {3.2.8}SocketIO}{25}{subsection.3.2.8}
-\contentsline {subsection}{\numberline {3.2.9} FFmpeg }{26}{subsection.3.2.9}
-\contentsline {subsection}{\numberline {3.2.10}Bootstrap}{27}{subsection.3.2.10}
-\contentsline {subsection}{\numberline {3.2.11}JQuery}{27}{subsection.3.2.11}
-\contentsline {section}{\numberline {3.3}Tecnolog\IeC {\'\i }as hardware y materiales utilizados}{27}{section.3.3}
+\contentsline {subsection}{\numberline {3.2.3}Fritzing}{23}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Arduino IDE}{23}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Github}{24}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}Git}{24}{subsection.3.2.6}
+\contentsline {subsection}{\numberline {3.2.7}Amazon Web Services (AWS) }{24}{subsection.3.2.7}
+\contentsline {subsection}{\numberline {3.2.8}Node js}{25}{subsection.3.2.8}
+\contentsline {subsection}{\numberline {3.2.9}Npm}{25}{subsection.3.2.9}
+\contentsline {subsection}{\numberline {3.2.10}SocketIO}{26}{subsection.3.2.10}
+\contentsline {subsection}{\numberline {3.2.11} FFmpeg }{26}{subsection.3.2.11}
+\contentsline {subsection}{\numberline {3.2.12}Bootstrap}{27}{subsection.3.2.12}
+\contentsline {subsection}{\numberline {3.2.13}JQuery}{27}{subsection.3.2.13}
+\contentsline {section}{\numberline {3.3}Tecnolog\IeC {\'\i }as hardware y materiales utilizados}{28}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Raspberry Pi Model B}{28}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2} Arduino }{29}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}Arduino sensor kit}{31}{subsection.3.3.3}
@@ -48,6 +50,7 @@
 \contentsline {subsection}{\numberline {3.3.5} Bater\IeC {\'\i }a LiPo }{33}{subsection.3.3.5}
 \contentsline {subsection}{\numberline {3.3.6} Tarjeta de expansi\IeC {\'o}n con bater\IeC {\'\i }a de Litio para Raspberry Pi }{34}{subsection.3.3.6}
 \contentsline {subsection}{\numberline {3.3.7} C\IeC {\'a}mara USB de alta definici\IeC {\'o}n }{34}{subsection.3.3.7}
+\contentsline {subsection}{\numberline {3.3.8}Gamepad}{35}{subsection.3.3.8}
 \contentsline {chapter}{\numberline {4}Requisitos}{37}{chapter.4}
 \contentsline {section}{\numberline {4.1}Requerimientos hardware}{37}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}An\IeC {\'a}lisis y selecci\IeC {\'o}n de componentes elect\IeC {\'r}onicos}{38}{subsection.4.1.1}
@@ -56,67 +59,64 @@
 \contentsline {section}{\numberline {4.3}Especificaci\IeC {\'o}n}{41}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Requisitos funcionales}{41}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}Requisitos no funcionales}{42}{subsection.4.3.2}
-\contentsline {chapter}{\numberline {5}Sensores}{43}{chapter.5}
-\contentsline {chapter}{\numberline {6}Desarrollo software }{45}{chapter.6}
-\contentsline {section}{\numberline {6.1}Metodolog\IeC {\'\i }a de desarrollo}{45}{section.6.1}
-\contentsline {section}{\numberline {6.2}Recolecci\IeC {\'o}n de requisitos}{46}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Requisitos funcionales}{46}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}Requisitos no funcionales}{46}{subsection.6.2.2}
-\contentsline {section}{\numberline {6.3}Diagrama de casos de uso}{46}{section.6.3}
-\contentsline {chapter}{\numberline {7}Comunicaciones}{47}{chapter.7}
-\contentsline {section}{\numberline {7.1}Introducci\IeC {\'o}n}{47}{section.7.1}
-\contentsline {section}{\numberline {7.2} Conexi\IeC {\'o}n y suscripci\IeC {\'o}n }{49}{section.7.2}
-\contentsline {section}{\numberline {7.3} Desconexi\IeC {\'o}n }{55}{section.7.3}
-\contentsline {section}{\numberline {7.4}Env\IeC {\'\i }o de comandos al robot}{58}{section.7.4}
-\contentsline {section}{\numberline {7.5}Captura de datos del robot}{59}{section.7.5}
-\contentsline {chapter}{\numberline {8}An\IeC {\'a}lisis de requisitos}{61}{chapter.8}
-\contentsline {section}{\numberline {8.1}Montaje}{61}{section.8.1}
-\contentsline {subsection}{\numberline {8.1.1}Chasis}{61}{subsection.8.1.1}
-\contentsline {subsection}{\numberline {8.1.2}Tracci\IeC {\'o}n}{61}{subsection.8.1.2}
-\contentsline {subsubsection}{\numberline {8.1.2.1}Motores de corriente continua}{62}{subsubsection.8.1.2.1}
-\contentsline {subsubsection}{\numberline {8.1.2.2}Servomotores}{62}{subsubsection.8.1.2.2}
-\contentsline {subsection}{\numberline {8.1.3}Interconexi\IeC {\'o}n de elementos}{63}{subsection.8.1.3}
-\contentsline {subsection}{\numberline {8.1.4}Driver motores}{64}{subsection.8.1.4}
-\contentsline {subsection}{\numberline {8.1.5}Alimentaci\IeC {\'o}n}{67}{subsection.8.1.5}
-\contentsline {subsubsection}{\numberline {8.1.5.1} Alimentaci\IeC {\'o}n USB/Protoboard}{69}{subsubsection.8.1.5.1}
-\contentsline {subsection}{\numberline {8.1.6}Interconexi\IeC {\'o}n entre m\IeC {\'o}dulos y fijaci\IeC {\'o}n}{72}{subsection.8.1.6}
-\contentsline {subsection}{\numberline {8.1.7}Esquema de conexiones}{72}{subsection.8.1.7}
-\contentsline {section}{\numberline {8.2}Control}{74}{section.8.2}
-\contentsline {subsubsection}{\numberline {8.2.0.1}Diagrama de casos de uso}{74}{subsubsection.8.2.0.1}
-\contentsline {subsubsection}{\numberline {8.2.0.2}Estados del robot}{75}{subsubsection.8.2.0.2}
-\contentsline {section}{\numberline {8.3}Software de control}{76}{section.8.3}
-\contentsline {subsection}{\numberline {8.3.1}Entrada/Salida}{77}{subsection.8.3.1}
-\contentsline {subsection}{\numberline {8.3.2}Comunicaciones}{77}{subsection.8.3.2}
-\contentsline {subsubsection}{\numberline {8.3.2.1}Sockets}{78}{subsubsection.8.3.2.1}
-\contentsline {subsubsection}{\numberline {8.3.2.2} Streaming de v\IeC {\'\i }deo }{82}{subsubsection.8.3.2.2}
-\contentsline {subsubsection}{\numberline {8.3.2.3}C\IeC {\'o}digo de ejemplo completo}{84}{subsubsection.8.3.2.3}
-\contentsline {chapter}{\numberline {9} Pruebas }{89}{chapter.9}
-\contentsline {section}{\numberline {9.1}Plan de pruebas}{89}{section.9.1}
-\contentsline {chapter}{\numberline {10}Organizaci\IeC {\'o}n temporal}{91}{chapter.10}
-\contentsline {section}{\numberline {10.1}Planificaci\IeC {\'o}n temporal de tareas}{94}{section.10.1}
-\contentsline {subsection}{\numberline {10.1.1}Hito 1: Planificaci\IeC {\'o}n y an\IeC {\'a}lisis }{94}{subsection.10.1.1}
-\contentsline {subsection}{\numberline {10.1.2}Hito 1: Definici\IeC {\'o}n de requisitos }{95}{subsection.10.1.2}
-\contentsline {subsection}{\numberline {10.1.3}Hito 2: Montaje del veh\IeC {\'\i }culo}{95}{subsection.10.1.3}
-\contentsline {subsection}{\numberline {10.1.4}Hito 3: Programaci\IeC {\'o}n del veh\IeC {\'\i }culo SensorRS }{95}{subsection.10.1.4}
-\contentsline {subsection}{\numberline {10.1.5}Hito 4: Mejoras en la aplicaci\IeC {\'o}n de control RobotUI }{95}{subsection.10.1.5}
-\contentsline {subsection}{\numberline {10.1.6}Hito 5: Documentaci\IeC {\'o}n }{96}{subsection.10.1.6}
-\contentsline {section}{\numberline {10.2}Diagrama de Gantt}{96}{section.10.2}
-\contentsline {chapter}{\numberline {11} Gu\IeC {\'\i }a de Usuario}{99}{chapter.11}
-\contentsline {subsection}{\numberline {11.0.1}Objetivo de esta gu\IeC {\'\i }a}{100}{subsection.11.0.1}
-\contentsline {subsection}{\numberline {11.0.2}Dirigido a}{100}{subsection.11.0.2}
-\contentsline {subsection}{\numberline {11.0.3}Obtener SensorRS}{100}{subsection.11.0.3}
-\contentsline {section}{\numberline {11.1} Uso de SensorRS }{100}{section.11.1}
-\contentsline {subsection}{\numberline {11.1.1} Configuraci\IeC {\'o}n }{100}{subsection.11.1.1}
-\contentsline {subsection}{\numberline {11.1.2} Programa tu robot }{101}{subsection.11.1.2}
-\contentsline {subsubsection}{\numberline {11.1.2.1}c\IeC {\'o}digo base}{103}{subsubsection.11.1.2.1}
-\contentsline {chapter}{\numberline {12}Comentarios finales}{107}{chapter.12}
-\contentsline {section}{\numberline {12.1}Presupuesto}{108}{section.12.1}
-\contentsline {section}{\numberline {12.2}Conclusiones}{109}{section.12.2}
-\contentsline {section}{\numberline {12.3}Mejoras futuras}{110}{section.12.3}
-\contentsline {chapter}{Anexos}{111}{appendix*.56}
-\contentsline {section}{\numberline {.1}Entorno de desarrollo}{111}{section.Alph0.1}
-\contentsline {section}{\numberline {.2}Instalaci\IeC {\'o}n de Node.js}{111}{section.Alph0.2}
-\contentsline {section}{\numberline {.3}Instalaci\IeC {\'o}n del control de versiones Git}{112}{section.Alph0.3}
-\contentsline {subsection}{\numberline {.3.1}Configuraci\IeC {\'o}n}{112}{subsection.Alph0.3.1}
-\contentsline {chapter}{Bibliograf\'{\i }a}{115}{appendix*.58}
-\contentsline {chapter}{GNU Documentation Free License}{117}{appendix*.59}
+\contentsline {chapter}{\numberline {5}Construcci\IeC {\'o}n del robot}{43}{chapter.5}
+\contentsline {section}{\numberline {5.1}Montaje}{43}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Chasis}{43}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Tracci\IeC {\'o}n}{43}{subsection.5.1.2}
+\contentsline {subsubsection}{\numberline {5.1.2.1}Motores de corriente continua}{44}{subsubsection.5.1.2.1}
+\contentsline {subsubsection}{\numberline {5.1.2.2}Servomotores}{44}{subsubsection.5.1.2.2}
+\contentsline {subsection}{\numberline {5.1.3}Interconexi\IeC {\'o}n de elementos}{45}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}Driver motores}{46}{subsection.5.1.4}
+\contentsline {subsection}{\numberline {5.1.5}Alimentaci\IeC {\'o}n}{48}{subsection.5.1.5}
+\contentsline {subsubsection}{\numberline {5.1.5.1} Alimentaci\IeC {\'o}n USB/Protoboard}{50}{subsubsection.5.1.5.1}
+\contentsline {subsection}{\numberline {5.1.6}Interconexi\IeC {\'o}n entre m\IeC {\'o}dulos y fijaci\IeC {\'o}n}{53}{subsection.5.1.6}
+\contentsline {subsection}{\numberline {5.1.7}Esquema de conexiones}{53}{subsection.5.1.7}
+\contentsline {section}{\numberline {5.2}Control}{55}{section.5.2}
+\contentsline {chapter}{\numberline {6}Desarrollo software }{57}{chapter.6}
+\contentsline {section}{\numberline {6.1}Metodolog\IeC {\'\i }a de desarrollo}{57}{section.6.1}
+\contentsline {subsubsection}{\numberline {6.1.0.1}Diagrama de casos de uso}{58}{subsubsection.6.1.0.1}
+\contentsline {subsubsection}{\numberline {6.1.0.2}Estados del robot}{59}{subsubsection.6.1.0.2}
+\contentsline {section}{\numberline {6.2}Software de control}{60}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Entrada/Salida}{61}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Comunicaciones}{61}{subsection.6.2.2}
+\contentsline {subsubsection}{\numberline {6.2.2.1}Sockets}{62}{subsubsection.6.2.2.1}
+\contentsline {subsubsection}{\numberline {6.2.2.2} Streaming de v\IeC {\'\i }deo }{66}{subsubsection.6.2.2.2}
+\contentsline {subsubsection}{\numberline {6.2.2.3}C\IeC {\'o}digo de ejemplo completo}{68}{subsubsection.6.2.2.3}
+\contentsline {chapter}{\numberline {7}Comunicaciones}{73}{chapter.7}
+\contentsline {section}{\numberline {7.1}Introducci\IeC {\'o}n}{73}{section.7.1}
+\contentsline {section}{\numberline {7.2} Conexi\IeC {\'o}n y suscripci\IeC {\'o}n }{75}{section.7.2}
+\contentsline {section}{\numberline {7.3} Desconexi\IeC {\'o}n }{81}{section.7.3}
+\contentsline {section}{\numberline {7.4}Env\IeC {\'\i }o de comandos al robot}{84}{section.7.4}
+\contentsline {section}{\numberline {7.5}Captura de datos del robot}{85}{section.7.5}
+\contentsline {chapter}{\numberline {8} Pruebas }{87}{chapter.8}
+\contentsline {section}{\numberline {8.1}Plan de pruebas}{87}{section.8.1}
+\contentsline {chapter}{\numberline {9}Organizaci\IeC {\'o}n temporal}{89}{chapter.9}
+\contentsline {section}{\numberline {9.1}Planificaci\IeC {\'o}n temporal de tareas}{92}{section.9.1}
+\contentsline {subsection}{\numberline {9.1.1}Hito 1: Planificaci\IeC {\'o}n y an\IeC {\'a}lisis }{92}{subsection.9.1.1}
+\contentsline {subsection}{\numberline {9.1.2}Hito 2: Definici\IeC {\'o}n de requisitos }{92}{subsection.9.1.2}
+\contentsline {subsection}{\numberline {9.1.3}Hito 3: Montaje del veh\IeC {\'\i }culo}{92}{subsection.9.1.3}
+\contentsline {subsection}{\numberline {9.1.4}Hito 4: Programaci\IeC {\'o}n del veh\IeC {\'\i }culo SensorRS }{93}{subsection.9.1.4}
+\contentsline {subsection}{\numberline {9.1.5}Hito 5: Mejoras en la aplicaci\IeC {\'o}n de control RobotUI }{93}{subsection.9.1.5}
+\contentsline {subsection}{\numberline {9.1.6}Hito 6: Documentaci\IeC {\'o}n }{93}{subsection.9.1.6}
+\contentsline {section}{\numberline {9.2}Diagrama de Gantt}{93}{section.9.2}
+\contentsline {chapter}{\numberline {10} Gu\IeC {\'\i }a de Usuario}{95}{chapter.10}
+\contentsline {subsection}{\numberline {10.0.1}Objetivo de esta gu\IeC {\'\i }a}{96}{subsection.10.0.1}
+\contentsline {subsection}{\numberline {10.0.2}Dirigido a}{96}{subsection.10.0.2}
+\contentsline {subsection}{\numberline {10.0.3}Obtener SensorRS}{96}{subsection.10.0.3}
+\contentsline {section}{\numberline {10.1} Uso de SensorRS }{96}{section.10.1}
+\contentsline {subsection}{\numberline {10.1.1} Configuraci\IeC {\'o}n }{96}{subsection.10.1.1}
+\contentsline {subsection}{\numberline {10.1.2} Programa tu robot }{97}{subsection.10.1.2}
+\contentsline {subsubsection}{\numberline {10.1.2.1}c\IeC {\'o}digo base}{99}{subsubsection.10.1.2.1}
+\contentsline {chapter}{\numberline {11}Comentarios finales}{103}{chapter.11}
+\contentsline {section}{\numberline {11.1}Presupuesto}{104}{section.11.1}
+\contentsline {section}{\numberline {11.2}Conclusiones}{105}{section.11.2}
+\contentsline {section}{\numberline {11.3}Mejoras futuras}{106}{section.11.3}
+\contentsline {chapter}{Anexos}{107}{appendix*.55}
+\contentsline {section}{\numberline {.1}Arduino, entorno de desarrollo}{107}{section.Alph0.1}
+\contentsline {subsection}{\numberline {.1.1}Descarga e instalaci\IeC {\'o}n}{108}{subsection.Alph0.1.1}
+\contentsline {section}{\numberline {.2}Fritzing}{108}{section.Alph0.2}
+\contentsline {section}{\numberline {.3}Instalaci\IeC {\'o}n de Node.js}{108}{section.Alph0.3}
+\contentsline {section}{\numberline {.4}Instalaci\IeC {\'o}n del control de versiones Git}{109}{section.Alph0.4}
+\contentsline {subsection}{\numberline {.4.1}Configuraci\IeC {\'o}n}{109}{subsection.Alph0.4.1}
+\contentsline {chapter}{Bibliograf\'{\i }a}{111}{appendix*.59}
+\contentsline {chapter}{GNU Documentation Free License}{113}{appendix*.60}

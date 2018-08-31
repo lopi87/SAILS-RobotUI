@@ -57,19 +57,17 @@
 
 \input{ requisitos/04_requisitos.tex }
 
-\input{sensores/sensores.tex}
+\input{ vehiculo/vehiculo.tex }
 
 \input{desarrollo-software/desarrollo-software.tex}
 
 \input{ comunicaciones/comunicaciones.tex }
 
-\input{ vehiculo/vehiculo.tex }
-
 \input{ programacion/programacion.tex }
 
 \input{ pruebas/plan_pruebas.tex }
 
-\input{planificacion/planificacion.tex}
+\input{planificacion/10_planificacion.tex}
 
 \input{manual-usuario/manual-usuario.tex}
 

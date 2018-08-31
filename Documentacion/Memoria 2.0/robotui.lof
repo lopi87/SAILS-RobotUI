@@ -16,50 +16,49 @@
 \contentsline {figure}{\numberline {3.7}{\ignorespaces Imagen de la bater\IeC {\'\i }a LiPo utilizada.\relax }}{33}{figure.caption.15}
 \contentsline {figure}{\numberline {3.8}{\ignorespaces Imagen de la tarjeta de expansi\IeC {\'o}n con bater\IeC {\'\i }a de Litio utilizado.\relax }}{34}{figure.caption.16}
 \contentsline {figure}{\numberline {3.9}{\ignorespaces Imagen de la c\IeC {\'a}mara USB utilizada.\relax }}{35}{figure.caption.17}
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Instancia RobotUI en AWS\relax }}{36}{figure.caption.9}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Vista del gamepad utilizado.\relax }}{36}{figure.caption.18}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Esquema GPIO de una Raspberry Pi Model B+.\relax }}{39}{figure.caption.18}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Placa Arduino Mega donde se visualiza la disposici\IeC {\'o}n de sus pines E/S.\relax }}{40}{figure.caption.19}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Esquema GPIO de una Raspberry Pi Model B+.\relax }}{39}{figure.caption.19}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Placa Arduino Mega donde se visualiza la disposici\IeC {\'o}n de sus pines E/S.\relax }}{40}{figure.caption.20}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Servomotor utilizado.\relax }}{44}{figure.caption.21}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Pines de entrada/salida del m\IeC {\'o}dulo L298N empleado.\relax }}{47}{figure.caption.22}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Funcionamiento del puente H.\relax }}{47}{figure.caption.23}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Conjunto Raspberry Pi y m\IeC {\'o}dulo de expansi\IeC {\'o}n de alimentaci\IeC {\'o}n.\relax }}{49}{figure.caption.24}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Bater\IeC {\'\i }a LiPo que alimenta los motores.\relax }}{50}{figure.caption.25}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Adaptador de entrada USB a protoboard.\relax }}{50}{figure.caption.26}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Adaptador de entrada USB a protoboard.\relax }}{51}{figure.caption.27}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Vista del conector J1.\relax }}{52}{figure.caption.28}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Vista del conector J2 y J3.\relax }}{52}{figure.caption.29}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Vista del conector J4 y J5.\relax }}{52}{figure.caption.30}
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Cables de interconexi\IeC {\'o}n para protoboard.\relax }}{53}{figure.caption.31}
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Esquema de conexiones del robot de pruebas.\relax }}{54}{figure.caption.32}
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Vista superior del veh\IeC {\'\i }culo.\relax }}{54}{figure.caption.33}
+\contentsline {figure}{\numberline {5.14}{\ignorespaces Vista del gamepad utilizado.\relax }}{55}{figure.caption.34}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Subsistemas existentes en el proyecto junto con el modelo de ciclo de vida utilizado para su desarrollo.\relax }}{46}{figure.caption.20}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Subsistemas existentes en el proyecto junto con el modelo de ciclo de vida utilizado para su desarrollo.\relax }}{58}{figure.caption.35}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Diagrama de casos de uso para la interacci\IeC {\'o}n con el robot.\relax }}{59}{figure.caption.36}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Aut\IeC {\'o}mata representativo de los diferentes estados del robot.\relax }}{60}{figure.caption.37}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Canales de comunicaci\IeC {\'o}n abiertos por el robot.\relax }}{62}{figure.caption.39}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Diagrama de bloques del robot controlado por WiFi.\relax }}{65}{figure.caption.41}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Peticiones entre un navegador y un servidor HTTP con y sin el empleo de Websockets.\relax }}{47}{figure.caption.21}
-\contentsline {figure}{\numberline {7.2}{\ignorespaces Representaci\IeC {\'o}n de una sala compuesta por dos clientes.\relax }}{48}{figure.caption.22}
-\contentsline {figure}{\numberline {7.3}{\ignorespaces P\IeC {\'a}gina de gesti\IeC {\'o}n de usuarios actualizable en tiempo real.\relax }}{50}{figure.caption.23}
-\contentsline {figure}{\numberline {7.4}{\ignorespaces Esquema representativo del flujo de datos originado por un usuario controlador de un robot.\relax }}{58}{figure.caption.24}
-\contentsline {figure}{\numberline {7.5}{\ignorespaces Esquema representativo del flujo de datos originado por un usuario tras la captura de datos procedentes del robot.\relax }}{59}{figure.caption.25}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces Servomotor utilizado.\relax }}{62}{figure.caption.26}
-\contentsline {figure}{\numberline {8.2}{\ignorespaces Funcionamiento del puente H.\relax }}{66}{figure.caption.27}
-\contentsline {figure}{\numberline {8.3}{\ignorespaces Pines de entrada/salida del m\IeC {\'o}dulo L298N empleado.\relax }}{67}{figure.caption.28}
-\contentsline {figure}{\numberline {8.4}{\ignorespaces Conjunto Raspberry Pi y m\IeC {\'o}dulo de expansi\IeC {\'o}n de alimentaci\IeC {\'o}n.\relax }}{69}{figure.caption.29}
-\contentsline {figure}{\numberline {8.5}{\ignorespaces Bater\IeC {\'\i }a LiPo que alimenta los motores.\relax }}{69}{figure.caption.30}
-\contentsline {figure}{\numberline {8.6}{\ignorespaces Adaptador de entrada USB a protoboard.\relax }}{70}{figure.caption.31}
-\contentsline {figure}{\numberline {8.7}{\ignorespaces Adaptador de entrada USB a protoboard.\relax }}{70}{figure.caption.32}
-\contentsline {figure}{\numberline {8.8}{\ignorespaces Vista del conector J1.\relax }}{71}{figure.caption.33}
-\contentsline {figure}{\numberline {8.9}{\ignorespaces Vista del conector J2 y J3.\relax }}{71}{figure.caption.34}
-\contentsline {figure}{\numberline {8.10}{\ignorespaces Vista del conector J4 y J5.\relax }}{72}{figure.caption.35}
-\contentsline {figure}{\numberline {8.11}{\ignorespaces Cables de interconexi\IeC {\'o}n para protoboard.\relax }}{72}{figure.caption.36}
-\contentsline {figure}{\numberline {8.12}{\ignorespaces Esquema de conexiones del robot de pruebas.\relax }}{73}{figure.caption.37}
-\contentsline {figure}{\numberline {8.13}{\ignorespaces Vista superior del veh\IeC {\'\i }culo.\relax }}{73}{figure.caption.38}
-\contentsline {figure}{\numberline {8.14}{\ignorespaces Vista superior del veh\IeC {\'\i }culo.\relax }}{74}{figure.caption.39}
-\contentsline {figure}{\numberline {8.15}{\ignorespaces Diagrama de casos de uso para la interacci\IeC {\'o}n con el robot.\relax }}{75}{figure.caption.40}
-\contentsline {figure}{\numberline {8.16}{\ignorespaces Aut\IeC {\'o}mata representativo de los diferentes estados del robot.\relax }}{76}{figure.caption.41}
-\contentsline {figure}{\numberline {8.17}{\ignorespaces Canales de comunicaci\IeC {\'o}n abiertos por el robot.\relax }}{78}{figure.caption.43}
-\contentsline {figure}{\numberline {8.18}{\ignorespaces Diagrama de bloques del robot controlado por WiFi.\relax }}{81}{figure.caption.45}
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {10.1}{\ignorespaces Panel de actividades - Trello\relax }}{91}{figure.caption.46}
-\contentsline {figure}{\numberline {10.2}{\ignorespaces Descomposici\IeC {\'o}n de las tareas implicadas en la construcci\IeC {\'o}n del veh\IeC {\'\i }culo rob\IeC {\'o}tico SensorRS (Primera Parte).\relax }}{93}{figure.caption.47}
-\contentsline {figure}{\numberline {10.3}{\ignorespaces Descomposici\IeC {\'o}n de las tareas implicadas en el desarrollo del proyecto (Segunda parte).\relax }}{94}{figure.caption.48}
-\contentsline {figure}{\numberline {10.4}{\ignorespaces Diagrama de Gantt 1. Desarrollo del proyecto.\relax }}{97}{figure.caption.49}
-\contentsline {figure}{\numberline {10.5}{\ignorespaces Diagrama de Gantt 2. Desarrollo del proyecto.\relax }}{98}{figure.caption.50}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {11.1}{\ignorespaces P\IeC {\'a}gina principal RobotUI.\relax }}{101}{figure.caption.51}
-\contentsline {figure}{\numberline {11.2}{\ignorespaces Panel informativo de un robot donde se aprecia su identificador.\relax }}{102}{figure.caption.52}
-\contentsline {figure}{\numberline {11.3}{\ignorespaces Robot a la espera de conexi\IeC {\'o}n entrante.\relax }}{105}{figure.caption.53}
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Peticiones entre un navegador y un servidor HTTP con y sin el empleo de Websockets.\relax }}{73}{figure.caption.42}
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Representaci\IeC {\'o}n de una sala compuesta por dos clientes.\relax }}{74}{figure.caption.43}
+\contentsline {figure}{\numberline {7.3}{\ignorespaces P\IeC {\'a}gina de gesti\IeC {\'o}n de usuarios actualizable en tiempo real.\relax }}{76}{figure.caption.44}
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Esquema representativo del flujo de datos originado por un usuario controlador de un robot.\relax }}{84}{figure.caption.45}
+\contentsline {figure}{\numberline {7.5}{\ignorespaces Esquema representativo del flujo de datos originado por un usuario tras la captura de datos procedentes del robot.\relax }}{85}{figure.caption.46}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1}{\ignorespaces Entorno de desarrollo de Arduino.\relax }}{111}{figure.caption.57}
+\contentsline {figure}{\numberline {9.1}{\ignorespaces Panel de actividades - Trello\relax }}{89}{figure.caption.47}
+\contentsline {figure}{\numberline {9.2}{\ignorespaces Descomposici\IeC {\'o}n de las tareas implicadas en la construcci\IeC {\'o}n del veh\IeC {\'\i }culo rob\IeC {\'o}tico SensorRS (Primera Parte).\relax }}{91}{figure.caption.48}
+\contentsline {figure}{\numberline {9.3}{\ignorespaces Diagrama de Gantt 1. Desarrollo del proyecto.\relax }}{94}{figure.caption.49}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {10.1}{\ignorespaces P\IeC {\'a}gina principal RobotUI.\relax }}{97}{figure.caption.50}
+\contentsline {figure}{\numberline {10.2}{\ignorespaces Panel informativo de un robot donde se aprecia su identificador.\relax }}{98}{figure.caption.51}
+\contentsline {figure}{\numberline {10.3}{\ignorespaces Robot a la espera de conexi\IeC {\'o}n entrante.\relax }}{101}{figure.caption.52}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1}{\ignorespaces Entorno de desarrollo de Arduino.\relax }}{107}{figure.caption.56}
+\contentsline {figure}{\numberline {2}{\ignorespaces Enlace para la descarga del software de Arduino.\relax }}{108}{figure.caption.57}
+\contentsline {figure}{\numberline {3}{\ignorespaces Enlace de acceso al IDE web de Arduino.\relax }}{108}{figure.caption.58}
 \addvspace {10\p@ }

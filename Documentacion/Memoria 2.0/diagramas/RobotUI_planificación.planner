@@ -20,244 +20,111 @@
     </calendar>
   </calendars>
   <tasks>
-    <task id="1" name="RobotUI" note="" work="3899700" start="20160417T000000Z" end="20161004T111500Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="2" name="Conocimiento del proyecto" note="" work="633600" start="20160417T000000Z" end="20160517T170000Z" work-start="20160418T080000Z" percent-complete="35" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="3" name="Planificaci&#xF3;n y estudio del proyecto" note="" work="144000" start="20160517T170000Z" end="20160524T170000Z" work-start="20160518T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="1" name="SensorRS" note="" work="2575800" start="20160417T000000Z" end="20160524T113000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="2" name="Conocimiento del proyecto" note="" work="144000" start="20160417T000000Z" end="20160422T170000Z" work-start="20160418T080000Z" percent-complete="35" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="3" name="Planificaci&#xF3;n y estudio del proyecto" note="" work="288000" start="20160422T170000Z" end="20160506T170000Z" work-start="20160425T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="2" type="FS"/>
         </predecessors>
       </task>
-      <task id="4" name="An&#xE1;lisis de herramientas existentes" note="" work="489600" start="20160524T170000Z" end="20160613T170000Z" work-start="20160525T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="5" name="Estudio de Node.js" note="" work="144000" start="20160524T170000Z" end="20160531T170000Z" work-start="20160525T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="4" name="An&#xE1;lisis de herramientas existentes" note="" work="432000" start="20160506T170000Z" end="20160518T170000Z" work-start="20160509T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="5" name="Estudio de Node.js" note="" work="144000" start="20160506T170000Z" end="20160513T170000Z" work-start="20160509T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="3" type="FS"/>
           </predecessors>
         </task>
-        <task id="6" name="Estudio de Sails.js" note="" work="144000" start="20160524T170000Z" end="20160531T170000Z" work-start="20160525T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="6" name="Estudio de Arduino.js" note="" work="144000" start="20160506T170000Z" end="20160513T170000Z" work-start="20160509T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="3" type="FS"/>
           </predecessors>
         </task>
-        <task id="7" name="Estudio de Socket.io" note="" work="57600" start="20160524T170000Z" end="20160526T170000Z" work-start="20160525T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="7" name="Estudio de Socket.io" note="" work="57600" start="20160506T170000Z" end="20160510T170000Z" work-start="20160509T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="3" type="FS"/>
           </predecessors>
         </task>
-        <task id="8" name="C&#xF3;digos y pruebas" note="" work="86400" start="20160531T170000Z" end="20160603T170000Z" work-start="20160601T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="8" name="C&#xF3;digos y pruebas" note="" work="86400" start="20160513T170000Z" end="20160518T170000Z" work-start="20160516T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="7" type="FS"/>
             <predecessor id="1" predecessor-id="6" type="FS"/>
             <predecessor id="1" predecessor-id="5" type="FS"/>
           </predecessors>
         </task>
-        <task id="9" name="Estudio de MongoDB" note="" work="57600" start="20160609T170000Z" end="20160613T170000Z" work-start="20160610T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="13" type="FS"/>
-          </predecessors>
-        </task>
       </task>
-      <task id="10" name="Definici&#xF3;n de requisitos" note="" work="168300" start="20160603T170000Z" end="20160613T154500Z" work-start="20160606T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="11" name="Arquiterura BBDD an&#xE1;lisis" note="" work="28800" start="20160603T170000Z" end="20160606T170000Z" work-start="20160606T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="8" type="FS"/>
-          </predecessors>
+      <task id="9" name="Definici&#xF3;n de requisitos" note="" work="172800" start="20160417T000000Z" end="20160419T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="10" name="Requisitos no funcionales" note="" work="86400" start="20160417T000000Z" end="20160419T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <task id="11" name="Software" note="" work="28800" start="20160417T000000Z" end="20160418T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+          <task id="12" name="Hardware" note="" work="57600" start="20160417T000000Z" end="20160419T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
         </task>
-        <task id="12" name="Dise&#xF1;o de diagrama UML" note="" work="57600" start="20160606T170000Z" end="20160608T170000Z" work-start="20160607T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="11" type="FS"/>
-          </predecessors>
+        <task id="13" name="Requisitos funcionales" note="" work="57600" start="20160417T000000Z" end="20160418T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <task id="14" name="Software" note="" work="28800" start="20160417T000000Z" end="20160418T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+          <task id="15" name="Hardware" note="" work="28800" start="20160417T000000Z" end="20160418T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
         </task>
-        <task id="13" name="Requisitos funcionales" note="" work="28800" start="20160608T170000Z" end="20160609T170000Z" work-start="20160609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="12" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="14" name="Requisitos no funcionales" note="" work="24300" start="20160609T170000Z" end="20160610T154500Z" work-start="20160610T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="13" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="15" name="Reuni&#xF3;n de planificaci&#xF3;n con director del proyecto" note="" work="28800" start="20160610T154500Z" end="20160613T154500Z" work-start="20160610T154500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="14" type="FS"/>
-          </predecessors>
-        </task>
+        <task id="16" name="Reuni&#xF3;n de planificaci&#xF3;n con director del proyecto" note="" work="28800" start="20160417T000000Z" end="20160418T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
       </task>
-      <task id="16" name="Desarrollo aplicaci&#xF3;n" note="" work="881100" start="20160613T154500Z" end="20160726T113000Z" work-start="20160613T154500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="17" name="Sistema de autenticaci&#xF3;n - registro" note="" work="57600" start="20160613T154500Z" end="20160615T154500Z" work-start="20160613T154500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="17" name="Montaje del veh&#xED;culo" note="" work="732600" start="20160418T170000Z" end="20160524T113000Z" work-start="20160419T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="18" name="Instalaci&#xF3;n y preparaci&#xF3;n placa Raspberry Pi" note="" work="57600" start="20160418T170000Z" end="20160420T170000Z" work-start="20160419T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
-            <predecessor id="1" predecessor-id="15" type="FS"/>
+            <predecessor id="1" predecessor-id="16" type="FS"/>
           </predecessors>
         </task>
-        <task id="18" name="Alta de dispositivos rob&#xF3;ticos" note="" work="57600" start="20160615T154500Z" end="20160617T154500Z" work-start="20160615T154500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="17" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="19" name="Internacionalizaci&#xF3;n" note="" work="28800" start="20160617T154500Z" end="20160620T154500Z" work-start="20160617T154500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="19" name="Comunicaci&#xF3;n serie Raspberry Pi - Arduino" note="" work="57600" start="20160420T170000Z" end="20160422T170000Z" work-start="20160421T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="18" type="FS"/>
           </predecessors>
         </task>
-        <task id="20" name="M&#xF3;dulo de mensajes entre usuarios" note="" work="86400" start="20160620T154500Z" end="20160623T154500Z" work-start="20160620T154500Z" percent-complete="79" priority="0" type="normal" scheduling="fixed-work">
+        <task id="20" name="Conexi&#xF3;n de sensores" note="" work="86400" start="20160422T170000Z" end="20160427T170000Z" work-start="20160425T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="19" type="FS"/>
           </predecessors>
         </task>
-        <task id="21" name="Implementaci&#xF3;n de pol&#xED;ticas de permisos" note="" work="115200" start="20160623T154500Z" end="20160629T154500Z" work-start="20160623T154500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="21" name="Montaje sobre el chasis del veh&#xED;culo" note="" work="86400" start="20160427T170000Z" end="20160502T170000Z" work-start="20160428T080000Z" percent-complete="79" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="20" type="FS"/>
           </predecessors>
         </task>
-        <task id="22" name="Reuni&#xF3;n de seguimiento con director del proyecto" note="" work="99000" start="20160629T154500Z" end="20160705T101500Z" work-start="20160629T154500Z" percent-complete="42" priority="0" type="normal" scheduling="fixed-work">
+        <task id="22" name="Alimentaci&#xF3;n del conjunto" note="" work="57600" start="20160502T170000Z" end="20160504T170000Z" work-start="20160503T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="21" type="FS"/>
           </predecessors>
         </task>
-        <task id="23" name="Elementos de la interfaz" note="" work="162900" start="20160705T101500Z" end="20160712T163000Z" work-start="20160705T101500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <task id="24" name="Acciones" note="" work="33300" start="20160705T101500Z" end="20160706T113000Z" work-start="20160705T101500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="23" name="Reuni&#xF3;n de seguimiento con director del proyecto" note="" work="99000" start="20160504T170000Z" end="20160510T113000Z" work-start="20160505T080000Z" percent-complete="42" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
+            <predecessor id="1" predecessor-id="22" type="FS"/>
+          </predecessors>
+        </task>
+        <task id="24" name="Programaci&#xF3;n del veh&#xED;culo" note="" work="288000" start="20160510T113000Z" end="20160524T113000Z" work-start="20160510T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <task id="25" name="Placa Raspberry Pi" note="" work="144000" start="20160510T113000Z" end="20160517T113000Z" work-start="20160510T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
             <predecessors>
-              <predecessor id="1" predecessor-id="22" type="FS"/>
+              <predecessor id="1" predecessor-id="23" type="FS"/>
             </predecessors>
           </task>
-          <task id="25" name="Sliders" note="" work="29700" start="20160706T113000Z" end="20160707T114500Z" work-start="20160706T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-            <predecessors>
-              <predecessor id="1" predecessor-id="24" type="FS"/>
-            </predecessors>
-          </task>
-          <task id="26" name="Labels" note="" work="56700" start="20160707T114500Z" end="20160711T113000Z" work-start="20160707T114500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <task id="26" name="Programaci&#xF3;n Arduino" note="" work="144000" start="20160517T113000Z" end="20160524T113000Z" work-start="20160517T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
             <predecessors>
               <predecessor id="1" predecessor-id="25" type="FS"/>
             </predecessors>
           </task>
-          <task id="27" name="Video" note="" work="43200" start="20160711T113000Z" end="20160712T163000Z" work-start="20160711T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-            <predecessors>
-              <predecessor id="1" predecessor-id="26" type="FS"/>
-            </predecessors>
-          </task>
-        </task>
-        <task id="28" name="Personalizacion de la interfaz" note="" work="273600" start="20160712T163000Z" end="20160726T113000Z" work-start="20160712T163000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <task id="29" name="Personalizaci&#xF3;n de acciones" note="" work="43200" start="20160712T163000Z" end="20160714T113000Z" work-start="20160712T163000Z" percent-complete="35" priority="0" type="normal" scheduling="fixed-work">
-            <predecessors>
-              <predecessor id="1" predecessor-id="27" type="FS"/>
-            </predecessors>
-          </task>
-          <task id="30" name="Personalizaci&#xF3;n de sliders" note="" work="57600" start="20160714T113000Z" end="20160718T113000Z" work-start="20160714T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-            <predecessors>
-              <predecessor id="1" predecessor-id="29" type="FS"/>
-            </predecessors>
-          </task>
-          <task id="31" name="Personalizaci&#xF3;n de labels" note="" work="57600" start="20160718T113000Z" end="20160720T113000Z" work-start="20160718T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-            <predecessors>
-              <predecessor id="1" predecessor-id="30" type="FS"/>
-            </predecessors>
-          </task>
-          <task id="32" name="Edici&#xF3;n de la interfaz" note="" work="115200" start="20160720T113000Z" end="20160726T113000Z" work-start="20160720T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-            <predecessors>
-              <predecessor id="1" predecessor-id="31" type="FS"/>
-            </predecessors>
-          </task>
         </task>
       </task>
-      <task id="33" name="M&#xF3;dulo de comunicaciones" note="" work="518400" start="20160726T113000Z" end="20160819T113000Z" work-start="20160726T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="34" name="Conexi&#xF3;n cliente - robot" note="" work="142200" start="20160726T113000Z" end="20160802T110000Z" work-start="20160726T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <task id="35" name="Env&#xED;o de &#xF3;rdenes al robot" note="" work="57600" start="20160726T113000Z" end="20160728T113000Z" work-start="20160726T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-            <predecessors>
-              <predecessor id="1" predecessor-id="32" type="FS"/>
-            </predecessors>
-          </task>
-          <task id="36" name="Captura de v&#xED;deo del robot" note="" work="84600" start="20160728T113000Z" end="20160802T110000Z" work-start="20160728T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-            <predecessors>
-              <predecessor id="1" predecessor-id="35" type="FS"/>
-            </predecessors>
-          </task>
-        </task>
-        <task id="37" name="Conexi&#xF3;n cliente - servidor" note="" work="88200" start="20160802T110000Z" end="20160805T113000Z" work-start="20160802T110000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <task id="38" name="Env&#xED;o de v&#xED;deo capturado al servidor" note="" work="45000" start="20160802T110000Z" end="20160803T163000Z" work-start="20160802T110000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-            <predecessors>
-              <predecessor id="1" predecessor-id="36" type="FS"/>
-            </predecessors>
-          </task>
-          <task id="39" name="Env&#xED;o de &#xF3;rdenes lanzadas al servidor" note="" work="43200" start="20160803T163000Z" end="20160805T113000Z" work-start="20160803T163000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-            <predecessors>
-              <predecessor id="1" predecessor-id="38" type="FS"/>
-            </predecessors>
-          </task>
-        </task>
-        <task id="40" name="Desarrollo de tests funcionales" note="" work="230400" start="20160805T113000Z" end="20160817T113000Z" work-start="20160805T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="27" name="Mejoras en la aplicaci&#xF3;n RobotUI" note="" work="115200" start="20160417T000000Z" end="20160419T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="28" name="Uso del gamepad" note="" work="57600" start="20160417T000000Z" end="20160419T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+        <task id="29" name="Renovaci&#xF3;n de la interfaz" note="" work="28800" start="20160417T000000Z" end="20160418T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+        <task id="30" name="Mejoras en comunicaciones" note="" work="28800" start="20160417T000000Z" end="20160418T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      </task>
+      <task id="31" name="Documentaci&#xF3;n" note="" work="662400" start="20160417T000000Z" end="20160518T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="32" name="Memoria" note="" work="547200" start="20160417T000000Z" end="20160512T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+        <task id="33" name="Resumen" note="" work="57600" start="20160512T170000Z" end="20160516T170000Z" work-start="20160513T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
-            <predecessor id="1" predecessor-id="39" type="FS"/>
+            <predecessor id="1" predecessor-id="32" type="FS"/>
           </predecessors>
         </task>
-        <task id="41" name="Frontend - detalles de estilos" note="" work="57600" start="20160817T113000Z" end="20160819T113000Z" work-start="20160817T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="34" name="Presentaci&#xF3;n" note="" work="57600" start="20160516T170000Z" end="20160518T170000Z" work-start="20160517T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
-            <predecessor id="1" predecessor-id="40" type="FS"/>
+            <predecessor id="1" predecessor-id="33" type="FS"/>
           </predecessors>
         </task>
       </task>
-      <task id="42" name="Conexi&#xF3;n servidor - cliente" note="" work="115200" start="20160805T113000Z" end="20160811T113000Z" work-start="20160805T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="43" name="Difusi&#xF3;n de v&#xED;deo a espectadores" note="" work="57600" start="20160805T113000Z" end="20160809T113000Z" work-start="20160805T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="39" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="44" name="Difuci&#xF3;n de comandos a espectadores" note="" work="57600" start="20160809T113000Z" end="20160811T113000Z" work-start="20160809T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="43" type="FS"/>
-          </predecessors>
-        </task>
-      </task>
-      <task id="45" name="Montaje del veh&#xED;culo" note="" work="86400" start="20160819T113000Z" end="20160824T113000Z" work-start="20160819T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="46" name="B&#xFA;squeda de elementos hardware" note="" work="57600" start="20160819T113000Z" end="20160823T113000Z" work-start="20160819T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="41" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="47" name="Montaje y conexiones" note="" work="28800" start="20160823T113000Z" end="20160824T113000Z" work-start="20160823T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="46" type="FS"/>
-          </predecessors>
-        </task>
-      </task>
-      <task id="48" name="Programaci&#xF3;n del veh&#xED;culo" note="" work="143100" start="20160824T113000Z" end="20160831T111500Z" work-start="20160824T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <predecessors>
-          <predecessor id="1" predecessor-id="47" type="FS"/>
-        </predecessors>
-        <task id="49" name="Gpio " note="" work="57600" start="20160824T113000Z" end="20160826T113000Z" work-start="20160824T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-        <task id="50" name="Video streaming" note="" work="42300" start="20160826T113000Z" end="20160829T161500Z" work-start="20160826T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="49" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="51" name="Fase de pruebas" note="" work="43200" start="20160829T161500Z" end="20160831T111500Z" work-start="20160829T161500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="50" type="FS"/>
-          </predecessors>
-        </task>
-      </task>
-      <task id="52" name="Despliegue de la aplicaci&#xF3;n en producci&#xF3;n" note="" work="28800" start="20160831T111500Z" end="20160901T111500Z" work-start="20160831T111500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <predecessors>
-          <predecessor id="1" predecessor-id="51" type="FS"/>
-        </predecessors>
-      </task>
-      <task id="53" name="Documentaci&#xF3;n" note="" work="662400" start="20160901T111500Z" end="20161004T111500Z" work-start="20160901T111500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="54" name="Memoria" note="" work="547200" start="20160901T111500Z" end="20160928T111500Z" work-start="20160901T111500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="52" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="55" name="Resumen" note="" work="57600" start="20160928T111500Z" end="20160930T111500Z" work-start="20160928T111500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="54" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="56" name="Presentaci&#xF3;n" note="" work="57600" start="20160930T111500Z" end="20161004T111500Z" work-start="20160930T111500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="55" type="FS"/>
-          </predecessors>
-        </task>
-      </task>
-      <task id="57" name="Reuni&#xF3;n de seguimiento con el director del proyectp" note="" work="28800" start="20160417T000000Z" end="20160418T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="35" name="Reuni&#xF3;n de seguimiento con el director del proyectp" note="" work="28800" start="20160417T000000Z" end="20160418T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
     </task>
   </tasks>
   <resource-groups/>
