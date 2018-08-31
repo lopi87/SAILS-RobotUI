@@ -1,13 +1,17 @@
-// Servo - Version: Latest
-#include <Servo.h>
 
 #include <SimpleDHT.h>
+#include <Timer.h>
+timer t;
 
 #define E1 10  // Enable Pin for motor 1
 #define I1 8  // Control pin 1 for motor 1
 #define I2 9 // Control pin 2 for motor 1
 
-int pinDHT11 = 4;
+#define E2 13  // Enable Pin for motor 2
+#define D1 12  // Control pin 1 for motor 2
+#define D2 11 // Control pin 2 for motor 2
+
+int pinDHT11 = 3;
 int photosensorPin = A0;   // select the analog input pin for the photoresistor
 String inData = "";
 
@@ -15,39 +19,26 @@ int servo_x, motor;
 
 SimpleDHT11 dht11;
 
-Servo servoMotor;
-
 void setup() {
   Serial.begin(9600);
-  pinMode(12, OUTPUT);
-
-  pinMode(motorPin1, OUTPUT);
-  pinMode(motorPin2, OUTPUT);
-  servoMotor.attach(5);
+  pinMode(2, OUTPUT); //lights
 
   pinMode(E1, OUTPUT);
   pinMode(I1, OUTPUT);
   pinMode(I2, OUTPUT);
+
+  pinMode(E2, OUTPUT);
+  pinMode(D2, OUTPUT);
+  pinMode(D1, OUTPUT);
+
+  // Set initial rotation direction
+  digitalWrite(I1, LOW);
+  digitalWrite(I2, HIGH);
+  digitalWrite(D1, LOW);
+  digitalWrite(D2, HIGH);
 }
 
 void loop() {
-
-  analogWrite(E1, 153); // Run in half speed
-  digitalWrite(I1, HIGH);
-  digitalWrite(I2, LOW);
-  delay(10000);
-
-  // change direction
-  digitalWrite(E1, LOW);
-
-  delay(200);
-
-  analogWrite(E1, 255);  // Run in full speed
-
-  digitalWrite(I1, LOW);
-  digitalWrite(I2, HIGH);
-
-  delay(10000);
 
   while (Serial.available() > 0) {
     char received = Serial.read();
@@ -55,59 +46,77 @@ void loop() {
 
     if (received == '\n') {
       inData.trim();
-      Serial.print(inData);
 
       // ON OFF LED
       if (inData == "H") {
-        analogWrite(12, 255);
+        analogWrite(2, HIGH);
       }
       if (inData == "L") {
-        analogWrite(12, 0);
+        analogWrite(2, LOW);
+        t.pulse(1000, LOW);
       }
 
-      //SERVO
-      if (inData.startsWith("SRV")){
+      if(inData == "LH"){
+        t.pulse(1000, HIGH);
+      }
 
+      //Direction
+      if (inData.startsWith("SRV")){
           if (sscanf(inData.c_str(), "SRV-%d", &servo_x) == 1) {
             Serial.println(servo_x);
           }
 
-          if(servo_x < 30){
-            servo_x = 30;
+          if( servo_x <= 51 && servo_x >= -51){
+            // stop
+            digitalWrite(E2, LOW);
+            digitalWrite(D1, LOW);
+            digitalWrite(D2, LOW);
           }
-          if (servo_x > 150){
-            servo_x = 150;
+
+          if( servo_x > 51){
+            analogWrite(E2, servo_x);
+            digitalWrite(D1, HIGH);
+            digitalWrite(D2, LOW);
           }
-          servoMotor.write(servo_x);
-          inData = "";
+
+          if( servo_x < -51){
+            servo_x = servo_x * -1;
+            analogWrite(E2, servo_x);
+            digitalWrite(D1, LOW);
+            digitalWrite(D2, HIGH);
+          }
+
       }
 
       //MOTOR
-      if (inData.startsWith("SRV")){
+      if (inData.startsWith("MOTOR")){
           if (sscanf(inData.c_str(), "MOTOR-%d", &motor) == 1) {
             Serial.println(motor);
           }
 
-          if( motor == 0){
+          if( motor <= 51 && motor >= -51){
             // stop
             digitalWrite(E1, LOW);
+            digitalWrite(I1, LOW);
+            digitalWrite(I2, LOW);
+
           }
 
-          if( motor > 0){
-            analogWrite(E1, motor); // Run in half speed
+          if( motor > 51){
+            analogWrite(E1, motor);
             digitalWrite(I1, HIGH);
             digitalWrite(I2, LOW);
           }
 
-          if( motor < 0){
-            analogWrite(E1, motor * -1);
+          if( motor < -51){
+            motor = motor * -1;
+            analogWrite(E1, motor);
             digitalWrite(I1, LOW);
             digitalWrite(I2, HIGH);
           }
-          motor = 0
       }
+      inData = "";
     }
-
   }
 
   // read without samples.

@@ -11,8 +11,8 @@ port.pipe(parser);
 var io_client = require('../node_modules/socket.io-client');
 var sails_client = require('../node_modules/sails.io.js');
 var io_server = sails_client(io_client);
-// io_server.sails.url = 'http://192.168.1.135:1337';
-io_server.sails.url = 'http://localhost:1337';
+io_server.sails.url = 'http://192.168.1.135:1337';
+//io_server.sails.url = 'http://localhost:1337';
 io_server.socket.get('/robot/changetoonline/', {robot: '5b64917f7510da0d68a140ec', online: true});
 
 // Inicia servidor socket.io en el puerto 8085.
@@ -56,7 +56,7 @@ io.sockets.on('connection', function (socket)
 
   socket.on('axes_action_a', function (data) {
 
-    if(data['x'] > 0){ //derecha
+    if(data['y'] > 0){ //derecha
       y = data['y'] * -2 * 100 - 50;
     } else { //izquierda
       y = data['y'] * -2 * 100 + 50;
@@ -82,7 +82,11 @@ io.sockets.on('connection', function (socket)
     } else { //delante
       y = data['y'] * -2 * 100 + 50;
     }
-    if(y == 50){
+    if(y >= 49 && y <= 52 ){
+      y = 0;
+    }
+
+    if(y == -51){
       y = 0;
     }
 
@@ -99,13 +103,14 @@ io.sockets.on('connection', function (socket)
   socket.on('pad_action', function (pad_btn) {
     console.log(pad_btn);
     if(pad_btn == 2){
-      serial_transmission('H', 50);
+      serial_transmission('H', 10);
     }
-
     if(pad_btn == 1){
-      serial_transmission('L', 50);
+      serial_transmission('L', 10);
     }
-
+    if(pad_btn == 3){
+      serial_transmission('IT', 10);
+    }
   });
 
 
@@ -113,9 +118,11 @@ io.sockets.on('connection', function (socket)
     console.log('Comando recibido: ' + data);
     switch(data) {
       case 'H':
-        serial_transmission(data, 50);
+        serial_transmission(data, 10);
       case 'L':
-        serial_transmission(data, 50);
+        serial_transmission(data, 10);
+      case 'IT':
+        serial_transmission(data, 10);
       default:
         console.log('command not found');
     }
