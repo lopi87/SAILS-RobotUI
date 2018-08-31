@@ -1,0 +1,110 @@
+% Este archivo es parte de la memoria del proyecto fin de carrera
+% de Manuel López Urbina. Protegida bajo la licencia GFDL.
+% Para más información, la licencia completa viene incluida en el
+% fichero fdl-1.3.tex
+
+% Copyright (C) 2018 Manuel López Urbina
+
+\newpage
+
+\begin{appendix}
+\backmatter
+
+\chapter{Anexos}
+\label{appendix:anexos}
+
+Anexos con los diferentes elementos software utilizados en el proyecto junto con las instrucciones para la instalación.\\
+
+\section{Entorno de desarrollo}
+
+El entorno de desarrollo es extremadamente sencillo ya que el programa se escribe en la zona
+del sketch y para compilarlo y cargarlo a cualquier placa solo es necesario pulsar un botón.\\
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.3]{imagenes/entorno_desarrollo_arduino.png}
+  \end{center}
+  \label{fig:logo}
+ \caption{Entorno de desarrollo de Arduino.}
+\end{figure}
+
+El software de desarrollo de Arduino es publicado bajo una licencia libre y gratuita, la cual se puede descargar desde la página oficial
+incluyendo los drivers necesarios para cualquier placa Arduino, así como las librerías necesarias para su programación.
+
+\section{Instalación de Node.js}
+
+Instalación de los prerrequisitos:\\
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install python-software-properties python g++ make
+\end{lstlisting}
+
+
+Si está utilizando Ubuntu 16.04, necesitará hacer los siguiente:\\
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install software-properties-common
+\end{lstlisting}
+
+
+Añadimos el repositorio:\\
+
+\begin{lstlisting}[language=bash]
+sudo add-apt-repository ppa:chris-lea/node.js
+\end{lstlisting}
+
+Actualizamos la lista de paquetes:\\
+
+\begin{lstlisting}[language=bash]
+sudo apt-get update
+\end{lstlisting}
+
+Instalación de  Node.js:\\
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install nodejs
+\end{lstlisting}
+
+\section{Instalación del control de versiones Git}
+
+Para seguir esta guía es necesario disponer de una máquina con Ubuntu 14.04.\\
+
+La forma más sencilla de tener Git instalado y configurado para su utilización es mediante el uso de los repositorios predeterminados de Ubuntu. 
+Este es el método más rápido, pero, por contra puede ser que la versión disponible no sea la más reciente. 
+Si necesita la última versión, deberá seguir los pasos para compilar Git desde el origen.\\
+
+Si no necesitamos disponer de la última versión podemos instalarlo desde el repositorio de Ubuntu. Para ello introducimos los siguientes comandos en una terminal:\\
+
+\begin{lstlisting}[language=bash]
+sudo apt-get update
+sudo apt-get install git
+\end{lstlisting}
+
+Esto descargará e instalará Git en el sistema. A continuación se describe los pasos para su configuración.
+
+\subsection{Configuración}
+
+Una vez que disponemos de Git instalado, necesitamos realizar una serie de pasos para añadir nuestros datos de acceso de nuestro repositorio.\\
+
+La forma más sencilla de hacerlo es a través del comando \emph{git config} proporcionando nuestro nombre y dirección de correo electrónico. Esto es debido a que Git incorpora esta información en cada commit
+que hacemos. Por ejemplo, si nuestro nombre es \emph{RobotUI} y nuestro email \emph{email@robotui.com}, los comandos de configuración serían los siguientes:\\
+
+\begin{lstlisting}[language=bash]
+ git config --global user.name "RobotUI"
+ git config --global user.email "email@robotui.com"
+\end{lstlisting}
+
+Finalmente podemos comprobar todos los valores de configuración establecidos escribiendo:\\
+
+\begin{lstlisting}[language=bash]
+git config --list
+\end{lstlisting}
+
+Existen muchas más opciones configurables pero estos son los dos esenciales necesarios.\\
+
+\end{appendix}
+
+
+
+
+

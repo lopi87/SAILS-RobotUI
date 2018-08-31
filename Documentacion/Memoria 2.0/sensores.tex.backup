@@ -1,0 +1,15 @@
+% Este archivo es parte de la memoria del proyecto fin de carrera
+% de Manuel López Urbina. Protegida bajo la licencia GFDL.
+% Para más información, la licencia completa viene incluida en el
+% fichero fdl-1.3.tex
+
+% Copyright (C) 2017 Manuel López Urbina
+
+\newpage
+
+
+\chapter{Sensores}
+\chaptermark{Sensores}
+
+\label{chap:sensores}
+

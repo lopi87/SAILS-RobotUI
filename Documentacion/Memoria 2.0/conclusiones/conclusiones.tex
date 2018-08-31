@@ -1,0 +1,95 @@
+% Este archivo es parte de la memoria del proyecto fin de carrera
+% de Manuel López Urbina. Protegida bajo la licencia GFDL.
+% Para más información, la licencia completa viene incluida en el
+% fichero fdl-1.3.tex
+
+% Copyright (C) 2018 Manuel López Urbina
+
+\newpage
+
+\chapter{Comentarios finales}
+\label{chap:conclusiones}
+
+\section{Presupuesto}
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{8cm}|p{2cm}|p{2cm}|p{2cm}|}
+      \hline
+      \vspace{+0.2in}{\textbf{Descripción}} & {\textbf{Unidades}} & {\textbf{Precio \EUR{} unidad }} & {\textbf{Total \EUR{}}}\\
+      \hline
+      \vspace{+0.2in}{Raspberry Pi 3 Modelo B} &  \vspace{+0.2in}{1} &  \vspace{+0.2in}{38,70} &  \vspace{+0.2in}{38,70}\\
+      \hline
+      \vspace{+0.2in}{Arduino Mega} & \vspace{+0.2in}{1} &  \vspace{+0.2in}{38,70} &  \vspace{+0.2in}{35,98}\\
+      \hline      
+      \vspace{+0.2in}{Arduino Sensor kit} & \vspace{+0.2in}{1} &  \vspace{+0.2in}{38,70} &  \vspace{+0.2in}{25,00}\\
+      \hline
+      \vspace{+0.2in}{Cámara USB alta definición} &  \vspace{+0.2in}{1} &  \vspace{+0.2in}{39,90} &  \vspace{+0.2in}{39,90}\\
+      \hline
+      \vspace{+0.2in}{Tarjeta de expansión con batería de Litio para Raspberry Pi} &  \vspace{+0.2in}{1} &  \vspace{+0.2in}{16,99} &  \vspace{+0.2in}{16,99}\\
+      \hline
+      \vspace{+0.2in}{Lipo batería (3.7v, 600mAh Lipo) } & \vspace{+0.2in}{1} & \vspace{+0.2in}{13,99} & \vspace{+0.2in}{13,99}\\
+      \hline
+      \vspace{+0.2in}{Indicador Tester de baterías Lipo} & \vspace{+0.2in}{1} & \vspace{+0.2in}{8,90} & \vspace{+0.2in}{8,90}\\
+      \hline      
+      \vspace{+0.2in}{Cargador baterías Lipo} & \vspace{+0.2in}{1} & \vspace{+0.2in}{21,90} & \vspace{+0.2in}{21,90}\\
+      \hline
+      \vspace{+0.2in}{Chasis vehículo Radiocontrol} & \vspace{+0.2in}{1} & \vspace{+0.2in}{54} & \vspace{+0.2in}{54}\\
+      \hline
+      \vspace{+0.2in}{Instancia Amazon Web Service} & \vspace{+0.2in}{2 meses} & \vspace{+0.2in}{5/mes} & \vspace{+0.2in}{10}\\
+      \hline        
+      \vspace{+0.2in}{Horas de programación y montaje} & \vspace{+0.2in}{350 horas} & \vspace{+0.2in}{50/hora} & \vspace{+0.2in}{17500}\\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\begin{table}[H]
+  \begin{flushright}
+    \begin{tabular}{p{8cm}p{2cm}}
+      \vspace{+0.1in}\textbf{Total bruto:} &\vspace{+0.1in}{\EUR{17745,38}}\\
+      \vspace{+0.1in}\textbf{I.V.A. \%: } & \vspace{+0.1in}{21\%}\\
+      \vspace{+0.2in}\textbf{Total presupuesto:} & \vspace{+0.2in}{\EUR{21471,91}}\\
+    \end{tabular}
+  \end{flushright}
+\end{table}
+
+
+\section{Conclusiones}
+
+La elaboración de este proyecto ha resultado muy gratificante a nivel personal. Uno de los motivos principales ha sido la necesidad de trabajar en numerosas áreas de 
+conocimiento entre las que encontramos, por un lado la programación, ya que ha sido necesaria la programación del microcontrolador que incorpora la placa Arduino, 
+concretamente el ATmega2560. Por otra parte se ha realizado la programación de la placa Raspberry Pi, módulo encargado de la comunicación por puerto serie con la placa Arduino y la 
+transmisión de los datos al servidor. 
+
+Por otro lado, la elaboración del vehículo robótico me ha permitido ampliar conocimientos en áreas más relacionadas con la electrónica, un área bastante desconcida para mí. 
+Donde se ha trabajado, entre otras áreas, en lo referente a la transmisión de señales por puerto serie, la emisión de pulsos PWM junto con la utilización de multitud de sensores.\\
+
+Entre los elementos desarrollados podemos destacar:\\
+
+\begin{itemize}
+ \item La elaboración de un vehículo roboótico haciendo uso de una Raspberry Pi 3 Model B.
+ \item Programación del micronoctrolador Atmega2560 alojado en una placa Arduino.
+ \item Comunicación por puerto serie entre la placa Arduino y Raspberry Pi
+ \item Realización de conexiones entre elementos y montaje del vehículo.
+ \item Transmisión de gran cantidad de datos entre cliente servidor y servidor cliente. Streaming de vídeo y audio, emisión de comandos entre otros datos.\\
+ \item Incorporación de algún sistema para el geoposicionamiento y escaneado de habiataciones, obstáculos, etc.
+\end{itemize}
+
+Pienso que el presente royecto puede ser de gran utilidad permitiendo liberar a los trabajadores de aquellas tareas especialmente peligrosas para la salud y la integridad física en diversas situaciones 
+como exploración de zonas peligrosas o de difícil acceso, búsqueda de personas, etc ya que el vehículo desarrolado permite introducirlo de manera remota en zonas inaccesibles 
+o peligrosa para las personas.\\
+
+Una vez presentado podré continuar añadiendo mejoras y muchas otras cosas que tengo pensadas y que, posiblemente, se realicen a modo proyecto personal y ocio.\\
+
+\section{Mejoras futuras}
+
+La aplicación puede mejorarse en diversos aspectos. A continuación, se citan algunas de las mejoras que pueden llevarse a cabo:
+
+\begin{itemize}
+  \item Incrementar el número de sensores en el sistema que permitan captar nuevos parámetros o situaciones.
+  \item Dotar del sistema de la posibilidad de otras posibilidades de cnectividad distintas al WiFi como 4G, buetooth, etc.
+  \item Incorporar una cámara con posibilidad de visión 360 grados.
+  \item Añadir autenticación por un sistema de certificados por clave pública y privada que garantice que la conectividad entre dispositivo robótico y usuario es la correcta.
+\end{itemize}
+
