@@ -4,41 +4,44 @@
 \chapter{ Guía de Usuario}
 \label{chap:manual-usuario}
 
-La aplicación RobotUI ha sido creada por Manuel López Urbina para el proyecto fin de carrera de la titulación de Ingeniería Informática de la Universidad de Cádiz.\\
+La aplicación SensorRS ha sido creada por Manuel López Urbina para el trabajo fin de máster titulado MÁSTER UNIVERSITARIO EN INVESTIGACIÓN EN
+INGENIERÍA DE SISTEMAS Y DE LA COMPUTACIÓN de la Universidad de Cádiz.\\
 
-Resulta de vital importancia consultar esta guía antes y/o durante la utilización de los diferentes elementos tanto hardware, robot de pruebas desarrollado, como software del presente proyecto ya 
-que le proporcionará una guía paso a paso en el manejo correcto de la aplicación.\\
+Resulta de vital importancia consultar esta guía antes y/o durante la utilización de los diferentes elementos tanto hardware pertenecientes al vehículo robótico, como software del 
+presente proyecto ya que le proporcionará una guía paso a paso en el manejo correcto del sistema completo.\\
 
-La resolución recomendada para la aplicación debe ser superior o igual a 1024x768 (Estándar XGA), aunque es adaptable a cualquier resolución debido a su diseño web responsive.\\
+La resolución recomendada para la utilización de la aplicación web de control debe ser superior o igual a 1024x768 (Estándar XGA), aunque es adaptable a cualquier resolución 
+debido a su diseño web responsive.\\
 
-RobotUI ha sido elaborado con un claro propósito; el de  proporcionar a los usuarios un medio donde compartir sus dispositivos robóticos con el resto de usuarios. Esto es posible gracias a una serie de
-herramientas desarrolladas para que, sin necesidad de tener grandes conocimientos en programación, puedan configurar un entorno para el manejo de sus proyectos robóticos y tener 
+SensorRS ha sido elaborado con un claro propósito; el de  proporcionar a los usuarios un medio donde realizar exploraciones de forma remota obteniendo información allá por donde se mueva el vehículo
+robótico ya sea por mero entretenimiento o por evitar la exposición a zonas peligrosas o de dificil acceso. Además de compartir dichos datos obtenidos, mediciones e imágenes, con 
+el resto de usuarios. Esto es posible gracias a una serie de herramientas desarrolladas para que, sin necesidad de tener grandes conocimientos en programación, puedan configurar un entorno para el manejo de sus proyectos robóticos y tener 
 posibilidad de compartir sus dispositivos y experiencias con el resto de usuarios.\\
 
 La particularidad de RobotUI es que el usuario propietario del robot tiene la posibilidad de permitir el manejo de sus dispositivos robóticos al resto de usuarios que él mismo considere de una 
 manera controlada o, por otra parte, permitir que otros usuarios visualicen, como si de espectadores se tratase, el control que un determinado usuario realiza de un determinado robot.
 Todo ello en tiempo real.\\
 
-Por tanto, tras esta breve introducción en el ámbito de la aplicación, en este manual se describen los diferentes pasos a realizar para configurar sus dispositivos correctamente en el sistema
-y abrirlo a toda una comunidad de usuarios. Además de tener abierto el acceso a otros muchos dispositivos de otras personas.\\
+Por tanto, tras esta breve introducción en el ámbito del sistema, en este manual se describen los diferentes pasos a realizar para configurar correctamente el 
+dispositivo y abrirlo a toda una comunidad de usuarios.\\
 
 \subsection{Objetivo de esta guía}
 
-Esta guía tiene como objetivo proporcionar al usuario un soporte de ayuda e iniciación a la utilización de RobotUI.\\
+Esta guía tiene como objetivo proporcionar al usuario un soporte de ayuda e iniciación a la utilización de SensorRS dentro de la aplicación web de control RobotUI.\\
 
 Esta sección comprende:\\
 
 \begin{itemize}
  \item Introducción.
  \item Guía de acceso al código fuente de la aplicación.
- \item Guía de uso de la aplicación.
- \item Guía para la puesta en marcha y programación de un robot.
+ \item Guía de uso del sistema.
+ \item Guía para la puesta en marcha y su utilización.
 \end{itemize}
 
 \subsection{Dirigido a}
 
-Esta guía esta dirigida al usuario final del proyecto SensorRS. Tiene la finalidad de proporcionar una guía descriptiva de los procedimientos de creación, configuración y utilización de los diferentes dispositivos 
-robóticos en sus dos modalidades disponibles, la de control y la de visualización.
+Esta guía esta dirigida al usuario final del proyecto SensorRS. Tiene la finalidad de proporcionar una guía descriptiva de los procedimientos de creación, configuración y utilización del dispositivo 
+robótico en sus dos modalidades disponibles, la de control y la de visualización dentro de la aplicación web de control.
 
 \subsection{Obtener SensorRS}
 
@@ -50,13 +53,16 @@ Git, escribiendo en la consola el siguiente comando:\\
 \end{lstlisting}
 
 
-\section{ Uso de RobotUI }
-\label{sec:uso-robotui}
+\section{ Uso de SensorRS }
+\label{sec:uso-sensorrs}
 
 
-\subsection{ Acceso a la aplicación }
-\label{sec:acceso-aplicacion}
+\subsection{ Configuración }
+\label{sec:configuracion}
 
+Para la puesta en funcionamiento es necesario establecer una series de configuraciones en el código del robot con la finalidad de conectarlo a la aplicación RobotUI.\\
+
+El manual de usuario de RobotUI se encuentra accesible en el respositorio del proyecto localizado en \url{ https://github.com/lopomaster/SAILS-RobotUI }
 Para acceder a la aplicación, el usuario deberá acceder al siguiente enlace: \url{www.robotui.com}. \\
 
 Al acceder podrá ver el portal de entrada a la aplicación. En él puede acceder al resto de funcionalidades identificándose con sus credenciales y acceder a los formularios de registro
@@ -70,296 +76,13 @@ de usuario.\\
   \label{website:pagina-principal}
 \end{figure}
 
-\subsection{ Registo de usuario }
-\label{sec:creacion-usuario}
-
-Una vez en la página principal, figura \ref{website:pagina-principal}, podemos observar la barra superior, la cual posee dos estados, la de usuario sin identificar y la de usuario identificado.
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.5]{imagenes/manual-usuario/barra-menu1.png}
-  \end{center}
-  \caption{Vista de la barra superior en modalidad usuario no identificado en el sistema.}
-  \label{website:barra-inicial}
-\end{figure}
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.5]{imagenes/manual-usuario/barra-menu2.png}
-  \end{center}
-  \caption{Vista de la barra superior en modalidad usuario identificado en el sistema.}
-  \label{website:barra-usuario}
-\end{figure}
-
-
-Para iniciar el proceso de registro de usuario hacemos clic sobre el botón de la barra superior \icontext{.2}{.35}{imagenes/manual-usuario/btn-registro.png} mediante el cual accedemos al formulario \ref{website:formulario-registro}.
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.4]{imagenes/manual-usuario/pagina-registro.png}
-  \end{center}
-  \caption{Formulario de registro de usuario.}
-  \label{website:formulario-registro}
-\end{figure}
-
-Para proceder con el registro necesitaremos los siguientes datos:
-
-\begin{enumerate}
- \item Nombre: nombre de usuario.
- \item Email: dirección de correo electrónico utilizada para acceder al sistema.
- \item Contraseña: deberá proporcionar una contraseña para poder acceder al sistema.
- \item Confirmación de contraseña: campo para comprobar que la contraseña es la deseada por el usuario.
- \item Imagen: imagen avatar del usuario.
- \item Idioma: selección del idioma por defecto del usuario.
-\end{enumerate}
-
-Una vez introducidos los datos correctamente podremos hacer clic en \emph{crear cuenta}. Si los datos introducidos son correctos dispondremos de un nuevo usuario en la aplicación redirigiéndonos
-a la página de información del nuevo usuario
-\ref{website:informacion-usuario}.
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.4]{imagenes/manual-usuario/informacion-usuario.png}
-  \end{center}
-  \caption{Información de un usuario.}
-  \label{website:informacion-usuario}
-\end{figure}
-
-
-
-\subsection{ Ingreso al sistema }
-\label{sec:ingreso-sisetma}
-
-Una vez registrados, procedimiento descrito en \ref{sec:creacion-usuario}, podremos acceder al sistema mediante la introducción de nuestro usuario y contraseña en los campos disponibles en la barra
-superior localizado en la aplicación y haciendo clic en \icontext{.2}{.45}{imagenes/manual-usuario/btn-identifiquese.png} localizados en la barra superior.\\
-
-\subsection{Registro de un Robot}
-\label{sec:creacion-robot}
-
-Para el iniciar el proceso de creación de un robot haremos clic en \emph{Robots} \textrightarrow \enspace \emph{Mis robots} del menú superior accediendo al formulario de creación, figura
-\ref{website:creacion-robot}.\\
-
-En este caso registraremos nuestro robot de pruebas descrito en el capítulo \ref{chap:robot}. Para ello introducimos los siguientes datos:\\
-
-\begin{enumerate}
- \item \textbf{Nombre:} nombre de nuestro robot.
- \item \textbf{Dirección IP:} dirección donde se encontrará accesible nuestro robot.
- \item \textbf{Puerto:} puerto donde se encontrará nuestro robot a la escucha de conexiones.
- \item \textbf{Descripción:} campo opcional en el que podemos añadir una descripción de nuestro robot y que será visible al resto de usuarios.
- \item \textbf{Imagen:} campo opcional en el que podremos subir una imagen de nuestro robot.
- \item \textbf{Usuarios espectadores:} selector en el que podemos especificar qué usuarios del sistema tendrán permisos para visualizar el funcionamiento de nuestro robot.
- \item \textbf{Usuarios controladores:} selector para especificar qué usuarios podrán tomar control de nuestro robot.
- \item \textbf{Público:} checkboxes para indicar si por el contrario, el robot que abierto a todos los usuarios para su control o abierto para su visualización si marcamos el primero o el segundo checkbox respectivamente
- y haciendo por tanto inválidos los parámetros de los selectores anteriores.
-\end{enumerate}
-
-Una vez introducidos los datos para el nuevo usuario pulsamos en \icontext{.2}{.35}{imagenes/manual-usuario/btn-crear.png}.\\
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.3]{imagenes/manual-usuario/pagina-crear-robot.png}
-  \end{center}
-  \caption{Formulario de creación de un robot.}
-  \label{website:creacion-robot}
-\end{figure}
-
-
-Si los campos introducidos son correctos la aplicación nos redireccionará a la página informativa de nuestro nuevo robot:\\
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.3]{imagenes/manual-usuario/show-robot.png}
-  \end{center}
-  \caption{Vista informativa de un robot.}
-  \label{website:show-robot}
-\end{figure}
-
-En la ventana informativa de un robot, figura \ref{website:show-robot}, podemos apreciar una serie de elementos representativos de los diferentes estados en los que se puede encontrar el dispositivo. La 
-tabla \ref{table:robot-estados} describe cada uno de los elementos:\\
-
-\begin{table}[H]
-  \begin{center}
-    \begin{tabular}{|p{3.5cm}|p{10cm}|}
-      \hline
-      \centering{ \textbf{Elemento}} & \qquad \quad \textbf{Significado} \\
-      \hline
-      \vspace*{0.1cm}
-      \hspace*{1.1cm}
-      \includegraphics[width=1cm]{imagenes/manual-usuario/offline.png} & Imagen indicativa de estado \emph{offline}. El robot se encuentra sin conexión. \\
-      \hline
-      \vspace*{0.1cm}
-      \hspace*{1.1cm}
-      \includegraphics[width=1cm]{imagenes/manual-usuario/online.png} & Imagen indicativa de estado \emph{online}. El robot se encuentra conectado, reemplazará a la imagen de estado \emph{offline}. \\
-      \hline
-      \vspace*{0.1cm}
-      \hspace*{0.6cm} 
-      \includegraphics[width=2.2cm]{imagenes/manual-usuario/control-publico.png} &  Imagen representativa de robot de control público. \\
-      \hline
-      \vspace*{0.1cm}
-      \hspace*{0.6cm}
-      \includegraphics[width=2.2cm]{imagenes/manual-usuario/control-privado.png} &  Imagen representativa de robot de control privado. \\
-      \hline
-      \vspace*{0.1cm}
-      \hspace*{0.4cm}
-      \includegraphics[width=2.8cm]{imagenes/manual-usuario/seguimiento-publico.png} &  Imagen representativa de robot de seguimiento público. \\
-      \hline
-      \vspace*{0.1cm}
-      \hspace*{0.4cm}
-      \includegraphics[width=2.8cm]{imagenes/manual-usuario/seguimiento-privado.png} & Imagen representativa de robot de seguimiento privado. \\
-      \hline
-      \vspace*{0.1cm}
-      \hspace*{1.1cm}
-      \includegraphics[width=1.2cm]{imagenes/manual-usuario/libre.png} & Imagen representativa de robot en disponible. \\
-      \hline
-      \vspace*{0.1cm}
-      \hspace*{1cm}
-      \includegraphics[width=1.5cm]{imagenes/manual-usuario/ocupado.png} & Imagen representativa de robot en uso. \\
-      \hline     
-    \end{tabular}
-  \end{center}
-\caption{Elementos representativos de los estados de un robot junto con su descripción.}
-\label{table:robot-estados}
-\end{table}
-
-
-\subsection{Gestión de permisos}
-
-Como hemos mencionado en el procedimiento de registro de un robot, éste se puede crear con una serie de permisos. Existen dos modalidades en RobotUI, como sabemos, la de visualización o seguimiento
-y la de control. Funcionalidades que podemos hacer públicas o privadas, y, en el caso de que optemos por alguna modalidad privada, definir para qué usuarios estará disponible.\\
-
-La gestión y visualización de los permisos configurados estarán disponibles en todo momento en la ventana de edición de un robot. En ella podremos visualizar los diferentes usuarios añadidos con
-los permisos de cada uno de ellos. Podremos eliminar usuarios o añadir otros nuevos estableciendo el acceso a alguna de las modalidades existentes como pública o privada.\\
-
-Si el robot es establecido como público en alguna de sus dos modalidades (control o seguimiento) entonces se ignorará toda la configuración de usuarios establecida para esa modalidad aunque
-permanecerán registradas en el sistema por si se desea volver al modo privado tan solo haciendo clic en el checkbox correspondiente.\\
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.5]{imagenes/manual-usuario/panel-permisos.png}
-  \end{center}
-  \caption{Panel de configuración de los permisos de un robot.}
-  \label{website:creacion-robot}
-\end{figure}
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=6cm]{imagenes/manual-usuario/robot-privado.png}
-    \qquad
-    \includegraphics[width=6.5cm]{imagenes/manual-usuario/robot-publico.png}
-    \caption{Panel informativo de un robot privado frente a uno público.}%
-    \label{fig:http-request}%
-\end{figure}
-
-
-\subsection{Configuración de la interfaz}
-\label{subsec:configuracion-interfaz}
-
-Una vez creado nuestro robot en el sistema ya podremos configurar su interfaz. En la figura \ref{website:configuracion-interfaz} podemos ver el canvas sobre el que iremos añadiendo los diferentes elementos que 
-conformarán nuestro panel de control. \\
-
-El diseño resultante de esta ventana servirá tanto para panel de control del robot como ventana de seguimiento a los usuarios que sigan el funcionamiento del
-dispositivo.\\
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.4]{imagenes/manual-usuario/pagina-configurar-interfaz.png}
-  \end{center}
-  \caption{Panel de configuración de la interfaz sin elementos añadidos.}
-  \label{website:configuracion-interfaz}
-\end{figure}
-
-La figura \ref{website:configuracion-interfaz} correspondiente al panel de configuración de una interfaz queda dividida en los siguientes elementos:
-
-\begin{enumerate}
-  \item Panel de elementos disponibles (Evento, Vídeo, Slider, Botón e Icono).
- \item Panel de acciones sobre elementos (Crear, editar y eliminar).
- \item Panel canvas sobre el que posicionar los elementos.
- \item Panel informativo de las características del robot.
-\end{enumerate}
-
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=.6]{imagenes/manual-usuario/barra-herramientas-interfaz.png}
-  \end{center}
-  \caption{Panel de elemento (izquierda) y panel de acciones (derecha) para la configuración de la interfaz.}
-  \label{website:pagina-principal}
-\end{figure}
-
-
-En los siguientes subapartados se describen los procedimientos para la creación, edición y borrados de elementos:\\
-
-
-\subsubsection{Nuevo elemento}
-
- Para la creación de elementos debemos tener seleccionado el modo creación en el panel de acciones y pulsar sobre el tipo de nuevo elemento deseado. La siguiente tabla muestra las diferentes combinaciones:
-  
-\begin{table}[H]
-  \begin{center}
-    \begin{tabular}{|p{2cm}|p{2cm}|p{10cm}|}
-      \hline
-      \centering{\textbf{Botón}} & \centering{\textbf{Modo}} & \qquad \quad \textbf{Acción} \\
-      \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-boton.png} & \includegraphics[width=2cm]{imagenes/manual-usuario/btn-new.png} & Apertura del formulario para la creación de un botón. \\
-      \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-video.png} & \includegraphics[width=2cm]{imagenes/manual-usuario/btn-new.png} & Apertura del formulario para la creación de un canvas de vídeo. \\
-      \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-slider.png} & \includegraphics[width=2cm]{imagenes/manual-usuario/btn-new.png} & Apertura del formulario para la creación de un slider. \\
-      \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-evento.png} & \includegraphics[width=2cm]{imagenes/manual-usuario/btn-new.png} & Apertura del formulario para la creación de una etiqueta. \\
-      \hline
-      \includegraphics[width=2cm]{imagenes/manual-usuario/nuevo-icono.png} & \includegraphics[width=2cm]{imagenes/manual-usuario/btn-new.png} & Apertura del formulario para la subida de un icono. \\
-      \hline
-    \end{tabular}
-  \end{center}
-\caption{Elementos añadibles a una interfaz.}
-\end{table}
-
-
-Una vez completado el formulario y creado el nuevo elemento tan solo debemos arrastrar el nuevo elemento a la posición deseada.
-
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=.4]{imagenes/manual-usuario/formulario-action.png}
-  \end{center}
-  \caption{Formulario para la creación de un botón.}
-  \label{website:pagina-principal}
-\end{figure}
-
-Del mismo modo para la creación del resto de tipos de elementos.
-
-\subsubsection{Editar elemento}
-
-Para la edición de elementos pulsaremos seleccionaremos el modo edición \icontext{.2}{.35}{imagenes/manual-usuario/btn-edit.png} y posteriormente haremos clic sobre el elemento que deseemos editar.\\
-
-Tras ello se abrirá el formulario correspondiente, modificamos los parámetros deseados y pulsamos guardar.\\
-
-\subsubsection{Eliminar elemento}
-
-Del mismo modo que en la edición de elementos, para borrar un elemento seleccionaremos el modo eliminar \icontext{.2}{.35}{imagenes/manual-usuario/btn-destroy.png}  del panel de acciones y posteriormente haremos clic sobre el elemento que deseemos borrar.\\
-
-
-\subsection{Ejemplo}
-
-La figura \ref{website:interfaz-configurada} muestra una posible interfaz de control para un dispositivo robótico.
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=.4]{imagenes/manual-usuario/interfaz-creada.png}
-  \end{center}
-  \caption{Vista tipo de una interfaz configurada.}
-  \label{website:interfaz-configurada}
-\end{figure}
-
-
 
 \subsection{ Programa tu robot }
 \label{sec:programacion-robot}
 
-NOTA: Esta guía comprende una serie de pasos para realizar la programación de un dispositivo robótico para la aplicación RobotUI. En este caso particular, el robot empleado posee como base una placa 
-Raspberry Pi, la cual emplea para la conexión de sensores y motores haciendo uso de su sistema de Entrada/Salio Gpio.\\
+NOTA: Esta guía comprende una serie de pasos para realizar la programación de un dispositivo robótico para la aplicación RobotUI. En este caso particular, el robot empleado posee
+como base una placa Raspberry Pi y una placa Arduino, la cual emplea para la conexión de sensores y motores haciendo uso de su sistema de Entrada/Salida programable con la ayuda del 
+microcontrolador incorporado.\\
 
 El sistema es compatible con cualquier dispositivo, no solo limitado a las placas Raspberry. La única diferencia radica en que se deberán emplear a nivel de programación las bibliotecas adecuadas 
 para la activación o lectura de las Entadas/Salidas correspondientes al modelo de placa utilizado.\\
@@ -374,7 +97,6 @@ tomar nota del identificador único que la aplicación proporciona para dicho ro
   \caption{Panel informativo de un robot donde se aprecia su identificador.}
   \label{website:pagina-principal}
 \end{figure}
-
 
 Una vez creado el robot y configurada su interfaz, añadiendo los diferentes elementos disponibles como acciones, vídeo, etiquetas, etcétera, recogidos en el punto \ref{subsec:configuracion-interfaz}: Configuración de la interfaz.
 Podemos comenzar con la programación del robot.\\
@@ -537,123 +259,3 @@ Obteniendo el siguiente resultado:
   \label{website:pagina-principal}
 \end{figure}
 
-\subsection{ Control de robots }
-\label{sec:control-robot}
-
-
-Para el acceso al control de un robot debemos localizar en el índice de robots públicos un robot con el estado \emph{Online} y \emph{Libre}. Ver figura \ref{website:inice-public-robots}.\\
-
-Para acceder al robot pulsaremos sobre \icontext{.2}{.35}{imagenes/manual-usuario/btn-controlar.png}.\\
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=.25]{imagenes/manual-usuario/robots-publicos.png}
-  \end{center}
-  \caption{ Índice robots públicos.}
-  \label{website:inice-public-robots}
-\end{figure}
-
-En la ventana de control \ref{website:ventana-control} pulsamos sobre conectar. En ese momento tendremos plena disponibilidad para el control del robot haciendo uso de todas las acciones previamente configuradas en la interfaz.\\
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=.3]{imagenes/manual-usuario/vista_control.png}
-  \end{center}
-  \caption{ Vista del panel de control de un robot junto con el listado de usuarios realizando el seguimiento.}
-  \label{website:ventana-control}
-\end{figure}
-
-En el panel de control de la interfaz podemos identificar los siguientes elementos:
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=.6]{imagenes/manual-usuario/panel-robot-info.png}
-  \end{center}
-  \caption{ Panel informativo de las características del robot de la interfaz.}
-  \label{website:pagina-principal}
-\end{figure}
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=3.5cm]{imagenes/manual-usuario/panel-comandos.png}
-    \qquad
-    \includegraphics[width=3.5cm]{imagenes/manual-usuario/listado-usuarios.png}
-    \caption{Histórico de las órdenes enviadas al robot junto con una entrada de comandos para enviar nuevas órdenes directamente junto con el listado de usuarios presentes en la sesión de control. }%
-    \label{fig:http-request}%
-\end{figure}
-
-
-\subsection{ Seguimiento de robots }
-\label{sec:visita-robot}
-
-Para realizar el seguimiento de un robot accedemos desde el menú superior en el desplegable \emph{Robots} \textrightarrow \enspace \emph{Públicos}. En la nueva ventana
-tendremos acceso a todos los robots públicos existentes pudiendo realizar el seguimiento en aquellos cuyo estado es \emph{ocupado}.
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=.8]{imagenes/manual-usuario/tarjeta_ocupado.png}
-  \end{center}
-  \caption{ Panel informativo de un robot en su modalidad \emph{ocupado}.}
-  \label{website:robot-ocupado}
-\end{figure}
-
-Para pulsamos sobre el botón \emph{Seguir} que se encontrará habilitado accediendo a su interfaz en modo espectador. La página mostrada será de aspecto similar a la mostrada en la figura \ref{website:ventana-seguimiento}:\\
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=.55]{imagenes/manual-usuario/vista_seguimiento.png}
-  \end{center}
-  \caption{ Vista del panel de seguimiento de un robot en tiempo real.}
-  \label{website:ventana-seguimiento}
-\end{figure}
-
-Mientras tanto, el usuario que dispone del control del robot será notificado de la entrada de un nuevo espectador. La figura \ref{website:ventana-control} muestra la ventana de control de un robot junto con 
-el listado de usuarios espectadores actualizado en todo momento.
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=.38]{imagenes/manual-usuario/vista_control.png}
-  \end{center}
-  \caption{ Vista del panel de control de un robot junto con el listado de usuarios realizando el seguimiento.}
-  \label{website:ventana-control}
-\end{figure}
-
-
-\subsection{Mensajes}
-
-RobotUI incorpora un sistema de mensajería donde los usuarios de la aplicación se pueden enviar mensajes a otros usuarios y recibirlos. Para acceder a la página de mensajes pulsamos sobre \emph{Mensajes} de barra superior.\\
-
-En la página \emph{Mensajes} tenemos acceso a la bandeja de entrada y los mensajes enviados.\\
-
-Para mandar un mensaje pulsamos sobre \icontext{.2}{.35}{imagenes/manual-usuario/btn-redactar.png}, rellenamos el formulario con título, usuario destinatario y contenido del mensaje y pulsamos en \icontext{.2}{.45}{imagenes/manual-usuario/btn-nuevo.png}.
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=.35]{imagenes/manual-usuario/formulario-mensaje.png}
-  \end{center}
-  \caption{ Formulario de redacción de un mensaje.}
-  \label{website:formulario-mensaje}
-\end{figure}
-
-
-El campo de entrada de texto para la redacción del mensaje incorpora un editor de texto WYSIWYG \footnote{ WYSIWYG es el acrónimo de What You See Is What You Get, (en español, "lo que ves es lo
-que obtienes"). Se aplica a los procesadores de texto y otros editores de texto con formato (como los editores de HTML) que permiten escribir un documento viendo directamente el resultado final,
-frecuentemente el resultado impreso.} en el cual podremos dar formato y etilo al mensaje añadiendo imágenes, enlaces, etcétera.
-
-
-\subsection{Panel de administración}
-
-
-Entradas disponibles únicamente para usuarios administradores. Accesible desde la barra superior \emph{Administración}  \textrightarrow \enspace  \emph{Usuarios} o \emph{Administración}  \textrightarrow \enspace  \emph{Robots}.
-
-En ella podremos gestionar todos los usuarios o robots existentes en el sistema, editarlos, borrarlos o crear nuevos.\\
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=12.5cm]{imagenes/manual-usuario/administracion-usuarios.png}
-    \qquad
-    \includegraphics[width=12.5cm]{imagenes/manual-usuario/administracion-robots.png}
-    \caption{Paneles de administración para robots y usuarios.}%
-    \label{fig:http-request}%
-\end{figure}

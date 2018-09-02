@@ -1,44 +1,46 @@
 \newpage
 
-
 \chapter{ Guía de Usuario}
 \label{chap:manual-usuario}
 
-La aplicación RobotUI ha sido creada por Manuel López Urbina para el proyecto fin de carrera de la titulación de Ingeniería Informática de la Universidad de Cádiz.\\
+La aplicación SensorRS ha sido creada por Manuel López Urbina para el trabajo fin de máster titulado MÁSTER UNIVERSITARIO EN INVESTIGACIÓN EN
+INGENIERÍA DE SISTEMAS Y DE LA COMPUTACIÓN de la Universidad de Cádiz.\\
 
-Resulta de vital importancia consultar esta guía antes y/o durante la utilización de los diferentes elementos tanto hardware, robot de pruebas desarrollado, como software del presente proyecto ya 
-que le proporcionará una guía paso a paso en el manejo correcto de la aplicación.\\
+Resulta de vital importancia consultar esta guía antes y/o durante la utilización de los diferentes elementos tanto hardware pertenecientes al vehículo robótico, como software del 
+presente proyecto ya que le proporcionará una guía paso a paso en el manejo correcto del sistema completo.\\
 
-La resolución recomendada para la aplicación debe ser superior o igual a 1024x768 (Estándar XGA), aunque es adaptable a cualquier resolución debido a su diseño web responsive.\\
+La resolución recomendada para la utilización de la aplicación web de control debe ser superior o igual a 1024x768 (Estándar XGA), aunque es adaptable a cualquier resolución 
+debido a su diseño web responsive.\\
 
-RobotUI ha sido elaborado con un claro propósito; el de  proporcionar a los usuarios un medio donde compartir sus dispositivos robóticos con el resto de usuarios. Esto es posible gracias a una serie de
-herramientas desarrolladas para que, sin necesidad de tener grandes conocimientos en programación, puedan configurar un entorno para el manejo de sus proyectos robóticos y tener 
+SensorRS ha sido elaborado con un claro propósito; el de  proporcionar a los usuarios un medio donde realizar exploraciones de forma remota obteniendo información allá por donde se mueva el vehículo
+robótico ya sea por mero entretenimiento o por evitar la exposición a zonas peligrosas o de dificil acceso. Además de compartir dichos datos obtenidos, mediciones e imágenes, con 
+el resto de usuarios. Esto es posible gracias a una serie de herramientas desarrolladas para que, sin necesidad de tener grandes conocimientos en programación, puedan configurar un entorno para el manejo de sus proyectos robóticos y tener 
 posibilidad de compartir sus dispositivos y experiencias con el resto de usuarios.\\
 
 La particularidad de RobotUI es que el usuario propietario del robot tiene la posibilidad de permitir el manejo de sus dispositivos robóticos al resto de usuarios que él mismo considere de una 
 manera controlada o, por otra parte, permitir que otros usuarios visualicen, como si de espectadores se tratase, el control que un determinado usuario realiza de un determinado robot.
 Todo ello en tiempo real.\\
 
-Por tanto, tras esta breve introducción en el ámbito de la aplicación, en este manual se describen los diferentes pasos a realizar para configurar sus dispositivos correctamente en el sistema
-y abrirlo a toda una comunidad de usuarios. Además de tener abierto el acceso a otros muchos dispositivos de otras personas.\\
+Por tanto, tras esta breve introducción en el ámbito del sistema, en este manual se describen los diferentes pasos a realizar para configurar correctamente el 
+dispositivo y abrirlo a toda una comunidad de usuarios.\\
 
 \subsection{Objetivo de esta guía}
 
-Esta guía tiene como objetivo proporcionar al usuario un soporte de ayuda e iniciación a la utilización de RobotUI.\\
+Esta guía tiene como objetivo proporcionar al usuario un soporte de ayuda e iniciación a la utilización de SensorRS dentro de la aplicación web de control RobotUI.\\
 
 Esta sección comprende:\\
 
 \begin{itemize}
  \item Introducción.
  \item Guía de acceso al código fuente de la aplicación.
- \item Guía de uso de la aplicación.
- \item Guía para la puesta en marcha y programación de un robot.
+ \item Guía de uso del sistema.
+ \item Guía para la puesta en marcha y su utilización.
 \end{itemize}
 
 \subsection{Dirigido a}
 
-Esta guía esta dirigida al usuario final del proyecto SensorRS. Tiene la finalidad de proporcionar una guía descriptiva de los procedimientos de creación, configuración y utilización de los diferentes dispositivos 
-robóticos en sus dos modalidades disponibles, la de control y la de visualización.
+Esta guía esta dirigida al usuario final del proyecto SensorRS. Tiene la finalidad de proporcionar una guía descriptiva de los procedimientos de creación, configuración y utilización del dispositivo 
+robótico en sus dos modalidades disponibles, la de control y la de visualización dentro de la aplicación web de control.
 
 \subsection{Obtener SensorRS}
 
@@ -77,20 +79,21 @@ de usuario.\\
 \subsection{ Programa tu robot }
 \label{sec:programacion-robot}
 
-NOTA: Esta guía comprende una serie de pasos para realizar la programación de un dispositivo robótico para la aplicación RobotUI. En este caso particular, el robot empleado posee como base una placa 
-Raspberry Pi, la cual emplea para la conexión de sensores y motores haciendo uso de su sistema de Entrada/Salida Gpio.\\
+NOTA: Esta guía comprende una serie de pasos para realizar la programación de un dispositivo robótico para la aplicación RobotUI. En este caso particular, el robot empleado posee
+como base una placa Raspberry Pi y una placa Arduino, la cual emplea para la conexión de sensores y motores haciendo uso de su sistema de Entrada/Salida programable con la ayuda del 
+microcontrolador incorporado.\\
 
 El sistema es compatible con cualquier dispositivo, no solo limitado a las placas Raspberry. La única diferencia radica en que se deberán emplear a nivel de programación las bibliotecas adecuadas 
 para la activación o lectura de las Entadas/Salidas correspondientes al modelo de placa utilizado.\\
 
-Antes de proceder con la programación de nuestro robot debemos de realizar su creación en la aplicación RobotUI como queda descrito en el punto \ref{sec:creacion-robot} y 
-tomar nota del identificador único que la aplicación proporciona para dicho robot y que posteriormente necesitaremos.\\	
+Asumido el paso de programación de nuestro robot, para más información puede acceder a la guía de usuario de RobotUI. Se procede al alta del robot en el sistema.
+Importante tomar nota del identificador único que la aplicación proporciona para dicho robot y que posteriormente necesitaremos.\\	
 
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=.6]{imagenes/manual-usuario/identificador.png}
   \end{center}
-  \caption{Panel informativo de un robot donde se aprecia su identificador.}
+  \caption{Panel informativo donde se aprecia el identificador del robot SensorRS en la aplicación.}
   \label{website:pagina-principal}
 \end{figure}
 
@@ -110,7 +113,7 @@ Para ello debemos seguir una serie de pasos:\\
 \end{enumerate}
 
 
-\subsubsection{código base}
+\subsubsection{Código base}
 \label{codigo:base}
 
 \begin{lstlisting}[language=JavaScript]

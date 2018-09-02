@@ -67,7 +67,7 @@ seguir las instrucciones de instalación.
     \includegraphics[scale=0.3]{imagenes/arduino_web_ide.png}
   \end{center}
   \label{fig:descarga_arduino}
- \caption{Enlace de acceso al IDE web de Arduino.}
+ \caption{Enlace de acceso al IDE de Arduino en su versión web.}
  \end{figure}
 
 \end{enumerate}
@@ -76,12 +76,56 @@ seguir las instrucciones de instalación.
 
 Es una iniciativa de hardware de código abierto que hace que la electrónica sea accesible como
 material creativo para todos, que nos permita hacer diagramas, circuitos electrónicos y
-montajes, también sirve para hacer circuitos impresos PCB.
-También nos permite documentar nuestros prototipos y compartirlos con otros.
+montajes, también sirve para hacer circuitos impresos PCB. También nos permite documentar nuestros prototipos y compartirlos con otros.
+
+\subsection{Descarga e instalación}
+
+Para descargar Fritzing, accesible en el enlace inferior, donde tan solo debemos seleccionar nuestro sistema operativo y hacer clcick en Download. \\
+
+\url{http://fritzing.org/download/?donation=0}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.5]{imagenes/fritzing_download.png}
+  \end{center}
+  \label{fig:descarga_arduino}
+ \caption{Sistemas operativos disponibles para Fritzing.}
+ \end{figure}
+
+Para su instalación en versión linux debemos seguir los siguientes pasos:
+
+Nos dirigimos al directorio donde hemos realizado la descarga:
+
+\begin{lstlisting}[language=bash]
+cd ~/Downloads
+\end{lstlisting}
+
+Posteriormente descomprimimos el archivo con el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+unzip -xzf fritzing-0.9.3b.linux.AMD64.tar.bz2
+\end{lstlisting}
 
 
+Nos posicionamos en el directorio de trabajo de Fritzing:
+
+\begin{lstlisting}[language=bash]
+cd /home/wali/Downloads/fritzing-0.9.3b.linux.AMD64/
+\end{lstlisting}
 
 
+Ejecutamos Fritzing:
+
+
+\begin{lstlisting}[language=bash]
+./Fritzing
+\end{lstlisting}
+
+o:
+
+\begin{lstlisting}[language=bash]
+sh Fritzing
+\end{lstlisting}
 
 
 \section{Instalación de Node.js}
@@ -154,6 +198,9 @@ git config --list
 \end{lstlisting}
 
 Existen muchas más opciones configurables pero estos son los dos esenciales necesarios.\\
+
+
+\section{Datasheets}
 
 \end{appendix}
 

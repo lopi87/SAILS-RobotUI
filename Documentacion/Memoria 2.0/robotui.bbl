@@ -46,10 +46,23 @@ Pablo Hinojoda and JJ~Merelo.
 \newblock {\em Aprende Git: ... y, de camino, GitHub}.
 \newblock Editorial Reviews, 2015.
 
+\bibitem{article:4}
+Hau-Shiue Juang and Kai-Yew Lum.
+\newblock {Design and Control of a Two-Wheel Self-Balancing Robot using the
+  Arduino Microcontroller Board}.
+\newblock Technical report, IEEE International Conference on Control and
+  Automation, 6 2013.
+
 \bibitem{book:MongoDB}
 {Kristina Chodorow}.
 \newblock {\em MongoDB: The Definitive Guide, 2nd Edition}.
 \newblock O'Reilly Media, 2013.
+
+\bibitem{article:5}
+Nilson~Mori Lazarin and Carlos~Eduardo Pantoja.
+\newblock {A Robotic-agent Platform For Embedding Software Agents usin
+  Raspberry Pi and Arduino Boards}.
+\newblock Technical report, UnED Nova Friburgo, 6 2011.
 
 \bibitem{book:sails}
 {Irl Nathan} {Mike McNeil}.

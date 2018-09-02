@@ -124,7 +124,7 @@
           </predecessors>
         </task>
       </task>
-      <task id="35" name="Reuni&#xF3;n de seguimiento con el director del proyectp" note="" work="28800" start="20160417T000000Z" end="20160418T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="35" name="Reuni&#xF3;n de seguimiento con el director del proyecto" note="" work="28800" start="20160417T000000Z" end="20160418T170000Z" work-start="20160418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
     </task>
   </tasks>
   <resource-groups/>

@@ -15,10 +15,9 @@
 
 Anexos con los diferentes elementos software utilizados en el proyecto junto con las instrucciones para la instalación.\\
 
-\section{Entorno de desarrollo}
+\section{Arduino, entorno de desarrollo}
 
-El entorno de desarrollo es extremadamente sencillo ya que el programa se escribe en la zona
-del sketch y para compilarlo y cargarlo a cualquier placa solo es necesario pulsar un botón.\\
+El entorno de desarrollo (IDE) ofrecido por Arduino es el que nos permite escribir el programa y cargarlo en la placa, siendo posible su carga de dos maneras:
 
 \begin{figure}[H]
   \begin{center}
@@ -30,9 +29,6 @@ del sketch y para compilarlo y cargarlo a cualquier placa solo es necesario puls
 
 El software de desarrollo de Arduino es publicado bajo una licencia libre y gratuita, la cual se puede descargar desde la página oficial
 incluyendo los drivers necesarios para cualquier placa Arduino, así como las librerías necesarias para su programación.
-
-
-Dicho software, IDE, es el que nos permite escribir el programa y cargarlo en la placa Arduino, siendo posible su carga de dos maneras:
 
 \begin{enumerate}
  \item Si deseamos trabajar sin conexión, debemos descargar e instalar la versión más reciente
@@ -74,8 +70,62 @@ seguir las instrucciones de instalación.
  \caption{Enlace de acceso al IDE web de Arduino.}
  \end{figure}
 
-
 \end{enumerate}
+
+\section{Fritzing}
+
+Es una iniciativa de hardware de código abierto que hace que la electrónica sea accesible como
+material creativo para todos, que nos permita hacer diagramas, circuitos electrónicos y
+montajes, también sirve para hacer circuitos impresos PCB. También nos permite documentar nuestros prototipos y compartirlos con otros.
+
+\subsection{Descarga e instalación}
+
+Para descargar Fritzing, accesible en el enlace inferior, donde tan solo debemos seleccionar nuestro sistema operativo y hacer clcick en Download. \\
+
+\url{http://fritzing.org/download/?donation=0}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.5]{imagenes/fritzing_download.png}
+  \end{center}
+  \label{fig:descarga_arduino}
+ \caption{Sistemas operativos disponibles para Fritzing.}
+ \end{figure}
+
+Para su instalación en versión linux debemos seguir los siguientes pasos:
+
+Nos dirigimos al directorio donde hemos realizado la descarga:
+
+\begin{lstlisting}[language=bash]
+cd ~/Downloads
+\end{lstlisting}
+
+Posteriormente descomprimimos el archivo con el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+unzip -xzf fritzing-0.9.3b.linux.AMD64.tar.bz2
+\end{lstlisting}
+
+
+Nos posicionamos en el directorio de trabajo de Fritzing:
+
+\begin{lstlisting}[language=bash]
+cd /home/wali/Downloads/fritzing-0.9.3b.linux.AMD64/
+\end{lstlisting}
+
+
+Ejecutamos Fritzing:
+
+
+\begin{lstlisting}[language=bash]
+./Fritzing
+\end{lstlisting}
+
+o:
+
+\begin{lstlisting}[language=bash]
+sh Fritzing
+\end{lstlisting}
 
 
 \section{Instalación de Node.js}

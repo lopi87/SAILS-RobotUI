@@ -3,6 +3,9 @@
 \usepackage{estilosbase}
 \usepackage{textcomp}
 \usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{siunitx}
 
 \headsep = 27 pt
 \clearpage{\pagestyle{empty}\cleardoublepage}
@@ -48,28 +51,26 @@
 \fancyhead[LE,RO]{\rightmark}
 \fancyhead[LO,RE]{\slshape \leftmark}
 %\fancyroot[C]{\thepage}
+  
+\input{01_introduccion/01_introduccion.tex}
 
-\input{introduccion/01_introduccion.tex}
+\input{02_conceptos-basicos/02_conceptos-basicos.tex}
 
-\input{conceptos-basicos/02_conceptos-basicos.tex}
+\input{03_herramientas-utilizadas/03_herramientas-utilizadas.tex}
 
-\input{herramientas-utilizadas/03_herramientas-utilizadas.tex}
+\input{ 04_requisitos/04_requisitos.tex }
 
-\input{ requisitos/04_requisitos.tex }
+\input{ 05_vehiculo/05_vehiculo.tex }
 
-\input{ vehiculo/05_vehiculo.tex }
+\input{06_desarrollo-software/06_desarrollo-software.tex}
 
-\input{desarrollo-software/desarrollo-software.tex}
+\input{ 07_comunicaciones/07_comunicaciones.tex }
 
-\input{ comunicaciones/comunicaciones.tex }
+\input{ 08_pruebas/08_plan_pruebas.tex }
 
-\input{ programacion/programacion.tex }
+\input{09_planificacion/09_planificacion.tex}
 
-\input{ pruebas/09_plan_pruebas.tex }
-
-\input{planificacion/10_planificacion.tex}
-
-\input{manual-usuario/manual-usuario.tex}
+\input{manual-usuario/manual-usuario.tex}  %\ inclir fotografías y revisar...
 
 \input{conclusiones/conclusiones.tex}
 

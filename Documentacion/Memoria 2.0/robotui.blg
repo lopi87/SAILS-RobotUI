@@ -3,46 +3,47 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: robotui.aux
 The style file: plain.bst
 Database file #1: robotui.bib
+Warning--I didn't find a database entry for "article-4"
 Warning--I didn't find a database entry for "website:7"
-You've used 23 entries,
+You've used 25 entries,
             2118 wiz_defined-function locations,
-            607 strings with 6925 characters,
-and the built_in function-call counts, 5435 in all, are:
-= -- 499
-> -- 247
+            617 strings with 7292 characters,
+and the built_in function-call counts, 5903 in all, are:
+= -- 547
+> -- 273
 < -- 0
-+ -- 101
-- -- 78
-* -- 233
-:= -- 973
-add.period$ -- 78
-call.type$ -- 23
-change.case$ -- 99
++ -- 111
+- -- 86
+* -- 259
+:= -- 1065
+add.period$ -- 84
+call.type$ -- 25
+change.case$ -- 111
 chr.to.int$ -- 0
-cite$ -- 23
-duplicate$ -- 224
-empty$ -- 486
-format.name$ -- 78
-if$ -- 1140
+cite$ -- 25
+duplicate$ -- 240
+empty$ -- 516
+format.name$ -- 86
+if$ -- 1232
 int.to.chr$ -- 0
-int.to.str$ -- 23
+int.to.str$ -- 25
 missing$ -- 24
-newline$ -- 127
-num.names$ -- 46
-pop$ -- 200
+newline$ -- 137
+num.names$ -- 50
+pop$ -- 208
 preamble$ -- 1
-purify$ -- 85
+purify$ -- 93
 quote$ -- 0
-skip$ -- 128
+skip$ -- 140
 stack$ -- 0
-substring$ -- 115
+substring$ -- 125
 swap$ -- 20
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 68
+type$ -- 76
 warning$ -- 0
-while$ -- 46
-width$ -- 25
-write$ -- 245
-(There was 1 warning)
+while$ -- 50
+width$ -- 27
+write$ -- 267
+(There were 2 warnings)
