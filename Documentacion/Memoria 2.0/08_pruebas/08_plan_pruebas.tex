@@ -1,0 +1,50 @@
+% Este archivo es parte de la memoria del proyecto fin de carrera
+% de Manuel López Urbina. Protegida bajo la licencia GFDL.
+% Para más información, la licencia completa viene incluida en el
+% fichero fdl-1.3.tex
+
+% Copyright (C) 2018 Manuel López Urbina
+
+\newpage
+
+
+\chapter{ Pruebas }
+\label{chap:pruebas}
+
+La realización de pruebas de software, es una de las fases del ciclo del software de gran imporatncia, la cual permite la identificación de posibles fallos en la implementación, 
+calidad o usabilidad de la aplicación con la finalidad de que el producto final cumpla una serie de garantías y sea de calidad.\\
+
+\section{Plan de pruebas}
+
+Debido a la arquitectura de SensorRS y a la metodología basada en desarrollo incremental que se ha seguido en el desarrollo y construcción del proyecto robótico,
+se ha establecido un plan de pruebas en el que las diferentes partes han ido siedo analizadas y testeadas de forma independiente. La aplicación y el robot ha sido sometido 
+a las siguientes pruebas:\\
+
+\begin{description} 
+
+\item [Pruebas de funcionamiento:]\\
+
+\begin{itemize}
+    \item[]
+ \item Se controla que los diferentes elementos y componentes electrónicos se encuentran correctamente alimentados y con un conexionado lo suficientemente fuerte y estable 
+ para que no de lugar a posibles futuras fallas.
+\end{itemize}
+
+
+\item [Pruebas de comunicaciones:]\\
+
+\begin{itemize}
+    \item[]
+ \item Se comprueba que se realiza una comunicación correcta entre la placa Arduino - Raspberry Pi y entre Raspberry PI - Servidor.
+\end{itemize}
+
+
+\item [Pruebas de control:] \\
+
+\begin{itemize}
+    \item[]
+ \item Se comprueba que se realiza un manejo adecuado del dispositivo robótico.
+ \item Se comprueba que se obtiene y muestra correctamente las diferentes mediciones obtenidas de los sensores.
+\end{itemize}
+
+\end{description}
