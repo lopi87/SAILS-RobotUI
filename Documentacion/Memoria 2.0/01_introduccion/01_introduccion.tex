@@ -58,7 +58,7 @@ proyecto tipo desarrollado a un entorno concreto o diferente al inicialmente pen
 Así que dadas las motivaciones existentes y, junto que la programación web y la robótica son temas que causan en mi un especial interés, hicieron que me lanzara a la elaboración de este
 proyecto que unifica ambos campos anteriormente citados.\\
 
-Así surgió \emph{SensorRC, Multi-sensor Robot Sysmtem}.\\
+Así surgió \emph{SensorRS, Multi-sensor Robot Sysmtem}.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -82,22 +82,18 @@ código fuente: \url{https://github.com/lopi87/SAILS-RobotUI}}, se configurará 
 Esta aplicación permite dar de alta dispositivos robóticos para su control y retransmisión de su funcionamento en vivo con otros usuarios.\\
 
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.3\textwidth}
         \includegraphics[width=\textwidth]{imagenes/robot/vehiculo_lateral.jpeg}
         \caption{Vista lateral}
         \label{fig:gull}
     \end{subfigure}
-    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
-      %(or a blank line to force the subfigure onto a new line)
     \begin{subfigure}[b]{0.3\textwidth}
         \includegraphics[width=\textwidth]{imagenes/robot/vehiculo_frontal.jpeg}
         \caption{Vista frontal}
         \label{fig:tiger}
     \end{subfigure}
-    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
-    %(or a blank line to force the subfigure onto a new line)
     \begin{subfigure}[b]{0.3\textwidth}
         \includegraphics[width=\textwidth]{imagenes/robot/vehiculo_trasera.jpeg}
         \caption{Vista trasera}
@@ -125,7 +121,7 @@ información del entorno más próximo en el que se encuentra.\\
 En lo referente al área de la programación, más concretamente con la programación de microcontroladores\footnote{Un microcontrolador (abreviado μC, UC o MCU) es un circuito integrado programable, capaz de 
 ejecutar las órdenes grabadas en su memoria. Está compuesto de varios bloques funcionales, los cuales cumplen una tarea específica. Un microcontrolador incluye en su interior las
 tres principales unidades funcionales de una computadora: unidad central de procesamiento, memoria y periféricos de entrada/salida. } permitirá crear un sistema fácilmente escalable
-donde 
+donde agregar nuevos sensores no suponga un elevado esferzo.\\
 
 En definitiva, este proyecto intenta demostrar que sin la necesiad de grandes conocimientos en programación, junto con pequeñas nociones de electrónica básica, que cualquier
 persona pueda elaborar un proyecto robótico de similares características. Evitanto que multitud de personas vean el no disponer de grandes conocimientos en la materia sean un impedimento a la 
@@ -149,7 +145,9 @@ Este documento se organiza en los siguientes capítulos:\\
 \item En el capítulo \ref{chap:requisitos}, Análisis de requisitos, se realiza un análisis sobre la metodología empleada para el desarrollo del proyecto, describiendo
 los modelos de ciclo de vida utilizados en el caso del desarrollo software y la descripción de los requisitos funcionales y no funcionales del mismo.
 
-\item En el capítulo \ref{chap:montaje}, Construcción del robot, se recogen aquellos aspectos referentes al montaje, configuración y programación de un robot de pruebas para la demostración y uso de la aplicación desarrollada en el presente proyecto. 
+\item En el capítulo \ref{chap:montaje}, Construcción del robot, se recogen aquellos aspectos referentes al montaje del robot SensorRS, conexionado y sensores utilizados. 
+
+\item En el capítulo \ref{chap:desarrollo-software}, Desarrollo software, se recogen aquellos aspectos referentes a la programación del robot y los diferentes canales de comunicación existentes.
 
 \item En el capítulo \ref{chap:pruebas}, Pruebas, se detallan las pruebas a las que se ha sometido el sistema.
 

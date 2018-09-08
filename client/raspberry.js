@@ -11,8 +11,8 @@ port.pipe(parser);
 var io_client = require('../node_modules/socket.io-client');
 var sails_client = require('../node_modules/sails.io.js');
 var io_server = sails_client(io_client);
-io_server.sails.url = 'http://192.168.1.135:1337';
-//io_server.sails.url = 'http://localhost:1337';
+// io_server.sails.url = 'http://192.168.1.135:1337';
+io_server.sails.url = 'http://localhost:1337';
 io_server.socket.get('/robot/changetoonline/', {robot: '5b64917f7510da0d68a140ec', online: true});
 
 // Inicia servidor socket.io en el puerto 8085.
@@ -127,7 +127,20 @@ io.sockets.on('connection', function (socket)
         console.log('command not found');
     }
 
-  })
+  });
+
+
+    // const parser = port.pipe(new Readline({ delimiter: '\r\n' }));
+    // parser.on('data', console.log);
+
+
+  const parser = port.pipe(new Readline({ delimiter: '\r\n' }));
+  parser.on('data', function(data){
+    // console.log(data);
+    socket.emit('tmp', {msg: data } );
+  });
+
+
 });
 
 io_video.sockets.on('connection', function (socket) {

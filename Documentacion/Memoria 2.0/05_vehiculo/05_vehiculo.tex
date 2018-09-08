@@ -52,7 +52,7 @@ continua, una caja reductora, un potenciómetro y una electrónica de control.\\
   \begin{center}
     \includegraphics[scale=0.1]{imagenes/servo.jpg}
   \end{center}
-  \caption{Servomotor utilizado.}
+  \caption{Imagen de un servomotor.}
   \label{figure:servomotor:}
 \end{figure}
 
@@ -366,7 +366,7 @@ Para la fijación de los diferentes módulos al chasis se ha empleado torniller�
 La siguiente imagen \ref{vista-conexiones} muestra una visión general de la disposición de todos los elementos que conforman el vehículo junto con sus conexiones:
 
 
-IMAGEN CONEXIONADO GENERAL
+**************** HACER UNA FOTO DONDE SE APRECIE TODO MEJOR POR PARTES ***************************
 
 \begin{figure}[H]
   \begin{center}
@@ -405,6 +405,8 @@ A continuación se muestra una imagen de los faros del vehículo en funcionamien
     \caption{Vehículo SensorRS con la iluminación activada.}\label{fig:iluminacion}
 \end{figure}
 
+
+Por otra parte, se ha incorporado un sensor detector de luminosidad para el encendido automático de luces en lugares de baja iluminación.
 
 \section{Sensores}
 
@@ -516,6 +518,7 @@ se controla por un pin de propósito general y cuyas características se adjunta
 El sensor dht11 en su versión PCB consta de tres pines. Un pin \textbf{VCC} de alimentación, uno \textbf{DATA} para la transferencia de
 datos que se conecta al microcontrolador y un pin que conectado a tierra \textbf{GND}.\\
 
+
 \subsubsection{transmisión de datos}
 
 A pesar de que conectemos el pin de datos a un pin digital de nuestro microcontrolador, se trata de un dispositivo analógico. Dentro del propio dispositivo se hace la
@@ -618,28 +621,84 @@ Conexionado del sensor MQ-2 en su modo digital. Siendo \textbf{D0} pin digital, 
 \end{figure}
 
 
-
-\subsection{ Sensor de sonido}
+\subsection{ Sensor de sonido }
 %https://www.luisllamas.es/detectar-sonido-con-arduino-y-microfono-ky-038/
 
+Para la detección de sonidos hemos empleado un micrófono el cual actúa como un transductor que convierte las ondas sonoras en señales eléctricas.\\
 
-
-
-\section{Control}
-
-El vehículo puede ser controlado gracias a la interfaz ofrecida por la aplicación RobotUI, la cual permite el control del vehículo mediante el uso de un ratón y teclado convencional pero, además,
-en el presente proyecto se ha aprovechado para desarrollar una ampliación de la misma permitiendo incorporar la posibilidad de utilizar un gamepad clásico tipo videoconsola como muestra la siguiente
-figura:
+La salida producida por un micrófono es una señal eléctrica analógica que representa el sonido recibido. Sin embargo, en general, esta señal demasiado baja para ser medida
+y tiene que ser amplificada.\\
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.2]{imagenes/robot/control_pad.jpg}
+    \includegraphics[scale=0.6]{imagenes/micro_amplificador.png}
   \end{center}
-  \caption{Vista del gamepad utilizado.}
-  \label{figura:rpi-modulo-bateria}
+  \caption{Amplificación de la señal de audio recibida.}
+  \label{figura:micro_amplificacion}
+\end{figure}
+
+La placa utilizada, KY-038 incorpora un micrófono junto con un comparador LM393, que permite obtener la lectura tanto como un valor analógico como de forma digital.\\
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.6]{imagenes/micro.png}
+  \end{center}
+  \caption{Amplificación de la señal de audio recibida.}
+  \label{figura:micro_amplificacion}
+\end{figure}
+
+El pinout de este sensor es muy simple. Cuenta con cuatro terminales, los cuales estan serigrafiados en la placa. Estos son: \textbf{AO}, Analog Output, \textbf{GND}, Ground,
+\textbf{VCC}, Alimentación de 3.3V a 12V y \textbf{DO}, Digital Output.\\
+
+Lo más característico de este sensor, es que la señal que nos entrega es digital y analógica, lo cual nos permite decidir cual utilizar segun nuestras necesidades.
+Si necesitamos saber el valor del sensor, podremos utilizar directamente la salida analógica para conseguir los datos crudos. Sino, podemos utilizar la salida digital, la cual
+se activa o se desactiva según si el sensor llega a medir la intensidad del sonido que le configuremos, mediante la definición de la sensibilidad del sensor, de igual modo al sensor de detección de gases. \\
+
+\subsubsection{Conexionado}
+
+Conexionado del sensor KY-038 en su modo digital:
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.6]{imagenes/micro_conexionado.png}
+  \end{center}
+  \caption{Sensor KY-038 utilizando el pin digital del microcontrolador.}
+  \label{figura:mq_2_conexionado}
 \end{figure}
 
 
-Por otra parte, también puede ser controlado mediante el uso de un ratón y teclados convencionales.\\
+
+
+\subsection{Fotoresistor}
+
+Un fotoresistor, o LDR (light-dependent resistor) es un dispositivo cuya resistencia varía en función de la luz recibida. Podemos usar esta variación para medir, a través de 
+las entradas analógicas, una estimación del nivel del luz percibida en el entorno del vehículo siendo de utilidad para el encendido automático de la iluminación en aquellas situaciones 
+donde resulte necesaria.\\
+
+Un fotoresistor está formado por un semiconductor, típicamente sulfuro de cadmio CdS. Al incidir la luz sobre él algunos de los fotones son absorbidos, provocando que electrones pasen
+a la banda de conducción y, por tanto, disminuyendo la resistencia del componente. Por tanto, un fotoresistor disminuye su resistencia a medida que aumenta la luz sobre él.
+Los valores típicos son de 1 Mohm en total oscuridad, a 50-100 Ohm bajo luz brillante.\\
+
+
+\subsubsection{Conexionado}
+
+
+\subsection{Sensor de lluvia}
+
+
+\subsubsection{Conexionado}
+
+
+\subsection{Sensor de impacto}
+
+\subsubsection{Conexionado}
+
+
+\subsection{Puntero láser}
+
+
+
+
+
 
 

@@ -116,7 +116,7 @@
     socket.on("<%= event.event_name %>", function messageReceived(message) {
       io.socket.get('/interface/emit_event/',{robot: '<%=robot.id %>', id: '<%= event.id %>', msg: {value: message.msg, name: '<%= event.name %>'}})
       $('#event_<%= event.id%>').html('<h5><%= event.name %> <span class="label label-pill label-danger color_event_<%= event.id %>">' + message.msg + '</span></h5>');
-      $('#chat').prepend('- received: ' + '<%= event.name %>' + ': ' + message.msg + '<br/>');
+      $('#chat').prepend('- <%= i18n('received')%>: ' + '<%= event.name %>' + ': ' + message.msg + '<br/>');
     });
     <% })%>
 

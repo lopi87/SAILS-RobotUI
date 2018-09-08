@@ -12,7 +12,7 @@ timer t;
 #define D2 11 // Control pin 2 for motor 2
 
 int pinDHT11 = 3;
-int photosensorPin = A0;   // select the analog input pin for the photoresistor
+int photosensorPin = A1;   // select the analog input pin for the photoresistor
 String inData = "";
 
 int servo_x, motor;

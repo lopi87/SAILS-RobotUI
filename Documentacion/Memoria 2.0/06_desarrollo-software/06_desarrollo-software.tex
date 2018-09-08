@@ -6,8 +6,8 @@
 
 \section{Metodología de desarrollo}
 
-Este proyecto ha sido elaborado empleando una metodología de desarrollo basada en el modelo de desarrollo incremental para la parte software referente a todos los subsistemas web y una metodología de 
-desarrollo en cascada para el desarrollo de la parte software referente al robot de pruebas.\\
+Este proyecto ha sido elaborado empleando una metodología de desarrollo basada en el modelo de desarrollo incremental para la parte software referente a todos los subsistemas que
+implican labores de programación, que son las referentes la programación de la placa Raspberry Pi y la programación de la placa Arduino.\\
 
 El modelo de desarrollo incremental proporciona una serie de características que lo hacen idóneo para este proyecto. Dicho modelo se basa en la filosofía de construir 
 e ir incrementando las funcionalidades del sistema mediante el desarrollo de los diferentes módulos. Esto permite ir aumentando gradualmente las capacidades del software. \\
@@ -23,27 +23,15 @@ Dicha metodología de desarrollo resulta especialmente útil en las siguientes s
 Centrándonos nuevamente en el desarrollo del proyecto, los motivos que llevaron a cabo la elección de un modelo de desarrollo incremental viene dada por la necesidad de simplificar e ir
 desarrollando de una forma gradual y modularizada debido a la extensión del proyecto. Más si cabe que el equipo de desarrollo solo consta de una persona.\\
 
-Por otro lado, para el desarrollo del vehículo de pruebas y por su simplicidad, se ha optado por un desarrollo en cascada. El modelo de desarrollo en cascada resulta adecuado en situaciones
-en las que:\\
-
-\begin{itemize}
- \item Se dispone de unos requisitos claros y precisos.
- \item El sistema a desarrollar es de pequeña envergadura.
- \item Las tecnologías utilizadas son conocidas por los desarrolladores.
-\end{itemize}
-
-Siendo precisamente éstas las características del proyecto del vehículo a desarrollar puesto que se trata de un desarrollo de pequeño tamaño y las herramientas empleadas ya me resultaban conocidas
-tras la realización de otros trabajos previos.\\
-
 Por tanto el proyecto queda distribuido en los siguientes subsistemas:\\
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=.6]{diagramas/subsistemas.png}
+    \includegraphics[scale=0.04]{diagramas/subsistemas.png}
   \end{center}
   \caption{Subsistemas existentes en el proyecto junto con el modelo de ciclo de vida
 utilizado para su desarrollo.}
-  \label{website:pagina-principal}
+  \label{diagrama:subsistemas}
 \end{figure}
 
 \subsubsection{Diagrama de casos de uso}
@@ -88,40 +76,42 @@ referentes al código desarrollado para el control del robot.\\
 Primeramente se ha realizado la carga de librerías necesarias, entre ellas encontramos:
 
 \begin{itemize}
- \item \emph{pigpio}: Módulo para la comunicación y control de los pines GPIO.
+ \item \emph{pigpio}: Módulo para la comunicación y control de los pines GPIO de la Raspberry pi.
  \item \emph{child process}: El módulo child\_process proporciona la capacidad de generar procesos secundarios. Se ha empleado para la captura de vídeo mediante el lanzado de comandos ffmpeg.
  \item \emph{socket.io}: Biblioteca que establece enlaces bidireccionales en tiempo real y en comunicación basada por eventos.
+ \item \emph{SerialPort} Módulo para la comunicación serie utilizado para establecer comunicación con la placa Arduino.
  \item \emph{Arduino programming language}  está basado en C++ y aunque la referencia para el lenguaje de programación de Arduino está en \href{http://arduino.cc/en/Reference/HomePage}, también es posible usar comandos estandar de C++ en la programación de Arduino.
 \end{itemize}
 
 
-\subsection{Entrada/Salida}
+\section{Comunicación interna}
 
-En segundo lugar se han definido los diferentes pines GPIO a utilizar y si serán empleados como pines de entrada o de salida:
+Diagrama de bloques \ref{figura:diagrama-comunicacion-robot} representativo de los diferentes canales de comunicaciones abiertos por SensorRS que irán describíendose en los sucesivos puntos.
 
-\begin{table}[H]
+\begin{figure}[H]
   \begin{center}
-    \begin{tabular}{|p{2.5cm}|p{2.5cm}|p{4.5cm}|}
-      \hline
-      {\textbf{GPIO}} & \textbf{ Modo } & \textbf{ Control }\\
-      \hline
-      {\textbf{ 2 }} & { OUTPUT } & { Motores lado izquierdo }  \\
-     \hline
-      {\textbf{ 3 }} & { OUTPUT } & { Motores lado izquierdo } \\
-      \hline
-      {\textbf{ 17 }} & { OUTPUT } & {  Motores lado derecho } \\
-      \hline
-      {\textbf{ 27 }} & { OUTPUT } & { Motores lado derecho } \\
-     \hline   
-    \end{tabular}
+    \includegraphics[scale=0.4]{diagramas/diagrama_bloques_robot.png}
   \end{center}
-\caption{ Configuración establecida para los puertos GPIO. }
-\end{table}
+  \caption{Diferentes flujos de comunicación abiertos por SensorRS.}
+  \label{figura:diagrama-comunicacion-robot}
+\end{figure}
 
 
-Si para el vehículo que deseemos programar resultan necesarios más pines para la utilización de servos, sensores o cualquier otro elemento, tan solo debemos inicializarlos e indicar si van a ser pines de entrada
-o de salida. Si existen dudas al respecto se puede acceder a la documentación de la biblioteca \emph{pigpio} en el siguiente enlace: \url{https://www.npmjs.com/package/pigpio}.
-Para el caso de este proyecto, la inicialización de los pines se ha realizado mediante las siguientes instrucciones:
+
+\subsection{Entrada/Salida Raspberry Pi}
+
+
+\subsubsection{GPIO}
+
+En esta ocasión no ha resultado necesario utilizar los pines GPIO que dispone la Raspberry Pi puesto que disponemos de los pines de entrada/salida que proporciona
+el microcontrolador Arduino y han resultado suficientes.
+
+Si, en cambio, para el vehículo que deseemos programar resultan necesarios más pines para la utilización de servos, sensores o cualquier otro elemento utilizando los pines GPIO de
+la placa Raspberry Pi, tan solo debemos inicializarlos e indicar si van a ser pines de entrada o de salida. Si existen dudas al respecto se puede acceder a la documentación de
+la biblioteca \emph{pigpio} en el siguiente enlace: \url{https://www.npmjs.com/package/pigpio}.\\
+
+Un posible ejemplo sería la inicialización de unos pines para una controladora de motores L298N que en lugar de conectarla a la placa Arduino la hubésemos conectado directamente a 
+la placa Raspberry Pi:\\
 
 \begin{lstlisting}[language=JavaScript]
   // Carga del módulo.
@@ -131,28 +121,233 @@ Para el caso de este proyecto, la inicialización de los pines se ha realizado m
   var gpio2 = new Gpio(2, {mode: Gpio.OUTPUT}),
     gpio3 = new Gpio(3, {mode: Gpio.OUTPUT}),
     gpio17 = new Gpio(17, {mode: Gpio.OUTPUT}),
-    gpio27 = new Gpio(27, {mode: Gpio.OUTPUT});
+    gpio27 = new Gpio(27, {mode: Gpio.OUTPUT}),
+    gpio4 = new Gpio(4, {mode: Gpio.INPUT, alert: true});
+\end{lstlisting}
+
+
+Para la escritura o lectura en los puertos inicializados utilizamos las siguiente sentencias:
+
+\begin{lstlisting}[language=JavaScript]
+  gpio2.digitalWrite(1);  //Escritura en pin 2
+  
+  gpio4.on('alert', (level, tick) => {
+    console.log('Activo!');
+  });  //Activacion del evento en pin 4
+\end{lstlisting}
+
+
+\subsubsection{Serie}
+
+
+Para la utilización del módulo \emph{SerialPort} debemos conocer y especificar el puerto serie asignado a nuestra placa Arduino. Para ello abrimos una terminal en nuestra Raspberry Pi
+ con la placa arduino conectada e introducimos el siguiente comando:\\
+
+\begin{lstlisting}[language=bash]
+ls /dev | grep ttyACM
+\end{lstlisting}
+
+Una vez conocido el puerto, lo emplearemos para la inicialización de la conexión con el puerto serie.\\
+
+A continuación, se muestra el código implementado para el envío de datos a la placa arduino \empg{serial\_transmission} junto con la inicialización del puerto y carga de las librerías:\\
+
+\begin{lstlisting}[language=JavaScript]
+
+// Carga del módulo.
+const SerialPort = require('serialport');
+const Readline = SerialPort.parsers.Readline;
+const port = new SerialPort('/dev/ttyACM0', {
+  baudRate: 9600
+});
+
+function serial_transmission( data, delay ){
+  setTimeout(function() {
+    // Envío del string caracter por caracter
+    for(var i=0; i<data.length; i++){
+      port.write(new Buffer(data[i], 'ascii'));
+    }
+    // Envío del caracter final \n
+    port.write(new Buffer('\n', 'ascii'));
+
+  }, delay  );
+
+}
+\end{lstlisting}
+\\
+
+Como se observa en la función superior la transmisión de información se realiza transmitiendo la cadena deseada caracter por caracter introduciendo finalmente un caracter identificador de final de línea que,
+para nuestro caso, hemos empleado el '\n'.\\
+
+El envío de cada caracter string irá acompañado de un retraso, \emph{delay}, el cual es introducido por parámetro.\\
+
+
+\subsection{Entrada/Salida Arduino}
+
+\subsubsection{Lectura puerto serie}
+
+A continuación se muestra el código para la recepción del mensaje desde la placa Arduino, mostrándose como ejemplo el código referente al control de motores:\\
+
+\begin{lstlisting}[language=C++]
+
+String inData = "";
+int servo_x, motor;
+
+#define E1 10  //Enable Pin para motor 1
+#define I1 8  // Control pin 1 para motor 1
+#define I2 9 // Control pin 2 para motor 1
+
+#define E2 13  // Enable Pin para motor 2
+#define D1 12  // Control pin 1 para motor 2
+#define D2 11 // Control pin 2 para motor 2
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(E1, OUTPUT);
+  pinMode(I1, OUTPUT);
+  pinMode(I2, OUTPUT);
+
+  pinMode(E2, OUTPUT);
+  pinMode(D2, OUTPUT);
+  pinMode(D1, OUTPUT);
+
+  // Establece direccion de rotacion inicial
+  digitalWrite(I1, LOW);
+  digitalWrite(I2, HIGH);
+  digitalWrite(D1, LOW);
+  digitalWrite(D2, HIGH);
+}
+
+void loop() {
+
+  while (Serial.available() > 0) {
+    char received = Serial.read();
+    inData.concat(received);
+
+    if (received == '\n') {  //Caracter final recibido, mensaje capturado
+      inData.trim();
+
+      //Direccion
+      if (inData.startsWith("SRV")){ //Comienzo del string identifica el tipo de comando. Accionamiento de la direccion
+          if (sscanf(inData.c_str(), "SRV-%d", &servo_x) == 1) {
+            Serial.println(servo_x);
+          }
+
+          if( servo_x <= 51 && servo_x >= -51){
+            // stop
+            digitalWrite(E2, LOW);
+            digitalWrite(D1, LOW);
+            digitalWrite(D2, LOW);
+          }
+
+          if( servo_x > 51){
+            analogWrite(E2, servo_x);
+            digitalWrite(D1, HIGH);
+            digitalWrite(D2, LOW);
+          }
+
+          if( servo_x < -51){
+            servo_x = servo_x * -1;
+            analogWrite(E2, servo_x);
+            digitalWrite(D1, LOW);
+            digitalWrite(D2, HIGH);
+          }
+
+      }
+
+      //MOTOR
+      if (inData.startsWith("MOTOR")){ //Comando accionador del motor
+          if (sscanf(inData.c_str(), "MOTOR-%d", &motor) == 1) {
+            Serial.println(motor);
+          }
+
+          if( motor <= 51 && motor >= -51){
+            // stop
+            digitalWrite(E1, LOW);
+            digitalWrite(I1, LOW);
+            digitalWrite(I2, LOW);
+
+          }
+
+          if( motor > 51){
+            analogWrite(E1, motor);
+            digitalWrite(I1, HIGH);
+            digitalWrite(I2, LOW);
+          }
+
+          if( motor < -51){
+            motor = motor * -1;
+            analogWrite(E1, motor);
+            digitalWrite(I1, LOW);
+            digitalWrite(I2, HIGH);
+          }
+      }
+      inData = ""; //Fin de procesamiento, borrado del mensaje.
+    }
+  }
+
+  delay(30);
+}
+
+\end{lstlisting}
+
+\subsubsection{Escritura en puerto serie}
+
+A continuación se muestra un ejemplo de envío de la lectura de los calores de temperatura y humedad del sensor Dth11 conectado al Arduino para su transferencia a la Placa Raspberry Pi:\\
+
+\begin{lstlisting}[language=C++]
+#include <SimpleDHT.h>
+
+int pinDHT11 = 4;
+String inData = "";
+
+SimpleDHT11 dht11;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  byte temperature = 0;
+  byte humidity = 0;
+  int err = SimpleDHTErrSuccess;
+  if ((err = dht11.read(pinDHT11, &temperature, &humidity, NULL)) != SimpleDHTErrSuccess) {
+     Serial.print("Read DHT11 failed, err="); Serial.println(err);delay(1000);
+  }
+
+  dht11.read(pinDHT11, &temperature, &humidity, NULL);
+
+  if ( (int)temperature != 0 and (int)humidity != 0 ){
+    Serial.print((int)temperature); Serial.print(" *C, ");
+    Serial.print((int)humidity); Serial.println(" H");
+  }
+  
+  delay(30);
+
+  Serial.println(analogRead(photosensorPin));
+}
+
 \end{lstlisting}
 
 
 
-\subsection{Comunicaciones}
+\section{Comunicación externa}
 
-En el punto anterior hemos visto las diferentes configuraciones de Entrada/Salida establecidas para el control de los diferentes motores y sensores. En el presente y sucesivos puntos describiremos los diferentes
-canales de comunicación abiertos y los flujos de información existentes. En la figura \ref{figura:comunicaciones-robot} se muestra un gráfico representativo de los diferentes flujos de datos existentes:
+En el punto anterior hemos visto las diferentes configuraciones de Entrada/Salida establecidas tanto para para el control de los diferentes motores y sensores en Arduino y Raspberry Pi. 
+En el presente y sucesivos puntos describiremos los diferentes canales de comunicación abiertos y los flujos de información existentes entre la placa Raspberry Pi y el servidor de control donde 
+se encuentra alojada la aplicación web para monitorización del vehículo SensorRS.\\
 
+En la figura \ref{figura:comunicaciones-robot} se muestra un gráfico representativo de los diferentes flujos de datos existentes:
 
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=0.6]{diagramas/flujo-comunicaciones-robot.png}
   \end{center}
-  \caption{Canales de comunicación abiertos por el robot.}
+  \caption{Canales de comunicación abiertos externos a SensorRS.}
   \label{figura:comunicaciones-robot}
 \end{figure}
 
-
-Primeramente al accionar el robot, éste envía una notificación al servidor indicando que se encuentra en modo \emph{online} y permanece a la espera de que algún usuario de la aplicación decida conectarse para su control.
-Canal de comunicación representado en amarillo en la figura \ref{figura:comunicaciones-robot}.\\
+Primeramente al accionar el robot, éste envía una notificación al servidor indicando que se encuentra en modo \emph{online} y permanece a la espera de que algún usuario de la aplicación decida
+conectarse para su control. Canal de comunicación representado en amarillo en la figura \ref{figura:comunicaciones-robot}.\\
 
 Un usuario ve disponible el robot y decide conectarse. Entonces se establece un enlace entre el robot, servidor, y el usuario, cliente. Flujo de comunicación representado en negro, figura \ref{figura:comunicaciones-robot}.\\
 
@@ -160,18 +355,12 @@ El usuario envía comandos al robot a través del canal abierto y las respuestas
 
 Las tres vías de comunicación entre el robot y el usuario discurren dentro de un mismo canal de comunicación (socket). En el siguiente punto se describirá más detalladamente el procedimiento.
 
-\subsubsection{ Formato del mensaje}
-
-
-
-MOTOR-
-SRV-
-
-
 \subsubsection{Sockets}
 
-Ahora bien, una vez definidos los pines que activarán nuestros motores y los canales de comunicación necesitamos que éstos sean activados cuando desde una red externa lo indiquemos haremos uso
-de la biblioteca Socket.io. Comenzamos el código incluyendo las librerías necesarias:
+Ahora bien, una vez definidos los pines o comandos que derivaremos a la placa Arduino y que activarán nuestros motores o sensores y los canales de comunicación necesarios, necesitamos que éstos sean activados
+cuando desde una red externa lo indiquemos. Para ello haremos uso de la biblioteca Socket.io. \\
+
+Comenzamos el código incluyendo las librerías necesarias:\\
 
 \begin{lstlisting}[language=JavaScript]
   var io_client = require('./node_modules/socket.io-client');
@@ -195,10 +384,9 @@ el código:\\
   io_server.socket.get('/robot/changetoonline/', {robot: '59188631c8e94ba54f7a4bdc', online: true});
 \end{lstlisting}
 
-
-
-Una vez realizado el paso anterior, tenemos un robot que ha indicado a la aplicación web principal de que se encuentra en estado online pero nada más. El siguiente paso sería establecer alguna comunicación que se mantuviera a la escucha a 
-la espera de la llegada de nuevas conexiones. Para la creación del socket basta con la siguiente instrucción, la cual recibe un puerto que utilizará para mantenerse a la escucha:\\
+Una vez realizado el paso anterior, tenemos al robot SensorRS que ha indicado a la aplicación web que se encuentra en estado online pero nada más. El siguiente paso sería establecer alguna 
+comunicación que se mantuviera a la escucha a la espera de la llegada de nuevas conexiones. Para la creación del socket basta con la siguiente instrucción, la cual recibe un puerto que 
+utilizará para mantenerse a la escucha:\\
 
 \begin{lstlisting}[language=JavaScript]
   var io = require('./node_modules/socket.io').listen(8085, { log: false });
@@ -230,116 +418,7 @@ io.sockets.on('connection', function (socket)
 \end{lstlisting}
 
 Cuando un evento \emph{action} es recibido se activada la función que procesa el comando recibido y activa las salidas correspondientes, la cual establece los pines necesarios a los valores
-1 o 0 según el parámetro establecido. La tabla \ref{table:table-pin-out} muestra las diferentes combinaciones de salidas y su acción correspondiente:
-
-\begin{table}[H]
-  \begin{center}
-    \begin{tabular}{|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
-      \hline
-      {\textbf{Acción}} & \textbf{ GPIO 2 } & \textbf{ GPIO 3 } & \textbf{  GPIO 17 } & \textbf{ GPIO 27 }\\
-      \hline
-      { \textbf{ UP } } & { 1 } & { 0 }  & { 1 }  & { 0 }  \\
-      \hline
-      { \textbf{ DOWN } } & { 0 } & { 1 }  & { 0 }  & { 1 } \\
-      \hline
-      { \textbf{ LEFT } } & { 1 } & { 0 }  & { 0 }  & { 0 } \\
-      \hline
-      { \textbf{ RIGHT } } & { 0 } & { 0 }  & { 1 }  & { 0 } \\
-      \hline
-      { \textbf{ STOP } } & { 0 } & { 0 }  & { 0 }  & { 0 }  \\
-     \hline   
-    \end{tabular}
-  \end{center}
-\caption{ Combinaciones de salida para los puertos GPIO y su acción correspondiente. }
-\label{table:table-pin-out}
-\end{table}
-
-A continuación se muestra el ejemplo desarrollado para la activación de los motores en sentido de giro y dirección según la tabla anterior:\\
-
-\begin{lstlisting}[language=JavaScript]
-  // Escucha de comandos.  
-  socket.on('action', function (data){
-
-    console.log('Comando recibido: ' + data);
-
-    switch(data) {
-      case 'UP':
-        gpio2.digitalWrite(1);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(1);
-        gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
-      case 'RIGHT':
-        gpio2.digitalWrite(0);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(1);
-        gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
-      case 'LEFT':
-        gpio2.digitalWrite(1);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(0);
-        gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
-      case 'DOWN':
-        gpio2.digitalWrite(0);
-        gpio3.digitalWrite(1);
-        gpio17.digitalWrite(0);
-        gpio27.digitalWrite(1);
-        console.log('UP');
-        break;
-
-      case 'STOP':
-        gpio2.digitalWrite(0);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(0);
-        gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
-      default:
-        console.log('command not found');
-    }
-
-  })
-    
-\end{lstlisting}
-
-
-Diagrama de bloques del robot controlado vía WiFi:
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.3]{diagramas/diagrama_bloques_robot.png}
-  \end{center}
-  \caption{Diagrama de bloques del robot controlado por WiFi.}
-  \label{figura:diagrama-bloques-robot}
-\end{figure}
-
-
-Componentes necesarios para el desarrollo del Robot controlado vía WiFi
-
-\begin{itemize}
- \item Microcontrolador
- \item Raspberry Pi con WiFi incorporado
- \item Sensor de temperatura
- \item Sensor de humerdad.
- \item Sensor de sonidos de baja intensidad.
- \item Sensor de sonidos de elevada intensidad.
- \item Sensor de humos.
- \item Sensor de llamas.
- \item Otros sensores...
- \item Controladora de motores L289N.
- \item Cámara USB.
- \item Buzzer
-\end{itemize}
-
+1 o 0 según el parámetro establecido.\\
 
 \subsubsection{ Streaming de vídeo }
 
@@ -378,7 +457,7 @@ diferentes frames y no almacenándolos en disco tal y como realiza la instrucci�
 
 Para resolver este problema podemos emplear el sistema de tuberías que implementan los sistemas UNIX \footnote{ Una tubería (pipe, cauce o '|') consiste en una cadena de 
 procesos conectados de forma tal que la salida de cada elemento de la cadena es la entrada del próximo. Permiten la comunicación y sincronización entre procesos. Es común el uso de
-buffer de datos entre elementos consecutivos. }.
+buffer de datos entre elementos consecutivos. }.\\
 
 En cualquier sistema Unix se puede hacer que la salida de una determinada orden sea la entrada estándar de otra, lo que le confiere a las órdenes Unix una enorme potencia.
 Para realizar dicha "canalización`` debemos utilizar las siguientes opciones:\\
@@ -444,7 +523,7 @@ A continuación mostramos el código de transmisión de vídeo al completo junto
 
 \subsubsection{Código de ejemplo completo}
 
-Finalmente se muestra el código completo para el robot de pruebas desarrollado. Dicho código puede emplearse como guía de referencia o plantilla para futuros proyectos con la idea de integrarlos en la aplicación RobotUI.\\
+Finalmente se muestra el código completo para el robot SensorRS desarrollado. Dicho código puede emplearse como guía de referencia o plantilla para futuros proyectos con la idea de integrarlos en la aplicación RobotUI.\\
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -492,55 +571,9 @@ io.sockets.on('connection', function (socket)
   console.log('emitiendo: ' + "¡¡¡Bienvenido!!!");
 
   socket.on('action', function (data){
-
     console.log('Comando recibido: ' + data);
-
-    switch(data) {
-      case 'UP':
-        gpio2.digitalWrite(1);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(1);
-        gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
-      case 'RIGHT':
-        gpio2.digitalWrite(0);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(1);
-        gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
-      case 'LEFT':
-        gpio2.digitalWrite(1);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(0);
-        gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
-      case 'DOWN':
-        gpio2.digitalWrite(0);
-        gpio3.digitalWrite(1);
-        gpio17.digitalWrite(0);
-        gpio27.digitalWrite(1);
-        console.log('UP');
-        break;
-
-      case 'STOP':
-        gpio2.digitalWrite(0);
-        gpio3.digitalWrite(0);
-        gpio17.digitalWrite(0);
-        gpio27.digitalWrite(0);
-        console.log('UP');
-        break;
-
-      default:
-        console.log('command not found');
-    }
-
-  })
+  });
+  
 });
 
 function stopStreaming(socket) {
@@ -597,13 +630,13 @@ function startStreaming(socket) {
 
 \end{lstlisting}
 
-Para la ejecución del código introducimos el siguiente comando:
+Para la ejecución del código introducimos el siguiente comando:\\
 
 \begin{lstlisting}[language=bash]
   sudo node raspberry.js
 \end{lstlisting}
 
-Siendo \emph{raspberry.js} el nombre del archivo que contiene nuestro código.
+Siendo \emph{raspberry.js} el nombre del archivo que contiene nuestro código.\\
 
 
 
