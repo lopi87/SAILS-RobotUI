@@ -125,7 +125,7 @@ y un regulador \textbf{LM7805} que suministra 5V a la parte lógica del integrad
 (A y B). La \textbf{salida A} esta conformada por \textbf{OUT1} y \textbf{OUT2} y la \textbf{salida B} por \textbf{OUT3} y \textbf{OUT4}. Los pines de habilitación 
 son \textbf{ENA} y \textbf{ENB} respectivamente.\\
 
-Los pines \texbf{IN1}, \texbf{IN2}, \texbf{IN3} y \texbf{IN4}; son los pines de entrada donde se conectan a pines digitales de Arduino para poder controlar el motor.
+Los pines \textbf{IN1}, \textbf{IN2}, \textbf{IN3} y \textbf{IN4}; son los pines de entrada donde se conectan a pines digitales de Arduino para poder controlar el motor.\\
 
 La alimentación del driver es variable, ya que dispone de un regulador de tensión de 5v incorporado. Cuando el jumper de selección de 5V se encuentra activo, el módulo permite una 
 alimentación de entre 6V a 12V DC. Como el regulador se encuentra activo, el pin marcado como +5V tendrá un voltaje de 5V DC. Este voltaje se puede usar para alimentar la parte de control del 
@@ -155,24 +155,25 @@ pueden crear con componentes discretos.\\
   \begin{center}
     \includegraphics[scale=0.7]{imagenes/esquema_puente_h.png}
   \end{center}
-  \caption{Funcionamiento del puente H.}
-  \label{esquema:puente_h}
+  \caption{Diagrama de funcionamiento del puente H.}
+  \label{esquema:funcionamiento_puente_h}
 \end{figure}
 
-El funcionamiento de un puente H es  bastante  simple. Cuando se cierran los interruptores S1 y S4, y se abren S2 y S3, se aplica una tensión positiva en bornes del motor, así 
-que este gira en un sentido. Cuando se abren los interruptores S1 y S4 y se cierran S2 y S3, se invierte la tensión en bornes del motor, por lo que este gira en sentido contrario.\\
+El funcionamiento de un puente H es  bastante  simple. Siguiendo la fifura \ref{esquema:funcionamiento_puente_h} podemos observar que, cuando se cierran los interruptores \textbf{S1} y \textbf{S4}, y se abren \textbf{S2} y \textbf{S3}, se aplica una tensión positiva en bornes del motor, así 
+que este gira en un sentido y cuando se abren los interruptores \textbf{S1} y \textbf{S4} y se cierran \textbf{S2} y \textbf{S3}, se invierte la tensión en bornes del motor, haciendo que el motor gire en sentido contrario.\\
 
-Y, por contra,si todos los interruptores están abiertos el motor no girará. \\
+Y, por contra, si todos los interruptores están abiertos el motor no girará. \\
 
-Para el caso del proyecto, hemos empleado las salidas para dos motores que el driver proporciona, una de ellas para traccionar el vehículo y la segunda para accionar la dirección.
+Para el caso del proyecto, hemos empleado utilizado las salidas para la conexión de dos motores, empeando así todas las que el driver proporciona. Una de ellas para traccionar
+el vehículo y la segunda para el accionamiento de la dirección.\\
 
-Se ha optado finalmente por un motor DC para la dirección debido que el chasis empleado para la constucción del robot ya lo traía así incorporado y se ha decicido reutilizar. De 
-igual modo se podría haber usado un servomotor para el accionamiento de la dirección, pero debido a una mayor simplicidad en el montaje y puesto que el motor ya incorporado 
-dispone de una mejor sujeción al chasis sin necesidad de hacer adaptaciones así se ha decidido.
+Se ha optado finalmente por emplear un motor DC para la dirección debido que el chasis empleado para la constucción del robot ya lo traía así incorporado y se ha decicido reutilizar.
+De igual modo se podría haber empleado un servomotor para el accionamiento de la dirección, pero debido a una mayor simplicidad en el montaje y puesto que el motor ya incorporado
+dispone de una mejor sujeción al chasis así se ha decidido.\\
 
 \subsection{Motores}
 
-A continuación se muestra le motor de dirección empleado con el sistema de topes de recorrido que incorpora.
+En la figura \ref{img:sistema_direccion} se muestra el motor de dirección empleado junto con el sistema de topes de recorrido que incorpora.\\
 
 
 \begin{figure}[H]
@@ -180,17 +181,17 @@ A continuación se muestra le motor de dirección empleado con el sistema de top
     \includegraphics[scale=0.2]{imagenes/robot/motor-direccion.jpg}
   \end{center}
   \caption{Sistema de accionamiento de la dirección.}
-  \label{esquema:puente_h}
+  \label{img:sistema_direccion}
 \end{figure}
 
-Motor de tracción del vehículo situado en su parte trasera.
+Motor de tracción del vehículo situado en su parte trasera, figura \ref{img:motor_traccion}.
 
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=0.2]{imagenes/robot/motor-traccion.jpeg}
   \end{center}
   \caption{Vista del motor de tracción.}
-  \label{esquema:puente_h}
+  \label{img:motor_traccion}
 \end{figure}
 
 
@@ -241,7 +242,7 @@ Por esta razón, se ha optado por el uso de dos baterías para la alimentación 
 motores debido a la gran cantidad de energía que éstos demandan y su elevado consumo.\\
 
 Para la alimentación de la placa Raspberry Pi, se ha optado por la utilización de una batería de Litio desarrollada específicamente para su uso con este modelo de placas el cual permite una integración
-perfecta. Dicho módulo de alimentación queda descrito en la subapartado correspondiente de herramientas utilizadas \ref{componente:bateria-expansion}.
+perfecta. Dicho módulo de alimentación queda descrito en la subapartado correspondiente de herramientas utilizadas \ref{componente:bateria-expansion}.\\
 
 Imagen de la Raspberry Pi junto con su módulo de expansión de batería:
 
@@ -298,7 +299,7 @@ Siguiento el esquema \ref{figura:alimentador_usb_protoboard_esquema} Podemos dif
  \item \textbf{Alimentación USB:} Esta entrada solo se utiliza para la alimentación de 5 voltios mediante un conector USB hembra.
  Los pines centrales, D+ y D- no están conectados a ningún elemento, por lo que no puede recibir datos.
 
- \item \texbf{Alimentación externa:} Se trata de un conector tipo Jack hembra al que se le puede colocar cualquier tipo de batería
+ \item \textbf{Alimentación externa:} Se trata de un conector tipo Jack hembra al que se le puede colocar cualquier tipo de batería
  o pila que se encuentre entre los rangos de 6 y 12V permitidos por el módulo.
  
  \item \textbf{AM1117-5 y AM1117-3.3:} Son los dos reguladores de tensión que incorpora el módulo MB102 para regulación de tensión de salida hasta los valores 
@@ -307,7 +308,7 @@ Siguiento el esquema \ref{figura:alimentador_usb_protoboard_esquema} Podemos dif
  \item \textbf{ Diodos y condensadores} También incorpora una serie de diodos zener \footnote{El diodo Zener es un diodo de silicio fuertemente dopado​ que se ha construido para que funcione en las zonas de rupturas, recibe ese nombre por su inventor Clarence Melvin Zener. El diodo Zener es la parte esencial de los reguladores de tensión casi constantes con independencia de que se presenten grandes variaciones de la tensión de red, de la resistencia de carga y temperatura. } 
  de portección ante posibles inversiones de polaridad junto con un diodo led para comprobar el correcto funcionamiento del módulo.
  
- \item \texbf{SW1:} Botón cuya finalidad es encender o apagar el módulo de alimentación.
+ \item \textbf{SW1:} Botón cuya finalidad es encender o apagar el módulo de alimentación.
  
  \item \textbf{J1:} Serie de pines en los cuales se tiene una tensión de 5V y 3.3V para la conexión de los diferentes elementos. De los ocho pines que dispone, cuatro pines son
  de GND, dos pines son de 5V y los otros dos pines restantes son de 3.3V.
@@ -320,7 +321,7 @@ Siguiento el esquema \ref{figura:alimentador_usb_protoboard_esquema} Podemos dif
   \label{figura:conector_usb_board_j1}
 \end{figure}
 
-  \item \texbf{J2 y J3:} Pines para la selección de la tensión de salida del módulo. Para seleccionar la tensión debemos conectar un jumper\footnote{En electrónica y en particular en informática,
+  \item \textbf{J2 y J3:} Pines para la selección de la tensión de salida del módulo. Para seleccionar la tensión debemos conectar un jumper\footnote{En electrónica y en particular en informática,
    un jumper o saltador es un elemento que permite cerrar el circuito eléctrico del que forma parte dos conexiones. Esto puede hacerse mediante soldadura (se derrite suficiente estaño para cerrar el circuito), soldando un cable o alambre entre ambos puntos o, lo más frecuente, conectado dos pines en hilera o paralelo mediante una pieza de plástico que protege el material conductor que cierra el circuito. Los más habituales tienen tamaños de 2,54 mm, 2 mm y 1,27 mm. } entre los pines en función de la
   tensión deseada.
 
@@ -363,7 +364,7 @@ Para la fijación de los diferentes módulos al chasis se ha empleado torniller�
 
 \subsection{Conexionado general}
 
-La siguiente imagen \ref{vista-conexiones} muestra una visión general de la disposición de todos los elementos que conforman el vehículo junto con sus conexiones:
+La siguiente imagen \ref{vista-conexiones} muestra una visión general de la disposición de todos los elementos que conforman el vehículo junto con sus conexiones:\\
 
 
 **************** HACER UNA FOTO DONDE SE APRECIE TODO MEJOR POR PARTES ***************************
@@ -380,12 +381,15 @@ La siguiente imagen \ref{vista-conexiones} muestra una visión general de la dis
 
 \section{Iluminación}
 
-Con el fin de dotar de iluminación al vehículo, se ha incorporado una serie de leds en los faros del vehículo tanto en su parte delantera como trasera. Dichos leds van concetados a un
-pin del Arduino con la finalidad de poder encenderlos o apagarlos al deseo del operador. 
 
-La alimentación se encuentra conectada a un pin digital del arduino mientras que la masa a una entrada GND del mismo.
+\subsection{Leds}
 
-A continuación se muestra una imagen de los faros del vehículo en funcionamiento.
+Con el fin de dotar de iluminación al vehículo, se ha incorporado una serie de leds en los faros del vehículo tanto en su parte delantera como trasera. Dichos leds van concetados
+a un pin del Arduino con la finalidad de poder encenderlos o apagarlos al deseo del operador. \\
+
+La alimentación se encuentra conectada a un pin digital del arduino mientras que la masa a una entrada GND del mismo.\\
+
+A continuación se muestra una imagen de los faros del vehículo en funcionamiento.\\
 
 
 \begin{figure}[H]
@@ -406,7 +410,34 @@ A continuación se muestra una imagen de los faros del vehículo en funcionamien
 \end{figure}
 
 
-Por otra parte, se ha incorporado un sensor detector de luminosidad para el encendido automático de luces en lugares de baja iluminación.
+Por otra parte, se ha incorporado un sensor detector de luminosidad para el encendido automático de luces en lugares de baja iluminación.\\
+
+
+\subsubsection{Conexionado}
+
+Representación del conexionado de los leds, figura \ref{img:leds_conexiones}.\\
+
+\begin{figure}[H]
+  \begin{center}
+   \includegraphics[scale=0.5]{imagenes/leds_conexion.png}
+  \end{center}
+  \caption{Conexionado de los leds de iluminación.}
+  \label{img:leds_conexiones}
+\end{figure}
+
+
+\subsection{Puntero láser}
+
+Junto con los leds de iluminación también se ha conectado un puntero láser accionable por el operador.
+
+\begin{figure}[H]
+  \begin{center}
+   \includegraphics[scale=0.2]{imagenes/robot/conexionado_general.jpeg}
+  \end{center}
+  \caption{Vehículo SensorRS con el puntero láser encendido.}
+  \label{vista-conexiones}
+\end{figure}
+
 
 \section{Sensores}
 
@@ -643,7 +674,7 @@ La placa utilizada, KY-038 incorpora un micrófono junto con un comparador LM393
   \begin{center}
     \includegraphics[scale=0.6]{imagenes/micro.png}
   \end{center}
-  \caption{Amplificación de la señal de audio recibida.}
+  \caption{Vista del sensor de audio KY-038 utilizado.}
   \label{figura:micro_amplificacion}
 \end{figure}
 
@@ -667,12 +698,6 @@ Conexionado del sensor KY-038 en su modo digital:
 \end{figure}
 
 
-
-
-
-
-
-
 \subsection{Fotoresistor}
 
 Un fotoresistor, o LDR (light-dependent resistor) es un dispositivo cuya resistencia varía en función de la luz recibida. Podemos usar esta variación para medir, a través de 
@@ -684,25 +709,156 @@ a la banda de conducción y, por tanto, disminuyendo la resistencia del componen
 Los valores típicos son de 1 Mohm en total oscuridad, a 50-100 Ohm bajo luz brillante.\\
 
 
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.05]{imagenes/fotoresistor_utilizado.jpg}
+  \end{center}
+  \caption{Vista del fotoresistor utilizado.}
+  \label{figura:micro_amplificacion}
+\end{figure}
+
+
+Por tanto, un fotoresistor disminuye su resistencia a medida que aumenta la luz sobre él. Los valores típicos son de 1 Mohm en total oscuridad, a 50-100 Ohm bajo condiciones de 
+luz brillante.\\
+
 \subsubsection{Conexionado}
 
+Conexionado del fotoresistor a la placa Arduino:
 
-\subsection{Sensor de lluvia}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.5]{imagenes/fotoresistor_conexionado.png}
+  \end{center}
+  \caption{Vista del fotoresistor utilizado.}
+  \label{figura:micro_amplificacion}
+\end{figure}
 
 
+\subsection{Sensor de llama}
+
+Un sensor de llama óptico es un dispositivo que permite detectar la existencia de combustión por la luz emitida por la misma. Esta luz puede ser detectada por un sensor óptico, 
+y ser capturado por las entradas digitales y las entradas analógicas de Arduino.\\
+
+La llama es un fenómeno de emisión de luz asociado a los procesos de combustión. La combustión es un proceso que desprende grandes cantidades de energía en forma de calor. Durante 
+la reacción se generan compuestos intermedios que liberan parte de su energía mediante la emisión de luz.\\
+
+El espectro de emisión de llama depende de los elementos que intervienen en la reacción. En el caso de combustión de productos con carbón en presencia del oxígeno tenemos dos picos característicos en ultravioleta en longitudes de onda de 185nm-260nm
+y en infrarrojo en longitudes de onda 4400-4600nm.\\
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.4]{imagenes/espectro.png}
+  \end{center}
+  \caption{Espectro visible por el ojo humano.}
+  \label{fig:}
+\end{figure}
+
+Estos dispositivos se ajustan a las longitudes de onda características de la aparición de la llama y normalmente combinan las señales ultravioleta y de infrarrojo.\\
+ 
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.5]{imagenes/sensor_llama.jpg}
+  \end{center}
+  \caption{Vista del sensor de llama YG1006 utilizado.}
+  \label{figura:sensor_mq_2_potenciometro}
+\end{figure}
+
+Estos sensores constan únicamente de un sensor infrarrojo ajustado a 760-1100 nm. El ángulo de detección es de 60º, y la distancia de detección entre 0.40 m a 0.80.
+
+Este tipo de sensores de llama infrarrojos suelen incorporar una placa de medición estándar con el comparador LM393, que permite obtener la lectura tanto como un valor analógico
+como de forma digital cuando se supera un cierto umbral, que se regula a través de un potenciómetro ubicado en la placa.
+
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=1.5]{imagenes/longitudes_onda.png}
+  \end{center}
+  \caption{Gráfico de sensibilidad espectral del sensor YG1006.}
+  \label{figura:longitudes_onda}
+\end{figure}
+
+Como vemos en la figura \ref{figura:longitudes_onda}, las longitudes de onda de estos sensores poco tienen que ver con las emisiones características de las llamas, las cuales
+pueden variar su espectro según múltiples factores siendo uno de ellos el material en combustión. Pudiéndose abarcar espectros desde tonos azulados de las llamas de gas a los
+verdosos producidos por el sulfato de cobre. De hecho, estos sensores también son afectados incluso por la iluminación interior, dando lugar a numerosos falsos positivos.\\
+
+Por tanto, la sensibilidad y fiabilidad de estos detectores de reducido coste no resultan suficientes para considerarlos un auténtico dispositivo de seguridad.\\
+ 
 \subsubsection{Conexionado}
 
+El esquema eléctrico es muy simple. Debemos alimentar el módulo conectando \textbf{GND} y \textbf{VCC} a los pines correspondientes de Arduino y salida \textbf{D0} a una de las 
+entradas digitales de Arduino.\\
 
-\subsection{Sensor de impacto}
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.4]{imagenes/llama_conexionado.png}
+  \end{center}
+  \caption{Vista del conexionado del sensor de llama YG1006.}
+  \label{figura:sensor_mq_2_potenciometro}
+\end{figure}
 
-\subsubsection{Conexionado}
+\subsection{Sensor de proximidad}
+
+La  familia  de  sensores  Sharp  GP2Dxx  es una de las más utilizadas tanto en lo que
+viene a denominarse rob ́otica m ́ovil casera como en el  ́ambito de investigacíon debido
+principalmente  a  su  facilidad de  integraci ́on  y su  bajo  coste  (unos 15  Euros). En la
+Figura \ref{figura:sensor_sharp} puede verse una imagen de un GP2D12.\\
 
 
-\subsection{Puntero láser}
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.3]{imagenes/sharp.jpg}
+  \end{center}
+  \caption{Sensor GP2D12.}
+  \label{figura:sensor_sharp}
+\end{figure}
+
+Los sensores GP2D12 proporcionan una salida analógica entre 0 y 3 voltios dependiendo de la distancia a la que se encuentre el objeto. Dicha salida anaĺogica no es
+lineal sino que sigue una curva, la cual se muestra en la figura \ref{figura:curva_sharp}. En aplicaciones de rob́otica ḿovil es coḿun la utilización de un conversor analogico-digital con 
+el que adaptar esa tensión para su tratamiento digital. Cuando además interese conocer la medida con exactitud y no un valor aproximado de la cercan ́ıa de los objetos, se debe
+realizar una calibraci ́on del dispositivo que permita dar una magnitud de la distancia junto con una medida del error cometido.
 
 
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=1.2]{imagenes/curva_sharp.png}
+  \end{center}
+  \caption{Curva de tensión de salida según la distancia al obstáculo.}
+  \label{figura:curva_sharp}
+\end{figure}
+
+Estos sensores se basan en el principio de triangulación para realización de las medidas. El elemento situado a la izquierda del sensor según vemos en la figura \ref{figura:sensor_sharp}
+es un led infrarrojo que emite un haz que ser ́a rebotado por el objeto y posteriormente recogido por el elemento situado a la derecha. Este ́ultimo se conoce como PSD (Position 
+Sensing Device, Dispositivo de Percepción de Posición)  y  puede  entenderse  como  una  lente situada sobre un array de células sensibles a la luz infrarroja. Dependiendo del 
+ángulo de incidencia del haz rebotado en la lente, se activa una u otra célula del array permitiendo estimar la distancia a la que se encuentra el objeto.\\
+
+El conexionado del GP2D12 con un microcontrolador requirie tan solo de una entrada del conversor analógico-digital a la que se conectará el
+pin de salida del sensor (el de más a la izquierda visto de frente según se muestra en la figura \ref{figura:pines_sharp}). Los otros dos pines corresponden, respectivamente, con \textbf{GND} y con
+\textbf{Vcc}, la tensión de alimentación, que deberá ser de 5 voltios.\\
 
 
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=1.5]{imagenes/pines_sharp.png}
+  \end{center}
+  \caption{Conexiones del GP2D12.}
+  \label{figura:pines_sharp}
+\end{figure}
+
+En la siguiente tabla se recoge un resumen de las especificaciones del sensor:\\
 
 
-
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{8cm}|p{2cm}|}
+      \hline
+      {Rango} & {18-80 cm}\\
+      {Periodo de lectura} & {40 ms}\\
+      {Máximo ángulo de reflexión} & {> 40 $^{\circ}$}\\
+      {Tensión de alimentación} & {4.5-5.5 V}\\
+      {Ruido de salida} & { < 200 mV }\\
+      {Consumo medio} & { 35 mA }\\
+      {Consumo de pico} & { 200 mA }\\
+      \hline
+      \end{tabular}
+  \end{center}
+  \caption{Resumen de las especificaciones del GP2D12.}
+\end{table}

@@ -136,8 +136,9 @@ io.sockets.on('connection', function (socket)
 
   const parser = port.pipe(new Readline({ delimiter: '\r\n' }));
   parser.on('data', function(data){
-    // console.log(data);
-    socket.emit('tmp', {msg: data } );
+    console.log(data);
+    var msg_data = data.split("%");
+    socket.emit(String(msg_data[0]), {msg: String(msg_data[1]) } );
   });
 
 

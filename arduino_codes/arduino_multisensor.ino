@@ -1,4 +1,6 @@
+#include <TonePlayer.h>
 #include <SimpleDHT.h>
+#include <NewPing.h>
 
 #define E1 10  // Enable Pin for motor 1
 #define I1 8  // Control pin 1 for motor 1
@@ -13,19 +15,21 @@ int pinDHT11 = 3;
 int photosensorPin = A1;   // select the analog input pin for the photoresistor
 String inData = "";
 
+//Ultrasonidos
+const int UltrasonicPin = 4;
+const int MaxDistance = 1000;
+int distancia_trasera = 0;
+NewPing sonar(UltrasonicPin, UltrasonicPin, MaxDistance);
 
-// Shock
-int shockPin = 7; // Pin 7 como pin de datos
-int shockVal = HIGH; // Valor medido
-boolean bAlarm = false;
-unsigned long lastShockTime; // Record the time that we measured a shock
-int shockAlarmTime = 250; // Number of milli seconds to keep the shock alarm high
+//SHARP
+int IR_SENSOR = 0; // Sensor is connected to the analog A0
+int intSensorResult = 0; //Sensor result
+float fltSensorCalc = 0; //Calculated value
 
-//IR sensor
-int ir_sensor = A2;
-int value;
-int cm;
-bool stop = false;
+//Sensor de llama
+const int sensorMin = 2;     // sensor minimo
+const int sensorMax = 1024;  // sensor maximo
+
 
 // Sensor de luz
 int light_val;
@@ -38,10 +42,15 @@ int servo_x, motor;
 //Temperatura
 SimpleDHT11 dht11;
 
+
+//Buzzer
+TonePlayer tone1 (TCCR5A, TCCR5B, OCR5AH, OCR5AL, TCNT5H, TCNT5L);  // pin D46
+
 void setup() {
   Serial.begin(9600);
 
-  pinMode (shockPin, INPUT) ; // shock KY-002
+  pinMode (46, OUTPUT);
+
 
   pinMode(2, OUTPUT); //luces
   pinMode(6, OUTPUT); //laser
@@ -66,25 +75,19 @@ void loop() {
   //MQ-2 Gas
   int adc_MQ = analogRead(A3); //Leemos la salida analógica del MQ
   float voltaje = adc_MQ * (5.0 / 1023.0); //Convertimos la lectura en un valor de voltaje
-  Serial.print("adc:");
-  Serial.print(adc_MQ);
-  Serial.print("    voltaje:");
-  Serial.println(voltaje);
+//  Serial.print("adc:");
+//  Serial.print(adc_MQ);
+//  Serial.print("    voltaje:");
+//  Serial.println(voltaje);
 
 
-  //IR
-  value = analogRead(ir_sensor);
-  cm = (6787.0 / (value - 3.0)) - 4.0; //Calculate distance in cm
-  //Serial.println(cm);
-  //Serial.println(" cm");
-  delay(200); //Wait
+bool stop = false;
 
-
-  if(cm <= 10){
-    stop = true;
-  } else {
-    stop = false;
-  }
+//  if(cm <= 10){
+//    stop = true;
+//  } else {
+//    stop = false;
+//  }
 
   // ON OFF LED
   if (light_val < 20 and ! on_pressed) {
@@ -150,8 +153,9 @@ void loop() {
             Serial.println(motor);
           }
 
-          if( ( motor <= 51 && motor >= -51 ) || stop ){
+          if( ( motor <= 51 && motor >= -51 ) || stop || ( distancia_trasera < 10 and distancia_trasera > 0) ){
             // stop
+            stop = false;
             Serial.println('STOP');
             digitalWrite(E1, LOW);
             digitalWrite(I1, LOW);
@@ -159,7 +163,6 @@ void loop() {
           }
 
           if( motor > 51){
-
             analogWrite(E1, motor);
             digitalWrite(I1, HIGH);
             digitalWrite(I2, LOW);
@@ -177,8 +180,8 @@ void loop() {
   }
 
   //Luz
-  light_val = analogRead(data_light);   //connect grayscale sensor to Analog 0
-  Serial.println(light_val);//print the value to serial
+  light_val = analogRead(data_light);
+  //Serial.println(light_val);
 
   // Lectura temperatura
   byte temperature = 0;
@@ -188,32 +191,47 @@ void loop() {
   dht11.read(pinDHT11, &temperature, &humidity, NULL);
 
   if ( (int)temperature != 0 and (int)humidity != 0 ){
+    Serial.print("tmp%");
     Serial.print((int)temperature); Serial.print(" *C, ");
     Serial.print((int)humidity); Serial.println(" H");
   }
 
 
-  //Shock sensor
-  shockVal = digitalRead (shockPin) ; // read the value from our sensor
+  distancia_trasera = sonar.ping_cm();
+  //  Serial.print(sonar.ping_cm()); // obtener el valor en cm (0 = fuera de rango)
+  //  Serial.println("distancia cm");
 
-  if (shockVal == LOW) // If we're in an alarm state
-  {
-    lastShockTime = millis(); // record the time of the shock
-    // The following is so you don't scroll on the output screen
-    if (!bAlarm){
-      Serial.println("Shock Alarm");
-      bAlarm = true;
-    }
-  }
-  else
-  {
-    if( (millis()-lastShockTime) > shockAlarmTime  &&  bAlarm){
-      Serial.println("no alarm");
-      bAlarm = false;
-    }
+
+  intSensorResult = analogRead(IR_SENSOR); //Obtener valor
+  fltSensorCalc = (6787.0 / (intSensorResult - 3.0)) - 4.0; //Calculo de la distancia en cm
+
+  //Serial.print(fltSensorCalc); //Imprimir distancia
+  //Serial.println(" cm SENSOR IR DISTANCIA");
+
+  if(fltSensorCalc < 10){
+    stop = true;
   }
 
+  // Lectura del sensor de llama en A2:
+  int sensorReading = analogRead(A2);
+  int range = map(sensorReading, sensorMin, sensorMax, 0, 3);
 
-  delay(30);
+  // range value:
+  switch (range) {
+  case 0:    // Fuego cercano.
+    Serial.println("fire%** Fuego!!! **");
+    tone1.tone (440);     // play 440 Hz
+    delay (500);          // wait half a second
+    tone1.noTone ();      // stop playing
+    break;
+  case 1:    // Fuego próximo.
+    Serial.println("fire%** Fuego próximo **");
+    break;
+  case 2:    // Fuego no detectado
+    Serial.println("fire%Fuego no detectado");
+    break;
+  }
+
+  delay(100);
 
 }
