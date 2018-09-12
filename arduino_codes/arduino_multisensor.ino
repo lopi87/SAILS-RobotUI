@@ -49,7 +49,7 @@ TonePlayer tone1 (TCCR5A, TCCR5B, OCR5AH, OCR5AL, TCNT5H, TCNT5L);  // pin D46
 void setup() {
   Serial.begin(9600);
 
-  pinMode (46, OUTPUT);
+  pinMode (46, OUTPUT);  //Buzzer
 
 
   pinMode(2, OUTPUT); //luces
@@ -205,8 +205,9 @@ bool stop = false;
   intSensorResult = analogRead(IR_SENSOR); //Obtener valor
   fltSensorCalc = (6787.0 / (intSensorResult - 3.0)) - 4.0; //Calculo de la distancia en cm
 
-  //Serial.print(fltSensorCalc); //Imprimir distancia
-  //Serial.println(" cm SENSOR IR DISTANCIA");
+  Serial.print("dst%");
+  Serial.print(fltSensorCalc); //Imprimir distancia
+  Serial.println(" cm");
 
   if(fltSensorCalc < 10){
     stop = true;
@@ -218,16 +219,16 @@ bool stop = false;
 
   // range value:
   switch (range) {
-  case 0:    // Fuego cercano.
+  case 0:    // A fire closer than 1.5 feet away.
     Serial.println("fire%** Fuego!!! **");
     tone1.tone (440);     // play 440 Hz
     delay (500);          // wait half a second
     tone1.noTone ();      // stop playing
     break;
-  case 1:    // Fuego próximo.
+  case 1:    // A fire between 1-3 feet away.
     Serial.println("fire%** Fuego próximo **");
     break;
-  case 2:    // Fuego no detectado
+  case 2:    // No fire detected.
     Serial.println("fire%Fuego no detectado");
     break;
   }
