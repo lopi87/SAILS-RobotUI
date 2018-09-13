@@ -22,19 +22,17 @@ int distancia_trasera = 0;
 NewPing sonar(UltrasonicPin, UltrasonicPin, MaxDistance);
 
 //SHARP
-int IR_SENSOR = 0; // Sensor is connected to the analog A0
-int intSensorResult = 0; //Sensor result
-float fltSensorCalc = 0; //Calculated value
+int IRpin = 0;
+const bool stop = false;
 
 //Sensor de llama
 const int sensorMin = 2;     // sensor minimo
 const int sensorMax = 1024;  // sensor maximo
 
-
 // Sensor de luz
 int light_val;
 int data_light = A1;
-bool on_pressed = false;
+bool on_pressed = true;
 
 // Motores
 int servo_x, motor;
@@ -42,6 +40,9 @@ int servo_x, motor;
 //Temperatura
 SimpleDHT11 dht11;
 
+//Micrófono
+int MIC = 4;
+int mic_value;
 
 //Buzzer
 TonePlayer tone1 (TCCR5A, TCCR5B, OCR5AH, OCR5AL, TCNT5H, TCNT5L);  // pin D46
@@ -49,8 +50,12 @@ TonePlayer tone1 (TCCR5A, TCCR5B, OCR5AH, OCR5AL, TCNT5H, TCNT5L);  // pin D46
 void setup() {
   Serial.begin(9600);
 
-  pinMode (46, OUTPUT);  //Buzzer
+  //Micrófono
+  pinMode(MIC, INPUT);
 
+  pinMode(IRpin,INPUT); //SHARP
+
+  pinMode (46, OUTPUT); //Buzzer
 
   pinMode(2, OUTPUT); //luces
   pinMode(6, OUTPUT); //laser
@@ -72,6 +77,11 @@ void setup() {
 
 void loop() {
 
+  mic_value = digitalRead(MIC);
+  if( mic_value == HIGH){
+    Serial.println("snd%**** SONIDO DETECTADO ****");
+  }
+
   //MQ-2 Gas
   int adc_MQ = analogRead(A3); //Leemos la salida analógica del MQ
   float voltaje = adc_MQ * (5.0 / 1023.0); //Convertimos la lectura en un valor de voltaje
@@ -83,18 +93,12 @@ void loop() {
 
 bool stop = false;
 
-//  if(cm <= 10){
-//    stop = true;
-//  } else {
-//    stop = false;
-//  }
-
   // ON OFF LED
-  if (light_val < 20 and ! on_pressed) {
+  if (light_val < 20 and on_pressed) {
     digitalWrite(2, HIGH);
     digitalWrite(6, HIGH);
   }
-  if (light_val > 20 and ! on_pressed) {
+  if (light_val > 20 and on_pressed) {
     digitalWrite(2, LOW);
     digitalWrite(6, LOW);
   }
@@ -109,12 +113,25 @@ bool stop = false;
       // ON OFF LED
       if (inData == "H") {
         on_pressed = true;
-        analogWrite(2, HIGH);
+        digitalWrite(2, HIGH);
+        digitalWrite(6, HIGH);
       }
       if (inData == "L") {
         on_pressed = false;
-        analogWrite(2, LOW);
+        digitalWrite(2, LOW);
+        digitalWrite(6, LOW);
       }
+
+      //SHARP
+      int volts = analogRead(IRpin);
+      int distance = (6787 / (volts - 3)) - 4;
+
+      Serial.print("dst%");
+      Serial.print(distance); //Imprimir distancia
+      Serial.println(" cm");
+
+
+      Serial.println(distance);
 
       //Direction
       if (inData.startsWith("SRV")){
@@ -153,16 +170,15 @@ bool stop = false;
             Serial.println(motor);
           }
 
-          if( ( motor <= 51 && motor >= -51 ) || stop || ( distancia_trasera < 10 and distancia_trasera > 0) ){
+          if( ( motor <= 51 && motor >= -51 ) || ( distancia_trasera < 10 and distancia_trasera > 0) ){
             // stop
-            stop = false;
             Serial.println('STOP');
             digitalWrite(E1, LOW);
             digitalWrite(I1, LOW);
             digitalWrite(I2, LOW);
           }
 
-          if( motor > 51){
+          if( motor > 51 and ! stop ){
             analogWrite(E1, motor);
             digitalWrite(I1, HIGH);
             digitalWrite(I2, LOW);
@@ -201,18 +217,6 @@ bool stop = false;
   //  Serial.print(sonar.ping_cm()); // obtener el valor en cm (0 = fuera de rango)
   //  Serial.println("distancia cm");
 
-
-  intSensorResult = analogRead(IR_SENSOR); //Obtener valor
-  fltSensorCalc = (6787.0 / (intSensorResult - 3.0)) - 4.0; //Calculo de la distancia en cm
-
-  Serial.print("dst%");
-  Serial.print(fltSensorCalc); //Imprimir distancia
-  Serial.println(" cm");
-
-  if(fltSensorCalc < 10){
-    stop = true;
-  }
-
   // Lectura del sensor de llama en A2:
   int sensorReading = analogRead(A2);
   int range = map(sensorReading, sensorMin, sensorMax, 0, 3);
@@ -236,3 +240,8 @@ bool stop = false;
   delay(100);
 
 }
+
+
+
+
+
