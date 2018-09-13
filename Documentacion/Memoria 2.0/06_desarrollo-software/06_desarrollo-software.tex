@@ -27,12 +27,17 @@ Por tanto el proyecto queda distribuido en los siguientes subsistemas:\\
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.04]{diagramas/subsistemas.png}
+    \includegraphics[scale=0.03]{diagramas/subsistemas.png}
   \end{center}
   \caption{Subsistemas existentes en el proyecto junto con el modelo de ciclo de vida
 utilizado para su desarrollo.}
   \label{diagrama:subsistemas}
 \end{figure}
+
+
+Donde el subsistema Arduino abarca todas las tarear referentes a la programación del microcontrolador e interconexionado con todos los sensores utilizados y el subsistema Raspberry Pi
+consta de todos aquellos porcesos de captación de datos, procesmiento y envío al servidor de control.\\
+
 
 \subsubsection{Diagrama de casos de uso}
 
@@ -40,7 +45,7 @@ Una vez analizados los componentes hardware principales a utilizar, pasamos al a
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=.5]{diagramas/casos-uso-robot.png}
+    \includegraphics[scale=.4]{diagramas/casos-uso-robot.png}
   \end{center}
   \caption{Diagrama de casos de uso para la interacción con el robot.}
   \label{diagram:caso-uso}
@@ -70,23 +75,34 @@ Donde:\\
 
 \section{Software de control}
  
-Para la programación del robot se ha empleado el lenguaje de programación JavaScript en un entorno de ejecución Node.js. A continuación se describirá aquellos aspectos más importantes
-referentes al código desarrollado para el control del robot.\\
-
-Primeramente se ha realizado la carga de librerías necesarias, entre ellas encontramos:
+Para la programación de la placa Raspberry Pi se ha empleado el lenguaje de programación JavaScript en un entorno de ejecución Node.js para la que se han utilizado las siguientes 
+bibliotecas o módulos:\\
 
 \begin{itemize}
  \item \emph{pigpio}: Módulo para la comunicación y control de los pines GPIO de la Raspberry pi.
  \item \emph{child process}: El módulo child\_process proporciona la capacidad de generar procesos secundarios. Se ha empleado para la captura de vídeo mediante el lanzado de comandos ffmpeg.
  \item \emph{socket.io}: Biblioteca que establece enlaces bidireccionales en tiempo real y en comunicación basada por eventos.
  \item \emph{SerialPort} Módulo para la comunicación serie utilizado para establecer comunicación con la placa Arduino.
- \item \emph{Arduino programming language}  está basado en C++ y aunque la referencia para el lenguaje de programación de Arduino está en \href{http://arduino.cc/en/Reference/HomePage}, también es posible usar comandos estandar de C++ en la programación de Arduino.
+\end{itemize}
+
+
+Por otra parte, para la programación de la placa Arduino se ha utilizado el legunaje de programación \emph{Arduino programming language} el cual está basado en C++ y aunque 
+la referencia para el lenguaje de programación de Arduino se encuentra disponible en \url{http://arduino.cc/en/Reference/HomePage}, también es posible usar comandos estandar de C++ en la
+programación de Arduino. Las bibliotecas Arduino utilizadas han sido las siguientes:\\
+
+\begin{itemize}
+ \item \emph{TonePlayer}: Biblioteca para la activación de los zumbadores.
+ \item \emph{SimpleDHT}: Bibliotecaía para la lectura del sensor de temperatura y humedad del sensor DTH11 encontrándose la descripción en la sección \ref{sec:dth11}.
+ \item \emph{NewPing}: Biblioteca para la lectura de los sensores de ultrasonido HC-SR04 cuya descripción se encuentra en la sección \ref{sec:ultrasonido}.
 \end{itemize}
 
 
 \section{Comunicación interna}
 
-Diagrama de bloques \ref{figura:diagrama-comunicacion-robot} representativo de los diferentes canales de comunicaciones abiertos por SensorRS que irán describíendose en los sucesivos puntos.
+Para la comunicación entre elementos del dispositivo, como hemos estado comentando en diversas ocasiones, disponemos de dos módulos principales interconectados, uno de ellos es 
+la placa Raspberry Pi, y el otro, la placa Arduino. En la presente sección se recogerán aquellos aspectos necesarios y de interés a nivel de programación para la comunicación entre elementos.\\
+
+La Figura \ref{figura:diagrama-comunicacion-robot} corresponde con el diagrama de bloques de los diferentes canales de comunicaciones abiertos por SensorRS.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -96,18 +112,18 @@ Diagrama de bloques \ref{figura:diagrama-comunicacion-robot} representativo de l
   \label{figura:diagrama-comunicacion-robot}
 \end{figure}
 
-
-
 \subsection{Entrada/Salida Raspberry Pi}
 
+
+En la presente sección se describen los diferentes canales de comunicación de entrada/salida utilizados en la Raspberry Pi para la comunicación con la Placa Arduino o el servidor de control.\\
 
 \subsubsection{GPIO}
 
 En esta ocasión no ha resultado necesario utilizar los pines GPIO que dispone la Raspberry Pi puesto que disponemos de los pines de entrada/salida que proporciona
-el microcontrolador Arduino y han resultado suficientes.
+el microcontrolador Arduino y han resultado suficientes.\\
 
-Si, en cambio, para el vehículo que deseemos programar resultan necesarios más pines para la utilización de servos, sensores o cualquier otro elemento utilizando los pines GPIO de
-la placa Raspberry Pi, tan solo debemos inicializarlos e indicar si van a ser pines de entrada o de salida. Si existen dudas al respecto se puede acceder a la documentación de
+Si, en cambio, para el vehículo que deseemos programar resultan necesarios más pines para la utilización de servos, sensores o cualquier otro elemento extra que utilize los pines
+GPIO de la placa Raspberry Pi, tan solo debemos inicializarlos e indicar si van a ser pines de entrada o de salida. Si existen dudas al respecto se puede acceder a la documentación de
 la biblioteca \emph{pigpio} en el siguiente enlace: \url{https://www.npmjs.com/package/pigpio}.\\
 
 Un posible ejemplo sería la inicialización de unos pines para una controladora de motores L298N que en lugar de conectarla a la placa Arduino la hubésemos conectado directamente a 
@@ -126,39 +142,48 @@ la placa Raspberry Pi:\\
 \end{lstlisting}
 
 
-Para la escritura o lectura en los puertos inicializados utilizamos las siguiente sentencias:
+Para la escritura o lectura en los puertos inicializados utilizamos las siguiente sentencias:\\
 
 \begin{lstlisting}[language=JavaScript]
   gpio2.digitalWrite(1);  //Escritura en pin 2
   
   gpio4.on('alert', (level, tick) => {
     console.log('Activo!');
-  });  //Activacion del evento en pin 4
+  });  //Activacion del evento tras activación del pin 4
 \end{lstlisting}
 
 
-\subsubsection{Serie}
+\subsubsection{comunicación Serie}
+\label{subsec:raspberry_serie}
 
+La comunicación serie mediante el uso del puerto USB se ha utilizado para la interconexión entre la placa Raspberry Pi y Arduino con la finalidad de transmitir información referente
+a las mediciones realizadas por los sensores y control de los mismos.\\
 
-Para la utilización del módulo \emph{SerialPort} debemos conocer y especificar el puerto serie asignado a nuestra placa Arduino. Para ello abrimos una terminal en nuestra Raspberry Pi
- con la placa arduino conectada e introducimos el siguiente comando:\\
+Para establecer dicha comunicación hemos utilizado el módulo JavaScript \emph{SerialPort} resultando necesario conocer y especificar el puerto serie asignado a nuestra placa Arduino. 
+Para ello abrimos una terminal en nuestra Raspberry Pi con la placa Arduino previamente conectada e introducimos el siguiente comando:\\
 
 \begin{lstlisting}[language=bash]
 ls /dev | grep ttyACM
 \end{lstlisting}
 
-Una vez conocido el puerto, lo emplearemos para la inicialización de la conexión con el puerto serie.\\
-
-A continuación, se muestra el código implementado para el envío de datos a la placa arduino \empg{serial\_transmission} junto con la inicialización del puerto y carga de las librerías:\\
+Una vez conocido el puerto, en nuestro caso \emph{/dev/ttyACM0}, lo emplearemos para la inicialización de la conexión con el puerto serie.\\
 
 \begin{lstlisting}[language=JavaScript]
+    // Carga del módulo.
+    const SerialPort = require('serialport');
+    const Readline = SerialPort.parsers.Readline;
+    const port = new SerialPort('/dev/ttyACM0', {
+      baudRate: 9600
+    });
+    
+    const parser = new Readline();
+    port.pipe(parser);
+\end{lstlisting}
 
-// Carga del módulo.
-const SerialPort = require('serialport');
-const Readline = SerialPort.parsers.Readline;
-const port = new SerialPort('/dev/ttyACM0', {
-  baudRate: 9600
-});
+
+A continuación, se muestra el código implementado para el envío de datos a la placa Arduino \empg{serial\_transmission} junto con la inicialización del puerto y carga de las librerías:\\
+
+\begin{lstlisting}[language=JavaScript]
 
 function serial_transmission( data, delay ){
   setTimeout(function() {
@@ -173,35 +198,46 @@ function serial_transmission( data, delay ){
 
 }
 \end{lstlisting}
-\\
 
 Como se observa en la función superior la transmisión de información se realiza transmitiendo la cadena deseada caracter por caracter introduciendo finalmente un caracter identificador de final de línea que,
-para nuestro caso, hemos empleado el '\n'.\\
+para nuestro caso, hemos empleado el '\n' indicativo de salto de línea.\\
 
-El envío de cada caracter string irá acompañado de un retraso, \emph{delay}, el cual es introducido por parámetro.\\
+El envío de cada caracter irá acompañado de un retraso, \emph{delay}, el cual es introducido por parámetro a la función.\\
 
+Para la captación por parte de la Raspberry Pi de los parámetros emitidos por la Placa Arduino se dispone de la siguiente función:\\
+
+\begin{lstlisting}[language=JavaScript]
+  const parser = port.pipe(new Readline({ delimiter: '\r\n' }));
+  parser.on('data', function(data){
+    console.log(data);
+    var msg_data = data.split("%");
+    socket.emit(String(msg_data[0]), {msg: String(msg_data[1]) } );
+  });
+
+\end{lstlisting}
+
+Dicha función se encarga de una vez capturado el mensaje, romperlo en dos secciones delimitadas por el caracter '\%' siendo la parte izquierda (almacenada en msg_data[0]) la referente al tipo de dato recibido
+y la derecha (almacenada en msg_data[1]) el propio valor del mensaje. Por ejemplo, para el sensor de temperatura tenemos el identificador \emph{tmp} siendo un posible mensaje
+resultante \emph{tmp\%22 *C}.\\
+
+Finalmente se realiza el envío del dato a través del websocket al servidor de control, donde el nombre del evento se corresponde con el nombre del tipo de dato recibido con la sentencia \emph{Socket.emit}.\\
 
 \subsection{Entrada/Salida Arduino}
 
 \subsubsection{Lectura puerto serie}
 
-A continuación se muestra el código para la recepción del mensaje desde la placa Arduino, mostrándose como ejemplo el código referente al control de motores:\\
+A continuación se muestra una sección del código destinado a la recepción de un mensaje enviado desde la placa Raspberry Pi. El ejemplo mostrado recibe los comando necesarios para
+la activación de los motores:\\
 
 \begin{lstlisting}[language=C++]
 
-String inData = "";
-int servo_x, motor;
-
-#define E1 10  //Enable Pin para motor 1
-#define I1 8  // Control pin 1 para motor 1
-#define I2 9 // Control pin 2 para motor 1
-
-#define E2 13  // Enable Pin para motor 2
-#define D1 12  // Control pin 1 para motor 2
-#define D2 11 // Control pin 2 para motor 2
+#define E1 10  // Enable Pin motor 1
+#define I1 8  // Control pin 1 motor 1
+#define I2 9 // Control pin 2 motor 1
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(9600); //Seteo de la tasa de transferencia
+
   pinMode(E1, OUTPUT);
   pinMode(I1, OUTPUT);
   pinMode(I2, OUTPUT);
@@ -210,7 +246,7 @@ void setup() {
   pinMode(D2, OUTPUT);
   pinMode(D1, OUTPUT);
 
-  // Establece direccion de rotacion inicial
+  // Seteo de direccion de rotación inicial
   digitalWrite(I1, LOW);
   digitalWrite(I2, HIGH);
   digitalWrite(D1, LOW);
@@ -219,53 +255,25 @@ void setup() {
 
 void loop() {
 
+
   while (Serial.available() > 0) {
     char received = Serial.read();
     inData.concat(received);
 
-    if (received == '\n') {  //Caracter final recibido, mensaje capturado
+    if (received == '\n') {
       inData.trim();
 
-      //Direccion
-      if (inData.startsWith("SRV")){ //Comienzo del string identifica el tipo de comando. Accionamiento de la direccion
-          if (sscanf(inData.c_str(), "SRV-%d", &servo_x) == 1) {
-            Serial.println(servo_x);
-          }
-
-          if( servo_x <= 51 && servo_x >= -51){
-            // stop
-            digitalWrite(E2, LOW);
-            digitalWrite(D1, LOW);
-            digitalWrite(D2, LOW);
-          }
-
-          if( servo_x > 51){
-            analogWrite(E2, servo_x);
-            digitalWrite(D1, HIGH);
-            digitalWrite(D2, LOW);
-          }
-
-          if( servo_x < -51){
-            servo_x = servo_x * -1;
-            analogWrite(E2, servo_x);
-            digitalWrite(D1, LOW);
-            digitalWrite(D2, HIGH);
-          }
-
-      }
-
       //MOTOR
-      if (inData.startsWith("MOTOR")){ //Comando accionador del motor
+      if (inData.startsWith("MOTOR")){
           if (sscanf(inData.c_str(), "MOTOR-%d", &motor) == 1) {
             Serial.println(motor);
           }
 
-          if( motor <= 51 && motor >= -51){
-            // stop
+          if( motor <= 51 && motor >= -51 ){
+            Serial.println('STOP');
             digitalWrite(E1, LOW);
             digitalWrite(I1, LOW);
             digitalWrite(I2, LOW);
-
           }
 
           if( motor > 51){
@@ -274,25 +282,36 @@ void loop() {
             digitalWrite(I2, LOW);
           }
 
-          if( motor < -51){
+          if( motor < -51 and ! stop){
             motor = motor * -1;
             analogWrite(E1, motor);
             digitalWrite(I1, LOW);
             digitalWrite(I2, HIGH);
           }
       }
-      inData = ""; //Fin de procesamiento, borrado del mensaje.
+      inData = "";
     }
   }
+ 
+  delay(100);
 
-  delay(30);
 }
-
 \end{lstlisting}
+
+
+Como podemos observar en el código superior, la función consta de un bucle principal que va leyendo los diferentes caracteres que recibe concatenándolos en una variable hasta recibir 
+el caracter utilizado como indicativo de final de mensaje '\textbackslash n'. Por lo que el mensaje quedaría interceptado e interpretado como completo. El código 
+análogo de la Raspberry Pi se localiza en la sección \ref{subsec:raspberry_serie}.\\
+
+Centrándonos nuevamente en el ejemplo superior, se recibe la palabra clave \emph{MOTOR-} seguida del valor de la velocidad de giro, siendo éstas positivas, avance o negativas para el retroceso en un rango
+que abarca entre los -255 a 255 y delimitado por '\textbackslash n'. Por lo que si el mensaje cumple el patrón deseado activará las salidas correspondientes a la acción a realizar.\\
+
+Otro punto a destacar es que los valores de detección del motor se encuentran en el rango situado entre -51 y 51. Ésto es debido a que a velocidades muy pequeñas el motor no aquiere la
+suficiente fuerza como para traccionar el vehículo evitando así consumos inecesarios y ruido ocasionado por los motores.\\
 
 \subsubsection{Escritura en puerto serie}
 
-A continuación se muestra un ejemplo de envío de la lectura de los calores de temperatura y humedad del sensor Dth11 conectado al Arduino para su transferencia a la Placa Raspberry Pi:\\
+A continuación se muestra un ejemplo de envío de los valores de temperatura y humedad del sensor Dth11 conectado al Arduino para su transferencia a la Placa Raspberry Pi:\\
 
 \begin{lstlisting}[language=C++]
 #include <SimpleDHT.h>
@@ -317,9 +336,11 @@ void loop() {
   dht11.read(pinDHT11, &temperature, &humidity, NULL);
 
   if ( (int)temperature != 0 and (int)humidity != 0 ){
+    Serial.print("tmp%");
     Serial.print((int)temperature); Serial.print(" *C, ");
     Serial.print((int)humidity); Serial.println(" H");
   }
+
   
   delay(30);
 
@@ -328,6 +349,8 @@ void loop() {
 
 \end{lstlisting}
 
+Como podemos observar en el código superior, el mensaje transmitido presenta el siguiente formato: tmp\% xx*C xxH, donde \emph{tmp} representa el tipo de dato transmitido actuando el caracter '\%' como 
+delimitador entre el tipo de dato y el dato en sí mismo.\\
 
 
 \section{Comunicación externa}

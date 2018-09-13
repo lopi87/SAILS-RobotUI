@@ -4,7 +4,7 @@
 % fichero fdl-1.3.tex
 
 % Copyright (C) 2018 Manuel López Urbina
-
+\newpage
 
 \chapter{Conceptos básicos}
 \label{chap:conceptos-básicos}
@@ -20,28 +20,22 @@ carcaterísticas y tipos existentes a modo general.\\
 \section{Telemetría}
 \label{def:telemetria}
 
-La telemetría es una tecnología que permite la medición remota de magnitudes físicas y el posterior envío de la información hacia el operador del sistema. La palabra telemetría
-procede de las palabras griegas τῆlε (tele), que quiere decir a distancia, y la palabra μετρον (metron), que quiere decir medida.\\
+La telemetría es una tecnología destinada la medición de magnitudes físicas de manera remota para un posterior envío de la información hacia un sistema que actúa como operador. La palabra telemetría
+procede de las palabras griegas τῆlε (tele), la cual significa distancia, y la palabra μετρον (metron), que indica medida.\\
 
-El envío de información hacia el operador en un sistema de telemetría se realiza típicamente mediante comunicación inalámbrica, aunque también se puede realizar por otros medios 
-(teléfono, redes de computadoras, enlace de fibra óptica, etcétera). Los sistemas de telemetría reciben las instrucciones y los datos necesarios para operar desde el Centro
-de Control.\\
-
-Aunque el término se refiere a mecanismos de transferencia de datos inalámbricos (por ejemplo, usando sistemas de radio, ultrasonidos o infrarrojos), también abarca datos 
-transferidos a otros medios tales como una red telefónica o de computadora, enlace óptico u otras comunicaciones por cable como portadoras de líneas eléctricas. Muchos sistemas 
-modernos de telemetría aprovechan el bajo costo y la ubicuidad de las redes GSM mediante el uso de SMS para recibir y transmitir datos de telemetría.\\
+El envío de información se realiza típicamente mediante comunicación inalámbrica, carcaterística fundamental de estos sistemas aunque también se pueden emplear otros medios 
+como redes de computadoras, fibra óptica, GSM, etc. Los sistemas de telemetría reciben las órdenes o instrucciones desde un sistema externo que hace las 
+funciones de control.\\
 
 \subsection{Aplicaciones}
 
-La telemetría se utiliza en grandes sistemas, tales como naves espaciales, plantas químicas, redes de suministro eléctrico, redes de suministro de gas entre otras empresas de 
-provisión de servicios públicos, debido a que facilita la monitorización automática y el registro de las mediciones, así como el envío de alertas o alarmas al centro de control, 
-con el fin de que el funcionamiento sea seguro y eficiente. Por ejemplo, las agencias espaciales como la NASA, la UK Space Agency, la ESA y otras, utilizan sistemas de telemetría
-y de telecontrol para operar con naves espaciales y satélites.\\
+La telemetría se utiliza tanto en sistemas simples como en sistemas de muy elevada complejidad. Estos sistemas pueden ser de muy diverssa índole como por ejemplo, naves espaciales,
+plantas químicas, redes de suministro (agua, gas, electricidad...) entre muchos otros. Dado que la telemetría posibilita la monitorización automática y el registro de las mediciones
+permiten el envío de alertas o alarmas al centro de control con el fin de que el funcionamiento sea seguro y eficiente. 
 
-La telemetría se utiliza en infinidad de campos, tales como la exploración científica con naves tripuladas o no (submarinos, aviones de reconocimiento y satélites), 
-diversos tipos de competición (por ejemplo, Fórmula 1 y MotoGP), o la operación de modelos matemáticos destinados a dar sustento a la operación de embalses. En las fábricas, 
-oficinas y residencias, el monitoreo del uso de energía de cada sección o equipo y los fenómenos derivados (como la temperatura) en un punto de control por 
-telemetría facilita la coordinación para un uso más eficiente de la energía.\\
+Por ejemplo, las agencias espaciales como la NASA, la UK Space Agency, la ESA y otras, utilizan sistemas de telemetría y de telecontrol para operar con satélites y naves espaciales,
+o en la Fórmula 1 donde se utilizan para la medición de las condiciones de la pista y transmitir al piloto información relevante para bajar sus tiempos por vuelta. En las fábricas donde
+el monitoreo de variables que afecten a la producción permitirá elaborar sistemas de mayor eficiencia energética reduciendo los costes.\\
 
 \section{Sensor}
 \label{sec:sensor-definicion}
@@ -87,15 +81,12 @@ Listado de los diferentes tipos de sensores junto con algunos ejemplos:\\
  \item Encoder
 \end{itemize}
 
-
 \textbf{Desplazamiento y deformación:}
 \begin{itemize}
  \item Gala extensiométrica
  \item Magnetoestrictivos
  \item LVDT
 \end{itemize}
-
-
 
 \textbf{Velocidad lineal y angular:}
 \begin{itemize}
@@ -180,61 +171,77 @@ Listado de los diferentes tipos de sensores junto con algunos ejemplos:\\
 
 Algunas magnitudes pueden calcularse mediante la medición y cálculo de otras, por ejemplo, la velocidad de un móvil puede calcularse a partir de la integración numérica de su 
 aceleración. La masa de un objeto puede conocerse mediante la fuerza gravitatoria que se ejerce sobre él en comparación con la fuerza gravitatoria ejercida sobre un objeto de 
-masa conocida. 
+masa conocida. \\
 
+\subsection{Características de los sensores}
 
-\subsection{Características}
-
-El transductor  ideal  sería  aquel  en  que  la  relación  entre  la  magnitud  de  entrada  y la 
+El transductor  ideal  sería  aquel  en  que  la  relación  entre la magnitud de entrada y la 
 magnitud de salida fuese proporcional y de respuesta instantánea e idéntica para todos los elementos de un mismo tipo. \\
 
-Sin  embargo,  la  respuesta  real  de  los  transductores  nunca  es  del  todo  lineal,  tiene  un 
-rango  limitado  de  validez,  suele  estar  afectada  por  perturbaciones  del  entorno  exterior  y 
-tiene un cierto retardo en la respuesta. \\
+Sin  embargo, la  respuesta  real  de  los  transductores  nunca  es del todo lineal, tiene un rango  limitado  de  validez que  suele  estar afectada por perturbaciones del entorno exterior además de tener un cierto retardo en la respuesta. \\
 
-Las características de los  transductores se pueden agrupar en dos grandes bloques: 
-Características estáticas, que describen la actuación del sensor en régimen permanente o 
-con cambios muy lentos de la variable a medir. 
-Características  dinámicas,  que  describen  el  comportamiento  del  sensor  en  régimen 
-transitorio. \\
+Las características de los transductores se pueden agrupar en dos grandes bloques:\\
+
+\begin{enumerate}
+ \item \textbf{Características estáticas}, que describen la actuación del sensor en régimen permanente o 
+con cambios muy lentos de la variable a medir. \\
+ \item \textbf{Características dinámicas}, que describen el comportamiento del sensor en régimen transitorio.\\
+\end{enumerate}
 
 \subsubsection{Estáticas}
 
 Instrumentos basados en la medición de parámetros estables, es decir, mediciones de valores que no presenten variaciones bruscas en su magnitud de salida.\\
 
-\subsubsubsection{Rango de medida:}
+\textbf{Rango de medida:}\\
 
-El conjunto de valores que puede tomar la señal de entrada comprendidos entre el máximo y el mínimo detectados por el sensor con una tolerancia de error aceptable.\\
+El  conjunto  de  valores  que  puede  tomar  la  señal  de  entrada comprendidos  entre  el  máximo  y  el  mínimo  detectados  por  el  sensor  con  una  tolerancia 
+de error aceptable. \\
 
-\subsubsubsection{Resolución:} 
+\textbf{Resolución:} \\
 
-Menor cambio en la magnitud de entrada que se aprecia en la magnitud de salida.\\
+Indica la capacidad del sensor para discernir entre valores muy próximos de la variable de entrada. Indica que variación de la señal de entrada produce una variación detectable en la señal de salida. \\
 
-\subsubsubsection{Sensibilidad:}
+\textbf{Presición:}\\
 
-Variación de la salida producida por una variación de entrada. Pendiente de la curva de calibración. Cuanto mayor, mejor.
+Define la variación  máxima entre la salida real obtenida y la salida teórica dada como patrón para el sensor. \\
 
-\subsubsubsection{Linealidad:}
+\textbf{Repetitibilidad:}\\
 
-Expresa lo constante que resulta la sensibilidad del sensor
+Indica la  máxima  variación  entre  valores  de  salida  obtenidos al  medir varias veces la misma entrada con el mismo sensor y en idénticas condiciones 
+ambientales.\\
 
+\textbf{Linealidad:}\\
 
+Un  transductor  es  lineal  si  existe  una  constante  de  proporcionalidad  única 
+que relaciona los incrementos de la señal de salida con los respectivos incrementos de la 
+señal de entrada en todo el rango de medida. \\
+
+\textbf{Ruido:}\\
+
+Cualquier perturbación aleatoria del propio sistema de medida que afecta la señal 
+que se quiere medir. \\
 
 \subsubsection{Dinámicas}
 
 Puede ocurrir que la cantidad bajo medición sufra una variación en un momento determinado y por lo tanto es necesario que conozcamos el comportamiento dinámico del instrumento 
 cuando sucedan estas variaciones.\\
 
-Velocidad de respuesta: 
-Capacidad para que la señal de salida siga sin retraso las variaciones de la señal de entrada.
+\textbf{Velocidad de respuesta:}\\
 
-Respuesta frecuencial: 
-Relación entre la sensibilidad y la frecuencia cuando la entrada es una excitación senoidal. Representación mediante un gráfico de Bode.
+Mide la capacidad del sensor para que la señal de salida siga sin 
+retrazo las variaciones de la señal de entrada. \\
 
-Estabilidad: 
-Desviación de salida del sensor al variar ciertos parámetros exteriores distintos del que se pretende medir.
+\textbf{Respuesta en frecuencia:}\\
 
+ mide la capacidad del sensor para seguir las variaciones de la 
+señal  de  entrada  a  medida  que  aumenta  la  frecuencia,  generalmente  los  sensores 
+convencionales presentan una respuesta del tipo pasabajos.\\
 
+\textbf{Estabilidad:}\\
+
+Indica  la  desviación  en  la  salida  del  sensor  con  respecto  al  valor  teórico 
+dado,  al  variar  parámetros  exteriores  distintos  al  que  se  quiere  medir  (condiciones 
+ambientales, alimentación, etc.). \\
 
 
 \section{Transmisión y comunicación}

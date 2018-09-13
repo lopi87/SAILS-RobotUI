@@ -367,8 +367,6 @@ Para la fijación de los diferentes módulos al chasis se ha empleado torniller�
 La siguiente imagen \ref{vista-conexiones} muestra una visión general de la disposición de todos los elementos que conforman el vehículo junto con sus conexiones:\\
 
 
-**************** HACER UNA FOTO DONDE SE APRECIE TODO MEJOR POR PARTES ***************************
-
 \begin{figure}[H]
   \begin{center}
    \includegraphics[scale=0.2]{imagenes/robot/conexionado_general.jpeg}
@@ -447,8 +445,7 @@ En la presente sección recogemos una descripción del funcionamiento y conexion
 
 Durante el movimiento del robot, es necesario la utilización de sensores de proximidad para
 evitar la colisión con objetos. En este proyecto, los sensores empleados son dos sensores
-ultrasonidos del modelo HC-SR04. Las características de dichos sensores se adjuntan en la
-referencia \ref{}.
+ultrasonidos del modelo HC-SR04.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -625,11 +622,12 @@ En el presente proyecto nos hemos decantado por utilizar la detección de gas me
 
 \subsubsection{ Calibración del punto de detección de gas}
 
-Nuestro módulo posee un potenciómetro (un componente a veces azul, que posee una ranura como para ajustar con un destornillador pequeño) que nos permite calibrar el punto en donde queremos que reporte haber detectado gas. La calibración nos permite decidir que tan sensible será el módulo al gas en cuestión.
+El sensor dispone de un potenciómetro (un componente que posee una ranura para su ajuste con un pequeño destornillador) que nos permite calibrar el umbral donde queremos que
+notifique haber detectado gas. La calibración nos permite decidir el nivel de sensibilidad del módulo a la detección de gases.\\
 
-La manera de calibrarlo es mientras está conectado, para ello simplemente giramos el potenciómetro hacia la izquierda hasta que una luz, verde en nuesto caso, se active, siendo
-el testigo de detección de gas. El ajuste de la sensibilidad dependerá del resultado deseado, si se desea un mayor graddo de sensibilidad, debemos girar hacia la derecha
-hasta que se apague el led de testigo. Sin embargo si se quiere un mayor grado de tolerancia, continue girando hacia la derecha hasta el grado deseado.\\
+La manera de calibrarlo es mientras está conectado, para ello simplemente giramos el potenciómetro hacia la izquierda hasta que un led se active, siendo
+el testigo indicativo de detección de gas. El ajuste de la sensibilidad dependerá del resultado deseado, si se desea un mayor grado de sensibilidad, debemos girar hacia la derecha
+hasta que se apague el led de testigo. Sin embargo si se quiere un mayor grado de tolerancia, se deberá girar hacia la derecha hasta el nivel deseado.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -655,10 +653,10 @@ Conexionado del sensor MQ-2 en su modo digital. Siendo \textbf{D0} pin digital, 
 \subsection{ Sensor de sonido }
 %https://www.luisllamas.es/detectar-sonido-con-arduino-y-microfono-ky-038/
 
-Para la detección de sonidos hemos empleado un micrófono el cual actúa como un transductor que convierte las ondas sonoras en señales eléctricas.\\
+Para la detección de sonidos hemos empleado un micrófono el cual actúa como un transductor convirtiendo las ondas sonoras en señales eléctricas.\\
 
-La salida producida por un micrófono es una señal eléctrica analógica que representa el sonido recibido. Sin embargo, en general, esta señal demasiado baja para ser medida
-y tiene que ser amplificada.\\
+La salida producida por un micrófono es una señal eléctrica analógica que representa el sonido recibido. Sin embargo, esta señal suele ser demasiado baja para ser medida
+siendo necesario amplificarla.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -668,7 +666,7 @@ y tiene que ser amplificada.\\
   \label{figura:micro_amplificacion}
 \end{figure}
 
-La placa utilizada, KY-038 incorpora un micrófono junto con un comparador LM393, que permite obtener la lectura tanto como un valor analógico como de forma digital.\\
+La placa utilizada, KY-038 incorpora un micrófono junto con un comparador LM393, el cual permite obtener la lectura tanto analógica como digitalmente.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -862,3 +860,18 @@ En la siguiente tabla se recoge un resumen de las especificaciones del sensor:\\
   \end{center}
   \caption{Resumen de las especificaciones del GP2D12.}
 \end{table}
+
+\subsubsection{Conexionado}
+
+El esquema eléctrico es muy simple. Debemos alimentar el módulo conectando GND y
+VCC a los pines correspondientes de Arduino y salida D0 a una de las entradas digitales
+de Arduino.\\
+
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.6]{imagenes/sharp_conexionado.png}
+  \end{center}
+  \caption{Conexionado del GP2D12.}
+  \label{figura:pines_sharp}
+\end{figure}
+

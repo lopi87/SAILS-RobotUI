@@ -5,18 +5,21 @@
 
 % Copyright (C) 2018 Manuel López Urbina
 
+\newpage
+
 \chapter[Requisitos]{Especificación y análisis de requisitos}
 \label{chap:requisitos}
 
-En el presente capítulo se recopilan las diferentes carcaterísticas base de obligado cumplimiento por el producto final desarrollado. Estas características han definidas en una
-etapa incial del presente proyecto. Debido a que el proyecto implica un desarrollo tanto a nivel software como hardware se realizó una recopilación de requsitos 
-abarcando ambas áreas.\\
+En el presente capítulo se recopilan las diferentes carcaterísticas base de obligado cumplimiento por el producto final a desarrollar. Siendo estas características definidas en una
+etapa incial del presente proyecto. \\
+
+Debido a que el proyecto implica un desarrollo tanto a nivel software como hardware se realizó una recopilación de requisitos abarcando ambas áreas por separado.\\
 
 \section{Requerimientos hardware}
 \label{sec:requerimientos-hardware}
 
 Se ha optado por la construcción de un robot móvil dotado de un chasis de 4 ruedas donde las dos ruedas traseras serán accionadas por un motor mientras que las dos ruedas delanteras
-harán de directrices.
+harán de directrices.\\
 
 El motor porpulsor funcionará a corriente continua de manera que en función de la polarización de los terminales haga girar las ruedas en una dirección o la contraria (marcha adelante o atrás), mientras que 
 la dirección será accionada por un servomotor.\\
@@ -29,13 +32,12 @@ pequeñas dimensiones de alta definición.\\
 
 Por otra parte, todo robot necesita de una unidad de central de procesamiento donde se localizará el programa de control. Este programa tendrá la función de interpretar las diferentes señales recibidas,
 control de sensores y dispositivos conectados. Además, esta placa es la encargada de distribuir la alimentación por los diferentes componentes hardware que lo necesiten y recibir las señales de
-los sensores y enviarla a los motores. Utilizando para ello la placa Raspberry Pi modelo B cuya descripción se encuentra en la sección \ref{sec:raspberry}.\\
+los sensores y enviarla a los motores.\\
 
-Este modelo de placa dispone de  una serie de pines denominados GPIO (General Purpose Input/Output) que son, como su propio nombre indica, un sistema de E/S (Entrada/Salida) de propósito general,
-es decir, una serie de conexiones que se pueden usar como entradas o salidas para usos múltiples. Estos pines están incluidos en todos los modelos de Raspberry Pi, con la
-finalidad de ser utilizados en diferentes proyectos de una manera similar a la que se haría con Arduino\footnote{Arduino es una plataforma de prototipos electrónica de código abierto (open-source) 
-basada en hardware y software flexibles y fáciles de usar.}. Pero dada su limitación en cuanto al número reducido de pines de entrada-salida, se incorporará además una Placa Arudino Mega estableciendo 
-un flujo de datos entre ambas mediante el uso del puerto serie.\\
+Necesidad de poder acoplar multitud de sensores para medicíon de parámetros ambientales resultando necesario incorporar alguna placa dotada de un microcontrolador de fácil programación como podría ser
+algunas de las placas proporcionadas por Arduino.\\
+
+Tanto la placa que incorpore el microcontrolador y sus sensores como la unidad central de procesamiento deben disponer de un canal de comunicación para el intercambio de datos entre las mismas.\\
 
 
 \subsection{Análisis y selección de componentes electŕonicos}
@@ -62,8 +64,11 @@ como una Arduino Mega aprovechando al máximo el potencial que ofrece cada una d
 
 \subsubsection{Ventajas y desventajas de Raspberry Pi y de Arduino}
 
-El punto fuerte de Arduino no es su potencia de cálculo, ni la memoria de la placa, ni la frecuencia del procesador. Entonces, ¿Por qué debemos considerar dichas placas para
-utilizarlas en nuestros proyectos? El punto fuerte de Arduino está en la facilidad de conectarse con el mundo, gracias a las entradas tanto analógicas como digitales con las que
+
+%REFERENCIA https://www.xataka.com/makers/raspberry-pi-frente-a-arduino-quien-se-adapta-mejor-a-mi-proyecto-maker
+
+Sabemos que Arduino no destaca precisamente por su potencia de cálculo, ni la memoria de la placa, ni la frecuencia del procesador. Entonces, ¿Por qué Arduino es masivamente utilizado
+en multitud de proyectos? Arduino destaca por su la facilidad de conectarse con el mundo, gracias a las entradas tanto analógicas como digitales con las que
 cuenta y de lo fácil que resulta activar o desactivar una de las entradas/salidas gracias a su software.
 
 Un Arduino Mega dispone 54 pines de entrada salida digital, de los cuales quince pueden ser utilizados como salidas PWM y controlar con ellos la velocidad de motores, por 
@@ -114,20 +119,6 @@ Otro requerimiento software es el de la posibilidad de integrar la lectura de va
 desde un servidor externo. Además de captación y transmisión de vídeo en tiempo real.\\
 
 Todas estas especificaciones quedan resueltas mediante la utilización de la aplicación web RobotUI, la cual se ha decidido utilizar como parte software del presente proyecto.\\
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Para el caso que nos concierne en el proyecto, dentro del marco de investigación que define la totalidad de la infraestructura, la funcionalidad principal del mismo a nivel 
 software será:\\

@@ -367,8 +367,6 @@ Para la fijación de los diferentes módulos al chasis se ha empleado torniller�
 La siguiente imagen \ref{vista-conexiones} muestra una visión general de la disposición de todos los elementos que conforman el vehículo junto con sus conexiones:\\
 
 
-**************** HACER UNA FOTO DONDE SE APRECIE TODO MEJOR POR PARTES ***************************
-
 \begin{figure}[H]
   \begin{center}
    \includegraphics[scale=0.2]{imagenes/robot/conexionado_general.jpeg}
@@ -444,11 +442,11 @@ Junto con los leds de iluminación también se ha conectado un puntero láser ac
 En la presente sección recogemos una descripción del funcionamiento y conexionado de los sensores más característicos utilizados en el proyecto.\\
 
 \subsection{Sensores ultrasonidos}
+\label{sec:ultrasonido}
 
 Durante el movimiento del robot, es necesario la utilización de sensores de proximidad para
 evitar la colisión con objetos. En este proyecto, los sensores empleados son dos sensores
-ultrasonidos del modelo HC-SR04. Las características de dichos sensores se adjuntan en la
-referencia \ref{}.
+ultrasonidos del modelo HC-SR04.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -531,6 +529,7 @@ El sensor HC-SR04 dispone de 4 pines, la toma de tierra \textbf{GND}, pin de ech
 
 
 \subsection{Sensor de temperatura DHT11}
+\label{sec:dth11}
 
 % https://programarfacil.com/blog/arduino-blog/sensor-dht11-temperatura-humedad-arduino/
 
@@ -625,11 +624,12 @@ En el presente proyecto nos hemos decantado por utilizar la detección de gas me
 
 \subsubsection{ Calibración del punto de detección de gas}
 
-Nuestro módulo posee un potenciómetro (un componente a veces azul, que posee una ranura como para ajustar con un destornillador pequeño) que nos permite calibrar el punto en donde queremos que reporte haber detectado gas. La calibración nos permite decidir que tan sensible será el módulo al gas en cuestión.
+El sensor dispone de un potenciómetro (un componente que posee una ranura para su ajuste con un pequeño destornillador) que nos permite calibrar el umbral donde queremos que
+notifique haber detectado gas. La calibración nos permite decidir el nivel de sensibilidad del módulo a la detección de gases.\\
 
-La manera de calibrarlo es mientras está conectado, para ello simplemente giramos el potenciómetro hacia la izquierda hasta que una luz, verde en nuesto caso, se active, siendo
-el testigo de detección de gas. El ajuste de la sensibilidad dependerá del resultado deseado, si se desea un mayor graddo de sensibilidad, debemos girar hacia la derecha
-hasta que se apague el led de testigo. Sin embargo si se quiere un mayor grado de tolerancia, continue girando hacia la derecha hasta el grado deseado.\\
+La manera de calibrarlo es mientras está conectado, para ello simplemente giramos el potenciómetro hacia la izquierda hasta que un led se active, siendo
+el testigo indicativo de detección de gas. El ajuste de la sensibilidad dependerá del resultado deseado, si se desea un mayor grado de sensibilidad, debemos girar hacia la derecha
+hasta que se apague el led de testigo. Sin embargo si se quiere un mayor grado de tolerancia, se deberá girar hacia la derecha hasta el nivel deseado.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -655,10 +655,10 @@ Conexionado del sensor MQ-2 en su modo digital. Siendo \textbf{D0} pin digital, 
 \subsection{ Sensor de sonido }
 %https://www.luisllamas.es/detectar-sonido-con-arduino-y-microfono-ky-038/
 
-Para la detección de sonidos hemos empleado un micrófono el cual actúa como un transductor que convierte las ondas sonoras en señales eléctricas.\\
+Para la detección de sonidos hemos empleado un micrófono el cual actúa como un transductor convirtiendo las ondas sonoras en señales eléctricas.\\
 
-La salida producida por un micrófono es una señal eléctrica analógica que representa el sonido recibido. Sin embargo, en general, esta señal demasiado baja para ser medida
-y tiene que ser amplificada.\\
+La salida producida por un micrófono es una señal eléctrica analógica que representa el sonido recibido. Sin embargo, esta señal suele ser demasiado baja para ser medida
+siendo necesario amplificarla.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -668,7 +668,7 @@ y tiene que ser amplificada.\\
   \label{figura:micro_amplificacion}
 \end{figure}
 
-La placa utilizada, KY-038 incorpora un micrófono junto con un comparador LM393, que permite obtener la lectura tanto como un valor analógico como de forma digital.\\
+La placa utilizada, KY-038 incorpora un micrófono junto con un comparador LM393, el cual permite obtener la lectura tanto analógica como digitalmente.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -678,10 +678,9 @@ La placa utilizada, KY-038 incorpora un micrófono junto con un comparador LM393
   \label{figura:micro_amplificacion}
 \end{figure}
 
-El pinout de este sensor es muy simple. Cuenta con cuatro terminales, los cuales estan serigrafiados en la placa. Estos son: \textbf{AO}, Analog Output, \textbf{GND}, Ground,
-\textbf{VCC}, Alimentación de 3.3V a 12V y \textbf{DO}, Digital Output.\\
+Los pines de los que dispone el sensor son: \textbf{AO}, Analog Output, \textbf{GND}, Ground, \textbf{VCC}, Alimentación de 3.3V a 12V y \textbf{DO}, Digital Output.\\
 
-Lo más característico de este sensor, es que la señal que nos entrega es digital y analógica, lo cual nos permite decidir cual utilizar segun nuestras necesidades.
+Lo más característico de este sensor es que la señal que nos entrega es digital y analógica, lo cual nos permite decidir cual utilizar segun nuestras necesidades.
 Si necesitamos saber el valor del sensor, podremos utilizar directamente la salida analógica para conseguir los datos crudos. Sino, podemos utilizar la salida digital, la cual
 se activa o se desactiva según si el sensor llega a medir la intensidad del sonido que le configuremos, mediante la definición de la sensibilidad del sensor, de igual modo al sensor de detección de gases. \\
 
@@ -739,11 +738,11 @@ Conexionado del fotoresistor a la placa Arduino:
 Un sensor de llama óptico es un dispositivo que permite detectar la existencia de combustión por la luz emitida por la misma. Esta luz puede ser detectada por un sensor óptico, 
 y ser capturado por las entradas digitales y las entradas analógicas de Arduino.\\
 
-La llama es un fenómeno de emisión de luz asociado a los procesos de combustión. La combustión es un proceso que desprende grandes cantidades de energía en forma de calor. Durante 
-la reacción se generan compuestos intermedios que liberan parte de su energía mediante la emisión de luz.\\
+La llama es un fenómeno de emisión de luz asociado a los procesos de combustión siendo ésta un proceso que desprende grandes cantidades de energía en forma de calor generándose
+compuestos intermedios que liberan parte de su energía mediante la emisión de luz.\\
 
-El espectro de emisión de llama depende de los elementos que intervienen en la reacción. En el caso de combustión de productos con carbón en presencia del oxígeno tenemos dos picos característicos en ultravioleta en longitudes de onda de 185nm-260nm
-y en infrarrojo en longitudes de onda 4400-4600nm.\\
+El espectro de emisión de la llama generada depende de los elementos que intervienen en la reacción. En el caso de combustión de productos con carbón en presencia del oxígeno 
+tenemos dos picos característicos en ultravioleta en longitudes de onda de 185nm-260nm y en infrarrojo en longitudes de onda 4400-4600nm.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -763,10 +762,10 @@ Estos dispositivos se ajustan a las longitudes de onda características de la ap
   \label{figura:sensor_mq_2_potenciometro}
 \end{figure}
 
-Estos sensores constan únicamente de un sensor infrarrojo ajustado a 760-1100 nm. El ángulo de detección es de 60º, y la distancia de detección entre 0.40 m a 0.80.
+Estos sensores constan únicamente de un sensor infrarrojo ajustado al rango de los 760-1100 nm siendo su ángulo de detección de 60º, y la distancia de detección entre 0.40 m a 0.80.\\
 
 Este tipo de sensores de llama infrarrojos suelen incorporar una placa de medición estándar con el comparador LM393, que permite obtener la lectura tanto como un valor analógico
-como de forma digital cuando se supera un cierto umbral, que se regula a través de un potenciómetro ubicado en la placa.
+como de forma digital cuando se supera un cierto umbral, que se regula a través de un potenciómetro ubicado en la placa.\\
 
  \begin{figure}[H]
   \begin{center}
@@ -797,11 +796,8 @@ entradas digitales de Arduino.\\
 
 \subsection{Sensor de proximidad}
 
-La  familia  de  sensores  Sharp  GP2Dxx  es una de las más utilizadas tanto en lo que
-viene a denominarse rob ́otica m ́ovil casera como en el  ́ambito de investigacíon debido
-principalmente  a  su  facilidad de  integraci ́on  y su  bajo  coste  (unos 15  Euros). En la
-Figura \ref{figura:sensor_sharp} puede verse una imagen de un GP2D12.\\
-
+La familia de los sensores Sharp GP2Dxx son una gama de sensores muy utilizados tanto en lo que viene a denominarse rob́otica ḿovil casera como en el ́ambito de investigación debido
+principalmente a su facilidad de integracíon y reducido coste (unos 15  Euros). En la Figura \ref{figura:sensor_sharp} puede verse una imagen de un GP2D12.\\
 
  \begin{figure}[H]
   \begin{center}
@@ -811,11 +807,8 @@ Figura \ref{figura:sensor_sharp} puede verse una imagen de un GP2D12.\\
   \label{figura:sensor_sharp}
 \end{figure}
 
-Los sensores GP2D12 proporcionan una salida analógica entre 0 y 3 voltios dependiendo de la distancia a la que se encuentre el objeto. Dicha salida anaĺogica no es
-lineal sino que sigue una curva, la cual se muestra en la figura \ref{figura:curva_sharp}. En aplicaciones de rob́otica ḿovil es coḿun la utilización de un conversor analogico-digital con 
-el que adaptar esa tensión para su tratamiento digital. Cuando además interese conocer la medida con exactitud y no un valor aproximado de la cercan ́ıa de los objetos, se debe
-realizar una calibraci ́on del dispositivo que permita dar una magnitud de la distancia junto con una medida del error cometido.
-
+Los sensores GP2D12 proporcionan una salida analógica entre 0 y 3 voltios dependiendo de la distancia a la que se encuentre el objeto. Dicha salida analógica no es
+lineal sino que sigue una curva, la cual se muestra en la figura \ref{figura:curva_sharp}.
 
  \begin{figure}[H]
   \begin{center}
@@ -830,10 +823,9 @@ es un led infrarrojo que emite un haz que ser ́a rebotado por el objeto y poste
 Sensing Device, Dispositivo de Percepción de Posición)  y  puede  entenderse  como  una  lente situada sobre un array de células sensibles a la luz infrarroja. Dependiendo del 
 ángulo de incidencia del haz rebotado en la lente, se activa una u otra célula del array permitiendo estimar la distancia a la que se encuentra el objeto.\\
 
-El conexionado del GP2D12 con un microcontrolador requirie tan solo de una entrada del conversor analógico-digital a la que se conectará el
-pin de salida del sensor (el de más a la izquierda visto de frente según se muestra en la figura \ref{figura:pines_sharp}). Los otros dos pines corresponden, respectivamente, con \textbf{GND} y con
+El conexionado del GP2D12 con un microcontrolador requirie de una entrada del conversor analógico-digital a la que se conectará el pin de salida del sensor 
+(el de más a la izquierda visto de frente según se muestra en la figura \ref{figura:pines_sharp}). Los otros dos pines corresponden, respectivamente, con \textbf{GND} y con
 \textbf{Vcc}, la tensión de alimentación, que deberá ser de 5 voltios.\\
-
 
  \begin{figure}[H]
   \begin{center}
