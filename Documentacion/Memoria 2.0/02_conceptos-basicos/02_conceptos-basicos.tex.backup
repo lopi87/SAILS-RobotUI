@@ -31,7 +31,7 @@ funciones de control.\\
 
 La telemetría se utiliza tanto en sistemas simples como en sistemas de muy elevada complejidad. Estos sistemas pueden ser de muy diverssa índole como por ejemplo, naves espaciales,
 plantas químicas, redes de suministro (agua, gas, electricidad...) entre muchos otros. Dado que la telemetría posibilita la monitorización automática y el registro de las mediciones
-permiten el envío de alertas o alarmas al centro de control con el fin de que el funcionamiento sea seguro y eficiente. 
+permiten el envío de alertas o alarmas al centro de control con el fin de que el funcionamiento sea seguro y eficiente.\\
 
 Por ejemplo, las agencias espaciales como la NASA, la UK Space Agency, la ESA y otras, utilizan sistemas de telemetría y de telecontrol para operar con satélites y naves espaciales,
 o en la Fórmula 1 donde se utilizan para la medición de las condiciones de la pista y transmitir al piloto información relevante para bajar sus tiempos por vuelta. En las fábricas donde
@@ -324,15 +324,16 @@ Los sockets dentro del modelo TCP/IP se pueden ver como una interfaz con la capa
 \section{Streaming}
 \label{sec:def-streaming}
 
-La retransmisión (en inglés streaming, también denominado transmisión) es la distribución digital de contenido multimedia a través de una red de computadoras, 
-de manera que el usuario utiliza el producto a la vez que se es descargado. La palabra retransmisión se refiere a una corriente continua que fluye sin interrupción, habitualmente audio o vídeo, aplicándose la difusión 
-de vídeo en el presente proyecto. \\
+La retransmisión, streaming o también denominado transmisión, es la distribución digital de contenido multimedia a través de una red de computadoras, 
+de manera que el usuario \emph{``consume''} el producto medida que es descargado. La palabra retransmisión se refiere a una corriente continua la cual fluye sin interrupción,
+habitualmente audio o vídeo.\\
 
 Este tipo de tecnología funciona mediante un búfer de datos que va almacenando el flujo de descarga en la estación del usuario para inmediatamente mostrarle el material descargado. Esto se contrapone al mecanismo de
 descarga de archivos, que requiere que el usuario descargue los archivos por completo para poder acceder al contenido.\\
 
-La retransmisión requiere de una conexión por lo menos de igual ancho de banda que la tasa de transmisión del servicio. La retransmisión de vídeo por Internet se popularizó a fines de la década de 2000, 
-cuando la contratación del suficiente ancho de banda para utilizar estos servicios en el hogar se hizo lo suficientemente barato.
+Como requisito fundamental, la retransmisión requiere de una conexión por lo menos de igual ancho de banda que la tasa de transmisión del servicio. Los servicios de streaming en 
+Internet se popularizaron entre los años 2009 y 2010, cuando las compañías de telecomunicaciones pudieron ofrecer del suficiente ancho de banda para utilizar estos servicios
+en el hogar a un coste relativamente asequible.
 
 \section{Comunicación serie}
 

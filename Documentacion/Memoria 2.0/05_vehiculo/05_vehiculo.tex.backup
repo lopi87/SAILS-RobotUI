@@ -12,7 +12,7 @@
 \label{chap:montaje}
 
 
-En el presente capítulo se recogen todos los procedimientos para la construcción del vehículo robóticos, desde el montaje a la interconexión de cada unos de los elementos.\\
+En el presente capítulo se recogen todos los procedimientos para la construcción del vehículo robótico, desde el montaje a la interconexión de cada unos de sus elementos.\\
 
 \section{Montaje}
 
@@ -21,31 +21,32 @@ sus diferentes interconexiones.\\
 
 \subsection{Chasis}
 
-El chasis consiste en una estructura interna que sostiene, aporta rigidez y da forma a un vehículo objeto en su construcción y uso. Es análogo al esqueleto de un animal.
-Para el caso que nos compete, consta de un armazón​ que integra entre sí y sujeta tanto los componentes mecánicos, como el grupo motopropulsor y la suspensión de las ruedas,
-motor incluyendo la carrocería además de los diferentes componentes electrónicos.​ Este robot debe ser capaz de acceder a y desenvolverse por zonas de difícil acceso, por ello de que dispone de unas redas con tacos de considerable tamaño 
-acompañadasy suspensiones. Este chasis debe  facilitar el  desplazamiento, mantenerlo en equilibrio en todo momento y que le permita cambiar de dirección fácilmente.
+El chasis consiste en una estructura interna que sostiene, aporta rigidez y da forma a un vehículo. Es análogo al esqueleto de un animal.
+Para el caso que nos compete, el vehículo desarrollado consta de un armazón​ que sirve de sujeción de los componentes mecánicos, como el sistema de propulsión y suspensión de las
+ruedas, incluyendo la carrocería además de los diferentes componentes electrónicos.​ Este robot debe ser capaz de acceder a y desenvolverse por zonas de difícil acceso, por ello de
+que debe disponer de un tamaño compacto que facilite el desplazamiento, lo mantenega en equilibrio en todo momento y que le permita cambiar de dirección fácilmente.\\
 
 \subsection{Tracción y dirección}
 
 Para generar el movimiento, se necesita algún dispositivo que proporcione una fuerza motriz encargada de desplazar el chasis y dotar de la capacidad de movimiento al robot.
 Se ha optado por la incorporación de ruedas para desplazarse, debido a su mayor agilidad y fácil manejo.\\
 
-Estos equipos suelen utilizar baterías para alimentar los motores y electrónica, y por tanto, la fuente de alimentación suele ser corriente continua. Utilizando este tipo de fuente de alimentación, 
-el tipo de dispositivo a utilizar suele variar respecto de las necesidades de cada equipo, en la sección \ref{sub:alimentación} se encuentra información referente a las mismas.
+Estos equipos suelen utilizar baterías para alimentar los motores y electrónica, y por tanto, la fuente de alimentación suele ser corriente continua. Utilizando este tipo de
+fuente de alimentación, el tipo de dispositivo a utilizar suele variar respecto de las necesidades de cada equipo, en la sección \ref{sub:alimentación} se encuentra información7
+referente a las mismas.\\
 
 \subsubsection{Motores de corriente continua}
 
 El motor de corriente continua es un dispositivo eléctrico que transforma la energía eléctrica en energía mecánica, de manera que genera un movimiento rotatorio gracias a la  
-acción producida por el campo magnético. Este tipo de motores son también denominados como motor de corriente directa, motor CC o motor DC.\\
+acción producida por el campo magnético. Este tipo de motores son también denominados como motores de corriente directa, motor CC o motor DC.\\
 
 En caso de nuestro vehículo dispondrá de un motor para proporcionar movimiento a las ruedas traseras y otro de menor potencia para dotar de movimiento lateral a las delanteras 
-a modo de dirección.
+a modo de dirección.\\
 
 \subsubsection{Servomotores}
 
-Los servomotores son dispositivos capaces de llevar el motor a posiciones angulares específicas al enviar una señal codificada. Mientras esta señal exista en la entrada, 
-el  motor  mantendrá  la  posición  angular  del  engranaje. Si esta señal cambia, la posición cambia, y si desaparece, el motor deja de mantener la posición. Dentro de un servomotor hay un motor de corriente
+Los servomotores son dispositivos capaces de llevar el motor a posiciones angulares específicas al enviar una señal codificada manteniendo la  posición  angular  del  engranaje
+mientras la señal persista. Si esta señal cambia, la posición cambia, y si desaparece, el motor deja de mantener la posición. Dentro de un servomotor hay un motor de corriente
 continua, una caja reductora, un potenciómetro y una electrónica de control.\\
 
 \begin{figure}[H]
@@ -56,16 +57,11 @@ continua, una caja reductora, un potenciómetro y una electrónica de control.\\
   \label{figure:servomotor:}
 \end{figure}
 
-Un servomotor está conformado por un motor, un circuito de control, un potenciómetro y un conjunto de engranajes. También potencia proporcional para cargas mecánicas. Un servo,
-por consiguiente, tiene un consumo de energía reducido.\\
+Un servomotor se compone de un motor, un circuito de control, un potenciómetro y un conjunto de engranajes. Los cuales se caracterizan por un consumo energético muy reducido.\\
 
-La corriente que requiere depende del tamaño del servo. Normalmente el fabricante indica cuál es la corriente que consume. La corriente depende principalmente del par, y puede
-exceder un amperio si el servo está enclavado.\\
-
-En otras palabras, un servomotor es un motor especial al que se ha añadido un sistema de control (tarjeta electrónica), un potenciómetro y un conjunto de engranajes. Con 
-anterioridad los servomotores no permitían que el motor girara 360 grados, solo aproximadamente 180; sin embargo, hoy en día existen servomotores en los que puede ser controlada
-su posición y velocidad en los 360 grados. Los servomotores son comúnmente usados en modelismo como aviones, barcos, helicópteros y trenes para controlar de manera eficaz los sistemas
-motores y los de dirección.\\
+Podemos definir un servomotor como un motor al que se le ha añadido un sistema de control, un potenciómetro y un conjunto de engranajes. Con anterioridad los servomotores no
+permitían que el motor girara 360 grados, solo aproximadamente 180; sin embargo, hoy en día existen servomotores en los que puede ser controlada
+su posición y velocidad en los 360 grados. Los servomotores son comúnmente usados en modelismo para controlar y dotar de movimiento multitud de elementos.\\
 
 En cuanto al conexionado, los servomotores poseen tres cables de conexión externa, alimentación, tierra y control. Mediante éste último indicamos el ángulo al cuál queremos llegar. 
 Un servomotor normal tiene un movimiento angular de 0 a 180º, caso del utilizado en este proyecto. El ángulo está determinado por la duración de un pulso. El servomotor 
@@ -112,24 +108,25 @@ posibles sobrecargas y fallas que puedan aparecer.
 Para ello empleamos el L298N, un controlador (driver) de motores integrado en un módulo, el cual nos permite encender y controlar dos motores de corriente continua desde una Raspberry Pi, Arduino o
 cualquier placa similiar, variando tanto la dirección como la velocidad de giro.\\
 
-La corriente máxima que el L298N puede suministrar a los motores es, en teoría, 2A por salida (hasta 3A de pico) y una tensión de alimentación de 3V a 35V. Sin embargo, el L298N tiene una 
-eficiencia baja. La electrónica supone una caída de tensión de unos 3V, es decir, la tensión que recibe el motor es unos 3V inferior a la tensión de alimentación.\\
+La corriente máxima que el L298N es capaz de suministrar a los motores es, en teoría, 2A por salida, permitiendo alcanzar hasta los 3A de pico, y una tensión de alimentación de 3V
+a 35V. Sin embargo, el L298N tiene una eficiencia energética extremadamente baja. La electrónica supone una caída de tensión de unos 3V, es decir, la tensión que recibe el motor
+es unos 3V inferior a la tensión de alimentación, todo ello unido a la gran cantidad de calor que disipa el driver.\\
 
-Estas pérdidas se disipan en forma de calor lo que se traduce en que, a efectos prácticos, es difícil que podamos obtener más de 0.8-1A por fase sin exceder el rango de temperatura de funcionamiento.\\
+Estas pérdidas se traducen en que, a efectos prácticos, es difícil que podamos obtener más de 0.8-1A por fase sin exceder el rango de temperatura de funcionamiento.\\
 
-El L298N incorpora protecciones contra efectos que pueden producirse al manejar motores de corriente continua. Dispone de protecciones contra sobre intensidad, sobre temperatura, y diodos de protección
-contra corrientes inducidas.\\
+El L298N tiene la ventaja de que incorpora protecciones contra efectos que pueden producirse al manejar motores de corriente continua. Dispone de protecciones contra situaciones
+de elevada intensidad, temperatura, y diodos de protección contra polaridades incorrectas.\\
 
-El módulo seleccionado, el cual incorpora el controlador L298N, cuenta con todos los componentes necesarios para funcionar sin necesidad de elementos adicionales, entre ellos diodos de protección
-y un regulador \textbf{LM7805} que suministra 5V a la parte lógica del integrado L298N. Además cuenta con jumpers de selección para habilitar cada una de las salidas del módulo
-(A y B). La \textbf{salida A} esta conformada por \textbf{OUT1} y \textbf{OUT2} y la \textbf{salida B} por \textbf{OUT3} y \textbf{OUT4}. Los pines de habilitación 
+Dicho módulo cuenta con todos los componentes necesarios para funcionar sin necesidad de elementos adicionales entre los que incluye un regulador \textbf{LM7805} que suministra 5V
+a la parte lógica del integrado L298N. Además cuenta con jumpers de selección para habilitar cada una de las salidas del módulo (A y B). La \textbf{salida A} esta conformada
+por \textbf{OUT1} y \textbf{OUT2} y la \textbf{salida B} por \textbf{OUT3} y \textbf{OUT4}. Los pines de habilitación 
 son \textbf{ENA} y \textbf{ENB} respectivamente.\\
 
 Los pines \textbf{IN1}, \textbf{IN2}, \textbf{IN3} y \textbf{IN4}; son los pines de entrada donde se conectan a pines digitales de Arduino para poder controlar el motor.\\
 
-La alimentación del driver es variable, ya que dispone de un regulador de tensión de 5v incorporado. Cuando el jumper de selección de 5V se encuentra activo, el módulo permite una 
-alimentación de entre 6V a 12V DC. Como el regulador se encuentra activo, el pin marcado como +5V tendrá un voltaje de 5V DC. Este voltaje se puede usar para alimentar la parte de control del 
-driver ya sea un micro-controlador o un Arduino, pero recomendamos que el consumo no sea mayor a 500 mA.\\
+La alimentación del driver es variable existiendo dos modos de funcionamiento, ya que dispone de un regulador de tensión de 5v incorporado. Cuando el jumper de selección de 5V se
+encuentra activo, el módulo permite una alimentación de entre 6V a 12V DC. Como el regulador se encuentra activo, el pin marcado como +5V tendrá un voltaje de 5V DC.
+Este voltaje se puede usar para alimentar la parte de control del driver ya sea un micro-controlador o un Arduino no debiendo superar los 500 mA.\\
 
 Cuando el jumper de selección de 5V se encuentra inactivo, el driver permite una alimentación de entre 12V a 35V DC. Como el regulador no está funcionando, tendremos que conectar el pin de +5V a una tensión de 5V para alimentar la parte 
 lógica del L298N.\\
@@ -146,7 +143,7 @@ En la figura \ref{diagrama:L298N-salidas} se muestra el módulo empleado con sus
   \label{diagrama:L298N-salidas}
 \end{figure}
 
-Dicho módulo incorpora, lo que conocemos en electrónica como puente en H, el cual es un circuito electrónico que permite cambiar el sentido de giro de los 
+Centrándonos a un nivel más bajo, dicho módulo incorpora, lo que conocemos en electrónica como puente en H, el cual es un circuito electrónico que permite cambiar el sentido de giro de los 
 motores de corriente continua. Este circuito lo componen cuatro interruptores, los cuales pueden ser mecánico o electrónicos (diodos, transistores...) de forma que,
 en función de cuales se abran o cierren, permitirán cambiar el sentido de alimentación de un motor.  Los podemos encontrar como circuitos integrados, pero también se
 pueden crear con componentes discretos.\\
@@ -159,7 +156,7 @@ pueden crear con componentes discretos.\\
   \label{esquema:funcionamiento_puente_h}
 \end{figure}
 
-El funcionamiento de un puente H es  bastante  simple. Siguiendo la fifura \ref{esquema:funcionamiento_puente_h} podemos observar que, cuando se cierran los interruptores \textbf{S1} y \textbf{S4}, y se abren \textbf{S2} y \textbf{S3}, se aplica una tensión positiva en bornes del motor, así 
+El funcionamiento de un puente H es bastante simple. Siguiendo la Figura \ref{esquema:funcionamiento_puente_h} podemos observar que, cuando se cierran los interruptores \textbf{S1} y \textbf{S4}, y se abren \textbf{S2} y \textbf{S3}, se aplica una tensión positiva en bornes del motor, así 
 que este gira en un sentido y cuando se abren los interruptores \textbf{S1} y \textbf{S4} y se cierran \textbf{S2} y \textbf{S3}, se invierte la tensión en bornes del motor, haciendo que el motor gire en sentido contrario.\\
 
 Y, por contra, si todos los interruptores están abiertos el motor no girará. \\
@@ -442,6 +439,7 @@ Junto con los leds de iluminación también se ha conectado un puntero láser ac
 En la presente sección recogemos una descripción del funcionamiento y conexionado de los sensores más característicos utilizados en el proyecto.\\
 
 \subsection{Sensores ultrasonidos}
+\label{sec:ultrasonido}
 
 Durante el movimiento del robot, es necesario la utilización de sensores de proximidad para
 evitar la colisión con objetos. En este proyecto, los sensores empleados son dos sensores
@@ -528,6 +526,7 @@ El sensor HC-SR04 dispone de 4 pines, la toma de tierra \textbf{GND}, pin de ech
 
 
 \subsection{Sensor de temperatura DHT11}
+\label{sec:dth11}
 
 % https://programarfacil.com/blog/arduino-blog/sensor-dht11-temperatura-humedad-arduino/
 
@@ -676,10 +675,9 @@ La placa utilizada, KY-038 incorpora un micrófono junto con un comparador LM393
   \label{figura:micro_amplificacion}
 \end{figure}
 
-El pinout de este sensor es muy simple. Cuenta con cuatro terminales, los cuales estan serigrafiados en la placa. Estos son: \textbf{AO}, Analog Output, \textbf{GND}, Ground,
-\textbf{VCC}, Alimentación de 3.3V a 12V y \textbf{DO}, Digital Output.\\
+Los pines de los que dispone el sensor son: \textbf{AO}, Analog Output, \textbf{GND}, Ground, \textbf{VCC}, Alimentación de 3.3V a 12V y \textbf{DO}, Digital Output.\\
 
-Lo más característico de este sensor, es que la señal que nos entrega es digital y analógica, lo cual nos permite decidir cual utilizar segun nuestras necesidades.
+Lo más característico de este sensor es que la señal que nos entrega es digital y analógica, lo cual nos permite decidir cual utilizar segun nuestras necesidades.
 Si necesitamos saber el valor del sensor, podremos utilizar directamente la salida analógica para conseguir los datos crudos. Sino, podemos utilizar la salida digital, la cual
 se activa o se desactiva según si el sensor llega a medir la intensidad del sonido que le configuremos, mediante la definición de la sensibilidad del sensor, de igual modo al sensor de detección de gases. \\
 
@@ -737,11 +735,11 @@ Conexionado del fotoresistor a la placa Arduino:
 Un sensor de llama óptico es un dispositivo que permite detectar la existencia de combustión por la luz emitida por la misma. Esta luz puede ser detectada por un sensor óptico, 
 y ser capturado por las entradas digitales y las entradas analógicas de Arduino.\\
 
-La llama es un fenómeno de emisión de luz asociado a los procesos de combustión. La combustión es un proceso que desprende grandes cantidades de energía en forma de calor. Durante 
-la reacción se generan compuestos intermedios que liberan parte de su energía mediante la emisión de luz.\\
+La llama es un fenómeno de emisión de luz asociado a los procesos de combustión siendo ésta un proceso que desprende grandes cantidades de energía en forma de calor generándose
+compuestos intermedios que liberan parte de su energía mediante la emisión de luz.\\
 
-El espectro de emisión de llama depende de los elementos que intervienen en la reacción. En el caso de combustión de productos con carbón en presencia del oxígeno tenemos dos picos característicos en ultravioleta en longitudes de onda de 185nm-260nm
-y en infrarrojo en longitudes de onda 4400-4600nm.\\
+El espectro de emisión de la llama generada depende de los elementos que intervienen en la reacción. En el caso de combustión de productos con carbón en presencia del oxígeno 
+tenemos dos picos característicos en ultravioleta en longitudes de onda de 185nm-260nm y en infrarrojo en longitudes de onda 4400-4600nm.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -761,10 +759,10 @@ Estos dispositivos se ajustan a las longitudes de onda características de la ap
   \label{figura:sensor_mq_2_potenciometro}
 \end{figure}
 
-Estos sensores constan únicamente de un sensor infrarrojo ajustado a 760-1100 nm. El ángulo de detección es de 60º, y la distancia de detección entre 0.40 m a 0.80.
+Estos sensores constan únicamente de un sensor infrarrojo ajustado al rango de los 760-1100 nm siendo su ángulo de detección de 60º, y la distancia de detección entre 0.40 m a 0.80.\\
 
 Este tipo de sensores de llama infrarrojos suelen incorporar una placa de medición estándar con el comparador LM393, que permite obtener la lectura tanto como un valor analógico
-como de forma digital cuando se supera un cierto umbral, que se regula a través de un potenciómetro ubicado en la placa.
+como de forma digital cuando se supera un cierto umbral, que se regula a través de un potenciómetro ubicado en la placa.\\
 
  \begin{figure}[H]
   \begin{center}
@@ -795,11 +793,8 @@ entradas digitales de Arduino.\\
 
 \subsection{Sensor de proximidad}
 
-La  familia  de  sensores  Sharp  GP2Dxx  es una de las más utilizadas tanto en lo que
-viene a denominarse rob ́otica m ́ovil casera como en el  ́ambito de investigacíon debido
-principalmente  a  su  facilidad de  integraci ́on  y su  bajo  coste  (unos 15  Euros). En la
-Figura \ref{figura:sensor_sharp} puede verse una imagen de un GP2D12.\\
-
+La familia de los sensores Sharp GP2Dxx son una gama de sensores muy utilizados tanto en lo que viene a denominarse rob́otica ḿovil casera como en el ́ambito de investigación debido
+principalmente a su facilidad de integracíon y reducido coste (unos 15  Euros). En la Figura \ref{figura:sensor_sharp} puede verse una imagen de un GP2D12.\\
 
  \begin{figure}[H]
   \begin{center}
@@ -809,11 +804,8 @@ Figura \ref{figura:sensor_sharp} puede verse una imagen de un GP2D12.\\
   \label{figura:sensor_sharp}
 \end{figure}
 
-Los sensores GP2D12 proporcionan una salida analógica entre 0 y 3 voltios dependiendo de la distancia a la que se encuentre el objeto. Dicha salida anaĺogica no es
-lineal sino que sigue una curva, la cual se muestra en la figura \ref{figura:curva_sharp}. En aplicaciones de rob́otica ḿovil es coḿun la utilización de un conversor analogico-digital con 
-el que adaptar esa tensión para su tratamiento digital. Cuando además interese conocer la medida con exactitud y no un valor aproximado de la cercan ́ıa de los objetos, se debe
-realizar una calibraci ́on del dispositivo que permita dar una magnitud de la distancia junto con una medida del error cometido.
-
+Los sensores GP2D12 proporcionan una salida analógica entre 0 y 3 voltios dependiendo de la distancia a la que se encuentre el objeto. Dicha salida analógica no es
+lineal sino que sigue una curva, la cual se muestra en la figura \ref{figura:curva_sharp}.
 
  \begin{figure}[H]
   \begin{center}
@@ -828,10 +820,9 @@ es un led infrarrojo que emite un haz que ser ́a rebotado por el objeto y poste
 Sensing Device, Dispositivo de Percepción de Posición)  y  puede  entenderse  como  una  lente situada sobre un array de células sensibles a la luz infrarroja. Dependiendo del 
 ángulo de incidencia del haz rebotado en la lente, se activa una u otra célula del array permitiendo estimar la distancia a la que se encuentra el objeto.\\
 
-El conexionado del GP2D12 con un microcontrolador requirie tan solo de una entrada del conversor analógico-digital a la que se conectará el
-pin de salida del sensor (el de más a la izquierda visto de frente según se muestra en la figura \ref{figura:pines_sharp}). Los otros dos pines corresponden, respectivamente, con \textbf{GND} y con
+El conexionado del GP2D12 con un microcontrolador requirie de una entrada del conversor analógico-digital a la que se conectará el pin de salida del sensor 
+(el de más a la izquierda visto de frente según se muestra en la figura \ref{figura:pines_sharp}). Los otros dos pines corresponden, respectivamente, con \textbf{GND} y con
 \textbf{Vcc}, la tensión de alimentación, que deberá ser de 5 voltios.\\
-
 
  \begin{figure}[H]
   \begin{center}

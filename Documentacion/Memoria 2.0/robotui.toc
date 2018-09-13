@@ -45,7 +45,7 @@
 \contentsline {section}{\numberline {3.3}Tecnolog\IeC {\'\i }as hardware y materiales utilizados}{27}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Raspberry Pi Model B}{27}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2} Arduino }{28}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Arduino sensor kit}{30}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.3}Arduino Sensor Kit}{30}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}Controlador de motores doble puente H - L298N}{31}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5} Bater\IeC {\'\i }a LiPo }{32}{subsection.3.3.5}
 \contentsline {subsection}{\numberline {3.3.6} Alimentaci\IeC {\'o}n USB/Protoboard }{33}{subsection.3.3.6}
