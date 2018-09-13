@@ -299,16 +299,15 @@ void loop() {
 \end{lstlisting}
 
 
-Como podemos observar en el código superior, se realiza una captura caracter por caracter del puerto serie pasando a su procesamiento una vez recibido el caracter fin de línea ``\n'' 
-interpretando el mensaje recibiido como completo. El código de la Raspberry Pi se localiza en la sección \ref{subsec:raspberry_serie}.\\
+Como podemos observar en el código superior, la función consta de un bucle principal que va leyendo los diferentes caracteres que recibe concatenándolos en una variable hasta recibir 
+el caracter utilizado como indicativo de final de mensaje '\textbackslash n'. Por lo que el mensaje quedaría interceptado e interpretado como completo. El código 
+análogo de la Raspberry Pi se localiza en la sección \ref{subsec:raspberry_serie}.\\
 
-Para el ejemplo superior se recibe la palabra clave \emph{MOTOR-} seguida del valor de la velocidad de giro, siendo éstas positivas, avance o negativas para el retroceso en un rango
-que abarca entre los -255 a 255.\\
+Centrándonos nuevamente en el ejemplo superior, se recibe la palabra clave \emph{MOTOR-} seguida del valor de la velocidad de giro, siendo éstas positivas, avance o negativas para el retroceso en un rango
+que abarca entre los -255 a 255 y delimitado por '\textbackslash n'. Por lo que si el mensaje cumple el patrón deseado activará las salidas correspondientes a la acción a realizar.\\
 
 Otro punto a destacar es que los valores de detección del motor se encuentran en el rango situado entre -51 y 51. Ésto es debido a que a velocidades muy pequeñas el motor no aquiere la
 suficiente fuerza como para traccionar el vehículo evitando así consumos inecesarios y ruido ocasionado por los motores.\\
-
-
 
 \subsubsection{Escritura en puerto serie}
 

@@ -453,8 +453,8 @@ ultrasonidos del modelo HC-SR04.\\
   \label{figura:rpi-modulo-bateria}
 \end{figure}
 
-Los sensores irán dispuestos en la parte frontal y trasera del robot, por lo que hay que no resulta necesario tener especial
-cuidado con las posibles interferencias entre dichos sensores, muy frecuentes debido a los rebotes.\\
+Los sensores irán dispuestos en la trasera del robot teniendo especial cuidado con las posibles interferencias entre dichos sensores, muy frecuentes debido a los rebotes. Es por ello
+que se han situado en ambos laterales orientados hacia el exterior.\\
 
 Para el correcto funcionamiento de estos sensores, se da un pulso de nivel alto de un mínimo de
 10 μs en el pin al que se conecta el trig del sensor y a continuación se vuelve a poner a cero, tal y
@@ -525,7 +525,18 @@ El sensor HC-SR04 dispone de 4 pines, la toma de tierra \textbf{GND}, pin de ech
 \end{figure}
 
 
-\subsection{Sensor de temperatura DHT11}
+
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.2]{imagenes/robot/ultrasonido_instalado.jpeg}
+  \end{center}
+  \caption{Sensores ultrasónicos situados en la parte trasera del vehículo.}
+  \label{figura:sensor_mq_2_potenciometro}
+\end{figure}
+
+
+
+\subsection{Sensor de temperatura y humedad DHT11}
 \label{sec:dth11}
 
 % https://programarfacil.com/blog/arduino-blog/sensor-dht11-temperatura-humedad-arduino/
@@ -597,10 +608,10 @@ Este modelo de DHT11, como comentamos anteriormente, dispone de 3 pines, la toma
 
 % http://www.arduinohobby.com/deteccion-de-gas-con-arduino/
 
-Para la detección de gas existen unos módulos muy practicos y bastante comunes basados en los sensores MQ. Existen una lista grande de sensores MQ donde cada uno fue diseñado para
-detectar un tipo de gas o sustancia especifica (o conjunto de ellas). Por ejemplo el que usaremos en el ejemplo es un MQ-2 que detecta gases combustibles, incluyendo propano, 
-butano, gas natural y humo. Para su activación y prueba basta con usar un encendedor para mostrar su operación. Otros modelos pueden detectar gases más raros como el hidrogeno o CO 
-(monoxido de carbono), o incluso gases toxicos como el amoníaco.\\
+Para la detección de gas se ha empleado un sensor basado en la serie MQ ampliamente utilizados y bastante populares en muy diversas aplicaciones entre ellas incluida la robótica.
+Existen una lista grande de sensores MQ donde cada uno fue diseñado para detectar un tipo de gas o sustancia especifica (o conjunto de ellas). El utilizado en el presente trabajo 
+es un MQ-2 que detecta gases combustibles, incluyendo propano, butano, gas natural y humo. Para su activación y prueba basta con usar un encendedor para mostrar su operación. 
+Otros modelos pueden detectar gases más raros como el hidrogeno o CO (monoxido de carbono), o incluso gases toxicos como el amoníaco.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -617,7 +628,7 @@ Este tipo de sensores presentan la particularidad de que necesitan un tiempo de 
 de calentamiento previo comenzando una vez alimentado el sensor. Trascurrido un par de minutos entonces se podrá realizar una medición efectiva.\\
 
 En el presente proyecto nos hemos decantado por utilizar la detección de gas mediante el uso de su salida digital. Dicha salida digital, con nombre \textbf{D0}, tendrá un estado
-0 o 1, representando 0 = 0v, y 1 = 5v aprox., y que representan 0 = detección de gas, y 1 = sin detección de gas. 
+0 o 1, representando 0 = 0v, y 1 = 5v aproximadamente, y que representan 0 = detección de gas, y 1 = sin detección de gas. 
 
 \subsubsection{ Calibración del punto de detección de gas}
 
@@ -788,6 +799,14 @@ entradas digitales de Arduino.\\
     \includegraphics[scale=0.4]{imagenes/llama_conexionado.png}
   \end{center}
   \caption{Vista del conexionado del sensor de llama YG1006.}
+  \label{figura:sensor_mq_2_potenciometro}
+\end{figure}
+
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.2]{imagenes/robot/llama_instalado.jpeg}
+  \end{center}
+  \caption{Sensor de llama instalado en la parte delantera del vehículo.}
   \label{figura:sensor_mq_2_potenciometro}
 \end{figure}
 

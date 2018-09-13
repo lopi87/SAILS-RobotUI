@@ -366,7 +366,7 @@ La siguiente imagen \ref{vista-conexiones} muestra una visión general de la dis
 
 \begin{figure}[H]
   \begin{center}
-   \includegraphics[scale=0.2]{imagenes/robot/conexionado_general.jpeg}
+   \includegraphics[scale=0.4]{imagenes/robot/general.png}
   \end{center}
   \caption{Vista del conexionado general del robot.}
   \label{vista-conexiones}
@@ -425,11 +425,25 @@ Representación del conexionado de los leds, figura \ref{img:leds_conexiones}.\\
 
 Junto con los leds de iluminación también se ha conectado un puntero láser accionable por el operador.
 
+
+\subsubsection{Conexionado}
+
+El conexionado del puntero láser se ha realizado del mismo modo que un para led convencional.\\
+
 \begin{figure}[H]
   \begin{center}
-   \includegraphics[scale=0.2]{imagenes/robot/conexionado_general.jpeg}
+   \includegraphics[scale=0.5]{imagenes/leds_conexion.png}
   \end{center}
-  \caption{Vehículo SensorRS con el puntero láser encendido.}
+  \caption{Conexionado de los leds de iluminación.}
+  \label{img:leds_conexiones}
+\end{figure}
+
+
+\begin{figure}[H]
+  \begin{center}
+   \includegraphics[scale=0.2]{imagenes/robot/puntero_laser.jpeg}
+  \end{center}
+  \caption{Vehículo SensorRS con el puntero láser situado en un lateral.}
   \label{vista-conexiones}
 \end{figure}
 
@@ -453,8 +467,8 @@ ultrasonidos del modelo HC-SR04.\\
   \label{figura:rpi-modulo-bateria}
 \end{figure}
 
-Los sensores irán dispuestos en la parte frontal y trasera del robot, por lo que hay que no resulta necesario tener especial
-cuidado con las posibles interferencias entre dichos sensores, muy frecuentes debido a los rebotes.\\
+Los sensores irán dispuestos en la trasera del robot teniendo especial cuidado con las posibles interferencias entre dichos sensores, muy frecuentes debido a los rebotes. Es por ello
+que se han situado en ambos laterales orientados hacia el exterior.\\
 
 Para el correcto funcionamiento de estos sensores, se da un pulso de nivel alto de un mínimo de
 10 μs en el pin al que se conecta el trig del sensor y a continuación se vuelve a poner a cero, tal y
@@ -464,7 +478,6 @@ distancia a la que se encuentra el objeto, cuanto mayor es la duración del puls
 encuentra el objeto. Utilizando una interrupción que se produzca por cada flanco de subida y
 bajada, se puede obtener el ancho de dicho pulso y mediante el uso de un timer se puede medir el
 tiempo transcurrido entre dichos flancos.\\
-
 
 \begin{figure}[H]
   \begin{center}
@@ -525,7 +538,15 @@ El sensor HC-SR04 dispone de 4 pines, la toma de tierra \textbf{GND}, pin de ech
 \end{figure}
 
 
-\subsection{Sensor de temperatura DHT11}
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.2]{imagenes/robot/ultrasonido_instalado.jpeg}
+  \end{center}
+  \caption{Sensores ultrasónicos situados en la parte trasera del vehículo.}
+  \label{figura:sensor_mq_2_potenciometro}
+\end{figure}
+
+\subsection{Sensor de temperatura y humedad DHT11}
 \label{sec:dth11}
 
 % https://programarfacil.com/blog/arduino-blog/sensor-dht11-temperatura-humedad-arduino/
@@ -544,7 +565,6 @@ se controla por un pin de propósito general y cuyas características se adjunta
 
 El sensor dht11 en su versión PCB consta de tres pines. Un pin \textbf{VCC} de alimentación, uno \textbf{DATA} para la transferencia de
 datos que se conecta al microcontrolador y un pin que conectado a tierra \textbf{GND}.\\
-
 
 \subsubsection{transmisión de datos}
 
@@ -791,6 +811,14 @@ entradas digitales de Arduino.\\
   \label{figura:sensor_mq_2_potenciometro}
 \end{figure}
 
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.2]{imagenes/robot/llama_instalado.jpeg}
+  \end{center}
+  \caption{Sensor de llama instalado en la parte delantera del vehículo.}
+  \label{figura:sensor_mq_2_potenciometro}
+\end{figure}
+
 \subsection{Sensor de proximidad}
 
 La familia de los sensores Sharp GP2Dxx son una gama de sensores muy utilizados tanto en lo que viene a denominarse rob́otica ḿovil casera como en el ́ambito de investigación debido
@@ -809,7 +837,7 @@ lineal sino que sigue una curva, la cual se muestra en la figura \ref{figura:cur
 
  \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=1.2]{imagenes/curva_sharp.png}
+    \includegraphics[scale=1.4]{imagenes/curva_sharp.png}
   \end{center}
   \caption{Curva de tensión de salida según la distancia al obstáculo.}
   \label{figura:curva_sharp}
@@ -866,3 +894,53 @@ de Arduino.\\
   \label{figura:pines_sharp}
 \end{figure}
 
+
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.2]{imagenes/robot/sharp_instalado.jpeg}
+  \end{center}
+  \caption{Sensor de proximidad Sharp GP2D12 instalado en la parte frontal del vehículo.}
+  \label{figura:sensor_mq_2_potenciometro}
+\end{figure}
+
+
+\subsection{Buzzer o zumbador}
+
+Un buzzer pasivo, un zumbador o altavoz, son dispositivos que permiten convertir una señal eléctrica en una onda de sonido. Son unos dispositivos muy simples ya que no disponen 
+de electrónica interna, por lo que tan solo debemos proporcionar una señal eléctrica para conseguir el sonido deseado.\\
+
+Por contra, los buzzer activos disponen de un oscilador interno siendo exclusivamente necesario alimentarlos para que se emita un sonido.\\
+
+Los buzzer pasivos, como el incorporado en el presente trabajo, tienen la particularidad de que al proporcionar y controlar nosotros la señal eléctrica, poseen la ventaja de
+que podemos variar el tono emitido modificando la señal que aplicamos al pin de control permitiendo la generación de melodías.\\
+
+En el caso que compete a este proyecto se ha empleado un buzzer para la emisión de sonidos intermitentes a modo de alarma activados tras la detección de alguna situación de riesgo.
+Estas situaciones son determinadas por parte de alguno de los demás sensores de los que dispone el vehículo, como por ejemplo
+puede ser la detección de llamas cercanas o ante la presencia de gases peligrosos.\\
+
+
+Tanto los buzzers como los altavoces son elementos denominados transductores electroacústicos, es decir, son dispositivos que poseen la propiedad de convertir señales eléctricas
+en sonido, que para el caso concreto de los buzzers entran en la categoría de los transductores piezoeléctricos. Esto significa que tienen la propiedad de variar su volumen al 
+ser atravesados por corrientes eléctricas aprovechando este fenómeno para hacer vibrar una membrana al atravesarlo con una señal eléctrica y con la consecuente emisión del sonido.\\
+
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.6]{imagenes/diagrama_buzzer.png}
+  \end{center}
+  \caption{Representación de la variación de volumen del material piezoeléctrico al paso de la corriente.}
+  \label{figura:sensor_mq_2_potenciometro}
+\end{figure}
+
+
+\subsubsection{Conexionado}
+
+La conexión con Arduino como en la mayoría de los casos resulta bastante sencilla. Simplemente alimentamos el módulo conectando \textbf{Vcc} y \textbf{GND} a Arduino, y la entrada
+de señal conectada a cualquier pin digital de Arduino configurado como salida.\\
+
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.6]{imagenes/conexionado_buzzer.png}
+  \end{center}
+  \caption{Conexionado del buzzer.}
+  \label{figura:pines_sharp}
+\end{figure}

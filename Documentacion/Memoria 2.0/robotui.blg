@@ -5,45 +5,45 @@ The style file: plain.bst
 Database file #1: robotui.bib
 Warning--I didn't find a database entry for "article-4"
 Warning--I didn't find a database entry for "website:7"
-You've used 25 entries,
+You've used 27 entries,
             2118 wiz_defined-function locations,
-            617 strings with 7292 characters,
-and the built_in function-call counts, 5903 in all, are:
-= -- 547
-> -- 273
+            629 strings with 7576 characters,
+and the built_in function-call counts, 6342 in all, are:
+= -- 587
+> -- 287
 < -- 0
-+ -- 111
-- -- 86
-* -- 259
-:= -- 1065
-add.period$ -- 84
-call.type$ -- 25
-change.case$ -- 111
++ -- 117
+- -- 90
+* -- 275
+:= -- 1143
+add.period$ -- 91
+call.type$ -- 27
+change.case$ -- 117
 chr.to.int$ -- 0
-cite$ -- 25
-duplicate$ -- 240
-empty$ -- 516
-format.name$ -- 86
-if$ -- 1232
+cite$ -- 27
+duplicate$ -- 264
+empty$ -- 560
+format.name$ -- 90
+if$ -- 1326
 int.to.chr$ -- 0
-int.to.str$ -- 25
-missing$ -- 24
-newline$ -- 137
-num.names$ -- 50
-pop$ -- 208
+int.to.str$ -- 27
+missing$ -- 28
+newline$ -- 148
+num.names$ -- 54
+pop$ -- 223
 preamble$ -- 1
-purify$ -- 93
+purify$ -- 99
 quote$ -- 0
-skip$ -- 140
+skip$ -- 152
 stack$ -- 0
-substring$ -- 125
-swap$ -- 20
+substring$ -- 135
+swap$ -- 22
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 76
+type$ -- 80
 warning$ -- 0
-while$ -- 50
-width$ -- 27
-write$ -- 267
+while$ -- 54
+width$ -- 29
+write$ -- 289
 (There were 2 warnings)

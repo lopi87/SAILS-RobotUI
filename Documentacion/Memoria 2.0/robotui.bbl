@@ -1,9 +1,20 @@
 \begin{thebibliography}{10}
 
+\bibitem{website:5}
+{Amazon Web Services}.
+\newblock {Amazon Web Services}.
+\newblock \url{https://www.aws.amazon.com/}.
+\newblock {Visitado el 15-08-2018}.
+
 \bibitem{book:WebSocket}
 {Andrew Lombardi}.
 \newblock {\em WebSocket: Lightweight Client-Server Communications}.
 \newblock O'Reilly Media, 2012.
+
+\bibitem{book:}
+A~Willey Brand.
+\newblock {\em Amazon Web Services for Dummies}.
+\newblock Bernard Golden, 2017.
 
 \bibitem{book:node}
 Mike Cantelon, Alex~R. Young, Marc Harter, T.J. Holowaychuk, and Nathan
@@ -16,18 +27,12 @@ Douglas Crockford.
 \newblock {\em JavaScript: The Good Parts}.
 \newblock O'Reilly, 2008.
 
-\bibitem{website:5}
-{Digital Ocean}.
-\newblock {Digital Ocean}.
-\newblock \url{https://www.digitalocean.com/}.
-\newblock {Visitado el 15-08-2018}.
-
 \bibitem{book:Raspberry}
 {Eben Upton and Gareth Halfacree}.
 \newblock {\em Raspberry Pi User Guide}.
-\newblock Rasoberry Pi, 2013.
+\newblock Raspberry Pi, 2013.
 \newblock \url{http://www.cs.unca.edu/~bruce/Fall14/360/RPiUsersGuide.pdf},
-  visitado el 10-04-2017.
+  visitado el 12-08-2018.
 
 \bibitem{book:FFmpeg}
 {Frantisek Korbel}.
@@ -51,12 +56,12 @@ Hau-Shiue Juang and Kai-Yew Lum.
 \newblock {Design and Control of a Two-Wheel Self-Balancing Robot using the
   Arduino Microcontroller Board}.
 \newblock Technical report, IEEE International Conference on Control and
-  Automation, 6 2013.
+  Automation, 5 2013.
 
-\bibitem{book:MongoDB}
-{Kristina Chodorow}.
-\newblock {\em MongoDB: The Definitive Guide, 2nd Edition}.
-\newblock O'Reilly Media, 2013.
+\bibitem{book:Sensors}
+{Kimmo Karvinen & Tero Karvinen}.
+\newblock {\em Make: Getting Started with Sensors}.
+\newblock Make Media Books, 2014.
 
 \bibitem{article:5}
 Nilson~Mori Lazarin and Carlos~Eduardo Pantoja.
@@ -109,6 +114,13 @@ Rohit Rai.
 {Sandro Pasquali}.
 \newblock {\em Deploying Node.js}.
 \newblock Packt Publishing, 2015.
+
+\bibitem{book:ArduinoProgram}
+{Simon Monk}.
+\newblock {\em Programming Arduino Getting Started with Sketches}.
+\newblock Mc Graw Hill, 2012.
+\newblock \url{http://index-of.es/Varios-2/Programming%20Arduino.pdf}, visitado
+  el 10-08-2018.
 
 \bibitem{article:2}
 Lakshminarasimhan Srinivasan, Julian Scharnagl, and Klaus Schilling.

@@ -108,23 +108,16 @@ io.sockets.on('connection', function (socket)
     if(pad_btn == 1){
       serial_transmission('L', 10);
     }
-    if(pad_btn == 3){
-      serial_transmission('IT', 10);
-    }
   });
 
 
   socket.on('action', function (data){
     console.log('Comando recibido: ' + data);
     switch(data) {
-      case 'H':
+      case "H":
         serial_transmission(data, 10);
-      case 'L':
+      case "L":
         serial_transmission(data, 10);
-      case 'IT':
-        serial_transmission(data, 10);
-      default:
-        console.log('command not found');
     }
 
   });
