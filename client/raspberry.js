@@ -118,14 +118,19 @@ io.sockets.on('connection', function (socket)
         serial_transmission(data, 10);
       case "L":
         serial_transmission(data, 10);
+      case "UP":
+        serial_transmission('MOTOR-255', 10);
+      case "DOWN":
+        serial_transmission('MOTOR--255', 10);
+      case "LEFT":
+        serial_transmission('SRV-255', 10);
+      case "RIGHT":
+        serial_transmission('SRV--255', 10);
     }
-
   });
 
-
-    // const parser = port.pipe(new Readline({ delimiter: '\r\n' }));
-    // parser.on('data', console.log);
-
+   // const parser = port.pipe(new Readline({ delimiter: '\r\n' }));
+   // parser.on('data', console.log);
 
   const parser = port.pipe(new Readline({ delimiter: '\r\n' }));
   parser.on('data', function(data){
@@ -133,8 +138,6 @@ io.sockets.on('connection', function (socket)
     var msg_data = data.split("%");
     socket.emit(String(msg_data[0]), {msg: String(msg_data[1]) } );
   });
-
-
 });
 
 io_video.sockets.on('connection', function (socket) {
