@@ -48,17 +48,19 @@ de cometidos:
 \end{itemize}
 
 De todo lo anterior se extrae, por tanto, la necesidad de elaborar un sistema robótico operado por una persona y que permita el análisis del entorno, junto con la posibilidad de controlarlo mediante una 
-aplicación software y una conexión a internet. O lo que es lo mismo, un sistema de \texbf{telemetría}\footnote{En el capítulo de conceptos básicos puede acceder a un apartado específico destinado a la telemetría \ref{def:telemetria}}.\\
+aplicación software y una conexión a internet. O dicho de otro modo, un sistema de \textbf{telemetría} definida como una tecnología que permite recabar información de un entorno
+sin necesidad de estar en él presente \footnote{En la sección \ref{def:telemetria} referente al capítulo de conceptos básicos puede acceder a un apartado específico destinado a la telemetría.}.\\
 
-La telemetría es una tecnología que permite recabar información de un entorno sin necesidad de estar en él presente. 
-La información que se desee medir para posteriormente transmitirla puede ser muy variada, según la situación. Desde el punto de vista de la comunicación, la información que se 
-transmite es irrelevante, por lo que una vez establecida la forma en la que se envían y se reciben los datos, podremos añadir, reemplazar o modificar los sensores para adaptar el
-proyecto tipo desarrollado a un entorno concreto o diferente al inicialmente pensado.\\
+Dado que la información que se desea medir para posteriormente transmitirla puede ser muy variada debido a sus múltiples orígenes, ya sea procedente de una cámara de vídeo, de 
+alguno de los distintos tipos de sensores existentes o de cualquier otra fuente de datos que podamos imaginar, hacen que desde el punto de vista de la comunicación, la información
+que se desea transmitir sea irrelevante, por lo que una vez establecida la forma en la que se envían y se reciben  los datos, podremos añadir, reemplazar o modificar los sensores
+para adaptar el proyecto tipo desarrollado a un entorno concreto o diferente al inicialmente pensado sin necesidad 
+de redefinir los procesos de comunicación ya creados.\\
 
 Así que dadas las motivaciones existentes y, junto que la programación web y la robótica son temas que causan en mi un especial interés, hicieron que me lanzara a la elaboración de este
-proyecto que unifica ambos campos anteriormente citados.\\
+proyecto que unifica ambos campos anteriormente citados. Más si cabe que el presente trabajo sirve de complemento a la aplicación RobotUI anteriormente desarrollada por mí.\\
 
-Así surgió \emph{SensorRS, Multi-sensor Robot Sysmtem}.\\
+Así surgió \emph{SensorRS, Multi-sensor Robot System}.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -71,7 +73,7 @@ Así surgió \emph{SensorRS, Multi-sensor Robot Sysmtem}.\\
 \footnotetext{Logotipo de \emph{SensorRS}, Multi-sensor Robot Sysmtem.}
 
 \emph{Multi Sensor Robot System (SensorRS), Vehículo robótico multisensorial de exploración controlado por WiFI basado en Arduino y Raspberry Pi}, nombre del sistema resultante, será una combinación de un elemento software (aplicación web RobotUI) y hardware (SensorRC, Multisensor
-Robot System) surgido como un sistema para sacar el máximo aprovechamiento de la aplicación RobotUI para la que se eleborará un dispositivo robótico de propósito general cuya finalidad es
+Robot System) surgido como un sistema para sacar el máximo aprovechamiento de la aplicación RobotUI para la que se elaborará un dispositivo robótico de propósito general cuya finalidad es
 análisis y exploración del entorno gracias a los sensores incorporados.\\
 
 SensorRS se compone de un vehículo controlado vía WiFi el cual responde a una serie de señales, \emph{comandos}\footnote{ Comando: instrucción u orden que el usuario proporciona a un sistema informático, 
@@ -79,24 +81,24 @@ desde la línea de comandos (como una shell) o desde una llamada de programació
 
 La interfaz de control generada en la aplicación web RobotUI\footnote{ Aplicación anteriormente desarrollada por Manuel López Urbina para el control de dispositivos robóticos de propósito general. Acceso al 
 código fuente: \url{https://github.com/lopi87/SAILS-RobotUI}}, se configurará de tal manera que permita el control del vehículo desarrollado en el presente proyecto. 
-Esta aplicación permite dar de alta dispositivos robóticos para su control y retransmisión de su funcionamento en vivo con otros usuarios.\\
+Esta aplicación permite dar de alta dispositivos robóticos para su control y retransmisión de su funcionamiento en vivo con otros usuarios.\\
 
 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.5\textwidth}
-        \includegraphics[width=\textwidth]{imagenes/robot/vehiculo_lateral.jpeg}
-        \caption{Vista lateral}
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{imagenes/robot/frontal.jpg}
+        \caption{Vista frontal-superior}
         \label{fig:gull}
     \end{subfigure}
     \begin{subfigure}[b]{0.5\textwidth}
-        \includegraphics[width=\textwidth]{imagenes/robot/vehiculo_frontal.jpeg}
-        \caption{Vista frontal}
+        \includegraphics[width=1.19\textwidth]{imagenes/robot/lateral.jpg}
+        \caption{Vista lateral}
         \label{fig:tiger}
     \end{subfigure}
     \begin{subfigure}[b]{0.5\textwidth}
-        \includegraphics[width=\textwidth]{imagenes/robot/vehiculo_trasera.jpeg}
-        \caption{Vista trasera}
+        \includegraphics[width=\textwidth]{imagenes/robot/trasera.jpg}
+        \caption{Vista posterior-lateral}
         \label{fig:mouse}
     \end{subfigure}
     \caption{Vehículo SensorRS \protect\footnotemark.}\label{fig:animals}
@@ -115,17 +117,52 @@ de un vehículo robótico de fácil construcción mediante la utilización de co
 Dicho robot irá destinado al área de la exploración, buscando, al menos, reducir la exposición de personas a zonas peligrosas ayudando a las labores de rastreo 
 o incursión en lugares en principio inalcanzables o de dificultoso acceso.\\
 
-En la presente memoria se abarcará la descripción del diseño, construcción y control de un Robot autómata teledirigido a base de una placa Arduino y Raspberry Pi dotado de multitud de sensores que ayuden a proporcionar 
-información del entorno más próximo en el que se encuentra.\\
+En la presente memoria se abarcará la descripción del diseño, construcción y control de un Robot autómata teledirigido a base de una placa Arduino y Raspberry Pi dotado de multitud
+de sensores que ayuden a proporcionar información al usuario del entorno más próximo en el que el robot se encuentra.\\
 
-En lo referente al área de la programación, más concretamente con la programación de microcontroladores\footnote{Un microcontrolador (abreviado μC, UC o MCU) es un circuito integrado programable, capaz de 
+El robot contendrá una arquitectura basada en microcontroladores\footnote{Un microcontrolador (abreviado μC, UC o MCU) es un circuito integrado programable, capaz de 
 ejecutar las órdenes grabadas en su memoria. Está compuesto de varios bloques funcionales, los cuales cumplen una tarea específica. Un microcontrolador incluye en su interior las
-tres principales unidades funcionales de una computadora: unidad central de procesamiento, memoria y periféricos de entrada/salida. } permitirá crear un sistema fácilmente escalable
-donde agregar nuevos sensores no suponga un elevado esferzo.\\
+tres principales unidades funcionales de una computadora: unidad central de procesamiento, memoria y periféricos de entrada/salida. } la cual permitirá crear un sistema fácilmente escalable donde se agregue nuevos sensores sin que ello suponga 
+un elevado esfuerzo.\\
 
-En definitiva, este proyecto intenta demostrar que sin la necesiad de grandes conocimientos en programación, junto con pequeñas nociones de electrónica básica, que cualquier
-persona pueda elaborar un proyecto robótico de similares características. Evitanto que multitud de personas vean que no disponer de grandes conocimientos en la materia sean un
+En definitiva, este proyecto intenta demostrar que sin la necesidad de grandes conocimientos en programación, junto con pequeñas nociones de electrónica básica, que cualquier
+persona pueda elaborar un proyecto robótico de similares características. Evitando que multitud de personas vean que no disponer de grandes conocimientos en la materia sean un
 impedimento a la hora de comenzar a desarrollar sus ideas.\\
+
+\section{Alcance}
+
+El sistema está basado en una Raspberry Pi que recibirá el gobernada vía wifi a través de la aplicación web RobotUI constituyendo éste el nivel superior del sistema. Como nivel inferior, 
+disponemos de una placa Arduino la cual será gestionada por la Raspberry Pi y que será la encargada de controlar todos los sensores. La Figura \ref{diagrama:representacion_sistema} muestra un diagrama representativo de la estructura
+global del sistema y sus canales de comunicación.\\
+
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[scale=0.5]{diagramas/diagrama_bloques_general.png}
+  \end{center}
+  \caption{ Diagrama representativo de la estructura de SensorRS, sus canales de comunicación y sus niveles de jerarquía.}
+  \label{diagrama:representacion_sistema}
+\end{figure}
+
+
+Además el sistema se encargará de una transmisión de vídeo en tiempo real de las imágenes captadas a través de una cámara conectada a la Raspberry Pi.\\
+
+SensorRS incorporará los elementos necesarios para la integración de diferentes sensores en la aplicación (Lectura, escritura de valores, ...) pudiendo ser éstos de tipos muy
+variados, temperatura, humedad, sonidos, de luminosidad, medición de distancias, sensor de fuego, de lluvia y de impacto. El sistema estará capacitado para soportar mayor número
+de sensores. \\
+
+En el presente trabajo se deberán abarcar diferentes aspectos como la descripción del diseño, construcción y control de un robot teledirigido junto con una descripción de los 
+diferentes procedimientos, bibliotecas y código elaborado para la interconexión e intercambio de información entre la placa Arduino y Raspberry Pi.\\
+
+A continuación se muestra una imagen general del vehículo donde se aprecian los diferentes elementos conectados.\\
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.3]{imagenes/robot/general.png}
+  \end{center}
+  \caption{ Imagen de los diferentes elementos que integran SensorRS.}
+  \label{diagrama:representacion_sistema}
+\end{figure}
 
 
 \section{Acerca de este documento}

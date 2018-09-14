@@ -14,7 +14,7 @@ En el presente capítulo se recogen aquellos conceptos, definiciones, protocolos
 la memoria sin profundizar demasiado en detalles técnicos.\\
 
 Todos estos conceptos se encuentran estrechamente ligados con tecnologías de la comunicación y transmisión de información y señales. Además de una sección destinada a los sensores, recogiendo sus 
-carcaterísticas y tipos existentes a modo general.\\
+características y tipos existentes a modo general.\\
 
 
 \section{Telemetría}
@@ -23,13 +23,13 @@ carcaterísticas y tipos existentes a modo general.\\
 La telemetría es una tecnología destinada la medición de magnitudes físicas de manera remota para un posterior envío de la información hacia un sistema que actúa como operador. La palabra telemetría
 procede de las palabras griegas τῆlε (tele), la cual significa distancia, y la palabra μετρον (metron), que indica medida.\\
 
-El envío de información se realiza típicamente mediante comunicación inalámbrica, carcaterística fundamental de estos sistemas aunque también se pueden emplear otros medios 
+El envío de información se realiza típicamente mediante comunicación inalámbrica, característica fundamental de estos sistemas aunque también se pueden emplear otros medios 
 como redes de computadoras, fibra óptica, GSM, etc. Los sistemas de telemetría reciben las órdenes o instrucciones desde un sistema externo que hace las 
 funciones de control.\\
 
 \subsection{Aplicaciones}
 
-La telemetría se utiliza tanto en sistemas simples como en sistemas de muy elevada complejidad. Estos sistemas pueden ser de muy diverssa índole como por ejemplo, naves espaciales,
+La telemetría se utiliza tanto en sistemas simples como en sistemas de muy elevada complejidad. Estos sistemas pueden ser de muy diversa índole como por ejemplo, naves espaciales,
 plantas químicas, redes de suministro (agua, gas, electricidad...) entre muchos otros. Dado que la telemetría posibilita la monitorización automática y el registro de las mediciones
 permiten el envío de alertas o alarmas al centro de control con el fin de que el funcionamiento sea seguro y eficiente.\\
 
@@ -40,40 +40,73 @@ el monitoreo de variables que afecten a la producción permitirá elaborar siste
 \section{Sensor}
 \label{sec:sensor-definicion}
 
-En su definición más amplia, un sensor es un dispositivo, módulo o subsistema cuyo propósito es detectar eventos o cambios en su entorno y enviar la información a otros
-componentes electrónicos, con frecuencia un procesador de computadora. Un sensor siempre es utizado en combinación con otros dispositivos electrónicos, para su posterior 
-procemasmiento, transmisión, activación de una acción, etc.\\
+Un sensor es un dispositivo módulo o subsistema que permite cuantificar una variable física cuyo propósito es detectar eventos o cambios en su entorno y
+enviar la información a otros componentes electrónicos, con frecuencia un procesador de computadora. Un sensor siempre es utilizado en combinación con 
+otros dispositivos electrónicos, para su posterior procesamiento, transmisión, activación de una acción, etc. \cite{book:sensoresyactuadores}. \\
 
-La sensibilidad de un sensor indica cuánto cambia la salida del sensor cuando cambia la cantidad de entrada que se mide. Por ejemplo, si el mercurio en un termómetro se mueve
-1 cm cuando la temperatura cambia en 1 grado, la sensibilidad es 1 cm/C (es básicamente la pendiente Dy/Dx asumiendo una característica lineal). Algunos sensores también pueden
-afectar lo que miden; por ejemplo, un termómetro a temperatura ambiente insertado en una taza de líquido caliente enfría el líquido mientras el líquido calienta el termómetro.
-Los sensores generalmente están diseñados para tener un pequeño efecto en lo que se mide; hacer el sensor más pequeño a menudo mejora esto y puede presentar otras ventajas. 
-El progreso tecnológico permite fabricar cada vez más sensores a escala microscópica como microsensores que utilizan la tecnología MEMS. En la mayoría de los casos, un microsensor 
-alcanza una velocidad y sensibilidad significativamente mayores en comparación con los enfoques macroscópicos
 
-\subsection{Clasificación de errores de medición}
+\subsection{clasificación}
 
-Un buen sensor obedece a las siguientes reglas:
+% https://books.google.es/books?id=CuoXCd6ZZqwC&pg=PR9&dq=sensores+clasificacion&hl=es&sa=X&ved=0ahUKEwiJ7vChrbvdAhUFXxoKHdbdBFMQ6AEITjAH#v=onepage&q=sensores%20clasificacion&f=false
 
+Dada la gran cantidad de sensores existentes resulta necesario aplicar una clasificación con la finalidad de comprender mejor su naturaleza y funcionamiento. Los sensores se pueden 
+clasificar de diversas formas según los distintos criterios atendidos \cite{book:guiapracticasensores}:\\
+
+
+\subsubsection{Atendiendo a su funcionamiento:}
 \begin{itemize}
- \item Es sensible a la propiedad medida.
- \item Es insensible a cualquier otra propiedad que pueda encontrarse en su aplicación.
- \item No influye en la propiedad medida.
+ \item \textbf{Activos:} Requieren de una fuente externa de energía de la que recibir alimentación de corriente para su funcionamiento.
+ \item \textbf{Pasivos:} No requieren de una fuente de energía externa, sino que las propias condiciones medioambientales son suficientes para que funcionen según su cometido.
 \end{itemize}
 
-La mayoría de los sensores tienen una función de transferencia lineal. La sensibilidad se define entonces como la relación entre la señal de salida y la propiedad medida. 
-Por ejemplo, si un sensor mide la temperatura y tiene una salida de voltaje, la sensibilidad es constante con las unidades [V / K]. La sensibilidad es la pendiente de la función 
-de transferencia. La conversión de la salida eléctrica del sensor (por ejemplo V) a las unidades medidas (por ejemplo K) requiere dividir la salida eléctrica por la pendiente 
-(o multiplicar por su recíproco). Además, con frecuencia se agrega o resta una compensación. Por ejemplo, se debe agregar -40 a la salida si la salida de 0 V corresponde a la 
-entrada de -40 \textdegree C.\\
+\subsubsection{Atendiendo a las señales que proporcionan:}
 
-Para que una señal de sensor analógico sea procesada o utilizada en un equipo digital, necesita convertirse en una señal digital, utilizando un convertidor de analógico a 
-digital.
+\begin{itemize}
+ \item \textbf{Analógicos:} Proporcionan la información mediante una señal analógica (tensón, corriente), es decir, que pueden tomar infinidad de valores entre un mínimo y
+ un máximo.
+ \item \textbf{Digitales:} Proporcionan la información mediante una señal digital que puede ser un 0 o un 1 lógicos, o bien un código de bits.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{imagenes/senal_digital.png}
+        \caption{Señal digital}
+        \label{fig:gull}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.26\textwidth}
+        \includegraphics[width=1.19\textwidth]{imagenes/senal_analogica.png}
+        \caption{Señal analógica}
+        \label{fig:tiger}
+    \end{subfigure}
+    \caption{Ejemplos de señal digital y analógica.}\label{fig:animals}
+\end{figure}
+
+\subsubsection{Atendiendo a la naturaleza de su funcionamiento:}
+
+\begin{itemize}
+ \item \textbf{Posición:} Son aquellos que experimentan variaciones en función de la posición que ocupan en cada instante los elementos que lo componen.
+ \item \textbf{Fotoeléctricos:} Son aquellos que experimentan variaciones en función de la luz que incide sobre los mismos.
+ \item \textbf{Magnéticos:} Son aquellos que experimentan variaciones en función de la temperatura del lugar donde están ubicados.
+ \item \textbf{Humedad:} Son aquellos que experimentan variaciones en función del nivel de humedad existente en el medio en el que se encuentran.
+ \item \textbf{Presión:} Son aquellos que experimentan variaciones en función de la presión a la que son sometidos.
+ \item \textbf{Movimiento:} Son aquellos que experimentan variaciones en función de los movimientos a los que son sometidos.
+ \item \textbf{Químicos:} Son aquellos que experimentan variaciones en función de los agentes químicos externos que pudieran incidir sobre ellos.
+\end{itemize}
+
+\subsubsection{Atendiendo a los elementos utilizados en su fabricación:}
+
+\begin{itemize}
+ \item \textbf{Mecánicos:} Son aquellos que utilizan contactos mecánicos que se abren o cierran.
+ \item \textbf{Resistivos:} Son aquellos que utilizan en su fabricación elementos resistivos.
+ \item \textbf{Capacitivos:} Son aquellos que emplean condensadores.
+ \item \textbf{Inductivos:} Son aquellos que emplean bobinas.
+ \item \textbf{Piezoeléctricos:} Son aquellos que emplean cristales como el cuarzo.
+ \item \textbf{Semiconductores:} Son aquellos que emplean materiales Semiconductores.
+\end{itemize}
 
 
-\subsection{Tipos de sensores}
-
-Listado de los diferentes tipos de sensores junto con algunos ejemplos:\\
+\subsubsection{Atendiendo a la magnitud}
 
 \textbf{Posición angular o lineal:}
 \begin{itemize}
@@ -142,14 +175,14 @@ Listado de los diferentes tipos de sensores junto con algunos ejemplos:\\
 
 \textbf{Proximidad:}
 \begin{itemize}
-  \item     Capacitvo
+  \item     Capacitivo
   \item     Inductivo
   \item     Fotoeléctrico
 \end{itemize}
 
 \textbf{Acustico:}
 \begin{itemize}
-  \item     Microfono
+  \item     Micrófono
 \end{itemize}
 
 \textbf{Sensor de acidez:}
@@ -173,14 +206,32 @@ Algunas magnitudes pueden calcularse mediante la medición y cálculo de otras, 
 aceleración. La masa de un objeto puede conocerse mediante la fuerza gravitatoria que se ejerce sobre él en comparación con la fuerza gravitatoria ejercida sobre un objeto de 
 masa conocida. \\
 
+\subsection{Atendiendo a los errores de medición}
+
+La mayoría de los sensores tienen una función de transferencia lineal. La sensibilidad se define entonces como la relación entre la señal de salida y la propiedad medida. 
+Por ejemplo, si un sensor mide la temperatura y tiene una salida de voltaje, la sensibilidad es constante con las unidades [V / K]. La sensibilidad es la pendiente de la función 
+de transferencia. La conversión de la salida eléctrica del sensor (por ejemplo V) a las unidades medidas (por ejemplo K) requiere dividir la salida eléctrica por la pendiente 
+(o multiplicar por su recíproco). Además, con frecuencia se agrega o resta una compensación. Por ejemplo, se debe agregar -40 a la salida si la salida de 0 V corresponde a la 
+entrada de -40 \textdegree C.\\
+
+\begin{itemize}
+ \item Sensibles a la propiedad medida.
+ \item Insensibles a cualquier otra propiedad que pueda encontrarse en su aplicación.
+ \item No influyen en la propiedad medida.
+\end{itemize}
+
+Para que una señal de sensor analógico sea procesada o utilizada en un equipo digital, necesita convertirse en una señal digital, utilizando un convertidor de analógico a 
+digital añadiendo un posible error a la salida.\\
+
+
 \subsection{Características de los sensores}
 
-El transductor  ideal  sería  aquel  en  que  la  relación  entre la magnitud de entrada y la 
+El sensor  ideal  sería  aquel  en  que  la  relación  entre la magnitud de entrada y la 
 magnitud de salida fuese proporcional y de respuesta instantánea e idéntica para todos los elementos de un mismo tipo. \\
 
-Sin  embargo, la  respuesta  real  de  los  transductores  nunca  es del todo lineal, tiene un rango  limitado  de  validez que  suele  estar afectada por perturbaciones del entorno exterior además de tener un cierto retardo en la respuesta. \\
+Sin  embargo, la respuesta real de los sensores  nunca  es del todo lineal, tiene un rango  limitado  de  validez que  suele  estar afectada por perturbaciones del entorno exterior además de tener un cierto retardo en la respuesta. \\
 
-Las características de los transductores se pueden agrupar en dos grandes bloques:\\
+Las características de los sensores se pueden agrupar en dos grandes bloques en cuanto a sus característica se refiere:\\
 
 \begin{enumerate}
  \item \textbf{Características estáticas}, que describen la actuación del sensor en régimen permanente o 
@@ -191,6 +242,11 @@ con cambios muy lentos de la variable a medir. \\
 \subsubsection{Estáticas}
 
 Instrumentos basados en la medición de parámetros estables, es decir, mediciones de valores que no presenten variaciones bruscas en su magnitud de salida.\\
+
+\textbf{Sensibilidad:}\\
+
+La sensibilidad de un sensor indica cuánto cambia la salida del sensor cuando cambia la cantidad de entrada que se mide. Por ejemplo, si el mercurio en un termómetro se mueve
+1 cm cuando la temperatura cambia en 1 grado, la sensibilidad es 1 cm/C (es básicamente la pendiente Dy/Dx asumiendo una característica lineal).\\
 
 \textbf{Rango de medida:}\\
 
@@ -228,14 +284,13 @@ cuando sucedan estas variaciones.\\
 
 \textbf{Velocidad de respuesta:}\\
 
-Mide la capacidad del sensor para que la señal de salida siga sin 
-retrazo las variaciones de la señal de entrada. \\
+Mide la capacidad del sensor para que la señal de salida siga sin retraso las variaciones de la señal de entrada. \\
 
 \textbf{Respuesta en frecuencia:}\\
 
- mide la capacidad del sensor para seguir las variaciones de la 
+Mide la capacidad del sensor para seguir las variaciones de la 
 señal  de  entrada  a  medida  que  aumenta  la  frecuencia,  generalmente  los  sensores 
-convencionales presentan una respuesta del tipo pasabajos.\\
+convencionales presentan una respuesta del tipo paso bajo.\\
 
 \textbf{Estabilidad:}\\
 
@@ -300,26 +355,15 @@ o niveles en los que se encuentran los protocolos que implementan las funciones 
 Siendo, por tanto, el modelo OSI el empleado en el estudio de las redes de datos y el modelo o arquitectura TCP/IP como un modelo real
 empleado es las redes actuales.\\
 
-En la siguiente figura \ref{diagram:modelo-osi-tcp} se aprecian los niveles o capas de los modelos OSI y TCP/IP.\\
+La Figura \ref{diagram:modelo-osi-tcp} representa los distintos niveles o capas de los modelos OSI y TCP/IP y la disposición de los sockets dentro de ellos.\\
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.8]{imagenes/osi-tcp.png}
+    \includegraphics[scale=0.4]{diagramas/modelo-capas.png}
   \end{center}
-  \caption{ Representación de capas o niveles OSI y TCP/IP.}
+  \caption{ Representación de los modelos de capas o niveles OSI y TCP/IP.}
   \label{diagram:modelo-osi-tcp}
 \end{figure}
-
-Los sockets dentro del modelo TCP/IP se pueden ver como una interfaz con la capa de transporte.
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[scale=0.5]{imagenes/modelo-tcp-ip-socket.png}
-  \end{center}
-  \caption{ Representación de los sockets como una interfaz de la capa de transporte del protocolo TCP/IP.}
-  \label{diagram:socket}
-\end{figure}
-
 
 \section{Streaming}
 \label{sec:def-streaming}
@@ -328,7 +372,7 @@ La retransmisión, streaming o también denominado transmisión, es la distribuc
 de manera que el usuario \emph{``consume''} el producto medida que es descargado. La palabra retransmisión se refiere a una corriente continua la cual fluye sin interrupción,
 habitualmente audio o vídeo.\\
 
-Este tipo de tecnología funciona mediante un búfer de datos que va almacenando el flujo de descarga en la estación del usuario para inmediatamente mostrarle el material descargado. Esto se contrapone al mecanismo de
+Este tipo de tecnología funciona mediante un buffer de datos que va almacenando el flujo de descarga en la estación del usuario para inmediatamente mostrarle el material descargado. Esto se contrapone al mecanismo de
 descarga de archivos, que requiere que el usuario descargue los archivos por completo para poder acceder al contenido.\\
 
 Como requisito fundamental, la retransmisión requiere de una conexión por lo menos de igual ancho de banda que la tasa de transmisión del servicio. Los servicios de streaming en 

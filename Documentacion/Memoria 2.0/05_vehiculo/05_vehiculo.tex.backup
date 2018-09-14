@@ -24,7 +24,7 @@ sus diferentes interconexiones.\\
 El chasis consiste en una estructura interna que sostiene, aporta rigidez y da forma a un vehículo. Es análogo al esqueleto de un animal.
 Para el caso que nos compete, el vehículo desarrollado consta de un armazón​ que sirve de sujeción de los componentes mecánicos, como el sistema de propulsión y suspensión de las
 ruedas, incluyendo la carrocería además de los diferentes componentes electrónicos.​ Este robot debe ser capaz de acceder a y desenvolverse por zonas de difícil acceso, por ello de
-que debe disponer de un tamaño compacto que facilite el desplazamiento, lo mantenega en equilibrio en todo momento y que le permita cambiar de dirección fácilmente.\\
+que debe disponer de un tamaño compacto que facilite el desplazamiento, lo mantenga en equilibrio en todo momento y que le permita cambiar de dirección fácilmente.\\
 
 \subsection{Tracción y dirección}
 
@@ -32,7 +32,7 @@ Para generar el movimiento, se necesita algún dispositivo que proporcione una f
 Se ha optado por la incorporación de ruedas para desplazarse, debido a su mayor agilidad y fácil manejo.\\
 
 Estos equipos suelen utilizar baterías para alimentar los motores y electrónica, y por tanto, la fuente de alimentación suele ser corriente continua. Utilizando este tipo de
-fuente de alimentación, el tipo de dispositivo a utilizar suele variar respecto de las necesidades de cada equipo, en la sección \ref{sub:alimentación} se encuentra información7
+fuente de alimentación, el tipo de dispositivo a utilizar suele variar respecto de las necesidades de cada equipo, en la sección \ref{sub:alimentación} se encuentra información
 referente a las mismas.\\
 
 \subsubsection{Motores de corriente continua}
@@ -91,6 +91,7 @@ que la placa no dispone de potencia suficiente para mover actuadores. De hecho, 
 realicen el trabajo pesado.\\
 
 \subsection{Driver motores}
+\label{sec:drivers}
 
 Un driver motor es un dispositivo, o grupo de dispositivos, que se utilizan para controlar de una manera predeterminada el funcionamiento de un motor eléctrico. El control 
 se consigue mediante unas señales de entrada, ya sean analógicas o bien digitales, con las que 
@@ -106,7 +107,7 @@ posibles sobrecargas y fallas que puedan aparecer.
 \end{itemize}
 
 Para ello empleamos el L298N, un controlador (driver) de motores integrado en un módulo, el cual nos permite encender y controlar dos motores de corriente continua desde una Raspberry Pi, Arduino o
-cualquier placa similiar, variando tanto la dirección como la velocidad de giro.\\
+cualquier placa similar, variando tanto la dirección como la velocidad de giro.\\
 
 La corriente máxima que el L298N es capaz de suministrar a los motores es, en teoría, 2A por salida, permitiendo alcanzar hasta los 3A de pico, y una tensión de alimentación de 3V
 a 35V. Sin embargo, el L298N tiene una eficiencia energética extremadamente baja. La electrónica supone una caída de tensión de unos 3V, es decir, la tensión que recibe el motor
@@ -161,10 +162,10 @@ que este gira en un sentido y cuando se abren los interruptores \textbf{S1} y \t
 
 Y, por contra, si todos los interruptores están abiertos el motor no girará. \\
 
-Para el caso del proyecto, hemos empleado utilizado las salidas para la conexión de dos motores, empeando así todas las que el driver proporciona. Una de ellas para traccionar
+Para el caso del proyecto, hemos empleado utilizado las salidas para la conexión de dos motores, empleando así todas las que el driver proporciona. Una de ellas para traccionar
 el vehículo y la segunda para el accionamiento de la dirección.\\
 
-Se ha optado finalmente por emplear un motor DC para la dirección debido que el chasis empleado para la constucción del robot ya lo traía así incorporado y se ha decicido reutilizar.
+Se ha optado finalmente por emplear un motor DC para la dirección debido que el chasis empleado para la construcción del robot ya lo traía así incorporado y se ha decidido reutilizar.
 De igual modo se podría haber empleado un servomotor para el accionamiento de la dirección, pero debido a una mayor simplicidad en el montaje y puesto que el motor ya incorporado
 dispone de una mejor sujeción al chasis así se ha decidido.\\
 
@@ -196,7 +197,7 @@ Motor de tracción del vehículo situado en su parte trasera, figura \ref{img:mo
 \label{sub:alimentación}
 
 Resulta de vital importancia el dotar de energía nuestro proyecto siendo una de las partes más importantes y críticas del mismo. La selección de los componentes adecuados
-require una realización previa de estudio de las necesidades que se desean cubrir puesto que una decisión equivocada puede implicar un defectuoso
+requiere una realización previa de estudio de las necesidades que se desean cubrir puesto que una decisión equivocada puede implicar un defectuoso
 comportamiento del conjunto.\\
 
 Por tanto, cuando se escoja la batería se deben tener en cuenta los siguientes puntos:\\
@@ -357,7 +358,7 @@ conocida como Wire-Wrap o cables tipo jumper-wire.\\
   \label{figura:cables_interconexion}
 \end{figure}
 
-Para la fijación de los diferentes módulos al chasis se ha empleado tornillería y bridas, éstas últimas para maneter el cableado más ordenado.\\
+Para la fijación de los diferentes módulos al chasis se ha empleado tornillería y bridas, éstas últimas para mantener el cableado más ordenado.\\
 
 \subsection{Conexionado general}
 
@@ -366,7 +367,7 @@ La siguiente imagen \ref{vista-conexiones} muestra una visión general de la dis
 
 \begin{figure}[H]
   \begin{center}
-   \includegraphics[scale=0.2]{imagenes/robot/conexionado_general.jpeg}
+   \includegraphics[scale=0.4]{imagenes/robot/general.png}
   \end{center}
   \caption{Vista del conexionado general del robot.}
   \label{vista-conexiones}
@@ -425,11 +426,25 @@ Representación del conexionado de los leds, figura \ref{img:leds_conexiones}.\\
 
 Junto con los leds de iluminación también se ha conectado un puntero láser accionable por el operador.
 
+
+\subsubsection{Conexionado}
+
+El conexionado del puntero láser se ha realizado del mismo modo que un para led convencional.\\
+
 \begin{figure}[H]
   \begin{center}
-   \includegraphics[scale=0.2]{imagenes/robot/conexionado_general.jpeg}
+   \includegraphics[scale=0.5]{imagenes/leds_conexion.png}
   \end{center}
-  \caption{Vehículo SensorRS con el puntero láser encendido.}
+  \caption{Conexionado de los leds de iluminación.}
+  \label{img:leds_conexiones}
+\end{figure}
+
+
+\begin{figure}[H]
+  \begin{center}
+   \includegraphics[scale=0.2]{imagenes/robot/puntero_laser.jpeg}
+  \end{center}
+  \caption{Vehículo SensorRS con el puntero láser situado en un lateral.}
   \label{vista-conexiones}
 \end{figure}
 
@@ -464,7 +479,6 @@ distancia a la que se encuentra el objeto, cuanto mayor es la duración del puls
 encuentra el objeto. Utilizando una interrupción que se produzca por cada flanco de subida y
 bajada, se puede obtener el ancho de dicho pulso y mediante el uso de un timer se puede medir el
 tiempo transcurrido entre dichos flancos.\\
-
 
 \begin{figure}[H]
   \begin{center}
@@ -525,7 +539,6 @@ El sensor HC-SR04 dispone de 4 pines, la toma de tierra \textbf{GND}, pin de ech
 \end{figure}
 
 
-
  \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=0.2]{imagenes/robot/ultrasonido_instalado.jpeg}
@@ -534,15 +547,13 @@ El sensor HC-SR04 dispone de 4 pines, la toma de tierra \textbf{GND}, pin de ech
   \label{figura:sensor_mq_2_potenciometro}
 \end{figure}
 
-
-
 \subsection{Sensor de temperatura y humedad DHT11}
 \label{sec:dth11}
 
 % https://programarfacil.com/blog/arduino-blog/sensor-dht11-temperatura-humedad-arduino/
 
 Para poder controlar la temperatura y la humedad relativa de la zona por la que se mueve el
-robot, se ha decidido añadir un sensor de temperatura. En concreto se trata del sensor dht11, que
+robot, se ha decidido añadir un sensor de temperatura. En concreto se trata del sensor DHT11, que
 se controla por un pin de propósito general y cuyas características se adjuntan en la referencia \ref{}.
 
 \begin{figure}[H]
@@ -553,9 +564,8 @@ se controla por un pin de propósito general y cuyas características se adjunta
   \label{figura:sensor_dth11}
 \end{figure}
 
-El sensor dht11 en su versión PCB consta de tres pines. Un pin \textbf{VCC} de alimentación, uno \textbf{DATA} para la transferencia de
+El sensor DHT11 en su versión PCB consta de tres pines. Un pin \textbf{VCC} de alimentación, uno \textbf{DATA} para la transferencia de
 datos que se conecta al microcontrolador y un pin que conectado a tierra \textbf{GND}.\\
-
 
 \subsubsection{transmisión de datos}
 
@@ -583,14 +593,14 @@ paridad. Si nos centramos en la imagen anterior y sumamos los bits, comprobamos 
 0011 0101 + 0000 0000 + 0001 1000 + 0000 0000 = 0100 1101
 \end{equation}
 
-El sensor dht11 tiene una resolución en el sensor de temperatura de un grado centígrado y en la
+El sensor DHT11 tiene una resolución en el sensor de temperatura de un grado centígrado y en la
 humedad relativa del 1 por ciento y se recomienda respetar un intervalo de al menos un segundo entre las
 tomas de medidas para el correcto funcionamiento del dispositivo. Ante frecuencias de trabajo
 mayores, se daña el dispositivo.\\
 
 \subsubsection{Conexionado}
 
-El sensor DHT11 integrado dentro de una PCB ya viene con la resistencia pull-up integrada. Esta resistenncia puede resultar muy útil en ocasiones, pero si añadimos un cable
+El sensor DHT11 integrado dentro de una PCB ya viene con la resistencia pull-up integrada. Esta resistencia puede resultar muy útil en ocasiones, pero si añadimos un cable
 de más de 20 metros, deberemos tener en cuenta dicho factor.
 
 Este modelo de DHT11, como comentamos anteriormente, dispone de 3 pines, la toma de tierra \textbf{GND}, para los datos \texbf{DATA} y para la alimentación \textbf{VCC} 
@@ -611,7 +621,7 @@ Este modelo de DHT11, como comentamos anteriormente, dispone de 3 pines, la toma
 Para la detección de gas se ha empleado un sensor basado en la serie MQ ampliamente utilizados y bastante populares en muy diversas aplicaciones entre ellas incluida la robótica.
 Existen una lista grande de sensores MQ donde cada uno fue diseñado para detectar un tipo de gas o sustancia especifica (o conjunto de ellas). El utilizado en el presente trabajo 
 es un MQ-2 que detecta gases combustibles, incluyendo propano, butano, gas natural y humo. Para su activación y prueba basta con usar un encendedor para mostrar su operación. 
-Otros modelos pueden detectar gases más raros como el hidrogeno o CO (monoxido de carbono), o incluso gases toxicos como el amoníaco.\\
+Otros modelos pueden detectar gases más raros como el hidrógeno o CO (monóxido de carbono), o incluso gases tóxicos como el amoníaco.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -621,7 +631,7 @@ Otros modelos pueden detectar gases más raros como el hidrogeno o CO (monoxido 
   \label{figura:sensor_mq_2}
 \end{figure}
 
-El sensor puede ser conectado de manera digital, analógica o mixta. Con la conexón digital podemos usarlo para detección de seguridad, con la analógica podemos medir la cantidad 
+El sensor puede ser conectado de manera digital, analógica o mixta. Con la conexión digital podemos usarlo para detección de seguridad, con la analógica podemos medir la cantidad 
 de gas en el aire en ppm (partes por millón), y si usamos ambos a la vez, podemos obtener una funcionalidad mixta.\\
 
 Este tipo de sensores presentan la particularidad de que necesitan un tiempo de “calentamiento” antes de poder arrojar lecturas válidas. Es aconsejable un mínimo de 2 minutos
@@ -688,7 +698,7 @@ La placa utilizada, KY-038 incorpora un micrófono junto con un comparador LM393
 
 Los pines de los que dispone el sensor son: \textbf{AO}, Analog Output, \textbf{GND}, Ground, \textbf{VCC}, Alimentación de 3.3V a 12V y \textbf{DO}, Digital Output.\\
 
-Lo más característico de este sensor es que la señal que nos entrega es digital y analógica, lo cual nos permite decidir cual utilizar segun nuestras necesidades.
+Lo más característico de este sensor es que la señal que nos entrega es digital y analógica, lo cual nos permite decidir cual utilizar según nuestras necesidades.
 Si necesitamos saber el valor del sensor, podremos utilizar directamente la salida analógica para conseguir los datos crudos. Sino, podemos utilizar la salida digital, la cual
 se activa o se desactiva según si el sensor llega a medir la intensidad del sonido que le configuremos, mediante la definición de la sensibilidad del sensor, de igual modo al sensor de detección de gases. \\
 
@@ -812,8 +822,8 @@ entradas digitales de Arduino.\\
 
 \subsection{Sensor de proximidad}
 
-La familia de los sensores Sharp GP2Dxx son una gama de sensores muy utilizados tanto en lo que viene a denominarse rob́otica ḿovil casera como en el ́ambito de investigación debido
-principalmente a su facilidad de integracíon y reducido coste (unos 15  Euros). En la Figura \ref{figura:sensor_sharp} puede verse una imagen de un GP2D12.\\
+La familia de los sensores Sharp GP2Dxx son una gama de sensores muy utilizados tanto en lo que viene a denominarse robótica móvil casera como en el ́ámbito de investigación debido
+principalmente a su facilidad de integración y reducido coste (unos 15  Euros). En la Figura \ref{figura:sensor_sharp} puede verse una imagen de un GP2D12.\\
 
  \begin{figure}[H]
   \begin{center}
@@ -828,7 +838,7 @@ lineal sino que sigue una curva, la cual se muestra en la figura \ref{figura:cur
 
  \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=1.2]{imagenes/curva_sharp.png}
+    \includegraphics[scale=1.4]{imagenes/curva_sharp.png}
   \end{center}
   \caption{Curva de tensión de salida según la distancia al obstáculo.}
   \label{figura:curva_sharp}
@@ -885,3 +895,53 @@ de Arduino.\\
   \label{figura:pines_sharp}
 \end{figure}
 
+
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.2]{imagenes/robot/sharp_instalado.jpeg}
+  \end{center}
+  \caption{Sensor de proximidad Sharp GP2D12 instalado en la parte frontal del vehículo.}
+  \label{figura:sensor_mq_2_potenciometro}
+\end{figure}
+
+
+\subsection{Buzzer o zumbador}
+
+Un buzzer pasivo, un zumbador o altavoz, son dispositivos que permiten convertir una señal eléctrica en una onda de sonido. Son unos dispositivos muy simples ya que no disponen 
+de electrónica interna, por lo que tan solo debemos proporcionar una señal eléctrica para conseguir el sonido deseado.\\
+
+Por contra, los buzzer activos disponen de un oscilador interno siendo exclusivamente necesario alimentarlos para que se emita un sonido.\\
+
+Los buzzer pasivos, como el incorporado en el presente trabajo, tienen la particularidad de que al proporcionar y controlar nosotros la señal eléctrica, poseen la ventaja de
+que podemos variar el tono emitido modificando la señal que aplicamos al pin de control permitiendo la generación de melodías.\\
+
+En el caso que compete a este proyecto se ha empleado un buzzer para la emisión de sonidos intermitentes a modo de alarma activados tras la detección de alguna situación de riesgo.
+Estas situaciones son determinadas por parte de alguno de los demás sensores de los que dispone el vehículo, como por ejemplo
+puede ser la detección de llamas cercanas o ante la presencia de gases peligrosos.\\
+
+
+Tanto los buzzers como los altavoces son elementos denominados transductores electroacústicos, es decir, son dispositivos que poseen la propiedad de convertir señales eléctricas
+en sonido, que para el caso concreto de los buzzers entran en la categoría de los transductores piezoeléctricos. Esto significa que tienen la propiedad de variar su volumen al 
+ser atravesados por corrientes eléctricas aprovechando este fenómeno para hacer vibrar una membrana al atravesarlo con una señal eléctrica y con la consecuente emisión del sonido.\\
+
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.6]{imagenes/diagrama_buzzer.png}
+  \end{center}
+  \caption{Representación de la variación de volumen del material piezoeléctrico al paso de la corriente.}
+  \label{figura:sensor_mq_2_potenciometro}
+\end{figure}
+
+
+\subsubsection{Conexionado}
+
+La conexión con Arduino como en la mayoría de los casos resulta bastante sencilla. Simplemente alimentamos el módulo conectando \textbf{Vcc} y \textbf{GND} a Arduino, y la entrada
+de señal conectada a cualquier pin digital de Arduino configurado como salida.\\
+
+ \begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.6]{imagenes/conexionado_buzzer.png}
+  \end{center}
+  \caption{Conexionado del buzzer.}
+  \label{figura:pines_sharp}
+\end{figure}

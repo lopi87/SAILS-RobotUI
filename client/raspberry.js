@@ -126,6 +126,8 @@ io.sockets.on('connection', function (socket)
         serial_transmission('SRV-255', 10);
       case "RIGHT":
         serial_transmission('SRV--255', 10);
+      case "STOP":
+        serial_transmission('MOTOR-0', 10);
     }
   });
 

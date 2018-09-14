@@ -11,6 +11,12 @@
 \newblock {\em WebSocket: Lightweight Client-Server Communications}.
 \newblock O'Reilly Media, 2012.
 
+\bibitem{book:guiapracticasensores}
+{Antonio Serna Ruiz & Francisco Antonio Ros García & Juan Carlos Rico
+  Noguera}.
+\newblock {\em Guía Práctica de Sensores}.
+\newblock Creaciones Copyright, 2015.
+
 \bibitem{book:}
 A~Willey Brand.
 \newblock {\em Amazon Web Services for Dummies}.
@@ -26,6 +32,11 @@ Mike Cantelon, Alex~R. Young, Marc Harter, T.J. Holowaychuk, and Nathan
 Douglas Crockford.
 \newblock {\em JavaScript: The Good Parts}.
 \newblock O'Reilly, 2008.
+
+\bibitem{book:telemetria}
+{Diego Aranda}.
+\newblock {\em Electrónica: plataformas Arduino y Raspberry Pi}.
+\newblock Manuales USERS, 2015.
 
 \bibitem{book:Raspberry}
 {Eben Upton and Gareth Halfacree}.
@@ -68,6 +79,12 @@ Nilson~Mori Lazarin and Carlos~Eduardo Pantoja.
 \newblock {A Robotic-agent Platform For Embedding Software Agents usin
   Raspberry Pi and Arduino Boards}.
 \newblock Technical report, UnED Nova Friburgo, 6 2011.
+
+\bibitem{book:sensoresyactuadores}
+{Leonel G. Corona Ramírez & Griselda S. Abarca Jiménez & Jesús Mares
+  Carreño}.
+\newblock {\em Sensores y actuadores, Aplicaciones con Arduino}.
+\newblock Grupo Editorial Patria, 2014.
 
 \bibitem{book:sails}
 {Irl Nathan} {Mike McNeil}.

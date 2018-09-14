@@ -28,7 +28,7 @@ causar un gran desperdicio. Con los robots, se elimina el riesgo: el ruido, el c
 proyecto a otro más rápido que las personas.\\
 
 En el caso de la exploración de aguas profundas, incluso los buzos con equipo moderno y años de experiencia pueden sucumbir a diversos peligros, incluidos los depredadores del
-mar y los efectos de las elevadas presiones. En la actualidad existen robots de exploración submarina capaces explorar y relaizar tareas 
+mar y los efectos de las elevadas presiones. En la actualidad existen robots de exploración submarina capaces explorar y realizar tareas 
 a elevadas profundidades sin el peligro humano que estas acciones conllevarían.\\
 
 Los robots han sido probados para una amplia gama de aplicaciones de respuesta a emergencias, incluyendo la extinción de incendios forestales, inundaciones y otras catástrofes
@@ -37,7 +37,7 @@ naturales.\\
 Con el tiempo, los robots se especializarán y adaptarán cada vez mejor a situaciones que serían potencialmente letales para los humanos. Con una capacidad de maniobra y adaptación,
 de lo que podemos concluir que los robots se han transformado en el compañero perfecto para cualquier tipo de misión de exploración o de rescate de alto riesgo.\\
 
-Estas sistuaciones anteriormente descritas combinadas a que en la actualidad la robótica cada vez se encuentra más presente en nuestras vidas cotidianas hacen que cualquier usuario
+Estas situaciones anteriormente descritas combinadas a que en la actualidad la robótica cada vez se encuentra más presente en nuestras vidas cotidianas hacen que cualquier usuario
 pueda elaborar sus propios proyectos robóticos adaptables a cualquier entorno. Prueba de ello es que si realizamos cualquier búsqueda en internet podemos encontrar multitud 
 de proyectos robóticos en la red. Existen excelentes portales como \url{http://blog.bricogeek.com/} por nombrar alguno de ellos, donde se
 publican guías paso a paso de proyectos novedosos y originales para que cualquier usuario pueda hacerlos realidad.\\
@@ -55,19 +55,62 @@ Tras la realización de un sondeo entre numerosas bases de datos de artículos c
 en cuanto a los requisitos y características del presente proyecto. Dichos artículos han sido tomados como punto de partida para el abordaje del problema y su estudio.\\
 
 Existen numerosos artículos en los que se aborda el diseño y desarrollo y teleoperación de sistemas robóticos mediante la utilización de WebSockets y mediante la programación de microcontroladores. Por citar algunos de ellos como; \emph{Design and Development of a Robotic Teleoperation System using
-Duplex WebSockets suitable for Variable Bandwidth Networks} \cite{article:1}, en el que se describe el desarrollo de un sistema teleoperable por WebSockets.\\
+Duplex WebSockets suitable for Variable Bandwidth Networks} \cite{article:1}, en el que se describe el desarrollo de un sistema teleoperable por WebSockets destacando entre otros aspectos sus ventajas como
+un menor consumo del ancho de banda, ver Figura \ref{fig:consumo_http_websocket}.\\
+  
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.4]{imagenes/http_websocket_consumo.png}
+  \end{center}
+  \label{fig:consumo_http_websocket}
+ \caption{ Comparativa del consumo de ancho de banda entre HTTP y WebSockets.}
+\end{figure}
+  
   
 Otros estudios, en cambio, se centran más en analizar las diferentes situaciones de sobrecarga en la red, anchos de banda, cargas del sistema, etcétera, con la finalidad de someter a pruebas de estrés
 los diferentes protocolos implicados. Como por ejemplo: \emph{Analysis of WebSockets as the New Age Protocol for Remote Robot Tele-operationt} \cite{article:2}.\\
+ 
+   
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{imagenes/tiempos_conexion.png}
+        \caption{Flujo de una conexión HTTP.}
+        \label{fig:gull}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.5\textwidth}
+        \includegraphics[width=1.19\textwidth]{imagenes/websocket_fases.png}
+        \caption{Flujo de conexión Websocket. }
+        \label{fig:tiger}
+    \end{subfigure}
+    \caption{Gráfico representativo de las etapas en una petición HTTP frente a una petición por Websocket  \cite{article:3}.}\label{fig:animals}
+\end{figure}
+  
   
 Por otra parte, el artículo \emph{ Remote Monitoring System based on a Wi-Fi Controlled Car Using Raspberry Pi } \cite{article:3}, describe un sistema de monitorización construido sobre una placa 
 Raspberry Pi de las mismas características que la empleada para el robot SensorRS.\\ 
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.4]{imagenes/esquema_articulo.png}
+  \end{center}
+  \label{fig:esquema_articulo}
+ \caption{Diagrama de bloques del sistema referenciado en \cite{article:3}.}
+\end{figure}
   
   
 También existen numerosos artículos donde detallándose el procedimiento para la construcción de proyectos robóticos con Arduino, como por ejemplo \emph{Design and Control of a Two-Wheel Self-Balancing Robot usin
-g the Arduino Microcontroller Board} \cite{article-4} o proyectos que combinan el uso de una placa Raspberry Pi con una Arduino, como puede ser \emph{A Robotic-agent Platform For Embedding Software Agents usin Raspberry Pi and Arduino Boards} \cite{article:5}.\\
+g the Arduino Microcontroller Board} \cite{article-4} o proyectos que combinan el uso de una placa Raspberry Pi con una Arduino, como puede ser \emph{A Robotic-agent Platform For Embedding Software Agents usin Raspberry Pi and Arduino Boards} \cite{article:5} el cual
+emplea un sistema de formato de mensajes para la comunicación entre Arduino y Raspberry Pi muy similar al empleado en el presente proyecto..\\
   
- 
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.4]{imagenes/esquema_articulo.png}
+  \end{center}
+  \label{fig:esquema_articulo}
+ \caption{Formato de mensaje para la comunicación entre Arduino y Raspberry Pi \cite{article:5}.}
+\end{figure}
+  
 Es, por todo lo anterior, que en el presente proyecto se ha intentado dotar al sistema de una característica añadida. Permitir el seguimiento por parte parte del usuario que realiza las funciones de teleoperador. Además de enfocarlo
 desde la perspectiva del entretenimiento y la enseñanza.\\
 
@@ -100,7 +143,7 @@ WebStorm es un IDE de JavaScript ligero pero potente, perfectamente equipado par
 
 Web: \url{https://http://fritzing.org/home//} \cite{website:1} \\
 
-\\Fritzing es una iniciativa de hardware de código abierto que hace que los productos electrónicos sean accesibles como material creativo para cualquier persona.\\
+Fritzing es una iniciativa de hardware de código abierto que hace que los productos electrónicos sean accesibles como material creativo para cualquier persona.\\
 
 Permitiendo la realización de diagramas, circuitos electrónicos y montajes, también sirve para hacer circuitos impresos PCB de manera profesional.
 
@@ -309,12 +352,12 @@ Web: \url{https://www.arduino.cc/}\\
 Arduino es una compañía open source y open hardware, así como un proyecto y comunidad internacional que diseña y manufactura placas de desarrollo de hardware para construir
 dispositivos digitales y dispositivos interactivos que puedan sensar y controlar objetos del mundo real. Arduino se enfoca en acercar y facilitar el uso de la electrónica y 
 programación de sistemas embebidos en proyectos multidisciplinarios. Los productos que vende la compañía son distribuidos como Hardware y Software Libre, bajo la Licencia Pública 
-General Reducida de GNU (LGPL) o la Licencia Pública General de GNU (GPL),1​permitiendo la manufactura de las placas Arduino y distribución del software por cualquier individuo.
+General Reducida de GNU (LGPL) o la Licencia Pública General de GNU (GPL), ​permitiendo la manufactura de las placas Arduino y distribución del software por cualquier individuo.
 Las placas Arduino están disponibles comercialmente en forma de placas ensambladas o también en forma de kits hazlo tu mismo (DIY, por sus siglas en inglés de "Do It Yourself").\\
 
 Los diseños de las placas Arduino usan diversos microcontroladores y microprocesadores. Generalmente el hardware consiste de un microcontrolador Atmel AVR, conectado bajo la 
 configuración de "sistema mínimo" sobre una placa de circuito impreso a la que se le pueden conectar placas de expansión (shields) a través de la disposición de los puertos de 
-entrada y salida presentes en la placa seleccionada. Las shields complementan la funcionalidad del modelo de placa empleada, agregando circuiteria, sensores y módulos de 
+entrada y salida presentes en la placa seleccionada. Las shields complementan la funcionalidad del modelo de placa empleada, agregando circuitería, sensores y módulos de 
 comunicación externos a la placa original. La mayoría de las placas Arduino pueden ser energizadas por un puerto USB o un puerto barrel Jack de 2.5mm. La mayoría de las placas 
 Arduino pueden ser programadas a través del puerto Serial que incorporan haciendo uso del Bootloader que traen programado por defecto. El software de Arduino consiste de dos 
 elementos: un entorno de desarrollo (IDE) (basado en el entorno de processing y en la estructura del lenguaje de programación Wiring), y en el cargador de arranque (bootloader,
@@ -366,7 +409,7 @@ El módulo controlador de motores L298N H-bridge o puentes H, nos permite contro
 gracias a los 2 los dos H-bridge que dispone.\\
 
 Básicamente un puente-H o H-bridge es un componente formado por 4 transistores que nos permite invertir el sentido de la corriente, y de esta forma podemos 
-invertir el sentido de giro del motor \footnote{Podrá acceder a información más detallada de la presente controladora en la sección correspondente al capítulo }.\\
+invertir el sentido de giro del motor \footnote{Podrá acceder a información más detallada de la presente controladora en la sección correspondiente al capítulo \ref{sec:drivers} }.\\
 
 El rango de tensiones en el que trabaja este módulo va desde 3V hasta 35V, y una intensidad de hasta 2A. A la hora de alimentarlo hay que tener en cuenta que la 
 electrónica del módulo consume unos 3V, así que los motores reciben 3V menos que la tensión con la que alimentemos el módulo.\\
@@ -402,7 +445,7 @@ de combustibles siendo muy recomendables ya que ofrecen una prestaciones superio
 
 \subsection{ Alimentación USB/Protoboard }
 
-Para alimentar la protoboard sin tener que modificar un cable USB, se ha decidido utilizar una pequeña tarjeta que se conecta en los carriles de tensión de la tarjeta Protoboard, y
+Para alimentar la protoboard sin tener que modificar un cable USB, se ha decidido utilizar una pequeña tarjeta que se conecta en los carriles de tensión de la tarjeta protoboard, y
 proporciona los 5 V de entrada del USB (o de un conector Jack) a las líneas de alimentación de la protoboard. Además este dispositivo integra un interruptor, que permitirá activar y
 desactivar los motores, y puede regular la tensión a 3,3 Voltios.\\
 
@@ -464,7 +507,7 @@ por prácticamente todas las distribuciones Linux.\\
 
 \subsection{Gamepad}
 
-Gamepad inalámbrico con conexión bluethoot para el manejo del vehículo desde un dispositivo móvil gracias al sistema de acoplamiento del que dispone, Ver figura \ref{figura:control_pad}.
+Gamepad inalámbrico con conexión Bluethoot para el manejo del vehículo desde un dispositivo móvil gracias al sistema de acoplamiento del que dispone, Ver figura \ref{figura:control_pad}.
 
 \begin{figure}[H]
   \begin{center}
