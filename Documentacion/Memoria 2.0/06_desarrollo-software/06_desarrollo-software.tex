@@ -104,7 +104,7 @@ La Figura \ref{figura:diagrama-comunicacion-robot} corresponde con el diagrama d
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.4]{diagramas/diagrama_bloques_robot.png}
+    \includegraphics[scale=0.4]{diagramas/diagrama_bloques_general.png}
   \end{center}
   \caption{Diferentes flujos de comunicación abiertos por SensorRS.}
   \label{figura:diagrama-comunicacion-robot}
@@ -309,7 +309,7 @@ suficiente fuerza como para traccionar el vehículo evitando así consumos innec
 
 \subsubsection{Escritura en puerto serie}
 
-A continuación se muestra un ejemplo de envío de los valores de temperatura y humedad del sensor Dth11 conectado al Arduino para su transferencia a la Placa Raspberry Pi:\\
+A continuación se muestra un ejemplo de envío de los valores de temperatura y humedad del sensor DTH11 conectado al Arduino para su transferencia a la Placa Raspberry Pi:\\
 
 \begin{lstlisting}[language=C++]
 #include <SimpleDHT.h>
@@ -561,7 +561,7 @@ var io =io_client.listen(8085, { log: false });
 var ffmpeg_command, running_camera = false, child_process = require('child_process');
 
 var Gpio = require('pigpio').Gpio;
-// Pines utilizados. Motores izquierdos: 2 y 3, motores derechos: 17 y 27
+// Pines utilizados. Motores izquierdos: 2 y 3, motores derechos: 17 y 27 en caso de conectarlos a la Raspberry Pi.
 var gpio2 = new Gpio(2, {mode: Gpio.OUTPUT}),
   gpio3 = new Gpio(3, {mode: Gpio.OUTPUT}),
   gpio17 = new Gpio(17, {mode: Gpio.OUTPUT}),

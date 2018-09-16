@@ -56,17 +56,17 @@ en cuanto a los requisitos y características del presente proyecto. Dichos art�
 
 Existen numerosos artículos en los que se aborda el diseño y desarrollo y teleoperación de sistemas robóticos mediante la utilización de WebSockets y mediante la programación de microcontroladores. Por citar algunos de ellos como; \emph{Design and Development of a Robotic Teleoperation System using
 Duplex WebSockets suitable for Variable Bandwidth Networks} \cite{article:1}, en el que se describe el desarrollo de un sistema teleoperable por WebSockets destacando entre otros aspectos sus ventajas como
-un menor consumo del ancho de banda, ver Figura \ref{fig:consumo_http_websocket}.\\
+un menor consumo del ancho de banda.\\
   
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=0.4]{imagenes/http_websocket_consumo.png}
   \end{center}
-  \label{fig:consumo_http_websocket}
+  \label{fig:consumos_ancho_banda}
  \caption{ Comparativa del consumo de ancho de banda entre HTTP y WebSockets.}
 \end{figure}
   
-  
+    
 Otros estudios, en cambio, se centran más en analizar las diferentes situaciones de sobrecarga en la red, anchos de banda, cargas del sistema, etcétera, con la finalidad de someter a pruebas de estrés
 los diferentes protocolos implicados. Como por ejemplo: \emph{Analysis of WebSockets as the New Age Protocol for Remote Robot Tele-operationt} \cite{article:2}.\\
  
@@ -79,7 +79,7 @@ los diferentes protocolos implicados. Como por ejemplo: \emph{Analysis of WebSoc
         \label{fig:gull}
     \end{subfigure}
     \begin{subfigure}[b]{0.5\textwidth}
-        \includegraphics[width=1.19\textwidth]{imagenes/websocket_fases.png}
+        \includegraphics[width=0.8\textwidth]{imagenes/websocket_fases.png}
         \caption{Flujo de conexión Websocket. }
         \label{fig:tiger}
     \end{subfigure}
@@ -101,13 +101,13 @@ Raspberry Pi de las mismas características que la empleada para el robot Sensor
   
 También existen numerosos artículos donde detallándose el procedimiento para la construcción de proyectos robóticos con Arduino, como por ejemplo \emph{Design and Control of a Two-Wheel Self-Balancing Robot usin
 g the Arduino Microcontroller Board} \cite{article-4} o proyectos que combinan el uso de una placa Raspberry Pi con una Arduino, como puede ser \emph{A Robotic-agent Platform For Embedding Software Agents usin Raspberry Pi and Arduino Boards} \cite{article:5} el cual
-emplea un sistema de formato de mensajes para la comunicación entre Arduino y Raspberry Pi muy similar al empleado en el presente proyecto..\\
+emplea un sistema de formato de mensajes para la comunicación entre Arduino y Raspberry Pi muy similar al empleado en el presente trabajo.\\
   
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.4]{imagenes/esquema_articulo.png}
+    \includegraphics[scale=0.8]{imagenes/mensaje_formato.png}
   \end{center}
-  \label{fig:esquema_articulo}
+  \label{fig:mensaje_formato}
  \caption{Formato de mensaje para la comunicación entre Arduino y Raspberry Pi \cite{article:5}.}
 \end{figure}
   
@@ -192,6 +192,8 @@ Amazon Web Services (AWS) es una plataforma de servicios de nube que ofrece pote
 \includegraphics[scale=0.3]{imagenes/aws_instance.png}
 \caption{Instancia RobotUI en AWS}
 \end{sidewaysfigure}
+
+Destacar la importancia de la referencia bibliográfica \cite{book:awsdummies} para el conocimiento de los aspectos básicos a la hora de gestionar los servidores virtuales proporcionados por AWS.
 
 
 \subsection{Node js}
@@ -417,12 +419,12 @@ electrónica del módulo consume unos 3V, así que los motores reciben 3V menos 
 Además el L298N incluye un regulador de tensión que nos permite obtener del módulo una tensión de 5V, perfecta para alimentar nuestro Arduino. Eso sí, este regulador sólo 
 funciona si alimentamos el módulo con una tensión máxima de 12V.\\
 
-Es un módulo que se utiliza mucho en proyectos de robótica, por su facilidad de uso y su reducido precio, lo cual ha servido para que sea seleccionado para el presente proyecto.
+Es un módulo que se utiliza mucho en proyectos de robótica, por su facilidad de uso y su reducido precio, lo cual ha servido para que sea seleccionado para el presente trabajo.
 
 \begin{figure}[H]
   \begin{center}
     \includegraphics[scale=0.8]{imagenes/l298n.jpg}\\
-    \caption{Imagen de la Controlador de motores doble puente H - L298N utilizada.}
+    \caption{ Imagen de la controladora de motores doble puente H - L298N utilizada.}
   \end{center}
 \end{figure}
 
@@ -511,7 +513,7 @@ Gamepad inalámbrico con conexión Bluethoot para el manejo del vehículo desde 
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.2]{imagenes/robot/control_pad.jpg}
+    \includegraphics[scale=0.18]{imagenes/robot/control_pad.jpg}
   \end{center}
   \caption{Vista del gamepad utilizado.}
   \label{figura:control_pad}

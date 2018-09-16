@@ -416,6 +416,15 @@ de comunicación o un bus.\\
 En cambio, en la “comunicación en paralelo” todos los bits de cada símbolo se envían al mismo tiempo, y por ello debe haber al menos tantas líneas de comunicación como bits tenga
 la información a transmitir.\\
 
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.6]{imagenes/serie_paralelo.png}
+  \end{center}
+  \label{fig:telemetria}
+ \caption{Diagrama representativo de la comunicación serie frente a la comunicación en paralelo.}
+\end{figure}
+
 \subsection{Características}
 
 La ventaja de la comunicación serie es que necesita un número más pequeño de líneas de transmisión que una comunicación paralela que transmita la misma información. Esta última
@@ -445,23 +454,21 @@ Ejemplos:\\
 
 La modulación de ancho de pulso (PWM) o la modulación de duración de pulso (PDM) es una técnica de modulación utilizada para codificar un mensaje en una señal de pulso. 
 Aunque esta técnica de modulación puede utilizarse para codificar información para la transmisión, su uso principal es permitir el control de la potencia suministrada a los
-dispositivos eléctricos, especialmente a cargas inerciales tales como motores. Además, PWM es uno de los dos principales algoritmos utilizados en los cargadores de baterías solares
-fotovoltaicas, el otro es el seguimiento del punto de máxima potencia.\\
+dispositivos eléctricos, especialmente a cargas inerciales tales como motores \cite{book:pwm}.\\
 
-El valor promedio de voltaje (y corriente) alimentado a la carga se controla al encender y apagar el interruptor entre suministro y carga a una velocidad rápida. Cuanto más tiempo
-esté encendido el interruptor en comparación con los períodos de desconexión, mayor será la potencia total suministrada a la carga.\\
+A continuación se muestran algunos gráficos demostrando señales PWM con diferentes ciclos de trabajo:\\
 
-La frecuencia de conmutación de PWM debe ser mucho más alta que la que afectaría a la carga (el dispositivo que usa la potencia), lo que significa que la forma de onda resultante
-percibida por la carga debe ser lo más suave posible. La velocidad (o frecuencia) a la que debe cambiar la fuente de alimentación puede variar mucho según la carga y la aplicación,
-por ejemplo:\\
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.4]{imagenes/pwm.png}
+  \end{center}
+  \caption{Representación de diferentes ciclos de trabajo de una señal PWM.}
+  \label{figura:sensor_dth11_bits}
+\end{figure}
 
-El cambio debe hacerse varias veces por minuto en una estufa eléctrica; 120 Hz en un atenuador de lámpara; entre unos pocos kilohercios (kHz) y decenas de kHz para un accionamiento
-de motor; y en las decenas o cientos de kHz en amplificadores de audio y fuentes de alimentación de computadoras.\\
-
-
-El término ciclo de trabajo describe la proporción de tiempo \quotes{conectado} al intervalo regular o \quotes{período} de tiempo; un ciclo de trabajo bajo corresponde a la baja potencia,
-ya que la energía está apagada la mayor parte del tiempo. El ciclo de trabajo se expresa en porcentaje, 100\% siendo completamente activado.
 La principal ventaja de PWM es que la pérdida de potencia en los dispositivos de conmutación es muy baja. Cuando un interruptor está apagado prácticamente no hay corriente, y 
 cuando está encendido y la energía se transfiere a la carga, casi no hay caída de tensión en el interruptor. La pérdida de potencia, al ser el producto de voltaje y corriente, es,
 por lo tanto, en ambos casos cercano a cero. PWM también funciona bien con controles digitales, que, debido a su naturaleza de encendido/apagado, pueden establecer fácilmente el 
 ciclo de trabajo necesario.\\
+
+

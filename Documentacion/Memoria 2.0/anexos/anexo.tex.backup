@@ -21,7 +21,7 @@ El entorno de desarrollo (IDE) ofrecido por Arduino es el que nos permite escrib
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.3]{imagenes/entorno_desarrollo_arduino.png}
+    \includegraphics[scale=0.5]{imagenes/entorno_desarrollo_arduino.png}
   \end{center}
   \label{fig:logo}
  \caption{Entorno de desarrollo de Arduino.}
@@ -42,7 +42,7 @@ continuación, Link para acceder al IDE online \footnote{ \url{https://create.ar
 
 \subsection{Descarga e instalación}
 
-Para descargar el IDE en nuestro sistema operático solo tendremos que seguir unos sencillos
+Para descargar el IDE en nuestro sistema operativo solo tendremos que seguir unos sencillos
 pasos:
 
 \begin{enumerate}
@@ -67,7 +67,7 @@ seguir las instrucciones de instalación.
     \includegraphics[scale=0.3]{imagenes/arduino_web_ide.png}
   \end{center}
   \label{fig:descarga_arduino}
- \caption{Enlace de acceso al IDE web de Arduino.}
+ \caption{Enlace de acceso al IDE de Arduino en su versión web.}
  \end{figure}
 
 \end{enumerate}
@@ -80,7 +80,7 @@ montajes, también sirve para hacer circuitos impresos PCB. También nos permite
 
 \subsection{Descarga e instalación}
 
-Para descargar Fritzing, accesible en el enlace inferior, donde tan solo debemos seleccionar nuestro sistema operativo y hacer clcick en Download. \\
+Para descargar Fritzing, accesible en el enlace inferior, donde tan solo debemos seleccionar nuestro sistema operativo y hacer click en Download. \\
 
 \url{http://fritzing.org/download/?donation=0}
 
@@ -198,6 +198,11 @@ git config --list
 \end{lstlisting}
 
 Existen muchas más opciones configurables pero estos son los dos esenciales necesarios.\\
+
+
+\section{Datasheets}
+
+\includepdf[pages={1-10}]{anexos/sharp_gp2d12.pdf}
 
 \end{appendix}
 

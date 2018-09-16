@@ -17,7 +17,7 @@
 \newblock {\em Guía Práctica de Sensores}.
 \newblock Creaciones Copyright, 2015.
 
-\bibitem{book:}
+\bibitem{book:awsdummies}
 A~Willey Brand.
 \newblock {\em Amazon Web Services for Dummies}.
 \newblock Bernard Golden, 2017.
@@ -85,6 +85,11 @@ Nilson~Mori Lazarin and Carlos~Eduardo Pantoja.
   Carreño}.
 \newblock {\em Sensores y actuadores, Aplicaciones con Arduino}.
 \newblock Grupo Editorial Patria, 2014.
+
+\bibitem{book:pwm}
+D.~Grahame Holmes & Thomas~A. Lipo.
+\newblock {\em Pulse Width Modulation for Power Converters}.
+\newblock Power Engineering, 2012.
 
 \bibitem{book:sails}
 {Irl Nathan} {Mike McNeil}.

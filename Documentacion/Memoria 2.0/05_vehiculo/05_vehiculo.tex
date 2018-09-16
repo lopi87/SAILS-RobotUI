@@ -69,7 +69,7 @@ espera ver un pulso cada 20 milisegundos. La longitud del pulso determinará el 
 neutra, a 90º respecto al eje. En caso contrario, si el pulso es menor de 1.5 ms,  el motor se acercará a 0º, y si el pulso es mayor de 1.5ms, el eje se acercará a los 180 grados.\\
 
 Inicialmente se pensó en utilizar un dispositivo de este tipo para el control de la dirección del vehículo pero debido a que el chasis utilizado ya incorporaba un motor de continua tradicional
-que cumplía muy bien su cometido, éste ha sido descartado. Dicho servomotor podría ser utilizado para dotar de movimiento de elevación, por ejemplo a la cámara que incorpora el vehículo. Tal y como
+que cumplía muy bien su cometido, éste ha sido descartado. Dicho servomotor podría ser utilizado para dotar de movimiento de elevación, por ejemplo a la cámara que incorpora el vehículo tal y como
 se recoge en la sección \ref{sec:mejoras_futuras} correspondiente a mejoras futuras.\\
 
 \subsection{Interconexión de elementos}
@@ -186,9 +186,20 @@ Motor de tracción del vehículo situado en su parte trasera, figura \ref{img:mo
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.2]{imagenes/robot/motor-traccion.jpeg}
+    \includegraphics[scale=0.2]{imagenes/robot/motor-traccion.jpg}
   \end{center}
   \caption{Vista del motor de tracción.}
+  \label{img:motor_traccion}
+\end{figure}
+
+
+\subsubsection{Conexionado}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.4]{imagenes/L298N_conexionado.png}
+  \end{center}
+  \caption{Conexionado del conjunto motores, driver y Arduino.}
   \label{img:motor_traccion}
 \end{figure}
 
@@ -246,7 +257,7 @@ Imagen de la Raspberry Pi junto con su módulo de expansión de batería:
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.15]{imagenes/modulo-expansion-rpi.jpg}
+    \includegraphics[scale=0.10]{imagenes/modulo-expansion-rpi.jpg}
   \end{center}
   \caption{Conjunto Raspberry Pi y módulo de expansión de alimentación.}
   \label{figura:rpi-modulo-bateria}
@@ -256,11 +267,21 @@ Imagen de la batería LiPo para la alimentación de los motores:
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.2]{imagenes/robot/bateria.jpg}
+    \includegraphics[scale=0.15]{imagenes/robot/bateria.jpg}
   \end{center}
   \caption{Batería LiPo que alimenta los motores.}
   \label{figura:rpi-modulo-bateria}
 \end{figure}
+
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[scale=0.15]{imagenes/robot/alojamiento_bateria.jpg}
+  \end{center}
+  \caption{Alojamiento de la batería LiPo.}
+  \label{figura:rpi-modulo-bateria}
+\end{figure}
+
 
 
 \subsubsection{ Alimentación USB/Protoboard }
@@ -287,7 +308,7 @@ En la Figura \ref{figura:alimentador_usb_protoboard_esquema} puede verse el esqu
   \begin{center}
     \includegraphics[scale=0.5]{imagenes/esquema_alimentador_protoboard.png}
   \end{center}
-  \caption{Adaptador de entrada USB a protoboard.}
+  \caption{Esquemático del adaptador de entrada USB a protoboard.}
   \label{figura:alimentador_usb_protoboard_esquema}
 \end{figure}
 
@@ -303,7 +324,8 @@ Siguiento el esquema \ref{figura:alimentador_usb_protoboard_esquema} Podemos dif
  \item \textbf{AM1117-5 y AM1117-3.3:} Son los dos reguladores de tensión que incorpora el módulo MB102 para regulación de tensión de salida hasta los valores 
  5 y 3,3V respectivamente.
  
- \item \textbf{ Diodos y condensadores} También incorpora una serie de diodos zener \footnote{El diodo Zener es un diodo de silicio fuertemente dopado​ que se ha construido para que funcione en las zonas de rupturas, recibe ese nombre por su inventor Clarence Melvin Zener. El diodo Zener es la parte esencial de los reguladores de tensión casi constantes con independencia de que se presenten grandes variaciones de la tensión de red, de la resistencia de carga y temperatura. } 
+ \item \textbf{ Diodos y condensadores} También incorpora una serie de diodos zener \footnote{El diodo Zener es un diodo de silicio altamente dopado​ ideado para que funcione en las zonas de rupturas. Estos tipos de diodos
+ resultan fundamentales en los reguladores de tensión proporcionando valores prácticamente constantes con independencia ante variaciones de tensión, resistencia y temperatura. } 
  de portección ante posibles inversiones de polaridad junto con un diodo led para comprobar el correcto funcionamiento del módulo.
  
  \item \textbf{SW1:} Botón cuya finalidad es encender o apagar el módulo de alimentación.
@@ -319,8 +341,8 @@ Siguiento el esquema \ref{figura:alimentador_usb_protoboard_esquema} Podemos dif
   \label{figura:conector_usb_board_j1}
 \end{figure}
 
-  \item \textbf{J2 y J3:} Pines para la selección de la tensión de salida del módulo. Para seleccionar la tensión debemos conectar un jumper\footnote{En electrónica y en particular en informática,
-   un jumper o saltador es un elemento que permite cerrar el circuito eléctrico del que forma parte dos conexiones. Esto puede hacerse mediante soldadura (se derrite suficiente estaño para cerrar el circuito), soldando un cable o alambre entre ambos puntos o, lo más frecuente, conectado dos pines en hilera o paralelo mediante una pieza de plástico que protege el material conductor que cierra el circuito. Los más habituales tienen tamaños de 2,54 mm, 2 mm y 1,27 mm. } entre los pines en función de la
+  \item \textbf{J2 y J3:} Pines para la selección de la tensión de salida del módulo. Para seleccionar la tensión debemos conectar un jumper\footnote{En electrónica y en particular en informática, un jumper
+   es un elemento utilizado para interconectar dos terminales de manera temporal sin tener que efectuar una operación que requiera herramienta adicional cerrando circuito eléctrico del que forma parte. } entre los pines en función de la
   tensión deseada.
 
    \begin{figure}[H]
@@ -367,12 +389,80 @@ La siguiente imagen \ref{vista-conexiones} muestra una visión general de la dis
 
 \begin{figure}[H]
   \begin{center}
-   \includegraphics[scale=0.4]{imagenes/robot/general.png}
+   \includegraphics[scale=0.3]{diagramas/conexionado_etiquetas_general.png}
   \end{center}
   \caption{Vista del conexionado general del robot.}
   \label{vista-conexiones}
 \end{figure}
 
+La Tabla \ref{table:pines_utilizados} muestra los pines utilizados, modo de configuración y propósito en la placa Arduino:\\
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{2.5cm}|p{4cm}|p{6cm}|}
+      \hline
+      {\textbf{Pin Arduino}} & \textbf{ Modo } & \textbf{ Pin destino }\\
+      \hline
+      {\textbf{ A0 }} & { INPUT } & { Entrada analógica SHARP GP2D12 }  \\
+     \hline
+      {\textbf{ D48 }} & { INPUT } & { Entrada digital del Buzzer } \\
+      \hline
+      {\textbf{ D38 }} & { INPUT } & {  Entrada digital del micrófono KY-038 } \\
+      \hline
+      {\textbf{ A2 }} & { INPUT } & { Entrada analógica del sensor de llama YG1006 } \\
+      \hline
+      {\textbf{ D4 }} & { OUTPUT } & { TRIG del sensor HC-SR04 trasero derecho } \\
+      \hline
+      {\textbf{ D5 }} & { INPUT } & { ECHO del sensor HC-SR04 trasero derecho} \\
+      \hline
+      {\textbf{ D7 }} & { OUTPUT } & { TRIG del sensor HC-SR04 trasero izquierdo } \\
+      \hline
+      {\textbf{ D2 }} & { INPUT } & { ECHO del sensor HC-SR04 trasero izquierdo } \\
+      \hline
+      \end{tabular}
+  \end{center}
+\end{table}      
+      
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|p{2.5cm}|p{4cm}|p{6cm}|}
+      \hline
+      {\textbf{ D3 }} & { INPUT } & { Entrada digital del sensor DTH11 } \\
+      \hline      
+      {\textbf{ A1 }} & { OUTPUT } & { Entrada analógica del fotoresistor } \\      
+      \hline	  
+      {\textbf{ D35 }} & { INPUT } & { Entrada analógica del sensor de gas MQ-2 fotoresistor } \\            
+      \hline
+      {\textbf{ D13 }} & { OUTPUT - PWM } & { Entrada ENA del driver L298N para control de tracción } \\
+      \hline
+      {\textbf{ D12 }} & { OUTPUT } & { Entrada IN3 del driver L298N para control de tracción } \\
+      \hline
+      {\textbf{ D11 }} & { OUTPUT } & { Entrada IN4 del driver L298N para control de tracción } \\      
+      \hline
+      {\textbf{ D10 }} & { OUTPUT - PWM } & { Entrada ENB del driver de motores L298N para control de dirección } \\
+      \hline
+      {\textbf{ D9 }} & { OUTPUT } & { Entrada IN1 del driver L298N para control de dirección } \\
+      \hline
+      {\textbf{ D8 }} & { OUTPUT } & { Entrada IN2 del driver L298N para control de dirección } \\      
+      \hline
+      {\textbf{ D6 }} & { OUTPUT } & { Entrada positiva de los leds de iluminación del vehículo } \\      
+      \hline
+      {\textbf{ D37 }} & { OUTPUT } & { Entrada positiva del puntero láser del vehículo } \\      
+     \hline   
+    \end{tabular}
+  \end{center}
+\caption{ Pines utilizados en la placa Arduino Mega. }
+\label{table:pines_utilizados}
+\end{table}
+
+La Figura \ref{fig:esquematico-conexiones} muestra el esquemático global de SensorRS.\\
+
+\begin{figure}[H]
+  \hspace*{.0in}{\includegraphics[scale=0.45,angle=90]{imagenes/esquema_general.png}}
+  \caption{Esquemático del conexionado general del robot.}
+  \label{fig:esquematico-conexiones}
+\end{figure}
 
 
 \section{Iluminación}
@@ -398,7 +488,7 @@ A continuación se muestra una imagen de los faros del vehículo en funcionamien
     ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
       %(or a blank line to force the subfigure onto a new line)
     \begin{subfigure}[b]{0.4\textwidth}
-        \includegraphics[width=\textwidth]{imagenes/robot/luces_traseras.jpeg}
+        \includegraphics[width=\textwidth]{imagenes/robot/luces_traseras.jpg}
         \caption{Iluminación trasera}
         \label{fig:tiger}
     \end{subfigure}
@@ -429,25 +519,15 @@ Junto con los leds de iluminación también se ha conectado un puntero láser ac
 
 \subsubsection{Conexionado}
 
-El conexionado del puntero láser se ha realizado del mismo modo que un para led convencional.\\
+El conexionado del puntero láser se ha realizado del mismo modo que para un led convencional resultando válido el esquema de la Figura \ref{img:leds_conexiones}.\\
 
 \begin{figure}[H]
   \begin{center}
-   \includegraphics[scale=0.5]{imagenes/leds_conexion.png}
-  \end{center}
-  \caption{Conexionado de los leds de iluminación.}
-  \label{img:leds_conexiones}
-\end{figure}
-
-
-\begin{figure}[H]
-  \begin{center}
-   \includegraphics[scale=0.2]{imagenes/robot/puntero_laser.jpeg}
+   \includegraphics[scale=0.2]{imagenes/robot/puntero_laser.jpg}
   \end{center}
   \caption{Vehículo SensorRS con el puntero láser situado en un lateral.}
   \label{vista-conexiones}
 \end{figure}
-
 
 \section{Sensores}
 
@@ -527,12 +607,12 @@ como para detener el vehículo, si es necesario, cuando hay riesgo de colisión.
 
 \subsubsection{Conexionado}
 
-El sensor HC-SR04 dispone de 4 pines, la toma de tierra \textbf{GND}, pin de echo \texbf{ECHO}, trig \texbf{TRIG} y para la alimentación \textbf{VCC} 
+El sensor HC-SR04 dispone de 4 pines, la toma de tierra \textbf{GND}, pin de echo \textbf{ECHO}, trig \texbf{TRIG} y para la alimentación \textbf{VCC} 
 (5V). En la siguiente imagen puedes ver el esquema de conexión con Arduino.
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.6]{imagenes/conexionado_ultrasonido.png}
+    \includegraphics[scale=0.8]{imagenes/conexionado_ultrasonido.png}
   \end{center}
   \caption{Conexionado del sensor HC-SR04 con Arduino.}
   \label{figura:sensor_HC-SR04_conexionado}
@@ -541,7 +621,7 @@ El sensor HC-SR04 dispone de 4 pines, la toma de tierra \textbf{GND}, pin de ech
 
  \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.2]{imagenes/robot/ultrasonido_instalado.jpeg}
+    \includegraphics[scale=0.2]{imagenes/robot/ultrasonido_instalado.jpg}
   \end{center}
   \caption{Sensores ultrasónicos situados en la parte trasera del vehículo.}
   \label{figura:sensor_mq_2_potenciometro}
@@ -554,7 +634,7 @@ El sensor HC-SR04 dispone de 4 pines, la toma de tierra \textbf{GND}, pin de ech
 
 Para poder controlar la temperatura y la humedad relativa de la zona por la que se mueve el
 robot, se ha decidido añadir un sensor de temperatura. En concreto se trata del sensor DHT11, que
-se controla por un pin de propósito general y cuyas características se adjuntan en la referencia \ref{}.
+se controla por un pin de propósito general.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -601,10 +681,10 @@ mayores, se daña el dispositivo.\\
 \subsubsection{Conexionado}
 
 El sensor DHT11 integrado dentro de una PCB ya viene con la resistencia pull-up integrada. Esta resistencia puede resultar muy útil en ocasiones, pero si añadimos un cable
-de más de 20 metros, deberemos tener en cuenta dicho factor.
+de más de 20 metros, deberemos tener en cuenta dicho factor.\\
 
-Este modelo de DHT11, como comentamos anteriormente, dispone de 3 pines, la toma de tierra \textbf{GND}, para los datos \texbf{DATA} y para la alimentación \textbf{VCC} 
-(de 3,5V a 5V). En la siguiente imagen puedes ver el esquema de conexión con Arduino.
+Este modelo de DHT11, como comentamos anteriormente, dispone de 3 pines, la toma de tierra \textbf{GND}, para los datos \textbf{DATA} y para la alimentación \textbf{VCC} 
+(de 3,5V a 5V). En la siguiente imagen puedes ver el esquema de conexión con Arduino.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -625,7 +705,7 @@ Otros modelos pueden detectar gases más raros como el hidrógeno o CO (monóxid
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.6]{imagenes/mq2_sensor.jpeg}
+    \includegraphics[scale=0.6]{imagenes/mq2_sensor.jpg}
   \end{center}
   \caption{Sensor MQ-2.}
   \label{figura:sensor_mq_2}
@@ -651,7 +731,7 @@ hasta que se apague el led de testigo. Sin embargo si se quiere un mayor grado d
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.6]{imagenes/mq2_trasera.jpeg}
+    \includegraphics[scale=0.6]{imagenes/mq2_trasera.jpg}
   \end{center}
   \caption{Vista del potenciómetro del sensor MQ-2.}
   \label{figura:sensor_mq_2_potenciometro}
@@ -659,7 +739,7 @@ hasta que se apague el led de testigo. Sin embargo si se quiere un mayor grado d
 
 \subsubsection{Conexionado}
 
-Conexionado del sensor MQ-2 en su modo digital. Siendo \textbf{D0} pin digital, \textbf{GND} a tierra y \txtbf{VCC} a alimentación 5V.\\
+Conexionado del sensor MQ-2 en su modo digital. Siendo \textbf{D0} pin digital, \textbf{GND} a tierra y \textbf{VCC} a alimentación 5V.\\
 
 \begin{figure}[H]
   \begin{center}
@@ -747,7 +827,7 @@ Conexionado del fotoresistor a la placa Arduino:
     \includegraphics[scale=0.5]{imagenes/fotoresistor_conexionado.png}
   \end{center}
   \caption{Vista del fotoresistor utilizado.}
-  \label{figura:micro_amplificacion}
+  \label{figura:conexionado_fotoresistor}
 \end{figure}
 
 
@@ -774,7 +854,7 @@ Estos dispositivos se ajustan a las longitudes de onda características de la ap
  
  \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.5]{imagenes/sensor_llama.jpg}
+    \includegraphics[scale=0.9]{imagenes/sensor_llama.jpg}
   \end{center}
   \caption{Vista del sensor de llama YG1006 utilizado.}
   \label{figura:sensor_mq_2_potenciometro}
@@ -787,7 +867,7 @@ como de forma digital cuando se supera un cierto umbral, que se regula a través
 
  \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=1.5]{imagenes/longitudes_onda.png}
+    \includegraphics[scale=1.3]{imagenes/longitudes_onda.png}
   \end{center}
   \caption{Gráfico de sensibilidad espectral del sensor YG1006.}
   \label{figura:longitudes_onda}
@@ -814,7 +894,7 @@ entradas digitales de Arduino.\\
 
  \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.2]{imagenes/robot/llama_instalado.jpeg}
+    \includegraphics[scale=0.2]{imagenes/robot/llama_instalado.jpg}
   \end{center}
   \caption{Sensor de llama instalado en la parte delantera del vehículo.}
   \label{figura:sensor_mq_2_potenciometro}
@@ -855,7 +935,7 @@ El conexionado del GP2D12 con un microcontrolador requiere de una entrada del co
 
  \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=1.5]{imagenes/pines_sharp.png}
+    \includegraphics[scale=1.8]{imagenes/pines_sharp.png}
   \end{center}
   \caption{Conexiones del GP2D12.}
   \label{figura:pines_sharp}
@@ -898,7 +978,7 @@ de Arduino.\\
 
  \begin{figure}[H]
   \begin{center}
-    \includegraphics[scale=0.2]{imagenes/robot/sharp_instalado.jpeg}
+    \includegraphics[scale=0.2]{imagenes/robot/sharp_instalado.jpg}
   \end{center}
   \caption{Sensor de proximidad Sharp GP2D12 instalado en la parte frontal del vehículo.}
   \label{figura:sensor_mq_2_potenciometro}
@@ -945,3 +1025,5 @@ de señal conectada a cualquier pin digital de Arduino configurado como salida.\
   \caption{Conexionado del buzzer.}
   \label{figura:pines_sharp}
 \end{figure}
+
+
