@@ -1,0 +1,26 @@
+\frametitle{\textcolor{black}{ Comunicaciones - Captura de mensajes }}
+
+
+\begin{adjustwidth}{-5em}{-1em}
+      \begin{lstlisting}[language=JavaScript]
+
+    io.socket.get('/user/user_subscribe');
+
+    io.socket.on('user', function (obj) {
+
+      if (obj.verb == 'updated') {
+        var data = obj.data;
+        change_img_status(data.id, data.loggedIn);
+
+        if (data.id != '<%= req.session.User.id %>') {
+          if (data.loggedIn) {
+           toastr.info('<%= i18n('user_connected')%>', 'RobotUI');
+          } else {
+           toastr.info('<%= i18n('user_disconnected')%>', 'RobotUI');
+          }
+        }
+      }
+
+      \end{lstlisting}
+\end{adjustwidth}
+

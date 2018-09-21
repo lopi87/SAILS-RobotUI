@@ -1,0 +1,19 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {spanish}
+\beamer@sectionintoc {1}{\IeC {\'I}ndice}{2}{0}{1}
+\beamer@sectionintoc {2}{Objetivos}{3}{0}{2}
+\beamer@sectionintoc {3}{Alcance}{4}{0}{3}
+\beamer@sectionintoc {4}{Desarrollo}{5}{0}{4}
+\beamer@sectionintoc {5}{Temporizaci\IeC {\'o}n}{6}{0}{5}
+\beamer@sectionintoc {6}{Herramientas software}{8}{0}{6}
+\beamer@sectionintoc {7}{Herramientas hardware}{8}{0}{7}
+\beamer@subsectionintoc {7}{1}{Raspberry Pi y Arduino}{8}{0}{7}
+\beamer@subsectionintoc {7}{2}{Complementos hardware}{10}{0}{7}
+\beamer@subsectionintoc {7}{3}{Sensores}{11}{0}{7}
+\beamer@sectionintoc {8}{Esquem\IeC {\'a}tico}{12}{0}{8}
+\beamer@sectionintoc {9}{Esquem\IeC {\'a}tico}{13}{0}{9}
+\beamer@sectionintoc {10}{Motores}{14}{0}{10}
+\beamer@sectionintoc {11}{Motores}{15}{0}{11}
+\beamer@sectionintoc {12}{Comunicaciones}{16}{0}{12}
+\beamer@sectionintoc {13}{Conclusiones}{20}{0}{13}
+\beamer@sectionintoc {14}{Referencias}{21}{0}{14}

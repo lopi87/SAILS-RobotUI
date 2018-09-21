@@ -1,0 +1,24 @@
+\frametitle{\textcolor{black}{ Comunicaciones Serie }}
+\textbf{Envío de mensaje a Raspberry Pi procedente de Arduino:}
+
+\begin{lstlisting}[language=JavaScript]
+void loop(){
+	bytetemperature=0;
+	bytehumidity=0;
+	interr=SimpleDHTErrSuccess;
+	if((err=dht11.read(pinDHT11,&temperature,&humidity,NULL)) != SimpleDHTErrSuccess){
+			Serial.print("ReadDHT11failed,err=");
+			Serial.println(err);delay(1000);
+		}
+	dht11.read(pinDHT11,&temperature,&humidity,NULL);
+
+	if((int)temperature!=0and(int)humidity!=0){
+		Serial.print("tmp%");
+		Serial.print((int)temperature);Serial.print("*C,");
+		Serial.print((int)humidity);Serial.println("H");
+	}
+
+	delay(30);
+	Serial.println(analogRead(photosensorPin));
+}
+\end{lstlisting}
