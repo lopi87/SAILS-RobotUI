@@ -546,29 +546,43 @@ A continuación mostramos el código de transmisión de vídeo al completo junto
 Finalmente se muestra el código completo para el robot SensorRS desarrollado. Dicho código puede emplearse como guía de referencia o plantilla para futuros proyectos con la idea de integrarlos en la aplicación RobotUI.\\
 
 \begin{lstlisting}[language=JavaScript]
-var io_client = require('./node_modules/socket.io-client');
-var sails_client = require('./node_modules/sails.io.js');
+
+// Serial
+const SerialPort = require('serialport');
+const Readline = SerialPort.parsers.Readline;
+const port = new SerialPort('/dev/ttyACM0', {
+  baudRate: 9600
+});
+
+const parser = new Readline();
+port.pipe(parser);
+
+var io_client = require('../node_modules/socket.io-client');
+var sails_client = require('../node_modules/sails.io.js');
 var io_server = sails_client(io_client);
-io_server.sails.url = 'http://46.101.102.33:80';
-io_server.socket.get('/robot/changetoonline/', {robot: '59188631c8e94ba54f7a4bdc', online: true});
+// io_server.sails.url = 'http://192.168.1.135:1337';
+io_server.sails.url = 'http://localhost:1337';
+io_server.socket.get('/robot/changetoonline/', {robot: '5b64917f7510da0d68a140ec', online: true});
 
 // Inicia servidor socket.io en el puerto 8085.
-var io =io_client.listen(8085, { log: false });
+var io = require('../node_modules/socket.io').listen(8085, { log: false });
+
+// Inicia servidor socket.io para vídeo en el puerto 3535.
+var io_video = require('../node_modules/socket.io').listen(3535, { log: false });
 
 // Carga de módulos necesarios.
 var ffmpeg_command, running_camera = false, child_process = require('child_process');
 
-var Gpio = require('pigpio').Gpio;
-// Pines utilizados. Motores izquierdos: 2 y 3, motores derechos: 17 y 27 en caso de conectarlos a la Raspberry Pi.
-var gpio2 = new Gpio(2, {mode: Gpio.OUTPUT}),
-  gpio3 = new Gpio(3, {mode: Gpio.OUTPUT}),
-  gpio17 = new Gpio(17, {mode: Gpio.OUTPUT}),
-  gpio27 = new Gpio(27, {mode: Gpio.OUTPUT});
-
-
 console.log('Esperando conexión...');
 
 var sockets = {};
+
+//Servo variables
+var y, servo_previous_status = 0;
+
+//Motor vairables
+var x, motor_previous_status = 0;
+
 
 io.sockets.on('connection', function (socket)
 {
@@ -589,10 +603,106 @@ io.sockets.on('connection', function (socket)
   socket.emit('robotmsg', {msg: "¡¡¡Bienvenido!!!"});
   console.log('emitiendo: ' + "¡¡¡Bienvenido!!!");
 
+  socket.on('axes_action_a', function (data) {
+
+    if(data['y'] > 0){ //derecha
+      y = data['y'] * -2 * 100 - 50;
+    } else { //izquierda
+      y = data['y'] * -2 * 100 + 50;
+    }
+
+    if(y >= 49 && y <= 52 ){
+      y = 0;
+    }
+
+    y = Math.round(y);
+    var difference = Math.abs(servo_previous_status - y);
+    if( difference > 10){
+      servo_previous_status = y;
+      serial_transmission('SRV-' + y, 10 );
+      console.log(y);
+    }
+
+  });
+
+  socket.on('axes_action_b', function (data) {
+    if(data['y'] > 0){ //atrás
+      y = data['y'] * -2 * 100 - 50;
+    } else { //delante
+      y = data['y'] * -2 * 100 + 50;
+    }
+    if(y >= 49 && y <= 52 ){
+      y = 0;
+    }
+
+    if(y == -51){
+      y = 0;
+    }
+
+    y = Math.round(y);
+    var speed_difference = Math.abs(motor_previous_status - y);
+    if( speed_difference > 10){
+      motor_previous_status = y;
+      serial_transmission('MOTOR-' + y, 10 );
+      console.log(y);
+    }
+  });
+
+
+  socket.on('pad_action', function (pad_btn) {
+    console.log(pad_btn);
+    if(pad_btn == 2){
+      serial_transmission('H', 10);
+    }
+    if(pad_btn == 1){
+      serial_transmission('L', 10);
+    }
+  });
+
+
   socket.on('action', function (data){
     console.log('Comando recibido: ' + data);
+    switch(data) {
+      case "H":
+        serial_transmission(data, 10);
+      case "L":
+        serial_transmission(data, 10);
+      case "UP":
+        serial_transmission('MOTOR-255', 10);
+      case "DOWN":
+        serial_transmission('MOTOR--255', 10);
+      case "LEFT":
+        serial_transmission('SRV-255', 10);
+      case "RIGHT":
+        serial_transmission('SRV--255', 10);
+      case "STOP":
+        serial_transmission('MOTOR-0', 10);
+    }
   });
-  
+
+   // const parser = port.pipe(new Readline({ delimiter: '\r\n' }));
+   // parser.on('data', console.log);
+
+  const parser = port.pipe(new Readline({ delimiter: '\r\n' }));
+  parser.on('data', function(data){
+    console.log(data);
+    var msg_data = data.split("%");
+    socket.emit(String(msg_data[0]), {msg: String(msg_data[1]) } );
+  });
+});
+
+io_video.sockets.on('connection', function (socket) {
+  console.log('Video socket oppened');
+
+  socket.on('disconnect', function() {
+    console.log('¡Video desconectado!');
+    //stopStreaming(socket);
+  });
+
+  socket.on('video_canvas', function() {
+    startStreaming(socket);
+  });
+
 });
 
 function stopStreaming(socket) {
@@ -608,11 +718,13 @@ function stopStreaming(socket) {
 }
 
 function startStreaming(socket) {
-  //ffmpeg -f video4linux2 -i /dev/video0 -s 300x150 -f mjpeg pipe:1 -b:v 28k -bufsize 28k
+  // video
+  // ffmpeg -f video4linux2 -i /dev/video0 -s 300x150 -f mjpeg pipe:1 -b:v 28k -bufsize 28k
 
   if (running_camera == false){
     console.log('Starting streaming....');
-    var args = ["-f", "video4linux2", "-i", "/dev/video0", "-s", "300x150","-f","mjpeg", "pipe:1", "-b:v 28k", "-bufsize 28k"]
+    var args = ["-f", "video4linux2", "-i", "/dev/video0", "-s", "300x150","-f","mjpeg", "pipe:1", "-b:v 16k", "-bufsize 28k"];
+
     ffmpeg_command = child_process.spawn("ffmpeg", args);
     running_camera = true
   }
@@ -640,10 +752,23 @@ function startStreaming(socket) {
   });
 
   ffmpeg_command.stdout.on('data', function (data) {
-    //console.log('stdout: ' + data);
+    // console.log('stdout: ' + data);
     var frame = new Buffer(data).toString('base64');
-    socket.emit('canvas',frame);
+    socket.emit('video_canvas',frame);
   });
+
+}
+
+function serial_transmission( data, delay ){
+  setTimeout(function() {
+    // Sending String character by character
+    for(var i=0; i<data.length; i++){
+      port.write(new Buffer(data[i], 'ascii'));
+    }
+    // Sending the terminate character
+    port.write(new Buffer('\n', 'ascii'));
+
+  }, delay  );
 
 }
 
