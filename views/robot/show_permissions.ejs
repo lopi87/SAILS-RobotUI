@@ -8,10 +8,9 @@
 <% } else { %>
 
   <div class="row">
-  <div class="col-md-6">
-    <div class="control-group">
-      <b><%= i18n("public") %> * :</b>
-      <div class="form-group">
+    <div class="col-md-10 col-md-offset-1">
+
+    <div class="form-group">
         <b><%= i18n('public') + ':' %></b>
         <div class="checkbox checkbox-info margintop10">
           <input id="check_public_drive" name="public_drive" <%= robot.public_drive ? 'checked' : '' %> class="styled" type="checkbox">
@@ -29,46 +28,42 @@
 
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
-      <table class="table table-hover">
-        <thead>
-        <tr>
-          <th><%= i18n('user') %></th>
-          <th><%= i18n('name') %></th>
-          <th><%= i18n('control') %></th>
-          <th><%= i18n('seeing') %></th>
-          <th><%= i18n('actions') %></th>
-        </tr>
-        </thead>
-        <tbody id="actualizar">
+      <div class="table-responsive">
+        <table class="table">
+          <tr>
+            <th><%= i18n('user') %></th>
+            <th><%= i18n('name') %></th>
+            <th><%= i18n('control') %></th>
+            <th><%= i18n('seeing') %></th>
+            <th><%= i18n('actions') %></th>
+          </tr>
 
         <% Object.keys(perm).forEach(function (key) { %>
-        <tr id="perm_<%= key %>">
+          <tr id="perm_<%= key %>">
 
-          <td><img src="<%= sails.getBaseUrl() + perm[key].avatarUrl %>" alt="Avatar" title="<%= perm[key].name %>" class="card-left card-circle card-margin-right img-responsive" style="width:32px"></td>
-          <td> <%= perm[key].name %></td>
+            <td><img src="<%= sails.getBaseUrl() + perm[key].avatarUrl %>" alt="Avatar" title="<%= perm[key].name %>" class="card-left card-circle card-margin-right img-responsive" style="width:32px"></td>
+            <td> <%= perm[key].name %></td>
 
-          <% if(perm[key].d){ %>
-          <td> <img src="/images/online.png" height="30" width="30"></td>
-          <% } else { %>
-          <td> <img src="/images/offline.png" height="30" width="30"></td>
-          <% } %>
+            <% if(perm[key].d){ %>
+            <td> <img src="/images/online.png" height="30" width="30"></td>
+            <% } else { %>
+            <td> <img src="/images/offline.png" height="30" width="30"></td>
+            <% } %>
 
-          <% if(perm[key].v){ %>
-          <td> <img src="/images/online.png" height="30" width="30"></td>
-          <% } else { %>
-          <td> <img src="/images/offline.png" height="30" width="30"></td>
-          <% } %>
-          <td> <a class="btn btn-sm btn-danger" onclick="delete_row_permissions('<%= robot.id %>', '<%= key %>')"><%= i18n('delete') %></a></td>
-        </tr>
+            <% if(perm[key].v){ %>
+            <td> <img src="/images/online.png" height="30" width="30"></td>
+            <% } else { %>
+            <td> <img src="/images/offline.png" height="30" width="30"></td>
+            <% } %>
+            <td> <a class="btn btn-sm btn-danger" onclick="delete_row_permissions('<%= robot.id %>', '<%= key %>')"><%= i18n('delete') %></a></td>
+          </tr>
         <% }) %>
-        </tbody>
-      </table>
+        </table>
+      </div>
       <% } %>
 
     </div>
   </div>
-
-  <div class="clear"></div>
 
   <div class="row">
     <div class="col-md-12">
@@ -93,7 +88,6 @@
       </div>
     </div>
   </div>
-</div>
 
 
 <script type="text/javascript">
