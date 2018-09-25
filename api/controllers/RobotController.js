@@ -431,7 +431,6 @@ module.exports = {
       });
 
       robot.save(function (err) {
-        if (err) return res.badRequest(err);
 
         console.log('The new permissions has been added');
 
