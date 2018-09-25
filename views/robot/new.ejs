@@ -6,7 +6,7 @@
     <div class="col-lg-5">
         <div class="form-group">
           <label for="name"><%= i18n("name") %> * :</label>
-          <input class="form-control" name="name" placeholder="<%= i18n("name") %>" required="" type="text">
+          <input class="form-control" name="name" type="text" placeholder="<%= i18n("name") %>" required="" data-parsley-minlength="4">
         </div>
 
         <div class="form-group">
@@ -23,14 +23,6 @@
           <label for="message"><%= i18n("description") %>:</label>
           <textarea id="message" class="form-control" name="description" placeholder="<%= i18n("description") %>" data-parsley-trigger="keyup" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10"></textarea>
         </div>
-
-        <div class="form-group">
-          <label for="name"><%= i18n("public") %> * :</label>
-          <p class="paddingtop10">
-            <%= i18n('pad') + ':' %><input class="i-checks pr-2" name="pad_enabled" type="checkbox">
-          </p>
-        </div>
-
       </div>
     <div class="col-lg-5">
 
@@ -72,7 +64,7 @@
         <div class="form-group">
           <label for="question"><%= i18n("filesmallerthan %s","2.5") %></label>
           <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-            <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+            <div class="form-control" data-trigger="fileinput" style="min-width: 70%;"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
             <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new"><%= i18n("selectfile") %></span><span class="fileinput-exists"><%= i18n("change") %></span><input id="input_avatar" type="file" name="robot_avatar" data-parsley-filemaxmegabytes="25000" data-parsley-trigger="change" data-parsley-filemimetypes="image/jpeg, image/png"></span>
             <a id="remove_iconfile_input" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput"><%= i18n("remove") %></a>
           </div>
