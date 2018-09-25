@@ -25,11 +25,10 @@
     </div>
   </div>
 
-
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
       <div class="table-responsive">
-        <table class="table">
+        <table class="table" id="actualizar">
           <tr>
             <th><%= i18n('user') %></th>
             <th><%= i18n('name') %></th>
@@ -71,7 +70,7 @@
       <div class="row">
         <div class="col-lg-12 marginbottom10">
           <div class="control-group">
-            <p><label for="user"><%= i18n("users") %> * :</label></p>
+            <label><b for="user"><%= i18n("users") %> * :</b></label>
             <select tabindex="-1" multiple="" data-placeholder="<%= i18n('chose_users') %>" class="chzn-select" name="users">
               <option value=""></option>
               <% users.forEach(function(user)  { %>
@@ -83,6 +82,18 @@
       </div>
       <div class="row">
         <div class="col-md-6 margintop10">
+          <div class="form-group">
+            <div class="checkbox checkbox-info margintop10">
+              <input id="check_user_drive" name="public_drive" type="checkbox">
+              <label for="check_user_drive"><%= i18n('control') %></label>
+            </div>
+
+            <div class="checkbox checkbox-info">
+              <input id="check_user_view" name="public_view" type="checkbox">
+              <label for="check_user_view"><%= i18n('view')%></label>
+            </div>
+          </div>
+        </div>
           <a id="down_bottom" class="btn btn-lg btn-block btn-success margintop10" onclick="new_permissions('<%= robot.id %>')"><%= i18n('add') %></a>
         </div>
       </div>
@@ -96,7 +107,7 @@
     $.ajax({
       url: '/robot/new_permissions/' + id,
       type: 'GET',
-      data: {users: $(".chzn-select").val(), control_check: $('input[name=control_check]:checked').val(), view_check: $('input[name=view_check]:checked').val()},
+      data: {users: $(".chzn-select").val(), control_check: $('#check_user_drive').is(':checked'), view_check: $('#check_user_view').is(':checked') },
       done:function() {
       },
 

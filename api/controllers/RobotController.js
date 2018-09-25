@@ -415,22 +415,24 @@ module.exports = {
       if (!robot) return res.badRequest(err);
 
       req.param('users').forEach(function (user_id) {
-        if (req.param('control_check') && (robot.owner.id != req.session.User.id)) {
+        if (req.param('control_check') == 'true' && (robot.owner.id != req.session.User.id)) {
           robot.drivers.add(user_id);
         }
-        if (req.param('view_check') && (robot.owner.id != req.session.User.id)) {
+        if (req.param('view_check') == 'true' && (robot.owner.id != req.session.User.id)) {
           robot.viewers.add(user_id);
         }
 
-        if (!req.param('control_check')) {
+        if (req.param('control_check') == 'false') {
           robot.drivers.remove(user_id);
         }
-        if (!req.param('view_check')) {
+        if (req.param('view_check') == 'false') {
           robot.viewers.remove(user_id);
         }
       });
 
       robot.save(function (err) {
+        if (err) return res.badRequest(err);
+
         console.log('The new permissions has been added');
 
         PermissionService.get_permissions_array(robot_id, function (error, perm) {
