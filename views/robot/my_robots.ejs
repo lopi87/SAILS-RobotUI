@@ -1,11 +1,12 @@
-<div class="jumbox">
+<div class="container">
+
   <h2><%= i18n('my_robots') %></h2>
 
   <% if(data.size == 0){ %>
-  <div class="alert alert-info margintop20 marginbottom20" role="alert">
-    <strong>Ups!</strong>
-    You haven't created any robots shared yet...
-  </div>
+    <div class="alert alert-info margintop20 marginbottom20" role="alert">
+      <strong>Ups!</strong>
+      You haven't created any robots shared yet...
+    </div>
   <% } else { %>
     <%- partial('_table2.ejs', {data: data}) %>
   <% } %>
