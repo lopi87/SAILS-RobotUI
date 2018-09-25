@@ -176,5 +176,7 @@
 	"pad": "pad",
 	"full_screen": "Pantalla completa",
 	"back": "Atrás",
-	"received": "Recibido"
+	"received": "Recibido",
+	"username": "username",
+	"user_name": "user_name"
 }
